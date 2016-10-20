@@ -1,0 +1,44 @@
+2016-10-17 09:21:47 Debug: command 'bake' in plugin 'Bake' was not aliased, conflicts with 'Bake'
+2016-10-17 09:21:47 Debug: command 'benchmark' in plugin 'DebugKit' was not aliased, conflicts with 'DebugKit'
+2016-10-17 09:21:47 Debug: command 'whitespace' in plugin 'DebugKit' was not aliased, conflicts with 'DebugKit'
+2016-10-17 09:21:47 Debug: command 'migrations' in plugin 'Migrations' was not aliased, conflicts with 'Migrations'
+2016-10-17 09:21:47 Debug: command 'admin' in plugin 'Wpadmin' was not aliased, conflicts with 'Wpadmin'
+2016-10-17 09:23:21 Debug: command 'bake' in plugin 'Bake' was not aliased, conflicts with 'Bake'
+2016-10-17 09:23:21 Debug: command 'benchmark' in plugin 'DebugKit' was not aliased, conflicts with 'DebugKit'
+2016-10-17 09:23:21 Debug: command 'whitespace' in plugin 'DebugKit' was not aliased, conflicts with 'DebugKit'
+2016-10-17 09:23:21 Debug: command 'migrations' in plugin 'Migrations' was not aliased, conflicts with 'Migrations'
+2016-10-17 09:23:21 Debug: command 'admin' in plugin 'Wpadmin' was not aliased, conflicts with 'Wpadmin'
+2016-10-17 09:23:22 Debug: command 'bake' in plugin 'Bake' was not aliased, conflicts with 'Bake'
+2016-10-17 09:23:22 Debug: command 'benchmark' in plugin 'DebugKit' was not aliased, conflicts with 'DebugKit'
+2016-10-17 09:23:22 Debug: command 'whitespace' in plugin 'DebugKit' was not aliased, conflicts with 'DebugKit'
+2016-10-17 09:23:22 Debug: command 'migrations' in plugin 'Migrations' was not aliased, conflicts with 'Migrations'
+2016-10-17 09:23:22 Debug: command 'admin' in plugin 'Wpadmin' was not aliased, conflicts with 'Wpadmin'
+2016-10-17 10:09:10 Debug: command 'bake' in plugin 'Bake' was not aliased, conflicts with 'Bake'
+2016-10-17 10:09:10 Debug: command 'benchmark' in plugin 'DebugKit' was not aliased, conflicts with 'DebugKit'
+2016-10-17 10:09:10 Debug: command 'whitespace' in plugin 'DebugKit' was not aliased, conflicts with 'DebugKit'
+2016-10-17 10:09:10 Debug: command 'migrations' in plugin 'Migrations' was not aliased, conflicts with 'Migrations'
+2016-10-17 10:09:10 Debug: command 'admin' in plugin 'Wpadmin' was not aliased, conflicts with 'Wpadmin'
+2016-10-17 10:09:10 Debug: command 'bake' in plugin 'Bake' was not aliased, conflicts with 'Bake'
+2016-10-17 10:09:10 Debug: command 'benchmark' in plugin 'DebugKit' was not aliased, conflicts with 'DebugKit'
+2016-10-17 10:09:10 Debug: command 'whitespace' in plugin 'DebugKit' was not aliased, conflicts with 'DebugKit'
+2016-10-17 10:09:10 Debug: command 'migrations' in plugin 'Migrations' was not aliased, conflicts with 'Migrations'
+2016-10-17 10:09:10 Debug: command 'admin' in plugin 'Wpadmin' was not aliased, conflicts with 'Wpadmin'
+2016-10-18 02:06:01 Notice: Notice (8): Undefined variable: prefix_str in [F:\www\meiyue\tmp\bake\add-ctp.php, line 48]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+include - ROOT\tmp\bake\add-ctp.php, line 48
+Bake\View\BakeView::_evaluate() - ROOT\vendor\cakephp\bake\src\View\BakeView.php, line 200
+Cake\View\View::_render() - CORE\src\View\View.php, line 971
+Bake\View\BakeView::render() - ROOT\vendor\cakephp\bake\src\View\BakeView.php, line 136
+Bake\Shell\Task\BakeTemplateTask::generate() - ROOT\vendor\cakephp\bake\src\Shell\Task\BakeTemplateTask.php, line 89
+Bake\Shell\Task\TemplateTask::getContent() - ROOT\vendor\cakephp\bake\src\Shell\Task\TemplateTask.php, line 426
+Bake\Shell\Task\TemplateTask::main() - ROOT\vendor\cakephp\bake\src\Shell\Task\TemplateTask.php, line 152
+Cake\Console\Shell::runCommand() - CORE\src\Console\Shell.php, line 466
+Cake\Console\Shell::runCommand() - CORE\src\Console\Shell.php, line 459
+Cake\Console\ShellDispatcher::_dispatch() - CORE\src\Console\ShellDispatcher.php, line 227
+Cake\Console\ShellDispatcher::dispatch() - CORE\src\Console\ShellDispatcher.php, line 182
+Cake\Console\ShellDispatcher::run() - CORE\src\Console\ShellDispatcher.php, line 128
+[main] - ROOT\bin\cake.php, line 34
+
+
+
