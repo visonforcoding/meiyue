@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-
+use Cake\Auth\DefaultPasswordHasher;
 /**
  * User Entity
  *
@@ -31,8 +32,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Union $union
  */
-class User extends Entity
-{
+class User extends Entity {
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -47,4 +47,10 @@ class User extends Entity
         '*' => true,
         'id' => false
     ];
+    protected $_hidden = ['pwd'];
+
+    protected function _setPwd($password) {
+        return (new DefaultPasswordHasher)->hash($password);
+    }
+
 }

@@ -74,12 +74,8 @@ class UserTable extends Table {
                 ->allowEmpty('app_wx_openid');
 
         $validator
-                ->requirePresence('truename', 'create')
-                ->notEmpty('truename');
+                ->allowEmpty('truename');
 
-        $validator
-                ->requirePresence('level', 'create')
-                ->notEmpty('level');
 
         $validator
                 ->allowEmpty('position');
@@ -88,45 +84,12 @@ class UserTable extends Table {
                 ->email('email')
                 ->allowEmpty('email');
 
-        $validator
-                ->integer('gender')
-                ->requirePresence('gender', 'create')
-                ->notEmpty('gender');
 
         $validator
                 ->allowEmpty('city');
 
         $validator
                 ->allowEmpty('avatar');
-
-        $validator
-                ->decimal('money')
-                ->requirePresence('money', 'create')
-                ->notEmpty('money');
-
-        $validator
-                ->integer('status')
-                ->requirePresence('status', 'create')
-                ->notEmpty('status');
-
-        $validator
-                ->boolean('enabled')
-                ->requirePresence('enabled', 'create')
-                ->notEmpty('enabled');
-
-        $validator
-                ->boolean('is_del')
-                ->requirePresence('is_del', 'create')
-                ->notEmpty('is_del');
-
-        $validator
-                ->requirePresence('device', 'create')
-                ->notEmpty('device');
-
-
-        $validator
-                ->requirePresence('guid', 'create')
-                ->notEmpty('guid');
 
         return $validator;
     }

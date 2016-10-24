@@ -434,3 +434,934 @@
 2016-10-18 16:06:17 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
 2016-10-18 16:06:17 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
 2016-10-18 16:06:17 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User ORDER BY User.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:31:35 Debug: duration=105 rows=8 SHOW FULL COLUMNS FROM `lm_admin`
+2016-10-20 14:31:35 Debug: duration=163 rows=2 SHOW INDEXES FROM `lm_admin`
+2016-10-20 14:31:36 Debug: duration=1195 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_admin' AND rc.TABLE_NAME = 'lm_admin'
+2016-10-20 14:31:36 Debug: duration=2 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_admin'
+2016-10-20 14:31:36 Debug: duration=63 rows=5 SHOW FULL COLUMNS FROM `lm_group`
+2016-10-20 14:31:36 Debug: duration=1 rows=2 SHOW INDEXES FROM `lm_group`
+2016-10-20 14:31:36 Debug: duration=10 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_group' AND rc.TABLE_NAME = 'lm_group'
+2016-10-20 14:31:36 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_group'
+2016-10-20 14:31:36 Debug: duration=36 rows=9 SHOW FULL COLUMNS FROM `lm_menu`
+2016-10-20 14:31:36 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_menu`
+2016-10-20 14:31:36 Debug: duration=6 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_menu' AND rc.TABLE_NAME = 'lm_menu'
+2016-10-20 14:31:36 Debug: duration=22 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_menu'
+2016-10-20 14:31:36 Debug: duration=18 rows=1 SELECT Admin.id AS `Admin__id`, Admin.username AS `Admin__username`, Admin.password AS `Admin__password`, Admin.enabled AS `Admin__enabled`, Admin.ctime AS `Admin__ctime`, Admin.utime AS `Admin__utime`, Admin.login_time AS `Admin__login_time`, Admin.login_ip AS `Admin__login_ip` FROM lm_admin Admin WHERE enabled = 1 and username = 'admin' LIMIT 1
+2016-10-20 14:31:36 Debug: duration=289 rows=3 SHOW FULL COLUMNS FROM `lm_admin_group`
+2016-10-20 14:31:36 Debug: duration=1 rows=3 SHOW INDEXES FROM `lm_admin_group`
+2016-10-20 14:31:36 Debug: duration=10 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_admin_group' AND rc.TABLE_NAME = 'lm_admin_group'
+2016-10-20 14:31:36 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_admin_group'
+2016-10-20 14:31:36 Debug: duration=34 rows=1 SELECT LmAdminGroup.id AS `g_CJoin__id`, LmAdminGroup.admin_id AS `g_CJoin__admin_id`, LmAdminGroup.group_id AS `g_CJoin__group_id`, g.id AS `g__id`, g.name AS `g__name`, g.remark AS `g__remark`, g.ctime AS `g__ctime`, g.utime AS `g__utime` FROM lm_group g INNER JOIN lm_admin_group LmAdminGroup ON g.id = (LmAdminGroup.group_id) WHERE LmAdminGroup.admin_id in (:c0)
+2016-10-20 14:31:37 Debug: duration=448 rows=3 SHOW FULL COLUMNS FROM `lm_group_menu`
+2016-10-20 14:31:37 Debug: duration=0 rows=3 SHOW INDEXES FROM `lm_group_menu`
+2016-10-20 14:31:37 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_group_menu' AND rc.TABLE_NAME = 'lm_group_menu'
+2016-10-20 14:31:37 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_group_menu'
+2016-10-20 14:31:37 Debug: duration=1 rows=0 SELECT LmGroupMenu.id AS `menu_CJoin__id`, LmGroupMenu.group_id AS `menu_CJoin__group_id`, LmGroupMenu.menu_id AS `menu_CJoin__menu_id`, menu.id AS `menu__id`, menu.name AS `menu__name`, menu.node AS `menu__node`, menu.pid AS `menu__pid`, menu.class AS `menu__class`, menu.rank AS `menu__rank`, menu.is_menu AS `menu__is_menu`, menu.status AS `menu__status`, menu.remark AS `menu__remark` FROM lm_menu menu INNER JOIN lm_group_menu LmGroupMenu ON menu.id = (LmGroupMenu.menu_id) WHERE LmGroupMenu.group_id in (:c0)
+2016-10-20 14:31:37 Debug: duration=0 rows=0 BEGIN
+2016-10-20 14:31:37 Debug: duration=2 rows=1 UPDATE lm_admin SET utime = '2016-10-20 14:31:37' , login_time = '2016-10-20 14:31:37' , login_ip = '127.0.0.1' WHERE id = 1
+2016-10-20 14:31:37 Debug: duration=0 rows=0 COMMIT
+2016-10-20 14:31:37 Debug: duration=0 rows=0 BEGIN
+2016-10-20 14:31:37 Debug: duration=157 rows=12 SHOW FULL COLUMNS FROM `lm_actionlog`
+2016-10-20 14:31:37 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_actionlog`
+2016-10-20 14:31:37 Debug: duration=9 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_actionlog' AND rc.TABLE_NAME = 'lm_actionlog'
+2016-10-20 14:31:37 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_actionlog'
+2016-10-20 14:31:37 Debug: duration=29 rows=1 INSERT INTO lm_actionlog (url, type, useragent, ip, filename, msg, controller, action, param, user, create_time) VALUES ('admin/login', 'POST', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36', '127.0.0.1', 'F:\www\meiyue\plugins\Wpadmin\src\Controller\Component\UtilComponent.php', '登录系统', 'admin', 'login', '', 'admin', '2016-10-20 14:31:37')
+2016-10-20 14:31:37 Debug: duration=0 rows=0 COMMIT
+2016-10-20 14:31:38 Debug: duration=2 rows=5 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu WHERE status = 1 ORDER BY rank DESC
+2016-10-20 14:31:44 Debug: duration=64 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_group g
+2016-10-20 14:31:44 Debug: duration=0 rows=1 SELECT g.id AS `g__id`, g.name AS `g__name`, g.remark AS `g__remark`, g.ctime AS `g__ctime`, g.utime AS `g__utime` FROM lm_group g ORDER BY id desc LIMIT 10 OFFSET 0
+2016-10-20 14:31:44 Debug: duration=0 rows=0 SELECT LmGroupMenu.id AS `menu_CJoin__id`, LmGroupMenu.group_id AS `menu_CJoin__group_id`, LmGroupMenu.menu_id AS `menu_CJoin__menu_id`, menu.id AS `menu__id`, menu.name AS `menu__name`, menu.node AS `menu__node`, menu.pid AS `menu__pid`, menu.class AS `menu__class`, menu.rank AS `menu__rank`, menu.is_menu AS `menu__is_menu`, menu.status AS `menu__status`, menu.remark AS `menu__remark` FROM lm_menu menu INNER JOIN lm_group_menu LmGroupMenu ON menu.id = (LmGroupMenu.menu_id) WHERE LmGroupMenu.group_id in (:c0)
+2016-10-20 14:32:15 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_admin Admin
+2016-10-20 14:32:15 Debug: duration=0 rows=1 SELECT Admin.id AS `Admin__id`, Admin.username AS `Admin__username`, Admin.password AS `Admin__password`, Admin.enabled AS `Admin__enabled`, Admin.ctime AS `Admin__ctime`, Admin.utime AS `Admin__utime`, Admin.login_time AS `Admin__login_time`, Admin.login_ip AS `Admin__login_ip` FROM lm_admin Admin ORDER BY id desc LIMIT 10 OFFSET 0
+2016-10-20 14:32:15 Debug: duration=0 rows=1 SELECT LmAdminGroup.id AS `g_CJoin__id`, LmAdminGroup.admin_id AS `g_CJoin__admin_id`, LmAdminGroup.group_id AS `g_CJoin__group_id`, g.id AS `g__id`, g.name AS `g__name`, g.remark AS `g__remark`, g.ctime AS `g__ctime`, g.utime AS `g__utime` FROM lm_group g INNER JOIN lm_admin_group LmAdminGroup ON g.id = (LmAdminGroup.group_id) WHERE LmAdminGroup.admin_id in (:c0)
+2016-10-20 14:32:19 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_group g
+2016-10-20 14:32:19 Debug: duration=0 rows=1 SELECT g.id AS `g__id`, g.name AS `g__name`, g.remark AS `g__remark`, g.ctime AS `g__ctime`, g.utime AS `g__utime` FROM lm_group g ORDER BY id desc LIMIT 10 OFFSET 0
+2016-10-20 14:32:19 Debug: duration=0 rows=0 SELECT LmGroupMenu.id AS `menu_CJoin__id`, LmGroupMenu.group_id AS `menu_CJoin__group_id`, LmGroupMenu.menu_id AS `menu_CJoin__menu_id`, menu.id AS `menu__id`, menu.name AS `menu__name`, menu.node AS `menu__node`, menu.pid AS `menu__pid`, menu.class AS `menu__class`, menu.rank AS `menu__rank`, menu.is_menu AS `menu__is_menu`, menu.status AS `menu__status`, menu.remark AS `menu__remark` FROM lm_menu menu INNER JOIN lm_group_menu LmGroupMenu ON menu.id = (LmGroupMenu.menu_id) WHERE LmGroupMenu.group_id in (:c0)
+2016-10-20 14:35:37 Debug: duration=4 rows=12 SHOW FULL COLUMNS FROM `lm_actionlog`
+2016-10-20 14:35:37 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_actionlog`
+2016-10-20 14:35:37 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_actionlog' AND rc.TABLE_NAME = 'lm_actionlog'
+2016-10-20 14:35:37 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_actionlog'
+2016-10-20 14:35:37 Debug: duration=10 rows=9 SHOW FULL COLUMNS FROM `lm_menu`
+2016-10-20 14:35:37 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_menu`
+2016-10-20 14:35:37 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_menu' AND rc.TABLE_NAME = 'lm_menu'
+2016-10-20 14:35:37 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_menu'
+2016-10-20 14:35:37 Debug: duration=0 rows=0 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu WHERE `node` = '/actionlog/index' LIMIT 1
+2016-10-20 14:35:37 Debug: duration=0 rows=0 BEGIN
+2016-10-20 14:35:37 Debug: duration=8 rows=1 INSERT INTO lm_menu (name, node, pid, is_menu) VALUES ('actionlog管理', '/actionlog/index', 1, 1)
+2016-10-20 14:35:37 Debug: duration=0 rows=0 COMMIT
+2016-10-20 14:35:53 Debug: duration=4 rows=5 SHOW FULL COLUMNS FROM `lm_group`
+2016-10-20 14:35:53 Debug: duration=0 rows=2 SHOW INDEXES FROM `lm_group`
+2016-10-20 14:35:53 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_group' AND rc.TABLE_NAME = 'lm_group'
+2016-10-20 14:35:53 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_group'
+2016-10-20 14:35:53 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_group g
+2016-10-20 14:35:53 Debug: duration=3 rows=9 SHOW FULL COLUMNS FROM `lm_menu`
+2016-10-20 14:35:53 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_menu`
+2016-10-20 14:35:53 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_menu' AND rc.TABLE_NAME = 'lm_menu'
+2016-10-20 14:35:53 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_menu'
+2016-10-20 14:35:53 Debug: duration=0 rows=1 SELECT g.id AS `g__id`, g.name AS `g__name`, g.remark AS `g__remark`, g.ctime AS `g__ctime`, g.utime AS `g__utime` FROM lm_group g ORDER BY id desc LIMIT 10 OFFSET 0
+2016-10-20 14:35:53 Debug: duration=3 rows=3 SHOW FULL COLUMNS FROM `lm_group_menu`
+2016-10-20 14:35:53 Debug: duration=0 rows=3 SHOW INDEXES FROM `lm_group_menu`
+2016-10-20 14:35:53 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_group_menu' AND rc.TABLE_NAME = 'lm_group_menu'
+2016-10-20 14:35:53 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_group_menu'
+2016-10-20 14:35:53 Debug: duration=0 rows=0 SELECT LmGroupMenu.id AS `menu_CJoin__id`, LmGroupMenu.group_id AS `menu_CJoin__group_id`, LmGroupMenu.menu_id AS `menu_CJoin__menu_id`, menu.id AS `menu__id`, menu.name AS `menu__name`, menu.node AS `menu__node`, menu.pid AS `menu__pid`, menu.class AS `menu__class`, menu.rank AS `menu__rank`, menu.is_menu AS `menu__is_menu`, menu.status AS `menu__status`, menu.remark AS `menu__remark` FROM lm_menu menu INNER JOIN lm_group_menu LmGroupMenu ON menu.id = (LmGroupMenu.menu_id) WHERE LmGroupMenu.group_id in (:c0)
+2016-10-20 14:35:57 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_menu Menu
+2016-10-20 14:35:57 Debug: duration=0 rows=6 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu ORDER BY id desc LIMIT 30 OFFSET 0
+2016-10-20 14:35:59 Debug: duration=1 rows=1 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu WHERE Menu.id = 6 LIMIT 1
+2016-10-20 14:35:59 Debug: duration=0 rows=6 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu
+2016-10-20 14:36:49 Debug: duration=0 rows=0 BEGIN
+2016-10-20 14:36:49 Debug: duration=3 rows=12 SHOW FULL COLUMNS FROM `lm_actionlog`
+2016-10-20 14:36:49 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_actionlog`
+2016-10-20 14:36:49 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_actionlog' AND rc.TABLE_NAME = 'lm_actionlog'
+2016-10-20 14:36:49 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_actionlog'
+2016-10-20 14:36:49 Debug: duration=38 rows=1 INSERT INTO lm_actionlog (url, type, useragent, ip, filename, msg, controller, action, param, user, create_time) VALUES ('menu/edit/6', 'PUT', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36', '127.0.0.1', 'F:\www\meiyue\plugins\Wpadmin\src\Controller\Component\UtilComponent.php', '修改', 'menu', 'edit', 'array (
+  'name' => '操作日志管理',
+  'node' => '/actionlog/index',
+  'pid' => '1',
+  'class' => 'icon-keyboard',
+  'rank' => '',
+  'is_menu' => '1',
+  'status' => '1',
+  'remark' => '',
+)', 'admin', '2016-10-20 14:36:49')
+2016-10-20 14:36:49 Debug: duration=0 rows=0 COMMIT
+2016-10-20 14:36:49 Debug: duration=0 rows=1 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu WHERE Menu.id = 6 LIMIT 1
+2016-10-20 14:36:49 Debug: duration=0 rows=0 BEGIN
+2016-10-20 14:36:49 Debug: duration=14 rows=1 UPDATE lm_menu SET name = '操作日志管理' , class = 'icon-keyboard' , remark = '' WHERE id = 6
+2016-10-20 14:36:49 Debug: duration=0 rows=0 COMMIT
+2016-10-20 14:36:50 Debug: duration=1 rows=6 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu WHERE status = 1 ORDER BY rank DESC
+2016-10-20 14:36:51 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_menu Menu
+2016-10-20 14:36:51 Debug: duration=0 rows=6 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu ORDER BY id desc LIMIT 30 OFFSET 0
+2016-10-20 14:38:00 Debug: duration=4 rows=12 SHOW FULL COLUMNS FROM `lm_actionlog`
+2016-10-20 14:38:00 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_actionlog`
+2016-10-20 14:38:00 Debug: duration=6 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_actionlog' AND rc.TABLE_NAME = 'lm_actionlog'
+2016-10-20 14:38:00 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_actionlog'
+2016-10-20 14:44:22 Debug: duration=4 rows=9 SHOW FULL COLUMNS FROM `lm_menu`
+2016-10-20 14:44:22 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_menu`
+2016-10-20 14:44:22 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_menu' AND rc.TABLE_NAME = 'lm_menu'
+2016-10-20 14:44:22 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_menu'
+2016-10-20 14:44:22 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_menu Menu
+2016-10-20 14:44:22 Debug: duration=0 rows=6 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu ORDER BY id desc LIMIT 30 OFFSET 0
+2016-10-20 14:45:35 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_menu Menu
+2016-10-20 14:45:35 Debug: duration=0 rows=6 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu ORDER BY id desc LIMIT 30 OFFSET 0
+2016-10-20 14:46:03 Debug: duration=43 rows=12 SHOW FULL COLUMNS FROM `lm_actionlog`
+2016-10-20 14:46:03 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_actionlog`
+2016-10-20 14:46:03 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_actionlog' AND rc.TABLE_NAME = 'lm_actionlog'
+2016-10-20 14:46:03 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_actionlog'
+2016-10-20 14:46:03 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:46:03 Debug: duration=1 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:46:09 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:46:09 Debug: duration=1 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:52:16 Debug: duration=4 rows=12 SHOW FULL COLUMNS FROM `lm_actionlog`
+2016-10-20 14:52:16 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_actionlog`
+2016-10-20 14:52:16 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_actionlog' AND rc.TABLE_NAME = 'lm_actionlog'
+2016-10-20 14:52:16 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_actionlog'
+2016-10-20 14:52:16 Debug: duration=3 rows=9 SHOW FULL COLUMNS FROM `lm_menu`
+2016-10-20 14:52:16 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_menu`
+2016-10-20 14:52:17 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_menu' AND rc.TABLE_NAME = 'lm_menu'
+2016-10-20 14:52:17 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_menu'
+2016-10-20 14:52:17 Debug: duration=0 rows=1 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu WHERE `node` = '/actionlog/index' LIMIT 1
+2016-10-20 14:52:30 Debug: duration=3 rows=12 SHOW FULL COLUMNS FROM `lm_actionlog`
+2016-10-20 14:52:30 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_actionlog`
+2016-10-20 14:52:30 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_actionlog' AND rc.TABLE_NAME = 'lm_actionlog'
+2016-10-20 14:52:30 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_actionlog'
+2016-10-20 14:52:30 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:52:30 Debug: duration=1 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:53:20 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-20 14:53:20 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-20 14:53:20 Debug: duration=605 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-20 14:53:20 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-20 14:53:20 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-20 14:53:20 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User ORDER BY User.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:53:34 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:53:34 Debug: duration=1 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:55:05 Debug: duration=218 rows=12 SHOW FULL COLUMNS FROM `lm_actionlog`
+2016-10-20 14:55:05 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_actionlog`
+2016-10-20 14:55:05 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_actionlog' AND rc.TABLE_NAME = 'lm_actionlog'
+2016-10-20 14:55:05 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_actionlog'
+2016-10-20 14:55:05 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:55:05 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:55:29 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:55:29 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:00 Debug: duration=4 rows=12 SHOW FULL COLUMNS FROM `lm_actionlog`
+2016-10-20 14:58:00 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_actionlog`
+2016-10-20 14:58:00 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_actionlog' AND rc.TABLE_NAME = 'lm_actionlog'
+2016-10-20 14:58:00 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_actionlog'
+2016-10-20 14:58:00 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:00 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:02 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:02 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:02 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:02 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:02 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:02 Debug: duration=1 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:03 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:03 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:03 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:03 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:03 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:03 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:04 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:04 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:04 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:04 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:04 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:04 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:05 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:05 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:05 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:05 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:05 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:05 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:05 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:05 Debug: duration=1 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:09 Debug: duration=4 rows=9 SHOW FULL COLUMNS FROM `lm_menu`
+2016-10-20 14:58:09 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_menu`
+2016-10-20 14:58:09 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_menu' AND rc.TABLE_NAME = 'lm_menu'
+2016-10-20 14:58:09 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_menu'
+2016-10-20 14:58:09 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_menu Menu
+2016-10-20 14:58:09 Debug: duration=0 rows=6 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu ORDER BY id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:12 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-20 14:58:12 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-20 14:58:12 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-20 14:58:12 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-20 14:58:12 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-20 14:58:12 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User ORDER BY User.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:58:14 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:58:14 Debug: duration=1 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:59:00 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:59:00 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:59:00 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:59:00 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:59:01 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:59:01 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:59:01 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:59:01 Debug: duration=1 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:59:01 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:59:01 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:59:02 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:59:02 Debug: duration=0 rows=20 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 30 OFFSET 0
+2016-10-20 14:59:14 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:59:14 Debug: duration=1 rows=10 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 10 OFFSET 0
+2016-10-20 14:59:16 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:59:16 Debug: duration=0 rows=10 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 10 OFFSET 10
+2016-10-20 14:59:18 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_actionlog Actionlog
+2016-10-20 14:59:18 Debug: duration=0 rows=10 SELECT Actionlog.id AS `Actionlog__id`, Actionlog.url AS `Actionlog__url`, Actionlog.type AS `Actionlog__type`, Actionlog.useragent AS `Actionlog__useragent`, Actionlog.ip AS `Actionlog__ip`, Actionlog.filename AS `Actionlog__filename`, Actionlog.msg AS `Actionlog__msg`, Actionlog.controller AS `Actionlog__controller`, Actionlog.action AS `Actionlog__action`, Actionlog.param AS `Actionlog__param`, Actionlog.user AS `Actionlog__user`, Actionlog.create_time AS `Actionlog__create_time` FROM lm_actionlog Actionlog ORDER BY Actionlog.id desc LIMIT 10 OFFSET 0
+2016-10-20 14:59:21 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_menu Menu
+2016-10-20 14:59:21 Debug: duration=0 rows=6 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu ORDER BY id desc LIMIT 30 OFFSET 0
+2016-10-20 15:00:56 Debug: duration=5 rows=9 SHOW FULL COLUMNS FROM `lm_menu`
+2016-10-20 15:00:56 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_menu`
+2016-10-20 15:00:56 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_menu' AND rc.TABLE_NAME = 'lm_menu'
+2016-10-20 15:00:56 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_menu'
+2016-10-20 15:00:56 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_menu Menu
+2016-10-20 15:00:56 Debug: duration=0 rows=6 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu ORDER BY id desc LIMIT 10 OFFSET 0
+2016-10-20 15:00:58 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_menu Menu
+2016-10-20 15:00:58 Debug: duration=0 rows=6 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu ORDER BY id desc LIMIT 20 OFFSET 0
+2016-10-20 15:13:59 Debug: duration=346 rows=0 SHOW FULL COLUMNS FROM `log`
+2016-10-23 11:54:28 Debug: duration=1 rows=10 SHOW TABLES FROM `meiyue`
+2016-10-23 11:54:28 Debug: duration=4 rows=5 SHOW FULL COLUMNS FROM `lm_smsmsg`
+2016-10-23 11:54:28 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_smsmsg`
+2016-10-23 11:54:28 Debug: duration=189 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_smsmsg' AND rc.TABLE_NAME = 'lm_smsmsg'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_smsmsg'
+2016-10-23 11:54:28 Debug: duration=4 rows=12 SHOW FULL COLUMNS FROM `lm_actionlog`
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_actionlog`
+2016-10-23 11:54:28 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_actionlog' AND rc.TABLE_NAME = 'lm_actionlog'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_actionlog'
+2016-10-23 11:54:28 Debug: duration=3 rows=8 SHOW FULL COLUMNS FROM `lm_admin`
+2016-10-23 11:54:28 Debug: duration=0 rows=2 SHOW INDEXES FROM `lm_admin`
+2016-10-23 11:54:28 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_admin' AND rc.TABLE_NAME = 'lm_admin'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_admin'
+2016-10-23 11:54:28 Debug: duration=3 rows=3 SHOW FULL COLUMNS FROM `lm_admin_group`
+2016-10-23 11:54:28 Debug: duration=0 rows=3 SHOW INDEXES FROM `lm_admin_group`
+2016-10-23 11:54:28 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_admin_group' AND rc.TABLE_NAME = 'lm_admin_group'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_admin_group'
+2016-10-23 11:54:28 Debug: duration=3 rows=5 SHOW FULL COLUMNS FROM `lm_group`
+2016-10-23 11:54:28 Debug: duration=0 rows=2 SHOW INDEXES FROM `lm_group`
+2016-10-23 11:54:28 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_group' AND rc.TABLE_NAME = 'lm_group'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_group'
+2016-10-23 11:54:28 Debug: duration=3 rows=3 SHOW FULL COLUMNS FROM `lm_group_menu`
+2016-10-23 11:54:28 Debug: duration=0 rows=3 SHOW INDEXES FROM `lm_group_menu`
+2016-10-23 11:54:28 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_group_menu' AND rc.TABLE_NAME = 'lm_group_menu'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_group_menu'
+2016-10-23 11:54:28 Debug: duration=3 rows=9 SHOW FULL COLUMNS FROM `lm_menu`
+2016-10-23 11:54:28 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_menu`
+2016-10-23 11:54:28 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_menu' AND rc.TABLE_NAME = 'lm_menu'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_menu'
+2016-10-23 11:54:28 Debug: duration=3 rows=5 SHOW FULL COLUMNS FROM `lm_smsmsg`
+2016-10-23 11:54:28 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_smsmsg`
+2016-10-23 11:54:28 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_smsmsg' AND rc.TABLE_NAME = 'lm_smsmsg'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_smsmsg'
+2016-10-23 11:54:28 Debug: duration=3 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 11:54:28 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 11:54:29 Debug: duration=497 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 11:54:29 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 11:54:29 Debug: duration=4 rows=4 SHOW FULL COLUMNS FROM `phinxlog`
+2016-10-23 11:54:29 Debug: duration=0 rows=1 SHOW INDEXES FROM `phinxlog`
+2016-10-23 11:54:29 Debug: duration=258 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'phinxlog' AND rc.TABLE_NAME = 'phinxlog'
+2016-10-23 11:54:29 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'phinxlog'
+2016-10-23 11:54:29 Debug: duration=4 rows=4 SHOW FULL COLUMNS FROM `wpadmin_phinxlog`
+2016-10-23 11:54:29 Debug: duration=0 rows=1 SHOW INDEXES FROM `wpadmin_phinxlog`
+2016-10-23 11:54:29 Debug: duration=331 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'wpadmin_phinxlog' AND rc.TABLE_NAME = 'wpadmin_phinxlog'
+2016-10-23 11:54:29 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'wpadmin_phinxlog'
+2016-10-23 11:54:29 Debug: duration=4 rows=5 SHOW FULL COLUMNS FROM `lm_smsmsg`
+2016-10-23 11:54:29 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_smsmsg`
+2016-10-23 11:54:29 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_smsmsg' AND rc.TABLE_NAME = 'lm_smsmsg'
+2016-10-23 11:54:29 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_smsmsg'
+2016-10-23 12:00:34 Debug: duration=5 rows=5 SHOW FULL COLUMNS FROM `lm_smsmsg`
+2016-10-23 12:00:34 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_smsmsg`
+2016-10-23 12:00:34 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_smsmsg' AND rc.TABLE_NAME = 'lm_smsmsg'
+2016-10-23 12:00:34 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_smsmsg'
+2016-10-23 12:00:34 Debug: duration=11 rows=0 SELECT smsmsg.id AS `smsmsg__id`, smsmsg.phone AS `smsmsg__phone`, smsmsg.code AS `smsmsg__code`, smsmsg.content AS `smsmsg__content`, smsmsg.create_time AS `smsmsg__create_time` FROM lm_smsmsg smsmsg WHERE `phone` = '18316629973' ORDER BY create_time DESC LIMIT 1
+2016-10-23 12:01:53 Debug: duration=1 rows=0 SELECT smsmsg.id AS `smsmsg__id`, smsmsg.phone AS `smsmsg__phone`, smsmsg.code AS `smsmsg__code`, smsmsg.content AS `smsmsg__content`, smsmsg.create_time AS `smsmsg__create_time` FROM lm_smsmsg smsmsg WHERE `phone` = '18316629973' ORDER BY create_time DESC LIMIT 1
+2016-10-23 12:01:56 Debug: duration=0 rows=0 BEGIN
+2016-10-23 12:01:56 Debug: duration=14 rows=1 INSERT INTO lm_smsmsg (phone, code, content, create_time) VALUES ('18316629973', '8471', '您的动态验证码为8471', '2016-10-23 12:01:54')
+2016-10-23 12:01:56 Debug: duration=0 rows=0 COMMIT
+2016-10-23 14:22:51 Debug: duration=6 rows=5 SHOW FULL COLUMNS FROM `lm_smsmsg`
+2016-10-23 14:22:51 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_smsmsg`
+2016-10-23 14:22:51 Debug: duration=6 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_smsmsg' AND rc.TABLE_NAME = 'lm_smsmsg'
+2016-10-23 14:22:51 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_smsmsg'
+2016-10-23 14:22:51 Debug: duration=0 rows=1 SELECT smsmsg.id AS `smsmsg__id`, smsmsg.phone AS `smsmsg__phone`, smsmsg.code AS `smsmsg__code`, smsmsg.content AS `smsmsg__content`, smsmsg.create_time AS `smsmsg__create_time` FROM lm_smsmsg smsmsg WHERE `phone` = '18316629973' ORDER BY create_time DESC LIMIT 1
+2016-10-23 14:22:51 Debug: duration=0 rows=0 BEGIN
+2016-10-23 14:22:51 Debug: duration=8 rows=1 INSERT INTO lm_smsmsg (phone, code, content, create_time) VALUES ('18316629973', '8206', '您的动态验证码为8206', '2016-10-23 14:22:51')
+2016-10-23 14:22:51 Debug: duration=0 rows=0 COMMIT
+2016-10-23 14:28:16 Debug: duration=5 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 14:28:16 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 14:28:16 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 14:28:16 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 14:28:16 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User WHERE phone = '18316629973' LIMIT 1
+2016-10-23 14:28:29 Debug: duration=1 rows=0 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User WHERE phone = '18316629973' LIMIT 1
+2016-10-23 14:28:29 Debug: duration=0 rows=0 BEGIN
+2016-10-23 14:28:29 Debug: duration=0 rows=1 INSERT INTO lm_user (create_time, update_time) VALUES ('2016-10-23 14:28:29', '2016-10-23 14:28:29')
+2016-10-23 14:28:29 Debug: duration=0 rows=0 COMMIT
+2016-10-23 14:31:12 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 14:31:12 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 14:31:12 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 14:31:12 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 14:31:12 Debug: duration=0 rows=0 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User WHERE phone = '18316629973' LIMIT 1
+2016-10-23 14:41:41 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 14:41:41 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 14:41:41 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 14:41:41 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 14:41:41 Debug: duration=0 rows=0 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User WHERE phone = '18316629973' LIMIT 1
+2016-10-23 14:41:42 Debug: duration=0 rows=0 BEGIN
+2016-10-23 14:41:42 Debug: duration=16 rows=1 INSERT INTO lm_user (phone, pwd, user_token, enabled, create_time, update_time) VALUES ('18316629973', 'y$LnMD.SY2bY/UXok0n5aC9.vBp1LpFLgrxboay9dAILdKnwW1uXs0m', 'c1581ba0fe451c216653b31408267e9c', 1, '2016-10-23 14:41:42', '2016-10-23 14:41:42')
+2016-10-23 14:41:42 Debug: duration=0 rows=0 COMMIT
+2016-10-23 15:02:47 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 15:02:47 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 15:02:47 Debug: duration=6 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 15:02:47 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 15:02:47 Debug: duration=0 rows=0 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User WHERE phone = '18316629973' LIMIT 1
+2016-10-23 15:02:47 Debug: duration=0 rows=0 BEGIN
+2016-10-23 15:02:47 Debug: duration=8 rows=1 INSERT INTO lm_user (phone, pwd, user_token, enabled, create_time, update_time) VALUES ('18316629973', 'y$liCZi7f57ZUG.LurSlnQRuuVwsJiGNKwFCzTZ6xi0A3rtjAssopqi', '134d935b57b82fc1e5eac5e122a41d13', 1, '2016-10-23 15:02:47', '2016-10-23 15:02:47')
+2016-10-23 15:02:47 Debug: duration=0 rows=0 COMMIT
+2016-10-23 15:02:49 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 15:02:49 Debug: duration=20 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 15:03:12 Debug: duration=2 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 15:03:12 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 15:03:42 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 15:03:42 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 15:15:07 Debug: duration=5 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 15:15:07 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 15:15:07 Debug: duration=7 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 15:15:07 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 15:15:07 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 15:15:07 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 15:33:21 Debug: duration=5 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 15:33:21 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 15:33:21 Debug: duration=6 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 15:33:21 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 15:33:21 Debug: duration=0 rows=0 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User WHERE (phone = NULL AND enabled = 1 AND is_del = 0) LIMIT 1
+2016-10-23 15:33:40 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User WHERE (phone = '18316629973' AND enabled = 1 AND is_del = 0) LIMIT 1
+2016-10-23 15:34:51 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User WHERE (phone = '18316629973' AND enabled = 1 AND is_del = 0) LIMIT 1
+2016-10-23 15:35:29 Debug: duration=5 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 15:35:29 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 15:35:29 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 15:35:29 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 15:35:29 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User WHERE (phone = '18316629973' AND enabled = 1 AND is_del = 0) LIMIT 1
+2016-10-23 15:35:41 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User WHERE (phone = '18316629973' AND enabled = 1 AND is_del = 0) LIMIT 1
+2016-10-23 15:40:30 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 15:40:30 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 15:40:30 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 15:40:30 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 15:40:30 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User WHERE (phone = '18316629973' AND enabled = 1 AND is_del = 0) LIMIT 1
+2016-10-23 15:40:31 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 15:40:31 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 15:43:40 Debug: duration=5 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 15:43:40 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 15:43:40 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 15:43:40 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 15:43:40 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 15:43:40 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 15:48:37 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 15:48:37 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 15:48:37 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 15:48:37 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 15:48:37 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 15:48:37 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 15:54:33 Debug: duration=51 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 15:54:33 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 15:54:33 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 15:54:33 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 15:54:33 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 15:54:33 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 15:57:59 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 15:57:59 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 15:57:59 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 15:57:59 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 15:57:59 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 15:57:59 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 15:59:00 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 15:59:00 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 16:00:36 Debug: duration=5 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 16:00:36 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 16:00:36 Debug: duration=6 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 16:00:36 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 16:00:36 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 16:00:37 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 16:01:27 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 16:01:27 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 16:07:33 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 16:07:33 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 16:07:33 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 16:07:33 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 16:07:33 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 16:07:33 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 16:07:59 Debug: duration=2 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 16:07:59 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 16:09:32 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 16:09:32 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 16:10:28 Debug: duration=5 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 16:10:28 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 16:10:28 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 16:10:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 16:10:28 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 16:10:28 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 16:10:39 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 16:10:39 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 16:11:53 Debug: duration=1427 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 16:11:53 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 16:12:15 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 16:12:15 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 16:13:09 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 16:13:09 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 16:13:09 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 16:13:09 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 16:13:09 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 16:13:09 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 16:29:17 Debug: duration=5 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 16:29:17 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 16:29:17 Debug: duration=6 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 16:29:17 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 16:29:17 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 16:29:17 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:22:31 Debug: duration=6 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 18:22:31 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 18:22:31 Debug: duration=7 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 18:22:31 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 18:22:31 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:22:31 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:26:17 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 18:26:17 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 18:26:17 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 18:26:17 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 18:26:17 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:26:17 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:30:17 Debug: duration=5 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 18:30:17 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 18:30:17 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 18:30:17 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 18:30:17 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:30:17 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:31:26 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:31:26 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:32:34 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 18:32:34 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 18:32:34 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 18:32:34 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 18:32:34 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:32:34 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:34:01 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:34:01 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:34:11 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:34:11 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:35:11 Debug: duration=269 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 18:35:11 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 18:35:11 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 18:35:11 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 18:35:11 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:35:11 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:35:19 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:35:19 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:36:33 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:36:33 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:36:45 Debug: duration=2 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:36:45 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:38:18 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 18:38:18 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 18:38:18 Debug: duration=6 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 18:38:18 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 18:38:18 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:38:18 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:38:32 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:38:33 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:38:42 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:38:42 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:39:34 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:39:34 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:41:06 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 18:41:06 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 18:41:06 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 18:41:06 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 18:41:06 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:41:06 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:41:17 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:41:17 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:42:11 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:42:11 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:46:25 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 18:46:25 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 18:46:25 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 18:46:25 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 18:46:25 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:46:25 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:52:02 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 18:52:02 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 18:52:02 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 18:52:02 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 18:52:02 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:52:02 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 18:55:24 Debug: duration=4 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 18:55:24 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 18:55:24 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 18:55:24 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 18:55:24 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 18:55:24 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 19:02:04 Debug: duration=5 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 19:02:04 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 19:02:04 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 19:02:04 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 19:02:04 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 19:02:04 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 19:02:36 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 19:02:37 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 19:02:59 Debug: duration=1 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 19:02:59 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-23 19:04:52 Debug: duration=5 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 19:04:52 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 19:04:52 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 19:04:52 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 19:04:52 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-23 19:04:52 Debug: duration=0 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
+2016-10-24 09:15:05 Debug: duration=21 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-24 09:15:05 Debug: duration=10 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-24 09:15:05 Debug: duration=214 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-24 09:15:05 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-24 09:15:05 Debug: duration=0 rows=1 SELECT User.id AS `User__id`, User.phone AS `User__phone`, User.pwd AS `User__pwd`, User.user_token AS `User__user_token`, User.union_id AS `User__union_id`, User.wx_openid AS `User__wx_openid`, User.app_wx_openid AS `User__app_wx_openid`, User.truename AS `User__truename`, User.level AS `User__level`, User.position AS `User__position`, User.email AS `User__email`, User.gender AS `User__gender`, User.city AS `User__city`, User.avatar AS `User__avatar`, User.money AS `User__money`, User.status AS `User__status`, User.enabled AS `User__enabled`, User.is_del AS `User__is_del`, User.device AS `User__device`, User.create_time AS `User__create_time`, User.update_time AS `User__update_time`, User.guid AS `User__guid` FROM lm_user User LIMIT 20 OFFSET 0
+2016-10-24 09:15:05 Debug: duration=1 rows=1 SELECT (COUNT(*)) AS `count` FROM lm_user User
