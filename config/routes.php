@@ -54,6 +54,9 @@ Router::scope('/', function (RouteBuilder $routes) {
     //子域名模式
     $subdomain = substr(env('HTTP_HOST'), 0, strpos(env('HTTP_HOST'), '.'));
     if (in_array($subdomain, ['admin', 'm'])) {
+        if($subdomain=='m'){
+            $subdomain = 'mobile';
+        }
         $routes->connect('/:controller/:action/*', ['prefix' => $subdomain]);
     }
     if ($subdomain == 'admin') {
@@ -69,13 +72,17 @@ Router::scope('/', function (RouteBuilder $routes) {
         $routes->connect('/group/index', ['plugin' => 'wpadmin', 'controller' => 'group', 'action' => 'index']);
         $routes->connect('/group/add', ['plugin' => 'wpadmin', 'controller' => 'group', 'action' => 'add']);
         $routes->connect('/group/edit', ['plugin' => 'wpadmin', 'controller' => 'group', 'action' => 'edit']);
+        $routes->connect('/actionlog/index', ['plugin' => 'wpadmin', 'controller' => 'actionlog', 'action' => 'index']);
         $routes->connect('/admin/', ['plugin' => 'wpadmin', 'controller' => 'index', 'action' => 'index']);
     }
     //上传
     $routes->connect('/do-upload/*', ['plugin' => 'wpadmin', 'controller' => 'util', 'action' => 'doUpload']);
 
     $routes->connect('/do-download/*', ['plugin' => 'wpadmin', 'controller' => 'util', 'action' => 'download']);
-
+    //m端
+    if($subdomain=='mobile'){
+        $routes->connect('/', ['prefix' => 'mobile', 'controller' => 'index', 'action' => 'index']);
+    }
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.

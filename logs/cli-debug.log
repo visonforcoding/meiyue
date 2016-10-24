@@ -42,3 +42,179 @@ Cake\Console\ShellDispatcher::run() - CORE\src\Console\ShellDispatcher.php, line
 
 
 
+2016-10-20 14:35:37 Debug: duration=4 rows=12 SHOW FULL COLUMNS FROM `lm_actionlog`
+2016-10-20 14:35:37 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_actionlog`
+2016-10-20 14:35:37 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_actionlog' AND rc.TABLE_NAME = 'lm_actionlog'
+2016-10-20 14:35:37 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_actionlog'
+2016-10-20 14:35:37 Debug: duration=10 rows=9 SHOW FULL COLUMNS FROM `lm_menu`
+2016-10-20 14:35:37 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_menu`
+2016-10-20 14:35:37 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_menu' AND rc.TABLE_NAME = 'lm_menu'
+2016-10-20 14:35:37 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_menu'
+2016-10-20 14:35:37 Debug: duration=0 rows=0 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu WHERE `node` = '/actionlog/index' LIMIT 1
+2016-10-20 14:35:37 Debug: duration=0 rows=0 BEGIN
+2016-10-20 14:35:37 Debug: duration=8 rows=1 INSERT INTO lm_menu (name, node, pid, is_menu) VALUES ('actionlog管理', '/actionlog/index', 1, 1)
+2016-10-20 14:35:37 Debug: duration=0 rows=0 COMMIT
+2016-10-20 14:38:00 Debug: duration=4 rows=12 SHOW FULL COLUMNS FROM `lm_actionlog`
+2016-10-20 14:38:00 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_actionlog`
+2016-10-20 14:38:00 Debug: duration=6 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_actionlog' AND rc.TABLE_NAME = 'lm_actionlog'
+2016-10-20 14:38:00 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_actionlog'
+2016-10-20 14:52:16 Debug: duration=4 rows=12 SHOW FULL COLUMNS FROM `lm_actionlog`
+2016-10-20 14:52:16 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_actionlog`
+2016-10-20 14:52:16 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_actionlog' AND rc.TABLE_NAME = 'lm_actionlog'
+2016-10-20 14:52:16 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_actionlog'
+2016-10-20 14:52:16 Debug: duration=3 rows=9 SHOW FULL COLUMNS FROM `lm_menu`
+2016-10-20 14:52:16 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_menu`
+2016-10-20 14:52:17 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_menu' AND rc.TABLE_NAME = 'lm_menu'
+2016-10-20 14:52:17 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_menu'
+2016-10-20 14:52:17 Debug: duration=0 rows=1 SELECT Menu.id AS `Menu__id`, Menu.name AS `Menu__name`, Menu.node AS `Menu__node`, Menu.pid AS `Menu__pid`, Menu.class AS `Menu__class`, Menu.rank AS `Menu__rank`, Menu.is_menu AS `Menu__is_menu`, Menu.status AS `Menu__status`, Menu.remark AS `Menu__remark` FROM lm_menu Menu WHERE `node` = '/actionlog/index' LIMIT 1
+2016-10-23 11:54:28 Debug: duration=1 rows=10 SHOW TABLES FROM `meiyue`
+2016-10-23 11:54:28 Debug: duration=4 rows=5 SHOW FULL COLUMNS FROM `lm_smsmsg`
+2016-10-23 11:54:28 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_smsmsg`
+2016-10-23 11:54:28 Debug: duration=189 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_smsmsg' AND rc.TABLE_NAME = 'lm_smsmsg'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_smsmsg'
+2016-10-23 11:54:28 Debug: duration=4 rows=12 SHOW FULL COLUMNS FROM `lm_actionlog`
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_actionlog`
+2016-10-23 11:54:28 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_actionlog' AND rc.TABLE_NAME = 'lm_actionlog'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_actionlog'
+2016-10-23 11:54:28 Debug: duration=3 rows=8 SHOW FULL COLUMNS FROM `lm_admin`
+2016-10-23 11:54:28 Debug: duration=0 rows=2 SHOW INDEXES FROM `lm_admin`
+2016-10-23 11:54:28 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_admin' AND rc.TABLE_NAME = 'lm_admin'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_admin'
+2016-10-23 11:54:28 Debug: duration=3 rows=3 SHOW FULL COLUMNS FROM `lm_admin_group`
+2016-10-23 11:54:28 Debug: duration=0 rows=3 SHOW INDEXES FROM `lm_admin_group`
+2016-10-23 11:54:28 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_admin_group' AND rc.TABLE_NAME = 'lm_admin_group'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_admin_group'
+2016-10-23 11:54:28 Debug: duration=3 rows=5 SHOW FULL COLUMNS FROM `lm_group`
+2016-10-23 11:54:28 Debug: duration=0 rows=2 SHOW INDEXES FROM `lm_group`
+2016-10-23 11:54:28 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_group' AND rc.TABLE_NAME = 'lm_group'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_group'
+2016-10-23 11:54:28 Debug: duration=3 rows=3 SHOW FULL COLUMNS FROM `lm_group_menu`
+2016-10-23 11:54:28 Debug: duration=0 rows=3 SHOW INDEXES FROM `lm_group_menu`
+2016-10-23 11:54:28 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_group_menu' AND rc.TABLE_NAME = 'lm_group_menu'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_group_menu'
+2016-10-23 11:54:28 Debug: duration=3 rows=9 SHOW FULL COLUMNS FROM `lm_menu`
+2016-10-23 11:54:28 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_menu`
+2016-10-23 11:54:28 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_menu' AND rc.TABLE_NAME = 'lm_menu'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_menu'
+2016-10-23 11:54:28 Debug: duration=3 rows=5 SHOW FULL COLUMNS FROM `lm_smsmsg`
+2016-10-23 11:54:28 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_smsmsg`
+2016-10-23 11:54:28 Debug: duration=4 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_smsmsg' AND rc.TABLE_NAME = 'lm_smsmsg'
+2016-10-23 11:54:28 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_smsmsg'
+2016-10-23 11:54:28 Debug: duration=3 rows=22 SHOW FULL COLUMNS FROM `lm_user`
+2016-10-23 11:54:28 Debug: duration=0 rows=1 SHOW INDEXES FROM `lm_user`
+2016-10-23 11:54:29 Debug: duration=497 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_user' AND rc.TABLE_NAME = 'lm_user'
+2016-10-23 11:54:29 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_user'
+2016-10-23 11:54:29 Debug: duration=4 rows=4 SHOW FULL COLUMNS FROM `phinxlog`
+2016-10-23 11:54:29 Debug: duration=0 rows=1 SHOW INDEXES FROM `phinxlog`
+2016-10-23 11:54:29 Debug: duration=258 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'phinxlog' AND rc.TABLE_NAME = 'phinxlog'
+2016-10-23 11:54:29 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'phinxlog'
+2016-10-23 11:54:29 Debug: duration=4 rows=4 SHOW FULL COLUMNS FROM `wpadmin_phinxlog`
+2016-10-23 11:54:29 Debug: duration=0 rows=1 SHOW INDEXES FROM `wpadmin_phinxlog`
+2016-10-23 11:54:29 Debug: duration=331 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'wpadmin_phinxlog' AND rc.TABLE_NAME = 'wpadmin_phinxlog'
+2016-10-23 11:54:29 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'wpadmin_phinxlog'
+2016-10-23 11:54:29 Debug: duration=4 rows=5 SHOW FULL COLUMNS FROM `lm_smsmsg`
+2016-10-23 11:54:29 Debug: duration=1 rows=1 SHOW INDEXES FROM `lm_smsmsg`
+2016-10-23 11:54:29 Debug: duration=5 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'meiyue' AND kcu.TABLE_NAME = 'lm_smsmsg' AND rc.TABLE_NAME = 'lm_smsmsg'
+2016-10-23 11:54:29 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'lm_smsmsg'

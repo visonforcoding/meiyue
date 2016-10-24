@@ -4432,3 +4432,1015 @@ Stack Trace:
 #15 {main}
 
 
+2016-10-20 14:30:58 Error: [Cake\Routing\Exception\MissingRouteException] A route matching "/" could not be found.
+Exception Attributes: array (
+  'url' => '/',
+)
+Request URL: /
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Router.php(351): Cake\Routing\RouteCollection->parse('/', 'GET')
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(51): Cake\Routing\Router::parse('/', 'GET')
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#4 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#10 {main}
+
+
+2016-10-20 14:36:55 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Actionlog could not be found.
+Exception Attributes: array (
+  'class' => 'Actionlog',
+  'plugin' => false,
+  'prefix' => 'admin',
+  '_ext' => false,
+)
+Request URL: /actionlog/index
+Referer URL: http://admin.meiyue.dev/menu/index
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-20 14:37:40 Error: [Cake\View\Exception\MissingTemplateException] Template file "Actionlog\index.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Actionlog\\index.ctp',
+)
+Request URL: /actionlog/index
+Referer URL: http://admin.meiyue.dev/menu/index
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\View\View.php(591): Cake\View\View->_getViewFileName(NULL)
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render(NULL, NULL)
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(128): Cake\Controller\Controller->render()
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(Wpadmin\Controller\ActionlogController))
+#4 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#14 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#15 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#16 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#17 {main}
+
+
+2016-10-20 14:38:05 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Wpadmin.actionlog could not be found.
+Exception Attributes: array (
+  'class' => 'Wpadmin.actionlog',
+  'plugin' => false,
+  'prefix' => 'admin',
+  '_ext' => false,
+)
+Request URL: /wpadmin.actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(67): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-20 14:38:14 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Wpadmin.actionlog could not be found.
+Exception Attributes: array (
+  'class' => 'Wpadmin.actionlog',
+  'plugin' => false,
+  'prefix' => 'admin',
+  '_ext' => false,
+)
+Request URL: /wpadmin.actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(67): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-20 14:38:23 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Wpadmin.actionlog could not be found.
+Exception Attributes: array (
+  'class' => 'Wpadmin.actionlog',
+  'plugin' => false,
+  'prefix' => 'admin',
+  '_ext' => false,
+)
+Request URL: /wpadmin.actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(67): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-20 14:38:24 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Wpadmin.actionlog could not be found.
+Exception Attributes: array (
+  'class' => 'Wpadmin.actionlog',
+  'plugin' => false,
+  'prefix' => 'admin',
+  '_ext' => false,
+)
+Request URL: /wpadmin.actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(67): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-20 14:41:06 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Wpadmin.actionlog could not be found.
+Exception Attributes: array (
+  'class' => 'Wpadmin.actionlog',
+  'plugin' => false,
+  'prefix' => 'admin',
+  '_ext' => false,
+)
+Request URL: /wpadmin.actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(67): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-20 14:43:22 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Actionlog could not be found.
+Exception Attributes: array (
+  'class' => 'Actionlog',
+  'plugin' => false,
+  'prefix' => 'admin',
+  '_ext' => false,
+)
+Request URL: /actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-20 14:44:04 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Actionlog could not be found.
+Exception Attributes: array (
+  'class' => 'Actionlog',
+  'plugin' => false,
+  'prefix' => 'admin',
+  '_ext' => false,
+)
+Request URL: /Actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-20 14:46:03 Warning: Warning (512): Unable to emit headers. Headers sent in file=F:\www\meiyue\plugins\Wpadmin\src\Controller\ActionlogController.php line=128 in [F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 48]
+Request URL: /wpadmin/actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 48
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-10-20 14:46:03 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at F:\www\meiyue\plugins\Wpadmin\src\Controller\ActionlogController.php:128) in [F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 146]
+Request URL: /wpadmin/actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitStatusLine() - CORE\src\Http\ResponseEmitter.php, line 146
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 54
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-10-20 14:46:03 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at F:\www\meiyue\plugins\Wpadmin\src\Controller\ActionlogController.php:128) in [F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 173]
+Request URL: /wpadmin/actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 173
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-10-20 14:46:03 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at F:\www\meiyue\plugins\Wpadmin\src\Controller\ActionlogController.php:128) in [F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 173]
+Request URL: /wpadmin/actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 173
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-10-20 14:46:09 Warning: Warning (512): Unable to emit headers. Headers sent in file=F:\www\meiyue\plugins\Wpadmin\src\Controller\ActionlogController.php line=128 in [F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 48]
+Request URL: /wpadmin/actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 48
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-10-20 14:46:09 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at F:\www\meiyue\plugins\Wpadmin\src\Controller\ActionlogController.php:128) in [F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 146]
+Request URL: /wpadmin/actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitStatusLine() - CORE\src\Http\ResponseEmitter.php, line 146
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 54
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-10-20 14:46:09 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at F:\www\meiyue\plugins\Wpadmin\src\Controller\ActionlogController.php:128) in [F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 173]
+Request URL: /wpadmin/actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 173
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-10-20 14:46:09 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at F:\www\meiyue\plugins\Wpadmin\src\Controller\ActionlogController.php:128) in [F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 173]
+Request URL: /wpadmin/actionlog/getDataList
+Referer URL: http://admin.meiyue.dev/actionlog/index
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 173
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-10-20 15:06:44 Error: [Cake\Routing\Exception\MissingRouteException] A route matching "/" could not be found.
+Exception Attributes: array (
+  'url' => '/',
+)
+Request URL: /
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Router.php(351): Cake\Routing\RouteCollection->parse('/', 'GET')
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(51): Cake\Routing\Router::parse('/', 'GET')
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#4 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#10 {main}
+
+
+2016-10-20 15:10:53 Error: [Cake\Core\Exception\MissingPluginException] Plugin Mobile could not be found.
+Exception Attributes: array (
+  'plugin' => 'Mobile',
+)
+Request URL: /
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Core\App.php(190): Cake\Core\Plugin::classPath('Mobile')
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\View\View.php(1272): Cake\Core\App::path('Template', 'Mobile')
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\View\View.php(1090): Cake\View\View->_paths('Mobile')
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\View\View.php(591): Cake\View\View->_getViewFileName('error500')
+#4 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\ExceptionRenderer.php(357): Cake\View\View->render('error500', 'error')
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\ExceptionRenderer.php(334): Cake\Error\ExceptionRenderer->_outputMessageSafe('error500')
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\ExceptionRenderer.php(194): Cake\Error\ExceptionRenderer->_outputMessage('missingControll...')
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(99): Cake\Error\ExceptionRenderer->render()
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(83): Cake\Error\Middleware\ErrorHandlerMiddleware->handleException(Object(Cake\Routing\Exception\MissingControllerException), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2016-10-20 15:12:33 Error: [Cake\Core\Exception\MissingPluginException] Plugin Mobile could not be found.
+Exception Attributes: array (
+  'plugin' => 'Mobile',
+)
+Request URL: /
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Core\App.php(190): Cake\Core\Plugin::classPath('Mobile')
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\View\View.php(1272): Cake\Core\App::path('Template', 'Mobile')
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\View\View.php(1090): Cake\View\View->_paths('Mobile')
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\View\View.php(591): Cake\View\View->_getViewFileName('error500')
+#4 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\ExceptionRenderer.php(357): Cake\View\View->render('error500', 'error')
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\ExceptionRenderer.php(334): Cake\Error\ExceptionRenderer->_outputMessageSafe('error500')
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\ExceptionRenderer.php(194): Cake\Error\ExceptionRenderer->_outputMessage('missingControll...')
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(99): Cake\Error\ExceptionRenderer->render()
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(83): Cake\Error\Middleware\ErrorHandlerMiddleware->handleException(Object(Cake\Routing\Exception\MissingControllerException), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2016-10-20 15:13:06 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Index could not be found.
+Exception Attributes: array (
+  'class' => 'Index',
+  'plugin' => false,
+  'prefix' => 'mobile',
+  '_ext' => false,
+)
+Request URL: /
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-20 15:13:59 Error: [Cake\Database\Exception] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'meiyue.log' doesn't exist
+Request URL: /
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(97): Cake\Database\Schema\Collection->_reflect('Column', 'log', Array, Object(Cake\Database\Schema\Table))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(63): Cake\Database\Schema\Collection->describe('log', Array)
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\ORM\Table.php(440): Cake\Database\Schema\CachedCollection->describe('log')
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\ORM\Marshaller.php(534): Cake\ORM\Table->schema()
+#4 F:\www\meiyue\vendor\cakephp\cakephp\src\ORM\Table.php(2235): Cake\ORM\Marshaller->merge(Object(Cake\ORM\Entity), Array, Array)
+#5 F:\www\meiyue\src\Controller\Component\UtilComponent.php(57): Cake\ORM\Table->patchEntity(Object(Cake\ORM\Entity), Array)
+#6 F:\www\meiyue\src\Controller\Mobile\IndexController.php(85): App\Controller\Component\UtilComponent->dblog('order', '\xE4\xB8\x80\xE4\xB8\xAA\xE6\xB5\x8B\xE8\xAF\x95\xE6\x97\xA5...', Array)
+#7 [internal function]: App\Controller\Mobile\IndexController->index()
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(122): Cake\Controller\Controller->invokeAction()
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\Mobile\IndexController))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#13 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#15 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#16 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#17 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#18 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#19 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#20 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#21 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#22 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#23 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#24 {main}
+
+
+2016-10-20 15:28:58 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Mobile could not be found.
+Exception Attributes: array (
+  'class' => 'Mobile',
+  'plugin' => false,
+  'prefix' => 'mobile',
+  '_ext' => false,
+)
+Request URL: /mobile/css/common.css
+Referer URL: http://m.meiyue.dev/
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-20 15:28:58 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Mobile could not be found.
+Exception Attributes: array (
+  'class' => 'Mobile',
+  'plugin' => false,
+  'prefix' => 'mobile',
+  '_ext' => false,
+)
+Request URL: /mobile/css/style.css
+Referer URL: http://m.meiyue.dev/
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-20 15:29:04 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Mobile could not be found.
+Exception Attributes: array (
+  'class' => 'Mobile',
+  'plugin' => false,
+  'prefix' => 'mobile',
+  '_ext' => false,
+)
+Request URL: /mobile/css/style.css
+Referer URL: http://m.meiyue.dev/
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-20 15:29:04 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Mobile could not be found.
+Exception Attributes: array (
+  'class' => 'Mobile',
+  'plugin' => false,
+  'prefix' => 'mobile',
+  '_ext' => false,
+)
+Request URL: /mobile/css/common.css
+Referer URL: http://m.meiyue.dev/
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-20 15:43:00 Error: [Cake\Controller\Exception\MissingActionException] Action UserController::login() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'UserController',
+  'action' => 'login',
+  'prefix' => 'mobile',
+  'plugin' => NULL,
+)
+Request URL: /user/login?redirect_url=/
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(122): Cake\Controller\Controller->invokeAction()
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\Mobile\UserController))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-20 15:43:39 Error: [Cake\View\Exception\MissingTemplateException] Template file "Mobile\User\login.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Mobile\\User\\login.ctp',
+)
+Request URL: /user/login?redirect_url=/
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\View\View.php(591): Cake\View\View->_getViewFileName(NULL)
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render(NULL, NULL)
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(128): Cake\Controller\Controller->render()
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\Mobile\UserController))
+#4 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#14 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#15 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#16 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#17 {main}
+
+
+2016-10-20 18:24:06 Error: [Cake\View\Exception\MissingTemplateException] Template file "Mobile\User\register.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Mobile\\User\\register.ctp',
+)
+Request URL: /user/register
+Referer URL: http://m.meiyue.dev/user/login?redirect_url=%2F
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\View\View.php(591): Cake\View\View->_getViewFileName(NULL)
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render(NULL, NULL)
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(128): Cake\Controller\Controller->render()
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\Mobile\UserController))
+#4 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#14 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#15 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#16 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#17 {main}
+
+
+2016-10-20 18:24:06 Error: [Cake\View\Exception\MissingTemplateException] Template file "Mobile\User\register.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Mobile\\User\\register.ctp',
+)
+Request URL: /user/register
+Referer URL: http://m.meiyue.dev/user/login?redirect_url=%2F
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\View\View.php(591): Cake\View\View->_getViewFileName(NULL)
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render(NULL, NULL)
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(128): Cake\Controller\Controller->render()
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\Mobile\UserController))
+#4 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#14 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#15 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#16 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#17 {main}
+
+
+2016-10-23 11:59:04 Error: Fatal Error (1): Call to undefined function App\Controller\Mobile\createRandomCode() in [F:\www\meiyue\src\Controller\Mobile\UserController.php, line 40]
+Request URL: /user/sendVCode
+Referer URL: http://m.meiyue.dev/user/register
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE\src\Error\BaseErrorHandler.php, line 216
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE\src\Error\BaseErrorHandler.php, line 98
+[main] - [internal], line ??
+
+
+
+2016-10-23 11:59:04 Error: [Cake\Error\FatalErrorException] Call to undefined function App\Controller\Mobile\createRandomCode()
+Request URL: /user/sendVCode
+Referer URL: http://m.meiyue.dev/user/register
+Client IP: 127.0.0.1
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\BaseErrorHandler.php(98): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Call to undefin...', 'F:\\www\\meiyue\\s...', 40)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2016-10-23 12:00:34 Error: [Exception] 未配置短信平台信息
+Request URL: /user/sendVCode
+Referer URL: http://m.meiyue.dev/user/register
+Stack Trace:
+#0 F:\www\meiyue\src\Controller\Mobile\UserController.php(46): App\Controller\Component\SmsComponent->sendByQf106('18316629973', '\xE6\x82\xA8\xE7\x9A\x84\xE5\x8A\xA8\xE6\x80\x81\xE9\xAA\x8C...', '5506')
+#1 [internal function]: App\Controller\Mobile\UserController->sendVcode()
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(122): Cake\Controller\Controller->invokeAction()
+#4 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\Mobile\UserController))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#7 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#15 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#16 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#17 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#18 {main}
+
+
+2016-10-23 14:31:12 Error: Array
+(
+    [pwd] => Array
+        (
+            [_empty] => This field cannot be left empty
+        )
+
+    [truename] => Array
+        (
+            [_required] => This field is required
+        )
+
+    [level] => Array
+        (
+            [_required] => This field is required
+        )
+
+    [gender] => Array
+        (
+            [_required] => This field is required
+        )
+
+    [money] => Array
+        (
+            [_required] => This field is required
+        )
+
+    [status] => Array
+        (
+            [_required] => This field is required
+        )
+
+    [is_del] => Array
+        (
+            [_required] => This field is required
+        )
+
+    [device] => Array
+        (
+            [_required] => This field is required
+        )
+
+    [guid] => Array
+        (
+            [_required] => This field is required
+        )
+
+)
+
+2016-10-23 14:31:12 Error: Array
+(
+    [pwd] => Array
+        (
+            [_empty] => This field cannot be left empty
+        )
+
+    [truename] => Array
+        (
+            [_required] => This field is required
+        )
+
+    [level] => Array
+        (
+            [_required] => This field is required
+        )
+
+    [gender] => Array
+        (
+            [_required] => This field is required
+        )
+
+    [money] => Array
+        (
+            [_required] => This field is required
+        )
+
+    [status] => Array
+        (
+            [_required] => This field is required
+        )
+
+    [is_del] => Array
+        (
+            [_required] => This field is required
+        )
+
+    [device] => Array
+        (
+            [_required] => This field is required
+        )
+
+    [guid] => Array
+        (
+            [_required] => This field is required
+        )
+
+)
+
+2016-10-23 15:02:49 Error: [Cake\View\Exception\MissingTemplateException] Template file "Mobile\User\index.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Mobile\\User\\index.ctp',
+)
+Request URL: /user/index
+Referer URL: http://m.meiyue.dev/user/register
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\View\View.php(591): Cake\View\View->_getViewFileName(NULL)
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render(NULL, NULL)
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(128): Cake\Controller\Controller->render()
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\Mobile\UserController))
+#4 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#14 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#15 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#16 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#17 {main}
+
+
+2016-10-23 15:33:21 Warning: Warning (512): Unable to emit headers. Headers sent in file=F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Debugger.php line=753 in [F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 48]
+Request URL: /user/login
+Referer URL: http://m.meiyue.dev/user/login
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 48
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-10-23 15:33:21 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Debugger.php:753) in [F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 146]
+Request URL: /user/login
+Referer URL: http://m.meiyue.dev/user/login
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitStatusLine() - CORE\src\Http\ResponseEmitter.php, line 146
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 54
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-10-23 15:33:21 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Debugger.php:753) in [F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 173]
+Request URL: /user/login
+Referer URL: http://m.meiyue.dev/user/login
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 173
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2016-10-23 15:33:42 Error: [Cake\Controller\Exception\MissingActionException] Action UserController::undefined() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'UserController',
+  'action' => 'undefined',
+  'prefix' => 'mobile',
+  'plugin' => NULL,
+)
+Request URL: /user/undefined
+Referer URL: http://m.meiyue.dev/user/login
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(122): Cake\Controller\Controller->invokeAction()
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\Mobile\UserController))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-23 15:34:52 Error: [Cake\Routing\Exception\MissingControllerException] Controller class News could not be found.
+Exception Attributes: array (
+  'class' => 'News',
+  'plugin' => false,
+  'prefix' => 'mobile',
+  '_ext' => false,
+)
+Request URL: /news/index
+Referer URL: http://m.meiyue.dev/user/login
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2016-10-23 15:35:30 Error: [Cake\Routing\Exception\MissingControllerException] Controller class News could not be found.
+Exception Attributes: array (
+  'class' => 'News',
+  'plugin' => false,
+  'prefix' => 'mobile',
+  '_ext' => false,
+)
+Request URL: /news/index
+Referer URL: http://m.meiyue.dev/user/login
+Stack Trace:
+#0 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 F:\www\meiyue\vendor\admad\cakephp-glide\src\Middleware\GlideMiddleware.php(90): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): ADmad\Glide\Middleware\GlideMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 F:\www\meiyue\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 F:\www\meiyue\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 F:\www\meiyue\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 F:\www\meiyue\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+

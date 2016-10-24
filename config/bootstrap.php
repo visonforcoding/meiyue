@@ -180,6 +180,9 @@ Request::addDetector('tablet', function ($request) {
     return $detector->isTablet();
 });
 
+Request::addDetector('weixin', ['env' => 'HTTP_USER_AGENT', 'pattern' => '/MicroMessenger/i']);
+Request::addDetector('lemon', ['env' => 'HTTP_USER_AGENT', 'pattern' => '/smartlemon/i']);
+
 /*
  * Enable immutable time objects in the ORM.
  *
@@ -221,7 +224,7 @@ Type::build('datetime')
  * Debug Kit should not be installed on a production system
  */
 if (Configure::read('debug')) {
-    Plugin::load('DebugKit', ['bootstrap' => true]);
+    //Plugin::load('DebugKit', ['bootstrap' => true]);
 }
 //配置日志文件
 if (Configure::read('debug')) {
@@ -234,7 +237,12 @@ if (Configure::read('debug')) {
         'scopes' => ['queriesLog']
     ]);
 }
-Plugin::load('Wpadmin', ['bootstrap' => true, 'routes' => true]);
-Configure::load('wpadmin');
+//载入插件
 Plugin::load('Migrations');
+Plugin::load('Wpadmin', ['bootstrap' => true, 'routes' => true]);
 Plugin::load('ADmad/Glide');
+
+//载入自定义配置文件
+Configure::load('wpadmin');
+Configure::load('dataconf');
+require_once dirname(__FILE__) . '/function.php';  //引入全局函数文件
