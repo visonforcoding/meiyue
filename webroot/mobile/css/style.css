@@ -30,7 +30,7 @@
  * 认证填写
  * */
 header{overflow: hidden;}
-.header{height:1rem;background: #1a1713;color:#eab96a;text-align: center;line-height: 1rem;font-size:20px;}
+.header{height:1rem;background: #1a1713;color:#eab96a;text-align: center;line-height: 1rem;font-size:20px;position:relative;}
 .header .toback{position: absolute;left:.3rem;}
 .identify_img_ifo,.identify_basic_info{background: #fff;}
 .identify_img_ifo ul,.identify_basic_info{overflow: hidden;border-bottom:1px #e5e5e5 solid;border-top:1px #e5e5e5 solid;}
@@ -65,7 +65,8 @@ background: #eab96a;bottom:0;font-size:18px;}
 /*
  * 通行证申请
  * */
+/*.fixedwraper{position:fixed;top:0;bottom:0;width:100%;max-width:750px;background: #fff;z-index:0;}*/
 .identify_jump_tips{padding:1.6rem 0 .6rem;background: transparent;}
 .relpotion i{position:absolute;bottom:0;right:-15px;line-height: 0;font-size:30px;}
-.jump_tipscon{margin-top:.6rem;}
+.jump_tipscon{margin-top:.6rem;font-size:16px;}
 
