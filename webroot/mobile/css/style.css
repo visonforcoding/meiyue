@@ -1,0 +1,71 @@
+/*
+ * 登录/注册
+ * */
+.loginwraper{background: url(../images/login_bg.jpg) no-repeat center center;background-size:cover;top:0;left:0;right:0;bottom:0;overflow: hidden;position:fixed;max-width:750px;margin:0 auto;z-index: 1;}
+.loginpage{position:relative;z-index:2;}
+.loginpage .logo{width:1.39rem;height:1rem;margin:1rem auto 0;}
+.loginpage .logo img{width:100%;height:auto;display: block;}
+.loginbox,.check_sex_type{padding:0 .74rem;margin-top:1.2rem;}
+.loginbox .user{width:59%;}
+.loginbox .valicode{width:50%;}
+.loginbox .getvalid{text-decoration: none;border:1px #5d5a57 solid;text-align:center;display: inline-block;color:#fff;width:1.8rem;height:28px;line-height: 26px;}
+.fogetpwd{color:#eab96a;font-size:13px;text-decoration: underline;}
+.loginbox div{border-bottom:1px #4a3d28 solid; padding:.3rem 0;margin-top:.16rem;padding-left:.2rem;color:#eab96a;font-size:16px;}
+.loginbox input::-webkit-input-placeholder { /* WebKit browsers */ color: #514128 } 
+.loginbox div i{margin-right:.3rem;}
+.outerlogin,.register_bottom_tips{width:100%;text-align: center;margin-top:1.1rem;}
+.outerlogin a{color:#987845;}
+.register_bottom_tips a{color:#fff}
+.getlogin{text-align: center;font-size:12px;margin-top: 15px;}
+.getlogin a{color:#cc9930;}
+@media only screen and (max-width: 320px){
+	.loginpage .logo{margin:.8rem auto 0;}
+	.loginbox{margin-top:.6rem;}
+	/*.outerlogin{margin-top:.6rem;}*/
+}
+@media only screen and (max-height: 500px){
+	.register_bottom_tips{margin-top:.8rem;}
+}
+/*
+ * 认证填写
+ * */
+header{overflow: hidden;}
+.header{height:1rem;background: #1a1713;color:#eab96a;text-align: center;line-height: 1rem;font-size:20px;}
+.header .toback{position: absolute;left:.3rem;}
+.identify_img_ifo,.identify_basic_info{background: #fff;}
+.identify_img_ifo ul,.identify_basic_info{overflow: hidden;border-bottom:1px #e5e5e5 solid;border-top:1px #e5e5e5 solid;}
+.identify_img_ifo ul{padding-bottom:.3rem;}
+.identify_img_ifo li,.identify_basic_info li{border-bottom:1px #e5e5e5 solid;}
+.identify_img_ifo li{line-height: 2rem;padding:.4rem 0;}
+.identify_basic_info li{line-height: 0.86rem;}
+.identify_img_ifo li:last-of-type,.identify_basic_info li:last-of-type{border-bottom:none;}
+.iden_r_pic{width:2rem;height:2rem;background: #efefef;border-radius: 5px;/*display: table;*/text-align: center;}
+.iden_r_pic img{max-width:100%;height:auto;vertical-align: middle;}
+.iden_r_box{position: relative;width:2.5rem;}
+.iden_r_box .potion{position:absolute;right:0;top:0;color:#959da7;}
+.identify_basic_info .right_ico{color:#959da7;}
+.identify_footer_potion{height:42px;width:100%;max-width: 750px;position:fixed;margin:0 auto;line-height: 42px;text-align: center;color:#fff;
+background: #eab96a;bottom:0;font-size:18px;}
+/*
+ * 开始认证
+ * */
+.identify_info_tips{text-align: center;background: #fff; padding:.6rem 0;}
+.iden_tips{margin:0 auto;line-height: 1.8rem;}
+.tipscon{line-height: 1.12rem;font-size: 16px;}
+.identify_info_des{margin-top:.6rem;}
+.identify_info_des li{border:1px #d2d2d2 solid;margin-top:.4rem;border-radius: 10px;background: #fff;}
+.identify_info_des li h3{line-height: .9rem;border-bottom:1px #d2d2d2 solid;text-indent:.3rem;font-size:15px;color:#000;}
+.identify_info_des h3 i{margin-right:6px;font-size: 16px;}
+.identify_info_des li .con{padding:.2rem .3rem ;}
+.identify_info_des .con p{line-height: 18px;color:#303030;}
+/*
+ * 选择性别
+ * */
+.check_sex_title{text-align: center;font-size:18px;color:#eab96a;margin-top:80%;}
+/*
+ * 通行证申请
+ * */
+.identify_jump_tips{padding:1.6rem 0 .6rem;background: transparent;}
+.relpotion i{position:absolute;bottom:0;right:-15px;line-height: 0;font-size:30px;}
+.jump_tipscon{margin-top:.6rem;}
+

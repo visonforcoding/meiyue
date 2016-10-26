@@ -1,0 +1,74 @@
+/*reset css*/
+html, body, div,iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0;font: inherit; vertical-align: baseline; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {margin:0;padding:0;}
+html{height:100%;overflow-x: hidden;background: #efefef;}
+ol, ul{ list-style: none; }
+a{text-decoration: none; color:#222c38;outline:none;}
+img{border:0;}
+table { border-collapse: collapse; border-spacing: 0; }
+*{-webkit-tap-highlight-color: rgba(0, 0, 0, 0);tap-highlight-color: rgba(0, 0, 0, 0);   -webkit-box-sizing: border-box;box-sizing: border-box;}
+body {max-width: 750px;min-width:320px;min-height:100%;margin: 0 auto;background: #f6f6f6;-webkit-tap-highlight-color: rgba(0,0,0,0); font-size:14px;color:#000000;font-family: 'STHeiti','Microsoft YaHei',Helvetica,Arial,sans-serif;}
+input, textarea, button,select{ outline: 0; resize: none;font-size:100%;font:inherit;color:inherit;background: rgba(255,255,255,0);}
+i{font-style: normal;}
+h1,h2,h3,h4,h5,h6{}
+p{background-color: transparent;word-break: break-all;}
+/*app*/
+a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);border:none;background: none;}
+input[type='text'],textarea{-webkit-appearance: none;}/*iphone内阴影*/
+textarea::-webkit-scrollbar{display: none;}/*隐藏多文本框滚动条*/
+table,tbody,tr,td,th,thead,tfoot{border:1px #e5e5e5 solid;}
+/*reset css end*/
+/*common css*/
+.fl { float:left; display: inline; }
+.fr { float:right; display: inline; }
+.clear { clear:both; }
+.clfix{clear:left;}
+.crfix{clear:right;}
+.clearfix:after { content:"."; display:block; clear:both; visibility:hidden; font-size:0; line-height:0; height:0;}
+.clearfix { *zoom:1; /* for IE6 7 */ }
+.wraper{overflow:hidden;}
+.inner{padding:0 .3rem;}
+input::-webkit-input-placeholder { /* WebKit browsers */ color: #b5b5b5;} 
+.ablock{display: block;}
+/*color*/
+
+.color_gray{color:#9f9f9f;}
+.bg_gray{background: #ddd;}
+.color_items{color:#29bbb1;}
+.color_org{color:#fe8c5a;}
+.color_y{color:#eab96a;}
+.color_ycc{color:#cc9930;}
+.bg_items{background: #29bbb1;}
+.bgff{background: #fff;}
+/*间隙*/
+.mt33{margin-top:33px;}
+.mt25{margin-top:25px;}
+.mt40{margin-top:.4rem;}
+.mt200{margin-top:2rem;}
+.mt160{margin-top:1.6rem;}
+.mb10{margin-bottom:10px;}
+.mt10{margin-top:10px;}
+.btop{border-top: 1px #d5d5d5 solid;}
+/*按钮*/
+.btn{width:100%;display: block;height:44px;line-height: 44px;text-align: center;border-radius: 4px;font-size:18px;}
+.btn_bg_y{background: #eab96a;color:#15130f;}
+.btn_bg_t{border:1px #81673d solid;color:#eab96a;height:46px;}
+/*定位*/
+.relpotion{position:relative;}
+/*字体图标*/
+@font-face {
+  font-family: 'iconfont';
+  src: url('../font/iconfont.eot');
+  src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'),
+  url('../font/iconfont.woff') format('woff'),
+  url('../font/iconfont.ttf') format('truetype'),
+  url('../font/iconfont.svg#iconfont') format('svg');
+}
+.iconfont{
+  font-family:"iconfont" !important;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+  /*font-size:16px;*/
+}
