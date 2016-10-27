@@ -72,7 +72,7 @@ class AppController extends Controller {
         if ($this->request->is('weixin')) {
             $this->loadComponent('Wx');
             $wxConfig = $this->Wx->wxconfig(['onMenuShareTimeline', 'onMenuShareAppMessage', 'scanQRCode',
-                'chooseImage', 'uploadImage','previewImage'], false);
+                'chooseImage', 'uploadImage', 'previewImage','getLocation','openLocation'], false);
         }
         $isLogin = 'no';
         if ($this->user) {
@@ -84,13 +84,9 @@ class AppController extends Controller {
 
     public function beforeFilter(Event $event) {
         $this->user = $this->request->session()->read('User.mobile');
-        //\Cake\Log\Log::debug('cookie');
-        //\Cake\Log\Log::debug($this->request->cookie('login_token'));
         if (!$this->user && $this->request->isLemon()) {
             //debug($this->request->cookie('login_token'));
         }
-        $this->wxBaseLogin();
-        $this->baseLogin();
         return $this->checkLogin();
     }
 
@@ -102,8 +98,13 @@ class AppController extends Controller {
         $controller = strtolower($this->request->param('controller'));
         $action = strtolower($this->request->param('action'));
         $request_aim = [$controller, $action];
+        if (!in_array($request_aim, [['user', 'login'], ['user', 'register']])) {
+            //静默登陆
+            $this->wxBaseLogin();
+            $this->baseLogin();
+        }
         if (in_array($request_aim, $this->firewall) ||
-                in_array($controller, ['user', 'wx', 'news', 'activity', 'meet', 'pay', 'api', 'home', 'beauty'])) {
+                in_array($controller, ['user', 'wx', 'news', 'activity', 'meet', 'pay', 'api', 'home', 'index'])) {
             return true;
         }
         return $this->handCheckLogin();

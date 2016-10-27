@@ -4,6 +4,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 html{height:100%;overflow-x: hidden;background: #efefef;}
 ol, ul{ list-style: none; }
 a{text-decoration: none; color:#222c38;outline:none;}
+a.disabled{border-color: #c8c9cb;color: #c8c9cb;cursor: not-allowed;}
 img{border:0;}
 table { border-collapse: collapse; border-spacing: 0; }
 *{-webkit-tap-highlight-color: rgba(0, 0, 0, 0);tap-highlight-color: rgba(0, 0, 0, 0);   -webkit-box-sizing: border-box;box-sizing: border-box;}
@@ -12,6 +13,22 @@ input, textarea, button,select{ outline: 0; resize: none;font-size:100%;font:inh
 i{font-style: normal;}
 h1,h2,h3,h4,h5,h6{}
 p{background-color: transparent;word-break: break-all;}
+/*弹出层提示*/
+.alert{position:fixed;	z-index: 999;color:#fff;font-size:0.28rem;left:0;top:40%;right:0;margin:auto;width:50%;height:30%;font-size:0.3rem;
+       /*display: -webkit-flex;display: flex;-webkit-justify-content: center;justify-content: center;-webkit-align-items:center;align-items: center;*/}
+.alert span{line-height: 0.38rem;text-align: center;background: rgba(0,0,0,0.8);border-radius: 0.15rem;padding:0.3rem;display:block;}
+/*loading层*/
+.loader {
+    position: fixed;
+    z-index:999;
+    padding:10px;
+    left:0;top:40%;right:0;margin:auto;width:60px;height:44px;
+    background:rgba(0,0,0,.5) url('../images/loading.gif')no-repeat center center;
+    background-size:30px 30px;
+    border-radius:10px;
+    opacity: 0.7;
+}
+
 /*app*/
 a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);border:none;background: none;}
 input[type='text'],textarea{-webkit-appearance: none;}/*iphone内阴影*/
@@ -51,25 +68,26 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #b5b5b5;}
 .btop{border-top: 1px #d5d5d5 solid;}
 /*按钮*/
 .btn{width:100%;display: block;height:44px;line-height: 44px;text-align: center;border-radius: 4px;font-size:18px;}
-.btn_bg_y{background: #eab96a;color:#fff;}
+.btn.disabled{width:100%;display: block;height:44px;line-height: 44px;text-align: center;border-radius: 4px;font-size:18px;background: #cda667;}
+.btn_bg_y{background: #eab96a;color:#15130f;}
 .btn_bg_disabled{background: #cda667;}
 .btn_bg_t{border:1px #81673d solid;color:#eab96a;height:46px;}
 /*定位*/
 .relpotion{position:relative;}
 /*字体图标*/
 @font-face {
-  font-family: 'iconfont';
-  src: url('../font/iconfont.eot');
-  src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'),
-  url('../font/iconfont.woff') format('woff'),
-  url('../font/iconfont.ttf') format('truetype'),
-  url('../font/iconfont.svg#iconfont') format('svg');
+    font-family: 'iconfont';
+    src: url('../font/iconfont.eot');
+    src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'),
+        url('../font/iconfont.woff') format('woff'),
+        url('../font/iconfont.ttf') format('truetype'),
+        url('../font/iconfont.svg#iconfont') format('svg');
 }
 .iconfont{
-  font-family:"iconfont" !important;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-stroke-width: 0.2px;
-  -moz-osx-font-smoothing: grayscale;
-  /*font-size:16px;*/
+    font-family:"iconfont" !important;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    /*font-size:16px;*/
 }

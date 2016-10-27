@@ -53,6 +53,7 @@ class SmsComponent extends Component {
                     'phone'=>$mobile,
                     'code'=>$code,
                     'content'=>$content,
+                    'expire_time'=>time()+60*10,
                     'create_time'=>date('Y-m-d H:i:s')
                 ]);
                 $smsTable->save($sms);

@@ -153,11 +153,13 @@ class WxComponent extends Component {
     public function getAccessToken() {
         \Cake\Log\Log::notice('获取普通accessToken','devlog');
         $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
-        if($this->request->env('SERVER_ADDR')!=$this->master_ip||
-                $this->request->env('SERVER_NAME')!=$this->master_domain){
-            //非中控服务器请求
-            //\Cake\Log\Log::notice('非中控请求','devlog');
-            return $this->handMasterRequest();
+        if($this->wxconfig['master_model']){
+            if($this->request->env('SERVER_ADDR')!=$this->master_ip||
+                    $this->request->env('SERVER_NAME')!=$this->master_domain){
+                //非中控服务器请求
+                \Cake\Log\Log::notice('非中控请求','devlog');
+                return $this->handMasterRequest();
+            }
         }
         $access_token = \Cake\Cache\Cache::read(self::TOKEN_NAME);
         $url = self::WEIXIN_API_URL . 'token?grant_type=client_credential&appid=' . $this->app_id . '&secret=' . $this->app_secret;

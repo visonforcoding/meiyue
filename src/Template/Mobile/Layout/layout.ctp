@@ -6,26 +6,35 @@
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title><?= isset($pageTitle) ? $pageTitle : '美约'; ?></title>
+        <title><?= $pageTitle ?></title>
+        <link rel="stylesheet" href="/mobile/css/basic.css">
+        <link rel="stylesheet" href="/mobile/css/style.css">
         <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
         <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>
-        <script type="text/javascript" src="/mobile/js/util.js?0908"></script>
-        <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.css">
-        <link rel="stylesheet" href="/mobile/css/base.css">
+        <script src="/mobile/js/view.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" src="/mobile/js/util.js"></script>
         <?= $this->fetch('css') ?>
         <?= $this->fetch('static') ?>
     </head>
     <body>
-        <div class="page-group">
-            <div class="page page-current">
-                <!-- 你的html代码 -->
-                <?= $this->fetch('content') ?>
-            </div>
-        </div>
-        <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
-        <!--如果你用到了拓展包中的组件，还需要引用下面两个-->
-        <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">
-        <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
+        <?= $this->fetch('content') ?>
+        <script>
+            wx.config(<?= json_encode($wxConfig) ?>);
+            wx.ready(function () {
+                if (!$.util.getCookie('coord')) {
+                    wx.getLocation({
+                        type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                        success: function (res) {
+                            var lat = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                            var lng = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                            var speed = res.speed; // 速度，以米/每秒计
+                            var accuracy = res.accuracy; // 位置精度
+                            $.util.setCookie('coord', lng + ',' + lat, 30);
+                        }
+                    })
+                }
+            });
+        </script>
         <?= $this->fetch('script') ?>
     </body>
 </html>

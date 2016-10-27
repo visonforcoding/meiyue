@@ -1,52 +1,28 @@
-<header class="bar bar-nav">
-    <h1 class='title'>注册</h1>
-</header>
-<div class="content">
-    <div class="list-block">
-        <ul>
-            <!-- Text inputs -->
-            <li>
-                <div class="item-content">
-                    <div class="item-media"><i class="icon icon-form-name"></i></div>
-                    <div class="item-inner">
-                        <div class="item-title label">手机号</div>
-                        <div class="item-input">
-                            <input id="phone" name="phone" type="text" placeholder="手机号">
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="item-content">
-                    <div class="item-media"><i class="icon icon-form-email"></i></div>
-                    <div class="item-inner">
-                        <div class="item-title label">验证码</div>
-                        <div class="item-input col-70">
-                            <input id="vcode" name="vcode" type="email" placeholder="验证码">
-                        </div>
-                        <div class="col-30"><a id="gcode" class="button disabled">获取验证码</a></div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="item-content">
-                    <div class="item-media"><i class="icon icon-form-password"></i></div>
-                    <div class="item-inner">
-                        <div class="item-title label">密码</div>
-                        <div class="item-input">
-                            <input id="pwd" name="pwd" type="password" placeholder="Password" class="">
-                        </div>
-                    </div>
-                </div>
-            </li>
-    </div>
-    <div class="content-block">
-        <div class="row">
-            <div class="col-100"><a id="submit" href="#" class="button button-big button-fill button-success">提交</a></div>
+<div class="loginwraper"></div>
+<div class="wraper loginpage">
+    <div class="logo"><img src="/mobile/images/logo.png"/></div>
+    <div class="loginbox">
+        <div class="username">
+            <i class="iconfont">&#xe608;</i>
+            <input tabindex="1" type="number" id="phone" value="" placeholder="手机号" id="user" />
         </div>
+        <div class="password validate">
+            <i class="iconfont">&#xe607;</i>
+            <input tabindex="2" type="text" id="vcode" placeholder="验证码" class="valicode" id="validate" />
+            <a href="#this" id="gcode" class="fogetpwd getvalid disabled">获取验证码</a>
+        </div>
+        <div class="password">
+            <i class="iconfont">&#xe606;</i>
+            <input tabindex="3" type="password" id="pwd" placeholder="6-16位的密码" class="user" id="password" />
+        </div>
+        <a id="submit"  class="btn btn_bg_y mt160 disabled">注册</a>
+        <h4 class="getlogin"><a href="/user/login">已有账号，直接登录</a></h4>
+    </div>
+    <div class="register_bottom_tips">
+        <a href="#this">注册表明已阅读并接受“用户服务协议”</a>
     </div>
 </div>
-<?php $this->start('script'); ?>
+<?= $this->start('script') ?>
 <script>
     $('#gcode').on('tap', function () {
         var obj = $(this);
@@ -57,7 +33,6 @@
         $.post('/user/sendVCode', {phone: phone}, function (res) {
             if (res.status === true) {
                 obj.addClass('disabled');
-                $.toast(res.msg);
                 var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
                 obj.html(text);
                 t1 = setInterval(function () {
@@ -72,7 +47,7 @@
                     }
                 }, 1000);
             } else {
-                $.toast(res.msg);
+                //$.toast(res.msg);
             }
         }, 'json');
     });
@@ -88,27 +63,43 @@
             }
         }
     });
-    $('#submit').on('tap',function(){
-       var obj = $(this);
-       if(obj.hasClass('disabled')){
-           return false;
-       }
-       var phone = $('#phone').val(); 
-       var vcode = $('#vcode').val(); 
-       var pwd = $('#pwd').val();
-       if(phone&&vcode&&pwd){
-           $.post('/user/register',{phone:phone,vcode:vcode,pwd:pwd},function(res){
-               $.toast(res.msg);
-               if(res.status){
-                   obj.addClass('disabled');
-                   setTimeout(function(){
-                       window.location.href=res.url;
-                   },1000);
-               }else{
-                   obj.removeClass('disabled');
-               }
-           },'json');
-       }
+    $('#phone,#pwd,#vcode').on('keyup', function () {
+        var phone = $('#phone').val();
+        var vcode = $('#vcode').val();
+        var pwd = $('#pwd').val();
+        var submit = $('#submit');
+        if ($.util.isMobile(phone) && vcode && pwd) {
+            submit.removeClass('disabled');
+        } else {
+            if (!submit.hasClass('disabled')) {
+                submit.addClass('disabled');
+            }
+        }
+    });
+    $('#submit').on('tap', function () {
+        var obj = $(this);
+        console.log(obj);
+        if (obj.hasClass('disabled')) {
+            return false;
+        }
+        var phone = $('#phone').val();
+        var vcode = $('#vcode').val();
+        var pwd = $('#pwd').val();
+        console.log('11');
+        if (phone && vcode && pwd) {
+            $.post('/user/register', {phone: phone, vcode: vcode, pwd: pwd}, function (res) {
+                $.util.alert(res.msg);
+                if (res.status) {
+                    obj.addClass('disabled');
+                    setTimeout(function () {
+                        window.location.href = res.url;
+                    }, 1000);
+                } else {
+                    obj.removeClass('disabled');
+                }
+            }, 'json');
+        }
     });
 </script>
-<?php $this->end('script'); ?>
+<?=
+$this->end('script')?>

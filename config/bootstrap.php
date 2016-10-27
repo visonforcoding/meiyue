@@ -237,6 +237,14 @@ if (Configure::read('debug')) {
         'scopes' => ['queriesLog']
     ]);
 }
+//开发调试文件
+Log::config('devlog', [
+    'className' => 'Cake\Log\Engine\FileLog',
+    'path' => LOGS,
+    'levels' => [],
+    'scopes' => ['devlog'],
+    'file' => 'devlog',
+]);
 //载入插件
 Plugin::load('Migrations');
 Plugin::load('Wpadmin', ['bootstrap' => true, 'routes' => true]);
