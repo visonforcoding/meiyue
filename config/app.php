@@ -340,7 +340,13 @@ return [
      *
      * To use database sessions, load the SQL file located at config/Schema/sessions.sql
      */
-    'Session' => [
+     'Session' => [
         'defaults' => 'php',
+        'timeout' => 1440,  //服务器的过期时间gc
+        'ini' => [
+            // Invalidate the cookie after 30 minutes without visiting
+            // any page on the site.
+            'session.cookie_lifetime' => 86400
+        ]
     ],
 ];

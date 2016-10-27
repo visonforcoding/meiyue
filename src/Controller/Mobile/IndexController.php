@@ -17,6 +17,10 @@ use App\Utils\Word\TrieTree;
  * @property \App\Controller\Component\PushComponent $Push
  */
 class IndexController extends AppController {
+    
+    public function beforeRender(\Cake\Event\Event $event) {
+        //parent::beforeRender($event);
+    }
 
     /**
      * Index method
@@ -24,6 +28,7 @@ class IndexController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
+        $this->viewBuilder()->layout('layout_sui');
         //$umengObj = new Umeng($key, $secret);
         //var_dump($umengObj);
         //set_time_limit(0);

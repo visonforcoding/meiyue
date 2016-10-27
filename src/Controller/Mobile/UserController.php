@@ -30,6 +30,7 @@ class UserController extends AppController {
         }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $phone = $this->request->data('phone');
+            $coord = $this->request->cookie('coord');
             $UserTable = \Cake\ORM\TableRegistry::get('User');
             if ($phone) {
                 //密码登录
@@ -51,13 +52,22 @@ class UserController extends AppController {
                     if ($this->request->is('weixin') && !$user->wx_openid) {
                         $bind_wx = true;
                     }
-                    return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url, 
-                        'token_uin' => $user_token, 'bind_wx' => $bind_wx,'msg'=>'登入成功']);
+                    $data['login_time'] = date('Y-m-d H:i:s');
+                    if ($coord) {
+                        $data['login_coord'] = $coord;
+                    }
+                    $user = $this->User->patchEntity($user, $data);
+                    $this->User->save($user);
+                    return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,
+                                'token_uin' => $user_token, 'bind_wx' => $bind_wx, 'msg' => '登入成功']);
                 }
             } else {
                 return $this->Util->ajaxReturn(['status' => false, 'msg' => '请输入手机号']);
             }
         }
+        $this->set([
+            'pageTitle' => '美约-登录'
+        ]);
     }
 
     /**
@@ -65,9 +75,23 @@ class UserController extends AppController {
      */
     public function register() {
         if ($this->request->is('ajax')) {
-            $user = $this->User->newEntity();
+            //验证验证码
             $data = $this->request->data();
+            $SmsTable = \Cake\ORM\TableRegistry::get('Smsmsg');
+            $sms = $SmsTable->find()->where(['phone'])->orderDesc('create_time')->first();
+            if (!$sms) {
+                return $this->Util->ajaxReturn(false, '验证码错误');
+            } else {
+                if ($sms->code != $data['vcode']) {
+                    return $this->Util->ajaxReturn(false, '验证码错误');
+                }
+                if ($sms->expire_time < time()) {
+                    return $this->Util->ajaxReturn(false, '验证码已过期');
+                }
+            }
+            $user = $this->User->newEntity();
             $data['enabled'] = 1;
+
             $ckReg = $this->User->find()->where(['phone' => $data['phone']])->first();
             if ($ckReg) {
                 return $this->Util->ajaxReturn(false, '该手机号已经注册过');
@@ -76,28 +100,10 @@ class UserController extends AppController {
             if ($this->request->is('weixin')) {
                 $data['device'] = 'weixin';
             }
-            if ($this->request->session()->read('reg.wx_bind') && $this->request->session()->check('reg.wx_openid')) {
-                //第一次微信登录的完善信息
-                if ($this->request->session()->check('reg.wx_unionid')) {
-                    $data['union_id'] = $this->request->session()->read('reg.wx_unionid');
-                }
-                if ($this->request->is('lemon')) {
-                    $data['app_wx_openid'] = $this->request->session()->read('reg.wx_openid');
-                } else {
-                    $data['wx_openid'] = $this->request->session()->read('reg.wx_openid');
-                }
-                if ($this->request->session()->check('reg.avatar')) {
-                    $data['avatar'] = $this->request->session()->read('reg.avatar');
-                }
-            }
             $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
-                $jumpUrl = '/user/index';
+                $jumpUrl = '/user/reg-check-sex';
                 $msg = '注册成功';
-                if ($this->request->is('weixin')) {
-                    $jumpUrl = '/wx/bindWx';
-                    $msg = '注册成功,前往绑定微信';
-                }
                 $this->request->session()->write('User.mobile', $user);
                 $this->user = $user;
                 $user_token = false;
@@ -113,7 +119,52 @@ class UserController extends AppController {
             }
         }
         $this->set([
-            'pageTitle' => '注册'
+            'pageTitle' => '美约-注册'
+        ]);
+    }
+
+    /**
+     * 注册检测性别
+     */
+    public function regCheckSex() {
+        $this->handCheckLogin();
+        if ($this->request->is('post')) {
+            $gender = 1;
+            $redirect_url = '/user/reg-user-info';
+            if ($this->request->data('sex') == '女') {
+                $gender = 2;
+                $redirect_url = '/user/reg-identify';
+            }
+            $user_id = $this->user->id;
+            $user = $this->User->get($user_id);
+            $user = $this->User->patchEntity($user, ['gender' => $gender]);
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '设置成功', 'redirect_url' => '/user/reg-user-info']);
+            } else {
+                return $this->Util->ajaxReturn(false, errorMsg($user, '服务器出错'));
+            }
+        }
+    }
+
+    /**
+     * 注册填写用户信息页
+     */
+    public function regUserInfo() {
+        if($this->request->is('post')){
+            $res = $this->Util->uploadFiles();
+            return $this->Util->ajaxReturn($res);
+        }
+        $this->set([
+            'pageTitle' => '美约-认证信息填写'
+        ]);
+    }
+
+    /**
+     * 美约认证
+     */
+    public function regIdentify() {
+        $this->set([
+            'pageTitle' => '美约-美约认证'
         ]);
     }
 
@@ -121,18 +172,71 @@ class UserController extends AppController {
         $this->loadComponent('Sms');
         $mobile = $this->request->data('phone');
         $code = createRandomCode(4, 2); //创建随机验证码
-        $content = '您的动态验证码为' . $code;
+        $content = '您的动态验证码为' . $code . ',请妥善保管，切勿泄露给他人，该验证码10分钟内有效';
         $codeTable = \Cake\ORM\TableRegistry::get('smsmsg');
         $vcode = $codeTable->find()->where("`phone` = '$mobile'")->orderDesc('create_time')->first();
         if (empty($vcode) || (time() - strtotime($vcode['time'])) > 30) {
             //30s 的间隔时间
             $ckSms = $this->Sms->sendByQf106($mobile, $content, $code);
             if ($ckSms) {
-                $this->request->session()->write('UserLoginVcode', ['code' => $code, 'time' => time()]);
                 return $this->Util->ajaxReturn(true, '发送成功');
             }
         } else {
             return $this->Util->ajaxReturn(false, '30秒后再发送');
+        }
+    }
+
+    /**
+     * 登出
+     */
+    public function loginOut() {
+        $this->viewBuilder()->autoLayout(false);
+        $this->request->session()->delete('User.mobile');
+        $this->request->session()->destroy();
+        return $this->redirect('/user/login?loginout=1');
+    }
+
+    /**
+     * 用户信息页
+     */
+    public function userinfo() {
+        
+    }
+
+    /**
+     * 从微信端获取图片
+     * @param type $id
+     * @return type
+     */
+    public function getWxPic() {
+        $this->loadComponent('Wx');
+        $ids = $this->request->data('ids');
+        $imgpaths = [];
+        \Cake\Log\Log::notice($ids, 'devlog');
+        foreach ($ids as $id) {
+            $token = $this->Wx->getAccessToken();
+            $url = 'http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=' . $token . '&media_id=' . $id;
+            $httpClient = new \Cake\Network\Http\Client();
+            $response = $httpClient->get($url);
+            if ($response->isOk()) {
+                $res = $response->body();
+            }
+            $today = date('Y-m-d');
+            $path = 'upload/user/avatar/' . $today;
+            $uniqid = uniqid();
+            if (!is_dir($path)) {
+                mkdir($path, 0777, true);
+            }
+            \Intervention\Image\ImageManagerStatic::make($res)
+                    ->save(WWW_ROOT . $path . '/' . $uniqid . '.jpg');
+            $imgpath = '/' . $path . '/' . $uniqid . '.jpg';
+            $imgpaths[] = $imgpath;
+        }
+        if ($res) {
+            \Cake\Log\Log::notice($imgpaths, 'devlog');
+            return $this->Util->ajaxReturn(['status' => true, 'msg' => '头像上传成功', 'path' => $imgpaths]);
+        } else {
+            return $this->Util->ajaxReturn(false, '头像上传失败');
         }
     }
 

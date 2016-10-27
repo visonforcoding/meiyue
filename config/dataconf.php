@@ -20,10 +20,10 @@ return [
         'salt'=>'d2339263f44886091b8a62ef43196f15',
     ],
     'weixin' => [
-        'appID' => 'wx0cf353f9fc03aad0',
-        'appsecret' => '460366e0beddcf18a21873db11a4eb1c',
+        'appID' => 'wxf3d1e078715e41ce',
+        'appsecret' => '293c2fb5bcf96db8eea854365471d48b',
         'token'=>'cwptest',
-        'mchid'=>'1348060901',
+        'mchid'=>'1296107201',
         'App_mchid'=>'1350978901',
         'key'=>'33DB349F8DB955DC78FC5F84F8E5D3F8',
         'sslcert_path'=> dirname(__FILE__).'/wxcert/apiclient_cert.pem',
@@ -31,6 +31,7 @@ return [
         'notify_url'=>'/wx/wx-notify',
         'AppID'=>'wxb450720adce7295f',     //APP端的 开放平台appid
         'AppSecret'=>'1c721c93e80578c2b707358993dcd371',
+        'master_model'=>false,   //中控模式
         'master_ip'=>'112.74.88.156' ,   //中控服务器ip
         'master_domain'=>'m.chinamatop.com'    //中控服务器域名
     ],
@@ -58,5 +59,8 @@ return [
     ],
     'pvlog'=>[
       'store_nums'=>100, //pvlog的redis 缓冲区数目 
+    ],
+    'baidu'=>[
+        'mapkey'=>'474572ab0a64485f5b02d3e8accaf09c'
     ]
 ];

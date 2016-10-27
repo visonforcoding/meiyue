@@ -1,29 +1,52 @@
+<?php $this->start('css'); ?>
+<style>
+    #map_canvas {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+</style>
+<?php $this->end('css'); ?>
 <header class="bar bar-nav">
-    <a class="button button-link button-nav pull-left" href="/demos/card" data-transition='slide-out'>
-        <span class="icon icon-left"></span>
-        返回
-    </a>
-    <h1 class="title">我的生活</h1>
+    <h1 class="title">发现</h1>
 </header>
-<nav class="bar bar-tab">
-    <a class="tab-item active" href="#">
-        <span class="icon icon-home"></span>
-        <span class="tab-label">发现</span>
-    </a>
-    <a class="tab-item" href="#">
-        <span class="icon icon-me"></span>
-        <span class="tab-label">活动</span>
-    </a>
-    <a class="tab-item" href="#">
-        <span class="icon icon-star"></span>
-        <span class="tab-label">消息</span>
-    </a>
-    <a class="tab-item" href="#">
-        <span class="icon icon-settings"></span>
-        <span class="tab-label">我</span>
-    </a>
-</nav>
+<?= $this->element('nav', ['active' => 'find']) ?>
 <div class="content">
-    <!-- 这里是页面内容区 -->
-    tet
+    <div id="map_canvas">
+
+    </div>
 </div>
+<?php $this->start('script'); ?>
+<script id="bmapjs" src="/mobile/js/bmap.js"></script>
+<script>
+    function initBmap() {
+        var map = new BMap.Map("map_canvas");            // 创建Map实例
+        map.centerAndZoom(new BMap.Point(114.043566, 22.646635), 15);
+        //创建小狐狸
+        var pt = new BMap.Point(114.043566, 22.646635);
+        var myIcon = new BMap.Icon("/imgs/user/avatar/avatar2.jpg?w=60&border=3,white,overlay", new BMap.Size(60, 60));
+        var marker2 = new BMap.Marker(pt, {icon: myIcon});  // 创建标注
+        map.addOverlay(marker2);              // 将标注添加到地图中
+        
+        wx.getLocation({
+            type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+            success: function (res) {
+                var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                var speed = res.speed; // 速度，以米/每秒计
+                var accuracy = res.accuracy; // 位置精度
+                $.bmap.convertor(longitude, latitude, function (lng, lat) {
+                    $.bmap.geocoder(lng, lat, function (res) {
+//                        alert(res.address);
+                        var point = new BMap.Point(lng, lat);
+                        map.centerAndZoom(point, 15);
+                        map.enableScrollWheelZoom();
+                        var marker = new BMap.Marker(point);  // 创建标注
+                        map.addOverlay(marker);               // 将标注添加到地图中
+                        //marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                        //var avatarOverlay = new avatarOverlay(new BMap.Point(114.043566, 22.646635), {src: '/img/user/avatar/avatar.jpg'});
+                        //map.addOverlay(avatarOverlay);
+                    });
+                });
+            }
+        })
+    }
+
+</script>
+<?php $this->end('script'); ?>

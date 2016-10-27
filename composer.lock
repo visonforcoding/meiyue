@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "192843b998b89b7eb3a1a5b1fbcae921",
-    "content-hash": "b7b7bfed977f82f590badc7f0926c80e",
+    "hash": "b1d0dc7ee6de364e29d21d45378a8edb",
+    "content-hash": "f1cadf49eff81c7ff046f760606e0456",
     "packages": [
         {
             "name": "admad/cakephp-glide",
