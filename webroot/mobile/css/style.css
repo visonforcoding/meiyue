@@ -6,8 +6,11 @@
 .loginpage .logo{width:1.39rem;height:1rem;margin:1rem auto 0;}
 .loginpage .logo img{width:100%;height:auto;display: block;}
 .loginbox,.check_sex_type{padding:0 .74rem;margin-top:1.2rem;}
+.login_box_btn{padding:0 .74rem;}
 .loginbox .user{width:59%;}
 .loginbox .valicode{width:50%;}
+.login_box_btn .login_group{display:box;display: -webkit-box;-webkit-box-pack: justify;}
+.login_box_btn .login_group .btn{width:48%;}
 .loginbox .getvalid{text-decoration: none;border:1px #5d5a57 solid;text-align:center;display: inline-block;color:#fff;width:1.8rem;height:28px;line-height: 26px;}
 .fogetpwd{color:#eab96a;font-size:13px;text-decoration: underline;}
 .loginbox div{border-bottom:1px #4a3d28 solid; padding:.3rem 0;margin-top:.16rem;padding-left:.2rem;color:#eab96a;font-size:16px;}
@@ -62,6 +65,7 @@ background: #eab96a;bottom:0;font-size:18px;}
  * 选择性别
  * */
 .check_sex_title{text-align: center;font-size:18px;color:#eab96a;margin-top:80%;}
+.check_sex_login{position: absolute;right:.74rem;top:.8rem;color:#eab96a;letter-spacing: 2px;}
 /*
  * 通行证申请
  * */
