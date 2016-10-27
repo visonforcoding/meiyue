@@ -51,7 +51,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #b5b5b5;}
 .btop{border-top: 1px #d5d5d5 solid;}
 /*按钮*/
 .btn{width:100%;display: block;height:44px;line-height: 44px;text-align: center;border-radius: 4px;font-size:18px;}
-.btn_bg_y{background: #eab96a;color:#15130f;}
+.btn_bg_y{background: #eab96a;color:#fff;}
 .btn_bg_disabled{background: #cda667;}
 .btn_bg_t{border:1px #81673d solid;color:#eab96a;height:46px;}
 /*定位*/
