@@ -1,7 +1,7 @@
 /*reset css*/
 html, body, div,iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0;font: inherit; vertical-align: baseline; }
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {margin:0;padding:0;}
-html{height:100%;overflow-x: hidden;background: #efefef;}
+html{height:100%;overflow-x: hidden;background: #f4f4f4;}
 ol, ul{ list-style: none; }
 a{text-decoration: none; color:#222c38;outline:none;}
 a.disabled{border-color: #c8c9cb;color: #c8c9cb;cursor: not-allowed;}
@@ -45,7 +45,7 @@ table,tbody,tr,td,th,thead,tfoot{border:1px #e5e5e5 solid;}
 .clearfix { *zoom:1; /* for IE6 7 */ }
 .wraper{overflow:hidden;}
 .inner{padding:0 .3rem;}
-input::-webkit-input-placeholder { /* WebKit browsers */ color: #b5b5b5;} 
+input::-webkit-input-placeholder { /* WebKit browsers */ color: #444444;} 
 .ablock{display: block;}
 /*color*/
 
@@ -55,18 +55,24 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #b5b5b5;}
 .color_org{color:#fe8c5a;}
 .color_y{color:#eab96a;}
 .color_ycc{color:#cc9930;}
+.color_black{color:#303030;}
+.color_error{color:#fd6a56;}
 .bg_items{background: #29bbb1;}
 .bgff{background: #fff;}
+
 /*间隙*/
+.mt20{margin-top:.2rem;}
 .mt33{margin-top:33px;}
 .mt25{margin-top:25px;}
 .mt40{margin-top:.4rem;}
 .mt200{margin-top:2rem;}
 .mt160{margin-top:1.6rem;}
+.mt60{margin-top:.6rem;}
+.mt100{margin-top:1rem;}
 .mb10{margin-bottom:10px;}
 .mt10{margin-top:10px;}
 .mt40{margin-top:.4rem;}
-.btop{border-top: 1px #d5d5d5 solid;}
+.btop{border-top: 1px #efefef solid;}
 .bbottom{border-bottom: 1px #bfad9a solid;}
 /*按钮*/
 .btn{width:100%;display: block;height:44px;line-height: 44px;text-align: center;border-radius: 4px;font-size:18px;}
@@ -74,6 +80,16 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #b5b5b5;}
 .btn_bg_y{background: #eab96a;color:#15130f;}
 .btn_bg_disabled{background: #cda667;}
 .btn_bg_t{border:1px #81673d solid;color:#eab96a;height:46px;}
+/*公共*/
+.small{font-size: 11px;color:#777;}
+.impordes{font-size: 15px;color:#303030;}
+.outerblock{overflow: hidden;}
+.outerblock li{border-bottom:1px #efefef solid;}
+.outerblock li:last-of-type{border-bottom: none;}
+.commontitle{font-size: 12px;color:#666;line-height: .57rem;}
+.commontips{color:#eab96a;font-size:11px;line-height: 20px;}
+.flex{display:-webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: start;}
+.flex_end{-webkit-box-pack: end;}
 /*定位*/
 .relpotion{position:relative;}
 /*字体图标*/
@@ -97,9 +113,9 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #b5b5b5;}
 /*在线图标*/
 @font-face {
   font-family: 'iconfont';  /* project id："166621" */
-  src: url('//at.alicdn.com/t/font_pntddzn9hs6skyb9.eot');
-  src: url('//at.alicdn.com/t/font_pntddzn9hs6skyb9.eot') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_pntddzn9hs6skyb9.woff') format('woff'),
-  url('//at.alicdn.com/t/font_pntddzn9hs6skyb9.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_pntddzn9hs6skyb9.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_rzuyi70djpehr529.eot');
+  src: url('//at.alicdn.com/t/font_rzuyi70djpehr529.eot') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_rzuyi70djpehr529.woff') format('woff'),
+  url('//at.alicdn.com/t/font_rzuyi70djpehr529.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_rzuyi70djpehr529.svg#iconfont') format('svg');
 }
