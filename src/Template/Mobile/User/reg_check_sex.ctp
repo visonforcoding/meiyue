@@ -16,6 +16,7 @@
 	<body>
 		<div class="loginwraper"></div>
 		<div class="wraper loginpage">
+            <a href="login.html" class="check_sex_login">登录</a>
 			<h3 class="check_sex_title">您的性别</h3>
 			<div class="check_sex_type">
 				<a data-sex="男" class="btn sex btn_bg_y">男</a>

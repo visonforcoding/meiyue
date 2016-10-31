@@ -15,6 +15,7 @@
 <?php $this->start('script'); ?>
 <script id="bmapjs" src="/mobile/js/bmap.js"></script>
 <script>
+//     $.showPreloader();
     function initBmap() {
         var map = new BMap.Map("map_canvas");            // 创建Map实例
         map.centerAndZoom(new BMap.Point(114.043566, 22.646635), 15);

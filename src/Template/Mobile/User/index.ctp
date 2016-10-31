@@ -1,28 +1,128 @@
-<header class="bar bar-nav">
-    <h1 class='title'>我的</h1>
+
+<header>
+    <div class="homepage">
+        <div class="header">
+            <h1>我的</h1>
+            <i class="iconfont install">&#xe661;</i>
+        </div>
+        <div class="home_cover_info">
+            <span class="avatar">
+                <img src="/mobile/images/avatar.jpg"/>
+            </span>
+            <div class="cover_left_info">
+                <ul>
+                    <li class="bbottom userinfo">
+                        <a href="#this" class="cover_block">
+                            <h3>
+                                <span>美女美女<i class="iconfont">&#xe628;</i></span>
+                                <span class="flag"><img src="/mobile/images/zui.png" alt="" /></span>
+                            </h3>
+                            <span class="cover_r_ico">
+                                <i class="iconfont">&#xe605;</i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="follow">
+                        <span>喜欢 <i>12</i></span>
+                        <span>粉丝 <i>122</i></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </header>
-<?= $this->element('nav',['active' => 'me']) ?>
-<div class="content">
-    <div class="list-block media-list" style="margin-top:0px">
+<div class="wraper">
+    <div class="home_items_list mt40">
         <ul>
             <li>
-                <a href="/user/userinfo" class="item-link item-content">
-                <div class="item-media">
-                    <img class="img-circle" src="/imgs/user/avatar/avatar.jpg" width="60"/>
-                    <i class="icon icon-f7"></i>
-                </div>
-                <div class="item-inner">
-                    <div class="item-title-row">
-                        <div class="item-title">绾儿</div>
+                <a href="#this"  class="home_items">
+                    <div class="home_list_l_info"><i class="iconfont">&#xe60e;</i><span class="itemsname">我的钱包</span></div>
+                    <div class="home_list_r_info">
+                        <span class="cashpic"><img src="/mobile/images/cash.png" alt="" />352</span>
+                        <i class="iconfont">&#xe605;</i>
                     </div>
-                    <div class="item-subtitle">ID1000425</div>
-                </div>
+                </a>
+            </li>
+            <li>
+                <a href="#this"  class="home_items">
+                    <div class="home_list_l_info"><i class="iconfont">&#xe60a;</i><span class="itemsname">订单管理</span></div>
+                    <div class="home_list_r_info">
+                        <span class="tips"></span>
+                        <i class="iconfont">&#xe605;</i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#this"  class="home_items">
+                    <div class="home_list_l_info"><i class="iconfont">&#xe60b;</i><span class="itemsname">我的派对</span></div>
+                    <div class="home_list_r_info">
+                        <i class="iconfont">&#xe605;</i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#this"  class="home_items">
+                    <div class="home_list_l_info"><i class="iconfont">&#xe60c;</i><span class="itemsname">我的评选</span></div>
+                    <div class="home_list_r_info">
+
+                        <i class="iconfont">&#xe605;</i>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="home_items_list mt40">
+        <ul>
+            <li>
+                <a href="#this"  class="home_items">
+                    <div class="home_list_l_info"><i class="iconfont">&#xe60d;</i><span class="itemsname">我的技能</span></div>
+                    <div class="home_list_r_info">
+                        <i class="iconfont">&#xe605;</i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#this"  class="home_items">
+                    <div class="home_list_l_info"><i class="iconfont">&#xe60f;</i><span class="itemsname">我发起的约会</span></div>
+                    <div class="home_list_r_info">
+                        <i class="iconfont">&#xe605;</i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#this"  class="home_items">
+                    <div class="home_list_l_info"><i class="iconfont">&#xe610;</i><span class="itemsname">我的动态</span></div>
+                    <div class="home_list_r_info">
+
+                        <i class="iconfont">&#xe605;</i>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="home_items_list items_basic_list mt40">
+        <ul>
+            <li>
+                <a href="#this"  class="home_items">
+                    <div class="home_list_l_info"><i class="iconfont">&#xe611;</i><span class="itemsname">联系客服</span></div>
+                    <div class="home_list_r_info">
+
+                        <i class="iconfont">&#xe605;</i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#this"  class="home_items">
+                    <div class="home_list_l_info"><i class="iconfont">&#xe612;</i><span class="itemsname">分享</span></div>
+                    <div class="home_list_r_info">
+
+                        <i class="iconfont">&#xe605;</i>
+                    </div>
                 </a>
             </li>
         </ul>
     </div>
 </div>
-<?php $this->start('script'); ?>
-<script>
-</script>
-<?php $this->end('script'); ?>
+<div style="height:1.4rem"></div>
+<!--底部-->
+<?= $this->element('footer', ['active' => 'me']) ?>

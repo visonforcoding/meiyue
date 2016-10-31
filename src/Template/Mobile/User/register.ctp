@@ -87,7 +87,7 @@
         var pwd = $('#pwd').val();
         console.log('11');
         if (phone && vcode && pwd) {
-            $.post('/user/register', {phone: phone, vcode: vcode, pwd: pwd}, function (res) {
+            $.post('', {phone: phone, vcode: vcode, pwd: pwd}, function (res) {
                 $.util.alert(res.msg);
                 if (res.status) {
                     obj.addClass('disabled');

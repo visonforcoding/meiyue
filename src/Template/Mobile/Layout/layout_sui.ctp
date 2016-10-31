@@ -11,7 +11,7 @@
         <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>
         <script type="text/javascript" src="/mobile/js/util.js?0908"></script>
         <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.css">
-        <link rel="stylesheet" href="/mobile/css/base.css">
+        <!--<link rel="stylesheet" href="/mobile/css/base.css">-->
         <?= $this->fetch('css') ?>
         <?= $this->fetch('static') ?>
     </head>
