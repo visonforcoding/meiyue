@@ -17,10 +17,9 @@ class UserController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        $user = $this->paginate($this->User);
-
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
+        $this->set([
+            'pageTitle' => '美约-我的'
+        ]);
     }
 
     public function login() {
@@ -77,6 +76,7 @@ class UserController extends AppController {
         if ($this->request->is('ajax')) {
             //验证验证码
             $data = $this->request->data();
+            $data['gender'] = $this->request->query('gender') ? $this->request->query('gender') : 1;
             $SmsTable = \Cake\ORM\TableRegistry::get('Smsmsg');
             $sms = $SmsTable->find()->where(['phone'])->orderDesc('create_time')->first();
             if (!$sms) {
@@ -102,7 +102,7 @@ class UserController extends AppController {
             }
             $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
-                $jumpUrl = '/user/reg-check-sex';
+                $jumpUrl = '/user/reg-identify';
                 $msg = '注册成功';
                 $this->request->session()->write('User.mobile', $user);
                 $this->user = $user;
@@ -147,16 +147,82 @@ class UserController extends AppController {
     }
 
     /**
-     * 注册填写用户信息页
+     * 注册填写用户信息页  头像上传
      */
     public function regUserInfo() {
-        if($this->request->is('post')){
-            $res = $this->Util->uploadFiles();
-            return $this->Util->ajaxReturn($res);
+        $this->handCheckLogin();
+        $user = $this->user;
+        if ($this->request->is('post')) {
+            $res = $this->Util->uploadFiles('user/avatar');
+            if ($res['status']) {
+                $avatar = $res['info'][0]['path'];
+                $user->avatar = $avatar;
+                if ($this->User->save($user)) {
+                    return $this->Util->ajaxReturn(true, '保存成功');
+                }
+            }
+            return $this->Util->ajaxReturn(false, '保存失败');
         }
         $this->set([
-            'pageTitle' => '美约-认证信息填写'
+            'pageTitle' => '美约-认证信息填写',
+            'user' => $user
         ]);
+    }
+
+    /**
+     * 注册填写用户信息页  头像上传
+     */
+    public function regBasicInfo() {
+        $this->handCheckLogin();
+        $user = $this->user;
+        if ($this->request->is('post')) {
+            $user = $this->User->get($user['id']);
+            $user = $this->User->patchEntity($user, $this->request->data());
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(true, '保存成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
+        $this->set([
+            'pageTitle' => '美约-认证信息填写',
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * 审核认证
+     */
+    public function regAuth() {
+        $this->handCheckLogin();
+        $user = $this->user;
+        if ($this->request->is('post')) {
+            $res = $this->Util->uploadFiles('user/idcard');
+            $data['user_id'] = $user->id;
+            $AuthTable = \Cake\ORM\TableRegistry::get('UserAuth');
+            if ($res['status']) {
+                $infos = $res['info'];
+                foreach ($infos as $key => $info) {
+                    $data[$info['key']] = $info['path'];
+                }
+                $auth = $AuthTable->newEntity($data);
+                if ($AuthTable->save($auth)) {
+                    return $this->Util->ajaxReturn(true, '保存成功');
+                }
+            }
+            return $this->Util->ajaxReturn(false, '保存失败');
+        }
+        $this->set([
+            'pageTitle' => '美约-身份审核',
+        ]);
+    }
+    
+    
+    /**
+     * 基本照片和视频
+     */
+    public function regBasicPic(){
+        
     }
 
     /**

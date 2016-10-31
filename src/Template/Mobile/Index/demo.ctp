@@ -1,0 +1,1 @@
+<?= $this->Glide->image('/upload/user/avatar/2016-10-26/58102ba461a5e.jpg')?>

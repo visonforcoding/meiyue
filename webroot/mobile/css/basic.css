@@ -19,15 +19,32 @@ p{background-color: transparent;word-break: break-all;}
        /*display: -webkit-flex;display: flex;-webkit-justify-content: center;justify-content: center;-webkit-align-items:center;align-items: center;*/}
 .alert span{line-height: 0.38rem;text-align: center;background: rgba(0,0,0,0.8);border-radius: 0.15rem;padding:0.3rem;display:block;}
 /*loading层*/
-.loader {
+.loader{
     position: fixed;
     z-index:999;
     padding:10px;
     left:0;top:40%;right:0;margin:auto;width:60px;height:44px;
-    background:rgba(0,0,0,.5) url('../images/loading.gif')no-repeat center center;
-    background-size:30px 30px;
+    background-color: rgba(0,0,0,.5);
     border-radius:10px;
     opacity: 0.7;
+}
+.loader .loader-inner{
+    position: relative;
+}
+.loader .loader-title{
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.3rem;
+    color:#ddd;
+}
+.loader .loader-text {
+    padding:10px;
+    background:rgba(0,0,0,0) url('../images/loading.gif')no-repeat center center;
+    background-size:30px 30px;
+    border-radius:10px;
+}
+.loader-title + .loader-text{
+    margin-top:0.15rem;
 }
 
 /*app*/

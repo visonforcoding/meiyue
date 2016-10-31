@@ -9,6 +9,7 @@ $.util = {
     },
     //
     alert: function (str, t) {
+        $('.alert').remove();
         var div = document.createElement('div');
         div.className = 'alert';
         var span = document.createElement('span');
@@ -21,9 +22,26 @@ $.util = {
         }, t || 3000);
     },
     showPreloader: function (str) {
+        $.util.hidePreloader();
         var div = document.createElement('div');
         div.className = 'loader';
+        var divInner = document.createElement('div');
+        divInner.className = 'loader-inner';
+        div.appendChild(divInner);
+        if(str){
+            div.style.cssText = 'width:120px;height:70px';
+            var divTitle = document.createElement('div');
+            divTitle.className = 'loader-title';
+            divTitle.innerHTML = str;
+            divInner.appendChild(divTitle);
+        }
         document.body.appendChild(div);
+        var divText = document.createElement('div');
+        divText.className = 'loader-text';
+        divInner.appendChild(divText);
+    },
+    hidePreloader:function(){
+        $('.loader').remove();
     },
     /**
      * 模板处理
@@ -389,24 +407,24 @@ $.util = {
     singleImgPreView: function (inputId, showId) {
         var fileinput = document.getElementById(inputId);
         fileinput.addEventListener("change", function (e) {
-            var files = this.files
-            var file = files[0]
+            var files = this.files;
+            var file = files[0];
             // image.classList.add("")
             var image = document.getElementById(showId);
             image.file = file;
-            var reader = new FileReader()
+            var reader = new FileReader();
             reader.onload = (function (aImg) {
                 return function (e) {
                     aImg.src = e.target.result;
                 };
-            }(image))
+            }(image));
             var ret = reader.readAsDataURL(file);
             var canvas = document.createElement("canvas");
             ctx = canvas.getContext("2d");
             image.onload = function () {
-                ctx.drawImage(image, 100, 100)
-            }
-        }, false)
+                ctx.drawImage(image, 100, 100);
+            };
+        }, false);
     },
     /**
      * zepto ajax 不能将formdata 对象成功提交故重新封装了原生xmlRequest

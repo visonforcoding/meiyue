@@ -11,14 +11,20 @@
             <input type="password" id="pwd" placeholder="密码" class="user"  />
             <a href="#this" class="fogetpwd">忘记密码?</a>
         </div>
-        <a id="submit" class="btn btn_bg_y mt160 disabled">登录</a>
-        <a href="/user/register" class="btn btn_bg_t mt40">注册</a>
+    </div>
+    <div class="login_box_btn">
+        <a id="submit" class="btn btn_bg_y disabled mt160">登录</a>
+        <div class="login_group mt40">
+            <a href="/user/register?gender=1" class="btn btn_bg_t ">注册男</a>
+            <a href="/user/register?gender=2" class="btn btn_bg_t">注册女</a>
+        </div>
+        <!--<a href="regiser.html" class="btn btn_bg_t mt40">注册</a>-->
     </div>
     <div class="outerlogin">
-        <a href="#this">游客身份浏览进入</a>
+        <a href="/index/index">游客身份浏览进入</a>
     </div>
 </div>
-<?=$this->start('script');?>
+<?= $this->start('script'); ?>
 <script>
     wx.config(<?= json_encode($wxConfig) ?>);
     $('#phone,#pwd').on('keyup', function () {
@@ -50,4 +56,4 @@
         }
     });
 </script>
-<?=$this->end('script');?>
+<?= $this->end('script'); ?>

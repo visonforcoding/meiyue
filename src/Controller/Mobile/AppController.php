@@ -48,9 +48,11 @@ class AppController extends Controller {
      */
     public function initialize() {
         parent::initialize();
+        $this->viewBuilder()->layout('layout');
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Util');
+        
         //无需登录的
         $this->firewall = array(
             ['user', 'login'],
@@ -67,7 +69,6 @@ class AppController extends Controller {
      * @return void
      */
     public function beforeRender(Event $event) {
-        $this->viewBuilder()->layout('layout');
         $wxConfig = [];
         if ($this->request->is('weixin')) {
             $this->loadComponent('Wx');

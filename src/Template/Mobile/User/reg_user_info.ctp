@@ -7,7 +7,7 @@
 <div class="wraper">
     <div class="identify_img_ifo">
         <ul class="inner">
-            <li class="clearfix">
+<!--            <li class="clearfix">
                 <span class="fl">个人头像</span>
                 <div class="iden_r_box fr">
                     <div id='thumbnail' class="iden_r_pic">
@@ -17,55 +17,43 @@
                     </div>
                     <i class="iconfont potion">&#xe605;</i>
                 </div>
-            </li>
+            </li>-->
             <li class="clearfix">
-                <span class="fl">个人主页封面</span>
+                <span class="fl">上传头像</span>
                 <div class="iden_r_box fr">
                     <div class="iden_r_pic">
-                        <img id='cover_img' src="/mobile/images/headpicinfo.png" alt="" />
-                        <input id='cover' type="file" name="cover" class="img-input" 
-                               style="position: absolute;left: 0;top: 0;opacity:0;width:100px;height:100px;" />
+                        <img id='avatar_img' src="/mobile/images/headpicinfo.png" alt="" />
+                        <input id='avatar' type="file" name="cover" class="img-input" 
+                               style="position: absolute;left: 0;top: 0;opacity:0;width:100px;height:100px;" single />
                     </div>
                     <i class="iconfont potion">&#xe605;</i>
                 </div>
             </li>
         </ul>
     </div>
-    <div class="identify_basic_info mt40">
-        <ul class="inner">
-            <li class="clearfix">
-                <a href="#this">
-                    <span class="fl">基本信息</span>
-                    <i class="iconfont right_ico fr">&#xe605;</i>
-                </a>
-            </li>
-            <li class="clearfix">
-                <a href="#this">
-                    <span class="fl">身份认证</span>
-                    <i class="iconfont right_ico fr">&#xe605;</i>
-                </a>
-            </li>
-            <li class="clearfix">
-                <a href="#this">
-                    <span class="fl">基本照片与视频上传</span>
-                    <i class="iconfont right_ico fr">&#xe605;</i>
-                </a>
-            </li>
-        </ul>
-    </div>
 </div>
 <div style="height:62px;"></div>
-<a id="submit" class="identify_footer_potion">提交审核</a>
+<?php if($user->gender=='2'): ?>
+<a id="submit" class="identify_footer_potion">下一步</a>
+<?php else:?>
+<a href="/index/index" class="identify_footer_potion">跳过</a>
+<?php endif;?>
 <?= $this->start('script'); ?>
 <script>
     $.util.singleImgPreView('avatar', 'avatar_img');
-    $.util.singleImgPreView('cover', 'cover_img');
     $('#submit').on('tap', function () {
+        var avatar = document.getElementById('avatar').files[0];
+        if(!avatar){
+            return false;
+        }
         var fd = new FormData();
         fd.append('avatar', document.getElementById('avatar').files[0]);
-        fd.append('cover', document.getElementById('cover').files[0]);
         $.util.zajax('','POST',fd,function(res){
-            console.log(res);
+            if(res.status){
+                document.location.href = '/user/reg-basic-info';
+            }else{
+                $.util.alert(res.msg);
+            }
         });
     });
 </script>

@@ -15,13 +15,9 @@ use App\Utils\Word\TrieTree;
  * @property \App\Controller\Component\WxComponent $Wx
  * @property \App\Controller\Component\EncryptComponent $Encrypt
  * @property \App\Controller\Component\PushComponent $Push
+ * @property \App\Controller\Component\BdmapComponent $Bdmap
  */
 class IndexController extends AppController {
-    
-    public function beforeRender(\Cake\Event\Event $event) {
-        //parent::beforeRender($event);
-    }
-
     /**
      * Index method
      *
@@ -32,6 +28,13 @@ class IndexController extends AppController {
         //$umengObj = new Umeng($key, $secret);
         //var_dump($umengObj);
         //set_time_limit(0);
+    }
+    
+    public function demo(){
+       //GlideHelper::image('/upload/user/avatar/2016-10-28/58102ba461a5e.jpg');
+       $this->loadComponent('Bdmap');
+       $res = $this->Bdmap->placeSearchNearBy('咖啡', '22.64322,114.0322');
+       debug($res);
     }
 
     public function test() {

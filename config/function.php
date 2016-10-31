@@ -49,7 +49,7 @@ function errorMsg($entity, $msg) {
             }
         }
     }
-    if($message){
+    if ($message) {
         Cake\Log\Log::error($errors, 'devlog');
     }
     return empty($message) ? $msg : $message;
@@ -69,11 +69,11 @@ function getOriginAvatar($thumb) {
  * @param type $thumb
  * @return type
  */
-function getSmallAvatar($thumb){
+function getSmallAvatar($thumb) {
     $small = preg_replace('/thumb_/', 'small_', $thumb);
-    if(!file_exists(WWW_ROOT.$small)){
+    if (!file_exists(WWW_ROOT . $small)) {
         return getOriginAvatar($thumb);
-    }else{
+    } else {
         return $small;
     }
 }
@@ -84,12 +84,12 @@ function getSmallAvatar($thumb){
  * @return string
  */
 function getAvatar($avatar) {
-    if(preg_match('/(http|https).*/', $avatar)){
+    if (preg_match('/(http|https).*/', $avatar)) {
         return $avatar;
     }
     if (empty($avatar) || !file_exists(WWW_ROOT . $avatar)) {
         return '/mobile/images/touxiang.jpg';
-    }else{
+    } else {
         return $avatar;
     }
 }
@@ -98,6 +98,25 @@ function getAvatar($avatar) {
  * 
  * @param type $url
  */
-function createImg($url){
-    return preg_replace('/upload/','img',$url);
+function createImg($url) {
+    return preg_replace('/upload/', 'imgs', $url);
+}
+
+/**
+ * 
+ * @param type $params
+ */
+function buildLinkString($params) {
+    $string = '';
+    foreach ($params as $key => $value) {
+        $string.= $key . '="' . $value . '"&';
+    }
+    //去掉最后一个&字符
+    $string = substr($string, 0, count($string) - 2);
+
+    //如果存在转义字符，那么去掉转义
+    if (get_magic_quotes_gpc()) {
+        $string = stripslashes($string);
+    }
+    return $string;
 }
