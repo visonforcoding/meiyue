@@ -6,9 +6,10 @@ ol, ul{ list-style: none; }
 a{text-decoration: none; color:#222c38;outline:none;}
 a.disabled{border-color: #c8c9cb;color: #c8c9cb;cursor: not-allowed;}
 img{border:0;}
+input{padding:0;}
 table { border-collapse: collapse; border-spacing: 0; }
 *{-webkit-tap-highlight-color: rgba(0, 0, 0, 0);tap-highlight-color: rgba(0, 0, 0, 0);   -webkit-box-sizing: border-box;box-sizing: border-box;}
-body {max-width: 750px;min-width:320px;min-height:100%;margin: 0 auto;background: #f6f6f6;-webkit-tap-highlight-color: rgba(0,0,0,0); font-size:14px;color:#000000;font-family: 'STHeiti','Microsoft YaHei',Helvetica,Arial,sans-serif;}
+body {max-width: 750px;min-width:320px;min-height:100%;margin: 0 auto;background: #f6f6f6;-webkit-tap-highlight-color: rgba(0,0,0,0); font-size:14px;color:#303030;font-family: 'STHeiti','Microsoft YaHei',Helvetica,Arial,sans-serif;}
 input, textarea, button,select{ outline: 0; resize: none;font-size:100%;font:inherit;color:inherit;background: rgba(255,255,255,0);}
 i{font-style: normal;}
 h1,h2,h3,h4,h5,h6{}
@@ -45,21 +46,8 @@ table,tbody,tr,td,th,thead,tfoot{border:1px #e5e5e5 solid;}
 .clearfix { *zoom:1; /* for IE6 7 */ }
 .wraper{overflow:hidden;}
 .inner{padding:0 .3rem;}
-input::-webkit-input-placeholder { /* WebKit browsers */ color: #444444;} 
+input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;} 
 .ablock{display: block;}
-/*color*/
-
-.color_gray{color:#9f9f9f;}
-.bg_gray{background: #ddd;}
-.color_items{color:#29bbb1;}
-.color_org{color:#fe8c5a;}
-.color_y{color:#eab96a;}
-.color_ycc{color:#cc9930;}
-.color_black{color:#303030;}
-.color_error{color:#fd6a56;}
-.bg_items{background: #29bbb1;}
-.bgff{background: #fff;}
-
 /*间隙*/
 .mt20{margin-top:.2rem;}
 .mt33{margin-top:33px;}
@@ -68,18 +56,22 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #444444;}
 .mt200{margin-top:2rem;}
 .mt160{margin-top:1.6rem;}
 .mt60{margin-top:.6rem;}
+.mb60{margin-bottom:.6rem;}
 .mt100{margin-top:1rem;}
 .mb10{margin-bottom:10px;}
 .mt10{margin-top:10px;}
 .mt40{margin-top:.4rem;}
 .btop{border-top: 1px #efefef solid;}
 .bbottom{border-bottom: 1px #bfad9a solid;}
+.bdbottom{border-bottom: 1px #efefef solid;}
 /*按钮*/
 .btn{width:100%;display: block;height:44px;line-height: 44px;text-align: center;border-radius: 4px;font-size:18px;}
 .btn.disabled{width:100%;display: block;height:44px;line-height: 44px;text-align: center;border-radius: 4px;font-size:18px;background: #cda667;}
 .btn_bg_y{background: #eab96a;color:#15130f;}
 .btn_bg_disabled{background: #cda667;}
 .btn_bg_t{border:1px #81673d solid;color:#eab96a;height:46px;}
+.btn_cancel{border:1px #e8b967 solid;color:#e8b967;}
+.btn_cancely{background: #E8B967;color:#fff;}
 /*公共*/
 .small{font-size: 11px;color:#777;}
 .impordes{font-size: 15px;color:#303030;}
@@ -90,17 +82,34 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #444444;}
 .commontips{color:#eab96a;font-size:11px;line-height: 20px;}
 .flex{display:-webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: start;}
 .flex_end{-webkit-box-pack: end;}
+.flex_justify{-webkit-box-pack: justify;}
+.maxwid70{max-width:70%;}
+
+/*color*/
+.color_gray{color:#9f9f9f;}
+.bg_gray{background: #ddd;}
+.color_items{color:#29bbb1;}
+.color_org{color:#fe8c5a;}
+.color_y{color:#eab96a;}
+.color_ycc{color:#cc9930;}
+.color_black{color:#303030;}
+.color_error{color:#fd6a56;}
+.color_des{color:#777;}
+.bg_items{background: #29bbb1;}
+.bgff{background: #fff;}
+
 /*定位*/
 .relpotion{position:relative;}
+.aligncenter{text-align: center;}
 /*字体图标*/
-@font-face {
+/*@font-face {
     font-family: 'iconfont';
     src: url('../font/iconfont.eot');
     src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'),
         url('../font/iconfont.woff') format('woff'),
         url('../font/iconfont.ttf') format('truetype'),
         url('../font/iconfont.svg#iconfont') format('svg');
-}
+}*/
 
 .iconfont{
     font-family:"iconfont" !important;
@@ -111,11 +120,11 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #444444;}
     /*font-size:16px;*/
 }
 /*在线图标*/
-/*@font-face {
+@font-face {
   font-family: 'iconfont'; 
   src: url('//at.alicdn.com/t/font_rzuyi70djpehr529.eot');
   src: url('//at.alicdn.com/t/font_rzuyi70djpehr529.eot') format('embedded-opentype'),
   url('//at.alicdn.com/t/font_rzuyi70djpehr529.woff') format('woff'),
   url('//at.alicdn.com/t/font_rzuyi70djpehr529.ttf') format('truetype'),
   url('//at.alicdn.com/t/font_rzuyi70djpehr529.svg#iconfont') format('svg');
-}*/
+}
