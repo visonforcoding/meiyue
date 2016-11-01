@@ -1,11 +1,12 @@
 /*Tab底部*/
-.footer{width:100%;max-width: 750px;margin:0 auto;overflow-x:hidden;-webkit-box-shadow: 0 0 10px 0 rgba(155,143,143,0.6);box-shadow: 0 0 10px 0 rgba(155,143,143,0.6);background: #fff;bottom:0;position: fixed;}
+.footer{width:100%;max-width: 750px;margin:0 auto;overflow-x:hidden;-webkit-box-shadow: 0 0 10px 0 rgba(155,143,143,0.6);box-shadow: 0 0 10px 0 rgba(155,143,143,0.6);background: #fff;bottom:0;position: fixed;z-index: 10;}
 .footer ul{overflow: hidden;}
 .footer ul li{width:25%;float:left;text-align: center;padding:8px 0 5px;font-size: 12px;}
 .footer ul li a{line-height: 22px;}
 .footer ul li i{font-size:22px;color:#777777;display: block;display: block;}
 .footer ul li.active i{color:#eab96a;}
-
+.footer ul li.active a{color:#EAB96A;}
+.fixedhead{width:100%;max-width: 750px;margin:0 auto;overflow-x:hidden;top:0;position: fixed;z-index: 10;}
 /*
  * 登录/注册
  * */
@@ -313,3 +314,76 @@ color:#444;position:relative;}
 @media (min-width: 320px) and (max-width: 374px) {
 	.place_info_desc .userinfo{margin-bottom:0;}
 }
+/*订单列表*/
+.header .menu{font-size:18px;}
+.navbar{height:1.35rem;width:100%;background: #1a1713;font-size:13px; padding-top:.1rem;}
+.navbar ul{height:1.35rem;}
+.navbar a{color:#eab96a;display: block;width:1.2rem;height:28px;line-height: 28px;background: #221f1d;text-align: center;border-radius: 2px;}
+.navbar .current a{background:#eab96a; color:#fff;}
+.find_list_box{padding-top:.1rem;}
+.find_list_box dl{width:3.33rem;float:left;margin-right:.2rem;margin-top:.3rem;}
+.find_list_box dl:nth-of-type(2n){margin-right:0;}
+.find_list_box dt{width:3.33rem;height:3.33rem;overflow: hidden;position: relative;box-shadow: 0 0 3px rgba(0,0,0,.2);border-radius: 3px;}
+.find_list_box dt img{height:100%;width:100%;display:block;}
+.find_list_box dt h1{width:100%;height:20px;bottom:0;position: absolute;background: rgba(234,185,106,.8);border-radius: 0 0 3px 3px;font-size:10px;
+color:#fff; line-height: 20px;padding-right: .1rem;}
+.find_list_box .find_list_con{height:34px;}
+.find_list_con span{ display: block;}
+.find_list_con span i{margin-right:.08rem;}
+.find_list_con span.userinfo{font-size:12px;color:#eab96a;}
+.find_list_con span.userinfo .iconfont{font-size:14px;vertical-align: middle;}
+/*筛选*/
+.choose_parmes{position: absolute;margin-top:1rem;height:230px;background: #1a1713;width:100%;padding-top:20px;}
+.choose_parmes .height_left{display: block;width:20%;margin-top:10px;font-weight: bold;}
+.choose_parmes .height_left i{font-size: 8px;vertical-align: bottom;font-weight: normal;}
+.choose_parmes .scale{width:80%;}
+.choose_parmes .scale input{width:100%;}
+.choose_parmes input[type="range"] {/*background: rgba(56,48,36,1);*/background:#fff;border-radius: 15px;-webkit-appearance: none;height:6px;}
+ .choose_parmes input[type="range"]::-webkit-slider-thumb {-webkit-appearance: none;cursor: default;height: 20px;width: 20px;background: none repeat scroll 0 0 #fff;border-radius: 50%;-webkit-box-shadow: 0 -1px 1px black inset;position: relative;z-index:999;}
+.scale_value{font-size:12px;color:#fff;}
+.choose_parmes .line{font-size: 12px;color:#eab96a;}
+.choose_parmes .sure{background: #eab96a;color:#fff;}
+.height{margin-bottom:30px;}
+/*
+ 个人主页
+ */
+ */
+.home_page .header{background:none;}
+.home_page .header span{color:#fff;}
+.home_page_basic{background: #fff;padding-top:.4rem;}
+.home_page_basic .home_name{position:relative;color:#170e00;font-size: 18px;}
+.home_page_basic .home_name em{position:absolute;font-size: 10px;color:#959da7;}
+.home_page_basic .home_name em i{margin-right:.05rem;}
+.home_page_basic .home_name_info{color:#959da7;font-size: 12px;margin-top:.36rem;}
+.home_page_basic .home_name_info .iconfont{font-size: 14px;}
+.home_page_basic .commend{margin-top:.3rem;font-size: 12px;color:#eab96a;padding-bottom:.4rem;border-bottom:1px #efefef solid;}
+.home_page_basic .otherinfo{overflow: hidden;padding:.22rem 0;}
+.home_page_basic .otherinfo li:last-of-type{border-right:none;}
+.home_page_basic .otherinfo li{text-align: center;border-right:1px #efefef solid;width:1.85rem;}
+.home_page_basic .otherinfo .t_desc{display: block;color:#170e00;font-size: 14px;margin-bottom:6px;}
+.home_page_basic .otherinfo .b_desc{color:#959da7;font-size: 12px;}
+.home_pic_info,.home_basic_mark,.home_basic_ability{background: #fff;padding:.4rem 0;}
+.home_pic_info ul{overflow: hidden;}
+.home_pic_info li{width:1.6rem;height:1.6rem;border-radius: 5px;overflow: hidden;}
+.home_pic_info li img{width:100%;height:auto;overflow: hidden;}
+.home_pic_info li a.ablock{position: relative;width:1.6rem;height:1.6rem;}
+.home_pic_info li a.ablock span{line-height: 1.6rem;width:1.6rem;height:1.6rem;font-size: 12px;color:#fff;position: absolute;background: rgba(0,0,0,0.6);z-index:999;top:0;left:0;text-align: center;}
+.home_pic_info .home_video{width:100%;height:3.2rem;border-radius: 5px;overflow: hidden;}
+.home_pic_info .home_video img{width:100%;height:auto;display: block;}
+.home_basic_mark .title,.home_basic_ability .title{font-size: 15px;color:#1b1612;font-size:15px;}
+.home_basic_mark .con{padding:.4rem 0;font-size: 0;}
+.home_basic_mark .con a{display: inline-block;color:#fff;font-size: 14px;background: #eab96a;border-radius: 15px;height:28px;line-height: 28px;
+padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
+.home_basic_mark .bottom{border:1px solid #eab96a;border-radius: 5px;color:#666;padding:.3rem;}
+.home_basic_mark .bottom .title,.home_basic_mark p{font-size: 12px;line-height: 20px;}
+.home_basic_mark p{text-align: justify;}
+.home_basic_ability ul{overflow: hidden;padding-top:.16rem;}
+.home_basic_ability li{padding:.2rem 0;}
+.home_basic_ability .itms{height:28px;}
+.home_basic_ability .items .date{width:1.2rem;height:28px;display: inline-block;border-radius:3px;line-height: 28px;background: #EAB96A;text-align: center;color:#fff;}
+.home_basic_ability .items_name{font-size: 15px;color:#000;}
+.home_basic_ability .items_name i{font-size:20px;vertical-align: middle;margin-right:.2rem;}
+.home_basic_ability  .price{color:#eab96a; font-size:12px;margin-right:.1rem;}
+.home_basic_ability  .price i{font-size: 18px;margin-right:.1rem;}
+.itms_list .more{padding:.2rem 0;}
+.itms_list .more i{font-size: 22px;}

@@ -81,6 +81,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .btop{border-top: 1px #efefef solid;}
 .bbottom{border-bottom: 1px #bfad9a solid;}
 .bdbottom{border-bottom: 1px #efefef solid;}
+.bdtop{border-top: 1px #bfad9a solid;}
 /*按钮*/
 .btn{width:100%;display: block;height:44px;line-height: 44px;text-align: center;border-radius: 4px;font-size:18px;}
 .btn.disabled{width:100%;display: block;height:44px;line-height: 44px;text-align: center;border-radius: 4px;font-size:18px;background: #cda667;}
@@ -100,6 +101,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .flex{display:-webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: start;}
 .flex_end{-webkit-box-pack: end;}
 .flex_justify{-webkit-box-pack: justify;}
+.flex_center{-webkit-box-pack:center;}
 .maxwid70{max-width:70%;}
 
 /*color*/
@@ -118,6 +120,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 /*定位*/
 .relpotion{position:relative;}
 .aligncenter{text-align: center;}
+.alignright{text-align: right;}
 /*字体图标*/
 /*@font-face {
     font-family: 'iconfont';
@@ -138,10 +141,10 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 }
 /*在线图标*/
 @font-face {
-  font-family: 'iconfont'; 
-  src: url('//at.alicdn.com/t/font_rzuyi70djpehr529.eot');
-  src: url('//at.alicdn.com/t/font_rzuyi70djpehr529.eot') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_rzuyi70djpehr529.woff') format('woff'),
-  url('//at.alicdn.com/t/font_rzuyi70djpehr529.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_rzuyi70djpehr529.svg#iconfont') format('svg');
+  font-family: 'iconfont';  /* project id："166621" */
+  src: url('//at.alicdn.com/t/font_m0kaycb0qrxjemi.eot');
+  src: url('//at.alicdn.com/t/font_m0kaycb0qrxjemi.eot') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_m0kaycb0qrxjemi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_m0kaycb0qrxjemi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_m0kaycb0qrxjemi.svg#iconfont') format('svg');
 }
