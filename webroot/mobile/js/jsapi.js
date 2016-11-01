@@ -8,13 +8,13 @@
  * @callback 回调函数，默认为空，回调执行时参数为{callback:'',data:{}},callback为当前函数名称，data为result.data
  * @result
  {
-   code:0,      //0表示正确执行，其他表示相应错误码
-   errorMsg:'', //错误信息
-   data:{}      //对于取结果的，数据会以json结构放在data里，否则data为空json
+ code:0,      //0表示正确执行，其他表示相应错误码
+ errorMsg:'', //错误信息
+ data:{}      //对于取结果的，数据会以json结构放在data里，否则data为空json
  }
  */
 
-if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios需要先注入JSApi对象
+if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //ios需要先注入JSApi对象
     document.write('<script src="http://jsapi.com/jsapi.js"><\/script>');
 }
 (function () {
@@ -23,16 +23,22 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
         link: 'http://m.chinamatop.com/',
         title: '并购帮',
         desc: '专注并购人的生活方式',
-        success:function(){},
-        cancel:function(){}
+        success: function () {
+        },
+        cancel: function () {
+        }
     };
     window.shareConfig = defaultConfig;
     window.nativeShare = function (type) {
-        LEMON.share[type](window.shareConfig, function(){});
+        LEMON.share[type](window.shareConfig, function () {
+        });
     };
-    window.onBottom = window.onBottom || function () {};
-    window.onBackView = window.onBackView || function () {};
-    window.onActiveView = window.onActiveView || function () {};
+    window.onBottom = window.onBottom || function () {
+    };
+    window.onBackView = window.onBackView || function () {
+    };
+    window.onActiveView = window.onActiveView || function () {
+    };
     var LEMON = {};
     window.__isAPP = LEMON.isAPP = window.JSApi || navigator.userAgent.toLowerCase().indexOf("smartlemon") >= 0;  //判断页面是否在app的环境中
 
@@ -59,7 +65,8 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
     };
 
     var apiCallback = function (func) {
-        if (!func) return '';
+        if (!func)
+            return '';
         var apiCB = 'apiCB' + Math.ceil(Math.random() * 1000000000000);
         window[apiCB] = function (param) {
             func && func(param);
@@ -73,20 +80,20 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
         "db.get",
         "db.set",
         "sys.version",
-        "sys.isUseLOC",  //是否使用缓存  on  off
-        "sys.openLOC",  //开启缓存
+        "sys.isUseLOC", //是否使用缓存  on  off
+        "sys.openLOC", //开启缓存
         "sys.closeLOC", //关闭缓存
-        "sys.showKeyboard",  //显示键盘
-        "sys.hideKeyboard",  //隐藏键盘
-        "sys.QRcode",  //二维码扫描
-        "sys.update",  //android系统更新
+        "sys.showKeyboard", //显示键盘
+        "sys.hideKeyboard", //隐藏键盘
+        "sys.QRcode", //二维码扫描
+        "sys.update", //android系统更新
         "sys.mediaPlay", //开始播放多媒体
-        "sys.back",  //设置返回链接
+        "sys.back", //设置返回链接
         "sys.clearWebCatch",
         "sys.logout",
         "sys.device", //获取唯一设备id
         "show.shareIco", //隐藏分享图标
-        "share.banner",  //调出分享的层
+        "share.banner", //调出分享的层
         "share.QQ",
         "share.QQfriend",
         "share.WX",
@@ -104,8 +111,11 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
         "event.getLocation",
         "event.viewImg",
         "event.tel",
-        "event.uploadPhoto",
-        "event.reuploadPhoto"];
+        "event.uploadPic", //选择并上传单个图片 返回服务器地址
+        "event.uploadPics", //上传9个图片
+        "event.choosePic",  //选择多个图片 返回base64 小图
+        "event.changePic"  //替换某张图片
+        ];
 
     for (var i = 0, len = apiList.length; i < len && apiList[i]; i++) {
         (function (api) { //api eg:'share.qq'
@@ -118,10 +128,13 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                             'content': arguments[1] || '',
                             'expires': arguments[2] || 999999
                         };
-                        if (!param['key']) return '';
+                        if (!param['key'])
+                            return '';
                         if (!isAPP) {
-                            if (api == 'db.set') localStorage.setItem(param['key'], param['content']);
-                            if (api == 'db.get') return localStorage.getItem(param['key']);
+                            if (api == 'db.set')
+                                localStorage.setItem(param['key'], param['content']);
+                            if (api == 'db.get')
+                                return localStorage.getItem(param['key']);
                             return '';
                         }
 
@@ -129,11 +142,11 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                         // ** db.set至少用到key value  LEMON.db.set  至少传入两个参数，字符串  **
                         // invoke可以多传几个变量 set  delete不会用到value和get
                         var invokeResult = JSApiInvoke(api, param, '', 'string');
-                        if(invokeResult.indexOf('"data"') != -1){
+                        if (invokeResult.indexOf('"data"') != -1) {
                             var re = JSON.parse(invokeResult);
                             return re.data;
                         }
-                        else{
+                        else {
                             return invokeResult;
                         }
                     });
@@ -141,18 +154,18 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                 case "sys.version":
                 case "sys.device":
                 case "sys.isUseLOC":  //是否使用缓存  on  off
-                        registerAPI(null, api, function () {
+                    registerAPI(null, api, function () {
                         var invokeResult = JSApiInvoke(api, '', '', 'string');
-                        if(invokeResult.indexOf('"data":') != -1){
+                        if (invokeResult.indexOf('"data":') != -1) {
                             var re = JSON.parse(invokeResult);
                             return re.data;
                         }
-                        else{
+                        else {
                             return invokeResult;
                         }
                     });
                     break;
-                //无参数   无回调
+                    //无参数   无回调
                 case "event.back":
                     registerAPI(null, api, function () {
                         if (!isAPP) {
@@ -164,14 +177,14 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                     break;
                 case "event.viewImg":
                     registerAPI(null, api, function () {
-                        var imgs = arguments[1], cImg=arguments[0], index=0, i=0;
-                        for(;i<imgs.length;i++){
-                            if(imgs[i] == cImg) {
+                        var imgs = arguments[1], cImg = arguments[0], index = 0, i = 0;
+                        for (; i < imgs.length; i++) {
+                            if (imgs[i] == cImg) {
                                 index = i;
                                 break;
                             }
                         }
-                        return JSApiInvoke(api, {imgs:imgs, index:index}, '');
+                        return JSApiInvoke(api, {imgs: imgs, index: index}, '');
                     });
                     break;
                 case "event.unrefresh":
@@ -189,30 +202,30 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                         return JSApiInvoke(api, {}, '');
                     });
                     break;
-                //一个字符型参数   无回调
+                    //一个字符型参数   无回调
                 case "sys.back":
                     registerAPI(null, api, function () {
                         var jump = arguments[0];
-                        jump = jump.replace('http://', '').replace('m.chinamatop.com','');
-                        return JSApiInvoke(api, {url:jump}, '');
+                        jump = jump.replace('http://', '').replace('m.chinamatop.com', '');
+                        return JSApiInvoke(api, {url: jump}, '');
                     });
                     break;
                 case "sys.update":
                     registerAPI(null, api, function () {
-                        return JSApiInvoke(api, {url:arguments[0]}, '');
+                        return JSApiInvoke(api, {url: arguments[0]}, '');
                     });
                     break;
                 case "event.tel":
                     registerAPI(null, api, function () {
-                        return JSApiInvoke(api, {tel:arguments[0]}, '');
+                        return JSApiInvoke(api, {tel: arguments[0]}, '');
                     });
                     break;
                 case "event.invite":
                     registerAPI(null, api, function () {
-                        return JSApiInvoke(api, {str:arguments[0]}, '');
+                        return JSApiInvoke(api, {str: arguments[0]}, '');
                     });
                     break;
-                //无参数 只用到callback
+                    //无参数 只用到callback
                 case 'login.wx':
                 case "event.getWXCode":
                 case "event.getLocation":
@@ -224,12 +237,15 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                         //return re.data;
                     });
                     break;
-                //有参数 有callback
+                    //有参数 有callback
                 case 'pay.wx':
                 case 'pay.ali':
-                case "event.uploadPhoto":
+                case "event.uploadPic":
+                case "event.uploadPics":
+                case "event.choosePic":
+                case "event.changePic":
                     registerAPI(null, api, function () {
-                        JSApiInvoke(api, {param:arguments[0]}, apiCallback(arguments[1]));
+                        JSApiInvoke(api, {param: arguments[0]}, apiCallback(arguments[1]));
                     });
                     break;
                 case "share.banner":
@@ -240,8 +256,9 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                 case "share.WB":
                     registerAPI(null, api, function () {
                         var param = arguments[0] || window.shareConfig, cb = arguments[1] || function () {
-                            }; //这里ios一定要callback
-                        if (!param) return '';
+                        }; //这里ios一定要callback
+                        if (!param)
+                            return '';
                         if (!isAPP) {
                             //register wx sq
                         }
