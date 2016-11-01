@@ -239,20 +239,20 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 
 /*约会管理*/
 .date_list_header{width:100%;background: #fff;height:45px;line-height:45px;color:#efefef;}
-.date_list_header .headertab{width:1.2rem;display: block;margin:0 auto;text-align: center;}
+.date_list_header .headertab{display: inline-block;margin:0 auto;text-align: center;padding:0 .2rem;}
 .date_list_header div.current .headertab{border-bottom:2px #eab96a solid;}
 .date_list_header div{color:#303030;font-size:15px;text-align: center;width:48%;display: inline-block;}
 .date_list_header div.current{color:#eab96a;}
 .date_list_con{}
-.date_list_con section{width:100%;}
+.date_list_con section{width:100%;display: none;}
 .date_list_con section li{padding-left:.3rem;margin-top:.2rem;background: #fff;}
-.date_list_con .date_item_des div{padding-right:.3rem;padding-top:.2rem;padding-bottom:.2rem;}
+.date_list_con .date_item_des div.flex{padding-right:.3rem;padding-top:.2rem;padding-bottom:.2rem;}
 .date_list_con .itemsname{margin-right:.2rem;}
-.date_list_con time,.date_list_con address{font-size: 11px;color:#666;}
-.date_list_con time i,.date_list_con address i{color:#c2c2c2;margin-right:.2rem;}
-.date_list_con address{margin-top:.1rem;}
+.date_list_con time,.date_list_con address{font-size: 11px;color:#666;line-height: 11px;}
+.date_list_con time i,.date_list_con address i{color:#c2c2c2;margin-right:.1rem;font-size:13px;vertical-align: middle;}
+.date_list_con address{margin-top:.05rem;}
 .date_type{font-size: 12px;}
-.fixed_r_submit{width:66px;height:66px;border-radius: 50%;position:fixed;right:.3rem;bottom:1.4rem;text-align: center;color:#fff;font-size: 15px;box-shadow: 0 5px 8px rgba(254,202,195,.8);border:1px #fff solid;display:-webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: center;background: -webkit-linear-gradient(top,#fe9872,#fd6a56);background: linear-gradient(top,#fe9872,#fd6a56);}
+.fixed_r_submit{width:66px;height:66px;border-radius: 50%;position:fixed;right:.3rem;bottom:.6rem;text-align: center;color:#fff;font-size: 15px;box-shadow: 0 5px 8px rgba(254,202,195,.8);border:1px #fff solid;display:-webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: center;background: -webkit-linear-gradient(top,#fe9872,#fd6a56);background: linear-gradient(top,#fe9872,#fd6a56);}
 /*约会详情页*/
 .date_detail_place{padding-bottom:.4rem;border-bottom:1px #efefef solid;background: #fff;}
 .date_detail_place .title{line-height: 1.1rem;font-size:16px;}
@@ -299,3 +299,17 @@ color:#444;position:relative;}
 .choose_mark__items .choose_marks i{font-size:11px;color:#666666;}
 /*订单管理*/
 .order_header div{width:30%;}
+.order_header .headertab{position:relative;}
+.order_header .current .headertab .tips_ico{position: absolute;width:8px;height:8px;background: red;border-radius: 50%;top:50%;right:0;margin-top:-8px;
+;-webkit-border-radius: 50%;}
+.place_info_desc{height:1.2rem;}
+.place_info_desc .place{width:1.2rem;height:1.2rem;position:absolute;}
+.place_info_desc .place img{width:100%;height:auto;display: block;}
+.place_info_desc .place_info{padding-left:1.4rem;}
+.place_info_desc .userinfo{margin-bottom:.15rem;}
+.groupbtn span{display: inline-block;padding:0 .35rem;height:25px;line-height: 23px;border-radius: 3px;font-size: 12px;}
+.groupbtn span.refuse{border:1px #e0e0e0 solid;color:#666;margin-right:.1rem;}
+.groupbtn span.orders{border:1px #eab96a solid;color:#eab96a;}
+@media (min-width: 320px) and (max-width: 374px) {
+	.place_info_desc .userinfo{margin-bottom:0;}
+}
