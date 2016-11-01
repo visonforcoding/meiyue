@@ -401,10 +401,11 @@ $.util = {
      * 单文件上传预览
      * @param {string} inputId  上传input id
      * @param {string} showId   显示图片的控件 id
+     * @param {function} func   回掉方法
      * @author caowenpeng
      * @returns {undefined}
      */
-    singleImgPreView: function (inputId, showId) {
+    singleImgPreView: function (inputId, showId,func) {
         var fileinput = document.getElementById(inputId);
         fileinput.addEventListener("change", function (e) {
             var files = this.files;
@@ -424,6 +425,7 @@ $.util = {
             image.onload = function () {
                 ctx.drawImage(image, 100, 100);
             };
+            func(inputId);
         }, false);
     },
     /**
