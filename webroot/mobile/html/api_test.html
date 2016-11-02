@@ -97,7 +97,8 @@
         alert('老子是回调函数');
         alert(re);
         for(k in re.images){
-            $('body').append('<img src="'+re.data[k]+'"/>')
+            alert(re.images[k]);
+            $('body').append('<img src="'+re.images[k]+'"/>')
         }
     }
 
