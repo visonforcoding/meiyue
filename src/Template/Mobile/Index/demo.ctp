@@ -70,15 +70,25 @@
         param['max'] = max;
         LEMON.event.choosePic(param, function (res) {
             res = JSON.parse(res);
-            $.each(res.images,function(i,n){
-                self.before('<dl class="Idcard">' +
+            $.each(res.images, function (i, n) {
+                self.parents('dl.Idcard').before('<dl class="Idcard">' +
                         '<dt>' +
-                        '<img data-id="'+n+'" class="up" src="http://image.com/'+n+'" alt="" />' +
+                        '<img data-id="' + n + '" class="up" src="http://image.com/' + n + '" alt="" />' +
                         '</dt>' +
                         '</dl>');
             })
         });
     })
+    function renderImgs(res) {
+        res = JSON.parse(res);
+        $.each(res.images, function (i, n) {
+            $('#up').parents('dl.Idcard').before('<dl class="Idcard">' +
+                    '<dt>' +
+                    '<img data-id="' + n + '" class="up" src="http://image.com/' + n + '" alt="" />' +
+                    '</dt>' +
+                    '</dl>');
+        })
+    }
 </script>
 <?= $this->end('script'); ?>
 
