@@ -1,6 +1,8 @@
 /*Tab底部*/
-.footer{width:100%;max-width: 750px;margin:0 auto;overflow-x:hidden;-webkit-box-shadow: 0 0 10px 0 rgba(155,143,143,0.6);box-shadow: 0 0 10px 0 rgba(155,143,143,0.6);background: #fff;bottom:0;position: fixed;z-index: 10;}
-.footer ul{overflow: hidden;}
+.footer,.home_page_footer{width:100%;max-width: 750px;margin:0 auto;overflow-x:hidden;-webkit-box-shadow: 0 0 10px 0 rgba(155,143,143,0.6);box-shadow: 0 0 10px 0 rgba(155,143,143,0.6);background: #fff;bottom:0;position: fixed;z-index: 10;}
+.footer ul,.home_page_footer ul{overflow: hidden;}
+.home_page_footer ul{height:50px;}
+.home_page_footer li{width:33.3%;text-align: center;}
 .footer ul li{width:25%;float:left;text-align: center;padding:8px 0 5px;font-size: 12px;}
 .footer ul li a{line-height: 22px;}
 .footer ul li i{font-size:22px;color:#777777;display: block;display: block;}
@@ -347,9 +349,9 @@ color:#fff; line-height: 20px;padding-right: .1rem;}
 /*
  个人主页
  */
- */
-.home_page .header{background:none;}
-.home_page .header span{color:#fff;}
+
+.home_page .header{background:url(../images/home_page_bg.jpg) no-repeat top center;background-size:contain;height:6.2rem;}
+.home_page .header span{color:#fff;font-size: 20px;;}
 .home_page_basic{background: #fff;padding-top:.4rem;}
 .home_page_basic .home_name{position:relative;color:#170e00;font-size: 18px;}
 .home_page_basic .home_name em{position:absolute;font-size: 10px;color:#959da7;}
@@ -366,7 +368,7 @@ color:#fff; line-height: 20px;padding-right: .1rem;}
 .home_pic_info ul{overflow: hidden;}
 .home_pic_info li{width:1.6rem;height:1.6rem;border-radius: 5px;overflow: hidden;}
 .home_pic_info li img{width:100%;height:auto;overflow: hidden;}
-.home_pic_info li a.ablock{position: relative;width:1.6rem;height:1.6rem;}
+.home_pic_info li a.ablock{position: relative;width:1.6rem;height:1.6rem;z-index: 1;}
 .home_pic_info li a.ablock span{line-height: 1.6rem;width:1.6rem;height:1.6rem;font-size: 12px;color:#fff;position: absolute;background: rgba(0,0,0,0.6);z-index:999;top:0;left:0;text-align: center;}
 .home_pic_info .home_video{width:100%;height:3.2rem;border-radius: 5px;overflow: hidden;}
 .home_pic_info .home_video img{width:100%;height:auto;display: block;}
@@ -387,3 +389,19 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .home_basic_ability  .price i{font-size: 18px;margin-right:.1rem;}
 .itms_list .more{padding:.2rem 0;}
 .itms_list .more i{font-size: 22px;}
+/*查看微信*/
+.home_seach_info,.home_seach_otherinfo{background: #fff;padding:.1rem 0 .1rem .3rem;}
+.home_seach_info li,.home_seach_otherinfo li{padding-right:.3rem;}
+.home_seach_info .items span,.home_seach_otherinfo .items span{display: block;}
+.home_seach_info .items span.golook,.home_seach_otherinfo .items span.golook{font-size: 12px;color:#999;}
+.home_seach_info .items,.home_seach_otherinfo .items{height:45px;}
+.home_seach_info .items .golook i,.home_seach_otherinfo .items .golook i{font-size: 12px;margin-left:.2rem;color:#d7dade;}
+.home_seach_otherinfo .items .seach_name{margin-right:.1rem;width:1.7rem;}
+.home_seach_otherinfo .items .sport_items{width:2.5rem;}
+.home_seach_otherinfo .items .golook .r_icon{color:#959da7;font-size: 14px;}
+.home_page_footer li a{font-size:16px;color:#000;}
+.home_page_footer li a.active{color:#EAB96A;}
+.home_page_footer li a.active i{color:#EAB96A;}
+.home_page_footer li i{margin-right:.08rem; color:#666;}
+.togift{width:50px;height:50px;background: #eab96a;border-radius: 50%;position: fixed;bottom:60px;right:.3rem;box-shadow: 0 0 3px rgba(234,185,106,.3);z-index: 10;}
+.togift i{font-size:23px;color:#fff;}
