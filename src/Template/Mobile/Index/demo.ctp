@@ -58,30 +58,45 @@
     </div>
 </div>
 <div style="height:62px;"></div>
-<a href="#this" class="identify_footer_potion">提交审核</a>
+<a href="#this" id='change' class="identify_footer_potion">提交审核</a>
+<a href="#this" id='submit' class="identify_footer_potion">提交审核</a>
 <?= $this->start('script'); ?>
 <script>
     $('#up').on('tap', function () {
-        alert('去APP选择图片咯..');
         var self = $(this);
         var max = $('#imageUpBox').data('count');
         var param = {};
         param['key'] = 'images';
         param['max'] = max;
+        var res = '{"images":[0, 1, 2]}';
+        renderImgs(res)
+        return;
         LEMON.event.choosePic(param, function (res) {
             res = JSON.parse(res);
             $.each(res.images, function (i, n) {
-                self.parents('dl.Idcard').before('<dl class="Idcard">' +
+                max--;
+                self.parents('dl.Idcard').before('<dl id="card_'+n+'" class="Idcard">' +
                         '<dt>' +
                         '<img data-id="' + n + '" class="up" src="http://image.com/' + n + '" alt="" />' +
                         '</dt>' +
                         '</dl>');
             })
+            $('#imageUpBox').data('count',max);
         });
     })
+    $('#change').on('tap',function(){
+        var param = {};
+        param['key'] = 'images';
+        param['index'] = 2;
+        LEMON.event.changePic(param,function(res){
+            $('#card_'+param['index']).find('img').attr('src','http://image.com'+res);
+        })
+    });
     function renderImgs(res) {
+        console.log(max);
         res = JSON.parse(res);
         $.each(res.images, function (i, n) {
+            max--;
             $('#up').parents('dl.Idcard').before('<dl class="Idcard">' +
                     '<dt>' +
                     '<img data-id="' + n + '" class="up" src="http://image.com/' + n + '" alt="" />' +
