@@ -10,7 +10,7 @@ use Cake\Event\Event;
 use Cake\Event\EventManager;
 use Cake\Database\Type\TimeType;
 use Cake\I18n\Time;
-\Cake\Core\Configure::load('Wpadmin');  //先加载
+\Cake\Core\Configure::load('wpadmin');  //先加载
 $wpconf = \Cake\Core\Configure::read('project');
 $prefix_str = '/admin';
 if($wpconf){
