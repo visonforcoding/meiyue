@@ -58,7 +58,7 @@
     </div>
 </div>
 <div style="height:62px;"></div>
-<a href="#this" id='change' class="identify_footer_potion">提交审核</a>
+<a href="#this" id='change' class="identify_footer_potion">更换第二张图片</a>
 <a href="#this" id='submit' class="identify_footer_potion">提交审核</a>
 <?= $this->start('script'); ?>
 <script>
