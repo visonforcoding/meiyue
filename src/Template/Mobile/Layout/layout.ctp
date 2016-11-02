@@ -13,6 +13,7 @@
         <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>
         <script src="/mobile/js/view.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript" src="/mobile/js/util.js"></script>
+        <script type="text/javascript" src="/mobile/js/jsapi.js"></script>
         <?= $this->fetch('css') ?>
         <?= $this->fetch('static') ?>
     </head>
