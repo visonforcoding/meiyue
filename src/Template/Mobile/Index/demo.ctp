@@ -68,9 +68,6 @@
         var param = {};
         param['key'] = 'images';
         param['max'] = max;
-        var res = '{"images":[0, 1, 2]}';
-        renderImgs(res)
-        return;
         LEMON.event.choosePic(param, function (res) {
             res = JSON.parse(res);
             $.each(res.images, function (i, n) {
