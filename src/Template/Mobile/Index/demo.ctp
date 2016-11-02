@@ -73,7 +73,7 @@
             $.each(res.images,function(i,n){
                 self.before('<dl class="Idcard">' +
                         '<dt>' +
-                        '<img class="up" src="'+n+'" alt="" />' +
+                        '<img data-id="'+n+'" class="up" src="http://image.com/'+n+'" alt="" />' +
                         '</dt>' +
                         '</dl>');
             })
