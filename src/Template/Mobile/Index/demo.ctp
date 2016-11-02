@@ -68,7 +68,7 @@
         var param = {};
         param['key'] = 'images';
         param['max'] = max;
-        LEMON.event.choosePic(JSON.stringify(param), function (res) {
+        LEMON.event.choosePic(param, function (res) {
             res = JSON.parse(res);
             $.each(res.images,function(i,n){
                 self.before('<dl class="Idcard">' +
