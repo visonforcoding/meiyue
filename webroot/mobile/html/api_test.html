@@ -53,8 +53,8 @@
     <li onclick="LEMON.sys.showKeyboard()">LEMON.sys.showKeyboard()显示键盘 </li>
     <li onclick="LEMON.sys.hideKeyboard()">LEMON.sys.hideKeyboard() 关闭键盘</li>
     <li onclick="LEMON.event.uploadPic(callback)">LEMON.event.uploadPic() 上传单张</li>
-    <li onclick="LEMON.event.uploadPics('{key:test,max:1}')">LEMON.event.uploadPics() 上传多张</li>
-    <li onclick="LEMON.event.choosePic('curr_group',showPic)">LEMON.event.choosePic() 选择多张图片</li>
+    <li onclick="LEMON.event.uploadPics('group')">LEMON.event.uploadPics() 上传多张</li>
+    <li onclick="LEMON.event.choosePic('{key:test,max:9}',showPic)">LEMON.event.choosePic() 选择多张图片</li>
     <li onclick="LEMON.event.changePic({index:0, key:'curr_group'},callback)">LEMON.event.changePic()替换单张图 </li>
 
     <!--
@@ -96,9 +96,9 @@
     function showPic(re){
         alert('老子是回调函数');
         alert(re);
-//        for(k in re.data){
-//            $('body').append('<img src="'+re.data[k]+'"/>')
-//        }
+        for(k in re.images){
+            $('body').append('<img src="'+re.data[k]+'"/>')
+        }
     }
 
     function testset()
