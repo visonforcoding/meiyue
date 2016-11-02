@@ -20,21 +20,36 @@ use App\Utils\Word\TrieTree;
 class IndexController extends AppController {
     /**
      * Index method
-     *
+     * 发现首页
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        $this->viewBuilder()->layout('layout_sui');
+//        echo json_encode(['images'=>['1'=>'http://1.jpg','2'=>'http://2.jpg']]);exit();
+//        $this->viewBuilder()->layout('layout_sui');
         //$umengObj = new Umeng($key, $secret);
         //var_dump($umengObj);
         //set_time_limit(0);
+        $this->set([
+            'pageTitle'=>'发现-美约'
+        ]);
     }
+    
+    
+    /**
+     * 发现列表
+     */
+    public function findList(){
+        
+    }
+    
     
     public function demo(){
        //GlideHelper::image('/upload/user/avatar/2016-10-28/58102ba461a5e.jpg');
-       $this->loadComponent('Bdmap');
-       $res = $this->Bdmap->placeSearchNearBy('咖啡', '22.64322,114.0322');
-       debug($res);
+       //$this->loadComponent('Bdmap');
+       //$res = $this->Bdmap->placeSearchNearBy('咖啡', '22.64322,114.0322');
+       $this->set([
+           'pageTitle'=>'测试'
+       ]);
     }
 
     public function test() {

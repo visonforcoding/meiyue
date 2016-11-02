@@ -1,21 +1,34 @@
 <?php $this->start('css'); ?>
 <style>
     #map_canvas {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    .wraper {
+        overflow: hidden;
+        position: absolute;
+        top: 1rem;
+        bottom: 1rem;
+        left: 0;
+        right: 0;
+    }
 </style>
 <?php $this->end('css'); ?>
-<header class="bar bar-nav">
-    <h1 class="title">发现</h1>
+<header>
+    <div class="header">
+        <a href='/index/find-list'>
+        <span class="l_btn">切换列表</span>
+        </a>
+        <h1>美约</h1>
+    </div>
 </header>
-<?= $this->element('nav', ['active' => 'find']) ?>
-<div class="content">
+<div class="wraper">
     <div id="map_canvas">
 
     </div>
 </div>
+<div style="height:1.4rem"></div>
+<?= $this->element('footer', ['active' => 'find']) ?>
 <?php $this->start('script'); ?>
 <script id="bmapjs" src="/mobile/js/bmap.js"></script>
 <script>
-//     $.showPreloader();
     function initBmap() {
         var map = new BMap.Map("map_canvas");            // 创建Map实例
         map.centerAndZoom(new BMap.Point(114.043566, 22.646635), 15);
@@ -24,7 +37,7 @@
         var myIcon = new BMap.Icon("/imgs/user/avatar/avatar2.jpg?w=60&border=3,white,overlay", new BMap.Size(60, 60));
         var marker2 = new BMap.Marker(pt, {icon: myIcon});  // 创建标注
         map.addOverlay(marker2);              // 将标注添加到地图中
-        
+
         wx.getLocation({
             type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
             success: function (res) {

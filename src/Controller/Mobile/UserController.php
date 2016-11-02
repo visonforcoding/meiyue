@@ -198,15 +198,14 @@ class UserController extends AppController {
         $user = $this->user;
         if ($this->request->is('post')) {
             $res = $this->Util->uploadFiles('user/idcard');
-            $data['user_id'] = $user->id;
-            $AuthTable = \Cake\ORM\TableRegistry::get('UserAuth');
+            $user = $this->User->get($user->id);
             if ($res['status']) {
                 $infos = $res['info'];
                 foreach ($infos as $key => $info) {
                     $data[$info['key']] = $info['path'];
                 }
-                $auth = $AuthTable->newEntity($data);
-                if ($AuthTable->save($auth)) {
+                $user = $this->User->patchEntity($user, $data);
+                if ($this->User->save($user)) {
                     return $this->Util->ajaxReturn(true, '保存成功');
                 }
             }
@@ -216,13 +215,36 @@ class UserController extends AppController {
             'pageTitle' => '美约-身份审核',
         ]);
     }
-    
-    
+
     /**
      * 基本照片和视频
      */
-    public function regBasicPic(){
-        
+    public function regBasicPic() {
+        $this->handCheckLogin();
+        $user = $this->user;
+        if ($this->request->is('post')) {
+            $res = $this->Util->uploadFiles('user/idcard');
+            $images = [];
+            if ($res['status']) {
+                $infos = $res['info'];
+                foreach ($infos as $key => $info) {
+                    if($info['key']=='video'){
+                        $data['video'] = $info['path'];
+                    }
+                    if(preg_match('/image_.*/',$info['key'])){
+                        $images[] = $info['path'];
+                    }
+                }
+                $user->images = json_encode($images);
+                if ($this->User->save($auth)) {
+                    return $this->Util->ajaxReturn(true, '保存成功');
+                }
+            }
+            return $this->Util->ajaxReturn(false, '保存失败');
+        }
+        $this->set([
+            'pageTitle' => '美约-身份审核',
+        ]);
     }
 
     /**

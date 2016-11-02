@@ -4,18 +4,20 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * UserAuth Entity
+ * UserProfile Entity
  *
  * @property int $id
  * @property int $user_id
  * @property string $front
  * @property string $back
  * @property string $person
+ * @property string $images
+ * @property string $video
  * @property \Cake\I18n\Time $create_time
  *
  * @property \App\Model\Entity\User $user
  */
-class UserAuth extends Entity
+class UserProfile extends Entity
 {
 
     /**
