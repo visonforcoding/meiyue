@@ -32,25 +32,13 @@
             <div class="title">
                 <h3 class="color_black">如上图所示，上传9张认证照片</h3>
             </div>
-            <div class="fact_identify">
+            <div id="imageUpBox" class="fact_identify">
                 <dl class="Idcard">
                     <dt>
-                    <img id="up_img" src="/mobile/images/upimg.png" alt="" />
-                    <input id="up" type="file" />
+                    <img id="up_img_0" src="/mobile/images/upimg.png" alt="" />
+                    <input id="up_0" type="file" />
                     </dt>
-
                 </dl>
-                <!--<dl class="Idcard">
-                    <dt>
-                        <img src="/mobile/images/upimg.png" alt="" />
-                    </dt>
-                    
-                </dl>
-                <dl class="Idcard personimg">
-                    <dt>
-                        <img src="/mobile/images/upimg.png" alt="" />
-                    </dt>
-                </dl>-->
             </div>
         </div>
     </div>
@@ -66,19 +54,7 @@
                     <img src="/mobile/images/upimg.png" alt="" />
                     <input type="file" />
                     </dt>
-
                 </dl>
-                <!--<dl class="Idcard">
-                    <dt>
-                        <img src="/mobile/images/upimg.png" alt="" />
-                    </dt>
-                    
-                </dl>
-                <dl class="Idcard personimg">
-                    <dt>
-                        <img src="/mobile/images/upimg.png" alt="" />
-                    </dt>
-                </dl>-->
             </div>
         </div>
     </div>
@@ -87,7 +63,17 @@
 <a href="#this" class="identify_footer_potion">提交审核</a>
 <?= $this->start('script'); ?>
 <script>
-    $.util.singleImgPreView('up', 'up_img');
+    var flag = 0;
+    $.util.singleImgPreView('up_0', 'up_img_0',cloneUp);
+//    $.util.singleImgPreView('up_1', 'up_img_1',cloneUp);
+    function cloneUp(id){
+       var elm =  $('#'+id).parents('dl').clone(false);
+        flag++;
+        elm.find('input').attr('id','up_'+flag);
+        elm.find('img').attr('id','up_img_'+flag);
+        $('#imageUpBox').append(elm);
+        //$.util.singleImgPreView('up_'+flag,'up_img_'+flag,cloneUp(id)); 
+    }
 </script>
 <?= $this->end('script'); ?>
 

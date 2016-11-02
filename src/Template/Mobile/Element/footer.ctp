@@ -1,6 +1,6 @@
 <div class="footer">
     <ul class="clearfix">
-        <li>
+        <li <?php if($active=='find'): ?>class="active"<?php endif;?>>
             <span class="bar-find">
                 <a href="#this">
                     <i class="iconfont">&#xe613;</i>发现

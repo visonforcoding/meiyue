@@ -8,19 +8,19 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * UserAuth Model
+ * UserProfile Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
  *
- * @method \App\Model\Entity\UserAuth get($primaryKey, $options = [])
- * @method \App\Model\Entity\UserAuth newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\UserAuth[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\UserAuth|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\UserAuth patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\UserAuth[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\UserAuth findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\UserProfile get($primaryKey, $options = [])
+ * @method \App\Model\Entity\UserProfile newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\UserProfile[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\UserProfile|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\UserProfile patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\UserProfile[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\UserProfile findOrCreate($search, callable $callback = null)
  */
-class UserAuthTable extends Table {
+class UserProfileTable extends Table {
 
     /**
      * Initialize method
@@ -31,13 +31,20 @@ class UserAuthTable extends Table {
     public function initialize(array $config) {
         parent::initialize($config);
 
-        $this->table('lm_user_auth');
+        $this->table('lm_user_profile');
         $this->displayField('id');
         $this->primaryKey('id');
 
         $this->belongsTo('User', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
+        ]);
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'create_time' => 'new',
+                ]
+            ]
         ]);
     }
 
@@ -53,24 +60,20 @@ class UserAuthTable extends Table {
                 ->allowEmpty('id', 'create');
 
         $validator
-                ->requirePresence('front', 'create')
-                ->notEmpty('front');
+                ->allowEmpty('front');
 
         $validator
-                ->requirePresence('back', 'create')
-                ->notEmpty('back');
+                ->allowEmpty('back');
 
         $validator
-                ->requirePresence('person', 'create')
-                ->notEmpty('person');
+                ->allowEmpty('person');
 
-        $this->addBehavior('Timestamp', [
-            'events' => [
-                'Model.beforeSave' => [
-                    'create_time' => 'new',
-                ]
-            ]
-        ]);
+        $validator
+                ->allowEmpty('images');
+
+        $validator
+                ->allowEmpty('video');
+
         return $validator;
     }
 
