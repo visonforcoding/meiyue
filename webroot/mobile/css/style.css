@@ -164,7 +164,7 @@ background: #eab96a;bottom:0;font-size:18px;}
 .up_identify_box .example_identify,.up_identify_box .fact_identify{overflow: hidden;display: box;display:-webkit-box;-webkit-box-pack: start;width:100%;}
 .up_identify_box .example_identify dl,.up_identify_box .fact_identify dl{margin-right:.1rem;overflow: hidden;}
 .up_identify_box .example_identify dt,.up_identify_box .fact_identify dt{background: #fff;background: #fff;border:1px #efefef solid;border-radius: 5px;width:2.24rem;height:1.67rem;position: relative;}
-.up_identify_box .fact_identify dt{background: #f4f4f4;width:2.25rem;height:1.89rem;overflow: hidden;}
+.up_identify_box .fact_identify dt{background: #e4d9d9;width:2.25rem;height:1.89rem;overflow: hidden;}
 .up_identify_box .fact_identify dt img{max-width: 100%;height:auto;display: block;position:absolute;bottom:0;top:0;left:0;right:0;margin:auto;}
 .up_identify_box .fact_identify dt input{width:100%;height:1.89rem;opacity: 0;}
 .up_identify_box .example_identify dl:last-of-type,.up_identify_box .fact_identify dl:last-of-type{margin-right: 0;}
