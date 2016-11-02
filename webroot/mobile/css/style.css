@@ -161,13 +161,14 @@ background: #eab96a;bottom:0;font-size:18px;}
 .up_identify_box .title{color:#777;font-size:15px;height:1rem;line-height: 1rem;}
 .up_identify_box .title i{font-size:12px;}
 .up_identify_box .fact_identify{padding-bottom:.4rem;}
-.up_identify_box .example_identify,.up_identify_box .fact_identify{overflow: hidden;display: box;display:-webkit-box;-webkit-box-pack: start;width:100%;}
-.up_identify_box .example_identify dl,.up_identify_box .fact_identify dl{margin-right:.1rem;overflow: hidden;}
+.up_identify_box .example_identify,.up_identify_box .fact_identify{overflow: hidden;/*display: box;display:-webkit-box;-webkit-box-pack: start;*/width:100%;}
+.up_identify_box .example_identify dl,.up_identify_box .fact_identify dl{margin-right:.06rem;overflow: hidden;float:left;margin-bottom:.1rem;}
+.up_identify_box .example_identify dl:nth-of-type(3n),.up_identify_box .fact_identify dl:nth-of-type(3n){margin-right:0;}
 .up_identify_box .example_identify dt,.up_identify_box .fact_identify dt{background: #fff;background: #fff;border:1px #efefef solid;border-radius: 5px;width:2.24rem;height:1.67rem;position: relative;}
 .up_identify_box .fact_identify dt{background: #e4d9d9;width:2.25rem;height:1.89rem;overflow: hidden;}
 .up_identify_box .fact_identify dt img{max-width: 100%;height:auto;display: block;position:absolute;bottom:0;top:0;left:0;right:0;margin:auto;}
 .up_identify_box .fact_identify dt input{width:100%;height:1.89rem;opacity: 0;}
-.up_identify_box .example_identify dl:last-of-type,.up_identify_box .fact_identify dl:last-of-type{margin-right: 0;}
+/*.up_identify_box .example_identify dl:last-of-type,.up_identify_box .fact_identify dl:last-of-type{margin-right: 0;}*/
 .example_identify .Idcard img{width:1.9rem;height:auto;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;}
 .example_identify .Idcard .tips{width:.76rem;height:12px;line-height: 14px;color:#fff;background: #eab96a;position: absolute;font-size: 7px;text-align: center;
 border-radius:0 20px 20px 0;margin-top:3px;}
@@ -405,3 +406,5 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .home_page_footer li i{margin-right:.08rem; color:#666;}
 .togift{width:50px;height:50px;background: #eab96a;border-radius: 50%;position: fixed;bottom:60px;right:.3rem;box-shadow: 0 0 3px rgba(234,185,106,.3);z-index: 10;}
 .togift i{font-size:23px;color:#fff;}
+/*分享*/
+.share_items_list .title{color:#eab96a;}
