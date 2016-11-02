@@ -129,11 +129,6 @@
 <?= $this->element('footer', ['active' => 'find']) ?>
 <?php $this->start('script'); ?>
 <script type="text/javascript">
-//    var re = '{"images":[1,2,4,5]}'
-//     re = JSON.parse(re);
-//     $.each(re.images,function(i,n){
-//         alert(i+':'+n);
-//     });
     var scale = document.getElementById('scale');
     var line = document.getElementById('line');
     scale.min = 160;
