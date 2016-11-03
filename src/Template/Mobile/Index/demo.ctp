@@ -74,7 +74,7 @@
             res = JSON.parse(res);
             $.each(res.images, function (i, n) {
                 max--;
-                self.parents('dl.Idcard').before('<dl data-index="' + n + '" id="#card_'+n+'" class="Idcard new">' +
+                self.parents('dl.Idcard').before('<dl data-index="' + n + '" id="card_'+n+'" class="Idcard new">' +
                         '<dt>' +
                         '<img data-id="' + n + '" class="up" src="http://image.com/' + key + '/' + n + '" alt="" />' +
                         '</dt>' +
