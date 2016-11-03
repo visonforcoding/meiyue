@@ -89,7 +89,7 @@
         param['index'] = 2;
         LEMON.event.changePic(param,function(res){
             var res = JSON.parse(res);
-            $('#card_'+param['index']).find('img').attr('src','http://image.com'+key+'/'+res[key][0]);
+            $('#card_'+param['index']).find('img').attr('src','http://image.com/'+key+'/'+res[key][0]);
         })
     });
     function renderImgs(res) {
