@@ -66,6 +66,7 @@
         var self = $(this);
         var max = $('#imageUpBox').data('count');
         var param = {};
+        var key = 'images';
         param['key'] = 'images';
         param['max'] = max;
         LEMON.event.choosePic(param, function (res) {
@@ -74,7 +75,7 @@
                 max--;
                 self.parents('dl.Idcard').before('<dl id="card_'+n+'" class="Idcard">' +
                         '<dt>' +
-                        '<img data-id="' + n + '" class="up" src="http://image.com/' + n + '" alt="" />' +
+                        '<img data-id="' + n + '" class="up" src="http://image.com/'+key+'/' + n + '" alt="" />' +
                         '</dt>' +
                         '</dl>');
             })
@@ -83,10 +84,12 @@
     })
     $('#change').on('tap',function(){
         var param = {};
+        var key = 'images';
         param['key'] = 'images';
         param['index'] = 2;
         LEMON.event.changePic(param,function(res){
-            $('#card_'+param['index']).find('img').attr('src','http://image.com'+res);
+            var res = JSON.parse(res);
+            $('#card_'+param['index']).find('img').attr('src','http://image.com'+key+'/'+res[key][0]);
         })
     });
     function renderImgs(res) {
