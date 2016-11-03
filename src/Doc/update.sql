@@ -23,6 +23,7 @@ COMMENT='价格管理'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=6
+;
 
 
 CREATE TABLE `lm_dates` (

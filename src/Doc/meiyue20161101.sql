@@ -375,36 +375,4 @@ INSERT INTO `lm_user_skills_tags` VALUES ('2', '1', '2');
 INSERT INTO `lm_user_skills_tags` VALUES ('3', '1', '4');
 
 -- ----------------------------
--- Table structure for `phinxlog`
--- ----------------------------
-DROP TABLE IF EXISTS `phinxlog`;
-CREATE TABLE `phinxlog` (
-  `version` bigint(20) NOT NULL,
-  `migration_name` varchar(100) DEFAULT NULL,
-  `start_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `end_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of phinxlog
--- ----------------------------
-
--- ----------------------------
--- Table structure for `wpadmin_phinxlog`
--- ----------------------------
-DROP TABLE IF EXISTS `wpadmin_phinxlog`;
-CREATE TABLE `wpadmin_phinxlog` (
-  `version` bigint(20) NOT NULL,
-  `migration_name` varchar(100) DEFAULT NULL,
-  `start_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `end_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of wpadmin_phinxlog
--- ----------------------------
-INSERT INTO `wpadmin_phinxlog` VALUES ('20160321153421', 'Inital', '2016-10-17 09:24:51', '2016-10-17 09:24:52');
-INSERT INTO `wpadmin_phinxlog` VALUES ('20161017092321', 'Initial', '2016-10-17 09:23:22', '2016-10-17 09:23:22');
-INSERT INTO `wpadmin_phinxlog` VALUES ('20161017100910', 'Initial', '2016-10-17 10:09:10', '2016-10-17 10:09:10');
