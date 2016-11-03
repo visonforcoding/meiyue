@@ -62,9 +62,7 @@
 <!--<a href="#this" id='submit' class="identify_footer_potion">提交审核</a>-->
 <?= $this->start('script'); ?>
 <script>
-//    res = '{"images":[0, 1, 2]}';
-//    res = JSON.parse(res);
-//    renderImgs(res);
+
     $('#up').on('tap', function () {
         var self = $(this);
         var max = $('#imageUpBox').data('count');
@@ -76,31 +74,34 @@
             res = JSON.parse(res);
             $.each(res.images, function (i, n) {
                 max--;
-                self.parents('dl.Idcard').before('<dl data-index="'+n+'"  class="Idcard new">' +
+                self.parents('dl.Idcard').before('<dl data-index="' + n + '"  class="Idcard new">' +
                         '<dt>' +
-                        '<img data-id="' + n + '" class="up" src="http://image.com/'+key+'/' + n + '" alt="" />' +
+                        '<img data-id="' + n + '" class="up" src="http://image.com/' + key + '/' + n + '" alt="" />' +
                         '</dt>' +
                         '</dl>');
             })
-            $('#imageUpBox').data('count',max);
+            $('#imageUpBox').data('count', max);
         });
     })
-    $('.Idcard').on('tap',function(){
-        alert('我要调试');
-    });
-    $('.Idcard.new').on('tap',function(){
+//    $('.Idcard').on('tap',function(){
+//        alert('我要调试');
+//    });
+    $(document).on('tap','.Idcard.new', function () {
         alert('我要去更换图片');
-//        var param = {};
-//        var key = 'images';
-//        var index = $(this).data('index');
-//        param['key'] = 'images';
-//        param['index'] = index;
-//        console.log(param);
-//        LEMON.event.changePic(param,function(res){
-//            res = JSON.parse(res);
-//            $('#card_'+param['index']).find('img').attr('src','http://image.com/'+key+'/'+res[key][0]);
-//        })
+        var param = {};
+        var key = 'images';
+        var index = $(this).data('index');
+        param['key'] = 'images';
+        param['index'] = index;
+        console.log(param);
+        LEMON.event.changePic(param,function(res){
+            res = JSON.parse(res);
+            $('#card_'+param['index']).find('img').attr('src','http://image.com/'+key+'/'+res[key][0]);
+        })
     });
+//    res = '{"images":[0, 1, 2]}';
+//    res = JSON.parse(res);
+//    renderImgs(res);
     function renderImgs(res) {
         var max = 9;
         console.log(max);
@@ -108,11 +109,11 @@
         var key = 'images';
         $.each(res.images, function (i, n) {
             max--;
-            $('#up').parents('dl.Idcard').before('<dl data-index="'+n+'"  class="Idcard new">' +
-                        '<dt>' +
-                        '<img data-id="' + n + '" class="up" src="http://image.com/'+key+'/' + n + '" alt="" />' +
-                        '</dt>' +
-                        '</dl>');
+            $('#up').parents('dl.Idcard').before('<dl data-index="' + n + '"  class="Idcard new">' +
+                    '<dt>' +
+                    '<img data-id="' + n + '" class="up" src="http://image.com/' + key + '/' + n + '" alt="" />' +
+                    '</dt>' +
+                    '</dl>');
         })
     }
 </script>
