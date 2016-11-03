@@ -62,6 +62,9 @@
 <!--<a href="#this" id='submit' class="identify_footer_potion">提交审核</a>-->
 <?= $this->start('script'); ?>
 <script>
+//    res = '{"images":[0, 1, 2]}';
+//    res = JSON.parse(res);
+//    renderImgs(res);
     $('#up').on('tap', function () {
         var self = $(this);
         var max = $('#imageUpBox').data('count');
@@ -73,7 +76,7 @@
             res = JSON.parse(res);
             $.each(res.images, function (i, n) {
                 max--;
-                self.parents('dl.Idcard').before('<dl id="card_'+n+'" class="Idcard">' +
+                self.parents('dl.Idcard').before('<dl data-index="'+n+'" id="card_'+n+'" class="Idcard new">' +
                         '<dt>' +
                         '<img data-id="' + n + '" class="up" src="http://image.com/'+key+'/' + n + '" alt="" />' +
                         '</dt>' +
@@ -82,22 +85,24 @@
             $('#imageUpBox').data('count',max);
         });
     })
-    $('#change').on('tap',function(){
+    $('.Idcard.new').on('tap',function(){
         var param = {};
         var key = 'images';
+        var index = $(this).data('index');
         param['key'] = 'images';
-        param['index'] = 2;
+        param['index'] = index;
         LEMON.event.changePic(param,function(res){
-            var res = JSON.parse(res);
+            res = JSON.parse(res);
             $('#card_'+param['index']).find('img').attr('src','http://image.com/'+key+'/'+res[key][0]);
         })
     });
     function renderImgs(res) {
+        var max = 9;
         console.log(max);
-        res = JSON.parse(res);
+        //res = JSON.parse(res);
         $.each(res.images, function (i, n) {
             max--;
-            $('#up').parents('dl.Idcard').before('<dl class="Idcard">' +
+            $('#up').parents('dl.Idcard').before('<dl data-index="'+n+'" class="Idcard new">' +
                     '<dt>' +
                     '<img data-id="' + n + '" class="up" src="http://image.com/' + n + '" alt="" />' +
                     '</dt>' +
