@@ -76,7 +76,7 @@
             res = JSON.parse(res);
             $.each(res.images, function (i, n) {
                 max--;
-                self.parents('dl.Idcard').before('<dl data-index="'+n+'" id="card_'+n+'" class="Idcard new">' +
+                self.parents('dl.Idcard').before('<dl data-index="'+n+'"  class="Idcard new">' +
                         '<dt>' +
                         '<img data-id="' + n + '" class="up" src="http://image.com/'+key+'/' + n + '" alt="" />' +
                         '</dt>' +
@@ -85,30 +85,34 @@
             $('#imageUpBox').data('count',max);
         });
     })
+    $('.Idcard').on('tap',function(){
+        alert('我要调试');
+    }
     $('.Idcard.new').on('tap',function(){
         alert('我要去更换图片');
-        var param = {};
-        var key = 'images';
-        var index = $(this).data('index');
-        param['key'] = 'images';
-        param['index'] = index;
-        console.log(param);
-        LEMON.event.changePic(param,function(res){
-            res = JSON.parse(res);
-            $('#card_'+param['index']).find('img').attr('src','http://image.com/'+key+'/'+res[key][0]);
-        })
+//        var param = {};
+//        var key = 'images';
+//        var index = $(this).data('index');
+//        param['key'] = 'images';
+//        param['index'] = index;
+//        console.log(param);
+//        LEMON.event.changePic(param,function(res){
+//            res = JSON.parse(res);
+//            $('#card_'+param['index']).find('img').attr('src','http://image.com/'+key+'/'+res[key][0]);
+//        })
     });
     function renderImgs(res) {
         var max = 9;
         console.log(max);
         //res = JSON.parse(res);
+        var key = 'images';
         $.each(res.images, function (i, n) {
             max--;
-            $('#up').parents('dl.Idcard').before('<dl data-index="'+n+'" class="Idcard new">' +
-                    '<dt>' +
-                    '<img data-id="' + n + '" class="up" src="http://image.com/' + n + '" alt="" />' +
-                    '</dt>' +
-                    '</dl>');
+            $('#up').parents('dl.Idcard').before('<dl data-index="'+n+'"  class="Idcard new">' +
+                        '<dt>' +
+                        '<img data-id="' + n + '" class="up" src="http://image.com/'+key+'/' + n + '" alt="" />' +
+                        '</dt>' +
+                        '</dl>');
         })
     }
 </script>
