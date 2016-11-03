@@ -10,15 +10,9 @@ $.util = {
     //
     alert: function (str, t) {
         $('.alert').remove();
-        var div = document.createElement('div');
-        div.className = 'alert';
-        var span = document.createElement('span');
-        span.innerHTML = str;
-        document.body.appendChild(div);
-        div.appendChild(span);
-        //.css('width', $('#alertText').width()+30);
+        document.body.append('<div class="alert"><span>'+str+'</span></div>');
         setTimeout(function () {
-            div.style.display = 'none';
+            $('.alert').hide();
         }, t || 3000);
     },
     showPreloader: function (str) {
@@ -246,26 +240,7 @@ $.util = {
         }
         $.util.loadImg();
     },
-    // 搜索框滚动隐藏
-    searchHide: function () {
-        window.up = false;
-        $(window).on('scroll', function () {
-            // 滚动一定距离，搜索隐藏
-            if (document.body.scrollTop > ($('#imgList').height() + $('.inner').height())) {
-                $('.a_search_box').removeClass('movedown');
-                $('.a_search_box').removeClass('moveto');
-                $('.a_search_box').addClass('moveup');
-                window.up = true;
-            }
-            if (document.body.scrollTop < ($('#imgList').height() + $('.inner').height()) && window.up == true) {
-                if (!$.util.isWX) {
-                    $('.a_search_box').addClass('movedown');
-                } else if ($.util.isWX) {
-                    $('.a_search_box').addClass('moveto');
-                }
-            }
-        });
-    },
+
     wxUploadPic: function (func) {
         wx.chooseImage({
             count: 1, // 默认9
@@ -324,6 +299,21 @@ $.util = {
                 return func(e);
             }
         });
+    },
+    /**
+     * type == 'zp'的时候使用zepto的tap  否则用util的tap
+     */
+    onbody: function (func, type) {
+        var tapfun = function(e){
+            var target = e.srcElement || e.target, em = target, i = 1;
+            while (em && !em.id && i <= 3) {
+                em = em.parentNode;
+                i++;
+            }
+            if (!em || !em.id)  return;
+            return func(em, target);
+        };
+        type == 'zp' ? $('body').on('tap', tapfun) : $.util.tap($('body'), tapfun);
     },
     getPosition: function (e) {
         var touch = e.changedTouches ? e.changedTouches[0] : e;
