@@ -11,15 +11,15 @@ use Wpadmin\Controller\AppController;
 class SkillsController extends AppController
 {
 
-/**
-* Index method
-*
-* @return void
-*/
-public function index()
-{
-$this->set('skills', $this->Skills);
-}
+    /**
+     * Index method
+     *
+     * @return void
+     */
+    public function index()
+    {
+        $this->set('skills', $this->Skills->find('threaded')->toArray());
+    }
 
     /**
      * View method
@@ -49,13 +49,13 @@ $this->set('skills', $this->Skills);
         if ($this->request->is('post')) {
             $skill = $this->Skills->patchEntity($skill, $this->request->data);
             if ($this->Skills->save($skill)) {
-                 $this->Util->ajaxReturn(true,'添加成功');
+                $this->Util->ajaxReturn(true, '添加成功');
             } else {
-                 $errors = $skill->errors();
-                 $this->Util->ajaxReturn(['status'=>false, 'msg'=>getMessage($errors),'errors'=>$errors]);
+                $errors = $skill->errors();
+                $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
-                $this->set(compact('skill'));
+        $this->set(compact('skill'));
     }
 
     /**
@@ -67,20 +67,21 @@ $this->set('skills', $this->Skills);
      */
     public function edit($id = null)
     {
-         $skill = $this->Skills->get($id,[
+        $skill = $this->Skills->get($id, [
             'contain' => []
         ]);
-        if ($this->request->is(['post','put'])) {
+        if ($this->request->is(['post', 'put'])) {
             $skill = $this->Skills->patchEntity($skill, $this->request->data);
             if ($this->Skills->save($skill)) {
-                  $this->Util->ajaxReturn(true,'修改成功');
+                $this->Util->ajaxReturn(true, '修改成功');
             } else {
-                 $errors = $skill->errors();
-               $this->Util->ajaxReturn(false,getMessage($errors));
+                $errors = $skill->errors();
+                $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-                  $this->set(compact('skill'));
+        $this->set(compact('skill'));
     }
+
 
     /**
      * Delete method
@@ -92,57 +93,65 @@ $this->set('skills', $this->Skills);
     public function delete($id = null)
     {
         $this->request->allowMethod('post');
-         $id = $this->request->data('id');
-                if ($this->request->is('post')) {
-                $skill = $this->Skills->get($id);
-                 if ($this->Skills->delete($skill)) {
-                     $this->Util->ajaxReturn(true,'删除成功');
-                } else {
-                    $errors = $skill->errors();
-                    $this->Util->ajaxReturn(true,getMessage($errors));
-                }
-          }
+        $id = $this->request->data('id');
+        if ($this->request->is('post')) {
+            $skill = $this->Skills->get($id);
+            if ($this->Skills->delete($skill)) {
+                $this->Util->ajaxReturn(true, '删除成功');
+            } else {
+                $errors = $skill->errors();
+                $this->Util->ajaxReturn(true, getMessage($errors));
+            }
+        }
     }
 
-/**
-* get jqgrid data 
-*
-* @return json
-*/
-public function getDataList()
-{
+    /**
+     * get jqgrid data
+     *
+     * @return json
+     */
+    public function getDataList()
+    {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'Skills.'.$this->request->data('sidx');
+        $sort = 'Skills.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
+        $type = $this->request->data('type');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where[' name like'] = "%$keywords%";
         }
+
+        if('skill' == $type) {
+            $where['and'] = "depth = 1";
+        } elseif ('category' == $type) {
+            $where['and'] = "depth = 0";
+        }
+
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-                $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order,$where);
-                $this->autoRender = false;
+        $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order, $where);
+        $this->autoRender = false;
         $this->response->type('json');
         $this->response->body(json_encode($data));
         $this->response->send();
         $this->response->stop();
-}
+    }
 
-/**
-* export csv
-*
-* @return csv 
-*/
-public function exportExcel()
-{
+    /**
+     * export csv
+     *
+     * @return csv
+     */
+    public function exportExcel()
+    {
         $sort = $this->request->query('sidx');
         $order = $this->request->query('sort');
         $keywords = $this->request->query('keywords');
@@ -157,12 +166,12 @@ public function exportExcel()
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $Table =  $this->Skills;
+        $Table = $this->Skills;
         $column = ['技能名称'];
         $query = $Table->find();
         $query->hydrate(false);
         $query->select(['name']);
-         if (!empty($where)) {
+        if (!empty($where)) {
             $query->where($where);
         }
         if (!empty($sort) && !empty($order)) {
@@ -170,8 +179,8 @@ public function exportExcel()
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'Skills_'.date('Y-m-d').'.csv';
-        \Wpadmin\Utils\Export::exportCsv($column,$res,$filename);
+        $filename = 'Skills_' . date('Y-m-d') . '.csv';
+        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
 
-}
+    }
 }

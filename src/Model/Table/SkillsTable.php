@@ -33,6 +33,16 @@ class SkillsTable extends Table
         $this->table('lm_skills');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('ParentSkills', [
+            'className' => 'Skills',
+            'foreignKey' => 'parent_id'
+        ]);
+
+        $this->hasMany('ChildSkills', [
+            'className' => 'Skills',
+            'foreignKey' => 'parent_id'
+        ]);
     }
 
     /**

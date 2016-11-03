@@ -48,6 +48,7 @@ class UserSkillsTable extends Table
 
         $this->belongsToMany('Tags', [
             'joinTable' => 'lm_user_skills_tags',
+            'dependent' => false,
             'foreignKey' => 'tag_id'
         ]);
     }

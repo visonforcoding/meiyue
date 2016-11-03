@@ -18,7 +18,7 @@ class TagsController extends AppController
 */
 public function index()
 {
-    $this->set('tags', $this->Tags);
+    $this->set('tags', $this->Tags->find('threaded')->toArray());
 }
 
     /**
@@ -48,17 +48,15 @@ public function index()
         $tag = $this->Tags->newEntity();
         if ($this->request->is('post')) {
             $tag = $this->Tags->patchEntity($tag, $this->request->data);
+
             if ($this->Tags->save($tag)) {
-                 $this->Util->ajaxReturn(true,'添加成功');
+                $this->Util->ajaxReturn(true, '添加成功');
             } else {
-                 $errors = $tag->errors();
-                 $this->Util->ajaxReturn(['status'=>false, 'msg'=>getMessage($errors),'errors'=>$errors]);
+                $errors = $tag->errors();
+                $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
-        $parentTags = $this->Tags->ParentTags->find('list', ['limit' => 200]);
-
-        //添加根节点标签
-        $this->set(compact('tag', 'parentTags'));
+        $this->set(compact('tag'));
     }
 
     /**
