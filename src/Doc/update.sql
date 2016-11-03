@@ -107,3 +107,60 @@ ENGINE=InnoDB
 ;
 
 #2016-11-03
+
+#用户表  在导入之前 需要先drop 掉该表
+CREATE TABLE `lm_user` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '用户表',
+	`phone` VARCHAR(20) NOT NULL COMMENT '手机号',
+	`pwd` VARCHAR(120) NOT NULL COMMENT '密码',
+	`user_token` VARCHAR(20) NOT NULL COMMENT '用户标志',
+	`union_id` VARCHAR(100) NULL DEFAULT '' COMMENT 'wx_unionid',
+	`wx_openid` VARCHAR(100) NULL DEFAULT '' COMMENT '微信的openid',
+	`app_wx_openid` VARCHAR(100) NULL DEFAULT '' COMMENT 'app端的微信id',
+	`nick` VARCHAR(20) NULL DEFAULT '' COMMENT '昵称',
+	`truename` VARCHAR(20) NULL DEFAULT '' COMMENT '真实姓名',
+	`profession` VARCHAR(20) NULL DEFAULT '' COMMENT '职业',
+	`email` VARCHAR(50) NULL DEFAULT '' COMMENT '邮箱',
+	`gender` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '1,男，2女',
+	`birthday` DATE NULL DEFAULT NULL COMMENT '生日',
+	`zodiac` TINYINT(4) NULL DEFAULT '0' COMMENT '星座',
+	`weight` TINYINT(4) NULL DEFAULT '0' COMMENT '体重(KG)',
+	`height` TINYINT(4) NULL DEFAULT '0' COMMENT '身高(cm)',
+	`bwh` VARCHAR(30) NULL DEFAULT '' COMMENT '三围',
+	`cup` VARCHAR(20) NULL DEFAULT '' COMMENT '罩杯',
+	`hometown` VARCHAR(20) NULL DEFAULT '' COMMENT '家乡',
+	`city` VARCHAR(50) NULL DEFAULT '' COMMENT '常驻城市',
+	`avatar` VARCHAR(250) NULL DEFAULT '' COMMENT '头像',
+	`state` TINYINT(4) NULL DEFAULT '1' COMMENT '情感状态',
+	`career` VARCHAR(100) NULL DEFAULT '' COMMENT '工作经历',
+	`place` VARCHAR(100) NULL DEFAULT '' COMMENT '常出没地',
+	`food` VARCHAR(20) NULL DEFAULT '' COMMENT '最喜欢美食',
+	`music` VARCHAR(20) NULL DEFAULT '' COMMENT '音乐',
+	`movie` VARCHAR(20) NULL DEFAULT '' COMMENT '电影',
+	`sport` VARCHAR(20) NULL DEFAULT '' COMMENT '运动',
+	`sign` VARCHAR(120) NULL DEFAULT '' COMMENT '个性签名',
+	`wxid` VARCHAR(50) NULL DEFAULT '' COMMENT '微信号',
+	`money` INT(11) NOT NULL DEFAULT '0' COMMENT '账户余额(美币)',
+	`status` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '审核状态1待审核2审核不通过3审核通过',
+	`enabled` TINYINT(1) NOT NULL DEFAULT '1' COMMENT '账号状态 ：1.可用0禁用(控制登录)',
+	`idpath` VARCHAR(250) NULL DEFAULT '' COMMENT '身份证路径',
+	`idfront` VARCHAR(250) NULL DEFAULT '' COMMENT '身份证正面照',
+	`idback` VARCHAR(250) NULL DEFAULT '' COMMENT '身份证背面照',
+	`idperson` VARCHAR(250) NULL DEFAULT '' COMMENT '手持身份照',
+	`images` TEXT NULL COMMENT '基本照片',
+	`video` VARCHAR(250) NULL DEFAULT '' COMMENT '基本视频',
+	`is_del` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '是否假删除：1,是0否',
+	`device` VARCHAR(50) NOT NULL DEFAULT 'app' COMMENT '注册设备',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`update_time` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+	`login_time` DATETIME NULL DEFAULT NULL COMMENT '上次登陆时间',
+	`login_coord` VARCHAR(100) NULL DEFAULT '' COMMENT '上次登录坐标',
+	`guid` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '唯一码（用于扫码登录）',
+	PRIMARY KEY (`id`)
+)
+COMMENT='用户表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+ROW_FORMAT=COMPACT
+AUTO_INCREMENT=4
+;
