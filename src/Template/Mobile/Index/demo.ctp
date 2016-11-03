@@ -74,7 +74,7 @@
             res = JSON.parse(res);
             $.each(res.images, function (i, n) {
                 max--;
-                self.parents('dl.Idcard').before('<dl data-index="' + n + '"  class="Idcard new">' +
+                self.parents('dl.Idcard').before('<dl data-index="' + n + '" id="#card_'+n+'" class="Idcard new">' +
                         '<dt>' +
                         '<img data-id="' + n + '" class="up" src="http://image.com/' + key + '/' + n + '" alt="" />' +
                         '</dt>' +
@@ -95,7 +95,9 @@
         param['index'] = index;
         console.log(param);
         LEMON.event.changePic(param,function(res){
+            alert(res);
             res = JSON.parse(res);
+            alert(res);
             $('#card_'+param['index']).find('img').attr('src','http://image.com/'+key+'/'+res[key][0]);
         })
     });
