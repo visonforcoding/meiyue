@@ -58,13 +58,13 @@
     </div>
 </div>
 <div style="height:62px;"></div>
-<a href="#this" id='change' class="identify_footer_potion">更换第二张图片</a>
+<a href="#this" id='submit' class="identify_footer_potion">提交</a>
 <!--<a href="#this" id='submit' class="identify_footer_potion">提交审核</a>-->
 <?= $this->start('script'); ?>
 <script>
-//    res = '{"images":[0, 1, 2]}';
-//    res = JSON.parse(res);
-//    renderImgs(res);
+    res = '{"images":[0, 1, 2]}';
+    res = JSON.parse(res);
+    renderImgs(res);
     $('#up').on('tap', function () {
         var self = $(this);
         var max = $('#imageUpBox').data('count');
@@ -86,11 +86,13 @@
         });
     })
     $('.Idcard.new').on('tap',function(){
+        alert('我要去更换图片');
         var param = {};
         var key = 'images';
         var index = $(this).data('index');
         param['key'] = 'images';
         param['index'] = index;
+        console.log(param);
         LEMON.event.changePic(param,function(res){
             res = JSON.parse(res);
             $('#card_'+param['index']).find('img').attr('src','http://image.com/'+key+'/'+res[key][0]);
