@@ -75,5 +75,15 @@ class IndexController extends AppController {
         }
         debug($redis->sGetMembers('phones'));
     }
+    
+    public function getParam(){
+        $time = time();
+        $sign = strtoupper(md5($time.'64e3f4e947776b2d6a61ffbf8ad05df4'));
+        debug([
+            'time'=>$time,
+            'sign'=>$sign
+        ]);
+        exit();
+    }
 
 }

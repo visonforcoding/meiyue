@@ -15,10 +15,10 @@ use Wpadmin\Utils\UploadFile;
  */
 class ApiController extends AppController {
 
-    const TOKEN = 'dBkuJtWzHuPJFtTjZqHJugGP';
+    const TOKEN = '64e3f4e947776b2d6a61ffbf8ad05df4';
 
     protected $noAcl = [
-        'upload', 'wxtoken', 'ckregister','recordphone'
+        'upload', 'wxtoken', 'ckregister', 'recordphone', 'saveuserbasicpic'
     ];
 
     public function initialize() {
@@ -37,17 +37,17 @@ class ApiController extends AppController {
             if (!array_key_exists('code', $status)) {
                 $status['code'] = 200;
             }
-            $json = json_encode($status);
+            $json = json_encode($status, JSON_UNESCAPED_UNICODE);
         } else {
-            $json = json_encode(array('status' => $status, 'msg' => $msg, 'code' => $statusCode));
+            $json = json_encode(array('status' => $status, 'msg' => $msg, 'code' => $statusCode), JSON_UNESCAPED_UNICODE);
         }
         echo $json;
         exit();
     }
 
     protected function checkAcl() {
-        \Cake\Log\Log::debug('接口debug');
-        \Cake\Log\Log::debug($this->request->data());
+        \Cake\Log\Log::debug('接口debug', 'devlog');
+        \Cake\Log\Log::debug($this->request->data(), 'devlog');
         if (!$this->request->isPost()) {
             return $this->jsonResponse(false, '请求受限', 405);
         }
@@ -59,7 +59,7 @@ class ApiController extends AppController {
                 return $this->jsonResponse(false, '验证不通过', 401);
             }
         } else {
-            //return $this->baseCheckAcl();
+            return $this->baseCheckAcl();
         }
     }
 
@@ -251,12 +251,40 @@ class ApiController extends AppController {
             'phones' => $phones,
             'create_time' => date('Y-m-d H:i:s')
         ]);
-        if($PhonelogTable->save($log)){
+        if ($PhonelogTable->save($log)) {
             $this->jsonResponse(true, 'ok');
-        }else{
-            $this->jsonResponse(false,'fail');
+        } else {
+            $this->jsonResponse(false, 'fail');
         }
-        
+    }
+
+    /**
+     * 保存用户基本图片
+     */
+    public function saveUserBasicPic() {
+        $data = $this->request->data();
+        $user_id = $this->request->data('user_id');
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $user = $UserTable->get($user_id);
+        if (!$user_id||!$user) {
+            $this->jsonResponse(false, '身份认证失败');
+        }
+        $res = $this->Util->uploadFiles('user/images');
+        $images = [];
+        if ($res['status']) {
+            $infos = $res['info'];
+            foreach ($infos as $key => $info) {
+                $images[] = $info['path'];
+            }
+            $user->images = serialize($images);
+            if ($UserTable->save($user)) {
+                $this->jsonResponse(true, '保存成功');
+            } else {
+                $this->jsonResponse(true, $user->errors());
+            }
+        } else {
+            $this->jsonResponse($res);
+        }
     }
 
 }

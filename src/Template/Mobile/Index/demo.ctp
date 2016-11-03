@@ -83,17 +83,27 @@
             $('#imageUpBox').data('count', max);
         });
     })
+    $('#submit').on('tap',function(){
+        var param = {};
+        param['key'] = 'images';
+        param['api'] = 'saveUserBasicPic';
+        LEMON.event.uploadPics(param,function(res){
+            if(res.status){
+                alert('老子成功去上传了');
+            }else{
+                alert('老子失败去上传了');
+            }
+        })
+    })
 //    $('.Idcard').on('tap',function(){
 //        alert('我要调试');
 //    });
     $(document).on('tap','.Idcard.new', function () {
-        alert('我要去更换图片');
         var param = {};
         var key = 'images';
         var index = $(this).data('index');
         param['key'] = 'images';
         param['index'] = index;
-        console.log(param);
         LEMON.event.changePic(param,function(res){
             alert(res);
             res = JSON.parse(res);
