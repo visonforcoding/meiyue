@@ -245,13 +245,18 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                 case 'pay.ali':
                 case "event.uploadPic":
                 case "event.uploadPics":
-                case "event.choosePic":
                 case "event.changePic":
                 case "event.chooseVideo":
                 case "event.changeVideo":
                 case "event.uploadVideo":
                     registerAPI(null, api, function () {
                         JSApiInvoke(api, {param: arguments[0]}, apiCallback(arguments[1]));
+                    });
+                    break;
+                case "event.choosePic":
+                    registerAPI(null, api, function () {
+                        window.lemonChoosePic = arguments[1]; //这里使用固定回调  会一次选择 多次回调
+                        JSApiInvoke(api, {param: arguments[0]}, '');
                     });
                     break;
                 case "share.banner":
