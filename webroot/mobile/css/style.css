@@ -260,12 +260,13 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .fixed_r_submit{width:66px;height:66px;border-radius: 50%;position:fixed;right:.3rem;bottom:.6rem;text-align: center;color:#fff;font-size: 15px;box-shadow: 0 5px 8px rgba(254,202,195,.8);border:1px #fff solid;display:-webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: center;background: -webkit-linear-gradient(top,#fe9872,#fd6a56);background: linear-gradient(top,#fe9872,#fd6a56);}
 /*约会详情页*/
 .date_detail_place{padding-bottom:.4rem;border-bottom:1px #efefef solid;background: #fff;}
-.date_detail_place .title{line-height: 1.1rem;font-size:16px;}
+.date_detail_place .title{/*line-height: 1.1rem;*/font-size:16px;line-height: .72rem;}
 .date_detail_place .place{width:2rem;height:2rem;display: block;overflow: hidden;position:absolute;}
+.date_detail_place .place_pic{height:2rem;}
 .date_detail_place .place img{width:100%;height:auto;display: block;}
 .date_detail_place .place_info{padding-left:2.18rem;}
 .date_detail_place .place_info .userinfo{font-size:15px;line-height: 18px;margin-top:.08rem;margin-bottom:.77rem;}
-.date_detail_place .place_info .userinfo span{display: inline-block;width:.64rem;height:18px;background: #eab96a;color:#fff;text-align: center;font-size: 10px;border-radius: 3px;margin-left:13px;}
+.date_detail_place .place_info .userinfo span{display: inline-block;width:.64rem;height:18px;background: #eab96a;color:#fff;text-align: center;font-size: 10px;border-radius: 3px;margin-left:5px;}
 .date_detail_place .otherinfo address{margin-top:.2rem;}
 @media (min-width: 320px) and (max-width: 374px) {
 	.date_detail_place .place_info .userinfo{margin-bottom:.5rem;}
@@ -324,7 +325,7 @@ color:#444;position:relative;}
 .navbar ul{height:1.35rem;}
 .navbar a{color:#eab96a;display: block;width:1.2rem;height:28px;line-height: 28px;background: #221f1d;text-align: center;border-radius: 2px;}
 .navbar .current a{background:#eab96a; color:#fff;}
-.find_list_box{padding-top:.1rem;}
+.find_list_box{padding-top:.1rem;overflow: hidden;}
 .find_list_box dl{width:3.33rem;float:left;margin-right:.2rem;margin-top:.3rem;}
 .find_list_box dl:nth-of-type(2n){margin-right:0;}
 .find_list_box dt{width:3.33rem;height:3.33rem;overflow: hidden;position: relative;box-shadow: 0 0 3px rgba(0,0,0,.2);border-radius: 3px;}
@@ -508,7 +509,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .voted_list .avatar img{width:100%;height:auto;display: block;}
 .voted_list .voted_con{padding:.2rem .3rem;}
 .voted_list .voted_place_info{height:.86rem;margin-right:.2rem;}
-.voted_list .voted_place_info h3{padding-left:1.1rem;}
+.voted_list .voted_place_info h3{padding-left:1.1rem;padding-top:.1rem;}
 .voted_list .voted_place_info h3 span{display: block;}
 .voted_list .voted_name{color:#1a1713;font-weight: 800;}
 .voted_list .voted_number{font-size: 12px;margin-top:.12rem;}
@@ -599,3 +600,37 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 
 /*土豪榜*/
 .rich_header{background: url(../images/rich.jpg) no-repeat center center;background-size: contain;width:100%;height:1.2rem;}
+.rich_list_first{padding-top:.4rem;padding-bottom:.2rem;border-bottom:1px #efefef solid;}
+.rich_list_first .rich_first_left{padding-left:1.7rem;}
+.rich_list_first  .first_info{margin-bottom:.2rem;overflow: hidden;position:relative;width:3.35rem;height:2.95rem;}
+.rich_list_first  .first_info .first_info_bg{background: url(icon/first.png) no-repeat left top;background-size:contain;width:3.35rem;height:2.95rem;position: absolute;}
+.rich_list_first  .first_info .first_info_img{width:2.25rem;height:2.25rem;overflow: hidden;border-radius: 50%;position: absolute;top:.32rem;left:.6rem;}
+.rich_list_first  .first_info .first_info_img img{width:100%;height:auto;display: block;}
+.rich_list_first .coast{font-size:12px;text-indent: .88rem;display: block;}
+.rich_list_first .beauty{color:#826439;font-size:15px;margin-bottom:.2rem;}
+.rich_list_first .rich_first_right{text-align: right;width:1.8rem;padding-bottom:1.4rem;}
+/*与投票页面类似*/
+.rich_list .voted_list li{margin-top:0;border:none;border-bottom:1px #efefef solid;padding:0 .3rem;}
+.rich_list .voted_list li .voted_name{font-weight: bold;}
+.rich_list .voted_list .voted_con{padding:.2rem 0}
+.rich_list .voted_list .voted_place_info{margin-left:.2rem;}
+.rich_list .voted_place_info h3{padding-top:.08rem;}
+.rich_list .silver{background: url(icon/tou1.png) no-repeat center center;background-size:contain; width:.72rem;height:.62rem;}
+.rich_list .voted_place{}
+/*活动*/
+.activity_list{}
+.activity_list .date_list{position:fixed;top:0;margin:auto;max-width: 750px;width:100%;z-index:11;}
+.activity_list .date_list_header div{width:30%;font-size:18px;}
+.date_detail_place .place_info .userinfo .price{font-size: 12px;}
+.activity_tips{background: rgba(0,0,0,.8);padding:.15rem .3rem;margin:auto;max-width: 750px;width:100%;color:#EAB96A;text-align: center;font-size: 13px;}
+.commonfixed{position: fixed;top:45px;}
+.common{font-size:12px;}
+.common i{font-size: 14px;color:#ccc;margin-right:.1rem;}
+
+/*约单支付成功*/
+.date_pay_content{background: #1a1713;color:#EAB96A;padding:.5rem .3rem .3rem;border-top:1px #2a2014 solid;}
+.date_pay_content .date_pay_leftcon .pay_tips{font-size: 16px;font-weight: 600;line-height: 33px;}
+.date_pay_content .date_pay_leftcon p{margin-bottom:.2rem;}
+.date_pay_rightcon .button{height:35px;width:2rem;line-height: 33px;margin-bottom:.2rem;}
+.pay_detail_content{background: #fff;padding-top:.2rem;}
+.pady_detail_tips{color:#666;text-align: center;height:1rem;line-height:1rem;}

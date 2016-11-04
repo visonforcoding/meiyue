@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1478223760155'); /* IE9*/
-  src: url('iconfont.eot?t=1478223760155#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1478223760155') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1478223760155') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1478223760155#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1478255575506'); /* IE9*/
+  src: url('iconfont.eot?t=1478255575506#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1478255575506') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1478255575506') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1478255575506#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -167,4 +167,6 @@
 .icon-dianhua:before { content: "\e646"; }
 
 .icon-renjunxiaofei:before { content: "\e648"; }
+
+.icon-huodong1:before { content: "\e64a"; }
 

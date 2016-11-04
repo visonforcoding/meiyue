@@ -94,6 +94,8 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .button{width:1.2rem;height:28px;line-height: 28px;text-align: center;border-radius: 3px;display: block;}
 .btn_bg_active{background: #EAB96A;color:#fff;}/*//带背景*/
 .btn_dark{background: #fff;border:1px #eab96a solid;color:#eab96a;}/*带颜色边框*/
+.btn_dark_t{border:1px #eab96a solid;color:#eab96a;}/*带深颜色透明边框*/
+.btn_light_t{border:1px #443724 solid;color:#eab96a;}/*带浅颜色透明边框*/
 .btn_light{background: #fff;border:1px #ccc solid;color:#ccc;}/*灰色边框*/
 /*公共*/
 .small{font-size: 11px;color:#777;}
@@ -121,6 +123,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .color_error{color:#fd6a56;}
 .color_des{color:#777;}
 .color_ts{color:#4db6ff;}
+.color_active{color:#fd6a56;}
 .bg_items{background: #29bbb1;}
 .bgff{background: #fff;}
 /*字号*/
@@ -129,6 +132,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .relpotion{position:relative;}
 .aligncenter{text-align: center;}
 .alignright{text-align: right;}
+.undertext{text-decoration: underline;}
 /*字体图标*/
 @font-face {
     font-family: 'iconfont';
@@ -149,10 +153,10 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 }
 /*在线图标*/
 /*@font-face {
-  font-family: 'iconfont';  
-  src: url('//at.alicdn.com/t/font_36qc3vwg3in3ik9.eot');
-  src: url('//at.alicdn.com/t/font_36qc3vwg3in3ik9.eot') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_36qc3vwg3in3ik9.woff') format('woff'),
-  url('//at.alicdn.com/t/font_36qc3vwg3in3ik9.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_36qc3vwg3in3ik9.svg#iconfont') format('svg');
+  font-family: 'iconfont'; 
+  src: url('//at.alicdn.com/t/font_j2mekrn1joklc8fr.eot');
+  src: url('//at.alicdn.com/t/font_j2mekrn1joklc8fr.eot') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_j2mekrn1joklc8fr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_j2mekrn1joklc8fr.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_j2mekrn1joklc8fr.svg#iconfont') format('svg');
 }*/
