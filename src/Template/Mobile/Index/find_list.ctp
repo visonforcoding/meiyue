@@ -1,3 +1,6 @@
+<?php $this->start('static')?>
+<script src="/mobile/js/mustache.min.js"></script>
+<?php $this->end('static')?>
 <header class="fixedhead">
     <div class="header">
         <a href="/index/index"><span class="l_btn">切换地图</span></a>
