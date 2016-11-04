@@ -114,7 +114,10 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         "event.uploadPic", //选择并上传单个图片 返回服务器地址
         "event.uploadPics", //上传9个图片
         "event.choosePic",  //选择多个图片 返回base64 小图
-        "event.changePic"  //替换某张图片
+        "event.changePic",  //替换某张图片
+        "event.chooseVideo",  //选择视频
+        "event.changeVideo",  //替换视频
+        "event.uploadVideo",  //上传视频
         ];
 
     for (var i = 0, len = apiList.length; i < len && apiList[i]; i++) {
@@ -244,6 +247,9 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                 case "event.uploadPics":
                 case "event.choosePic":
                 case "event.changePic":
+                case "event.chooseVideo":
+                case "event.changeVideo":
+                case "event.uploadVideo":
                     registerAPI(null, api, function () {
                         JSApiInvoke(api, {param: arguments[0]}, apiCallback(arguments[1]));
                     });

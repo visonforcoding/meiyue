@@ -49,8 +49,7 @@
             <div class="fact_identify">
                 <dl class="Idcard">
                     <dt>
-                    <img src="/mobile/images/upimg.png" alt="" />
-                    <input type="file" />
+                    <img id="up_video" src="/mobile/images/upimg.png" alt="" />
                     </dt>
                 </dl>
             </div>
@@ -83,6 +82,14 @@
             $('#imageUpBox').data('count', max);
         });
     })
+    $('#up_video').on('tap',function(){
+        alert('去选择视频');
+        var self = $(this);
+        var param = {'key':'video'};
+        LEMON.event.chooseVideo(param,function(res){
+            self.attr('src','http://video.com/'+res['video'][0]);
+        });
+    });
     $('#submit').on('tap',function(){
         var param = {};
         param['key'] = 'images';
