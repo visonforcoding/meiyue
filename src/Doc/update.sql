@@ -184,3 +184,22 @@ ENGINE=InnoDB
 AUTO_INCREMENT=10
 ;
 
+##2016/11/4
+CREATE TABLE `lm_dates` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`skill_id` INT(11) NULL DEFAULT '0' COMMENT '对应管理员录入的技能列表',
+	`title` VARCHAR(50) NOT NULL DEFAULT '0' COMMENT '约会标题',
+	`start_time` DATETIME NOT NULL COMMENT '约会开始时间',
+	`site` VARCHAR(255) NOT NULL DEFAULT '0' COMMENT '约会地点',
+	`end_time` DATETIME NOT NULL COMMENT '约会结束时间',
+	`price` DOUBLE NOT NULL DEFAULT '0' COMMENT '约会价格',
+	`description` VARCHAR(255) NULL DEFAULT '0' COMMENT '约会说明',
+	`status` TINYINT(4) NOT NULL DEFAULT '2' COMMENT '状态：1#已有人赴约 2#未有人赴约 3#已下线',
+	`user_id` INT(11) NOT NULL COMMENT '对应美女id',
+	PRIMARY KEY (`id`)
+)
+COMMENT='约会表（美女发布的约会）'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=16
+;
