@@ -64,6 +64,8 @@ class ApiController extends AppController {
     }
 
     protected function baseCheckAcl() {
+         \Cake\Log\Log::debug('接口debug', 'devlog');
+        \Cake\Log\Log::debug($this->request->data(), 'devlog');
         $timestamp = $this->request->data('timestamp');
         $access_token = $this->request->data('access_token');
         if (!$timestamp || !$access_token) {
