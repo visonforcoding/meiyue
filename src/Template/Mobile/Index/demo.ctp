@@ -87,6 +87,7 @@
         var self = $(this);
         var param = {'key':'video'};
         LEMON.event.chooseVideo(param,function(res){
+            res = JSON.parse(res);
             self.attr('src','http://video.com/'+res['video'][0]);
         });
     });
