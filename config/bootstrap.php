@@ -194,9 +194,10 @@ Request::addDetector('lemon', ['env' => 'HTTP_USER_AGENT', 'pattern' => '/smartl
 Type::build('time')
     ->useImmutable();
 Type::build('date')
-    ->useImmutable();
+    ->useLocaleParser();
 Type::build('datetime')
     ->useLocaleParser();
+\Cake\I18n\Date::setToStringFormat('yyyy-MM-dd');
 \Cake\I18n\Time::setToStringFormat('yyyy-MM-dd HH:mm:ss');
 
 /*
