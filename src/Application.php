@@ -58,7 +58,7 @@ class Application extends BaseApplication {
             'server' => [
                 // Path or League\Flysystem adapter instance to read images from.
                 // http://glide.thephpleague.com/1.0/config/source-and-cache/
-                'source' => WWW_ROOT . 'upload/',
+                'source' => WWW_ROOT . 'upload',
                 // Path or League\Flysystem adapter instance to write cached images to.
                 'cache' => WWW_ROOT . 'cache',
                 // URL part to be omitted from source path. Defaults to "/images/"
