@@ -4,6 +4,7 @@
  * Encoding     :   UTF-8
  * Created on   :   2015-12-26 22:45:09 by allen <blog.rc5j.cn> , caowenpeng1990@126.com
  */
+use Cake\I18n\Date;
 
 /**
  * 生成指定长度的随机字符串
@@ -119,4 +120,22 @@ function buildLinkString($params) {
         $string = stripslashes($string);
     }
     return $string;
+}
+
+
+//仅适用于本项目对应数据库约会表start_time，end_time字段
+//用户将开始时间和结束时间合成页面需要的格式
+function getFormateDT($startTime, $endTime) {
+
+    $timestr = $startTime->year . "-" . $startTime->month . "-" . $startTime->day . " " . $startTime->hour . ":00~" . $endTime->hour . ":00";
+    return $timestr;
+
+}
+
+//根据出生日期计算年龄
+function getAge($birthday) {
+
+    $currentday = new Date();
+    return ($currentday->year - $birthday->year);
+
 }
