@@ -1,7 +1,7 @@
 /*reset css*/
 html, body, div,iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0;font: inherit; vertical-align: baseline; }
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {margin:0;padding:0;}
-html{height:100%;overflow-x: hidden;background: #f4f4f4;}
+html{height:100%;overflow-x: hidden;/*background: #f4f4f4;*/background: #ccc;}
 ol, ul{ list-style: none; }
 a{text-decoration: none; color:#222c38;outline:none;}
 a.disabled{border-color: #c8c9cb;color: #c8c9cb;cursor: not-allowed;}
@@ -9,7 +9,7 @@ img{border:0;}
 input{padding:0;}
 table { border-collapse: collapse; border-spacing: 0; }
 *{-webkit-tap-highlight-color: rgba(0, 0, 0, 0);tap-highlight-color: rgba(0, 0, 0, 0);   -webkit-box-sizing: border-box;box-sizing: border-box;}
-body {max-width: 750px;min-width:320px;min-height:100%;margin: 0 auto;background: #f6f6f6;-webkit-tap-highlight-color: rgba(0,0,0,0); font-size:14px;color:#303030;font-family: 'STHeiti','Microsoft YaHei',Helvetica,Arial,sans-serif;}
+body {max-width: 750px;min-width:320px;min-height:100%;margin: 0 auto;-webkit-tap-highlight-color: rgba(0,0,0,0); font-size:14px;color:#303030;font-family: 'STHeiti','Microsoft YaHei',Helvetica,Arial,sans-serif;}
 input, textarea, button,select{ outline: 0; resize: none;font-size:100%;font:inherit;color:inherit;background: rgba(255,255,255,0);}
 i{font-style: normal;}
 h1,h2,h3,h4,h5,h6{}
@@ -91,6 +91,10 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .btn_t_border{border:1px #EAB96A solid;color:#eab96a;height:46px;}
 .btn_cancel{border:1px #e8b967 solid;color:#e8b967;}
 .btn_cancely{background: #E8B967;color:#fff;}
+.button{width:1.2rem;height:28px;line-height: 28px;text-align: center;border-radius: 3px;display: block;}
+.btn_bg_active{background: #EAB96A;color:#fff;}/*//带背景*/
+.btn_dark{background: #fff;border:1px #eab96a solid;color:#eab96a;}/*带颜色边框*/
+.btn_light{background: #fff;border:1px #ccc solid;color:#ccc;}/*灰色边框*/
 /*公共*/
 .small{font-size: 11px;color:#777;}
 .smallarea{font-size:12px;color:#999;}
@@ -119,20 +123,21 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .color_ts{color:#4db6ff;}
 .bg_items{background: #29bbb1;}
 .bgff{background: #fff;}
-
+/*字号*/
+.lagernum{font-size: 18px;}
 /*定位*/
 .relpotion{position:relative;}
 .aligncenter{text-align: center;}
 .alignright{text-align: right;}
 /*字体图标*/
-/*@font-face {
+@font-face {
     font-family: 'iconfont';
     src: url('../font/iconfont.eot');
     src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'),
         url('../font/iconfont.woff') format('woff'),
         url('../font/iconfont.ttf') format('truetype'),
         url('../font/iconfont.svg#iconfont') format('svg');
-}*/
+}
 
 .iconfont{
     font-family:"iconfont" !important;
@@ -143,12 +148,11 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
     /*font-size:16px;*/
 }
 /*在线图标*/
-
-@font-face {
-  font-family: 'iconfont';  /* project id："166621" */
-  src: url('//at.alicdn.com/t/font_r2txbpjll06647vi.eot');
-  src: url('//at.alicdn.com/t/font_r2txbpjll06647vi.eot') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_r2txbpjll06647vi.woff') format('woff'),
-  url('//at.alicdn.com/t/font_r2txbpjll06647vi.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_r2txbpjll06647vi.svg#iconfont') format('svg');
-}
+/*@font-face {
+  font-family: 'iconfont';  
+  src: url('//at.alicdn.com/t/font_36qc3vwg3in3ik9.eot');
+  src: url('//at.alicdn.com/t/font_36qc3vwg3in3ik9.eot') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_36qc3vwg3in3ik9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_36qc3vwg3in3ik9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_36qc3vwg3in3ik9.svg#iconfont') format('svg');
+}*/
