@@ -6,6 +6,7 @@ use App\Controller\Mobile\AppController;
 use App\Utils\umeng\Umeng;
 use Cake\Utility\Security;
 use App\Utils\Word\TrieTree;
+use Cake\I18n\Time;
 
 /**
  * Index Controller
@@ -18,6 +19,7 @@ use App\Utils\Word\TrieTree;
  * @property \App\Controller\Component\BdmapComponent $Bdmap
  */
 class IndexController extends AppController {
+
     /**
      * Index method
      * 发现首页
@@ -30,58 +32,63 @@ class IndexController extends AppController {
         //var_dump($umengObj);
         //set_time_limit(0);
         $this->set([
-            'pageTitle'=>'发现-美约'
+            'pageTitle' => '发现-美约'
         ]);
     }
-    
-    
+
     /**
      * 发现列表
      */
-    public function findList(){
-        
-    }
-    
-    
-    public function demo(){
-       //GlideHelper::image('/upload/user/avatar/2016-10-28/58102ba461a5e.jpg');
-       //$this->loadComponent('Bdmap');
-       //$res = $this->Bdmap->placeSearchNearBy('咖啡', '22.64322,114.0322');
-       $this->set([
-           'pageTitle'=>'测试'
-       ]);
+    public function findList() {
+        $this->set([
+            'pageTitle' => '发现'
+        ]);
     }
 
-    public function test() {
-        $this->autoRender = false;
-        $cipher = 'NDk3MzYyNmI3YzI0YjMwZDU4MTViZTliOTVhNGRlYzZhOTk3ZmZlZmQwNmNlOTI1NjExODU1ZDAwNTJiMzEwZaD0xBasVESkYgXn99ZSMnBRdwanx0YcQse1r6cbGC1Z';
-        $this->loadComponent('Encrypt');
-        $str = $this->Encrypt->decrypt($cipher);
-        debug($str);
-    }
-
-    public function setphone() {
-        $this->autoRender = false;
-        $redis = new \Redis();
-        $redis_conf = \Cake\Core\Configure::read('redis_server');
-        $redis->connect($redis_conf['host'], $redis_conf['port']);
+    public function getUserList($page) {
+        $limit = 10;
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $users = $UserTable->find()->hydrate(false)->select(['phone'])->where(['is_del' => 0, 'enabled' => '1'])->toArray();
-        foreach ($users as $user) {
-            if (empty($user['phone'])) {
-                continue;
-            }
-            $redis->sAdd('phones', $user['phone']);
-        }
-        debug($redis->sGetMembers('phones'));
+        $query = $UserTable->find()->select(['id', 'nick', 'birthday', 'profession', 'login_time', 'avatar', 'login_coord']);
+        $query->hydrate(false);
+        $query->where(['enabled' => 1, 'status' => 3]);
+        $query->order(['login_time' => 'desc']);
+        $query->limit(intval($limit))
+                ->page(intval($page));
+        $query->formatResults(function($items) {
+            return $items->map(function($item) {
+                        //时间语义化转换
+                        $item['age'] = (Time::now()->year)-((new Time($item['birthday']))->year);
+                        $item['login_time'] = (new Time($item['login_time']))->timeAgoInWords(
+                                [ 'accuracy' => [
+                                        'year' => 'year',
+                                        'month' => 'month',
+                                        'week' => 'week',
+                                        'day' => 'day',
+                                        'hour' => 'hour'
+                                    ], 'end' => '+10 year']
+                        );
+                        return $item;
+                    });
+        });
+        $users = $query->toArray();
+        return $this->Util->ajaxReturn(['users' => $users]);
     }
-    
-    public function getParam(){
+
+    public function demo() {
+        //GlideHelper::image('/upload/user/avatar/2016-10-28/58102ba461a5e.jpg');
+        //$this->loadComponent('Bdmap');
+        //$res = $this->Bdmap->placeSearchNearBy('咖啡', '22.64322,114.0322');
+        $this->set([
+            'pageTitle' => '测试'
+        ]);
+    }
+
+    public function getParam() {
         $time = time();
-        $sign = strtoupper(md5($time.'64e3f4e947776b2d6a61ffbf8ad05df4'));
+        $sign = strtoupper(md5($time . '64e3f4e947776b2d6a61ffbf8ad05df4'));
         debug([
-            'time'=>$time,
-            'sign'=>$sign
+            'time' => $time,
+            'sign' => $sign
         ]);
         exit();
     }
