@@ -244,7 +244,7 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 
 /*约会管理*/
 .date_list_header{width:100%;background: #fff;height:45px;line-height:45px;color:#efefef;}
-.date_list_header .headertab{display: inline-block;margin:0 auto;text-align: center;padding:0 .2rem;}
+.date_list_header .headertab{display: inline-block;margin:0 auto;text-align: center;padding:0 .2rem;height:45px;}
 .date_list_header div.current .headertab{border-bottom:2px #eab96a solid;}
 .date_list_header div{color:#303030;font-size:15px;text-align: center;width:48%;display: inline-block;}
 .date_list_header div.current{color:#eab96a;}
@@ -592,3 +592,10 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .payment_choose_account li .paydes{padding-left:.64rem;}
 .payment_choose_account .choose{color:#a1a9b1;font-size: .4rem;}
 .payment_choose_account .choosed .color_y{color:#eab96a;}
+
+/*她的技能*/
+.find_ability .choose_mark__items li{width:20%;padding:.2rem 0 .1rem;}
+.find_ability .choose_marks span{margin:0 auto;}
+
+/*土豪榜*/
+.rich_header{background: url(../images/rich.jpg) no-repeat center center;background-size: contain;width:100%;height:1.2rem;}
