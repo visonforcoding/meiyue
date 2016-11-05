@@ -81,7 +81,7 @@
                     </div>
                 </a>
             </li>
-            <li>
+            <li id="my-dates-btn">
                 <a href="#this"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe60f;</i><span class="itemsname">我发起的约会</span></div>
                     <div class="home_list_r_info">
@@ -126,3 +126,15 @@
 <div style="height:1.4rem"></div>
 <!--底部-->
 <?= $this->element('footer', ['active' => 'me']) ?>
+
+<script>
+
+    $("#my-dates-btn").on('click', function(){
+
+        window.location.href = "/dates/index";
+
+    })
+
+
+
+</script>
