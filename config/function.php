@@ -123,6 +123,65 @@ function buildLinkString($params) {
 }
 
 
+
+/**
+ * 计算2点间距离
+ * @param type $coordinate1
+ * @param type $coordinate2
+ * @return 米  两点间距离
+ * @throws Exception
+ */
+function getDistance($coordinate1, $coordinate2) {
+    $coordinate1_arr = explode(',', $coordinate1);
+    $coordinate2_arr = explode(',', $coordinate2);
+    if (!is_array($coordinate1_arr) || empty($coordinate1_arr)) {
+        throw new Exception;
+    } else {
+        $lng1 = $coordinate1_arr[0];
+        $lat1 = $coordinate1_arr[1];
+    }
+    if (!is_array($coordinate2_arr) || empty($coordinate2_arr)) {
+        throw new Exception;
+    } else {
+        $lng2 = $coordinate2_arr[0];
+        $lat2 = $coordinate2_arr[1];
+    }
+//    $earthRadius = 6367000; //approximate radius of earth in meters
+    $earthRadius = 6371000; //百度地图用的参数
+    /*
+      Convert these degrees to radians
+      to work with the formula
+     */
+    $lat1 = ($lat1 * pi() ) / 180;
+    $lng1 = ($lng1 * pi() ) / 180;
+
+    $lat2 = ($lat2 * pi() ) / 180;
+    $lng2 = ($lng2 * pi() ) / 180;
+
+    /*
+      Using the
+      Haversine formula
+
+      http://en.wikipedia.org/wiki/Haversine_formula
+
+      calculate the distance
+     */
+    $calcLongitude = $lng2 - $lng1;
+    $calcLatitude = $lat2 - $lat1;
+    $stepOne = pow(sin($calcLatitude / 2), 2) + cos($lat1) * cos($lat2) * pow(sin($calcLongitude / 2), 2);
+    $stepTwo = 2 * asin(min(1, sqrt($stepOne)));
+    $calculatedDistance = $earthRadius * $stepTwo;
+
+    $dis =  round($calculatedDistance);
+    if($dis<1000){
+        return $dis.'m';
+    }else{
+        return round($dis/1000,1).'km';
+    }
+//     return round($calculatedDistance);
+}
+
+
 //仅适用于本项目对应数据库约会表start_time，end_time字段
 //用户将开始时间和结束时间合成页面需要的格式
 function getFormateDT($startTime, $endTime) {
@@ -139,3 +198,4 @@ function getAge($birthday) {
     return ($currentday->year - $birthday->year);
 
 }
+
