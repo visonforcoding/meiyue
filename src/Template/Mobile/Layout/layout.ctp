@@ -21,6 +21,7 @@
         <?= $this->fetch('content') ?>
         <script>
             wx.config(<?= json_encode($wxConfig) ?>);
+            $.util.setCookie('coord', '114.044555,22.6453', 30); //测试时候的初始坐标
             wx.ready(function () {
                 if (!$.util.getCookie('coord')) {
                     wx.getLocation({

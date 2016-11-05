@@ -47,17 +47,24 @@ class IndexController extends AppController {
 
     public function getUserList($page) {
         $limit = 10;
+        $userCoord = $this->coord;
+        $userCoord_arr = explode(',', $userCoord);
+        $userCoord_lng = $userCoord_arr[0];
+        $userCoord_lat = $userCoord_arr[1];
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $query = $UserTable->find()->select(['id', 'nick', 'birthday', 'profession', 'login_time', 'avatar', 'login_coord']);
+        $query = $UserTable->find()->select(['id', 'nick', 'birthday', 'profession', 'login_time', 'avatar', 'login_coord_lng','login_coord_lat']);
         $query->hydrate(false);
         $query->where(['enabled' => 1, 'status' => 3]);
-        $query->order(['login_time' => 'desc']);
+        $query->order(["getDistance($userCoord_lng,$userCoord_lat,login_coord_lng,login_coord_lat)"=>'asc',
+            'login_time' => 'desc']);
         $query->limit(intval($limit))
                 ->page(intval($page));
-        $query->formatResults(function($items) {
-            return $items->map(function($item) {
+        $query->formatResults(function($items)use($userCoord) {
+            return $items->map(function($item)use($userCoord) {
                         //时间语义化转换
-                        $item['age'] = (Time::now()->year)-((new Time($item['birthday']))->year);
+                        $item['distance'] = getDistance($userCoord, $item['login_coord_lng'],$item['login_coord_lat']);
+                        $item['avatar'] = createImg($item['avatar']) . '?w=184&h=184&fit=stretch';
+                        $item['age'] = (Time::now()->year) - ((new Time($item['birthday']))->year);
                         $item['login_time'] = (new Time($item['login_time']))->timeAgoInWords(
                                 [ 'accuracy' => [
                                         'year' => 'year',
@@ -72,6 +79,23 @@ class IndexController extends AppController {
         });
         $users = $query->toArray();
         return $this->Util->ajaxReturn(['users' => $users]);
+    }
+
+    public function homepage($id) {
+        $userCoord = $this->request->cookie('coord');
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $user = $UserTable->get($id);
+        $distance = getDistance($userCoord, $user->login_coord);
+        $user->avatar = createImg($user->avatar) . '?w=184&h=184&fit=stretch';
+        $age = (Time::now()->year) - ((new Time($user->birthday))->year);
+        $birthday = date('m-d',strtotime($user->birthday));
+        $this->set([
+            'pageTitle' => '发现-主页',
+            'user' => $user,
+            'age'=>$age,
+            'distance'=>$distance,
+            'birthday'=>$birthday
+        ]);
     }
 
     public function demo() {
@@ -90,6 +114,12 @@ class IndexController extends AppController {
             'time' => $time,
             'sign' => $sign
         ]);
+        exit();
+    }
+
+    public function test() {
+        //var_dump(round1214 / 1000);
+        //var_dump(round('42.99687156342637',1));
         exit();
     }
 

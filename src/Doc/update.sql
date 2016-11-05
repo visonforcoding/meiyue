@@ -184,6 +184,47 @@ ENGINE=InnoDB
 AUTO_INCREMENT=10
 ;
 
+
+ALTER TABLE `lm_user`
+	CHANGE COLUMN `login_coord` `login_coord_lng` FLOAT NULL DEFAULT '0' COMMENT '上次登录坐标' AFTER `login_time`,
+	ADD COLUMN `login_coord_lat` FLOAT NULL DEFAULT '0' AFTER `login_coord_lng`;
+
+
+#自定义函数 获取2点距离
+CREATE DEFINER=`root`@`localhost` FUNCTION `getDistance`(
+	`lng1` float(10,7) 
+    ,
+	`lat1` float(10,7)
+    ,
+	`lng2` float(10,7) 
+    ,
+	`lat2` float(10,7)
+
+)
+RETURNS double
+LANGUAGE SQL
+NOT DETERMINISTIC
+CONTAINS SQL
+SQL SECURITY DEFINER
+COMMENT ''
+BEGIN
+	declare d double;
+    declare radius int;
+    set radius = 6371000; #假设地球为正球形，直径为6371000米
+    set d = (2*ATAN2(SQRT(SIN((lat1-lat2)*PI()/180/2)   
+        *SIN((lat1-lat2)*PI()/180/2)+   
+        COS(lat2*PI()/180)*COS(lat1*PI()/180)   
+        *SIN((lng1-lng2)*PI()/180/2)   
+        *SIN((lng1-lng2)*PI()/180/2)),   
+        SQRT(1-SIN((lat1-lat2)*PI()/180/2)   
+        *SIN((lat1-lat2)*PI()/180/2)   
+        +COS(lat2*PI()/180)*COS(lat1*PI()/180)   
+        *SIN((lng1-lng2)*PI()/180/2)   
+        *SIN((lng1-lng2)*PI()/180/2))))*radius;
+    return d;
+END	
+
+
 ##2016/11/4
 CREATE TABLE `lm_dates` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -203,3 +244,4 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=16
 ;
+
