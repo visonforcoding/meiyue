@@ -131,21 +131,16 @@ function buildLinkString($params) {
  * @return 米  两点间距离
  * @throws Exception
  */
-function getDistance($coordinate1, $coordinate2) {
+function getDistance($coordinate1, $lng,$lat) {
     $coordinate1_arr = explode(',', $coordinate1);
-    $coordinate2_arr = explode(',', $coordinate2);
     if (!is_array($coordinate1_arr) || empty($coordinate1_arr)) {
         throw new Exception;
     } else {
         $lng1 = $coordinate1_arr[0];
         $lat1 = $coordinate1_arr[1];
     }
-    if (!is_array($coordinate2_arr) || empty($coordinate2_arr)) {
-        throw new Exception;
-    } else {
-        $lng2 = $coordinate2_arr[0];
-        $lat2 = $coordinate2_arr[1];
-    }
+        $lng2 = $lng;
+        $lat2 = $lat;
 //    $earthRadius = 6367000; //approximate radius of earth in meters
     $earthRadius = 6371000; //百度地图用的参数
     /*

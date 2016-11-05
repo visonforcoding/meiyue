@@ -36,6 +36,11 @@ class AppController extends Controller {
      */
     private $firewall;
     protected $user;
+    /**
+     * 登录坐标
+     * @var type 
+     */
+    protected $coord;
 
     /**
      * Initialization hook method.
@@ -85,6 +90,7 @@ class AppController extends Controller {
 
     public function beforeFilter(Event $event) {
         $this->user = $this->request->session()->read('User.mobile');
+        $this->coord = $this->request->cookie('coord')?$this->request->cookie('coord'):'114.044555,22.6453';
         if (!$this->user && $this->request->isLemon()) {
             //debug($this->request->cookie('login_token'));
         }

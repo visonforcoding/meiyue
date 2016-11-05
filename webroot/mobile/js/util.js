@@ -231,7 +231,8 @@ $.util = {
         var obj = this, st = document.body.scrollTop;
 
         //console.log([$(document).height(), $(window).height(),$(document).height()-$(window).height()-200,st].join('-'));
-        if (loadFunc && st >= (($(document).height() - $(window).height()) - 300)) {
+//        if (loadFunc && st >= (($(document).height() - $(window).height()) - 300)) {
+        if (loadFunc && st >= (($(document).height() - 150))) {
             loadFunc();
             $.util.initLoadImg(listId);
         }
