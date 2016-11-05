@@ -7,9 +7,9 @@
                 </a>
             </span>
         </li>
-        <li>
+        <li <?php if($active=='activity'): ?>class="active"<?php endif;?>>
             <span class="bar-activity">
-                <a href="#this">
+                <a href="/activity/index">
                     <i class="iconfont">&#xe614;</i>活动
                 </a>
             </span>
