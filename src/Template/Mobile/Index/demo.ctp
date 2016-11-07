@@ -71,8 +71,7 @@
             if(cid == 'up'){
                 if(dom.data('count') == 0) return;
                 LEMON.event.choosePic({'key':id, 'max':dom.data('max')}, function (res) {
-                    alert(res);
-                    res = JSON.parse(res);
+                    res = JSON.parse(res);  res = res[id];
                     var len = max-dom.data('max');
 
                     if(res.index){
@@ -94,8 +93,7 @@
             }
             if(cid >= 0 && cid < max){
                 LEMON.event.changePic({'key':id, 'max':cid},function(res){
-                    alert(res);
-                    res = JSON.parse(res);
+                    res = JSON.parse(res); res = res[id];
                     dom.find('dl').eq(res.index).find('img').attr('src', 'http://image.com/'+id+'/'+res.index);
                 })
 
