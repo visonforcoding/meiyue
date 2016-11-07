@@ -125,7 +125,9 @@ class UserController extends AppController {
         $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order, $where);
         $this->autoRender = false;
         $this->response->type('json');
-        echo json_encode($data);
+        $this->response->body(json_encode($data));
+        $this->response->send();
+        $this->response->stop();
     }
 
     /**

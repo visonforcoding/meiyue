@@ -57,8 +57,7 @@ class IndexController extends AppController {
             'profession', 'login_time', 'avatar', 'login_coord_lng', 'login_coord_lat']);
         $query->hydrate(false);
         $query->where(['enabled' => 1, 'status' => 3]);
-        $query->order(['distance' => 'asc',
-            'login_time' => 'desc']);
+        $query->order(['distance' => 'asc','login_time' => 'desc']);
         $query->limit(intval($limit))
                 ->page(intval($page));
         $query->formatResults(function($items)use($userCoord) {
