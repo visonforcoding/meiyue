@@ -34,6 +34,10 @@ class UserTable extends Table {
         $this->table('lm_user');
         $this->displayField('id');
         $this->primaryKey('id');
+        $this->hasMany('UserSkills', [
+            'className' => 'UserSkill',
+            'foreignKey' => 'user_id'
+        ]);
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

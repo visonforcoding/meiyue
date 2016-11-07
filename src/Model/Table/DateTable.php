@@ -32,11 +32,11 @@ class DateTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('lm_date');
+        $this->table('lm_dates');
         $this->displayField('title');
         $this->primaryKey('id');
 
-        $this->belongsTo('Skill', [
+        $this->belongsTo('Skills', [
             'foreignKey' => 'skill_id'
         ]);
 
@@ -44,11 +44,11 @@ class DateTable extends Table
             'foreignKey' => 'user_id'
         ]);
 
-        $this->belongsToMany('Tag', [
-            'joinTable' => 'lm_date_tag',
+        $this->belongsToMany('Tags', [
+            'joinTable' => 'lm_dates_tags',
             'dependent' => false,
             'foreignKey' => 'date_id',
-            'className' => "Tag",
+            'className' => "Tags",
         ]);
     }
 
@@ -92,7 +92,7 @@ class DateTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['skill_id'], 'Skill'));
+        $rules->add($rules->existsIn(['skill_id'], 'Skills'));
 
         return $rules;
     }
