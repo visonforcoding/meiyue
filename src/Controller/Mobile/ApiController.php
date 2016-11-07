@@ -265,6 +265,7 @@ class ApiController extends AppController {
      * 保存用户基本图片
      */
     public function saveUserBasicPic() {
+        set_time_limit(0);
         $data = $this->request->data();
         $user_id = $this->request->data('user_id');
         $UserTable = \Cake\ORM\TableRegistry::get('User');
@@ -294,6 +295,7 @@ class ApiController extends AppController {
      * 保存用户基本视频
      */
     public function saveUserBasicVideo() {
+        set_time_limit(0);
         $data = $this->request->data();
         $user_id = $this->request->data('user_id');
         $UserTable = \Cake\ORM\TableRegistry::get('User');
