@@ -1,14 +1,13 @@
 <?php
 namespace App\Controller\Mobile;
 
-use App\Controller\Mobile\AppController;
 /**
  * Dates Controller
  *
  * @property \App\Model\Table\DatesTable $Dates
  *
  */
-class DatesController extends AppController
+class DateController extends AppController
 {
 
     /**
@@ -21,7 +20,7 @@ class DatesController extends AppController
 
         if($this->request->is("post")) {
 
-            $datas = $this->Dates->find("all", ['contain' => ['Skills']]);
+            $datas = $this->Dates->find("all", ['contain' => ['Skill']]);
             if($user_id) {
 
                 $datas = $datas->where(['user_id' => $user_id]);
@@ -32,7 +31,14 @@ class DatesController extends AppController
                 }
 
             } else{
-                //
+
+                $datas = $datas->contain(['User' => function ($q) {
+                    return $q->select(['nick', 'birthday']);}]);
+                $userCoord_lng = $this->user->login_coord_lng;
+                $userCoord_lat = $this->user->login_coord_lat;
+                $datas->order(["getDistance($userCoord_lng, $userCoord_lat, user.login_coord_lng, user.login_coord_lat)"=>'asc',
+                    'created_time' => 'desc']);
+
             }
             return $this->Util->ajaxReturn(['datas' => $datas->toArray(), 'status' => true]);
 
@@ -51,7 +57,7 @@ class DatesController extends AppController
     public function view($id = null)
     {
         $date = $this->Dates->get($id, [
-            'contain' => ['Skills', 'User', 'Tags']
+            'contain' => ['Skill', 'User', 'Tag']
         ]);
         $this->set('date', $date);
 
@@ -87,7 +93,7 @@ class DatesController extends AppController
     {
 
         $date = $this->Dates->get($id, [
-            'contain' => ['Skills', 'User', 'Tags']
+            'contain' => ['Skill', 'User', 'Tag']
         ]);
         //修改信息
         if($this->request->is("POST")) {

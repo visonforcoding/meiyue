@@ -56,7 +56,7 @@ class DatesCell extends Cell
      */
     public function tagsView($container_id = '')
     {
-        $this->loadModel("Tags");
+        $this->loadModel("Tag");
         $list = $this->Tags->find("threaded")->toArray();
         $this->set(["list" => $list, "container_id" => $container_id]);
     }

@@ -19,7 +19,7 @@
                 <h3 class="otherinfo">
                     <time><i class="iconfont color_y">&#xe622;</i>
                         <?= getFormateDT($date['start_time'], $date['end_time']);?></time>
-                    <address><i class="iconfont color_y">&#xe623;</i>广东省深圳市福田区 福田口岸 </address>
+                    <address><i class="iconfont color_y">&#xe623;</i><?= $date['site']?></address>
                 </h3>
             </div>
         </div>
