@@ -71,7 +71,7 @@
             if(cid == 'up'){
                 if(dom.data('count') == 0) return;
                 LEMON.event.choosePic({'key':id, 'max':dom.data('max')}, function (res) {
-                    alert(0);
+                    alert(res);
                     res = JSON.parse(res);  res = res[id];
                     var len = max-dom.data('max');
 
