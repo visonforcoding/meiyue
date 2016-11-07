@@ -74,7 +74,7 @@
                     res = JSON.parse(res);  res = res[id];
                     var len = max-dom.data('max');
 
-                    if(res.index){
+                    if(res.hasOwnProperty('index')){
                         dom.find('img').eq(res.index).attr('src', 'http://image.com/'+id+'/'+res.index);
                         return;
                     }
