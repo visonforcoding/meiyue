@@ -67,7 +67,7 @@
             if(em.nodeName == 'IMG') em = em.parentNode;
             if(em.nodeName == 'DT') em = em.parentNode;
             if(em.nodeName != 'DL') return;
-            var cid = em.data('id');
+            var cid = $(em).data('id');
             if(cid == 'up'){
                 if(dom.data('count') == 0) return;
                 LEMON.event.choosePic({'key':id, 'max':dom.data('max')}, function (res) {
