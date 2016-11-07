@@ -18,7 +18,8 @@ class ApiController extends AppController {
     const TOKEN = '64e3f4e947776b2d6a61ffbf8ad05df4';
 
     protected $noAcl = [
-        'upload', 'wxtoken', 'ckregister', 'recordphone', 'saveuserbasicpic'
+        'upload', 'wxtoken', 'ckregister', 'recordphone', 'saveuserbasicpic',
+        'saveuserbasicvideo'
     ];
 
     public function initialize() {
@@ -64,7 +65,7 @@ class ApiController extends AppController {
     }
 
     protected function baseCheckAcl() {
-         \Cake\Log\Log::debug('接口debug', 'devlog');
+        \Cake\Log\Log::debug('接口debug', 'devlog');
         \Cake\Log\Log::debug($this->request->data(), 'devlog');
         $timestamp = $this->request->data('timestamp');
         $access_token = $this->request->data('access_token');
@@ -268,7 +269,7 @@ class ApiController extends AppController {
         $user_id = $this->request->data('user_id');
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $user = $UserTable->get($user_id);
-        if (!$user_id||!$user) {
+        if (!$user_id || !$user) {
             $this->jsonResponse(false, '身份认证失败');
         }
         $res = $this->Util->uploadFiles('user/images');
@@ -279,6 +280,39 @@ class ApiController extends AppController {
                 $images[] = $info['path'];
             }
             $user->images = serialize($images);
+            if ($UserTable->save($user)) {
+                $this->jsonResponse(true, '保存成功');
+            } else {
+                $this->jsonResponse(true, $user->errors());
+            }
+        } else {
+            $this->jsonResponse($res);
+        }
+    }
+
+    /**
+     * 保存用户基本视频
+     */
+    public function saveUserBasicVideo() {
+        $data = $this->request->data();
+        $user_id = $this->request->data('user_id');
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $user = $UserTable->get($user_id);
+        if (!$user_id || !$user) {
+            $this->jsonResponse(false, '身份认证失败');
+        }
+        $res = $this->Util->uploadFiles('user/video');
+        if ($res['status']) {
+            $infos = $res['info'];
+            foreach ($infos as $key => $info) {
+                if ($info['key'] == 'video') {
+                    $data['video'] = $info['path'];
+                }
+                if ($info['key'] == 'cover') {
+                    $data['video_cover'] = $info['path'];
+                }
+            }
+            $user = $UserTable->patchEntity($user, $data);
             if ($UserTable->save($user)) {
                 $this->jsonResponse(true, '保存成功');
             } else {
