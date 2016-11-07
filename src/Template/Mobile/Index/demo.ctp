@@ -48,6 +48,7 @@
                 <dl class="Idcard">
                     <dt>
                     <img id="up_video" src="/mobile/images/upimg.png" alt="" />
+                        <i class="iconfont playbtn">&#xe600;</i>
                     </dt>
                 </dl>
             </div>
@@ -62,16 +63,8 @@
 
 
     $.util.choosImgs('demoImg');
+    $.util.chooseVideo('up_video');
 
-    $('#up_video').on('tap',function(){
-        alert('去选择视频');
-        var self = $(this);
-        var param = {'key':'video2'};
-        LEMON.event.chooseVideo(param,function(res){
-            res = JSON.parse(res);
-            self.attr('src','http://video.com/'+res['key']);
-        });
-    });
     $('#submit').on('tap',function(){
         var param = {};
         param['key'] = 'images';
