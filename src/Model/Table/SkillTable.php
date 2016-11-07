@@ -7,7 +7,7 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Skills Model
+ * Skill Model
  *
  * @method \App\Model\Entity\Skill get($primaryKey, $options = [])
  * @method \App\Model\Entity\Skill newEntity($data = null, array $options = [])
@@ -35,12 +35,12 @@ class SkillTable extends Table
         $this->primaryKey('id');
 
         $this->belongsTo('ParentSkills', [
-            'className' => 'Skill',
+            'className' => 'Skills',
             'foreignKey' => 'parent_id'
         ]);
 
         $this->hasMany('ChildSkills', [
-            'className' => 'Skill',
+            'className' => 'Skills',
             'foreignKey' => 'parent_id'
         ]);
     }

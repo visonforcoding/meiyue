@@ -37,17 +37,20 @@ class UserSkillTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Skills', [
+        $this->belongsTo('Skill', [
             'foreignKey' => 'skill_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Costs', [
+        $this->belongsTo('Cost', [
             'foreignKey' => 'cost_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('User',[
+            'className'=>'User'
+        ]);
 
         $this->belongsToMany('Tags', [
-            'joinTable' => 'lm_user_skill_tag',
+            'joinTable' => 'lm_user_skills_tags',
             'dependent' => false,
             'foreignKey' => 'tag_id'
         ]);

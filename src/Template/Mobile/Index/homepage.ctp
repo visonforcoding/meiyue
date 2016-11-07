@@ -61,33 +61,17 @@
                 <h3>Ta的技能</h3>
             </div>
             <ul class="outerblock">
+                <?php foreach ($user->user_skills as $user_skill): ?>
                 <li class="itms_list">
                     <div class="items flex flex_justify">
-                        <span class="items_name"><i class="iconfont color_y">&#xe631;</i>约电影</span>
+                        <span class="items_name"><i class="iconfont color_y">&#xe631;</i><?=$user_skill->skill->name?></span>
                         <div>
-                            <span class="price"><i>500</i> 美币/小时</span>
+                            <span class="price"><i><?=$user_skill->cost->money?></i> 美币/小时</span>
                             <a href="#this" class="date">约他</a>
                         </div>
                     </div>
                 </li>
-                <li class="itms_list">
-                    <div class="items flex flex_justify">
-                        <span class="items_name"><i class="iconfont color_y">&#xe631;</i>约电影</span>
-                        <div>
-                            <span class="price"><i>500</i> 美币/小时</span>
-                            <a href="#this" class="date">约他</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="itms_list">
-                    <div class="items flex flex_justify">
-                        <span class="items_name"><i class="iconfont color_y">&#xe631;</i>约电影</span>
-                        <div>
-                            <span class="price"><i>500</i> 美币/小时</span>
-                            <a href="#this" class="date">约他</a>
-                        </div>
-                    </div>
-                </li>
+                <?php endforeach;?>
                 <li class="itms_list">
                     <div class="items flex flex_center more">
                         <i class="iconfont more color_y">&#xe62f;</i>
@@ -100,7 +84,7 @@
     <!--查看Ta的微信-->
     <ul class="home_seach_info outerblock mt40">
         <li>
-            <a class="items flex flex_justify" href="#this">
+            <a id="showWx" class="items flex flex_justify" >
                 <span class="seach_name">查看Ta的微信</span>
                 <span class="golook">点击查看<i class="iconfont r_icon">&#xe605;</i></span>
             </a>
@@ -135,37 +119,37 @@
         <li>
             <div class="items flex">
                 <span class="seach_name">TA的家乡</span>
-                <span class="golook">中南海</span>
+                <span class="golook"><?=$user->hometown?></span>
             </div>
         </li>
         <li>
             <div class="items flex">
                 <span class="seach_name">喜欢的美食</span>
-                <span class="golook">中南海</span>
+                <span class="golook"><?=$user->food?></span>
             </div>
         </li>
         <li>
             <div class="items flex">
                 <span class="seach_name">喜欢的音乐</span>
-                <span class="golook">中南海</span>
+                <span class="golook"><?=$user->music?></span>
             </div>
         </li>
         <li>
             <div class="items flex">
                 <span class="seach_name">喜欢的电影</span>
-                <span class="golook">中南海</span>
+                <span class="golook"><?=$user->movie?></span>
             </div>
         </li>
         <li>
             <div class="items flex">
                 <span class="seach_name sport_items">喜欢的运动/娱乐</span>
-                <span class="golook">中南海</span>
+                <span class="golook"><?=$user->sport?></span>
             </div>
         </li>
         <li>
             <div class="items flex">
                 <span class="seach_name">个人签名</span>
-                <span class="golook">中南海</span>
+                <span class="golook"><?=$user->sign?></span>
             </div>
         </li>
     </ul>
@@ -197,7 +181,7 @@
 <!--约Ta弹出层-->
 <div style="display:none" class="raper show flex flex_center">
     <!--约Ta弹出层-->
-    <div class="popup" style="display: none;">
+    <div class="popup" id="showPay" style="display: none;">
         <div class="popup_con">
             <h3 class="aligncenter">需支付100美币才能看到她的微信需支付100美币才能看到她的微信需支付100美币才能看到她的微信</h3>
         </div>
@@ -226,3 +210,13 @@
         <span class="closed"><i class="iconfont">&#xe644;</i></span>
     </div>
 </div>
+<?php $this->start('script'); ?>
+<script>
+    $('#showWx').on('tap',function(){
+        console.log($(this));
+        $('.show.flex').attr('style','display:block');
+        $('#showPay').attr('style','display:block');
+        //$('.wx_popup').attr('style','display:block');
+    });
+</script>
+<?php $this->end('script'); ?>

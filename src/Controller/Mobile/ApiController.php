@@ -297,7 +297,7 @@ class ApiController extends AppController {
         $data = $this->request->data();
         $user_id = $this->request->data('user_id');
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $user = $UserTable->get($user_id);
+        $user = $UserTable->findById($user_id)->first();
         if (!$user_id || !$user) {
             $this->jsonResponse(false, '身份认证失败');
         }
