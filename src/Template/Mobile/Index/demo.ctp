@@ -60,77 +60,16 @@
 <?= $this->start('script'); ?>
 <script>
 
-    function choosImgs(id){
-        var max=9, dom = $('#'+id); dom.data('max', max);
-        dom.on('tap', function(e){
-            var target = e.srcElement || e.target, em = target, i = 1;
-            if(em.nodeName == 'IMG') em = em.parentNode;
-            if(em.nodeName == 'DT') em = em.parentNode;
-            if(em.nodeName != 'DL') return;
-            var cid = $(em).data('id');
-            if(cid == 'up'){
-                if(dom.data('max') == 0) return;
-                LEMON.event.choosePic({'key':id, 'max':dom.data('max')}, function (res) {
-                    res = JSON.parse(res);
-                    var cdom = $('#'+res.key), len = max-cdom.data('max'), up=cdom.find("[data-id=up]");
 
-                    if(res.hasOwnProperty('index')){
-                        cdom.find('img').eq(res.index).attr('src', 'http://image.com/'+id+'/'+res.index);
-                        return;
-                    }
+    $.util.choosImgs('demoImg');
 
-                    if(res.count){
-                        for(var i=0; i<res.count; i++) {
-                            var src = $.util.isIOS ? 'src="http://image.com/'+id+'/'+(len+i)+'"' : '';
-                            up.before('<dl class="Idcard" data-id="'+(len+i)+'"><dt><img '+src+'/></dt></dl>');
-                        }
-                    }
-
-                    len = cdom.find('dl').length-1;
-                    cdom.data('max', max-len);
-                    if(len == max) up.hide();
-                })
-            }
-            else if(cid >= 0 && cid < max){
-                LEMON.event.changePic({'key':id, 'index':cid},function(res){
-                    res = JSON.parse(res);
-                    cdom.find('img').eq(res.index).attr('src', 'http://image.com/'+id+'/'+res.index);
-                })
-
-            }
-        });
-
-    }
-
-    choosImgs('demoImg');
-
-    $('#up').on('tap', function () {
-        var self = $(this);
-        var max = $('#imageUpBox').data('count');
-        var param = {};
-        var key = 'images';
-        param['key'] = 'images';
-        param['max'] = max;
-        LEMON.event.choosePic(param, function (res) {
-            res = JSON.parse(res);
-            $.each(res.images, function (i, n) {
-                max--;
-                self.parents('dl.Idcard').before('<dl data-index="' + n + '" id="card_'+n+'" class="Idcard new">' +
-                        '<dt>' +
-                        '<img data-id="' + n + '" class="up" src="http://image.com/' + key + '/' + n + '" alt="" />' +
-                        '</dt>' +
-                        '</dl>');
-            })
-            $('#imageUpBox').data('count', max);
-        });
-    })
     $('#up_video').on('tap',function(){
         alert('去选择视频');
         var self = $(this);
-        var param = {'key':'video'};
+        var param = {'key':'video2'};
         LEMON.event.chooseVideo(param,function(res){
             res = JSON.parse(res);
-            self.attr('src','http://video.com/'+res['video'][0]);
+            self.attr('src','http://video.com/'+res['key']);
         });
     });
     $('#submit').on('tap',function(){
@@ -145,39 +84,7 @@
             }
         })
     })
-//    $('.Idcard').on('tap',function(){
-//        alert('我要调试');
-//    });
-    $(document).on('tap','.Idcard.new', function () {
-        var param = {};
-        var key = 'images';
-        var index = $(this).data('index');
-        param['key'] = 'images';
-        param['index'] = index;
-        LEMON.event.changePic(param,function(res){
-            alert(res);
-            res = JSON.parse(res);
-            alert(res);
-            $('#card_'+param['index']).find('img').attr('src','http://image.com/'+key+'/'+res[key][0]);
-        })
-    });
-//    res = '{"images":[0, 1, 2]}';
-//    res = JSON.parse(res);
-//    renderImgs(res);
-    function renderImgs(res) {
-        var max = 9;
-        console.log(max);
-        //res = JSON.parse(res);
-        var key = 'images';
-        $.each(res.images, function (i, n) {
-            max--;
-            $('#up').parents('dl.Idcard').before('<dl data-index="' + n + '"  class="Idcard new">' +
-                    '<dt>' +
-                    '<img data-id="' + n + '" class="up" src="http://image.com/' + key + '/' + n + '" alt="" />' +
-                    '</dt>' +
-                    '</dl>');
-        })
-    }
+
 </script>
 <?= $this->end('script'); ?>
 
