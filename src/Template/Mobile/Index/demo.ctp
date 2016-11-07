@@ -31,7 +31,7 @@
             <div class="title">
                 <h3 class="color_black">如上图所示，上传9张认证照片</h3>
             </div>
-            <div  class="fact_identify">
+            <div  class="fact_identify" id="demoImg">
                 <dl class="Idcard" data-id="up">
                     <dt><img src="/mobile/images/upimg.png" /></dt>
                 </dl>
@@ -103,6 +103,8 @@
         });
 
     }
+
+    choosImgs('demoImg');
 
     $('#up').on('tap', function () {
         var self = $(this);
