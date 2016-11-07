@@ -91,8 +91,9 @@
                     if(len == max) dom.find("[data-id=up]").hide();
                 })
             }
-            if(cid >= 0 && cid < max){
-                LEMON.event.changePic({'key':id, 'max':cid},function(res){
+            else if(cid >= 0 && cid < max){
+                alert(cid);
+                LEMON.event.changePic({'key':id, 'index':cid},function(res){
                     res = JSON.parse(res); res = res[id];
                     dom.find('img').eq(res.index).attr('src', 'http://image.com/'+id+'/'+res.index);
                 })
