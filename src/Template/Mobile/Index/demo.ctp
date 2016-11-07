@@ -88,7 +88,7 @@
 
                     len = dom.find('dl').length-1;
                     dom.data('max', max-len);
-                    if(len == max) dom.last('dl').hide();
+                    if(len == max) dom.find("[data-id=up]").hide();
                 })
             }
             if(cid >= 0 && cid < max){
