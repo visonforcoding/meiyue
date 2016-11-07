@@ -19,7 +19,7 @@
                 </dl>
                 <dl class="Idcard">
                     <dt>
-                    <img src="/mobile/images/avatar.jpg" alt="" />
+                        <img src="/mobile/images/avatar.jpg" alt="" />
                     </dt>
                 </dl>
             </div>
@@ -31,11 +31,9 @@
             <div class="title">
                 <h3 class="color_black">如上图所示，上传9张认证照片</h3>
             </div>
-            <div data-count='9' id="imageUpBox" class="fact_identify">
-                <dl class="Idcard">
-                    <dt>
-                    <img id='up' src="/mobile/images/upimg.png" alt="" />
-                    </dt>
+            <div  class="fact_identify">
+                <dl class="Idcard" data-id="up">
+                    <dt><img src="/mobile/images/upimg.png" /></dt>
                 </dl>
             </div>
         </div>
@@ -61,6 +59,50 @@
 <!--<a href="#this" id='submit' class="identify_footer_potion">提交审核</a>-->
 <?= $this->start('script'); ?>
 <script>
+
+    function choosImgs(id){
+        var max=9, dom = $('#'+id); dom.data('max', max);
+        dom.on('tap', function(){
+            var target = e.srcElement || e.target, em = target, i = 1;
+            if(em.nodeName == 'IMG') em = em.parentNode;
+            if(em.nodeName == 'DT') em = em.parentNode;
+            if(em.nodeName != 'DL') return;
+            var cid = em.data('id');
+            if(cid == 'up'){
+                if(dom.data('count') == 0) return;
+                LEMON.event.choosePic({'key':id, 'max':dom.data('max')}, function (res) {
+                    alert(res);
+                    res = JSON.parse(res);
+                    var len = max-dom.data('max');
+
+                    if(res.index){
+                        dom.find('dl').eq(res.index).find('img').attr('src', 'http://image.com/'+id+'/'+res.index);
+                        return;
+                    }
+
+                    if(res.count){
+                        for(var i=0; i<res.count; i++) {
+                            var src = $.util.isIOS ? 'src="http://image.com/'+id+'/'+(len+i)+'"' : '';
+                            $(em).before('<dl class="Idcard" data-id="'+(len+i)+'"><dt><img '+src+'/></dt></dl>');
+                        }
+                    }
+
+                    len = dom.find('dl').length-1;
+                    dom.data('max', max-len);
+                    if(len == max) dom.last('dl').hide();
+                })
+            }
+            if(cid >= 0 && cid < max){
+                LEMON.event.changePic({'key':id, 'max':cid},function(res){
+                    alert(res);
+                    res = JSON.parse(res);
+                    dom.find('dl').eq(res.index).find('img').attr('src', 'http://image.com/'+id+'/'+res.index);
+                })
+
+            }
+        });
+
+    }
 
     $('#up').on('tap', function () {
         var self = $(this);
