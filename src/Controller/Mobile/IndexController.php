@@ -52,17 +52,20 @@ class IndexController extends AppController {
         $userCoord_lng = $userCoord_arr[0];
         $userCoord_lat = $userCoord_arr[1];
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $query = $UserTable->find()->select(['id', 'nick', 'birthday', 'profession', 'login_time', 'avatar', 'login_coord_lng','login_coord_lat']);
+        $query = $UserTable->find()->select(['id', 'nick', 'distance' => 
+            "getDistance($userCoord_lng,$userCoord_lat,login_coord_lng,login_coord_lat)", 'birthday', 
+            'profession', 'login_time', 'avatar', 'login_coord_lng', 'login_coord_lat']);
         $query->hydrate(false);
         $query->where(['enabled' => 1, 'status' => 3]);
-        $query->order(["getDistance($userCoord_lng,$userCoord_lat,login_coord_lng,login_coord_lat)"=>'asc',
+        $query->order(['distance' => 'asc',
             'login_time' => 'desc']);
         $query->limit(intval($limit))
                 ->page(intval($page));
         $query->formatResults(function($items)use($userCoord) {
             return $items->map(function($item)use($userCoord) {
                         //时间语义化转换
-                        $item['distance'] = getDistance($userCoord, $item['login_coord_lng'],$item['login_coord_lat']);
+                        $item['distance'] = $item['distance'] >= 1000 ? 
+                                round($item['distance'] / 1000, 1) . 'km' : round($item['distance']) . 'm';
                         $item['avatar'] = createImg($item['avatar']) . '?w=184&h=184&fit=stretch';
                         $item['age'] = (Time::now()->year) - ((new Time($item['birthday']))->year);
                         $item['login_time'] = (new Time($item['login_time']))->timeAgoInWords(
@@ -83,18 +86,20 @@ class IndexController extends AppController {
 
     public function homepage($id) {
         $userCoord = $this->request->cookie('coord');
-        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $UserTable = \Cake\ORM\TableRegistry::get('User',[
+            //'contain'=>[]
+        ]);
         $user = $UserTable->get($id);
-        $distance = getDistance($userCoord, $user->login_coord);
+        $distance = getDistance($userCoord, $user->login_coord_lng, $user->login_coord_lat);
         $user->avatar = createImg($user->avatar) . '?w=184&h=184&fit=stretch';
         $age = (Time::now()->year) - ((new Time($user->birthday))->year);
-        $birthday = date('m-d',strtotime($user->birthday));
+        $birthday = date('m-d', strtotime($user->birthday));
         $this->set([
             'pageTitle' => '发现-主页',
             'user' => $user,
-            'age'=>$age,
-            'distance'=>$distance,
-            'birthday'=>$birthday
+            'age' => $age,
+            'distance' => $distance,
+            'birthday' => $birthday
         ]);
     }
 

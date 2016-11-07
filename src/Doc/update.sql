@@ -191,6 +191,7 @@ ALTER TABLE `lm_user`
 
 
 #自定义函数 获取2点距离
+DELIMITER //
 CREATE DEFINER=`root`@`localhost` FUNCTION `getDistance`(
 	`lng1` float(10,7) 
     ,
@@ -200,13 +201,8 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `getDistance`(
     ,
 	`lat2` float(10,7)
 
-)
-RETURNS double
-LANGUAGE SQL
-NOT DETERMINISTIC
-CONTAINS SQL
-SQL SECURITY DEFINER
-COMMENT ''
+) RETURNS double
+    COMMENT '计算2坐标点距离'
 BEGIN
 	declare d double;
     declare radius int;
@@ -222,7 +218,8 @@ BEGIN
         *SIN((lng1-lng2)*PI()/180/2)   
         *SIN((lng1-lng2)*PI()/180/2))))*radius;
     return d;
-END	
+END//
+DELIMITER ;
 
 
 ##2016/11/4
