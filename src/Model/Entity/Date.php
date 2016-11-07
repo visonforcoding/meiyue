@@ -16,6 +16,7 @@ use Cake\ORM\Entity;
  * @property string $description
  * @property int $status
  * @property int $user_id
+ * @property \Cake\I18n\Time $created_time
  *
  * @property \App\Model\Entity\Skill $skill
  * @property \App\Model\Entity\User $user
