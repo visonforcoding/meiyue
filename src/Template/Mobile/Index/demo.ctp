@@ -69,9 +69,8 @@
             if(em.nodeName != 'DL') return;
             var cid = $(em).data('id');
             if(cid == 'up'){
-                if(dom.data('count') == 0) return;
+                if(dom.data('max') == 0) return;
                 LEMON.event.choosePic({'key':id, 'max':dom.data('max')}, function (res) {
-                    alert(res);
                     res = JSON.parse(res);  res = res[id];
                     var len = max-dom.data('max');
 
