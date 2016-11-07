@@ -62,7 +62,7 @@
 
     function choosImgs(id){
         var max=9, dom = $('#'+id); dom.data('max', max);
-        dom.on('tap', function(){
+        dom.on('tap', function(e){
             var target = e.srcElement || e.target, em = target, i = 1;
             if(em.nodeName == 'IMG') em = em.parentNode;
             if(em.nodeName == 'DT') em = em.parentNode;
