@@ -81,11 +81,11 @@
 </div>
 <!--弹出层-->
 <!--技能选择框-->
-<?= $this->cell('Dates::skillsView', ['skills-select-view']); ?>
+<?= $this->cell('Date::skillsView', ['skills-select-view']); ?>
 <!--价格选择框-->
-<?= $this->cell('Dates::costsView', ['costs-select-view']); ?>
+<?= $this->cell('Date::costsView', ['costs-select-view']); ?>
 <!--标签选择框-->
-<?= $this->cell('Dates::tagsView', ['tags-select-view']); ?>
+<?= $this->cell('Date::tagsView', ['tags-select-view']); ?>
 <!--日期时间选择器-->
 <?= $this->element('checkdate'); ?>
 
@@ -174,7 +174,7 @@
         }
         $.ajax({
             type: 'POST',
-            url: '/dates/add',
+            url: '/date/add',
             data: $("form").serialize(),
             dataType: 'json',
             success: function (res) {
@@ -182,7 +182,7 @@
                     if (res.status) {
 
                         alert(res.msg);
-                        window.location.href = '/dates/index';
+                        window.location.href = '/date/index';
 
                     } else {
 

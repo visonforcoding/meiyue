@@ -2,9 +2,9 @@
 namespace App\Controller\Mobile;
 
 /**
- * Dates Controller
+ * Date Controller
  *
- * @property \App\Model\Table\DatesTable $Dates
+ * @property \App\Model\Table\DateTable $Date
  *
  */
 class DateController extends AppController
@@ -20,7 +20,7 @@ class DateController extends AppController
 
         if($this->request->is("post")) {
 
-            $datas = $this->Dates->find("all", ['contain' => ['Skill']]);
+            $datas = $this->Date->find("all", ['contain' => ['Skill']]);
             if($user_id) {
 
                 $datas = $datas->where(['user_id' => $user_id]);
@@ -56,7 +56,7 @@ class DateController extends AppController
      */
     public function view($id = null)
     {
-        $date = $this->Dates->get($id, [
+        $date = $this->Date->get($id, [
             'contain' => ['Skill', 'User', 'Tag']
         ]);
         $this->set('date', $date);
@@ -70,10 +70,10 @@ class DateController extends AppController
      */
     public function add()
     {
-        $date = $this->Dates->newEntity();
+        $date = $this->Date->newEntity();
         if ($this->request->is('post')) {
-            $date = $this->Dates->patchEntity($date, $this->request->data);
-            if ($this->Dates->save($date)) {
+            $date = $this->Date->patchEntity($date, $this->request->data);
+            if ($this->Date->save($date)) {
                 return $this->Util->ajaxReturn(true, "发布成功");
             } else {
                 return $this->Util->ajaxReturn(false, "发布失败");
@@ -92,14 +92,14 @@ class DateController extends AppController
     public function edit($id = null, $status = null)
     {
 
-        $date = $this->Dates->get($id, [
+        $date = $this->Date->get($id, [
             'contain' => ['Skill', 'User', 'Tag']
         ]);
         //修改信息
         if($this->request->is("POST")) {
 
-            $date = $this->Dates->patchEntity($date, $this->request->data);
-            if ($this->Dates->save($date)) {
+            $date = $this->Date->patchEntity($date, $this->request->data);
+            if ($this->Date->save($date)) {
                 return $this->Util->ajaxReturn(true, "发布成功");
             } else {
                 return $this->Util->ajaxReturn(false, "发布失败");
@@ -109,9 +109,9 @@ class DateController extends AppController
         //修改状态
         if($this->request->is("PUT")) {
 
-            $date = $this->Dates->get($id);
+            $date = $this->Date->get($id);
             $date->set("status", $status);
-            if ($this->Dates->save($date)) {
+            if ($this->Date->save($date)) {
                 return $this->Util->ajaxReturn(true, "成功下架");
             } else {
                 return $this->Util->ajaxReturn(false, "下架失败");
@@ -130,8 +130,8 @@ class DateController extends AppController
      */
     public function delete($id = null)
     {
-        $date = $this->Dates->get($id);
-        if ($this->Dates->delete($date)) {
+        $date = $this->Date->get($id);
+        if ($this->Date->delete($date)) {
             return $this->Util->ajaxReturn(true, "删除成功");
         } else {
             return $this->Util->ajaxReturn(false, "删除失败");
