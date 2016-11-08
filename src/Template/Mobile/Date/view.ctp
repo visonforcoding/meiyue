@@ -57,7 +57,7 @@
 
     $(".edit-btn").on('click', function(){
 
-        window.location.href = '/dates/edit/' + $(this).attr('date-id');
+        window.location.href = '/date/edit/' + $(this).attr('date-id');
 
     })
 
@@ -69,14 +69,14 @@
 
             $.ajax({
                 type: 'PUT',
-                url: '/dates/edit/' + <?= $date['id'] ?> + "/3",
+                url: '/date/edit/' + <?= $date['id'] ?> + "/3",
                 dataType: 'json',
                 success: function (res) {
                     if (typeof res === 'object') {
                         if (res.status) {
 
                             alert(res.msg);
-                            window.location.href = '/dates/index';
+                            window.location.href = '/date/index';
 
                         } else {
 

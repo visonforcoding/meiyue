@@ -26,11 +26,5 @@
 
 <script>
 
-    $('#cost-view-cancel-btn').on('click', function(){
-
-        $('#<?= $container_id; ?>').hide();
-
-    });
-
 </script>
 
