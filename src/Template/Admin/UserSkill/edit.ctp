@@ -7,13 +7,13 @@
         <div class="form-group">
             <label class="col-md-2 control-label">名称</label>
             <div class="col-md-8">
-                <?php echo $this->Form->input('skill_id', ['label' => false, 'default' => $userSkill->name, 'options' => $skills, 'class' => 'form-control']); ?>
+                <?php echo $this->Form->input('skill_id', ['label' => false, 'default' => $userSkill->name, 'options' => $skill, 'class' => 'form-control']); ?>
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">费用/小时</label>
             <div class="col-md-8">
-                <?php echo $this->Form->input('cost_id', ['label' => false, 'options' => $costs, 'class' => 'form-control']); ?>
+                <?php echo $this->Form->input('cost_id', ['label' => false, 'options' => $cost, 'class' => 'form-control']); ?>
             </div>
         </div>
         <div class="form-group">
@@ -28,7 +28,7 @@
             <label class="col-md-2 control-label">启用状态</label>
             <div class="col-md-8">
                 <?php
-                echo $this->Form->input('is_used', ['label' => false, 'type' => 'select', "default" => $userSkill->isUsed, "options" => [1 => "是", 0 => "否"], 'class' => 'form-control']);
+                echo $this->Form->input('is_used', ['label' => false, 'type' => 'select', "default" => $userSkill->isUsed, "options" => getUsedStatus(-2), 'class' => 'form-control']);
                 ?>
             </div>
         </div>
@@ -36,7 +36,7 @@
             <label class="col-md-2 control-label">审核状态</label>
             <div class="col-md-8">
                 <?php
-                echo $this->Form->input('is_checked', ['label' => false, 'type' => 'select', "default" => \App\Model\Table\UserSkillsTable::getCheckStatus($userSkill->isChecked), "options" => \App\Model\Table\UserSkillsTable::getCheckStatus(), 'class' => 'form-control']);
+                echo $this->Form->input('is_checked', ['label' => false, 'type' => 'select', "default" => getCheckStatus($userSkill->isChecked), "options" => getCheckStatus(-2), 'class' => 'form-control']);
                 ?>
             </div>
         </div>
@@ -54,13 +54,8 @@
     <script type="text/javascript"
             src="/wpadmin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
     <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
-    <!--<script src="/wpadmin/lib/ueditor/ueditor.config.js" ></script>
-    <script src="/wpadmin/lib/ueditor/ueditor.all.js" ></script>
-    <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>    -->
     <script>
         $(function () {
-            // initJqupload('cover', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
-            //var ue = UE.getEditor('content'); //初始化富文本编辑器
             $('form').validationEngine({
                 focusFirstField: true,
                 autoPositionUpdate: true,
@@ -77,7 +72,7 @@
                         if (typeof res === 'object') {
                             if (res.status) {
                                 layer.alert(res.msg, function () {
-                                    window.location.href = '/userskills/index';
+                                    window.location.href = '/userskill/index';
                                 });
                             } else {
                                 layer.alert(res.msg, {icon: 5});

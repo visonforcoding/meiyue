@@ -45,7 +45,7 @@
                     type: 'post',
                     data: {id: id},
                     dataType: 'json',
-                    url: '/skills/delete',
+                    url: '/skill/delete',
                     success: function (res) {
                         layer.msg(res.msg);
                         if (res.status) {
@@ -67,7 +67,7 @@
                     type: 'post',
                     data: {parent_id: id, name: pass},
                     dataType: 'json',
-                    url: '/skills/add',
+                    url: '/skill/add',
                     success: function (res) {
                         layer.msg(res.msg);
                         if (res.status) {
@@ -91,7 +91,7 @@
                     type: 'post',
                     data: {name: pass},
                     dataType: 'json',
-                    url: '/skills/edit/' + id,
+                    url: '/skill/edit/' + id,
                     success: function (res) {
                         layer.msg(res.msg);
                         if (res.status) {

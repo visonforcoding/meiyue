@@ -79,7 +79,7 @@ class UserSkillController extends AppController
     public function edit($id = null)
     {
         $userSkill = $this->UserSkill->get($id, [
-            'contain' => []
+            'contain' => ['Skill', 'Cost']
         ]);
         if ($this->request->is(['post', 'put'])) {
             $userSkill = $this->UserSkill->patchEntity($userSkill, $this->request->data);
@@ -90,9 +90,9 @@ class UserSkillController extends AppController
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-        $skills = $this->UserSkill->Skills->find('list', ['limit' => 200]);
-        $costs = $this->UserSkill->Cost->find('list', ['limit' => 200]);
-        $this->set(compact('userSkill', 'skills', 'costs'));
+        $skill = $this->UserSkill->Skill->find('list', ['limit' => 200]);
+        $cost = $this->UserSkill->Cost->find('list', ['limit' => 200]);
+        $this->set(compact('userSkill', 'skill', 'cost'));
     }
 
     /**
@@ -129,13 +129,9 @@ class UserSkillController extends AppController
         $rows = $this->request->data('rows');
         $sort = 'UserSkill.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
-        $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
-        if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
-        }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
@@ -146,7 +142,7 @@ class UserSkillController extends AppController
         if (!empty($where)) {
             $query->where($where);
         }
-        $query->contain(['Skills', 'Cost', 'Tag']);
+        $query->contain(['Skill', 'Cost', 'Tags']);
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
@@ -172,43 +168,4 @@ class UserSkillController extends AppController
         $this->response->stop();
     }
 
-    /**
-     * export csv
-     *
-     * @return csv
-     */
-    public function exportExcel()
-    {
-        $sort = $this->request->query('sidx');
-        $order = $this->request->query('sort');
-        $keywords = $this->request->query('keywords');
-        $begin_time = $this->request->query('begin_time');
-        $end_time = $this->request->query('end_time');
-        $where = [];
-        if (!empty($keywords)) {
-            $where['username like'] = "%$keywords%";
-        }
-        if (!empty($begin_time) && !empty($end_time)) {
-            $begin_time = date('Y-m-d', strtotime($begin_time));
-            $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
-        }
-        $Table = $this->UserSkill;
-        $column = ['对应管理员录入的名称', '对应管理员录入的费用', '约会说明', '是否上架'];
-        $query = $Table->find();
-        $query->hydrate(false);
-        $query->select(['skill_id', 'cost_id', 'desc', 'is_used']);
-        if (!empty($where)) {
-            $query->where($where);
-        }
-        if (!empty($sort) && !empty($order)) {
-            $query->order([$sort => $order]);
-        }
-        $res = $query->toArray();
-
-        $this->autoRender = false;
-        $filename = 'UserSkill_' . date('Y-m-d') . '.csv';
-        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
-
-    }
 }
