@@ -487,6 +487,7 @@ $.util = {
                 alert(res);
                 res = JSON.parse(res);
                 dom.find('img').eq(0).attr('src','http://video.com/'+(new Date()).getTime()+'/'+res.key);
+                dom.data('choosed', 'ok');
             });
         })
     }
