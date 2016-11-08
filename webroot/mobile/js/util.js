@@ -452,13 +452,13 @@ $.util = {
                     var cdom = $('#'+res.key), len = max-cdom.data('max'), up=cdom.find("[data-id=up]");
 
                     if(res.hasOwnProperty('index')){
-                        cdom.find('img').eq(res.index).attr('src', 'http://image.com/'+id+'/'+res.index);
+                        cdom.find('img').eq(res.index).attr('src', 'http://image.com/'+res.key+'/'+res.index);
                         return;
                     }
 
                     if(res.count){
                         for(var i=0; i<res.count; i++) {
-                            var src = $.util.isIOS ? 'src="http://image.com/'+id+'/'+(len+i)+'"' : '';
+                            var src = $.util.isIOS ? 'src="http://image.com/'+res.key+'/'+(len+i)+'"' : '';
                             up.before('<dl class="Idcard" data-id="'+(len+i)+'"><dt><img '+src+'/></dt></dl>');
                         }
                     }
@@ -471,7 +471,8 @@ $.util = {
             else if(cid >= 0 && cid < max){
                 LEMON.event.changePic({'key':id, 'index':cid},function(res){
                     res = JSON.parse(res);
-                    cdom.find('img').eq(res.index).attr('src', 'http://image.com/'+(new Date()).getTime()+'/'+id+'/'+res.index);
+                    var cdom = $('#'+res.key);
+                    cdom.find('img').eq(res.index).attr('src', 'http://image.com/'+(new Date()).getTime()+'/'+res.key+'/'+res.index);
                 })
 
             }
