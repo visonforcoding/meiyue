@@ -164,36 +164,9 @@
         <ul>
             <li>
                 <div class="home_items">
-                    <div class="home_list_l_info"><span class="itemsname">常出没地点：</span></div>
-                    <div class="home_list_r_info">
-                        <input name="place" type="text" placeholder="请输入地点" />
-                        <i class="iconfont r_icon"></i>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="home_items">
                     <div class="home_list_l_info"><span class="itemsname">喜欢的美食：</span></div>
                     <div class="home_list_r_info">
                         <input name="food" type="text" placeholder="请输入美食" />
-                        <i class="iconfont r_icon"></i>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="home_items">
-                    <div class="home_list_l_info"><span class="itemsname">喜欢的音乐：</span></div>
-                    <div class="home_list_r_info">
-                        <input name="music" type="text" placeholder="请输入音乐" />
-                        <i class="iconfont r_icon"></i>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="home_items">
-                    <div class="home_list_l_info"><span class="itemsname">喜欢的电影：</span></div>
-                    <div class="home_list_r_info">
-                        <input name="movie" type="text" placeholder="请输入电影" />
                         <i class="iconfont r_icon"></i>
                     </div>
                 </div>
@@ -207,15 +180,6 @@
                     </div>
                 </div>
             </li>
-            <li>
-                <div class="home_items">
-                    <div class="home_list_l_info"><span class="itemsname">个性签名：</span></div>
-                    <div class="home_list_r_info">
-                        <input name="sign" type="text" placeholder="个性签名" />
-                        <i class="iconfont r_icon">&#xe605;</i>
-                    </div>
-                </div>
-            </li>
         </ul>
     </div>
     <!--个性标签-->
@@ -225,7 +189,7 @@
         </div>
         <ul>
             <li>
-                <div class="home_items">
+                <div id="tag-container" class="home_items">
                     <div class="home_list_l_info"><span class="itemsname">个性标签：</span></div>
                     <div class="home_list_r_info">
                         <input name="tag" type="text" placeholder="请选择" readonly="readonly" />
@@ -235,27 +199,6 @@
             </li>
         </ul>
     </div>
-    <!--微信号-->
-    <div class="home_fill_basic_info">
-        <div class="items_title">
-            <h3>我的微信 <i>（用户查看你的微信你会有收入哦）</i></h3>
-        </div>
-        <ul>
-            <li>
-                <div class="home_items">
-                    <div class="home_list_l_info"><span class="itemsname">微信号：</span></div>
-                    <div class="home_list_r_info">
-                        <input name="wxid" type="text" placeholder="请输入" />
-                        <i class="iconfont r_icon">&#xe605;</i>
-                    </div>
-                </div>
-            </li>
-        </ul>
-        <div class="isDisplay">
-            <span class="displaybtn choose"><i class="iconfont">&#xe64c;</i>展示赚钱</span>
-            <span class="notdispaybtn"><i class="iconfont">&#xe64c;</i>展示赚钱</span>
-        </div>
-    </div>
     </form>
 </div>
 <div style="height:62px;"></div>
@@ -264,6 +207,8 @@
 <?php else:?>
 <a href="/index/index" class="identify_footer_potion">跳过</a>
 <?php endif;?>
+<!--标签选择框-->
+<?= $this->cell('Date::tagsView', ['tags-select-view']); ?>
 <?= $this->start('script'); ?>
 <script>
     $('#submit').on('tap', function () {
@@ -278,6 +223,31 @@
                 }
             }
         });
+    });
+    function chooseTagsCallBack(tagsData) {
+
+        var html = "";
+        for(key in tagsData) {
+
+            var item = tagsData[key];
+            html += "<a class='mark'>" + item['name'] +
+                "<input type='text' name='tags[_ids][]' value='" + item['id']
+                + "' tag-name='"+ item['name'] +"' hidden></a>";
+
+        }
+        $("#tag-container").html(html);
+
+    }
+
+    $("#tag-container").on('click', function () {
+        var currentDatas = [];
+        $("#tag-container").find("input").each(function () {
+
+            currentDatas.push($(this).val());
+
+        })
+        new TagsPicker().show(chooseTagsCallBack, currentDatas);
+
     });
 </script>
 <?= $this->end('script'); ?>

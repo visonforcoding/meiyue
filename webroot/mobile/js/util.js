@@ -10,10 +10,34 @@ $.util = {
     //
     alert: function (str, t) {
         $('.alert').remove();
-        document.body.append('<div class="alert"><span>'+str+'</span></div>');
+        $('body').append('<div class="alert"><span>' + str + '</span></div>');
         setTimeout(function () {
             $('.alert').hide();
         }, t || 3000);
+    },
+    confirm: function (title, msg, hR, hL, btnL, btnR) {
+        $('.alert7-confirm').remove();
+        var bL = btnL ? btnL : '取消';
+        var bR = btnR ? btnR : '确定';
+        var confirm = '<div id="Alert7" class="alert7-confirm">' +
+                '<div class="alert7-container"><div class="alert7-title">' + title +
+                '</div><div class="alert7-message">' + msg +
+                '</div><div class="alert7-actions"><button class="alert7-action-item btnL">' + bL +
+                '</button><button class="alert7-action-item btnR">' + bR
+                + '</button></div></div></div>';
+        $('body').append(confirm);
+        $(document).on('tap', '.alert7-action-item.btnL', function () {
+            if (hL && hL instanceof Function) {
+                hL();
+            }
+            $('.alert7-confirm').remove();
+        })
+        $(document).on('tap', '.alert7-action-item.btnR', function () {
+            if (hR && hR instanceof Function) {
+                hR();
+            }
+            $('.alert7-confirm').remove();
+        })
     },
     showPreloader: function (str) {
         $.util.hidePreloader();
@@ -22,7 +46,7 @@ $.util = {
         var divInner = document.createElement('div');
         divInner.className = 'loader-inner';
         div.appendChild(divInner);
-        if(str){
+        if (str) {
             div.style.cssText = 'width:120px;height:70px';
             var divTitle = document.createElement('div');
             divTitle.className = 'loader-title';
@@ -34,7 +58,7 @@ $.util = {
         divText.className = 'loader-text';
         divInner.appendChild(divText);
     },
-    hidePreloader:function(){
+    hidePreloader: function () {
         $('.loader').remove();
     },
     /**
@@ -241,7 +265,6 @@ $.util = {
         }
         $.util.loadImg();
     },
-
     wxUploadPic: function (func) {
         wx.chooseImage({
             count: 1, // 默认9
@@ -305,13 +328,14 @@ $.util = {
      * type == 'zp'的时候使用zepto的tap  否则用util的tap
      */
     onbody: function (func, type) {
-        var tapfun = function(e){
+        var tapfun = function (e) {
             var target = e.srcElement || e.target, em = target, i = 1;
             while (em && !em.id && i <= 3) {
                 em = em.parentNode;
                 i++;
             }
-            if (!em || !em.id)  return;
+            if (!em || !em.id)
+                return;
             return func(em, target);
         };
         type == 'zp' ? $('body').on('tap', tapfun) : $.util.tap($('body'), tapfun);
@@ -396,7 +420,7 @@ $.util = {
      * @author caowenpeng
      * @returns {undefined}
      */
-    singleImgPreView: function (inputId, showId,func) {
+    singleImgPreView: function (inputId, showId, func) {
         var fileinput = document.getElementById(inputId);
         fileinput.addEventListener("change", function (e) {
             var files = this.files;
@@ -416,7 +440,7 @@ $.util = {
             image.onload = function () {
                 ctx.drawImage(image, 100, 100);
             };
-            func(inputId);
+            func && func(inputId);
         }, false);
     },
     /**
@@ -441,42 +465,48 @@ $.util = {
      * 判断是否上传过  用属性  data('max')是不是等于0
      * @param id
      */
-    choosImgs: function (id){
-        var max=9, dom = $('#'+id); dom.data('max', max);
+    choosImgs: function (id) {
+        var max = 9, dom = $('#' + id);
+        dom.data('max', max);
         //dom.on('click', function(e){
-        $.util.tap(dom, function(e){
+        $.util.tap(dom, function (e) {
             var target = e.srcElement || e.target, em = target, i = 1;
-            if(em.nodeName == 'IMG') em = em.parentNode;
-            if(em.nodeName == 'DT') em = em.parentNode;
-            if(em.nodeName != 'DL') return;
+            if (em.nodeName == 'IMG')
+                em = em.parentNode;
+            if (em.nodeName == 'DT')
+                em = em.parentNode;
+            if (em.nodeName != 'DL')
+                return;
             var cid = $(em).data('id');
-            if(cid == 'up'){
-                if(dom.data('max') == 0) return;
-                LEMON.event.choosePic({'key':id, 'max':dom.data('max')}, function (res) {
+            if (cid == 'up') {
+                if (dom.data('max') == 0)
+                    return;
+                LEMON.event.choosePic({'key': id, 'max': dom.data('max')}, function (res) {
                     res = JSON.parse(res);
-                    var cdom = $('#'+res.key), len = max-cdom.data('max'), up=cdom.find("[data-id=up]");
+                    var cdom = $('#' + res.key), len = max - cdom.data('max'), up = cdom.find("[data-id=up]");
 
-                    if(res.hasOwnProperty('index')){
-                        cdom.find('img').eq(res.index).attr('src', 'http://image.com/'+res.key+'/'+res.index);
+                    if (res.hasOwnProperty('index')) {
+                        cdom.find('img').eq(res.index).attr('src', 'http://image.com/' + res.key + '/' + res.index);
                         return;
                     }
 
-                    if(res.count){
-                        for(var i=0; i<res.count; i++) {
-                            var src = $.util.isIOS ? 'src="http://image.com/'+res.key+'/'+(len+i)+'"' : '';
-                            up.before('<dl class="Idcard" data-id="'+(len+i)+'"><dt><img '+src+'/></dt></dl>');
+                    if (res.count) {
+                        for (var i = 0; i < res.count; i++) {
+                            var src = $.util.isIOS ? 'src="http://image.com/' + res.key + '/' + (len + i) + '"' : '';
+                            up.before('<dl class="Idcard" data-id="' + (len + i) + '"><dt><img ' + src + '/></dt></dl>');
                         }
                     }
 
-                    len = cdom.find('dl').length-1;
-                    cdom.data('max', max-len);
-                    if(len == max) up.hide();
+                    len = cdom.find('dl').length - 1;
+                    cdom.data('max', max - len);
+                    if (len == max)
+                        up.hide();
                 })
             }
-            else if(cid >= 0 && cid < max){
-                LEMON.event.changePic({'key':id, 'index':cid},function(res){
+            else if (cid >= 0 && cid < max) {
+                LEMON.event.changePic({'key': id, 'index': cid}, function (res) {
                     res = JSON.parse(res);
-                    $('#'+res.key).find('img').eq(res.index).attr('src', 'http://image.com/'+(new Date()).getTime()+'/'+res.key+'/'+res.index);
+                    $('#' + res.key).find('img').eq(res.index).attr('src', 'http://image.com/' + (new Date()).getTime() + '/' + res.key + '/' + res.index);
                 })
             }
         });
@@ -485,12 +515,12 @@ $.util = {
      * 判断是否上传过  用属性  data('choosed')
      * @param id
      */
-    chooseVideo: function(id){
-        var dom = $('#'+id);
+    chooseVideo: function (id) {
+        var dom = $('#' + id);
         dom.on('tap', function () {
-            LEMON.event.chooseVideo({'key':id}, function(res){
+            LEMON.event.chooseVideo({'key': id}, function (res) {
                 res = JSON.parse(res);
-                dom.find('img').eq(0).attr('src','http://video.com/'+(new Date()).getTime()+'/'+res.key);
+                dom.find('img').eq(0).attr('src', 'http://video.com/' + (new Date()).getTime() + '/' + res.key);
                 dom.data('choosed', 'ok');
             });
         })
