@@ -66,7 +66,7 @@
 
     });
 
-    var statuses = <?= \App\Model\Table\DatesTable::getStatStr()?>;
+    var statuses = <?= getDateStatStr()?>;
     function getNetDatas(tpl_id, action, options) {
 
         $.ajax({

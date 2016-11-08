@@ -25,7 +25,7 @@
                     <div class="edit_date_items flex">
                         <h3 class="edit_l_con">约会标题</h3>
                         <div class="edit_r_con">
-                            <input name='title' type="text" value="" placeholder="例：海岸城西餐厅，美女在等你"/>
+                            <input id="title" name='title' type="text" value="" placeholder="例：海岸城西餐厅，美女在等你"/>
                         </div>
                     </div>
                 </li>
@@ -45,7 +45,7 @@
                     <div class="edit_date_items flex">
                         <h3 class="edit_l_con">约会地点</h3>
                         <div class="edit_r_con">
-                            <input name="site" type="text" readonly="true" placeholder="选择约会地点" value="老地方测试"/>
+                            <input id="site" name="site" type="text" readonly="true" placeholder="选择约会地点" value="老地方测试"/>
                         </div>
                     </div>
                 </li>
@@ -71,11 +71,11 @@
             <div class="mt40 inner edit_date_desc">
                 <h3 class="title">约会说明</h3>
                 <div class="text_con">
-                    <textarea name="description" placeholder="您的说明将是屌丝买单的动力"></textarea>
+                    <textarea id="description" name="description" placeholder="您的说明将是屌丝买单的动力"></textarea>
                 </div>
             </div>
-            <input type="text" name="user_id" value="<?= $user->id ?>" hidden>
-            <input type="text" name="status" value="2" hidden>
+            <input id="user-id" type="text" name="user_id" value="<?= $user->id ?>" hidden>
+            <input id="status" type="text" name="status" value="2" hidden>
         </form>
     </div>
 </div>
@@ -90,6 +90,8 @@
 <?= $this->element('checkdate'); ?>
 
 <script>
+
+    restoreDatas();
 
     $("#cancel-btn").on('click', function () {
 
@@ -194,5 +196,70 @@
         });
 
     })
+
+
+    //点击跳转到选择地址的页面并将原数据保存到cookie中
+    $('#site').on('click', function () {
+
+        var tags = {};
+        $('#tag-container input').each(function(){
+
+            var tag_id = $(this).val();
+            var tag_name = $(this).attr('tag-name');
+            tags[tag_name] = tag_id;
+
+        });
+        var datas = {};
+        datas['show-skill-name'] = $('#show-skill-name').val();
+        datas['skill-id-input'] = $('#skill-id-input').val();
+        datas['title'] = $('#title').val();
+        datas['time'] = $('#time').val();
+        datas['start-time'] = $('#start-time').val();
+        datas['end-time'] = $('#end-time').val();
+        datas['site'] = $('#site').val();
+        datas['cost-btn'] = $('#cost-btn').val();
+        datas['tags'] = tags;
+        datas['description'] = $('#description').val();
+        datas['user-id'] = $('#user-id').val();
+        datas['status'] = $('#status').val();
+        $.util.setCookie('date_add_datas_keeper', JSON.stringify(datas));
+
+    })
+
+
+    //将cookie中数据重现页面
+    function restoreDatas() {
+
+        var datas = $.util.getCookie('date_add_datas_keeper');
+        console.log(datas['tags']);
+        if(datas) {
+
+            var datas = JSON.parse(datas);
+            console.log(datas);
+            for(key in datas) {
+
+                if('tags' != key) {
+
+                    $("#" + key).val(datas[key]);
+
+                }
+
+            }
+            var html = '';
+            for(tag_key in datas['tags']) {
+
+                html += "<a class='mark'>" + tag_key +
+                    "<input type='text' name='tags[_ids][]' value='" + datas['tags'][tag_key]
+                    + "' tag-name='"+ tag_key +"' hidden></a>";
+
+            }
+            $("#tag-container").html(html);
+
+            $.util.setCookie('date_add_datas_keeper', '');
+
+        }
+
+    }
+
 
 </script>
