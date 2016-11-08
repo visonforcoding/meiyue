@@ -89,16 +89,14 @@
 <!--<a href="#this" id='submit' class="identify_footer_potion">提交审核</a>-->
 <?= $this->start('script'); ?>
 <script>
-
-
     $.util.choosImgs('demoImg');
-    $.util.choosImgs('demoImg2');
+    //$.util.choosImgs('demoImg2');
     $.util.chooseVideo('up_video');
-    $.util.chooseVideo('up_video2');
+    //$.util.chooseVideo('up_video2');
 
     $('#submit').on('tap',function(){
-        if($('#demoImg').data('max') === '0') LEMON.event.uploadPics({key:'demoImg', user_id: 3});
-        if($('#demoImg2').data('max') === '0') LEMON.event.uploadPics({key:'demoImg2', user_id:'3'});
+        if($('#demoImg').data('max') === '0') LEMON.event.uploadPics({key:'demoImg', param:'{id:123,uid:456}'});
+        if($('#demoImg2').data('max') === '0') LEMON.event.uploadPics({key:'demoImg2', param:'{id:12322,uid:45644}'});
         if($('#up_video').data('choosed')) LEMON.event.uploadVideo({key:'up_video', user_id:'3'});
         if($('#up_video2').data('choosed')) LEMON.event.uploadVideo({key:'up_video2', user_id:'3'});
     })
