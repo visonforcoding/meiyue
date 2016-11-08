@@ -113,11 +113,10 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         "event.tel",
         "event.uploadPic", //选择并上传单个图片 返回服务器地址
         "event.uploadPics", //上传9个图片
-        "event.choosePic",  //选择多个图片 返回base64 小图
-        "event.changePic",  //替换某张图片
-        "event.chooseVideo",  //选择视频
-        "event.changeVideo",  //替换视频
         "event.uploadVideo",  //上传视频
+        "event.choosePic",  //选择多个图片 返回base64 小图
+        "event.chooseVideo",  //选择视频
+        "event.changePic",  //替换某张图片
         ];
 
     for (var i = 0, len = apiList.length; i < len && apiList[i]; i++) {
@@ -249,7 +248,6 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                 case "event.changePic":
                 case "event.choosePic":
                 case "event.chooseVideo":
-                case "event.changeVideo":
                     registerAPI(null, api, function () {
                         if(api == 'event.choosePic') window.lemonChoosePic = arguments[1]; //这里使用固定回调  android会一次选择 多次回调
                         JSApiInvoke(api, {param: arguments[0]}, apiCallback(arguments[1]));
