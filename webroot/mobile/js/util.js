@@ -485,7 +485,7 @@ $.util = {
             var fun = dom.data('choosed') ? LEMON.event.changeVideo : LEMON.event.chooseVideo;
             fun({'key':id},function(res){
                 res = JSON.parse(res);
-                dom.attr('src','http://video.com/'+res['key']);
+                dom.find('img').eq(0).attr('src','http://video.com/'+(new Date()).getTime()+'/'+res['key']);
             });
         })
     }

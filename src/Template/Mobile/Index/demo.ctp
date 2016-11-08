@@ -59,9 +59,9 @@
             </div>
             <div class="fact_identify">
                 <dl class="Idcard">
-                    <dt>
-                    <img id="up_video" src="/mobile/images/upimg.png" alt="" />
-                        <i class="iconfont playbtn">&#xe600;</i>
+                    <dt id="up_video">
+                    <img src="/mobile/images/upimg.png" alt="" />
+                    <i class="iconfont playbtn">&#xe600;</i>
                     </dt>
                 </dl>
             </div>
