@@ -38,6 +38,12 @@ class UserTable extends Table {
             'className' => 'UserSkill',
             'foreignKey' => 'user_id'
         ]);
+        $this->belongsToMany('Tags',[
+            'className'=>'Tag',
+            'joinTable'=>'lm_user_tag',
+            'foreignKey'=>'user_id',
+            'targetForeignKey'=>'tag_id'
+        ]);
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

@@ -9,28 +9,30 @@
 <div class="wraper">
     <!--基本信息-->
     <div class="home_page_basic">
-        <h3 class="aligncenter"><span class="home_name"><b><?=$user->nick?></b><em><i class="iconfont">&#xe623;</i><?=$distance?></em></span></h3>
+        <h3 class="aligncenter"><span class="home_name"><b><?= $user->nick ?></b><em><i class="iconfont">&#xe623;</i><?= $distance ?></em></span></h3>
         <div class="home_name_info aligncenter">
-            <i class="iconfont color_y">&#xe61d;</i> <?=$age?> <i class="job"><?=$user->profession?></i> <i class="address"><?=$user->city?></i>
+            <i class="iconfont color_y">&#xe61d;</i> <?= $age ?> <i class="job"><?= $user->profession ?></i> <i class="address"><?= $user->city ?></i>
         </div>
         <div class="commend aligncenter">
             <i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont color_gray">&#xe62a;</i>
             <span class="total">4.2分</span>
         </div>
         <ul class="otherinfo flex flex_justify bdbottom">
-            <li><span class="t_desc"><?=$user->height?>cm</span><span class="b_desc">身高</span></li>
-            <li><span class="t_desc"><?=$user->weight?>kg</span><span class="b_desc">体重</span></li>
-            <li><span class="t_desc"><?=$user->bwh?></span><span class="b_desc">三围</span></li>
-            <li><span class="t_desc"><?=$birthday?></span><span class="b_desc">生日</span></li>
+            <li><span class="t_desc"><?= $user->height ?>cm</span><span class="b_desc">身高</span></li>
+            <li><span class="t_desc"><?= $user->weight ?>kg</span><span class="b_desc">体重</span></li>
+            <li><span class="t_desc"><?= $user->bwh ?></span><span class="b_desc">三围</span></li>
+            <li><span class="t_desc"><?= $birthday ?></span><span class="b_desc">生日</span></li>
         </ul>
     </div>
     <!--图片 && 视频展示-->
     <div class="home_pic_info mt40">
         <ul class="inner flex flex_justify">
-            <?php foreach(unserialize($user->images) as $image): ?>
-            <li><img src="<?=  createImg($image)?>"/></li>
-            <?php endforeach; ?>
-            <li><a href="#this" class='ablock'><img src="/mobile/images//avatar.jpg"/><span>更 多 私 房</span></a></li>
+            <?php if (@unserialize($user->images)): ?>
+                <?php foreach (unserialize($user->images) as $image): ?>
+                    <li><img src="<?= createImg($image) ?>"/></li>
+                <?php endforeach; ?>
+                <li><a href="#this" class='ablock'><img src="/mobile/images//avatar.jpg"/><span>更 多 私 房</span></a></li>
+            <?php endif; ?>
         </ul>
         <div class="inner home_video mt20">
             <img src="/mobile/images//vid.jpg"/>
@@ -50,7 +52,7 @@
             </div>
             <div class="bottom">
                 <div class="title">工作经验:</div>
-                <p><?=$user->career?></p>
+                <p><?= $user->career ?></p>
             </div>
         </div>
     </div>
@@ -62,16 +64,16 @@
             </div>
             <ul class="outerblock">
                 <?php foreach ($user->user_skills as $user_skill): ?>
-                <li class="itms_list">
-                    <div class="items flex flex_justify">
-                        <span class="items_name"><i class="iconfont color_y">&#xe631;</i><?=$user_skill->skill->name?></span>
-                        <div>
-                            <span class="price"><i><?=$user_skill->cost->money?></i> 美币/小时</span>
-                            <a href="#this" class="date">约他</a>
+                    <li class="itms_list">
+                        <div class="items flex flex_justify">
+                            <span class="items_name"><i class="iconfont color_y">&#xe631;</i><?= $user_skill->skill->name ?></span>
+                            <div>
+                                <span class="price"><i><?= $user_skill->cost->money ?></i> 美币/小时</span>
+                                <a href="#this" class="date">约他</a>
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <?php endforeach;?>
+                    </li>
+                <?php endforeach; ?>
                 <li class="itms_list">
                     <div class="items flex flex_center more">
                         <i class="iconfont more color_y">&#xe62f;</i>
@@ -119,37 +121,37 @@
         <li>
             <div class="items flex">
                 <span class="seach_name">TA的家乡</span>
-                <span class="golook"><?=$user->hometown?></span>
+                <span class="golook"><?= $user->hometown ?></span>
             </div>
         </li>
         <li>
             <div class="items flex">
                 <span class="seach_name">喜欢的美食</span>
-                <span class="golook"><?=$user->food?></span>
+                <span class="golook"><?= $user->food ?></span>
             </div>
         </li>
         <li>
             <div class="items flex">
                 <span class="seach_name">喜欢的音乐</span>
-                <span class="golook"><?=$user->music?></span>
+                <span class="golook"><?= $user->music ?></span>
             </div>
         </li>
         <li>
             <div class="items flex">
                 <span class="seach_name">喜欢的电影</span>
-                <span class="golook"><?=$user->movie?></span>
+                <span class="golook"><?= $user->movie ?></span>
             </div>
         </li>
         <li>
             <div class="items flex">
                 <span class="seach_name sport_items">喜欢的运动/娱乐</span>
-                <span class="golook"><?=$user->sport?></span>
+                <span class="golook"><?= $user->sport ?></span>
             </div>
         </li>
         <li>
             <div class="items flex">
                 <span class="seach_name">个人签名</span>
-                <span class="golook"><?=$user->sign?></span>
+                <span class="golook"><?= $user->sign ?></span>
             </div>
         </li>
     </ul>
@@ -161,10 +163,19 @@
 <!--底部-->
 <div class="home_page_footer">
     <ul class="clearfix  flex flex_justify">
-        <li class="active">
-            <a href="#this" class="active">
-                <i class="iconfont">&#xe63d;</i>关注
-            </a>
+        <?php if ($isFollow): ?>
+            <li>
+                <a id="focusIt">
+                    <i class="iconfont">&#xe63d;</i>已关注
+                </a>
+            </li>
+        <?php else: ?>
+            <li class="active">
+                <a id="focusIt" class="active">
+                    <i class="iconfont">&#xe63d;</i>关注
+                </a>
+            </li>
+        <?php endif; ?>
         <li>
             <a href="#this">
                 <i class="iconfont">&#xe632;</i>约Ta
@@ -212,11 +223,40 @@
 </div>
 <?php $this->start('script'); ?>
 <script>
-    $('#showWx').on('tap',function(){
+    $('#showWx').on('tap', function () {
         console.log($(this));
-        $('.show.flex').attr('style','display:block');
-        $('#showPay').attr('style','display:block');
+        $('.show.flex').attr('style', 'display:block');
+        $('#showPay').attr('style', 'display:block');
         //$('.wx_popup').attr('style','display:block');
     });
+    $('#focusIt').on('tap', function () {
+        //加关注
+        var id = <?= $user->id ?>;
+        var $obj = $(this);
+        if (!$obj.hasClass('active')) {
+            //取消关注
+            $.util.confirm('取消关注', '你确定取消关注她吗?', function () {
+                followIt(id,$obj);
+            });
+        } else {
+            followIt(id,$obj);
+        }
+
+    });
+    function followIt(id,$obj) {
+        $.util.ajax({
+            url: '/user/follow',
+            data: {id: id},
+            func: function (res) {
+                if($obj.hasClass('active')){
+                    $obj.html('<i class="iconfont">&#xe63d;</i>已关注');
+                }else{
+                    $obj.html('<i class="iconfont">&#xe63d;</i>关注');
+                }
+                $obj.toggleClass('active');
+                $.util.alert(res.msg);
+            }
+        })
+    }
 </script>
 <?php $this->end('script'); ?>

@@ -46,7 +46,97 @@ p{background-color: transparent;word-break: break-all;}
 .loader-title + .loader-text{
     margin-top:0.15rem;
 }
+/*confirm层*/
+#Alert7.alert7-confirm {
+}
 
+#Alert7 {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    background-color: rgba(0, 0, 0, 0.3);
+    text-align: center;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#Alert7, #Alert7::after, #Alert7 .alert7-container {
+    vertical-align: middle;
+}
+#Alert7 .alert7-container {
+    max-width: 240px;
+    width: 80%;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 18px;
+}
+#Alert7::after {
+    height: 100%;
+    content: '';
+}
+#Alert7::after, #Alert7 .alert7-container {
+    display: inline-block;
+}
+#Alert7 .alert7-title,
+#Alert7 .alert7-message {
+    padding-left: 20px;
+    padding-right: 20px;
+    line-height:1.3em;
+}
+#Alert7 .alert7-title {
+    padding-top: 20px;
+    font-size: 1.1em;
+    font-weight: bolder;
+    line-height: 2em;
+}
+
+#Alert7 .alert7-message {
+    padding-bottom: 14px;
+    font-size: 0.8em; 
+}
+#Alert7 .alert7-actions button.alert7-action-item {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 100%;
+    background: 0;
+    border: 0;
+    border-top: 1px solid #E7E7E7;
+    outline: 0;
+    color: #59F;
+}
+#Alert7 .alert7-actions button.alert7-action-item:last-of-type {
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+
+#Alert7 .alert7-actions button.alert7-action-item:active {
+    background-color: #E7E7E7;
+}
+
+#Alert7.alert7-confirm .alert7-actions button.alert7-action-item {
+    width: 50%;
+}
+
+#Alert7.alert7-confirm .alert7-actions button.alert7-action-item:first-of-type {
+    border-bottom-left-radius: 18px;
+}
+
+#Alert7.alert7-confirm .alert7-actions button.alert7-action-item:first-of-type:last-of-type {
+    width: 100%;
+}
+#Alert7.alert7-confirm .alert7-actions button.alert7-action-item:nth-of-type(2) {
+    border-left: 1px solid #E7E7E7;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 18px;
+}
+#Alert7.alert7-confirm .alert7-actions button.alert7-action-item:nth-of-type(n+3) {
+    display: none;
+}
 /*app*/
 a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);border:none;background: none;}
 input[type='text'],textarea{-webkit-appearance: none;}/*iphone内阴影*/
@@ -160,10 +250,10 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 }
 /*在线图标*/
 @font-face {
-  font-family: 'iconfont';  /* project id："166621" */
-  src: url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.eot');
-  src: url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.eot') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.woff') format('woff'),
-  url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.svg#iconfont') format('svg');
+    font-family: 'iconfont';  /* project id："166621" */
+    src: url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.eot');
+    src: url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.eot') format('embedded-opentype'),
+        url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.woff') format('woff'),
+        url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.ttf') format('truetype'),
+        url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.svg#iconfont') format('svg');
 }

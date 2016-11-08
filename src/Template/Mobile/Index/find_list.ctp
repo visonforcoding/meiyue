@@ -4,14 +4,14 @@
     {{#users}}
     <dl>
         <a href="/index/homepage/{{id}}">
-        <dt>
-        <img src="{{avatar}}" alt="" />
-        <h1 class="alignright"><time>{{login_time}}</time> | <i>{{distance}}</i></h1>
-        </dt>
-        <dd class="flex flex_justify find_list_con">
-            <span class="username">{{nick}}</span>
-            <span class="userinfo"><i class="iconfont color_y">&#xe61d;</i><i class="age">{{age}}</i><i class="job">{{profession}}</i></span>
-        </dd>
+            <dt>
+            <img src="{{avatar}}" alt="" />
+            <h1 class="alignright"><time>{{login_time}}</time> | <i>{{distance}}</i></h1>
+            </dt>
+            <dd class="flex flex_justify find_list_con">
+                <span class="username">{{nick}}</span>
+                <span class="userinfo"><i class="iconfont color_y">&#xe61d;</i><i class="age">{{age}}</i><i class="job">{{profession}}</i></span>
+            </dd>
         </a>
     </dl>
     {{/users}}
@@ -21,17 +21,16 @@
     <div class="header">
         <a href="/index/index"><span class="l_btn">切换地图</span></a>
         <h1>美约</h1>
-        <span class="r_btn iconfont menu">&#xe639;</span>
+        <span id="selectMenu" class="r_btn iconfont menu">&#xe639;</span>
     </div>
 </header>
-<div class="wraper">
+<div class="wraper pd45">
     <div class="navbar">
-        <ul class="inner flex flex_justify">
-            <li class="current"><a href="#this">约吃饭</a></li>
-            <li><a href="#this">约吃饭</a></li>
-            <li><a href="#this">约吃饭</a></li>
-            <li><a href="#this">约吃饭</a></li>
-            <li><a href="#this">约吃饭</a></li>
+        <ul id="selectSkil" class="inner flex flex_justify">
+            <li  class="current"><a data-id="0" href="#this">精选</a></li>
+            <?php foreach ($skills as $skill): ?>
+                <li ><a data-id="<?= $skill->id ?>">约<?= $skill->name ?></a></li>
+            <?php endforeach; ?>
         </ul>
     </div>
     <div class="find_list_box">
@@ -41,7 +40,7 @@
     </div>
 </div>
 <!--筛选-->
-<div class="raper" hidden>
+<div id="selectMenu_box" class="raper" hidden>
     <div  class="choose_parmes">
         <div  class="inner">
             <div class="height flex">
@@ -71,7 +70,7 @@
 
         </div>
         <div class="inner bdtop">
-            <span class="btn sure mt40 ">确定</span>
+            <span id="search" class="btn sure mt40 ">确定</span>
         </div>
     </div>
 </div>
@@ -97,21 +96,29 @@ scale.addEventListener("touchmove", function () {
 </script>
 <script type="text/javascript">
     var curpage = 1;
+    var skill = 0;
+    var age = 0;
+    var height = 0;
     loadUser(curpage);
-    function loadUser(page, more = false) {
+    function loadUser(page, more = false, query = false) {
         $.util.showPreloader();
         var template = $('#user-list-tpl').html();
         Mustache.parse(template);   // optional, speeds up future uses
-        $.getJSON('/index/get-user-list/' + page, function (data) {
+        if (!query) {
+            url = '/index/get-user-list/' + page;
+        } else {
+            url = '/index/get-user-list/' + page + query;
+        }
+        $.getJSON(url, function (data) {
             window.holdLoad = false
             if (data.code === 200) {
                 console.log(data.users);
                 var rendered = Mustache.render(template, data);
                 if (more) {
                     $('#user-list').append(rendered);
-                    if(!data.users.length){
-                       window.holdLoad = true;
-                    }else{
+                    if (!data.users.length) {
+                        window.holdLoad = true;
+                    } else {
                         curpage++;
                     }
                 } else {
@@ -121,11 +128,32 @@ scale.addEventListener("touchmove", function () {
             }
         });
     }
+    $('#selectSkil li a').on('tap', function () {
+        //切换技能筛选
+        $(this).parents('#selectSkil').find('li').removeClass('current')
+        $(this).parents('li').addClass('current');
+        curpage = 1;
+        skill = $(this).data('id');
+        loadUser(curpage, false, '?skill=' + skill+'&age='+age+'&height='+height);
+    });
+    $('#selectMenu').on('tap', function () {
+        $('#selectMenu_box').toggle();
+    });
+    $('#search').on('click',function(){
+        $('#selectMenu_box').hide();
+        height = $('#sacle').val();
+        age = $('#age').val();
+        loadUser(1, false, '?skill=' + skill+'&age='+age+'&height='+height);
+    });
     setTimeout(function () {
         $(window).on("scroll", function () {
             $.util.listScroll('user-list', function () {
                 //window.holdLoad = false;  //打开加载锁  可以开始再次加载
-                loadUser(curpage+1, true);
+                if (skill) {
+                    loadUser(curpage + 1, true, '?skill=' + skill+'&age='+age+'&height='+height);
+                } else {
+                    loadUser(curpage + 1, true);
+                }
             })
         });
     }, 2000)

@@ -1,4 +1,3 @@
-
 <header>
     <div class="homepage">
         <div class="header">
@@ -7,14 +6,14 @@
         </div>
         <div class="home_cover_info">
             <span class="avatar">
-                <img src="/mobile/images/avatar.jpg"/>
+                <img src="<?=  createImg($user->avatar).'?w=77'?>"/>
             </span>
             <div class="cover_left_info">
                 <ul>
                     <li class="bbottom userinfo">
                         <a href="#this" class="cover_block">
                             <h3>
-                                <span>美女美女<i class="iconfont">&#xe628;</i></span>
+                                <span><?=$user->nick?><i class="iconfont">&#xe628;</i></span>
                                 <span class="flag"><img src="/mobile/images/zui.png" alt="" /></span>
                             </h3>
                             <span class="cover_r_ico">
@@ -24,7 +23,7 @@
                     </li>
                     <li class="follow">
                         <span>喜欢 <i>12</i></span>
-                        <span>粉丝 <i>122</i></span>
+                        <a href="/userc/fans"><span>粉丝 <i>122</i></span></a>
                     </li>
                 </ul>
             </div>

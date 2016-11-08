@@ -17,6 +17,7 @@ use Cake\I18n\Time;
  * @property \App\Controller\Component\EncryptComponent $Encrypt
  * @property \App\Controller\Component\PushComponent $Push
  * @property \App\Controller\Component\BdmapComponent $Bdmap
+ * @property \App\Controller\Component\BusinessComponent $Business
  */
 class IndexController extends AppController {
 
@@ -40,8 +41,11 @@ class IndexController extends AppController {
      * 发现列表
      */
     public function findList() {
+        $this->loadComponent('Business');
+        $skills = $this->Business->getTopSkill();
         $this->set([
-            'pageTitle' => '发现'
+            'pageTitle' => '发现',
+            'skills'=>$skills
         ]);
     }
 
@@ -52,21 +56,30 @@ class IndexController extends AppController {
         $userCoord_lng = $userCoord_arr[0];
         $userCoord_lat = $userCoord_arr[1];
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $query = $UserTable->find()->select(['id', 'nick', 'distance' => 
+        $skill = $this->request->query('skill');
+        $query = $UserTable->find();
+        $query = $query->select(['id', 'nick', 'distance' => 
             "getDistance($userCoord_lng,$userCoord_lat,login_coord_lng,login_coord_lat)", 'birthday', 
             'profession', 'login_time', 'avatar', 'login_coord_lng', 'login_coord_lat']);
         $query->hydrate(false);
+        if($skill){
+            $query->matching('UserSkills.Skill',function($q)use($skill){
+                return $q->where(['parent_id'=>$skill]);
+            });
+        }
         $query->where(['enabled' => 1, 'status' => 3]);
+        $height = $this->request->query('height');
+        $query->where(['enabled' => 1, 'status']);
         $query->order(['distance' => 'asc','login_time' => 'desc']);
         $query->limit(intval($limit))
                 ->page(intval($page));
         $query->formatResults(function($items)use($userCoord) {
             return $items->map(function($item)use($userCoord) {
-                        //时间语义化转换
                         $item['distance'] = $item['distance'] >= 1000 ? 
                                 round($item['distance'] / 1000, 1) . 'km' : round($item['distance']) . 'm';
                         $item['avatar'] = createImg($item['avatar']) . '?w=184&h=184&fit=stretch';
                         $item['age'] = (Time::now()->year) - ((new Time($item['birthday']))->year);
+                        //时间语义化转换
                         $item['login_time'] = (new Time($item['login_time']))->timeAgoInWords(
                                 [ 'accuracy' => [
                                         'year' => 'year',
@@ -84,7 +97,8 @@ class IndexController extends AppController {
     }
 
     public function homepage($id) {
-        $userCoord = $this->request->cookie('coord');
+        //个人信息
+        $userCoord = $this->coord;
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $user = $UserTable->get($id,[
             'contain'=>['UserSkills','UserSkills.Skill','UserSkills.Cost']
@@ -93,12 +107,23 @@ class IndexController extends AppController {
         $user->avatar = createImg($user->avatar) . '?w=184&h=184&fit=stretch';
         $age = (Time::now()->year) - ((new Time($user->birthday))->year);
         $birthday = date('m-d', strtotime($user->birthday));
+        
+        $isFollow = false;  //是否关注
+        if($this->user){
+            $UserFansTable = \Cake\ORM\TableRegistry::get('UserFans');
+            $follow = $UserFansTable->find()->where(['user_id'=>  $this->user->id,'following_id'=> $id])->count();
+            if($follow){
+                $isFollow = true;
+            }
+        }
+        //若登录
         $this->set([
             'pageTitle' => '发现-主页',
             'user' => $user,
             'age' => $age,
             'distance' => $distance,
-            'birthday' => $birthday
+            'birthday' => $birthday,
+            'isFollow'=> $isFollow,
         ]);
     }
 

@@ -182,6 +182,7 @@ Request::addDetector('tablet', function ($request) {
 
 Request::addDetector('weixin', ['env' => 'HTTP_USER_AGENT', 'pattern' => '/MicroMessenger/i']);
 Request::addDetector('lemon', ['env' => 'HTTP_USER_AGENT', 'pattern' => '/smartlemon/i']);
+Request::addDetector('json', ['param' => '_ext', 'value' => 'json']);
 
 /*
  * Enable immutable time objects in the ORM.

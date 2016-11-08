@@ -17,8 +17,10 @@ class UserController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
+        $this->handCheckLogin();
         $this->set([
-            'pageTitle' => '美约-我的'
+            'pageTitle' => '美约-我的',
+            'user'=>  $this->user
         ]);
     }
 
@@ -228,10 +230,10 @@ class UserController extends AppController {
             if ($res['status']) {
                 $infos = $res['info'];
                 foreach ($infos as $key => $info) {
-                    if($info['key']=='video'){
+                    if ($info['key'] == 'video') {
                         $data['video'] = $info['path'];
                     }
-                    if(preg_match('/image_.*/',$info['key'])){
+                    if (preg_match('/image_.*/', $info['key'])) {
                         $images[] = $info['path'];
                     }
                 }
@@ -325,6 +327,93 @@ class UserController extends AppController {
             return $this->Util->ajaxReturn(['status' => true, 'msg' => '头像上传成功', 'path' => $imgpaths]);
         } else {
             return $this->Util->ajaxReturn(false, '头像上传失败');
+        }
+    }
+
+    
+    
+    /**
+     * 加关注
+     */
+    public function follow() {
+        $this->handCheckLogin();
+        if ($this->request->is('post')) {
+            $following_id = $this->request->data('id');
+            $user_id = $this->user->id;
+            if ($following_id == $user_id) {
+                return $this->Util->ajaxReturn(false, '不可关注自己');
+            }
+            $follower = $this->User->find()->select(['id','gender'])->where(['id'=>$following_id])->first();
+            if(!$follower){
+                return $this->Util->ajaxReturn(false, '您所关注的用户不存在');
+            }
+            if($this->user->gender==$follower->gender){
+                if($this->user=='1'){
+                    return $this->Util->ajaxReturn(false, '男性只可关注女性');
+                }else{
+                    return $this->Util->ajaxReturn(false, '女性只可关注男性');
+                }
+            }
+            $FansTable = \Cake\ORM\TableRegistry::get('UserFans');
+            //判断是否关注过
+            $fans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$following_id'")->first();
+            if ($fans) {
+                //查看是否被该用户关注过 关注过则为取消关注操作
+                $follower = $FansTable->find()->where("`user_id` = '$following_id' and `following_id` = '$user_id'")->first();
+                if ($follower) {
+                    //有被关注，改变互相关注状态
+                    $follower->type = 1;
+                    $transRes = $FansTable->connection()
+                            ->transactional(function()use($FansTable, $follower, $fans) {
+                                //开启事务
+                                return $FansTable->delete($fans) && $FansTable->save($follower);
+                            });
+                } else {
+                    $transRes = $FansTable->delete($fans);
+                }
+                if (!$transRes) {
+                    return $this->Util->ajaxReturn(false, '取消关注失败');
+                } else {
+                    return $this->Util->ajaxReturn(true, '取消关注成功');
+                }
+            } else {
+                //查看是否被该用户关注过
+                $follower = $FansTable->find()->where("`user_id` = '$following_id' and `following_id` = '$user_id'")->first();
+                $newfans = $FansTable->newEntity();
+                $newfans->user_id = $user_id;
+                $newfans->following_id = $following_id;
+                if ($follower) {
+                    //有被关注
+                    $follower->type = 2;  //关系标注为互为关注
+                    $newfans->type = 2;
+                    $transRes = $FansTable->connection()
+                            ->transactional(function()use($FansTable, $follower, $newfans) {
+                        //开启事务
+                        return $FansTable->save($newfans) && $FansTable->save($follower);
+                    });
+                    if (!$transRes) {
+                        return $this->Util->ajaxReturn(false, '关注失败');
+                    }
+                } else {
+                    $newfans->type = 1;
+                    if (!$FansTable->save($newfans)) {
+                        return $this->Util->ajaxReturn(true, '关注失败');
+                    }
+                }
+                //发送一条关注消息给被关注者
+                //$this->loadComponent('Business');
+                //$this->Business->usermsg($this->user->id, $following_id, '您有新的关注者', '', 1, $newfans->id);
+                //更新被关注者粉丝数  列表方便显示
+                //$follower_user = $this->User->get($following_id);
+                //$fansCount = $FansTable->find()->where("`following_id` = '$following_id'")->count();
+                //$follower_user->fans = $fansCount;
+                //$this->User->save($follower_user);
+                //$me = $this->User->get($user_id);
+                //$followCount = $FansTable->find()->where(['user_id' => $user_id])->count();
+                //$me->focus_nums = $followCount;
+                //$this->User->save($me);
+                return $this->Util->ajaxReturn(true, '关注成功');
+            }
         }
     }
 
