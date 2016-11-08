@@ -471,7 +471,7 @@ $.util = {
             else if(cid >= 0 && cid < max){
                 LEMON.event.changePic({'key':id, 'index':cid},function(res){
                     res = JSON.parse(res);
-                    cdom.find('img').eq(res.index).attr('src', 'http://image.com/'+id+'/'+res.index);
+                    cdom.find('img').eq(res.index).attr('src', 'http://image.com/'+(new Date()).getTime()+'/'+id+'/'+res.index);
                 })
 
             }
