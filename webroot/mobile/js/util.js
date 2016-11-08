@@ -484,8 +484,9 @@ $.util = {
         dom.on('tap', function () {
             var fun = dom.data('choosed') ? LEMON.event.changeVideo : LEMON.event.chooseVideo;
             fun({'key':id},function(res){
+                alert(res);
                 res = JSON.parse(res);
-                dom.find('img').eq(0).attr('src','http://video.com/'+(new Date()).getTime()+'/'+res['key']);
+                dom.find('img').eq(0).attr('src','http://video.com/'+(new Date()).getTime()+'/'+res.key);
             });
         })
     }
