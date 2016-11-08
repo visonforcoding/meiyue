@@ -299,6 +299,8 @@ color:#444;position:relative;}
 .choose_mark{padding-bottom:.2rem;}
 .choose_mark li{height:70px;width:20%;}
 .choose_mark .cancel{position:absolute;left:.3rem;}
+.choose_mark__items ul{overflow: hidden;}
+.choose_mark__items ul li{float:left;}
 .choose_mark .r_btn{right:.3rem;position:absolute;}
 .choose_mark .r_btn .complete{margin-left:.5rem;font-size: 15px;}
 .choose_mark__items .choose_marks{text-align: center;margin:0 auto;}
@@ -719,6 +721,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .rank_con .place {background: url(icon/tou.png) no-repeat center center;background-size: contain;display: block;width: .6rem;height: .68rem;
 text-align: center;line-height: .62rem;font-size: 18px;color: #666;font-weight: bold;margin-right: .3rem;}
 .rank_con .silver{background: url(icon/tou1.png) no-repeat center center;background-size: contain;width: .72rem;height: .62rem;display: block;color:#fd6a56;}
+.invite{padding:.3rem .3rem;background: #fff;}
 .rank_con li{padding:.2rem 0;}
 .rank_con .place_info{height: .88rem;}
 .rank_con .place_info .avatar{width:.88rem;height:.88rem;overflow: hidden;position: absolute;border-radius: 50%;}
