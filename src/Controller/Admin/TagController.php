@@ -45,6 +45,7 @@ public function index()
      */
     public function add()
     {
+        $this->viewBuilder()->autoLayout(false);
         $tag = $this->Tag->newEntity();
         if ($this->request->is('post')) {
             $tag = $this->Tag->patchEntity($tag, $this->request->data);
@@ -68,7 +69,8 @@ public function index()
      */
     public function edit($id = null)
     {
-         $tag = $this->Tag->get($id,[
+        $this->viewBuilder()->autoLayout(false);
+        $tag = $this->Tag->get($id,[
             'contain' => []
         ]);
         if ($this->request->is(['post','put'])) {

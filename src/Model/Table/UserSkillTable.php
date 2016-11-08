@@ -41,6 +41,7 @@ class UserSkillTable extends Table
             'foreignKey' => 'skill_id',
             'joinType' => 'INNER'
         ]);
+
         $this->belongsTo('Cost', [
             'foreignKey' => 'cost_id',
             'joinType' => 'INNER'
@@ -50,9 +51,10 @@ class UserSkillTable extends Table
         ]);
 
         $this->belongsToMany('Tags', [
-            'joinTable' => 'lm_user_skills_tags',
-            'dependent' => false,
-            'foreignKey' => 'tag_id'
+            'joinTable' => 'lm_user_skill_tag',
+            'foreignKey' => 'user_skill_id',
+            'targetForeignKey' => 'tag_id',
+            'className' => 'tag'
         ]);
     }
 
@@ -89,64 +91,10 @@ class UserSkillTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['skill_id'], 'Skills'));
-        $rules->add($rules->existsIn(['cost_id'], 'Costs'));
+        $rules->add($rules->existsIn(['skill_id'], 'Skill'));
+        $rules->add($rules->existsIn(['cost_id'], 'Cost'));
 
         return $rules;
-    }
-
-    /**
-     * 获取审核状态
-     * @param int $status_code
-     * @return array|mixed|string
-     */
-    public static function getCheckStatus($status_code = -1) {
-
-        $status = Array(
-
-            2 => "未审核",
-            1 => "通过",
-            0 => "不通过",
-
-        );
-
-        if($status_code != -1) {
-
-            return isset($status[$status_code])?$status[$status_code]:"未知状态";
-
-        } else {
-
-            return $status;
-
-        }
-
-    }
-
-
-    /**
-     * 获取启用状态
-     * @param int $status_code
-     * @return array|mixed|string
-     */
-    public static function getUsedStatus($status_code = -1) {
-
-        $status = Array(
-
-            0 => "禁用",
-            1 => "启用",
-
-        );
-
-        if($status_code != -1) {
-
-            return isset($status[$status_code])?$status[$status_code]:"未知状态";
-
-        } else {
-
-            return $status;
-
-        }
-
     }
 
 }

@@ -37,7 +37,7 @@ class TagTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
-        /*$this->belongsTo('ParentTag', [
+        $this->belongsTo('ParentTag', [
             'className' => 'Tag',
             'foreignKey' => 'parent_id'
         ]);
@@ -45,13 +45,8 @@ class TagTable extends Table
         $this->hasMany('ChildTag', [
             'className' => 'Tag',
             'foreignKey' => 'parent_id'
-        ]);*/
-
-        $this->belongsToMany('UserSkills', [
-            'joinTable' => 'lm_user_skill_tag',
-            'dependent' => false,
-            'foreignKey' => 'user_skill_id'
         ]);
+
     }
 
     /**

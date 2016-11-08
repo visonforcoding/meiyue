@@ -5,13 +5,6 @@
     <div class="col-xs-12">
         <form id="table-bar-form">
             <div class="table-bar form-inline">
-                <a href="/userskills/add" class="btn btn-small btn-warning">
-                    <i class="icon icon-plus-sign"></i>添加
-                </a>
-                <div class="form-group">
-                    <label for="keywords">关键字</label>
-                    <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
-                </div>
                 <div class="form-group">
                     <label for="keywords">时间</label>
                     <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords"
@@ -35,6 +28,8 @@
     <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
     <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
     <script>
+        var checkStatuses = <?= getCheckStatus(); ?>;
+        var usedStatuses = <?= getUsedStatus(); ?>;
         $(function () {
             $('#main-content').bind('resize', function () {
                 $("#list").setGridWidth($('#main-content').width() - 40);
@@ -46,7 +41,7 @@
             });
             $.zui.store.pageClear(); //刷新页面缓存清除
             $("#list").jqGrid({
-                url: "/userskills/getDataList",
+                url: "/userskill/getDataList",
                 datatype: "json",
                 mtype: "POST",
                 colNames: ['名称', '费用/小时', '约会说明', '标签', '是否启用', '审核状态', '操作'],
@@ -54,9 +49,27 @@
                     {name: 'skill.name', editable: true, align: 'center'},
                     {name: 'cost.money', editable: true, align: 'center'},
                     {name: 'desc', editable: true, align: 'center'},
-                    {name: 'tags', editable: true, align: 'center'},
-                    {name: 'is_used', editable: true, align: 'center'},
-                    {name: 'is_checked', editable: true, align: 'center'},
+                    {name: 'tags', editable: true, align: 'center',formatter: function (cellvalue, options, rowObject) {
+                        html = '';
+                        for(index in cellvalue) {
+
+                            if(cellvalue[index].name) {
+
+                                html += "<" + cellvalue[index].name + ">";
+
+                            }
+
+                        }
+                        return html;
+                    }},
+                    {name: 'is_used', editable: true, align: 'center', formatter: function(cellvalue, options, rowObject){
+                        return usedStatuses[rowObject.is_used];
+                    }},
+                    {name: 'is_checked', editable: true, align: 'center',
+                        formatter: function(cellvalue, options, rowObject){
+                            return checkStatuses[rowObject.is_checked];
+                        }
+                    },
                     {
                         name: 'actionBtn',
                         align: 'center',
@@ -92,8 +105,7 @@
 
         function actionFormatter(cellvalue, options, rowObject) {
             response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-            //response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-            response += '<a title="编辑" href="/userskills/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+            response += '<a title="编辑" href="/userskill/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
             return response;
         }
 
@@ -130,29 +142,6 @@
             }).trigger("reloadGrid");
         }
 
-        function doExport() {
-            //导出excel
-            var sortColumnName = $("#list").jqGrid('getGridParam', 'sortname');
-            var sortOrder = $("#list").jqGrid('getGridParam', 'sortorder');
-            var searchData = $.zui.store.pageGet('searchData') ? $.zui.store.pageGet('searchData') : {};
-            searchData['sidx'] = sortColumnName;
-            searchData['sort'] = sortOrder;
-            var searchQueryStr = $.param(searchData);
-            $("body").append("<iframe src='/userskills/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
-        }
-
-        function doView(id) {
-            //查看明细
-            url = '/userskills/view/' + id;
-            layer.open({
-                type: 2,
-                title: '查看详情',
-                shadeClose: true,
-                shade: 0.8,
-                area: ['45%', '70%'],
-                content: url//iframe的url
-            });
-        }
     </script>
 <?php
 $this->end();

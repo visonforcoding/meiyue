@@ -7,21 +7,20 @@
             <li><a class="add tree-plus" data-id="0"><i class="icon icon-plus-sign"></i></a></li>
             <?php foreach ($tags as $item): ?>
                 <li>
-                    <?= $item->name ?>
-                    <a class="add tree-plus" data-id="<?= $item->id ?>"><i
+                    <?= $item->name ?>【<?= getTagType($item['type'])?>】
+                    <a class="add tree-plus" data-id="<?= $item->id ?>" type-no="<?= $item->type ?>"><i
                             class="icon icon-plus-sign"></i></a>
                     <?php if (count($item->children) == 0): ?>
                         <a class="del" data-id="<?= $item->id ?>"><i
                                 class="icon icon-trash"></i></a>
                     <?php endif; ?>
-                    <a class="edit" data-val="<?= $item->name ?>" data-id="<?= $item->id ?>"><i
+                    <a class="edit" data-val="<?= $item->name ?>" data-id="<?= $item->id ?>" type-no="<?= $item->type ?>"><i
                             class="icon icon-pencil"></i></a>
                 </li>
                 <?php if ($item->children): ?>
                     <ul>
                         <?php foreach ($item->children as $i): ?>
                             <li><?= $i->name ?>
-                                <!--<a class="del" data-id="<?= $i->id ?>"><i class="icon icon-trash"></i></a>-->
                                 <a class="edit" data-val="<?= $i->name ?>" data-id="<?= $i->id ?>"><i
                                         class="icon icon-pencil"></i></a>
                                 <a class="del" data-id="<?= $i->id ?>"><i
@@ -46,11 +45,11 @@
                     type: 'post',
                     data: {id: id},
                     dataType: 'json',
-                    url: '/tags/delete',
+                    url: '/tag/delete',
                     success: function (res) {
                         layer.msg(res.msg);
                         if (res.status) {
-                            window.location.reload();
+                            parent.window.location.reload();
                         }
                     }
                 })
@@ -60,52 +59,32 @@
 
 
         $('.add').click(function () {
-            var id = $(this).data('id');
-            layer.prompt({
-                title: '添加',
-                btn: ['确认', '取消'], //按钮
-                formType: 0, // input.type 0:text,1:password,2:textarea
-            }, function (pass) {
-                $.ajax({
-                    type: 'post',
-                    data: {parent_id: id, name: pass},
-                    dataType: 'json',
-                    url: '/tags/add',
-                    success: function (res) {
-                        layer.msg(res.msg);
-                        if (res.status) {
-                            window.location.reload();
-                        }
-                    }
-                });
-            }, function () {
+
+            url = '/tag/add/';
+            layer.open({
+                type: 2,
+                title: '添加标签',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['50%', '40%'],
+                content: url//iframe的url
             });
+
         });
 
 
         $('.edit').click(function () {
-            var id = $(this).data('id');
-            var val = $(this).data('val');
-            layer.prompt({
-                title: '修改',
-                btn: ['确认', '取消'], //按钮
-                formType: 0, // input.type 0:text,1:password,2:textarea
-                value: val
-            }, function (pass) {
-                $.ajax({
-                    type: 'post',
-                    data: {name: pass},
-                    dataType: 'json',
-                    url: '/tags/edit/' + id,
-                    success: function (res) {
-                        layer.msg(res.msg);
-                        if (res.status) {
-                            window.location.reload();
-                        }
-                    }
-                });
-            }, function () {
+
+            url = '/tag/edit/' + $(this).attr('data-id');
+            layer.open({
+                type: 2,
+                title: '修改标签',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['50%', '40%'],
+                content: url//iframe的url
             });
+
         });
     });
 </script>
