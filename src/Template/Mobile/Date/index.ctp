@@ -55,7 +55,7 @@
 
     });
 
-    var statuses = <?= \App\Model\Table\DatesTable::getStatStr()?>;
+    var statuses = <?= \App\Model\Table\DateTable::getStatStr()?>;
     $("#publish-date-info").on('click', function(){
 
         location.href = "/date/add";

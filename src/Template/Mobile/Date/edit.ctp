@@ -59,7 +59,7 @@
                     <div class="edit_date_items flex flex_justify marks_edit">
                         <span class="edit_l_con">个人标签</span>
                         <div class="edit_r_con edit_r_marks" id="tag-container">
-                            <?php foreach ($date['tags'] as $item): ?>
+                            <?php foreach ($date['tag'] as $item): ?>
                                 <a class="mark"><?= $item['name']?><input type="text" name='tags[_ids][]'
                                                                           value="<?= $item['id']?>" tag-name="<?= $item['name']?>" hidden/></a>
                             <?php endforeach; ?>
@@ -83,11 +83,11 @@
 </div>
 <!--弹出层-->
 <!--技能选择框-->
-<?= $this->cell('Dates::skillsView', ['skills-select-view']); ?>
+<?= $this->cell('Date::skillsView'); ?>
 <!--价格选择框-->
-<?= $this->cell('Dates::costsView', ['costs-select-view']); ?>
+<?= $this->cell('Date::costsView'); ?>
 <!--标签选择框-->
-<?= $this->cell('Dates::tagsView', ['tags-select-view']); ?>
+<?= $this->cell('Date::tagsView'); ?>
 <!--日期时间选择器-->
 <?= $this->element('checkdate'); ?>
 
