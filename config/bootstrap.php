@@ -255,3 +255,4 @@ Plugin::load('ADmad/Glide');
 Configure::load('wpadmin');
 Configure::load('dataconf');
 require_once dirname(__FILE__) . '/function.php';  //引入全局函数文件
+require_once dirname(__FILE__) . '/translate.php';  //引入全局函数文件

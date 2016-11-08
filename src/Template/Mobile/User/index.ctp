@@ -131,7 +131,7 @@
 
     $("#my-dates-btn").on('click', function(){
 
-        window.location.href = "/dates/index";
+        window.location.href = "/date/index";
 
     })
 

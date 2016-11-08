@@ -97,28 +97,4 @@ class DateTable extends Table
         return $rules;
     }
 
-
-    public static function getStatStr($status = -1) {
-
-        $statuses = Array(
-            1 => "已有人赴约",
-            2 => "未有人赴约",
-            3 => "已下线"
-        );
-
-        if($status == -1) {
-
-            return json_encode($statuses);
-
-        } elseif($status == -2) {
-
-            return $statuses;
-
-        } else {
-
-            return isset($statuses[$status])?$statuses[$status] : "未知状态";
-
-        }
-
-    }
 }
