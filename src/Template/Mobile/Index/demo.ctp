@@ -38,6 +38,19 @@
             </div>
         </div>
     </div>
+    <!--示例-->
+    <div class="up_identify_box bgff mt40">
+        <div class="inner">
+            <div class="title">
+                <h3 class="color_black">如上图所示，上传9张认证照片2</h3>
+            </div>
+            <div  class="fact_identify" id="demoImg2">
+                <dl class="Idcard" data-id="up">
+                    <dt><img src="/mobile/images/upimg.png" /></dt>
+                </dl>
+            </div>
+        </div>
+    </div>
     <!--上传-->
     <div class="up_identify_box bgff mt40">
         <div class="inner">
@@ -63,6 +76,7 @@
 
 
     $.util.choosImgs('demoImg');
+    $.util.choosImgs('demoImg2');
     $.util.chooseVideo('up_video');
 
     $('#submit').on('tap',function(){
