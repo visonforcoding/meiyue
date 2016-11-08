@@ -2,7 +2,7 @@
     <div class="activity_list">
         <div class="date_list">
             <div class="date_list_header">
-                <div class="tab-btn alldate current" tab-action="/dates/index" tpl_id="date_tpl"><span
+                <div class="tab-btn alldate current" tab-action="/date/index" tpl_id="date_tpl"><span
                         class="headertab">约会</span></div>
                 |
                 <div class="tab-btn todate" tab-action=""><span class="headertab">派对</span></div>
@@ -48,7 +48,7 @@
 </script>
 
 <script>
-    getNetDatas('date_tpl', '/dates/index', '');
+    getNetDatas('date_tpl', '/date/index', '');
 
     //点击tab的切换动作
     $(".tab-btn").on('click', function () {

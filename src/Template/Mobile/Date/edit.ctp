@@ -179,7 +179,7 @@
 
         $.ajax({
             type: 'POST',
-            url: '/dates/edit/' + $(this).attr('date-id'),
+            url: '/date/edit/' + $(this).attr('date-id'),
             data: $("form").serialize(),
             dataType: 'json',
             success: function (res) {
@@ -187,7 +187,7 @@
                     if (res.status) {
 
                         alert(res.msg);
-                        window.location.href = '/dates/index';
+                        window.location.href = '/date/index';
 
                     } else {
 
@@ -206,14 +206,14 @@
         if(confirm("确定删除?")) {
             $.ajax({
                 type: 'POST',
-                url: '/dates/delete/' + <?= $date['id']?>,
+                url: '/date/delete/' + <?= $date['id']?>,
                 dataType: 'json',
                 success: function (res) {
                     if (typeof res === 'object') {
                         if (res.status) {
 
                             alert(res.msg);
-                            window.location.href = '/dates/index';
+                            window.location.href = '/date/index';
 
                         } else {
 

@@ -194,3 +194,18 @@ function getAge($birthday) {
 
 }
 
+
+/**
+ * //根据开始时间，结束时间，单价计算总价和付费百分比计算价格
+ * @param \Cake\I18n\Time $start_time
+ * @param \Cake\I18n\Time $end_time
+ * @param double $price
+ * @param float $percent
+ * @return float;
+ */
+function getCost($start_time, $end_time, $price, $percent = 1.0) {
+
+    return ($end_time->hour - $start_time->hour) * $price * $percent;
+
+}
+

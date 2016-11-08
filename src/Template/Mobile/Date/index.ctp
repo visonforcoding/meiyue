@@ -58,7 +58,7 @@
     var statuses = <?= \App\Model\Table\DatesTable::getStatStr()?>;
     $("#publish-date-info").on('click', function(){
 
-        location.href = "/dates/add";
+        location.href = "/date/add";
 
     });
 
@@ -86,7 +86,7 @@
     function getNetDatas(options) {
 
         $.ajax({
-            url: "/dates/index/" + <?= $user->id ?>,
+            url: "/date/index/" + <?= $user->id ?>,
             type: "POST",
             data: options,
             dataType: "json",
@@ -116,7 +116,7 @@
 
     $(document).on("click", ".date-item", function() {
 
-        window.location.href = '/dates/view/' + $(this).attr('date-id');
+        window.location.href = '/date/view/' + $(this).attr('date-id');
 
     });
 
