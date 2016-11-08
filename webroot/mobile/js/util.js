@@ -437,6 +437,10 @@ $.util = {
         xhr.open(type, url, true);
         xhr.send(data);
     },
+    /**
+     * 判断是否上传过  用属性  data('max')是不是等于0
+     * @param id
+     */
     choosImgs: function (id){
         var max=9, dom = $('#'+id); dom.data('max', max);
         //dom.on('click', function(e){
@@ -472,19 +476,19 @@ $.util = {
             else if(cid >= 0 && cid < max){
                 LEMON.event.changePic({'key':id, 'index':cid},function(res){
                     res = JSON.parse(res);
-                    var cdom = $('#'+res.key);
-                    cdom.find('img').eq(res.index).attr('src', 'http://image.com/'+(new Date()).getTime()+'/'+res.key+'/'+res.index);
+                    $('#'+res.key).find('img').eq(res.index).attr('src', 'http://image.com/'+(new Date()).getTime()+'/'+res.key+'/'+res.index);
                 })
-
             }
         });
     },
+    /**
+     * 判断是否上传过  用属性  data('choosed')
+     * @param id
+     */
     chooseVideo: function(id){
         var dom = $('#'+id);
         dom.on('tap', function () {
-            var fun = dom.data('choosed') ? LEMON.event.changeVideo : LEMON.event.chooseVideo;
-            fun({'key':id},function(res){
-                alert(res);
+            LEMON.event.chooseVideo({'key':id}, function(res){
                 res = JSON.parse(res);
                 dom.find('img').eq(0).attr('src','http://video.com/'+(new Date()).getTime()+'/'+res.key);
                 dom.data('choosed', 'ok');

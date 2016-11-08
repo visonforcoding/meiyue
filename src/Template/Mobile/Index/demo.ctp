@@ -60,8 +60,24 @@
             <div class="fact_identify">
                 <dl class="Idcard">
                     <dt id="up_video">
-                    <img src="/mobile/images/upimg.png" alt="" />
-                    <i class="iconfont playbtn">&#xe600;</i>
+                        <img src="/mobile/images/upimg.png" alt="" />
+                        <i class="iconfont playbtn">&#xe600;</i>
+                    </dt>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <!--上传-->
+    <div class="up_identify_box bgff mt40">
+        <div class="inner">
+            <div class="title">
+                <h3 class="color_black">如上图所示，上传认证视频2</h3>
+            </div>
+            <div class="fact_identify">
+                <dl class="Idcard">
+                    <dt id="up_video2">
+                        <img src="/mobile/images/upimg.png" alt="" />
+                        <i class="iconfont playbtn">&#xe600;</i>
                     </dt>
                 </dl>
             </div>
@@ -78,18 +94,13 @@
     $.util.choosImgs('demoImg');
     $.util.choosImgs('demoImg2');
     $.util.chooseVideo('up_video');
+    $.util.chooseVideo('up_video2');
 
     $('#submit').on('tap',function(){
-        var param = {};
-        param['key'] = 'images';
-        param['api'] = 'saveUserBasicPic';
-        LEMON.event.uploadPics(param,function(res){
-            if(res.status){
-                alert('老子成功去上传了');
-            }else{
-                alert('老子失败去上传了');
-            }
-        })
+        if($('#demoImg').data('max') === '0') LEMON.event.uploadPics({key:'demoImg', user_id: 3});
+        if($('#demoImg2').data('max') === '0') LEMON.event.uploadPics({key:'demoImg2', user_id:'3'});
+        if($('#up_video').data('choosed')) LEMON.event.uploadVideo({key:'up_video', user_id:'3'});
+        if($('#up_video2').data('choosed')) LEMON.event.uploadVideo({key:'up_video2', user_id:'3'});
     })
 
 </script>
