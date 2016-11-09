@@ -223,6 +223,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .lagernum{font-size: 18px;}
 .smalldes{font-size: 12px;color:#666;}
 .rcon{color:#c2c2c2;font-size: 12px;}
+.bold{font-weight: 800;}
 /*定位*/
 .relpotion{position:relative;}
 .aligncenter{text-align: center;}
@@ -231,14 +232,14 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 /*字号*/
 .ft20{font-size:20px;}
 /*字体图标*/
-/*@font-face {
+@font-face {
     font-family: 'iconfont';
     src: url('../font/iconfont.eot');
     src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'),
         url('../font/iconfont.woff') format('woff'),
         url('../font/iconfont.ttf') format('truetype'),
         url('../font/iconfont.svg#iconfont') format('svg');
-}*/
+}
 
 .iconfont{
     font-family:"iconfont" !important;
@@ -249,11 +250,3 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
     /*font-size:16px;*/
 }
 /*在线图标*/
-@font-face {
-    font-family: 'iconfont';  /* project id："166621" */
-    src: url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.eot');
-    src: url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.eot') format('embedded-opentype'),
-        url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.woff') format('woff'),
-        url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.ttf') format('truetype'),
-        url('//at.alicdn.com/t/font_qdydbb12d7a54s4i.svg#iconfont') format('svg');
-}
