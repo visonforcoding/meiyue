@@ -57,7 +57,8 @@ class DateOrderController extends AppController
        ]);
        $this->set([
            'pageTitle'=> '约他',
-           'data'=>$data
+           'data'=>$data,
+           'user'=>  $this->user
        ]);    
     }
 
