@@ -43,7 +43,7 @@ class DateController extends AppController
             return $this->Util->ajaxReturn(['datas' => $datas->toArray(), 'status' => true]);
 
         }
-        $this->set("user", $this->user);
+        $this->set(["user" => $this->user, 'pageTitle' => '美约-约会管理']);
 
     }
 
@@ -59,7 +59,7 @@ class DateController extends AppController
         $date = $this->Date->get($id, [
             'contain' => ['Skill', 'User', 'Tag']
         ]);
-        $this->set('date', $date);
+        $this->set(['date' => $date, 'pageTitle' => '美约-约会详情']);
 
     }
 
@@ -79,7 +79,7 @@ class DateController extends AppController
                 return $this->Util->ajaxReturn(false, "发布失败");
             }
         }
-        $this->set(['user'=>$this->user]);
+        $this->set(['user'=>$this->user, 'pageTitle' => '美约-添加约会']);
     }
 
     /**
@@ -118,7 +118,7 @@ class DateController extends AppController
             }
 
         }
-        $this->set(['date' => $date, 'user'=>$this->user]);
+        $this->set(['date' => $date, 'user'=>$this->user, 'pageTitle' => '美约-约会编辑']);
     }
 
     /**

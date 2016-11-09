@@ -30,22 +30,22 @@ class DateCell extends Cell
     /**
      * 显示技能表选择框
      */
-    public function skillsView($container_id = '')
+    public function skillsView()
     {
         $this->loadModel("Skill");
         $list = $this->Skill->find("threaded")->toArray();
-        $this->set(["list" => $list, "container_id" => $container_id]);
+        $this->set(["list" => $list]);
     }
 
 
     /**
      * 显示价格表选择框
      */
-    public function costsView($container_id = '')
+    public function costsView()
     {
         $this->loadModel("Cost");
         $list = $this->Cost->find("threaded")->toArray();
-        $this->set(["list" => $list, "container_id" => $container_id]);
+        $this->set(["list" => $list]);
     }
 
 
@@ -54,10 +54,10 @@ class DateCell extends Cell
      * 显示标签列表选择框
      *
      */
-    public function tagsView($container_id = '')
+    public function tagsView()
     {
         $this->loadModel("Tag");
         $list = $this->Tag->find("threaded")->toArray();
-        $this->set(["list" => $list, "container_id" => $container_id]);
+        $this->set(["list" => $list]);
     }
 }

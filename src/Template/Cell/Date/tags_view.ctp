@@ -12,7 +12,7 @@
             <?php foreach ($list as $item): ?>
                 <div class="choose_mark__items">
                     <h3 class="commontitle mt20"><?= $item['name']?></h3>
-                    <ul class="bgff flex flex_justify">
+                    <ul class="bgff">
                         <?php foreach ($item['children'] as $i): ?>
                             <li class="tag-item" tag-id="<?= $i['id']?>" tag-name="<?= $i['name'] ?>">
                                 <div class="choose_marks">
@@ -40,14 +40,18 @@
     var TagsPicker = function() {};
 
 
-    var _func;
-    TagsPicker.prototype.show = function(func, datas) {
+    var _func;  //回调函数
+    var _max;   //最大选择数量
+    TagsPicker.prototype.show = function(func, datas, limit) {
 
         _func = func;
+        _max = limit;
 
         //初始化显示
+        console.log(datas);
         $(".tag-item").each(function(){
 
+            console.log($(this).attr('tag-id'))
             if(datas.indexOf($(this).attr('tag-id')) != -1) {
 
                 $(this).addClass("choosed");
@@ -96,6 +100,12 @@
 
         if(_func) {
 
+            if(tagsData.length > _max) {
+
+                alert("标签不能超过" + _max + "个!");
+                return;
+
+            }
             _func(tagsData);
             $(".tags-container").hide();
 

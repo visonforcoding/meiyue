@@ -6,9 +6,9 @@
 </header>
 <div class="wraper">
     <div class="find_date_detail">
-        <div class="activity_tips">
+        <!--<div class="activity_tips">
             <p>请抓紧时间，共有12人同时在支付中···</p>
-        </div>
+        </div>-->
         <div class="date_detail_place inner">
             <h3 class="title"><i class="itemsname color_y"><?= $date['skill']['name'] ?></i><?= $date['title'] ?></h3>
             <div class="place_pic">
@@ -51,7 +51,7 @@
             <div class="con">
                 <div class="date_time  flex flex_justify">
                     <span>我的钱包</span>
-                    <div class="color_y"><?= $date['user']['money'] ?> 美币</div>
+                    <div class="color_y"><?= $user['money'] ?> 美币</div>
                 </div>
             </div>
         </div>
