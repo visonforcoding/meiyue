@@ -62,9 +62,9 @@
                     <ul class="outerblock">
                         <li>
                             <div class="date_time flex flex_justify">
-                                <span>共<i id="lasth" class="color_y">3</i>小时</span>
+                                <span>共<i id="lasth" class="color_y">0</i>小时</span>
                                 <div>
-                                    <span>合计：<i id="total_money" class="lagernum color_y">900</i><i class="color_y">美币</i></span>
+                                    <span>合计：<i id="total_money" class="lagernum color_y">0</i><i class="color_y">美币</i></span>
                                 </div>
                             </div>
                         </li>
@@ -72,7 +72,7 @@
                             <div class="date_time  flex flex_justify">
                                 <span>预约金</span>
                                 <div>
-                                    <span id="order_money">0美币</span>
+                                    <span id="order_money_str">0美币</span>
                                 </div>
                             </div>
                         </li>
@@ -85,7 +85,7 @@
                 <div class="con">
                     <div class="date_time  flex flex_justify">
                         <span>我的钱包</span>
-                        <div class="color_y">90 美币</div>
+                        <div class="color_y"><?=$user->money?> 美币</div>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
     <div style="height:1.4rem;"></div>
     <div class="bottomblock">
         <div class="flex flex_end">
-            <span class="total">预约金：<i class="color_y">￥</i> <span class="color_y"><i class="color_y lagernum">180 </i>美币</span></span>
+            <span class="total">预约金：<i class="color_y">￥</i> <span class="color_y"><i id="order_money" class="color_y lagernum">0</i>美币</span></span>
             <a href="javascript:void(0);" class="nowpay">立即支付</a>
         </div>
         <!--日期时间选择器-->
@@ -106,8 +106,9 @@
                  var lasth = new Date(end_datetime).getHours() - new Date(start_datetime).getHours();
                  $('#lasth').html(lasth);
                  var price = <?= $data->cost->money ?>;
-                 $('#total_money').html(lasth*);
-                 $('#order_money').html(lasth*<?= $data->cost->money ?>+'');
+                 $('#total_money').html(lasth*price);
+                 $('#order_money_str').html(lasth*price+'x20%='+lasth*price*0.2+'美币');
+                 $('#order_money').html(lasth*price*0.2);
                 var time_tmpstart = (start_datetime).split(" ");
                 var time_tmpend = (end_datetime).split(" ");
                 var year_month_date = time_tmpstart[0];

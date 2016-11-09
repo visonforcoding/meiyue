@@ -94,6 +94,10 @@ class AppController extends Controller {
 
     public function beforeFilter(Event $event) {
         $this->user = $this->request->session()->read('User.mobile');
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        if($this->user){
+            $this->user = $UserTable->findById($this->user->id)->first();
+        }
         $this->coord = $this->request->cookie('coord')?$this->request->cookie('coord'):'114.044555,22.6453';
         if (!$this->user && $this->request->isLemon()) {
             //debug($this->request->cookie('login_token'));
