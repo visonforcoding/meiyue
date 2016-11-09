@@ -177,7 +177,7 @@
             </li>
         <?php endif; ?>
         <li>
-            <a href="#this">
+            <a href="/index/find-skill/<?=$user->id?>">
                 <i class="iconfont">&#xe632;</i>约Ta
             </a>
         </li>

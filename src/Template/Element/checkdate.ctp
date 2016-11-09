@@ -217,13 +217,13 @@
 
             if(current >= start) {
 
-                alert("约会时间不能小于当前时间!");
+                $.util.alert("约会时间不能小于当前时间!");
                 return;
 
             }
             if(((end - start) / (1000 * 60 * 60)) < 3) {
 
-                alert("约会时长最少3个小时!");
+                $.util.alert("约会时长最少3个小时!");
                 return;
 
             }

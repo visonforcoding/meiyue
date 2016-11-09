@@ -54,7 +54,7 @@ class UserSkillTable extends Table
             'joinTable' => 'lm_user_skill_tag',
             'foreignKey' => 'user_skill_id',
             'targetForeignKey' => 'tag_id',
-            'className' => 'tag'
+            'className' => 'Tag'
         ]);
     }
 

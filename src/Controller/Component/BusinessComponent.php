@@ -29,7 +29,7 @@ class BusinessComponent extends Component
             $skills = $SkillTable->find()->hydrate(true)->where(['parent_id'=>0])->toArray();
             if($skills){
                 \Cake\Cache\Cache::write('topskill',$skills);
-            }
+            } 
         }
         return $skills;
     }

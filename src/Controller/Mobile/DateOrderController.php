@@ -37,6 +37,28 @@ class DateOrderController extends AppController
     {
 
     }
-
+    
+    /**
+     * 约技能
+     * @param type $skill_id
+     */
+    public function orderSkill($skill_id){
+       $UserSkillTable = TableRegistry::get('UserSkill');
+       $data = $UserSkillTable->get($skill_id,[
+           'contain'=>[
+               'User'=>function($q){
+                    return $q->select(['id','avatar','birthday','nick']);
+               },
+               'Skill'=>function($q){
+                    return $q->select(['skill_id'=>'Skill.id','name']);
+               },        
+               'Tags','Cost'      
+           ]    
+       ]);
+       $this->set([
+           'pageTitle'=> '约他',
+           'data'=>$data
+       ]);    
+    }
 
 }
