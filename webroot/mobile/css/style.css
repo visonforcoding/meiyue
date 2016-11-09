@@ -62,8 +62,8 @@ header{overflow: hidden;}
 .iden_r_box{position: relative;width:2.5rem;}
 .iden_r_box .potion{position:absolute;right:0;top:0;color:#959da7;}
 .identify_basic_info .right_ico{color:#959da7;}
-.identify_footer_potion{height:42px;width:100%;max-width: 750px;position:fixed;margin:0 auto;line-height: 42px;text-align: center;color:#fff;
-background: #eab96a;bottom:0;font-size:18px;}
+.identify_footer_potion,.identify_dark_potion{height:42px;width:100%;max-width: 750px;position:fixed;margin:0 auto;line-height: 42px;text-align: center;color:#fff;background: #eab96a;bottom:0;font-size:18px;}
+.identify_dark_potion{background: #fff;color:#999;box-shadow: 0 0 1px rgba(0,0,0,.2);}
 /*
  * 开始认证
  * */
@@ -457,7 +457,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .wx_popup{position:relative;margin-top:-60px;}
 .popup .popup_con{color:#000000;line-height: 24px;padding:0 .2rem .4rem;}
 .popup .popup_footer{height:44px;line-height: 44px;}
-.popup .popup_footer span.footerbtn{display: block;width:50%;text-align: center;box-shadow: 0 -1px 0 rgba(0,0,0,.2);}
+.popup .popup_footer span.footerbtn{display: block;width:50%;text-align: center;box-shadow: 0 -1px 0 rgba(0,0,0,.1);}
 .popup .popup_footer span.cancel{color:#7f7f7f;}
 .popup .popup_footer span.gopay{color:#fff;background: #eab96a;border-radius: 0 0 5px 0;}
 .popup .wx_copy_con{padding:.2rem .1rem;}
@@ -735,3 +735,44 @@ text-align: center;line-height: .62rem;font-size: 18px;color: #666;font-weight: 
 .rank_con .place_info h3 .place_name i{margin-right:.1rem;}
 
 
+/*
+ * 我的技能
+ * */
+.ability_items{background: #fff;}
+.switchbox{height:70px;}
+.ability_items .switch{width:65px;height:32px;position:relative;border-radius: 15px;}
+.ability_items .on{background: #eab96a;transition: all .2s ease-in;}
+.ability_items .switch i{display: block;width:28px;height:28px;border-radius: 50%;background: #fff;margin:2px;position:absolute;
+box-shadow: 0 0 1px rgba(0,0,0,.2);}
+.ability_items .on i{right:0;transition: all .2s ease-in;}
+.ability_items .off{background: #efefef;transition: all .2s ease-in;transition: all .2s ease-in;}
+.ability_items .off i{left:0;transition: all .2s ease-in;}
+.ability_items ul{overflow: hidden;width:100%;}
+.ability_items li{height:70px;}
+.ability_items li .switch{margin-left:.2rem;}
+.edit_ability li,.edit_ability li .items{height:45px;}
+.edit_ability .date_text{padding:.2rem 0;}
+.edit_ability .date_text textarea{width:100%;height:66px;font-size:13px;color:#666;margin-top:.1rem;border:none;}
+/*
+ * 
+ 约单待确认
+ */
+.date_head_info{width:100%;height:2.4rem;background: url(icon/date.jpg) no-repeat left center;background-size: cover;padding:.4rem 0;}
+.date_head_info .avatar{width:1.66rem;height:1.66rem;overflow: hidden;border-radius: 50%;position: absolute;}
+.date_head_info .avatar img{width:100%;height:100%;display: block;}
+.date_head_info .date_head_con{height:1.6rem;}
+.date_head_info .l_con{padding-left:1.8rem;vertical-align: middle;height:1.6rem;display: table-cell;vertical-align: middle;}
+.date_head_info .l_info{}
+.date_head_info .l_info h3{font-size: 16px;color:#fffefe;margin-bottom:.2rem;}
+.date_head_info .translate{display: inline-block;width:12px;height:12px;font-size: 15px;background: #fFF;border-radius: 2px;line-height: 15px;margin-right: .1rem;background-size:contain ;}
+/**/
+.date_ability_list .title{height:45px;}
+.date_ability_list li{height:55px;}
+.date_ability_list li .date_info h3{font-size: 13px;color:#999;line-height: 20px;}
+.date_info .mark{display:inline-block;height:22px;color:#999;font-size: 11px;background: #efefef;border-radius: 10px;padding:0 .12rem;line-height: 22px;}
+.date_ability_pay li{height:45px;}
+.date_bosses{background: #fff;height:45px;border-top:1px #efefef solid;}
+.potion_footer{height:40px;background: #fff;position: fixed;bottom:0;width:100%;max-width:750px;box-shadow: 0 -1px 1px rgba(0,0,0,.1);}
+.potion_footer span{display: block;width:50%;text-align: center;font-size: 18px;height:40px;line-height: 40px;}
+.potion_footer span.cancel{color:#999;}
+.potion_footer span.gopay{color:#fff;background: #EAB96A;}
