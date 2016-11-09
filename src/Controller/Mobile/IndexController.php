@@ -67,7 +67,7 @@ class IndexController extends AppController {
                 return $q->where(['parent_id'=>$skill]);
             });
         }
-        $query->where(['enabled' => 1, 'status' => 3]);
+        $query->where(['enabled' => 1, 'status' => 3,'gender'=>2]);
         $height = $this->request->query('height');
         $query->where(['enabled' => 1, 'status']);
         $query->order(['distance' => 'asc','login_time' => 'desc']);
@@ -124,6 +124,22 @@ class IndexController extends AppController {
             'distance' => $distance,
             'birthday' => $birthday,
             'isFollow'=> $isFollow,
+        ]);
+    }
+    
+    /**
+     * 约她  技能列表
+     * @param type $id
+     */
+    public function findSkill($id){
+        $UserSkillTable = \Cake\ORM\TableRegistry::get('UserSkill');
+        $this->loadComponent('Business');
+        $topSkills = $this->Business->getTopSkill();
+        $userSkills = $UserSkillTable->find()->contain(['Skill'])->where(['user_id'=>$id])->toArray();
+        $this->set([
+            'pageTitle'=>'约她',
+            'topSkills'=>$topSkills,
+            'userSkills'=>$userSkills
         ]);
     }
 

@@ -69,31 +69,5 @@
 
 <script>
 
-    $(".toback").on('click', function(){
-
-        history.back();
-
-    })
-
-
-    $(".nowpay").on('click', function(){
-
-        $.ajax({
-            url: "/date-order/",
-            type: "POST",
-            data: options,
-            dataType: "json",
-            success: function (res) {
-
-                if (res.status) {
-
-
-                }
-
-            }
-
-        });
-
-    })
 
 </script>
