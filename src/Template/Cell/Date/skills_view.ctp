@@ -9,7 +9,7 @@
             <?php foreach ($list as $item): ?>
             <div class="choose_mark__items">
                 <h3 class="commontitle mt20"><?= $item['name']?></h3>
-                <ul class="bgff flex flex_justify">
+                <ul class="bgff">
                     <?php foreach ($item['children'] as $i): ?>
                         <li class="skill-item" val="<?= $i['id'] ?>" name="<?= $i['name'] ?>">
                             <div class="choose_marks">

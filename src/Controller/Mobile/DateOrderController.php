@@ -29,6 +29,10 @@ class DateOrderController extends AppController
     }
 
 
+    /**
+     * 约会支付接口--赴约流程
+     *
+     */
     public function joinPay()
     {
 

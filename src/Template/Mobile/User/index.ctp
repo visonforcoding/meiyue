@@ -73,7 +73,7 @@
     <div class="home_items_list mt40">
         <ul>
             <li>
-                <a href="#this"  class="home_items">
+                <a href="/userc/user-skills-index"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe60d;</i><span class="itemsname">我的技能</span></div>
                     <div class="home_list_r_info">
                         <i class="iconfont">&#xe605;</i>
@@ -81,7 +81,7 @@
                 </a>
             </li>
             <li id="my-dates-btn">
-                <a href="#this"  class="home_items">
+                <a href="/date/index"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe60f;</i><span class="itemsname">我发起的约会</span></div>
                     <div class="home_list_r_info">
                         <i class="iconfont">&#xe605;</i>
@@ -125,15 +125,3 @@
 <div style="height:1.4rem"></div>
 <!--底部-->
 <?= $this->element('footer', ['active' => 'me']) ?>
-
-<script>
-
-    $("#my-dates-btn").on('click', function(){
-
-        window.location.href = "/date/index";
-
-    })
-
-
-
-</script>

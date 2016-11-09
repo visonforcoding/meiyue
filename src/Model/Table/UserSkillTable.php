@@ -71,13 +71,24 @@ class UserSkillTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('desc', 'create')
-            ->notEmpty('desc');
+            ->integer('skill_id')
+            ->requirePresence('skill_id', 'create')
+            ->notEmpty('skill_id', '请选择技能名称');
+
+        $validator
+            ->integer('cost_id')
+            ->requirePresence('cost_id', 'create')
+            ->notEmpty('cost_id', '请选择技能价格');
 
         $validator
             ->integer('is_used')
             ->requirePresence('is_used', 'create')
-            ->notEmpty('is_used');
+            ->notEmpty('is_used', '非法请求');
+
+        $validator
+            ->integer('is_checked')
+            ->requirePresence('is_checked', 'create')
+            ->notEmpty('is_checked', '非法请求');
 
         return $validator;
     }
