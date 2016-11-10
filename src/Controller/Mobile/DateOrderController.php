@@ -20,7 +20,8 @@ class DateOrderController extends AppController
     {
 
         $dateTable = TableRegistry::get("Date");
-        $date = $dateTable->get($id, ['contain' => ['Skill', 'Tag', 'User' => function ($q) {
+        $date = $dateTable->get($id, ['contain' => ['UserSkill' =>function($q){
+            return $q->contain(['Skill', 'Cost']);}, 'Tags', 'User' => function ($q) {
             return $q->select(['nick', 'birthday', 'gender', 'money']);
         }]]);
         $this->set(['date' => $date, 'user' => $this->user]);
