@@ -118,3 +118,23 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
+
+CREATE TABLE `lm_flow` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL COMMENT '收款方',
+	`consumer_id` INT(11) NOT NULL COMMENT '支付方',
+	`relate_id` INT(11) NOT NULL COMMENT '关联表，与type交易类型一起使用',
+	`type` INT(11) NOT NULL COMMENT '交易类型：1#约单交易',
+	`income` TINYINT(4) NOT NULL COMMENT '收支类型：1#收入 2#支出',
+	`amount` DOUBLE NOT NULL COMMENT '金额',
+	`remark` VARCHAR(255) NOT NULL COMMENT '备注',
+	`pre_amount` DOUBLE NOT NULL COMMENT '交易前金额',
+	`after_amount` DOUBLE NOT NULL COMMENT '交易后金额',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='美币收支表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
