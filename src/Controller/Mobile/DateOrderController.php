@@ -8,6 +8,7 @@ use Cake\ORM\TableRegistry;
  * DateOrder Controller
  *
  * @property \App\Model\Table\DateOrderTable $DateOrder
+ * @property \App\Controller\Component\BdmapComponent $Bdmap
  */
 class DateOrderController extends AppController
 {
@@ -62,5 +63,13 @@ class DateOrderController extends AppController
            'user'=>  $this->user
        ]);    
     }
-
+    
+    /**
+     * 选择地点
+     */
+    public function findPlace($page){
+        $this->loadComponent('Bdmap');
+        $places = $this->Bdmap->placeSearchNearBy('咖啡', $this->coord,$page);
+        return $this->Util->ajaxReturn(['places'=>$places]);
+    }
 }

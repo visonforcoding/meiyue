@@ -462,6 +462,40 @@ $.util = {
         xhr.send(data);
     },
     /**
+     * 
+     * @param {object} opt
+     * @returns {undefined}
+     */
+    asyLoadData: function (opt) {
+        $.util.showPreloader();
+        var gurl = opt.gurl;
+        var more = opt.more;
+        var template = $(opt.tpl).html();
+        Mustache.parse(template);   // optional, speeds up future uses
+        if (!opt['query']) {
+            url = gurl + opt.page;
+        } else {
+            url = gurl + opt.page + opt['query'];
+        }
+        $.getJSON(url, function (data) {
+            window.holdLoad = false
+            if (data.code === 200) {
+                $.util.hidePreloader();
+                if (!data[opt.key].length) {
+                    window.holdLoad = true;
+                } else {
+                    var rendered = Mustache.render(template, data);
+                    curpage++;
+                    if (more) {
+                        $(opt.id).append(rendered);
+                    } else {
+                        $(opt.id).html(rendered);
+                    }
+                }
+            }
+        });
+    },
+    /**
      * 判断是否上传过  用属性  data('max')是不是等于0
      * @param id
      */
