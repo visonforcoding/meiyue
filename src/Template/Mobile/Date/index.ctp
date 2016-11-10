@@ -31,7 +31,7 @@
         <div class="date_item_des">
             <div class="flex flex_justify bdbottom">
                 <h3 class='maxwid70'><i class="itemsname color_y">[{#skill_name#}]</i>{#title#}</h3>
-                <span class="price">{#price#}</span>
+                <span class="price">{#price#}美币/小时</span>
             </div>
             <div class="flex flex_justify">
                 <h3>
@@ -94,6 +94,12 @@
 
                 if(res.status) {
 
+                    if((res.datas).length == 0) {
+
+                        $('#dates-list-container').html('');
+                        return;
+
+                    }
                     $.util.dataToTpl("dates-list-container", "tpl", res.datas, function(d){
                         var time_tmpstart = (d.start_time).split(" ");
                         var time_tmpend = (d.end_time).split(" ");
@@ -101,7 +107,8 @@
                         var start_hour_second = (time_tmpstart[1]).substring(0, (time_tmpstart[1]).lastIndexOf(':'));
                         var end_hour_second = (time_tmpend[1]).substring(0, (time_tmpend[1]).lastIndexOf(':'));
                         d.time = year_month_date + " " + start_hour_second + "~" + end_hour_second;
-                        d.skill_name = d.skill.name;
+                        d.skill_name = d.user_skill.skill.name;
+                        d.price = d.user_skill.cost.money;
                         d.status = statuses[d.status];
                         return d;
                     });

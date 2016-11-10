@@ -18,8 +18,8 @@ use Cake\ORM\Entity;
  * @property int $user_id
  * @property \Cake\I18n\Time $created_time
  *
- * @property \App\Model\Entity\Skill $skill
- * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\UserSkill $userSkill
+ * @property \App\Model\Entity\User $userw
  */
 class Date extends Entity
 {

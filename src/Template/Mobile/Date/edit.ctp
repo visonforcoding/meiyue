@@ -12,8 +12,9 @@
                     <div class="edit_date_items flex">
                         <h3 class="edit_l_con">约会主题</h3>
                         <div class="edit_r_con">
-                            <input id="show-skill-name" type="text" value="<?= $date['skill']['name'] ?>" readonly/>
-                            <input id="skill-id-input" type="text" name="skill_id" value="<?= $date['skill']['id'] ?>" hidden>
+                            <input id="show-skill-name" type="text" placeholder="请选择约会主题" value="<?= $date['user_skill']['skill']['name'] ?>" readonly="true"/>
+                            <input id="skill-id-input" name="user_skill_id" type="text" placeholder="请选择约会主题" value=""
+                                   hidden="true"/>
                         </div>
                     </div>
                 </li>
@@ -49,7 +50,8 @@
                     <div class="edit_date_items flex">
                         <h3 class="edit_l_con">约会价格</h3>
                         <div class="edit_r_con">
-                            <input type="number" name="price" value="300" readonly/>
+                            <input type="text" value="<?= $date['user_skill']['cost']['money']?> 美币/小时" readonly/>
+                            <input type="number" name="price" value="<?= $date['user_skill']['cost']['money']?>" readonly/>
                         </div>
                     </div>
                 </li>
@@ -59,7 +61,7 @@
                     <div class="edit_date_items flex flex_justify marks_edit">
                         <span class="edit_l_con">个人标签</span>
                         <div class="edit_r_con edit_r_marks" id="tag-container">
-                            <?php foreach ($date['tag'] as $item): ?>
+                            <?php foreach ($date['tags'] as $item): ?>
                                 <a class="mark"><?= $item['name']?><input type="text" name='tags[_ids][]'
                                                                           value="<?= $item['id']?>" tag-name="<?= $item['name']?>" hidden/></a>
                             <?php endforeach; ?>
@@ -70,7 +72,7 @@
             <div class="mt40 inner edit_date_desc">
                 <h3 class="title">约会说明</h3>
                 <div class="text_con">
-                    <textarea>100字以内</textarea>
+                    <textarea name="description" ><?= $date['description']; ?></textarea>
                 </div>
             </div>
             <input type="text" name="user_id" value="<?= $user->id ?>" hidden>
@@ -83,7 +85,7 @@
 </div>
 <!--弹出层-->
 <!--技能选择框-->
-<?= $this->cell('Date::skillsView'); ?>
+<?= $this->cell('Date::skillsView', ['user_id' => $user->id]); ?>
 <!--价格选择框-->
 <?= $this->cell('Date::costsView'); ?>
 <!--标签选择框-->
@@ -100,10 +102,12 @@
     });
 
     //约会主题选择回调函数
-    function chooseSkillCallBack(name, value) {
+    function chooseSkillCallBack(userSkill) {
 
-        $("#skill-id-input").val(value);
-        $("#show-skill-name").val(name);
+        $("#skill-id-input").val(userSkill['id']);
+        $("#show-skill-name").val(userSkill['skill_name']);
+        $('#cost-btn').val(userSkill['cost'] + " 美币/小时");
+        $('#cost-input').val(userSkill['cost']);
 
     }
 

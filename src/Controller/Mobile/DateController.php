@@ -20,13 +20,15 @@ class DateController extends AppController
 
         if($this->request->is("post")) {
 
-            $datas = $this->Date->find("all", ['contain' => ['Skill']]);
+            $datas = $this->Date->find("all")->contain(['UserSkill' => function($q){
+                return $q->contain(['Skill', 'Cost']);
+            }]);
             if($user_id) {
 
-                $datas = $datas->where(['user_id' => $user_id]);
+                $datas = $datas->where(['Date.user_id' => $user_id]);
                 if(isset($this->request->data['status'])) {
 
-                    $datas->where(["status" => $this->request->data['status']]);
+                    $datas->where(["Date.status" => $this->request->data['status']]);
 
                 }
 
@@ -57,7 +59,9 @@ class DateController extends AppController
     public function view($id = null)
     {
         $date = $this->Date->get($id, [
-            'contain' => ['Skill', 'User', 'Tag']
+            'contain' => ['UserSkill' => function($q){
+                return $q->contain(['Skill', 'Cost']);
+            }, 'User', 'Tags']
         ]);
         $this->set(['date' => $date, 'pageTitle' => '美约-约会详情']);
 
@@ -91,9 +95,10 @@ class DateController extends AppController
      */
     public function edit($id = null, $status = null)
     {
-
         $date = $this->Date->get($id, [
-            'contain' => ['Skill', 'User', 'Tag']
+            'contain' => ['UserSkill' => function($q){
+                return $q->contain(['Skill', 'Cost']);
+            }, 'User', 'Tags']
         ]);
         //修改信息
         if($this->request->is("POST")) {

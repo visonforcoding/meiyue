@@ -16,7 +16,7 @@
                         <h3 class="edit_l_con">约会主题</h3>
                         <div class="edit_r_con">
                             <input id="show-skill-name" type="text" placeholder="请选择约会主题" value="" readonly="true"/>
-                            <input id="skill-id-input" name="skill_id" type="text" placeholder="请选择约会主题" value=""
+                            <input id="skill-id-input" name="user_skill_id" type="text" placeholder="请选择约会主题" value=""
                                    hidden="true"/>
                         </div>
                     </div>
@@ -49,11 +49,12 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <li class="noafter">
                     <div class="edit_date_items flex">
                         <h3 class="edit_l_con">约会价格</h3>
                         <div class="edit_r_con">
-                            <input name="price" id="cost-btn" type="number" readonly="true" placeholder="选择约会价格" value="300"/>
+                            <input id="cost-btn" type="text" readonly="true" placeholder="无需手动填写" value=""/>
+                            <input id="cost-input" name="price" type="number" readonly="true" value="" hidden/>
                         </div>
                     </div>
                 </li>
@@ -81,11 +82,11 @@
 </div>
 <!--弹出层-->
 <!--技能选择框-->
-<?= $this->cell('Date::skillsView', ['skills-select-view']); ?>
+<?= $this->cell('Date::skillsView', ['user_id' => $user->id]); ?>
 <!--价格选择框-->
-<?= $this->cell('Date::costsView', ['costs-select-view']); ?>
+<?= $this->cell('Date::costsView'); ?>
 <!--标签选择框-->
-<?= $this->cell('Date::tagsView', ['tags-select-view']); ?>
+<?= $this->cell('Date::tagsView'); ?>
 <!--日期时间选择器-->
 <?= $this->element('checkdate'); ?>
 
@@ -100,10 +101,12 @@
     });
 
     //约会主题选择回调函数
-    function chooseSkillCallBack(name, value) {
+    function chooseSkillCallBack(userSkill) {
 
-        $("#skill-id-input").val(value);
-        $("#show-skill-name").val(name);
+        $("#skill-id-input").val(userSkill['id']);
+        $("#show-skill-name").val(userSkill['skill_name']);
+        $('#cost-btn').val(userSkill['cost'] + " 美币/小时");
+        $('#cost-input').val(userSkill['cost']);
 
     }
 
@@ -231,7 +234,6 @@
     function restoreDatas() {
 
         var datas = $.util.getCookie('date_add_datas_keeper');
-        console.log(datas['tags']);
         if(datas) {
 
             var datas = JSON.parse(datas);
