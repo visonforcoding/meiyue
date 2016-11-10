@@ -10,7 +10,7 @@
             <p>请抓紧时间，共有12人同时在支付中···</p>
         </div>-->
         <div class="date_detail_place inner">
-            <h3 class="title"><i class="itemsname color_y"><?= $date['skill']['name'] ?></i><?= $date['title'] ?></h3>
+            <h3 class="title"><i class="itemsname color_y"><?= $date['user_skill']['skill']['name'] ?></i><?= $date['title'] ?></h3>
             <div class="place_pic">
 							<span class="place">
 								<img src="/mobile/images/date_place.jpg"/>
@@ -33,7 +33,7 @@
         <div class="date_des mt20">
             <h3 class="commontitle inner">我的标签</h3>
             <div class="con con_mark">
-                <?php foreach ($date['tag'] as $item): ?>
+                <?php foreach ($date['tags'] as $item): ?>
                     <a class="mark"><?= $item['name'] ?></a>
                 <?php endforeach; ?>
             </div>

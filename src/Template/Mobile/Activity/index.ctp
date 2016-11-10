@@ -32,7 +32,7 @@
         <h3 class="title"><i class="itemsname color_y">{#skill_name#}</i>{#title#}</h3>
         <div class="place_pic">
                         <span class="place">
-                            <img src="../images/date_place.jpg"/>
+                            <img src="/mobile/images/date_place.jpg"/>
                         </span>
             <div class="place_info">
                 <h3 class="userinfo">{#user_name#}<span>{#age#}岁</span> <em class="price color_y fr"><i
@@ -80,12 +80,13 @@
 
                     $.util.dataToTpl("activity_list_container", tpl_id, res.datas, function (d) {
 
+                        console.log(res.datas);
                         var start_time = new Date(d.start_time);
                         var end_time = new Date(d.end_time);
                         var timestr = start_time.getFullYear() + "-" + (start_time.getMonth() + 1) + "-" + start_time.getDate() + " " + start_time.getHours() + ":00~" + end_time.getHours() + ":00";
 
                         d.time = timestr;
-                        d.skill_name = d.skill.name;
+                        d.skill_name = d.user_skill.skill.name;
                         d.status = statuses[d.status];
                         d.user_name = d.user.nick;
                         d.age = ((new Date()).getFullYear() - (new Date(d.user.birthday)).getFullYear());
