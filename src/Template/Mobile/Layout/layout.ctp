@@ -38,5 +38,36 @@
             });
         </script>
         <?= $this->fetch('script') ?>
+        <script>
+            function asyLoadData(opt) {
+                $.util.showPreloader();
+                var gurl = opt.gurl;
+                var more = opt.more;
+                var template = $(opt.tpl).html();
+                Mustache.parse(template);   // optional, speeds up future uses
+                if (!opt['query']) {
+                    url = gurl + opt.page;
+                } else {
+                    url = gurl + opt.page + opt['query'];
+                }
+                $.getJSON(url, function (data) {
+                    window.holdLoad = false
+                    if (data.code === 200) {
+                        var rendered = Mustache.render(template, data);
+                        if (more) {
+                            $(id).append(rendered);
+                            if (!data[opt.key].length) {
+                                window.holdLoad = true;
+                            } else {
+                                curpage++;
+                            }
+                        } else {
+                            $(id).html(rendered);
+                        }
+                        $.util.hidePreloader();
+                    }
+                });
+            }
+        </script>
     </body>
 </html>

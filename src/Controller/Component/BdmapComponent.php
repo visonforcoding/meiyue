@@ -24,7 +24,7 @@ class BdmapComponent extends Component {
      * 4（bd09mc即百度米制坐标）
      * @var type 
      */
-    protected $coord_type = 1;
+    protected $coord_type = 3;
     protected $page_num = 0;
     protected $page_size = 10;
     protected $scope = 2;
@@ -40,6 +40,7 @@ class BdmapComponent extends Component {
     public function placeSearchNearBy($query, $location, $page_num = null, $tag = null, $scope = null, $radius = 2000) {
 //        http://api.map.baidu.com/place/v2/search?query=银行&location=39.915,116.404&radius=2000&output=xml&ak={您的密钥}
         $api_url = '/place/v2/search?';
+        $location = $this->formatCoord($location);
         $params = [
             'query' => $query,
             'location' => $location,
@@ -67,7 +68,7 @@ class BdmapComponent extends Component {
         if ($res->isOk()) {
             if ($data = json_decode($res->body())) {
                 if ($data->status === 0) {
-                    return $data;
+                    return $data->results;
                 } else {
                     \Cake\Log\Log::error($data->message);
                     return false;
@@ -92,6 +93,21 @@ class BdmapComponent extends Component {
             $string = stripslashes($string);
         }
         return $string;
+    }
+    
+    
+    /**
+     * 坐标格式化成纬度在前 经度在后
+     * @param type $coord
+     * @return type
+     * @throws Exception
+     */
+    public function formatCoord($coord){
+        $coord_arr = explode(',', $coord);
+        if(!$coord_arr){
+            throw new Exception('坐标参数不正确');
+        }
+        return $coord_arr[1].','.$coord_arr[0];
     }
 
 }
