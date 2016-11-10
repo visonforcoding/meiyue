@@ -11,14 +11,13 @@
 		<meta content="email=no" name="format-detection">
 		<title>滑块</title>
 		<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/loopScroll.js" type="text/javascript" charset="utf-8"></script>
 		<style type='text/css'>
 		body{font-size:14px;color:#303030;font-family: 'STHeiti','Microsoft YaHei',Helvetica,Arial,sans-serif;background: #ccc;}
 		.box{margin-top:100px;}
 		.range {position: relative;width: 200px;height: 8px;font-size: 0;line-height: 0;background: #fff;border-radius: 10px;background: #fff;}
 		.meaBox {position: absolute;left:0;right:0;height: 8px;border-radius: 10px;background: #EAB96A;top:0;bottom:0;margin:auto;}
 		.mea{position: absolute;width: 16px;height: 16px;border-radius: 50%;background: #fff;top:-4px;box-shadow: 0 1px 1px rgba(0,0,0,.2);}
-		#mea_l {left: 0;}
-		#mea_r {right:0;}
 		.flex{display: -webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: start;}
 		</style>
 	</head>
@@ -37,133 +36,8 @@
 		</div>
 
 
-
-
-		<script type='text/javascript'>
-			$(function(){
-				return;
-				var xl,xr,ll,xxl,xxr,obj,len,lnum,rnum,rx,lx;
-				$("#mea_l").on("touchstart",function(e){
-					obj = 1;//左边滑块
-					ll = $(this).offset().left;
-					console.log(ll);
-					xl = e.targetTouches[0].pageX;
-					$("#mea_l").on("touchmove",function(e){
-						if(obj ==1){
-							xxl = e.targetTouches[0].pageX - xl ;
-							lx = ll + xxl;
-							if(lx>=0&&lx<192){
-								$("#mea_l").css({"left":lx+'px'});
-								$('#meaBox').css({'left':lx+'px'});
-//								lnum =Math.floor( lx / 20);
-							} 
-						}
-						
-					})
-				})
-				$("#mea_l").on("touchend",function(e){
-					$(document).unbind("touchmove");
-				})
-				
-				$("#mea_r").on("touchstart",function(e){
-					obj = 0;//右边滑块
-					rl = $(this).offset().left;
-					xr = e.targetTouches[0].pageX;
-					$(document).on("touchmove",function(e){
-						if(obj ==0){
-							xxr = e.targetTouches[0].pageX - xr ;
-							rx = xxr + rl;
-							if(rx>0&&rx<192){
-								len= $('#range').width()-rx-16;
-								$("#mea_r").css({"left":rx+'px'});
-								$('#meaBox').css({'right':len+'px'});
-//								rnum=Math.floor(rx / 20);
-						}
-					}
-					})
-				})
-				$("#mea_r").on("touchend",function(e){
-					$(document).unbind("touchmove");
-				})
-
-			})
-		</script>
-
-
-
 	<script>
 
-		var ranger = function(o) {
-			this.opt = {
-				dom : null, //父容器
-				range:[], //数组  开始和末尾
-				reRange:[],//滑动的结果
-				highlightBar : null, //高亮的容器
-				moverleft : $(new Image()), //滑块按钮
-				moverright : $(new Image()), //滑块按钮
-				mover:null, //当前滑动的元素
-				left:0,  // highlightBar  css left
-				right:0, // highlightBar  css right
-				width : 0, //总宽度
-				movex :0,  //滑动时  移动的x距离
-				fun : function() {
-				}
-			};
-			$.extend(this, this.opt, o);
-			var obj = this, divs=this.dom.find('div');
-			this.width = this.dom.width();
-			this.highlightBar = divs.eq(0);
-			this.moverleft = divs.eq(1);
-			this.moverright = divs.eq(2);
-			this.startEvent();
-
-		};
-		$.extend(ranger.prototype, {
-			startEvent : function() {
-				var obj = this, dom = this.dom.get(0);
-				dom.addEventListener("touchstart", obj, false);
-				dom.addEventListener("touchmove", obj, false);
-				dom.addEventListener("webkitTransitionEnd", obj, false);
-			},
-			// 默认事件处理函数，事件分发用
-			handleEvent : function(e) {
-				var em = e.srcElement || e.target, bar=$(em).data('bar');
-				this.mover = $(em).data('bar');
-				if(!this.mover) return;
-				switch(e.type) {
-					case "touchstart":
-						this.movex = this.getPosition(e);
-						break;
-					case "touchmove":
-						this.touchmove(e);
-						break;
-					case "webkitTransitionEnd":
-						e.preventDefault();
-						break;
-				}
-			},
-			getPosition : function(e) {
-				var touch = e.changedTouches ? e.changedTouches[0] : e;
-				return touch.pageX;
-			},
-			touchmove : function(e) {
-				var mp = this.getPosition(e), x = mp - this.movex, m=this['mover'+this.mover], r=this.range[1] - this.range[0];
-				this.movex = mp;
-				this.mover == 'left' ? this.left += x : this.right -= x;
-				this.left = Math.min(this.left, this.width);
-				this.right = Math.min(this.right, this.width);
-				this.left = Math.max(this.left, 0);
-				this.right = Math.max(this.right, 0);
-				this.mover == 'left' ? m.css({left : this[this.mover]+'px'}) : m.css({right : this[this.mover]+'px'});
-				this.left+this.right>this.width ?
-						this.highlightBar.css({left: (this.width-this.right)+'px', right: (this.width-this.left)+'px'}):
-						this.highlightBar.css({left: this.left+'px', right: this.right+'px'});
-
-				var l = this.left, r = this.width-this.right, rg=this.range[1]-this.range[0];
-				this.reRange = [this.range[0] + rg*(Math.min(l,r)/this.width), this.range[0]+ rg*(Math.max(l,r)/this.width)];
-				console.log(this.reRange);
-			}
-		});
 
 		// 入口函数
 		new ranger({dom:$('#age'), range:[18, 40]});

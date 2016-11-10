@@ -329,3 +329,80 @@ $.extend(simpleScroll.prototype, {
 });
 
 // 入口函数  new simpleScroll(opt);
+
+
+
+var ranger = function(o) {
+    this.opt = {
+        dom : null, //父容器
+        range:[], //数组  开始和末尾
+        reRange:[],//滑动的结果
+        highlightBar : null, //高亮的容器
+        moverleft : $(new Image()), //滑块按钮
+        moverright : $(new Image()), //滑块按钮
+        mover:null, //当前滑动的元素
+        left:0,  // highlightBar  css left
+        right:0, // highlightBar  css right
+        width : 0, //总宽度
+        movex :0,  //滑动时  移动的x距离
+        fun : function() {
+        }
+    };
+    $.extend(this, this.opt, o);
+    var obj = this, divs=this.dom.find('div');
+    this.width = this.dom.width();
+    this.highlightBar = divs.eq(0);
+    this.moverleft = divs.eq(1);
+    this.moverright = divs.eq(2);
+    this.startEvent();
+
+};
+$.extend(ranger.prototype, {
+    startEvent : function() {
+        var obj = this, dom = this.dom.get(0);
+        dom.addEventListener("touchstart", obj, false);
+        dom.addEventListener("touchmove", obj, false);
+        dom.addEventListener("webkitTransitionEnd", obj, false);
+    },
+    // 默认事件处理函数，事件分发用
+    handleEvent : function(e) {
+        var em = e.srcElement || e.target, bar=$(em).data('bar');
+        this.mover = $(em).data('bar');
+        if(!this.mover) return;
+        switch(e.type) {
+            case "touchstart":
+                this.movex = this.getPosition(e);
+                break;
+            case "touchmove":
+                this.touchmove(e);
+                break;
+            case "webkitTransitionEnd":
+                e.preventDefault();
+                break;
+        }
+    },
+    getPosition : function(e) {
+        var touch = e.changedTouches ? e.changedTouches[0] : e;
+        return touch.pageX;
+    },
+    touchmove : function(e) {
+        var mp = this.getPosition(e), x = mp - this.movex, m=this['mover'+this.mover], r=this.range[1] - this.range[0];
+        this.movex = mp;
+        this.mover == 'left' ? this.left += x : this.right -= x;
+        this.left = Math.min(this.left, this.width);
+        this.right = Math.min(this.right, this.width);
+        this.left = Math.max(this.left, 0);
+        this.right = Math.max(this.right, 0);
+        this.mover == 'left' ? m.css({left : this[this.mover]+'px'}) : m.css({right : this[this.mover]+'px'});
+        this.left+this.right>this.width ?
+            this.highlightBar.css({left: (this.width-this.right)+'px', right: (this.width-this.left)+'px'}):
+            this.highlightBar.css({left: this.left+'px', right: this.right+'px'});
+
+        var l = this.left, r = this.width-this.right, rg=this.range[1]-this.range[0];
+        this.reRange = [this.range[0] + rg*(Math.min(l,r)/this.width), this.range[0]+ rg*(Math.max(l,r)/this.width)];
+        console.log(this.reRange);
+    }
+});
+
+
+// 入口函数  new ranger({dom:$('#age'), range:[18, 40]});
