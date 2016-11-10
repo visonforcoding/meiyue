@@ -350,6 +350,7 @@ var ranger = function(o) {
     };
     $.extend(this, this.opt, o);
     var obj = this, divs=this.dom.find('div');
+    this.reRange = this.range;
     this.width = this.dom.width();
     this.highlightBar = divs.eq(0);
     this.moverleft = divs.eq(1);
