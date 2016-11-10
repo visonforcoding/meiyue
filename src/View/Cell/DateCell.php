@@ -30,11 +30,15 @@ class DateCell extends Cell
     /**
      * 显示技能表选择框
      */
-    public function skillsView()
+    public function skillsView($user_id)
     {
-        $this->loadModel("Skill");
-        $list = $this->Skill->find("threaded")->toArray();
-        $this->set(["list" => $list]);
+        $UserSkillTable = \Cake\ORM\TableRegistry::get('UserSkill');
+        $topSkills = $this->getTopSkill();
+        $userSkills = $UserSkillTable->find()->contain(['Skill', 'Cost'])->where(['user_id'=>$user_id, 'is_used' => 1, 'is_checked' => 1])->toArray();
+        $this->set([
+            'topSkills'=>$topSkills,
+            'userSkills'=>$userSkills
+        ]);
     }
 
 
@@ -59,5 +63,21 @@ class DateCell extends Cell
         $this->loadModel("Tag");
         $list = $this->Tag->find("threaded")->toArray();
         $this->set(["list" => $list]);
+    }
+
+
+    /**
+     * 获取1级技能标签 从缓存或数据库当中
+     */
+    public function getTopSkill(){
+        $skills = \Cake\Cache\Cache::read('topskill');
+        if(!$skills){
+            $SkillTable = \Cake\ORM\TableRegistry::get('Skill');
+            $skills = $SkillTable->find()->hydrate(true)->where(['parent_id'=>0])->toArray();
+            if($skills){
+                \Cake\Cache\Cache::write('topskill',$skills);
+            }
+        }
+        return $skills;
     }
 }

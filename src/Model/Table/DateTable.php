@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Dates Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Skills
+ * @property \Cake\ORM\Association\BelongsTo $UserSkills
  *
  * @method \App\Model\Entity\Date get($primaryKey, $options = [])
  * @method \App\Model\Entity\Date newEntity($data = null, array $options = [])
@@ -36,15 +36,15 @@ class DateTable extends Table
         $this->displayField('title');
         $this->primaryKey('id');
 
-        $this->belongsTo('Skill', [
-            'foreignKey' => 'skill_id'
+        $this->belongsTo('UserSkill', [
+            'foreignKey' => 'user_skill_id'
         ]);
 
         $this->belongsTo('User', [
             'foreignKey' => 'user_id'
         ]);
 
-        $this->belongsToMany('Tag', [
+        $this->belongsToMany('Tags', [
             'joinTable' => 'lm_date_tag',
             'dependent' => false,
             'foreignKey' => 'date_id',
@@ -92,7 +92,7 @@ class DateTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['skill_id'], 'Skills'));
+        $rules->add($rules->existsIn(['user_skill_id'], 'UserSkill'));
 
         return $rules;
     }

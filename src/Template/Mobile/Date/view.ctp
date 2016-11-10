@@ -6,10 +6,10 @@
 </header>
 <div class="wraper">
     <div class="date_detail_place inner">
-        <h3 class="title"><i class="itemsname color_y"><?= $date['skill']['name']?></i> <?= $date['title']?></h3>
+        <h3 class="title"><i class="itemsname color_y"><?= $date['user_skill']['skill']['name']?></i> <?= $date['title']?></h3>
         <div class="place_pic">
 					<span class="place">
-						<img src="../images/date_place.jpg"/>
+						<img src="/mobile/images/date_place.jpg"/>
 					</span>
             <div class="place_info">
                 <h3 class="userinfo"><?= $date['user']['nick']?>

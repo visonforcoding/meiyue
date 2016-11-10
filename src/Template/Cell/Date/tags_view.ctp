@@ -48,10 +48,8 @@
         _max = limit;
 
         //初始化显示
-        console.log(datas);
         $(".tag-item").each(function(){
 
-            console.log($(this).attr('tag-id'))
             if(datas.indexOf($(this).attr('tag-id')) != -1) {
 
                 $(this).addClass("choosed");
@@ -102,8 +100,7 @@
 
             if(tagsData.length > _max) {
 
-                alert("标签不能超过" + _max + "个!");
-                return;
+                alert("标签不能超过");
 
             }
             _func(tagsData);
