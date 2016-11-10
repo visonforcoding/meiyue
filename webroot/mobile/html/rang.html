@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-orientation" content="portrait">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<title>滑块</title>
+		<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type='text/css'>
+		body{font-size:14px;color:#303030;font-family: 'STHeiti','Microsoft YaHei',Helvetica,Arial,sans-serif;background: #ccc;}
+		.box{margin-top:100px;}
+		#range {position: relative;width: 200px;height: 8px;font-size: 0;line-height: 0;background: #fff;border-radius: 10px;background: #fff;}
+		#meaBox {position: absolute;left:0;right:0;height: 8px;border-radius: 10px;background: #EAB96A;top:0;bottom:0;margin:auto;}
+		.mea{position: absolute;width: 16px;height: 16px;border-radius: 50%;background: #fff;top:-4px;box-shadow: 0 1px 1px rgba(0,0,0,.2);}
+		#mea_l {left: 0;}
+		#mea_r {right:0;}
+		.flex{display: -webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: start;}
+		</style>
+	</head>
+	<body>
+		<div class="box flex clearfix">
+			<div>
+				<div id='range' class="">
+					<div id='meaBox' ></div>
+					<div id='mea_l' class='mea'></div>
+					<div id='mea_r' class='mea'></div>
+				</div>
+			</div>
+			
+		</div>
+		
+		
+		<script type='text/javascript'>
+			$(function(){
+				var xl,xr,ll,xxl,xxr,obj,len,lnum,rnum,rx,lx;
+				$("#mea_l").on("touchstart",function(e){
+					obj = 1;//左边滑块
+					ll = $(this).offset().left;
+					console.log(ll);
+					xl = e.targetTouches[0].pageX;
+					$("#mea_l").on("touchmove",function(e){
+						if(obj ==1){
+							xxl = e.targetTouches[0].pageX - xl ;
+							lx = ll + xxl;
+							if(lx>=0&&lx<192){
+								$("#mea_l").css({"left":lx+'px'});
+								$('#meaBox').css({'left':lx+'px'});
+//								lnum =Math.floor( lx / 20);
+							} 
+						}
+						
+					})
+				})
+				$("#mea_l").on("touchend",function(e){
+					$(document).unbind("touchmove");
+				})
+				
+				$("#mea_r").on("touchstart",function(e){
+					obj = 0;//右边滑块
+					rl = $(this).offset().left;
+					xr = e.targetTouches[0].pageX;
+					$(document).on("touchmove",function(e){
+						if(obj ==0){
+							xxr = e.targetTouches[0].pageX - xr ;
+							rx = xxr + rl;
+							if(rx>0&&rx<192){
+								len= $('#range').width()-rx-16;
+								$("#mea_r").css({"left":rx+'px'});
+								$('#meaBox').css({'right':len+'px'});
+//								rnum=Math.floor(rx / 20);
+						}
+					}
+					})
+				})
+				$("#mea_r").on("touchend",function(e){
+					$(document).unbind("touchmove");
+				})
+
+			})
+		</script>
+	</body>
+
+</html>
