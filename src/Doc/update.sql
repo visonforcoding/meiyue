@@ -89,3 +89,32 @@ AUTO_INCREMENT=12
 ;
 
 
+##20161110
+CREATE TABLE `lm_dateorder` (
+	`id` INT(255) NOT NULL AUTO_INCREMENT,
+	`dater_name` VARCHAR(50) NOT NULL DEFAULT '0' COMMENT '服务提供者姓名',
+	`consumer` VARCHAR(50) NOT NULL DEFAULT '0' COMMENT '消费者姓名',
+	`date_id` INT(11) NOT NULL DEFAULT '0' COMMENT '对应约会',
+	`dater_id` INT(11) NOT NULL DEFAULT '0' COMMENT '服务提供者',
+	`user_skill_id` INT(11) NOT NULL COMMENT '标签列表',
+	`created_time` DATETIME NOT NULL COMMENT '生成时间',
+	`status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '订单状态码： 1#消费者未支付预约金 2#消费者超时未支付预约金，订单取消 3#消费者已支付预约金 4#消费者取消订单 5#受邀者拒绝约单 6#受邀者超时未响应，自动退单 7#受邀者确认约单 8#受邀者取消订单 9#消费者超时未付尾款 10#消费者已支付尾款 11#消费者退单 12#受邀者退单 13#受邀者确认到达 14#订单完成 15#已评价 16#订单失败',
+	`update_time` DATETIME NOT NULL COMMENT '订单更新时间',
+	`operate_status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '用户操作状态码：0#无操作 1#消费者删除订单 2#被约者删除订单 3#双方删除订单',
+	`site` VARCHAR(50) NOT NULL COMMENT '约会地点',
+	`consumer_id` INT(11) NOT NULL DEFAULT '0' COMMENT '消费者',
+	`price` DOUBLE NOT NULL DEFAULT '0' COMMENT '价格',
+	`count` DOUBLE NOT NULL DEFAULT '0' COMMENT '总金额',
+	`is_complain` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '是否被投诉',
+	`pre_pay` DOUBLE NOT NULL DEFAULT '0' COMMENT '预约金',
+	`pre_precent` FLOAT NOT NULL DEFAULT '0' COMMENT '预约金占比',
+	`start_time` DATETIME NOT NULL COMMENT '开始时间',
+	`end_time` DATETIME NOT NULL COMMENT '结束时间',
+	`date_time` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '约会总时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='约单表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
