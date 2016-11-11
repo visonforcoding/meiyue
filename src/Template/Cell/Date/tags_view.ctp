@@ -100,7 +100,8 @@
 
             if(tagsData.length > _max) {
 
-                alert("标签不能超过");
+                alert("标签不能超过" + _max + "个!");
+                return;
 
             }
             _func(tagsData);

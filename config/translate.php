@@ -125,3 +125,34 @@ function getUsedStatus($status_code = -1) {
     }
 
 }
+
+
+/**
+ * 获取百度地图POI行业分类
+ * @param int $status_code
+ * @return array|mixed|string
+ */
+function getBaiduPOICF() {
+
+    $cfs = Array(
+        '美食',
+        '酒店',
+        '购物',
+        '生活服务',
+        '丽人',
+        '旅游景点',
+        '休闲娱乐',
+        '运动健身',
+        '教育培训',
+        '文化传媒',
+        '医疗',
+        '汽车服务',
+        '交通设施',
+        '金融',
+        '房地产',
+        '公司企业',
+        '政府机构'
+    );
+
+    return $cfs;
+}

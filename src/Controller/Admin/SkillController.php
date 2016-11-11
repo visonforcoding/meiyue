@@ -43,9 +43,10 @@ class SkillController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($parent_id)
     {
         $skill = $this->Skill->newEntity();
+        $skill->parent_id = $parent_id;
         if ($this->request->is('post')) {
             $skill = $this->Skill->patchEntity($skill, $this->request->data);
             if ($this->Skill->save($skill)) {
@@ -67,9 +68,7 @@ class SkillController extends AppController
      */
     public function edit($id = null)
     {
-        $skill = $this->Skill->get($id, [
-            'contain' => []
-        ]);
+        $skill = $this->Skill->get($id);
         if ($this->request->is(['post', 'put'])) {
             $skill = $this->Skill->patchEntity($skill, $this->request->data);
             if ($this->Skill->save($skill)) {

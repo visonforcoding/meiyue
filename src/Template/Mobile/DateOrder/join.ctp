@@ -69,5 +69,11 @@
 
 <script>
 
+    $('.toback').on('click', function(){
+
+        history.back();
+
+    })
+
 
 </script>

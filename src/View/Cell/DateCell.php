@@ -28,13 +28,26 @@ class DateCell extends Cell
 
 
     /**
-     * 显示技能表选择框
+     * 显示后台技能表选择框
+     */
+    public function adminSkillsView()
+    {
+        $SkillTable = \Cake\ORM\TableRegistry::get('Skill');
+        $skills = $SkillTable->find('threaded')->toArray();
+        $this->set([
+            'skills'=>$skills
+        ]);
+    }
+
+
+    /**
+     * 显示用户技能表选择框
      */
     public function skillsView($user_id)
     {
         $UserSkillTable = \Cake\ORM\TableRegistry::get('UserSkill');
         $topSkills = $this->getTopSkill();
-        $userSkills = $UserSkillTable->find()->contain(['Skill', 'Cost'])->where(['user_id'=>$user_id, 'is_used' => 1, 'is_checked' => 1])->toArray();
+        $userSkills = $UserSkillTable->find()->contain(['Skill', 'Cost'])->where(['UserSkill.user_id'=>$user_id, 'UserSkill.is_used' => 1, 'UserSkill.is_checked' => 1])->toArray();
         $this->set([
             'topSkills'=>$topSkills,
             'userSkills'=>$userSkills
