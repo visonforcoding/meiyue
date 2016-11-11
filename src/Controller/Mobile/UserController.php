@@ -18,6 +18,9 @@ class UserController extends AppController {
      */
     public function index() {
         $this->handCheckLogin();
+        if($this->user->gender){
+            
+        }
         $this->set([
             'pageTitle' => '美约-我的',
             'user'=>  $this->user
