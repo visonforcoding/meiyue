@@ -87,7 +87,7 @@
                             <span>地点</span>
                             <div>
                                 <a href="#choosePlace">
-                                    <span class="color_gray">请选择</span>
+                                    <span id="thePlace" class="color_gray">请选择</span>
                                     <i class="iconfont r_con">&#xe605;</i>
                                 </a>
                             </div>
@@ -134,7 +134,7 @@
     <div class="bottomblock">
         <div class="flex flex_end">
             <span class="total">预约金：<i class="color_y">￥</i> <span class="color_y"><i id="order_money" class="color_y lagernum">0</i>美币</span></span>
-            <a href="javascript:void(0);" class="nowpay">立即支付</a>
+            <a id="order_pay" class="nowpay">立即支付</a>
         </div>
         <!--日期时间选择器-->
         <?= $this->element('checkdate'); ?>
@@ -178,8 +178,11 @@
 <?php $this->start('script'); ?>
 <script>
 //日期选择回调函数
+var lasth,start_time,end_time;
 function choosedateCallBack(start_datetime, end_datetime) {
-    var lasth = new Date(end_datetime).getHours() - new Date(start_datetime).getHours();
+    start_time= start_datetime;
+    end_time= end_datetime;
+    lasth = new Date(end_datetime).getHours() - new Date(start_datetime).getHours();
     $('#lasth').html(lasth);
     var price = <?= $data->cost->money ?>;
     $('#total_money').html(lasth * price);
@@ -254,9 +257,27 @@ function loadHashPage() {
     }
 }
 $('#go-here').on('tap',function(){
+    //选择好地址
     place_name = $(this).data('name');
     coord_lng = $(this).data('coordlng');
     coord_lat = $(this).data('coordlat');
+    $('#thePlace').html(place_name);
+});
+$('#order_pay').on('tap',function(){
+   //预约支付
+   var user_skill_id = <?=$data->id?>;
+   var data = {user_skill_id:user_skill_id,
+       place_name:place_name,
+       coord_lng:coord_lng,
+       coord_lat:coord_lat,
+       start_time:start_time,
+       end_time:end_time}
+   $.util.ajax({
+       data:data,
+       func:function(res){
+           $.util.alert(res.msg);
+       }
+   });
 });
 </script>
 <?php $this->end('script'); ?>
