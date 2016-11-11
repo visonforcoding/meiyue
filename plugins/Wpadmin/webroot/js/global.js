@@ -56,6 +56,20 @@ $(function () {
         });
     });
 
+    //图标选择器
+    $('.choiceSkillIcon').on('click', function () {
+        ICON_OBJ = $(this);
+        iframe_index = layer.open({
+            type: 2,
+            title: '图标选择器',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['960px', '550px'],
+            content: '/wpadmin/util/icon'
+        });
+    });
+
     //面板的隐藏和显示
     $(".close-panel").on('click', function () {
         $(this).parents('div.panel').find('div.panel-body,div.chart-bar').slideToggle("slow");

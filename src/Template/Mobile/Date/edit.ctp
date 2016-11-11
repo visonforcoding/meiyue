@@ -13,7 +13,7 @@
                         <h3 class="edit_l_con">约会主题</h3>
                         <div class="edit_r_con">
                             <input id="show-skill-name" type="text" placeholder="请选择约会主题" value="<?= $date['user_skill']['skill']['name'] ?>" readonly="true"/>
-                            <input id="skill-id-input" name="user_skill_id" type="text" placeholder="请选择约会主题" value=""
+                            <input id="skill-id-input" name="user_skill_id" type="text" value="<?= $date['user_skill']['id']; ?>"
                                    hidden="true"/>
                         </div>
                     </div>

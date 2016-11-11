@@ -1,77 +1,66 @@
-<?php $this->start('static') ?>
-    <link href="/wpadmin/lib/jqupload/uploadfile.css" rel="stylesheet">
-    <link href="/wpadmin/lib/jqvalidation/css/validationEngine.jquery.css" rel="stylesheet">
-<?php $this->end() ?>
-    <div class="work-copy">
-        <?= $this->Form->create($skill, ['class' => 'form-horizontal']) ?>
-        <div class="form-group">
-            <label class="col-md-2 control-label">技能名称</label>
-            <div class="col-md-8">
-                <?php
-                echo $this->Form->input('name', ['label' => false, 'class' => 'form-control']);
-                ?>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">所属分类</label>
-            <div class="col-md-8">
-                <?php
-                echo $this->Form->input('name', ['label' => false, 'class' => 'form-control']);
-                ?>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...'/>
-            </div>
-        </div>
-        <?= $this->Form->end() ?>
-    </div>
+<form>
+    <label>技能名称：<input type="text" name="name"></label>
+    <p>
+    <label>技能图标：<input type="text" name="class" class=""></label>
+    <p>
+    <label>地址关键字（选填）：<input type="text" name="q_key">
+        <br>
+        <span style="font-size: small; color: grey;">(例如：百度大厦、中关村。多个关键字之间使用'$'隔开，最多10个关键字)</span>
+    </label>
+    <p>
+    <label>POI分类：
+        <select name="poi_cls">
+            <?php $types = getBaiduPOICF(); ?>
+            <?php foreach ($types as $key => $value): ?>
+                <option value="<?= $value?>"><?= $value?></option>
+            <?php endforeach;?>
+        </select>
+    </label>
+    <p>
+    <label>是否显示在‘发现’筛选框中：
+        <select name="is_shown">
+            <option value="1">是</option>
+            <option value="0">否</option>
+        </select>
+    </label>
+    <p>
+    <label>在‘发现’筛选框中的排序：
+        <input type="number" name="shown_order" value="0">
+        <span style="font-size: small; color: grey;">(数值越小越靠前)</span>
+    </label>
+    <p>
+    <input name="parent_id" value="<?= $skill['parent_id']; ?>" hidden>
+    <input id="submit" type="button" value="确定">
+</form>
 
-<?php $this->start('script'); ?>
-    <script type="text/javascript" src="/wpadmin/lib/jqform/jquery.form.js"></script>
-    <script type="text/javascript" src="/wpadmin/lib/jqupload/jquery.uploadfile.js"></script>
-    <script type="text/javascript"
-            src="/wpadmin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
-    <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
-    <!--<script src="/wpadmin/lib/ueditor/ueditor.config.js" ></script>
-        <script src="/wpadmin/lib/ueditor/ueditor.all.js" ></script>
-        <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>-->
-    <script>
-        $(function () {
-            // initJqupload('cover', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
-            //var ue = UE.getEditor('content'); //初始化富文本编辑器
-            $('form').validationEngine({
-                focusFirstField: true,
-                autoPositionUpdate: true,
-                promptPosition: "bottomRight"
-            });
-            $('form').submit(function () {
-                var form = $(this);
-                $.ajax({
-                    type: $(form).attr('method'),
-                    url: $(form).attr('action'),
-                    data: $(form).serialize(),
-                    dataType: 'json',
-                    success: function (res) {
-                        if (typeof res === 'object') {
-                            if (res.status) {
-                                layer.confirm(res.msg, {
-                                    btn: ['确认', '继续添加'] //按钮
-                                }, function () {
-                                    window.location.href = '/skills/index';
-                                }, function () {
-                                    window.location.reload();
-                                });
-                            } else {
-                                layer.alert(res.msg, {icon: 5});
-                            }
-                        }
+<script src="/wpadmin/js/jquery.js" ></script>
+<script src="/wpadmin/lib/layer/layer.js" ></script>
+<script src="/wpadmin/js/global.js" ></script>
+<script>
+
+    $("#submit").on('click', function(){
+        var options = $('form').serialize();
+        $.ajax({
+            type: 'POST',
+            url: '/skill/add/<?= $skill['parent_id']; ?>',
+            dataType: 'json',
+            data: options,
+            success: function (res) {
+                if (typeof res === 'object') {
+                    if (res.status) {
+
+                        history.back();
+
+                    } else {
+
+                        alert(res.msg);
+
                     }
-                });
-                return false;
-            });
+                }
+            }
         });
-    </script>
-<?php
-$this->end();
+
+    })
+
+
+</script>

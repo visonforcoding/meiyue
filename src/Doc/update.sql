@@ -190,3 +190,69 @@ COMMENT='约单表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
+
+
+##20161111
+CREATE TABLE `lm_activity` (
+	`id` INT(11) NOT NULL,
+	`big_img` VARCHAR(50) NOT NULL COMMENT '大图url',
+	`title` VARCHAR(50) NOT NULL COMMENT '标题',
+	`male_price` DOUBLE NOT NULL DEFAULT '0' COMMENT '男性价格',
+	`female_price` DOUBLE NOT NULL DEFAULT '0' COMMENT '女性价格',
+	`description` VARCHAR(50) NOT NULL COMMENT '描述',
+	`start_time` DATETIME NOT NULL COMMENT '开始时间',
+	`end_time` DATETIME NOT NULL COMMENT '结束时间',
+	`site` VARCHAR(50) NOT NULL COMMENT '活动地址',
+	`site_lat` FLOAT NOT NULL COMMENT '地址纬度',
+	`site_lng` FLOAT NOT NULL COMMENT '地址经度',
+	`male_lim` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT '活动男性名额',
+	`female_lim` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT '活动女性名额',
+	`male_rest` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT '男性剩余名额',
+	`female_rest` SMALLINT(6) NULL DEFAULT '0' COMMENT '女性剩余名额',
+	`detail` TEXT NOT NULL COMMENT '图文详情',
+	`notice` VARCHAR(255) NOT NULL COMMENT '活动须知',
+	`status` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '活动状态：1#正常进行 2#异常取消',
+	`remark` VARCHAR(255) NOT NULL COMMENT '备注',
+	PRIMARY KEY (`id`)
+)
+COMMENT='活动派对表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `lm_actregistration` (
+	`id` INT(11) NOT NULL,
+	`user_id` INT(11) NOT NULL COMMENT '用户id',
+	`activity_id` INT(11) NOT NULL COMMENT '活动id',
+	`status` TINYINT(4) NOT NULL COMMENT '报名状态：1#正常 2#取消',
+	`cost` DOUBLE NOT NULL COMMENT '报名费用',
+	`punish` DOUBLE NOT NULL COMMENT '取消报名惩罚金额',
+	`punish_percent` FLOAT NOT NULL COMMENT '惩罚金占报名费百分比',
+	`create_time` DATETIME NOT NULL COMMENT '报名时间',
+	`cancel_time` DATETIME NOT NULL COMMENT '取消报名时间',
+	`update_time` DATETIME NOT NULL COMMENT '更新时间，包括管理员操作',
+	PRIMARY KEY (`id`)
+)
+COMMENT='活动报名表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `lm_flow` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL COMMENT '收款方',
+	`consumer_id` INT(11) NOT NULL COMMENT '支付方',
+	`relate_id` INT(11) NOT NULL COMMENT '关联表，与type交易类型一起使用',
+	`type` INT(11) NOT NULL COMMENT '交易类型：1#约单交易 2#报名活动',
+	`income` TINYINT(4) NOT NULL COMMENT '收支类型：1#收入 2#支出',
+	`amount` DOUBLE NOT NULL COMMENT '金额',
+	`remark` VARCHAR(255) NOT NULL COMMENT '备注',
+	`pre_amount` DOUBLE NOT NULL COMMENT '交易前金额',
+	`after_amount` DOUBLE NOT NULL COMMENT '交易后金额',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='美币收支表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
