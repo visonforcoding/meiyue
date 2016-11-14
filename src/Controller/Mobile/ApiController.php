@@ -19,7 +19,7 @@ class ApiController extends AppController {
 
     protected $noAcl = [
         'upload', 'wxtoken', 'ckregister', 'recordphone', 'saveuserbasicpic',
-        'saveuserbasicvideo'
+        'saveuserbasicvideo', 'getmapusers'
     ];
 
     public function initialize() {
@@ -323,6 +323,47 @@ class ApiController extends AppController {
         } else {
             $this->jsonResponse($res);
         }
+    }
+
+    /**
+     * 获取地图上的用户
+     */
+    public function getMapUsersD() {
+        $lng = $this->request->data('lng');
+        $lat = $this->request->data('lat');
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $users = $UserTable->find()->select(['id', 'avatar', 'login_coord_lng', 'login_coord_lat'])
+                ->where(["getDistance($lng,$lat,login_coord_lng,login_coord_lat) <=" => 1000])
+                ->where(['gender'=>2])
+                ->limit(10)->formatResults(function($items) {
+                    return $items->map(function($item) {
+                                $item['avatar'] = 'http://m-my.smartlemon.cn/' . createImg($item['avatar']) . 
+                                        '?w=184&h=184&fit=stretch';
+                                return $item;
+                            });
+                })
+                ->toArray();
+        $this->jsonResponse(['result' => $users]);
+    }
+
+    public function getMapUsers() {
+        $lng = $this->request->data('lng');
+        $lat = $this->request->data('lat');
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $users = $UserTable->find()->select(['id', 'avatar', 'login_coord_lng', 'login_coord_lat'])
+//                ->where(["getDistance($lng,$lat,login_coord_lng,login_coord_lat) <=" => 1000])
+                ->where(['gender'=>2])
+                ->limit(10)->formatResults(function($items)use($lng,$lat) {
+                    return $items->map(function($item)use($lng,$lat) {
+                                $item['avatar'] = 'http://m-my.smartlemon.cn/' . createImg($item['avatar']) . 
+                                        '?w=184&h=184&fit=stretch';
+                                $item['login_coord_lng'] = $lng+  randomFloat()*0.1;
+                                $item['login_coord_lat'] = $lat+  randomFloat()*0.1;
+                                return $item;
+                            });
+                })
+                ->toArray();
+        return $this->Util->ajaxReturn(['result' => $users]);
     }
 
 }

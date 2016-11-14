@@ -209,3 +209,13 @@ function getCost($start_time, $end_time, $price, $percent = 1.0) {
 
 }
 
+/**
+ * 生成浮点随机数
+ * @param int $min
+ * @param int $max
+ * @return float
+ */
+function randomFloat($min = 0, $max = 1) {
+    return $min + mt_rand() / mt_getrandmax() * ($max - $min);
+}
+
