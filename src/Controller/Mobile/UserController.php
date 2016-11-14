@@ -13,17 +13,21 @@ class UserController extends AppController {
 
     /**
      * Index method
-     *
+     *  个人中心首页
      * @return \Cake\Network\Response|null
      */
     public function index() {
         $this->handCheckLogin();
-        if($this->user->gender){
-            
+        $template = 'index';
+        $Dateorders = \Cake\ORM\TableRegistry::get('Dateorder');
+        if ($this->user->gender == 1) {
+            $template = 'home_m';
+            //$dateorder_counts = $Dateorders->find()->where([''])
         }
+        $this->render($template);
         $this->set([
             'pageTitle' => '美约-我的',
-            'user'=>  $this->user
+            'user' => $this->user
         ]);
     }
 
@@ -333,8 +337,6 @@ class UserController extends AppController {
         }
     }
 
-    
-    
     /**
      * 加关注
      */
@@ -346,14 +348,14 @@ class UserController extends AppController {
             if ($following_id == $user_id) {
                 return $this->Util->ajaxReturn(false, '不可关注自己');
             }
-            $follower = $this->User->find()->select(['id','gender'])->where(['id'=>$following_id])->first();
-            if(!$follower){
+            $follower = $this->User->find()->select(['id', 'gender'])->where(['id' => $following_id])->first();
+            if (!$follower) {
                 return $this->Util->ajaxReturn(false, '您所关注的用户不存在');
             }
-            if($this->user->gender==$follower->gender){
-                if($this->user=='1'){
+            if ($this->user->gender == $follower->gender) {
+                if ($this->user == '1') {
                     return $this->Util->ajaxReturn(false, '男性只可关注女性');
-                }else{
+                } else {
                     return $this->Util->ajaxReturn(false, '女性只可关注男性');
                 }
             }
@@ -368,9 +370,9 @@ class UserController extends AppController {
                     $follower->type = 1;
                     $transRes = $FansTable->connection()
                             ->transactional(function()use($FansTable, $follower, $fans) {
-                                //开启事务
-                                return $FansTable->delete($fans) && $FansTable->save($follower);
-                            });
+                        //开启事务
+                        return $FansTable->delete($fans) && $FansTable->save($follower);
+                    });
                 } else {
                     $transRes = $FansTable->delete($fans);
                 }
