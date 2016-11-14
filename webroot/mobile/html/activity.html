@@ -9,8 +9,10 @@
 		<title>美约-活动主页</title>
 		<link rel="stylesheet" type="text/css" href="../css/basic.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
-		<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/view.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/loopScroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/util.js"></script>
 	</head>
 	<body>
 		<div class="wraper pd45">
@@ -18,8 +20,8 @@
 				<div class="date_list">
 					<div class="date_list_header">
 						<div class="alldate"><span class="headertab">约会</span></div> |
-						<div class="todate"><span class="headertab">派对</span></div> |
-						<div class="todate current"><span class="headertab">头牌</span></div>
+						<div class="todate current"><span class="headertab">派对</span></div> |
+						<div class="todate"><span class="headertab">头牌</span></div>
 					</div>
 				</div>
 				<div class="activity_list_con">
@@ -76,14 +78,19 @@
 					</section>
 					
 					<!--派对-->
-					<section style="display: none;">
+					<section style="display: block;">
 						<!--轮播图-->
 						<div class="abanner">
-							<ul>
+							<ul id="imgbox">
 								<li><a href="#this"><img src="../css/icon/banner1.jpg"/></a></li>
 								<li><a href="#this"><img src="../css/icon/banner1.jpg"/></a></li>
 								<li><a href="#this"><img src="../css/icon/banner1.jpg"/></a></li>
 							</ul>
+							<div class="yd" id="imgTab">
+								<span class="cur"></span>
+								<span></span>
+								<span></span>
+							</div>
 						</div>
 						<div class="party_content">
 							<div class="items">
@@ -131,7 +138,7 @@
 						</div>
 					</section>
 					<!--头牌-->
-					<section>
+					<section style="display: none;">
 						<div class="cover_image">
 							<img src="../images/cover.jpg" alt="" />
 							<a href="#this" class="more"><img src="../images/more.png"/></a>
@@ -266,5 +273,8 @@
 				</li>
 			</ul>
 		</div>
+		  <script>
+                var loop = $.util.loopImg($('#imgbox'),$('#imgbox li'),$('#imgTab span'),$('.abanner'));
+            </script>
 	</body>
 </html>
