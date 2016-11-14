@@ -192,6 +192,10 @@ ENGINE=InnoDB
 ;
 
 
+
+
+
+
 ##20161111
 CREATE TABLE `lm_activity` (
 	`id` INT(11) NOT NULL,
@@ -238,21 +242,64 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
+
+-- #2016-11-14
+
+-- 流水表更改
 CREATE TABLE `lm_flow` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`user_id` INT(11) NOT NULL COMMENT '收款方',
-	`consumer_id` INT(11) NOT NULL COMMENT '支付方',
-	`relate_id` INT(11) NOT NULL COMMENT '关联表，与type交易类型一起使用',
-	`type` INT(11) NOT NULL COMMENT '交易类型：1#约单交易 2#报名活动',
-	`income` TINYINT(4) NOT NULL COMMENT '收支类型：1#收入 2#支出',
-	`amount` DOUBLE NOT NULL COMMENT '金额',
-	`remark` VARCHAR(255) NOT NULL COMMENT '备注',
-	`pre_amount` DOUBLE NOT NULL COMMENT '交易前金额',
-	`after_amount` DOUBLE NOT NULL COMMENT '交易后金额',
+	`user_id` INT(11) NOT NULL DEFAULT '0' COMMENT '收款方',
+	`buyer_id` INT(11) NOT NULL DEFAULT '0' COMMENT '支付方',
+	`relate_id` INT(11) NOT NULL DEFAULT '0' COMMENT '关联id',
+	`type` INT(11) NOT NULL DEFAULT '0' COMMENT '交易类型',
+	`type_msg` VARCHAR(50) NOT NULL COMMENT '类型名称',
+	`income` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '是否收入1:收入2:支出',
+	`amount` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '支付金额',
+	`price` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '订单金额',
+	`pre_amount` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '交易前金额',
+	`after_amount` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '交易后金额',
+	`paytype` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '支付方式',
+	`status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '交易状态',
+	`remark` VARCHAR(50) NOT NULL COMMENT '备注',
 	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL COMMENT '修改时间',
 	PRIMARY KEY (`id`)
 )
-COMMENT='美币收支表'
+COMMENT='用户资金流水'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
+AUTO_INCREMENT=48
+;
+
+
+-- 预约单表
+CREATE TABLE `lm_dateorder` (
+	`id` INT(255) NOT NULL AUTO_INCREMENT,
+	`consumer_id` INT(11) NOT NULL DEFAULT '0' COMMENT '男方',
+	`consumer` VARCHAR(50) NOT NULL DEFAULT '0' COMMENT '消费者姓名',
+	`dater_id` INT(11) NOT NULL DEFAULT '0' COMMENT '女方',
+	`dater_name` VARCHAR(50) NOT NULL DEFAULT '0' COMMENT '服务提供者姓名',
+	`date_id` INT(11) NOT NULL DEFAULT '0' COMMENT '对应约会',
+	`user_skill_id` INT(11) NOT NULL COMMENT '用户技能id',
+	`status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '订单状态码： 1#消费者未支付预约金 2#消费者超时未支付预约金，订单取消 3#消费者已支付预约金 4#消费者取消订单 5#受邀者拒绝约单 6#受邀者超时未响应，自动退单 7#受邀者确认约单 8#受邀者取消订单 9#消费者超时未付尾款 10#消费者已支付尾款 11#消费者退单 12#受邀者退单 13#受邀者确认到达 14#订单完成 15#已评价 16#订单失败',
+	`operate_status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '用户操作状态码：0#无操作 1#消费者删除订单 2#被约者删除订单 3#双方删除订单',
+	`site` VARCHAR(50) NOT NULL COMMENT '约会地点',
+	`site_lat` FLOAT NOT NULL COMMENT '约会地点纬度',
+	`site_lng` FLOAT NOT NULL COMMENT '约会地点经度',
+	`price` DOUBLE NOT NULL DEFAULT '0' COMMENT '价格',
+	`amount` DOUBLE NOT NULL DEFAULT '0' COMMENT '总金额',
+	`is_complain` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '是否被投诉',
+	`pre_pay` DOUBLE NOT NULL DEFAULT '0' COMMENT '预约金',
+	`pre_precent` FLOAT NOT NULL DEFAULT '0' COMMENT '预约金占比',
+	`start_time` DATETIME NOT NULL COMMENT '开始时间',
+	`end_time` DATETIME NOT NULL COMMENT '结束时间',
+	`date_time` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '约会总时间',
+	`create_time` DATETIME NOT NULL COMMENT '生成时间',
+	`update_time` DATETIME NOT NULL COMMENT '订单更新时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='约单表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=3
 ;
