@@ -18,17 +18,17 @@ class UserController extends AppController {
      */
     public function index() {
         $this->handCheckLogin();
-        $template = 'index';
         $Dateorders = \Cake\ORM\TableRegistry::get('Dateorder');
+        $template = 'index';
         if ($this->user->gender == 1) {
             $template = 'home_m';
             //$dateorder_counts = $Dateorders->find()->where([''])
         }
-        $this->render($template);
         $this->set([
             'pageTitle' => '美约-我的',
             'user' => $this->user
         ]);
+        $this->render($template);
     }
 
     public function login() {

@@ -355,7 +355,7 @@ class ApiController extends AppController {
                 ->where(['gender'=>2])
                 ->limit(10)->formatResults(function($items)use($lng,$lat) {
                     return $items->map(function($item)use($lng,$lat) {
-                                $item['avatar'] = 'http://m-my.smartlemon.cn/' . createImg($item['avatar']) . 
+                                $item['avatar'] = 'http://m-my.smartlemon.cn' . createImg($item['avatar']) . 
                                         '?w=184&h=184&fit=stretch';
                                 $item['login_coord_lng'] = $lng+  randomFloat()*0.1;
                                 $item['login_coord_lat'] = $lat+  randomFloat()*0.1;
@@ -363,7 +363,7 @@ class ApiController extends AppController {
                             });
                 })
                 ->toArray();
-        return $this->Util->ajaxReturn(['result' => $users]);
+        $this->jsonResponse(['result' => $users]);
     }
 
 }
