@@ -50,6 +50,7 @@ class DateorderTable extends Table {
         ]);
         //女性用户  被约
         $this->belongsTo('Dater', [
+            'className'=>'User',
             'foreignKey' => 'dater_id',
             'joinType' => 'INNER'
         ]);

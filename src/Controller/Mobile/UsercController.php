@@ -148,5 +148,44 @@ class UsercController extends AppController {
 
     }
 
+    
+    /**
+     * 我的订单
+     */
+    public function dateorder(){
+        if($this->request->is('json')){
+            $limit = 10;
+        }
+        $this->set([
+            'pageTitle'=>'我的粉丝',
+            'user'=>  $this->user,
+            ]);
+        
+    }
+    
+    /**
+     * 我的订单列表
+     */
+    public function getDateorders($page){
+       $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+       $limit = 10;
+       if($this->user->gender==1){
+          $orders = $DateorderTable->find()
+                  ->contain([
+                      'Dater'=>function($q){
+                        return $q->select(['avatar']);
+                      },'UserSkill','UserSkill.Skill'
+                  ])
+                  ->where(['consumer_id'=>  $this->user->id])
+                  ->orderDesc('Dateorder.create_time')
+                  ->limit($limit)
+                  ->page($page)
+                  ->toArray();
+       }else{
+           
+       }
+       return $this->Util->ajaxReturn(['orders'=>$orders]);
+       
+    }
 
 }
