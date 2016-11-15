@@ -1,18 +1,32 @@
+<?php
+    $date_action = '/date/index';  //定义约会请求地址
+    $activity_action = '/activity/index';  //定义派对请求地址
+?>
 <div class="wraper pd45">
     <div class="activity_list">
         <div class="date_list">
             <div class="date_list_header">
-                <div class="tab-btn alldate current" tab-action="/date/index" tpl_id="date_tpl"><span
+                <div class="tab-btn alldate current" tab-action="<?= $date_action; ?>" tpl_id="date_tpl"><span
                         class="headertab">约会</span></div>
                 |
-                <div class="tab-btn todate" tab-action=""><span class="headertab">派对</span></div>
+                <div class="tab-btn todate" tab-action="<?= $activity_action; ?>" tpl_id="activity_tpl"><span class="headertab">派对</span></div>
                 |
                 <div class="tab-btn todate" tab-action=""><span class="headertab">头牌</span></div>
             </div>
         </div>
         <div class="activity_list_con">
-            <section id="activity_list_container">
+            <section class="abanner" hidden>
+                <!-- 轮播图容器 -->
+                <ul>
+                    <li><a href="#this"><img src="/mobile/css/icon/banner1.jpg"/></a></li>
+                    <li><a href="#this"><img src="/mobile/css/icon/banner2.jpg"/></a></li>
+                    <li><a href="#this"><img src="/mobile/css/icon/banner3.jpg"/></a></li>
+                </ul>
+            </section>
+            <section>
                 <!-- 内容容器 -->
+                <div id="date_list_container" class="list_container" hidden></div>
+                <div id="activity_list_container" class="party_content list_container" hidden></div>
             </section>
         </div>
     </div>
@@ -28,7 +42,7 @@
 <?= $this->element('footer', ['active' => 'activity']) ?>
 
 <script id="date_tpl" type="text/html">
-    <div class="date_item date_detail_place inner" date-id="{#id#}">
+    <div class="date_detail_place inner mt20" onclick="window.location.href = '/date-order/join/{#id#}'">
         <h3 class="title"><i class="itemsname color_y">{#skill_name#}</i>{#title#}</h3>
         <div class="place_pic">
                         <span class="place">
@@ -47,8 +61,37 @@
     </div>
 </script>
 
+<script id="activity_banner_tpl" type="text/html">
+</script>
+
+<script id="activity_tpl" type="text/html">
+<div class="items">
+    <div class="items_pic">
+        <img src="/mobile/css/icon/party1.jpg"/>
+    </div>
+    <div class="items_con">
+        <h3 class="items_title">{#title#}</h3>
+        <div class="items_time flex flex_justify mt20">
+            <div>{#ad#}</div>
+            <div>
+                <i class="iconfont ico">&#xe64b;</i>
+                {#time#}
+            </div>
+        </div>
+    </div>
+    <div class="items_adress flex flex_justify">
+        <div><i class="iconfont ico">&#xe623;</i>{#site#}</div>
+        <div class="button btn_dark" onclick="window.location.href='/activity/view/{#id#}'">
+            我要报名
+        </div>
+    </div>
+</div>
+</script>
+
 <script>
-    getNetDatas('date_tpl', '/date/index', '');
+    var date_action = '<?= $date_action; ?>';
+    var activity_action = '<?= $activity_action; ?>';
+    getNetDatas('date_tpl', date_action, '');
 
     //点击tab的切换动作
     $(".tab-btn").on('click', function () {
@@ -78,21 +121,37 @@
 
                 if (res.status) {
 
-                    $.util.dataToTpl("activity_list_container", tpl_id, res.datas, function (d) {
+                    $('.list_container').hide();
+                    $('.abanner').hide();
+                    if(action == date_action) {
 
-                        console.log(res.datas);
-                        var start_time = new Date(d.start_time);
-                        var end_time = new Date(d.end_time);
-                        var timestr = start_time.getFullYear() + "-" + (start_time.getMonth() + 1) + "-" + start_time.getDate() + " " + start_time.getHours() + ":00~" + end_time.getHours() + ":00";
+                        $('#date_list_container').show();
+                        $.util.dataToTpl("date_list_container", tpl_id, res.datas, function (d) {
+                            var start_time = new Date(d.start_time);
+                            var end_time = new Date(d.end_time);
+                            var timestr = start_time.getFullYear() + "-" + (start_time.getMonth() + 1) + "-" + start_time.getDate() + " " + start_time.getHours() + ":00~" + end_time.getHours() + ":00";
+                            d.time = timestr;
+                            d.skill_name = d.user_skill.skill.name;
+                            d.status = statuses[d.status];
+                            d.user_name = d.user.nick;
+                            d.age = ((new Date()).getFullYear() - (new Date(d.user.birthday)).getFullYear());
+                            d.total_price = (((new Date(d.end_time)).getHours() - (new Date(d.start_time)).getHours()) * d.price);
+                            return d;
+                        });
 
-                        d.time = timestr;
-                        d.skill_name = d.user_skill.skill.name;
-                        d.status = statuses[d.status];
-                        d.user_name = d.user.nick;
-                        d.age = ((new Date()).getFullYear() - (new Date(d.user.birthday)).getFullYear());
-                        d.total_price = (((new Date(d.end_time)).getHours() - (new Date(d.start_time)).getHours()) * d.price);
-                        return d;
-                    });
+                    } else if(action == activity_action) {
+
+                        $('.abanner').show();
+                        $('#activity_list_container').show();
+                        $.util.dataToTpl("activity_list_container", tpl_id, res.datas, function (d) {
+                            var start_time = new Date(d.start_time);
+                            var end_time = new Date(d.end_time);
+                            var timestr = start_time.getFullYear() + "-" + (start_time.getMonth() + 1) + "-" + start_time.getDate() + " " + start_time.getHours() + ":00~" + end_time.getHours() + ":00";
+                            d.time = timestr;
+                            return d;
+                        });
+
+                    }
 
                 }
 
@@ -101,12 +160,5 @@
         });
 
     }
-
-    $(document).on('click', '.date_item', function(){
-
-        var date_id = $(this).attr("date-id");
-        window.location.href = "/date-order/join/" + date_id;
-
-    })
 
 </script>
