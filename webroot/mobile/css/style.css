@@ -712,8 +712,9 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .activity_pay_num ul{overflow: hidden;}
 .activity_pay_num ul li{height:45px;}
 .buybox input{width:1rem;height:26px;border:1px #efefef solid;border-radius: 3px;text-align: center;display:block;}
-.buybox .reduce{color:#efefef;font-size: 26px;margin-right:5px;vertical-align: middle;display:block}
-.buybox .add{color:#EAB96A;font-size: 26px;vertical-align: middle;margin-left:5px;display:block;}
+.buybox .reduce{font-size: 26px;margin-right:5px;vertical-align: middle;display:block}
+.buybox .add{font-size: 26px;vertical-align: middle;margin-left:5px;display:block;}
+.buybox .disabled{color:#ccc;}
 .activity_pay_type .con{height:45px;line-height: 45px;background: #fff;}
 /*头牌*/
 .cover_image{width:100%;height:5.2rem;position: relative;overflow: hidden;}
