@@ -9,6 +9,7 @@ use Cake\I18n\Time;
  * Userc Controller 个人中心
  *
  * @property \App\Model\Table\UserTable $User
+ * @property \App\Controller\Component\SmsComponent $Sms
  */
 class UsercController extends AppController {
 
@@ -153,9 +154,6 @@ class UsercController extends AppController {
      * 我的订单
      */
     public function dateorder(){
-        if($this->request->is('json')){
-            $limit = 10;
-        }
         $this->set([
             'pageTitle'=>'我的粉丝',
             'user'=>  $this->user,
@@ -169,23 +167,69 @@ class UsercController extends AppController {
     public function getDateorders($page){
        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
        $limit = 10;
+       $where = [];
+       $query = $this->request->query('query');
        if($this->user->gender==1){
-          $orders = $DateorderTable->find()
+         $where = ['consumer_id'=>  $this->user->id];
+       }else{
+         $where = ['dater_id'=>  $this->user->id];  
+       }
+       if($query>1){
+           switch ($query) {
+               case 2:
+                   $where[] = ['Dateorder.status in'=>['3','7']];
+                   break;
+               case 3:
+                   $where[] = ['Dateorder.status in'=>['10']];
+                   break;
+               default:
+                   break;
+           }
+       }
+        $orders = $DateorderTable->find()
                   ->contain([
                       'Dater'=>function($q){
                         return $q->select(['avatar']);
                       },'UserSkill','UserSkill.Skill'
                   ])
-                  ->where(['consumer_id'=>  $this->user->id])
+                  ->where($where)
                   ->orderDesc('Dateorder.create_time')
                   ->limit($limit)
                   ->page($page)
                   ->toArray();
-       }else{
-           
-       }
        return $this->Util->ajaxReturn(['orders'=>$orders]);
        
     }
-
+    
+    
+    /***
+     * 美女接受订单
+     * 1.订单状态更改->7
+     * 2.短信通知男方
+     */
+    public function receiveOrder(){
+        $orderid = $this->request->data('orderid');
+        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+        $dateorder = $DateorderTable->get($orderid,[
+            'contain'=>[
+                'Buyer'=>function($q){
+                    return $q->select(['phone','id']);
+                }
+                ,'Dater'=>function($q){
+                    return $q->select(['id','nick']);
+                }
+                ,'UserSkill.Skill'
+            ]
+        ]);
+        if($dateorder){
+            $dateorder->status = 7;
+            if($DateorderTable->save($dateorder)){
+                $this->loadComponent('Sms');
+                $this->Sms->sendByQf106($dateorder->buyer->phone, $dateorder->dater->nick.
+                        '已接受你发出的【'.$dateorder->user_skill->skill->name.'】邀请，请您尽快支付尾款.');
+                return $this->Util->ajaxReturn(true,'成功接受');
+            }
+        }
+        return $this->Util->ajaxReturn(false,'服务器开小差');
+    }
 }
