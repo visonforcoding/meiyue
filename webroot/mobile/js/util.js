@@ -159,7 +159,7 @@ $.util = {
             moveChild: child, //$('#loopImgUl li')
             tab: tab, //$('#loopImgBar li')
             loopScroll: this.loopImg.length > 1,
-            autoTime: 5000,
+            autoTime: 3000,
             lockScrY: true,
             imgInitLazy: 1000,
             //loopScroll:true,
