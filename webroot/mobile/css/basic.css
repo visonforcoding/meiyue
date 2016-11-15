@@ -177,6 +177,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .bbottom{border-bottom: 1px #bfad9a solid;}
 .bdbottom{border-bottom: 1px #efefef solid;}
 .blight{border-bottom:1px #a09b9c solid;}
+.btlight{border-top:1px #2a2014 solid;}
 .bdtop{border-top: 1px #bfad9a solid;}
 /*按钮*/
 .btn{width:100%;display: block;height:44px;line-height: 44px;text-align: center;border-radius: 4px;font-size:18px;}
