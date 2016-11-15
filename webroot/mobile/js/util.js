@@ -469,7 +469,7 @@ $.util = {
     asyLoadData: function (opt) {
         $.util.showPreloader();
         var gurl = opt.gurl;
-        var more = opt.more;
+        var more = opt['more'];
         var template = $(opt.tpl).html();
         Mustache.parse(template);   // optional, speeds up future uses
         if (!opt['query']) {
@@ -478,19 +478,22 @@ $.util = {
             url = gurl + opt.page + opt['query'];
         }
         $.getJSON(url, function (data) {
+            if(opt['func']){
+                data = opt['func'](data);
+            }
             window.holdLoad = false
             if (data.code === 200) {
                 $.util.hidePreloader();
+                var rendered = Mustache.render(template, data);
                 if (!data[opt.key].length) {
                     window.holdLoad = true;
                 } else {
-                    var rendered = Mustache.render(template, data);
                     curpage++;
-                    if (more) {
-                        $(opt.id).append(rendered);
-                    } else {
-                        $(opt.id).html(rendered);
-                    }
+                }
+                if (more) {
+                    $(opt.id).append(rendered);
+                } else {
+                    $(opt.id).html(rendered);
                 }
             }
         });
