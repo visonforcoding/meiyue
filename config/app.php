@@ -231,7 +231,7 @@ return [
              */
             //'port' => 'non_standard_port_number',
             'username' => 'root',
-            'password' => '123456',
+            'password' => 'root',
             'database' => 'meiyue',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
