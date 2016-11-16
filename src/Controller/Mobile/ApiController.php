@@ -148,7 +148,7 @@ class ApiController extends AppController {
             $response['path'] = $res['info'][0]['path'];
         } else {// 上传成功 获取上传文件信息
             $response['status'] = true;
-            $response['msg'] = '上传成功!';
+            $response['msg'] = $res['msg'];
         }
         return $this->jsonResponse($response);
     }
