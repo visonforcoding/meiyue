@@ -39,7 +39,7 @@ class DateController extends AppController
                     ->where(['Date.status' => 2]);
                 $userCoord_lng = $this->user->login_coord_lng;
                 $userCoord_lat = $this->user->login_coord_lat;
-                $datas->order(["getDistance($userCoord_lng, $userCoord_lat, user.login_coord_lng, user.login_coord_lat)"=>'asc',
+                $datas->order(["getDistance($userCoord_lng, $userCoord_lat, login_coord_lng, login_coord_lat)"=>'asc',
                     'created_time' => 'desc']);
 
             }
