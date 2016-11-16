@@ -12,11 +12,11 @@ class DateController extends AppController
 {
 
     /**
+     * 我的-我发起的约会
      * Index method
-     *
      * @return \Cake\Network\Response|null
      */
-    public function index($user_id = null)
+    public function index()
     {
 
         if($this->request->is("post")) {
@@ -24,33 +24,18 @@ class DateController extends AppController
             $datas = $this->Date->find("all", ['contain' => ['UserSkill' => function($q){
                 return $q->contain(['Skill', 'Cost']);
             }]]);
-            if($user_id) {
 
-                $datas = $datas->where(['Date.user_id' => $user_id]);
-                if(isset($this->request->data['status'])) {
+            $datas = $datas->where(['Date.user_id' => $this->user->id]);
+            if(isset($this->request->data['status'])) {
 
-                    $datas->where(["Date.status" => $this->request->data['status']]);
-
-                }
-
-            } else{
-
-                $datas = $datas->contain(['User' => function ($q) {
-                    return $q->select(['nick', 'birthday']);}])
-                    ->where(['Date.status' => 2]);
-                $posititon = parent::getPosition();
-                $userCoord_lng = $posititon[0];
-                $userCoord_lat = $posititon[1];
-                $datas->order(["getDistance($userCoord_lng, $userCoord_lat, login_coord_lng, login_coord_lat)"=>'asc',
-                    'created_time' => 'desc']);
+                $datas->where(["Date.status" => $this->request->data['status']]);
 
             }
+
             $datas->formatResults(function(ResultSetInterface $results) {
 
                 return $results->map(function($row) {
-                    $row->time = getFormateDT($row['start_time'], $row['end_time']);
-                    $row->age = getAge($row['user']['birthday']);
-                    $row->total_price = ($row->end_time->hour - $row->start_time->hour) * $row->price;
+                    $row->time = getFormateDT($row->start_time, $row->end_time);
                     return $row;
                 });
 
@@ -154,6 +139,35 @@ class DateController extends AppController
         } else {
             return $this->Util->ajaxReturn(false, "删除失败");
         }
+    }
+
+
+    public function getAllDates()
+    {
+        $datas = $this->Date->find("all", ['contain' => ['UserSkill.Skill', 'UserSkill.Cost', 'User' => function ($q) {
+            return $q->select(['nick', 'birthday']);}]])
+            ->where(['Date.status' => 2]);
+
+        $posititon = parent::getPosition();
+        $userCoord_lng = $posititon[0];
+        $userCoord_lat = $posititon[1];
+
+        $datas->order(["getDistance($userCoord_lng, $userCoord_lat, login_coord_lng, login_coord_lat)"=>'asc',
+            'created_time' => 'desc']);
+
+        $datas->formatResults(function(ResultSetInterface $results) {
+
+            return $results->map(function($row) {
+                $row->time = getFormateDT($row->start_time, $row->end_time);
+                $row->age = getAge($row['user']['birthday']);
+                $row->total_price = ($row->end_time->hour - $row->start_time->hour) * $row->price;
+                return $row;
+            });
+
+        });
+
+        return $this->Util->ajaxReturn(['datas' => $datas->toArray(), 'status' => true]);
+
     }
 
 }
