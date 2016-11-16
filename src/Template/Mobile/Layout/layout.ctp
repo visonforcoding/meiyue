@@ -16,6 +16,16 @@
         <script type="text/javascript" src="/mobile/js/jsapi.js"></script>
         <?= $this->fetch('css') ?>
         <?= $this->fetch('static') ?>
+        <?php if ($this->request->is('lemon')): ?>
+            <style>
+                header{
+                    display: none;  
+                }
+                .footer{
+                    display: none;
+                }
+            </style>
+        <?php endif; ?>
     </head>
     <body>
         <?= $this->fetch('content') ?>
