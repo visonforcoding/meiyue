@@ -35,7 +35,8 @@ class DateController extends AppController
             } else{
 
                 $datas = $datas->contain(['User' => function ($q) {
-                    return $q->select(['nick', 'birthday']);}]);
+                    return $q->select(['nick', 'birthday']);}])
+                    ->where(['Date.status' => 2]);
                 $userCoord_lng = $this->user->login_coord_lng;
                 $userCoord_lat = $this->user->login_coord_lat;
                 $datas->order(["getDistance($userCoord_lng, $userCoord_lat, user.login_coord_lng, user.login_coord_lat)"=>'asc',

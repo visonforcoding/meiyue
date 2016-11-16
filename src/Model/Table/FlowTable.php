@@ -23,6 +23,8 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Flow findOrCreate($search, callable $callback = null)
  */
 class FlowTable extends Table {
+    const TYPE_DATE = 1;   //约会
+    const TYPE_ACTREGIST = 2;  //派对
 
     /**
      * Initialize method
