@@ -38,7 +38,7 @@
                 <a href="#this"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe60e;</i><span class="itemsname">我的钱包</span></div>
                     <div class="home_list_r_info">
-                        <span class="cashpic"><img src="/mobile/images/cash.png" alt="" /><?=$this->number->format($user->money)?></span>
+                        <span class="cashpic"><img src="/mobile/images/cash.png" alt="" /><?=$this->Number->format($user->money)?></span>
                         <i class="iconfont">&#xe605;</i>
                     </div>
                 </a>
