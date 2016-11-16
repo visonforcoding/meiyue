@@ -274,7 +274,25 @@
 			</ul>
 		</div>
 		  <script>
-                var loop = $.util.loopImg($('#imgBox'),$('#imgBox section'),$('#imgTab div'),$('.activity_list'),0);
+                 return $.util.loop({
+		            tp: 'text', //图片img或是文字text
+		            //min : 5,
+		            loadImg: true,
+		            moveDom: $('#imgBox'), // eg: $('#loopImgUl')
+		            moveChild: $('#imgBox section'), //$('#loopImgUl li')
+		            tab: $('#imgTab div'), //$('#loopImgBar li')
+		            loopScroll: false,
+		            autoTime: 0,
+		            lockScrY: true,
+		            //imgInitLazy: 1000,
+		            index: 1,
+		            viewDom: $('.activity_list'),
+		            fun: function (index) {
+		            	var hei = child.eq(index-1).height();
+		            	fatherDom.height(hei);
+		            	
+		            }
+        		});
             </script>
 	</body>
 </html>
