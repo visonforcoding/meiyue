@@ -106,7 +106,9 @@ function getUsedStatus($status_code = -1) {
 
 function getFlowType($index = null) {
     $flowType = [
-        '1' => '约技能支出',
+        '1' => '约技能支付预约金',
+        '2' => '约技能支付尾款',
+        '3' => '约技能收款',
     ];
     if ($index) {
         return $flowType[$index];

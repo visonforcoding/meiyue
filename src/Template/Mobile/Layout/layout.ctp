@@ -16,7 +16,7 @@
         <script type="text/javascript" src="/mobile/js/jsapi.js"></script>
         <?= $this->fetch('css') ?>
         <?= $this->fetch('static') ?>
-        <?php if ($this->request->is('lemon')): ?>
+        <script id="hideHeaderTpl" type="text/html">
             <style>
                 header{
                     display: none;  
@@ -25,7 +25,12 @@
                     display: none;
                 }
             </style>
-        <?php endif; ?>
+        </script>
+        <script>
+            if (navigator.userAgent.toLowerCase().indexOf('smartlemon') != -1) {
+                document.write($('#hideHeaderTpl').text());
+            }
+        </script>
     </head>
     <body>
         <?= $this->fetch('content') ?>
