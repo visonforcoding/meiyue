@@ -100,7 +100,7 @@ scale.addEventListener("touchmove", function () {
     var age = 0;
     var height = 0;
     loadUser(curpage);
-    function loadUser(page, more = false, query = false) {
+    function loadUser(page, more, query) {
         $.util.showPreloader();
         var template = $('#user-list-tpl').html();
         Mustache.parse(template);   // optional, speeds up future uses
