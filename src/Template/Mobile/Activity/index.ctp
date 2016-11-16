@@ -125,14 +125,10 @@
                     $('.abanner').hide();
                     if(action == date_action) {
 
-                        $.util.alert(action);
                         $('#date_list_container').show();
                         $.util.dataToTpl("date_list_container", tpl_id, res.datas, function (d) {
                             d.skill_name = d.user_skill.skill.name;
                             d.status = statuses[d.status];
-                            d.user_name = d.user.nick;
-                            d.age = ((new Date()).getFullYear() - (new Date(d.user.birthday)).getFullYear());
-                            d.total_price = (((new Date(d.end_time)).getHours() - (new Date(d.start_time)).getHours()) * d.price);
                             return d;
                         });
 
