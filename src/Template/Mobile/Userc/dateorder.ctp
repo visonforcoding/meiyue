@@ -8,8 +8,9 @@
                 <h3 class='maxwid70'><i class="itemsname color_y">[{{user_skill.skill.name}}]</i>{{user_skill.description}}</h3>
                 <span class="customer color_y">{{consumer}}</span>
             </div>
+            <a style="display:block" href="/userc/order-detail/{{id}}">
             <div class="place_pic flex flex_justify bdbottom">
-                <div class="place_info_desc">
+                <div  class="place_info_desc">
                     <span class="place">
                         <img src="{{dater.avatar}}"/>
                     </span>
@@ -23,6 +24,7 @@
                 </div>
                 <span class="price">{{amount}}美币</span>
             </div>
+            </a>
             <div class="flex flex_justify">
                 {{#finish_prepay}}
                 <h3 class="pay_desc color_y">已预付：{{pre_pay}}美币</h3>
@@ -37,7 +39,7 @@
                     <?php if($user->gender==1): ?>
                     <span data-orderid="{{id}}" class="receive_order">立即支付</span>
                     <?php else:?>
-                    <span data-orderid="{{id}}" class="receive_order">立即支付</span>
+                    <span data-orderid="{{id}}" class="cancel_order">取消订单</span>
                     <?php endif;?>
                 </div>
                 {{/finish_receive}}
@@ -91,6 +93,7 @@ var curpage = 1;
 $.util.asyLoadData({gurl: '/userc/getDateorders/', page: curpage, tpl: '#order-list-tpl', id: '#order-list', 
     key: 'orders',func:calFunc});
 setTimeout(function () {
+    //滚动加载
     $(window).on("scroll", function () {
         $.util.listScroll('order-list', function () {
             $.util.asyLoadData({gurl: '/userc/getDateorders/', page: curpage,
@@ -110,6 +113,7 @@ $(document).on('tap','.receive_order',function(){
    })
 });
 $('.date_list_header div').on('tap',function(){
+    //tap切换
     curpage = 1;
     var query = $(this).data('query');
     $('.date_list_header div').removeClass('current');
@@ -125,6 +129,7 @@ $('.date_list_header div').on('tap',function(){
     });
 });
 function calFunc(data){
+    //返回格式化回调
     if(data.orders.length){
         $.each(data.orders,function(i,n){
            if($.inArray(n.status,[3])!==-1){

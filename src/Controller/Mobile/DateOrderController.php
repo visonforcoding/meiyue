@@ -106,7 +106,7 @@ class DateOrderController extends AppController
                'user_id'=>0,
                'buyer_id'=>  $this->user->id,
                'type'=>1,
-               'type_msg'=>'约技能支出',
+               'type_msg'=>'约技能支付预约金',
                'income'=>2,
                'amount'=>$pre_pay,
                'price'=>$pre_pay,
