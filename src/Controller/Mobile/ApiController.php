@@ -131,7 +131,7 @@ class ApiController extends AppController {
      */
     public function upload() {
         $this->autoRender = false;
-        $dir = 'app';
+        $dir = 'tmp';
         $extra_data = $this->request->data('extra_param');
         $extra_data_json = json_decode($extra_data);
         //\Cake\Log\Log::debug($extra_data_json, 'devlog');
@@ -144,11 +144,10 @@ class ApiController extends AppController {
         $res = $this->Util->uploadFiles($dir);
         if ($res) {// 上传错误提示错误信息
             $response['status'] = false;
-            $response['msg'] = $res->getErrorMsg();
+            $response['msg'] = $res['msg'];
+            $response['path'] = $res['info'][0]['path'];
         } else {// 上传成功 获取上传文件信息
-            $info = $res->getUploadFileInfo();
             $response['status'] = true;
-            $response['path'] = $res['path'];
             $response['msg'] = '上传成功!';
         }
         return $this->jsonResponse($response);
