@@ -96,6 +96,7 @@
     //点击tab的切换动作
     $(".tab-btn").on('click', function () {
 
+        $.util.alert(date_action);
         $(".tab-btn").each(function () {
 
             $(this).removeClass('current');
