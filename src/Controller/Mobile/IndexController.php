@@ -165,6 +165,7 @@ class IndexController extends AppController {
     public function test() {
         //var_dump(round1214 / 1000);
         //var_dump(round('42.99687156342637',1));
+        debug($this->Util->getServerDomain());
         exit();
     }
 

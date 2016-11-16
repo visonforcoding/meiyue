@@ -146,6 +146,7 @@ class ApiController extends AppController {
             $response['status'] = false;
             $response['msg'] = $res['msg'];
             $response['path'] = $res['info'][0]['path'];
+            $response['urlpath'] = $this->Util->getServerDomain().$res['info'][0]['path'];
         } else {// 上传成功 获取上传文件信息
             $response['status'] = true;
             $response['msg'] = $res['msg'];

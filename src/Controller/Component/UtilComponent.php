@@ -133,5 +133,9 @@ class UtilComponent extends Component {
         }
         return $pattern;
     }
+    
+    public function getServerDomain(){
+        return $this->request->scheme().'://'.$this->request->env('SERVER_NAME'); 
+    }
 
 }
