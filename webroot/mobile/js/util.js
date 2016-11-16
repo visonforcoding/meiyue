@@ -150,7 +150,7 @@ $.util = {
         return new scroll(opt);
     },
     //轮播图  传入的都是
-    loopImg: function (fatherDom, child, tab, dom) {
+    loopImg: function (fatherDom, child, tab, dom, speed) {
         return $.util.loop({
             tp: 'img', //图片img或是文字text
             //min : 5,
@@ -159,7 +159,7 @@ $.util = {
             moveChild: child, //$('#loopImgUl li')
             tab: tab, //$('#loopImgBar li')
             loopScroll: this.loopImg.length > 1,
-            autoTime: 3000,
+            autoTime: speed,
             lockScrY: true,
             imgInitLazy: 1000,
             //loopScroll:true,
@@ -168,6 +168,8 @@ $.util = {
             index: 1,
             viewDom: dom,
             fun: function (index) {
+            	var hei = child.eq(index-1).height();
+            	fatherDom.height(hei);
             }
         });
     },

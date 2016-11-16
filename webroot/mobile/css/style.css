@@ -247,11 +247,13 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .bottomblock .total i.numbers{font-size:18px;}
 
 /*约会管理*/
+.activity_list_con{width:2000%;overflow:hidden;}
+.activity_list_con section{float:left;width:7.5rem;overflow: hidden;}
 .date_list_header{width:100%;background: #fff;height:45px;line-height:45px;color:#efefef;}
 .date_list_header .headertab{display: inline-block;margin:0 auto;text-align: center;padding:0 .2rem;height:45px;}
-.date_list_header div.current .headertab{border-bottom:2px #eab96a solid;}
+.date_list_header div.cur .headertab{border-bottom:2px #eab96a solid;}
 .date_list_header div{color:#303030;font-size:15px;text-align: center;width:48%;display: inline-block;}
-.date_list_header div.current{color:#eab96a;}
+.date_list_header div.cur{color:#eab96a;}
 .date_list_con{}
 .date_list_con section{width:100%;display: none;}
 .date_list_con section li{padding-left:.3rem;margin-top:.2rem;background: #fff;}
@@ -629,12 +631,13 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .rich_list .silver{background: url(icon/tou1.png) no-repeat center center;background-size:contain; width:.72rem;height:.62rem;}
 .rich_list .voted_place{}
 /*活动*/
-.activity_list{}
+.activity_list{overflow:hidden;}
 .activity_list .date_list{position:fixed;top:0;margin:auto;max-width: 750px;width:100%;z-index:11;}
 .activity_list .date_list_header div{width:30%;font-size:18px;}
 .date_detail_place .place_info .userinfo .price{font-size: 12px;}
 .activity_tips{background: rgba(0,0,0,.8);padding:.15rem .3rem;margin:auto;max-width: 750px;width:100%;color:#EAB96A;text-align: center;font-size: 13px;}
 .commonfixed{position: fixed;top:45px;}
+.activewd{width:7.5rem;top:0;}
 .common{font-size:12px;}
 .common i{font-size: 14px;color:#ccc;margin-right:.1rem;}
 
