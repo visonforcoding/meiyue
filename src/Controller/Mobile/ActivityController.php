@@ -328,4 +328,19 @@ class ActivityController extends AppController
         }
 
     }
+
+
+    public function memIndex($activity_id) {
+
+        if($activity_id) {
+
+            $actreTable = TableRegistry::get('Actregistration');
+            $actres = $actreTable->find('all', ['contain' => ['User' => function($q) {
+                return $q->select(['id', 'nick', 'birthday', 'gender', 'avatar']);
+            }]])->where(['activity_id' => $activity_id, 'Actregistration.status' => 1]);
+
+        }
+        $this->set(['pageTitle' => '美约-派对已报名', 'actres' => $actres]);
+
+    }
 }
