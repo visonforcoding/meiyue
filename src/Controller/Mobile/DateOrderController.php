@@ -26,7 +26,7 @@ class DateOrderController extends AppController
             return $q->contain(['Skill', 'Cost']);}, 'Tags', 'User' => function ($q) {
             return $q->select(['nick', 'birthday', 'gender', 'money']);
         }]]);
-        $this->set(['date' => $date, 'user' => $this->user]);
+        $this->set(['date' => $date, 'user' => $this->user, 'pageTitle' => '美约-约会详情']);
 
 
     }

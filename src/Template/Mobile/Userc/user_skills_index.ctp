@@ -15,7 +15,7 @@
     <div class="ability_items mt20">
         <ul class="outerblock inner">
             <?php foreach ($userskills as $item): ?>
-                <li class="flex flex_justify skill-item" item-id="<?= $item['id'];?>">
+                <li class="switchbox flex flex_justify skill-item" item-id="<?= $item['id'];?>">
                     <div><?= $item['skill']['name']; ?></div>
                     <div class="flex">
                         <i class="smalldes"><?= $item['cost']['money']; ?>美币/小时</i>

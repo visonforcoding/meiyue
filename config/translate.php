@@ -18,7 +18,8 @@ function getDateStatStr($status = -1) {
     $statuses = Array(
         1 => "已有人赴约",
         2 => "未有人赴约",
-        3 => "已下线"
+        3 => "已下线",
+        4 => "被平台下架"
     );
 
     if ($status == -1) {
@@ -144,6 +145,5 @@ function getBaiduPOICF() {
         '公司企业',
         '政府机构'
     );
-
     return $cfs;
 }

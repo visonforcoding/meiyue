@@ -268,7 +268,7 @@ CREATE TABLE `lm_flow` (
 COMMENT='用户资金流水'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
-AUTO_INCREMENT=48
+AUTO_INCREMENT=1
 ;
 
 
@@ -302,4 +302,56 @@ COMMENT='约单表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=3
+;
+
+##20161116
+CREATE TABLE `lm_actregistration` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL COMMENT '用户id',
+	`activity_id` INT(11) NOT NULL COMMENT '活动id',
+	`status` TINYINT(4) NOT NULL COMMENT '报名状态：1#正常 2#取消 3#未付款',
+	`cost` DOUBLE NOT NULL COMMENT '报名费用',
+	`punish` DOUBLE NOT NULL COMMENT '取消报名惩罚金额',
+	`punish_percent` TINYINT(4) NOT NULL COMMENT '惩罚金占报名费百分比',
+	`create_time` DATETIME NOT NULL COMMENT '报名时间',
+	`cancel_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '取消报名时间',
+	`update_time` DATETIME NOT NULL COMMENT '更新时间，包括管理员操作',
+	`num` SMALLINT(6) NOT NULL DEFAULT '1' COMMENT '购买数量',
+	PRIMARY KEY (`id`)
+)
+COMMENT='活动报名表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=25
+;
+
+
+CREATE TABLE `lm_activity` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`big_img` VARCHAR(50) NOT NULL COMMENT '封面图',
+	`title` VARCHAR(50) NOT NULL COMMENT '标题',
+	`male_price` DOUBLE NOT NULL DEFAULT '0' COMMENT '男性价格',
+	`female_price` DOUBLE NOT NULL DEFAULT '0' COMMENT '女性价格',
+	`description` VARCHAR(50) NOT NULL COMMENT '描述',
+	`ad` VARCHAR(50) NULL DEFAULT NULL COMMENT '宣传语',
+	`start_time` DATETIME NOT NULL COMMENT '开始时间',
+	`end_time` DATETIME NOT NULL COMMENT '结束时间',
+	`site` VARCHAR(50) NOT NULL COMMENT '活动地址',
+	`site_lat` FLOAT NOT NULL COMMENT '地址纬度',
+	`site_lng` FLOAT NOT NULL COMMENT '地址经度',
+	`male_lim` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT '活动男性名额',
+	`female_lim` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT '活动女性名额',
+	`male_rest` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT '男性剩余名额',
+	`female_rest` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT '女性剩余名额',
+	`detail` TEXT NULL COMMENT '图文详情',
+	`notice` VARCHAR(255) NOT NULL COMMENT '活动须知',
+	`status` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '活动状态：1#正常进行 2#下架处理',
+	`remark` VARCHAR(255) NOT NULL COMMENT '备注',
+	`punish_percent` TINYINT(4) NULL DEFAULT '0' COMMENT '惩罚比例',
+	PRIMARY KEY (`id`)
+)
+COMMENT='活动派对表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=4
 ;
