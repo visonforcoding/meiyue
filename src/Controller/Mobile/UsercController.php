@@ -180,7 +180,7 @@ class UsercController extends AppController {
                    $where[] = ['Dateorder.status in'=>['3','7']];
                    break;
                case 3:
-                   $where[] = ['Dateorder.status in'=>['10']];
+                   $where[] = ['Dateorder.status in'=>['10','13']];
                    break;
                default:
                    break;
@@ -252,7 +252,8 @@ class UsercController extends AppController {
         ]);
         $this->set([
             'order'=>$order,
-            'user'=>  $this->user
+            'user'=>  $this->user,
+            'pageTitle'=>'订单详情'
         ]);                      
         
     }
@@ -283,8 +284,10 @@ class UsercController extends AppController {
         //扣除尾款
         $payment = $order->amount - $order->pre_pay;
         //交易流水
-        //扣除 预约金
         $pre_amount = $this->user->money;
+        if($this->user->money < $payment){
+            return $this->Util->ajaxReturn(['status'=>false,'code'=>'110','账户美币不足']);
+        }
         $this->user->money = $this->user->money - $payment;
         $user = $this->user;
         $after_amount = $this->user->money;
@@ -324,8 +327,72 @@ class UsercController extends AppController {
     
     /**
      * 赴约成功
+     * 女方：
+     *      1.状态更改
+     *      2.通知男方
+     * 男方：
+     *     1.结束约单 
+     *     2.女方收到全款
+     *     3.收款资金流水
      */
     public function orderGo(){
         $this->handCheckLogin();
+        $order_id = $this->request->data('order');
+        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+        $order = $DateorderTable->get($order_id,[
+            'contain'=>[
+                'Buyer'=>function($q){
+                    return $q->select(['phone','id','avatar','nick','birthday','money']);
+                }
+                ,'Dater'=>function($q){
+                    return $q->select(['id','nick','avatar','birthday','phone','money']);
+                }
+                ,'UserSkill.Skill'
+            ]
+        ]);
+        if($this->user->gender==2){
+            $order->status = 13;
+            if($DateorderTable->save($order)){
+                $this->loadComponent('Sms');
+                $this->Sms->sendByQf106($order->buyer->phone, $order->dater->nick.
+                        '已到达约会目的地，请及时到场赴约.');
+                return $this->Util->ajaxReturn(true,'成功接受');
+            }
+        }else{
+            $order->status = 14; //订单完成
+            //女方收款
+            $pre_amount = $order->dater->money;
+            $order->dater->money = $order->amount+$pre_amount;
+            $order->dirty('dater',true);
+            //资金流水
+            //生成流水
+            $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+            $flow = $FlowTable->newEntity([
+               'user_id'=>$order->dater_id,
+               'buyer_id'=>  0,
+               'relate_id'=>$order->id,
+               'type'=>3,
+               'type_msg'=>'约技能收款',
+               'income'=>1,
+               'amount'=>$order->amount,
+               'price'=>$order->amount,
+               'pre_amount'=>$pre_amount,
+               'after_amount'=>$order->dater->money,
+               'paytype'=>1,   //余额支付
+               'remark'=> '约技收取尾款'
+            ]);
+           $transRes = $DateorderTable->connection()->transactional(function()use(&$flow,$FlowTable,&$order,$DateorderTable){
+               $UserTable = \Cake\ORM\TableRegistry::get('User');
+               return $FlowTable->save($flow)&&$DateorderTable->save($order);
+           });
+            if($transRes){
+                return $this->Util->ajaxReturn(true,'订单完成');
+            }else{
+                errorMsg($flow, '失败');
+                errorMsg($order, '失败');
+                return $this->Util->ajaxReturn(false,'订单完成失败');
+            }
+        }
+        return $this->Util->ajaxReturn(false,'服务器开小差');
     }
 }

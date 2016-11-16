@@ -88,7 +88,9 @@
                 <div>合计</div><div><?= $order->amount ?>美币</div>
             </li>
             <li class="flex flex_justify">
-                <div>已支付预约金</div><div><?= $order->pre_pay ?>美币</div>
+                <?php if(in_array($order->status,['13','10'])): ?>
+                    <div>已支付</div><div><?= $order->amount ?>美币</div>
+                <?php endif; ?>
             </li>
         </ul>
         <?php if($order->status == 7): ?>
@@ -109,6 +111,20 @@
             </div>
         </div>
     <?php endif; ?>
+    <?php if ($order->status == 7): ?>
+        <div class="bottomblock">
+            <div class="flex flex_end">
+                <span class="total">剩余尾款数:<span class="color_y"><?= $order->amount - $order->pre_pay ?> </i>美币</span></span>
+                <a href="javascript:void(0);" data-id="<?=$order->id?>" id="payall" class="nowpay">立即支付</a>
+            </div>
+        </div>
+    <?php endif; ?>
+    <?php if ($order->status == 13): ?>
+        <div class="potion_footer flex flex_justify">
+			<span class="footerbtn cancel">取消约单</span>
+			<span id="godate" class="footerbtn gopay">赴约成功</span>
+		</div>
+    <?php endif; ?>
 <?php else: ?>
     <?php if ($order->status == 7): ?>
         <a href="login_identify_jump.html" class="identify_dark_potion">取消约单</a>
@@ -116,7 +132,7 @@
     <?php if ($order->status == 10): ?>
         <div class="potion_footer flex flex_justify">
 			<span class="footerbtn cancel">取消约单</span>
-			<span  id="godate" class="footerbtn gopay">赴约成功</span>
+			<span  id="godate" class="footerbtn gopay">到达约会目的地</span>
 		</div>
     <?php endif; ?>
 <?php endif; ?>
@@ -138,8 +154,8 @@
     $('#godate').on('tap',function(){
         //赴约成功
         $.util.ajax({
-           url:'/userc/order-payall',
-           data:{order:id},
+           url:'/userc/order-go',
+           data:{order:orderid},
            func:function(res){
                $.util.alert(res.msg);
            }

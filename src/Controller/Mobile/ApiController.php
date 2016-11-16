@@ -11,6 +11,7 @@ use Wpadmin\Utils\UploadFile;
  * @property \App\Model\Table\ApiTable $Api
  * @property \App\Controller\Component\WxComponent $Wx
  * @property \App\Controller\Component\EncryptComponent $Encrypt
+ * @property \App\Controller\Component\UtilComponent $Util
  *
  */
 class ApiController extends AppController {
@@ -133,43 +134,21 @@ class ApiController extends AppController {
         $dir = 'app';
         $extra_data = $this->request->data('extra_param');
         $extra_data_json = json_decode($extra_data);
-        \Cake\Log\Log::debug($extra_data_json, 'devlog');
+        //\Cake\Log\Log::debug($extra_data_json, 'devlog');
         if (is_object($extra_data_json)) {
             if (isset($extra_data_json->dir)) {
                 $dir = $extra_data_json->dir;
             }
         }
-        \Cake\Log\Log::debug($this->request->data(), 'devlog');
-        $today = date('Y-m-d');
-        $urlpath = '/upload/' . $dir . '/' . $today . '/';
-        $savePath = ROOT . '/webroot' . $urlpath;
-        $upload = new UploadFile(); // 实例化上传类
-        $upload->maxSize = 31457280; // 设置附件上传大小
-        $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg', 'zip', 'ppt',
-            'pptx', 'doc', 'docx', 'xls', 'xlsx', 'webp'); // 设置附件上传类型
-        $upload->savePath = $savePath; // 设置附件上传目录
-        $isZip = false;
-        if (isset($extra_data_json->zip)) {
-            if ($extra_data_json->zip) {
-                //缩略图处理
-                $isZip = true;
-                $upload->thumb = true;
-                $upload->thumbMaxWidth = '60';
-                $upload->thumbMaxHeight = '60';
-            }
-        }
-        $upload->savePath = $savePath; // 设置附件上传目录
-        if (!$upload->upload()) {// 上传错误提示错误信息
+        //\Cake\Log\Log::debug($this->request->data(), 'devlog');
+        $res = $this->Util->uploadFiles($dir);
+        if ($res) {// 上传错误提示错误信息
             $response['status'] = false;
-            $response['msg'] = $upload->getErrorMsg();
+            $response['msg'] = $res->getErrorMsg();
         } else {// 上传成功 获取上传文件信息
-            $info = $upload->getUploadFileInfo();
+            $info = $res->getUploadFileInfo();
             $response['status'] = true;
-            $response['path'] = $urlpath . $info[0]['savename'];
-            if ($isZip) {
-                $response['thumbpath'] = $urlpath . $upload->thumbPrefix . $info[0]['savename'];
-                $response['smallpath'] = $urlpath . $upload->smallPrefix . $info[0]['savename'];
-            }
+            $response['path'] = $res['path'];
             $response['msg'] = '上传成功!';
         }
         return $this->jsonResponse($response);
