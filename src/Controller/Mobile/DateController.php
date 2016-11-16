@@ -1,5 +1,6 @@
 <?php
 namespace App\Controller\Mobile;
+use Cake\Datasource\ResultSetInterface;
 
 /**
  * Date Controller
@@ -20,9 +21,9 @@ class DateController extends AppController
 
         if($this->request->is("post")) {
 
-            $datas = $this->Date->find("all")->contain(['UserSkill' => function($q){
+            $datas = $this->Date->find("all", ['contain' => ['UserSkill' => function($q){
                 return $q->contain(['Skill', 'Cost']);
-            }]);
+            }]]);
             if($user_id) {
 
                 $datas = $datas->where(['Date.user_id' => $user_id]);
@@ -43,6 +44,14 @@ class DateController extends AppController
                     'created_time' => 'desc']);
 
             }
+            $datas->formatResults(function(ResultSetInterface $results) {
+
+                return $results->map(function($row) {
+                    $row->time = getFormateDT($row->start_time, $row->end_time);
+                    return $row;
+                });
+
+            });
             return $this->Util->ajaxReturn(['datas' => $datas->toArray(), 'status' => true]);
 
         }
