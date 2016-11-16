@@ -38,8 +38,9 @@ class DateController extends AppController
                 $datas = $datas->contain(['User' => function ($q) {
                     return $q->select(['nick', 'birthday']);}])
                     ->where(['Date.status' => 2]);
-                $userCoord_lng = $this->user->login_coord_lng;
-                $userCoord_lat = $this->user->login_coord_lat;
+                $posititon = parent::getPosition();
+                $userCoord_lng = $posititon[0];
+                $userCoord_lat = $posititon[1];
                 $datas->order(["getDistance($userCoord_lng, $userCoord_lat, login_coord_lng, login_coord_lat)"=>'asc',
                     'created_time' => 'desc']);
 

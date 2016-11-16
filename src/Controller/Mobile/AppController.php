@@ -246,4 +246,14 @@ class AppController extends Controller {
         }
     }
 
+
+    /**
+     * 获取坐标
+     */
+    protected function getPosition() {
+
+        $position = explode(',', $this->coord);
+        return $position;
+
+    }
 }
