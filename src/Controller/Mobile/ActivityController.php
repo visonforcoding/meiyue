@@ -20,7 +20,11 @@ class ActivityController extends AppController
     {
         if($this->request->is("post")) {
 
-            $datas = $this->Activity->find("all")->where(['status' => 1, 'Activity.start_time >' => new Time()]);
+            $datas = $this->Activity->find("all")->where(['status' => 1, 'Activity.start_time >' => new Time()])
+                ->map(function($row) {
+                    $row->time = getFormateDT($row->start_time, $row->end_time);
+                    return $row;
+            });
             if($user_id) {
 
                 $datas = $datas->where(['Date.user_id' => $user_id]);

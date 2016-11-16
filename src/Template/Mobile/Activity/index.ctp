@@ -127,10 +127,6 @@
 
                         $('#date_list_container').show();
                         $.util.dataToTpl("date_list_container", tpl_id, res.datas, function (d) {
-                            var start_time = new Date(d.start_time);
-                            var end_time = new Date(d.end_time);
-                            var timestr = start_time.getFullYear() + "-" + (start_time.getMonth() + 1) + "-" + start_time.getDate() + " " + start_time.getHours() + ":00~" + end_time.getHours() + ":00";
-                            d.time = timestr;
                             d.skill_name = d.user_skill.skill.name;
                             d.status = statuses[d.status];
                             d.user_name = d.user.nick;
@@ -144,10 +140,6 @@
                         $('.abanner').show();
                         $('#activity_list_container').show();
                         $.util.dataToTpl("activity_list_container", tpl_id, res.datas, function (d) {
-                            var start_time = new Date(d.start_time);
-                            var end_time = new Date(d.end_time);
-                            var timestr = start_time.getFullYear() + "-" + (start_time.getMonth() + 1) + "-" + start_time.getDate() + " " + start_time.getHours() + ":00~" + end_time.getHours() + ":00";
-                            d.time = timestr;
                             return d;
                         });
 
