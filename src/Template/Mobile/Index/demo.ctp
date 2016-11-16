@@ -42,7 +42,7 @@
     <div class="up_identify_box bgff mt40">
         <div class="inner">
             <div class="title">
-                <h3 class="color_black">如上图所示，上传9张认证照片2</h3>
+                <h3 class="color_black">如上图所示，上传单张图片</h3>
             </div>
             <div  class="fact_identify" id="demoImg2">
                 <dl class="Idcard" data-id="up">
@@ -99,6 +99,12 @@
         if($('#demoImg2').data('max') === '0') LEMON.event.uploadPics({key:'demoImg2', user_id:'3', param:'{id:12322,uid:45644}'});
         if($('#up_video').data('choosed')) LEMON.event.uploadVideo({key:'up_video', user_id:'3'});
         if($('#up_video2').data('choosed')) LEMON.event.uploadVideo({key:'up_video2', user_id:'3'});
+    })
+
+    $('#demoImg2').on('click', function () {
+        LEMON.event.uploadPic('{"dir":"user/avatar"}', function(res){
+            alert(res);
+        })
     })
 
 </script>
