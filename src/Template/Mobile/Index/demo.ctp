@@ -104,6 +104,7 @@
     $('#demoImg2').on('click', function () {
         LEMON.event.uploadPic('{"dir":"user/avatar"}', function(res){
             alert(res);
+            
         })
     })
 
