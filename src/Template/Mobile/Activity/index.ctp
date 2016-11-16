@@ -96,7 +96,6 @@
     //点击tab的切换动作
     $(".tab-btn").on('click', function () {
 
-        $.util.alert(date_action);
         $(".tab-btn").each(function () {
 
             $(this).removeClass('current');
@@ -105,6 +104,7 @@
         $(this).addClass('current');
         var options = "";
         var actionstr = $(this).attr('tab-action');
+        $.util.alert(actionstr);
         var tpl_id = $(this).attr('tpl_id');
         getNetDatas(tpl_id, actionstr, options);
 
