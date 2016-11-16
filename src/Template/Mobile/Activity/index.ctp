@@ -1,5 +1,5 @@
 <?php
-    $date_action = '/date/index';  //定义约会请求地址
+    $date_action = '/date/get-all-dates';  //定义约会请求地址
     $activity_action = '/activity/index';  //定义派对请求地址
 ?>
 <div class="wraper pd45">

@@ -86,7 +86,7 @@
     function getNetDatas(options) {
 
         $.ajax({
-            url: "/date/index/" + <?= $user->id ?>,
+            url: "/date/index",
             type: "POST",
             data: options,
             dataType: "json",
