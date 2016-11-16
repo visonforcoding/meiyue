@@ -104,7 +104,6 @@
         $(this).addClass('current');
         var options = "";
         var actionstr = $(this).attr('tab-action');
-        $.util.alert(actionstr);
         var tpl_id = $(this).attr('tpl_id');
         getNetDatas(tpl_id, actionstr, options);
 
@@ -126,6 +125,7 @@
                     $('.abanner').hide();
                     if(action == date_action) {
 
+                        $.util.alert(action);
                         $('#date_list_container').show();
                         $.util.dataToTpl("date_list_container", tpl_id, res.datas, function (d) {
                             d.skill_name = d.user_skill.skill.name;
