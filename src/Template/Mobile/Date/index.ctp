@@ -101,12 +101,6 @@
 
                     }
                     $.util.dataToTpl("dates-list-container", "tpl", res.datas, function(d){
-                        var time_tmpstart = (d.start_time).split(" ");
-                        var time_tmpend = (d.end_time).split(" ");
-                        var year_month_date = time_tmpstart[0];
-                        var start_hour_second = (time_tmpstart[1]).substring(0, (time_tmpstart[1]).lastIndexOf(':'));
-                        var end_hour_second = (time_tmpend[1]).substring(0, (time_tmpend[1]).lastIndexOf(':'));
-                        d.time = year_month_date + " " + start_hour_second + "~" + end_hour_second;
                         d.skill_name = d.user_skill.skill.name;
                         d.price = d.user_skill.cost.money;
                         d.status = statuses[d.status];
