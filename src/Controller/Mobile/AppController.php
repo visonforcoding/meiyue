@@ -119,7 +119,7 @@ class AppController extends Controller {
             $this->baseLogin();
         }
         if (in_array($request_aim, $this->firewall) ||
-                in_array($controller, ['user', 'wx', 'news', 'activity', 'meet', 'pay', 'api', 'home', 'index'])) {
+                in_array($controller, ['user', 'wx', 'news', 'meet', 'pay', 'api', 'home', 'index', 'activity', 'date'])) {
             return true;
         }
         return $this->handCheckLogin();
