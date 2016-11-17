@@ -24,7 +24,7 @@
         <span id="selectMenu" class="r_btn iconfont menu">&#xe639;</span>
     </div>
 </header>
-<div class="wraper pd45">
+<div class="wraper">
     <div class="navbar">
         <ul id="selectSkil" class="inner flex flex_justify">
             <li  class="current"><a data-id="0" href="#this">精选</a></li>
