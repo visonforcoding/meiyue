@@ -7,7 +7,7 @@
 <div class="wraper">
     <div class="date_list">
         <div class="date_list_header">
-            <div class="date-tab alldate current" tab-action="all"><span class="headertab">全部</span></div> |
+            <div class="date-tab alldate cur" tab-action="all"><span class="headertab">全部</span></div> |
             <div class="date-tab todate" tab-action="to"><span class="headertab">待抢单</span></div>
         </div>
         <div class="date_list_con">
@@ -27,7 +27,7 @@
 </div>
 
 <script type="text/html" id="tpl">
-    <li class="date-item" date-id="{#id#}">
+    <li onclick="window.location.href = '/date/view/{#id#}'">
         <div class="date_item_des">
             <div class="flex flex_justify bdbottom">
                 <h3 class='maxwid70'><i class="itemsname color_y">[{#skill_name#}]</i>{#title#}</h3>
@@ -68,10 +68,10 @@
 
         $(".date-tab").each(function () {
 
-            $(this).removeClass('current');
+            $(this).removeClass('cur');
 
         });
-        $(this).addClass('current');
+        $(this).addClass('cur');
         var datas = "";
         if($(this).attr('tab-action') == 'to') {
 
@@ -114,11 +114,5 @@
         });
 
     }
-
-    $(document).on("click", ".date-item", function() {
-
-        window.location.href = '/date/view/' + $(this).attr('date-id');
-
-    });
 
 </script>
