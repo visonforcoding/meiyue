@@ -1,5 +1,6 @@
 <?php
 namespace App\Controller\Mobile;
+use Cake\Datasource\ResultSetInterface;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 
@@ -46,13 +47,20 @@ class ActivityController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
-    public function getInPage($page) {
+    public function getAllDatesInPage($page) {
 
-        $datas = $this->Activity->find("all")->where(['status' => 1, 'Activity.start_time >' => new Time()])
-            ->map(function($row) {
+        $limit = 10;
+        $datas = $this->Activity->find("all")->where(['status' => 1, 'Activity.start_time >' => new Time()]);
+        $datas->limit($limit);
+        $datas->page($page);
+        $datas->formatResults(function(ResultSetInterface $results) {
+
+            return $results->map(function($row) {
                 $row->time = getFormateDT($row->start_time, $row->end_time);
                 return $row;
             });
+
+        });
         return $this->Util->ajaxReturn(['datas' => $datas->toArray(), 'status' => true]);
 
     }
