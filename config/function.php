@@ -186,6 +186,23 @@ function getFormateDT($startTime, $endTime) {
 
 }
 
+//获取年月日
+function getYMD($time) {
+
+    $timestr = $time->year . "年" . $time->month . "月" . $time->day;
+    return $timestr;
+
+}
+
+//仅适用于本项目对应数据库约会表start_time，end_time字段
+//用户将开始时间和结束时间合成页面需要的格式
+function getHIS($startTime, $endTime) {
+
+    $timestr = $startTime->hour . ":00~" . $endTime->hour . ":00";
+    return $timestr;
+
+}
+
 //根据出生日期计算年龄
 function getAge($birthday) {
 

@@ -7,18 +7,18 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 <script src="/mobile/js/mustache.min.js"></script>
 <script id="date-list-tpl" type="text/html">
     {{#datas}}
-    <div class="date_detail_place inner {{^is_first}}mt20{{/is_first}}">
-        <h3 class="title"><i class="itemsname color_y">[约吃饭]</i> 海岸城高级西餐厅 美女在等你</h3>
+    <div class="date_detail_place inner {{^is_first}}mt20{{/is_first}}" onclick="window.location.href = '/date-order/join/{{id}}'">
+        <h3 class="title"><i class="itemsname color_y">[{{user_skill.skill.name}}]</i> {{description}}</h3>
         <div class="place_pic">
 								<span class="place">
 									<img src="/mobile/images/date_place.jpg"/>
 								</span>
             <div class="place_info">
-                <h3 class="userinfo">范冰冰 <span>23岁</span> <em class="price color_y fr"><i class="lagernum">500</i>元/约会金</em>
+                <h3 class="userinfo">{{user.nick}} <span>{{user.age}}岁</span> <em class="price color_y fr"><i class="lagernum">{{user_skill.cost.money}}</i>元/约会金</em>
                 </h3>
                 <h3 class="otherinfo">
-                    <time class="color_gray"><i class="iconfont">&#xe622;</i> 今日 · 12:00-15:00</time>
-                    <address class="color_gray"><i class="iconfont">&#xe623;</i>广东省深圳市福田区 福田口岸</address>
+                    <time class="color_gray"><i class="iconfont">&#xe622;</i> {{time}}</time>
+                    <address class="color_gray"><i class="iconfont">&#xe623;</i>{{site}}</address>
                 </h3>
             </div>
         </div>
@@ -33,18 +33,18 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             <img src="/mobile/css/icon/party1.jpg"/>
         </div>
         <div class="items_con">
-            <h3 class="items_title">中秋国庆 三门岛游艇Party 七日游中秋国庆 三门岛游艇Party 七日游中秋国庆 三门岛游艇Party 七日游</h3>
+            <h3 class="items_title">{{title}}</h3>
             <div class="items_time flex flex_justify mt20">
-                <div>名额有限，大家速速报名</div>
+                <div>{{ad}}</div>
                 <div>
                     <i class="iconfont ico">&#xe64b;</i>
-                    即将开始
+                    {{time}}
                 </div>
             </div>
         </div>
         <div class="items_adress flex flex_justify">
-            <div><i class="iconfont ico">&#xe623;</i>广东省深圳市福田区福田口岸</div>
-            <div class="button btn_dark">
+            <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
+            <div class="button btn_dark" onclick="window.location.href='/activity/view/{{id}}'">
                 我要报名
             </div>
         </div>
@@ -69,7 +69,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             <!--活动-->
             <section>
                 <!-- 约会列表 -->
-                <div id="date_list">&nbsp;</div>
+                <div id="date_list"></div>
             </section>
 
             <!--派对-->
@@ -111,7 +111,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                                             <span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 5</i><i
                                                     class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
                                             <span class="place_number color_gray"><em class="color_y"><i
-                                                    class="iconfont color_y">&#xe61d;</i> 23</em>
+                                                        class="iconfont color_y">&#xe61d;</i> 23</em>
 														本周魅力值：<i class="color_y">255554222</i>
 													</span>
                                         </h3>
@@ -128,7 +128,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                                             <span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 5</i><i
                                                     class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
                                             <span class="place_number color_gray"><em class="color_y"><i
-                                                    class="iconfont color_y">&#xe61d;</i> 23</em>
+                                                        class="iconfont color_y">&#xe61d;</i> 23</em>
 														本周魅力值：<i class="color_y">255554222</i>
 													</span>
                                         </h3>
@@ -145,7 +145,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                                             <span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 3</i><i
                                                     class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
                                             <span class="place_number color_gray"><em class="color_y"><i
-                                                    class="iconfont color_y">&#xe61d;</i> 23</em>
+                                                        class="iconfont color_y">&#xe61d;</i> 23</em>
 														本周魅力值：<i class="color_y">255554222</i>
 													</span>
                                         </h3>
@@ -162,7 +162,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                                             <span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 3</i><i
                                                     class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
                                             <span class="place_number color_gray"><em class="color_y"><i
-                                                    class="iconfont color_y">&#xe61d;</i> 23</em>
+                                                        class="iconfont color_y">&#xe61d;</i> 23</em>
 														本周魅力值：<i class="color_y">255554222</i>
 													</span>
                                         </h3>
@@ -179,7 +179,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                                             <span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 1</i><i
                                                     class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
                                             <span class="place_number color_gray"><em class="color_y"><i
-                                                    class="iconfont color_y">&#xe61d;</i> 23</em>
+                                                        class="iconfont color_y">&#xe61d;</i> 23</em>
 														本周魅力值：<i class="color_y">255554222</i>
 													</span>
                                         </h3>
@@ -208,13 +208,20 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             tab_activity: 2,
             tab_top: 3,
             cur_tab: 1,  //记录当前显示的tab
-            tabInitLoad:[0,0,0,0], //第一次加载
-            tabPage:[1,1,1,1], //当前第几页
-            tabLoadEnd:[0,0,0,0], //页码加载结束
-            tabLoadHold:[0,0,0,0], //页码加载结束
-            tabDataTpl: ['','#date-list-tpl', '#activity-list-tpl', '#top-list-tpl'],
-            listId: ['','#date_list', '#party_list', '#winer_list'],
-            tabDataUrl:['','/date/get-all-dates-in-page/','/activity/index/','/activity/index/']
+            tabInitLoad: [0, 0, 0, 0], //第一次加载
+            tabPage: [1, 1, 1, 1], //当前第几页
+            tabLoadEnd: [0, 0, 0, 0], //页码加载结束
+            tabLoadHold: [0, 0, 0, 0], //页码加载结束
+            tabDataTpl: ['', '#date-list-tpl', '#activity-list-tpl', '#top-list-tpl'],
+            listId: ['', '#date_list', '#party_list', '#winer_list'],
+            tabDataUrl: ['', '/date/get-all-dates-in-page/', '/activity/get-all-dates-in-page/', '/activity/index/'],
+            date_curpage: 1,   //记录约会当前页
+            party_curpage: 1,  //记录派对当前页
+            top_curpage: 1,    //记录封面女神当前页
+            activity_curpage: 1,
+            currentlist_tpl: '',
+            currentlist_container: '',
+            current_action: '',
         }
         $.extend(this, this.opt, o);
 
@@ -233,7 +240,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 tp: 'text', //图片img或是文字text
                 //min : 5,
                 loadImg: true,
-                isInit:true,
+                isInit: true,
                 moveDom: $('#imgBox'),
                 moveChild: $('#imgBox section'),
                 tab: $('#imgTab div'),
@@ -245,18 +252,19 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 viewDom: $('.activity_list'),
                 fun: function (index) {
                     index = parseInt(index);
-                    if(obj.cur_tab == index && !this.isInit) {
+
+                    if (obj.cur_tab == index && !this.isInit) {
                         return;
                     }
-                    window.scrollTo(0,0);
+                    window.scrollTo(0, 0);
                     this.isInit = false;
-                    this.cur_tab = index;
+                    obj.cur_tab = index;
                     obj.tabInit(index);
                 }
             });
         },
-        tabInit: function(index){
-            if(this.tabInitLoad[index]) return;
+        tabInit: function (index) {
+            if (this.tabInitLoad[index]) return;
             this.tabInitLoad[index] = 1;
             //首次加载数据
             this.asyLoadData(this.cur_tab);
@@ -272,16 +280,16 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             }
 
         },
-        scroll:function () {
+        scroll: function () {
             var obj = this;
             $(window).on("scroll", function () {
-                if(!obj.tabInitLoad[obj.cur_tab]) return;
+                if (!obj.tabInitLoad[obj.cur_tab]) return;
                 var st = document.body.scrollTop;
                 var cbodyH = $(obj.listId[obj.cur_tab]).height();
 
                 //console.log([$(document).height(), $(window).height(),$(document).height()-$(window).height()-200,st].join('-'));
                 //if (st >= (($(document).height() - 150))) {
-                console.log([st, cbodyH,st - cbodyH].join('-'));
+                //console.log([st, cbodyH, st - cbodyH].join('-'));
                 if (st >= cbodyH) {
                     obj.asyLoadData(obj.cur_tab);
                 }
@@ -289,7 +297,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
         },
 
         asyLoadData: function (curtab) {
-            if(this.tabLoadHold[curtab] || this.tabLoadEnd[curtab]) return;
+            if (this.tabLoadHold[curtab] || this.tabLoadEnd[curtab]) return;
             this.tabLoadHold[curtab] = true;
 
             $.util.showPreloader();

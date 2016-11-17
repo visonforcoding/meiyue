@@ -4,6 +4,7 @@ namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
 use Cake\I18n\Time;
+use Cake\ORM\TableRegistry;
 
 /**
  * Userc Controller 个人中心
@@ -38,6 +39,68 @@ class UsercController extends AppController {
             $this->set(['fans' => $fans]);
         }
         $this->set(['pageTitle'=>'我的粉丝']);
+    }
+
+
+    /**
+     * 我的-我的派对
+     */
+    public function myActivitys()
+    {
+
+    }
+
+
+    /**
+     * 我的-我的派对-分页获取我的派对列表
+     */
+    public function getActsInPage($page) {
+
+        $actRTable = TableRegistry::get('Actregistration');
+        $limit = 10;
+        $where = ['user_id' => $this->user->id, 'Actregistration.status' => 1];
+        $query = $this->request->query('query');
+        switch ($query) {
+            case 1:
+                $where = array_merge($where, ['Activity.end_time <=' => new Time()]);
+                break;
+            case 2:
+                $where = array_merge($where, ['Activity.end_time >'=>new Time()]);
+                break;
+            default:
+                break;
+        }
+        $datas = $actRTable->find()
+            ->contain(['Activity'])
+            ->where($where)
+            ->limit($limit)
+            ->page($page)
+            ->map(function($row) {
+
+                $row->date = getYMD($row->activity->start_time);
+                $row->time = getHIS($row->activity->start_time, $row->activity->end_time);
+                $curdatetime = new Time();
+                $row->bustr = '';
+                if($row->activity->end_time > $curdatetime) {
+
+                    $row->bustr = '已经结束';
+
+                } else if ($row->activity->start < $curdatetime) {
+
+                    $row->bustr = '即将开启';
+
+                } else if (($row->activity->start < $curdatetime) && ($curdatetime < $row->activity->end)) {
+
+                    $row->bustr = '正在进行';
+
+                }
+
+                return $row;
+
+            })
+            ->toArray();
+        return $this->Util->ajaxReturn(['datas'=>$datas]);
+
     }
 
 

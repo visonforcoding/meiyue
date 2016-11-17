@@ -121,7 +121,7 @@ $('.date_list_header div').on('tap',function(){
     $.util.asyLoadData({
         gurl: '/userc/getDateorders/', 
         page: curpage, 
-        tpl: '#order-list-tpl', 
+        tpl: '#order-list-tpl',
         id: '#order-list', 
         key: 'orders',
         query:'?query='+query,
