@@ -214,14 +214,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             tabLoadHold:[0,0,0,0], //页码加载结束
             tabDataTpl: ['','#date-list-tpl', '#activity-list-tpl', '#top-list-tpl'],
             listId: ['','#date_list', '#party_list', '#winer_list'],
-            tabDataUrl:['','/date/get-all-dates-in-page/','/activity/index/','/activity/index/'],
-            date_curpage: 1,   //记录约会当前页
-            party_curpage: 1,  //记录派对当前页
-            top_curpage: 1,    //记录封面女神当前页
-            activity_curpage: 1,
-            currentlist_tpl: '',
-            currentlist_container: '',
-            current_action: '',
+            tabDataUrl:['','/date/get-all-dates-in-page/','/activity/index/','/activity/index/']
         }
         $.extend(this, this.opt, o);
 
