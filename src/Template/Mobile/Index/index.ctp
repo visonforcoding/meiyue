@@ -6,8 +6,8 @@
         position: absolute;
         top: 1rem;
         bottom: 1rem;
-        left: 0;
-        right: 0;
+        width:100%;
+        max-width:750px;
     }
 </style>
 <?php $this->end('css'); ?>
