@@ -142,18 +142,21 @@ class DateController extends AppController
     }
 
 
-    public function getAllDates()
+    public function getAllDatesInPage($page)
     {
+        $limit = 10;
         $datas = $this->Date->find("all", ['contain' => ['UserSkill.Skill', 'UserSkill.Cost', 'User' => function ($q) {
             return $q->select(['nick', 'birthday']);}]])
             ->where(['Date.status' => 2]);
-
         $posititon = parent::getPosition();
         $userCoord_lng = $posititon[0];
         $userCoord_lat = $posititon[1];
 
         $datas->order(["getDistance($userCoord_lng, $userCoord_lat, login_coord_lng, login_coord_lat)"=>'asc',
             'created_time' => 'desc']);
+
+        $datas->limit($limit);
+        $datas->page($page);
 
         $datas->formatResults(function(ResultSetInterface $results) {
 
