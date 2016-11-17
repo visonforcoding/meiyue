@@ -70,16 +70,8 @@
     <!--上传-->
     <div class="up_identify_box bgff mt40">
         <div class="inner">
-            <div class="title">
-                <h3 class="color_black">如上图所示，上传认证视频2</h3>
-            </div>
-            <div class="fact_identify">
-                <dl class="Idcard">
-                    <dt id="up_video2">
-                        <img src="/mobile/images/upimg.png" alt="" />
-                        <i class="iconfont playbtn">&#xe600;</i>
-                    </dt>
-                </dl>
+            <div class="title" onclick="LEMON.event.getLocation(cbfun)">
+                <h3 class="color_black">获取地理位置</h3>
             </div>
         </div>
     </div>
@@ -104,9 +96,13 @@
     $('#demoImg2').on('click', function () {
         LEMON.event.uploadPic('{"dir":"user/avatar"}', function(res){
             alert(res);
-            
+
         })
     })
+
+    function cbfun (p) {
+        alert(p);
+    }
 
 </script>
 <?= $this->end('script'); ?>
