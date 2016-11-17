@@ -5,7 +5,7 @@
         overflow: hidden;
         position: absolute;
         top: 1rem;
-        bottom: 1rem;
+        bottom: 67px;
         width:100%;
         max-width:750px;
     }
@@ -24,7 +24,6 @@
 
     </div>
 </div>
-<div style="height:1.4rem"></div>
 <?= $this->element('footer', ['active' => 'find']) ?>
 <?php $this->start('script'); ?>
 <script id="bmapjs" src="/mobile/js/bmap.js"></script>
