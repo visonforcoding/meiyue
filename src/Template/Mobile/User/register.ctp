@@ -6,7 +6,7 @@
             <i class="iconfont">&#xe608;</i>
             <input tabindex="1" type="number" id="phone" value="" placeholder="手机号" id="user" />
         </div>
-        <div class="password validate">
+        <div class="password validate flex">
             <i class="iconfont">&#xe607;</i>
             <input tabindex="2" type="text" id="vcode" placeholder="验证码" class="valicode" id="validate" />
             <a href="javascript:void(0)" id="gcode" class="fogetpwd getvalid disabled">获取验证码</a>
@@ -33,7 +33,7 @@
         $.post('/user/sendVCode', {phone: phone}, function (res) {
             if (res.status === true) {
                 obj.addClass('disabled');
-                var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
+                var text = '<span id="timer">' + 30 + '</span>秒后重新发送';
                 obj.html(text);
                 t1 = setInterval(function () {
                     var timer = $('#timer').text();
