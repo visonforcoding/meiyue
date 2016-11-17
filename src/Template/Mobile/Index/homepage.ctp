@@ -26,7 +26,7 @@
     </div>
     <!--图片 && 视频展示-->
     <div class="home_pic_info mt40">
-        <ul class="inner flex flex_justify">
+        <ul class="inner flex">
             <?php if (@unserialize($user->images)): ?>
                 <?php foreach (unserialize($user->images) as $image): ?>
                     <li><img src="<?= createImg($image) ?>"/></li>
@@ -190,7 +190,8 @@
 </div>
 <!--弹出层-->
 <!--约Ta弹出层-->
-<div style="display:none" class="raper show flex flex_center">
+<div class="raper show">
+    <div class='fullwraper flex flex_center'>
     <!--约Ta弹出层-->
     <div class="popup" id="showPay" style="display: none;">
         <div class="popup_con">
@@ -219,6 +220,7 @@
             <p class="wx_care_tips smallarea">若微信号为空假号，点击此处<a href="#this" class="color_ts">举报</a></p>
         </div>
         <span class="closed"><i class="iconfont">&#xe644;</i></span>
+    </div>
     </div>
 </div>
 <?php $this->start('script'); ?>
