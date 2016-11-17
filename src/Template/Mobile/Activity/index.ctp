@@ -315,7 +315,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                         obj.tabPage[curtab]++;
                     }
 
-                    obj.tabInitLoad[curtab] ? $(obj.listId[curtab]).html(rendered) : $(obj.listId[obj.cur_tab]).append(rendered);
+                    obj.tabInitLoad[curtab] ? $(obj.listId[curtab]).append(rendered) : $(obj.listId[obj.cur_tab]).html(rendered);
                 }
             });
         },
