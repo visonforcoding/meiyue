@@ -290,6 +290,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 //console.log([$(document).height(), $(window).height(),$(document).height()-$(window).height()-200,st].join('-'));
                 //if (st >= (($(document).height() - 150))) {
                 //console.log([st, cbodyH, st - cbodyH].join('-'));
+                console.log(st + "|" + cbodyH);
                 if (st >= cbodyH) {
                     obj.asyLoadData(obj.cur_tab);
                 }
