@@ -29,7 +29,7 @@
     <div class="up_identify_box bgff mt40">
         <div class="inner">
             <div class="title">
-                <h3 class="color_black">如上图所示，上传9张认证照片</h3>
+                <h3 class="color_black">上传9张认证照片</h3>
             </div>
             <div  class="fact_identify" id="demoImg">
                 <dl class="Idcard" data-id="up">
@@ -42,7 +42,7 @@
     <div class="up_identify_box bgff mt40">
         <div class="inner">
             <div class="title">
-                <h3 class="color_black">如上图所示，上传单张图片</h3>
+                <h3 class="color_black">上传单张图片</h3>
             </div>
             <div  class="fact_identify" id="demoImg2">
                 <dl class="Idcard" data-id="up">
@@ -71,7 +71,7 @@
     <div class="up_identify_box bgff mt40">
         <div class="inner">
             <div class="title" onclick="LEMON.event.getLocation(cbfun)">
-                <h3 class="color_black">获取地理位置</h3>
+                <h3 class="color_black">获取地理位置LEMON.event.getLocation(cbfun)</h3>
             </div>
         </div>
     </div>
