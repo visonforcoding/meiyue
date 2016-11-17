@@ -212,7 +212,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             tabPage:[0,0,0,0], //当前第几页
             tabLoadEnd:[0,0,0,0], //页码加载结束
             tabLoadHold:[0,0,0,0], //页码加载结束
-            tpl: ['','#date-list-tpl', '#activity-list-tpl', '#top-list-tpl'],
+            tabDataTpl: ['','#date-list-tpl', '#activity-list-tpl', '#top-list-tpl'],
             listId: ['','#date_list', '#party_list', '#winer_list'],
             tabDataUrl:['','/date/get-all-dates-in-page/','/activity/index/','/activity/index/'],
             date_curpage: 1,   //记录约会当前页
@@ -300,7 +300,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             this.tabLoadHold[curtab] = true;
 
             $.util.showPreloader();
-            var template = $(this.tabDataUrl[curtab]).html();
+            var template = $(this.tabDataTpl[curtab]).html();
             var url = this.tabDataUrl + this.tabPage[curtab];
             Mustache.parse(template);   // optional, speeds up future uses
             var obj = this;
