@@ -1,8 +1,10 @@
-<div class="header">
-    <i class="iconfont toback">&#xe602;</i>
-    <span class="edit-btn r_btn" date-id="<?= $date['id'] ?>">编辑</span>
-    <h1>约会详情</h1>
-</div>
+<header>
+    <div class="header">
+        <i class="iconfont toback">&#xe602;</i>
+        <span class="edit-btn r_btn" date-id="<?= $date['id'] ?>">编辑</span>
+        <h1>约会详情</h1>
+    </div>
+</header>
 <div class="wraper">
     <div class="date_detail_place inner">
         <h3 class="title"><i class="itemsname color_y"><?= $date['user_skill']['skill']['name']?></i> <?= $date['title']?></h3>
