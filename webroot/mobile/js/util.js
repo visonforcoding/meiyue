@@ -168,8 +168,6 @@ $.util = {
             index: 1,
             viewDom: dom,
             fun: function (index) {
-            	var hei = child.eq(index-1).height();
-            	fatherDom.height(hei);
             }
         });
     },
