@@ -22,7 +22,6 @@ class UsercController extends AppController {
      * 美女粉丝
      */
     public function fans($page=null) {
-        $this->handCheckLogin();
         if($this->request->is('json')){
             $limit = 10;
             $UserFansTable = \Cake\ORM\TableRegistry::get('UserFans');
@@ -237,7 +236,6 @@ class UsercController extends AppController {
      * 预约订单详情
      */
     public function orderDetail($id){
-        $this->handCheckLogin();
         $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
         $order = $DateorderTable->get($id,[
             'contain'=>[
@@ -394,5 +392,13 @@ class UsercController extends AppController {
             }
         }
         return $this->Util->ajaxReturn(false,'服务器开小差');
+    }
+    
+    
+    /**
+     * 我的钱包
+     */
+    public function myPurse(){
+        
     }
 }

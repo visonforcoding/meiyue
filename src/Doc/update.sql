@@ -355,3 +355,7 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=4
 ;
+
+#user表添加唯一索引
+ALTER TABLE `lm_user`
+	ADD UNIQUE INDEX `phone` (`phone`);

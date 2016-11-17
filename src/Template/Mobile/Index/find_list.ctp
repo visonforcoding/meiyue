@@ -137,8 +137,11 @@ scale.addEventListener("touchmove", function () {
         loadUser(curpage, false, '?skill=' + skill+'&age='+age+'&height='+height);
     });
     $('#selectMenu').on('tap', function () {
-        $('#selectMenu_box').toggle();
+        onTopRight();
     });
+    window.onTopRight = function(){
+        $('#selectMenu_box').toggle();
+    }
     $('#search').on('click',function(){
         $('#selectMenu_box').hide();
         height = $('#sacle').val();
