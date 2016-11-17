@@ -43,6 +43,22 @@ class ActivityController extends AppController
 
 
     /**
+     *
+     * @return \Cake\Network\Response|null
+     */
+    public function getInPage($page) {
+
+        $datas = $this->Activity->find("all")->where(['status' => 1, 'Activity.start_time >' => new Time()])
+            ->map(function($row) {
+                $row->time = getFormateDT($row->start_time, $row->end_time);
+                return $row;
+            });
+        return $this->Util->ajaxReturn(['datas' => $datas->toArray(), 'status' => true]);
+
+    }
+
+
+    /**
      * @param string|null $id Activity id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
