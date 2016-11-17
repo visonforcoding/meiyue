@@ -58,7 +58,7 @@
 <div class="wraper">
     <div class="date_list">
         <div class="date_list_header order_header">
-            <div data-query="1" class="alldate current">
+            <div data-query="1" class="alldate cur">
                 <span class="headertab">全部</span>
             </div> | 
             <div data-query="2" class="todate">
