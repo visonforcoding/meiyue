@@ -27,16 +27,36 @@ class IndexController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-//        echo json_encode(['images'=>['1'=>'http://1.jpg','2'=>'http://2.jpg']]);exit();
-//        $this->viewBuilder()->layout('layout_sui');
-        //$umengObj = new Umeng($key, $secret);
-        //var_dump($umengObj);
-        //set_time_limit(0);
         $this->set([
             'pageTitle' => '发现-美约'
         ]);
     }
 
+    public function findRichList() {
+        $this->set([
+            'pageTitle' => '土豪榜-美约'
+        ]);
+    }
+
+    /**
+     * 获取土豪榜
+     */
+    public function getRichList($page){
+        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+        $limit = 10;
+        $richs = $FlowTable->find()
+                    ->contain([
+                        'User'=>function($q){
+                                return $q->select(['id','avatar','nick']);
+                            },
+                     ])
+                    ->select(['user_id','total'=>'sum(amount)'])
+                    ->orderDesc('total')
+                    ->limit($limit)
+                    ->page($page)
+                    ->toArray();                
+        return $this->Util->ajaxReturn(['richs'=>$richs]);                            
+    }
     /**
      * 发现列表
      */
@@ -45,7 +65,7 @@ class IndexController extends AppController {
         $skills = $this->Business->getTopSkill();
         $this->set([
             'pageTitle' => '发现',
-            'skills'=>$skills
+            'skills' => $skills
         ]);
     }
 
@@ -58,24 +78,24 @@ class IndexController extends AppController {
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $skill = $this->request->query('skill');
         $query = $UserTable->find();
-        $query = $query->select(['id', 'nick', 'distance' => 
-            "getDistance($userCoord_lng,$userCoord_lat,login_coord_lng,login_coord_lat)", 'birthday', 
+        $query = $query->select(['id', 'nick', 'distance' =>
+            "getDistance($userCoord_lng,$userCoord_lat,login_coord_lng,login_coord_lat)", 'birthday',
             'profession', 'login_time', 'avatar', 'login_coord_lng', 'login_coord_lat']);
         $query->hydrate(false);
-        if($skill){
-            $query->matching('UserSkills.Skill',function($q)use($skill){
-                return $q->where(['parent_id'=>$skill]);
+        if ($skill) {
+            $query->matching('UserSkills.Skill', function($q)use($skill) {
+                return $q->where(['parent_id' => $skill]);
             });
         }
-        $query->where(['enabled' => 1, 'status' => 3,'gender'=>2]);
+        $query->where(['enabled' => 1, 'status' => 3, 'gender' => 2]);
         $height = $this->request->query('height');
         $query->where(['enabled' => 1, 'status']);
-        $query->order(['distance' => 'asc','login_time' => 'desc']);
+        $query->order(['distance' => 'asc', 'login_time' => 'desc']);
         $query->limit(intval($limit))
                 ->page(intval($page));
         $query->formatResults(function($items)use($userCoord) {
             return $items->map(function($item)use($userCoord) {
-                        $item['distance'] = $item['distance'] >= 1000 ? 
+                        $item['distance'] = $item['distance'] >= 1000 ?
                                 round($item['distance'] / 1000, 1) . 'km' : round($item['distance']) . 'm';
                         $item['avatar'] = createImg($item['avatar']) . '?w=184&h=184&fit=stretch';
                         $item['age'] = (Time::now()->year) - ((new Time($item['birthday']))->year);
@@ -100,19 +120,19 @@ class IndexController extends AppController {
         //个人信息
         $userCoord = $this->coord;
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $user = $UserTable->get($id,[
-            'contain'=>['UserSkills','UserSkills.Skill','UserSkills.Cost']
+        $user = $UserTable->get($id, [
+            'contain' => ['UserSkills', 'UserSkills.Skill', 'UserSkills.Cost']
         ]);
         $distance = getDistance($userCoord, $user->login_coord_lng, $user->login_coord_lat);
         $user->avatar = createImg($user->avatar) . '?w=184&h=184&fit=stretch';
         $age = (Time::now()->year) - ((new Time($user->birthday))->year);
         $birthday = date('m-d', strtotime($user->birthday));
-        
+
         $isFollow = false;  //是否关注
-        if($this->user){
+        if ($this->user) {
             $UserFansTable = \Cake\ORM\TableRegistry::get('UserFans');
-            $follow = $UserFansTable->find()->where(['user_id'=>  $this->user->id,'following_id'=> $id])->count();
-            if($follow){
+            $follow = $UserFansTable->find()->where(['user_id' => $this->user->id, 'following_id' => $id])->count();
+            if ($follow) {
                 $isFollow = true;
             }
         }
@@ -123,23 +143,23 @@ class IndexController extends AppController {
             'age' => $age,
             'distance' => $distance,
             'birthday' => $birthday,
-            'isFollow'=> $isFollow,
+            'isFollow' => $isFollow,
         ]);
     }
-    
+
     /**
      * 约她  技能列表
      * @param type $id
      */
-    public function findSkill($id){
+    public function findSkill($id) {
         $UserSkillTable = \Cake\ORM\TableRegistry::get('UserSkill');
         $this->loadComponent('Business');
         $topSkills = $this->Business->getTopSkill();
-        $userSkills = $UserSkillTable->find()->contain(['Skill'])->where(['user_id'=>$id])->toArray();
+        $userSkills = $UserSkillTable->find()->contain(['Skill'])->where(['user_id' => $id])->toArray();
         $this->set([
-            'pageTitle'=>'约她',
-            'topSkills'=>$topSkills,
-            'userSkills'=>$userSkills
+            'pageTitle' => '约她',
+            'topSkills' => $topSkills,
+            'userSkills' => $userSkills
         ]);
     }
 

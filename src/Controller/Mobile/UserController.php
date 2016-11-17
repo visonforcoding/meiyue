@@ -66,6 +66,10 @@ class UserController extends AppController {
                     }
                     $user = $this->User->patchEntity($user, $data);
                     $this->User->save($user);
+                    if(($redirect_url=='/index/index'||$redirect_url=='/')&&$user->gender =='2'){
+                        //女性用户首页
+                        $redirect_url = '/index/find-rich-list';
+                    }
                     return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,
                                 'token_uin' => $user_token, 'bind_wx' => $bind_wx, 'msg' => '登入成功']);
                 }
