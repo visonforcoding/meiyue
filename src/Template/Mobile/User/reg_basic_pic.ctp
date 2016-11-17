@@ -19,7 +19,7 @@
                 </dl>
                 <dl class="Idcard">
                     <dt>
-                    <img src="/mobile/images/avatar.jpg" alt="" />
+                        <img src="/mobile/images/avatar.jpg" alt="" />
                     </dt>
                 </dl>
             </div>
@@ -31,16 +31,15 @@
             <div class="title">
                 <h3 class="color_black">如上图所示，上传9张认证照片</h3>
             </div>
-            <div id="imageUpBox" class="fact_identify">
-                <dl class="Idcard">
-                    <dt>
-                    <img id="up_img_0" src="/mobile/images/upimg.png" alt="" />
-                    <input id="up_0" type="file" />
-                    </dt>
+            <div  class="fact_identify" id="demoImg">
+                <dl class="Idcard" data-id="up">
+                    <dt><img src="/mobile/images/upimg.png" /></dt>
                 </dl>
             </div>
         </div>
     </div>
+    <!--示例-->
+   
     <!--上传-->
     <div class="up_identify_box bgff mt40">
         <div class="inner">
@@ -49,30 +48,35 @@
             </div>
             <div class="fact_identify">
                 <dl class="Idcard">
-                    <dt>
-                    <img src="/mobile/images/upimg.png" alt="" />
-                    <input type="file" />
+                    <dt id="up_video">
+                        <img src="/mobile/images/upimg.png" alt="" />
+                        <i class="iconfont playbtn">&#xe600;</i>
                     </dt>
                 </dl>
             </div>
         </div>
     </div>
+    <!--上传-->
 </div>
 <div style="height:62px;"></div>
-<a href="#this" class="identify_footer_potion">提交审核</a>
+<a href="#this" id='submit' class="identify_footer_potion">提交</a>
+<!--<a href="#this" id='submit' class="identify_footer_potion">提交审核</a>-->
 <?= $this->start('script'); ?>
 <script>
-    var flag = 0;
-    $.util.singleImgPreView('up_0', 'up_img_0',cloneUp);
-//    $.util.singleImgPreView('up_1', 'up_img_1',cloneUp);
-    function cloneUp(id){
-       var elm =  $('#'+id).parents('dl').clone(false);
-        flag++;
-        elm.find('input').attr('id','up_'+flag);
-        elm.find('img').attr('id','up_img_'+flag);
-        $('#imageUpBox').append(elm);
-        //$.util.singleImgPreView('up_'+flag,'up_img_'+flag,cloneUp(id)); 
-    }
+    var user_id = <?=$user->id?>;
+    $.util.choosImgs('demoImg');
+    $.util.chooseVideo('up_video');
+
+    $('#submit').on('tap',function(){
+        if($('#demoImg').data('max') === '0') LEMON.event.uploadPics({key:'demoImg', user_id:user_id, param:'id:123,uid:456'});
+        if($('#up_video').data('choosed')) LEMON.event.uploadVideo({key:'up_video', user_id:user_id});
+        $.util.alert('完成注册');
+        setTimeout(function(){
+            location.href = '/index/index';
+        },1000);
+    })
+
+
 </script>
 <?= $this->end('script'); ?>
 

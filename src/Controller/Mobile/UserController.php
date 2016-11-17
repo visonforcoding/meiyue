@@ -17,7 +17,7 @@ class UserController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        $this->handCheckLogin();
+        $this->handCheckLogin(); 
         $Dateorders = \Cake\ORM\TableRegistry::get('Dateorder');
         $template = 'index';
         if ($this->user->gender == 1) {
@@ -33,8 +33,8 @@ class UserController extends AppController {
 
     public function login() {
         $redirect_url = empty($this->request->query('redirect_url')) ? '/index/index' : $this->request->query('redirect_url');
-        if (in_array($redirect_url, ['/home/my-install', '/user/login'])) {
-            $redirect_url = '/user/index';
+        if (in_array($redirect_url, ['/home/my-install', '/user/login','/user/index'])) {
+            $redirect_url = '/index/index';
         }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $phone = $this->request->data('phone');
@@ -162,13 +162,10 @@ class UserController extends AppController {
         $this->handCheckLogin();
         $user = $this->user;
         if ($this->request->is('post')) {
-            $res = $this->Util->uploadFiles('user/avatar');
-            if ($res['status']) {
-                $avatar = $res['info'][0]['path'];
-                $user->avatar = $avatar;
-                if ($this->User->save($user)) {
-                    return $this->Util->ajaxReturn(true, '保存成功');
-                }
+            $avatar = $this->request->data('avatar');
+            $user->avatar = $avatar;
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(true, '保存成功');
             }
             return $this->Util->ajaxReturn(false, '保存失败');
         }
@@ -206,17 +203,10 @@ class UserController extends AppController {
         $this->handCheckLogin();
         $user = $this->user;
         if ($this->request->is('post')) {
-            $res = $this->Util->uploadFiles('user/idcard');
             $user = $this->User->get($user->id);
-            if ($res['status']) {
-                $infos = $res['info'];
-                foreach ($infos as $key => $info) {
-                    $data[$info['key']] = $info['path'];
-                }
-                $user = $this->User->patchEntity($user, $data);
-                if ($this->User->save($user)) {
-                    return $this->Util->ajaxReturn(true, '保存成功');
-                }
+            $user = $this->User->patchEntity($user,  $this->request->data());
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(true, '保存成功');
             }
             return $this->Util->ajaxReturn(false, '保存失败');
         }
@@ -253,6 +243,7 @@ class UserController extends AppController {
         }
         $this->set([
             'pageTitle' => '美约-身份审核',
+            'user'=>$user
         ]);
     }
 
