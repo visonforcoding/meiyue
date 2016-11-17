@@ -1,24 +1,24 @@
 <?php
 $date_action = '/date/get-all-dates-in-page/';  //定义约会请求地址
-$activity_action = '/activity/index/';  //定义派对请求地址
+$activity_action = '/activity/get-all-dates-in-page/';  //定义派对请求地址
 ?>
 
 <?php $this->start('static') ?>
 <script src="/mobile/js/mustache.min.js"></script>
 <script id="date-list-tpl" type="text/html">
     {{#datas}}
-    <div class="date_detail_place inner {{^is_first}}mt20{{/is_first}}">
-        <h3 class="title"><i class="itemsname color_y">[约吃饭]</i> 海岸城高级西餐厅 美女在等你</h3>
+    <div class="date_detail_place inner {{^is_first}}mt20{{/is_first}}" onclick="window.location.href = '/date-order/join/{{id}}'">
+        <h3 class="title"><i class="itemsname color_y">[{{user_skill.skill.name}}]</i> {{description}}</h3>
         <div class="place_pic">
 								<span class="place">
 									<img src="/mobile/images/date_place.jpg"/>
 								</span>
             <div class="place_info">
-                <h3 class="userinfo">范冰冰 <span>23岁</span> <em class="price color_y fr"><i class="lagernum">500</i>元/约会金</em>
+                <h3 class="userinfo">{{user.nick}} <span>{{user.age}}岁</span> <em class="price color_y fr"><i class="lagernum">{{user_skill.cost.money}}</i>元/约会金</em>
                 </h3>
                 <h3 class="otherinfo">
-                    <time class="color_gray"><i class="iconfont">&#xe622;</i> 今日 · 12:00-15:00</time>
-                    <address class="color_gray"><i class="iconfont">&#xe623;</i>广东省深圳市福田区 福田口岸</address>
+                    <time class="color_gray"><i class="iconfont">&#xe622;</i> {{time}}</time>
+                    <address class="color_gray"><i class="iconfont">&#xe623;</i>{{site}}</address>
                 </h3>
             </div>
         </div>
@@ -33,18 +33,18 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             <img src="/mobile/css/icon/party1.jpg"/>
         </div>
         <div class="items_con">
-            <h3 class="items_title">中秋国庆 三门岛游艇Party 七日游中秋国庆 三门岛游艇Party 七日游中秋国庆 三门岛游艇Party 七日游</h3>
+            <h3 class="items_title">{{title}}</h3>
             <div class="items_time flex flex_justify mt20">
-                <div>名额有限，大家速速报名</div>
+                <div>{{ad}}</div>
                 <div>
                     <i class="iconfont ico">&#xe64b;</i>
-                    即将开始
+                    {{time}}
                 </div>
             </div>
         </div>
         <div class="items_adress flex flex_justify">
-            <div><i class="iconfont ico">&#xe623;</i>广东省深圳市福田区福田口岸</div>
-            <div class="button btn_dark">
+            <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
+            <div class="button btn_dark" onclick="window.location.href='/activity/view/{{id}}'">
                 我要报名
             </div>
         </div>
@@ -72,7 +72,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             <!--活动-->
             <section>
                 <!-- 约会列表 -->
-                <div id="date-list">&nbsp;</div>
+                <div id="date-list"></div>
             </section>
 
             <!--派对-->
@@ -315,6 +315,8 @@ $activity_action = '/activity/index/';  //定义派对请求地址
     var activityobj = new activity();
 
     function calFunc(data) {
+
+        console.log(data.datas);
         //返回格式化回调
         if(data.datas) {
 
