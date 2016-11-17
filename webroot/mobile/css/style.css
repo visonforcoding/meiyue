@@ -519,6 +519,11 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .items_right_info span.color_gray .iconfont{color:#ccc;}
 .items_right_info span .iconfont{display: block;font-size: 18px;}
 .getdatebtn{margin-top:.3rem;}
+/*派对日期*/
+.home_paty_container .items_right_info span .iconfont{display: inline;margin-right:.05rem;}
+.home_paty_container .items_right_info .party_time{font-size: 11px;color:#999;margin-top:.1rem;}
+.home_paty_container .items_right_info{margin-right: .15rem;}
+.home_paty_container .items_right_info .getdatebtn{margin:.2rem auto 0;}
 /*评选*/
 .voted_list li{margin-top:.4rem;border:1px #e5e5e5 solid;border-radius: 3px;background: #fff;}
 .voted_list li .title{border-bottom:1px #efefef solid;padding:0 .3rem;height:30px;}
