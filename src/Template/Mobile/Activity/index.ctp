@@ -209,7 +209,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             tab_top: 3,
             cur_tab: 1,  //记录当前显示的tab
             tabInitLoad:[0,0,0,0], //第一次加载
-            tabPage:[0,0,0,0], //当前第几页
+            tabPage:[1,1,1,1], //当前第几页
             tabLoadEnd:[0,0,0,0], //页码加载结束
             tabLoadHold:[0,0,0,0], //页码加载结束
             tabDataTpl: ['','#date-list-tpl', '#activity-list-tpl', '#top-list-tpl'],
