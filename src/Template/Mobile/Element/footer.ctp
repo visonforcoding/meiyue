@@ -10,7 +10,7 @@
         <li <?php if($active=='activity'): ?>class="active"<?php endif;?>>
             <span class="bar-activity">
                 <a href="/activity/index">
-                    <i class="iconfont">&#xe614;</i>活动
+                    <i class="iconfont">&#xe64a;</i>活动
                 </a>
             </span>
         </li>
