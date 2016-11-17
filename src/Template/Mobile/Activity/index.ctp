@@ -400,13 +400,13 @@ $activity_action = '/activity/get-all-dates-in-page/';  //定义派对请求地�
                 case 3:
                     activityobj.current_tab = activityobj.tab_top;
                     if(activityobj.tab3_is_first) {
-                        activityobj.asyLoadData(activityobj.tab_top, {
+                        /*activityobj.asyLoadData(activityobj.tab_top, {
                             key: 'datas',
                             gurl: activityobj.current_action,
                             tpl: '#' + activityobj.currentlist_tpl,
                             id: '#' + activityobj.currentlist_container,
                             func: calFunc
-                        });
+                        });*/
                         activityobj.tab3_is_first = false;
                     }
                     break;
