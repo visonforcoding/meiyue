@@ -301,7 +301,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 
             $.util.showPreloader();
             var template = $(this.tabDataTpl[curtab]).html();
-            var url = this.tabDataUrl + this.tabPage[curtab];
+            var url = this.tabDataUrl[curtab] + this.tabPage[curtab];
             Mustache.parse(template);   // optional, speeds up future uses
             var obj = this;
             $.getJSON(url, function (data) {
