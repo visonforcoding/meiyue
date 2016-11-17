@@ -144,7 +144,7 @@ class DateController extends AppController
 
     public function getAllDatesInPage($page)
     {
-        $limit = 1;
+        $limit = 5;
         $datas = $this->Date->find("all", ['contain' => ['UserSkill.Skill', 'UserSkill.Cost', 'User' => function ($q) {
             return $q->select(['nick', 'birthday']);}]])
             ->where(['Date.status' => 2]);
