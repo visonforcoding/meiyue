@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Mobile;
 use Cake\Datasource\ResultSetInterface;
+use Cake\I18n\Time;
 
 /**
  * Date Controller
@@ -144,10 +145,10 @@ class DateController extends AppController
 
     public function getAllDatesInPage($page)
     {
-        $limit = 5;
+        $limit = 10;
         $datas = $this->Date->find("all", ['contain' => ['UserSkill.Skill', 'UserSkill.Cost', 'User' => function ($q) {
             return $q->select(['nick', 'birthday']);}]])
-            ->where(['Date.status' => 2]);
+            ->where(['Date.status' => 2, 'Date.start_time >' => new Time()]);
         $posititon = parent::getPosition();
         $userCoord_lng = $posititon[0];
         $userCoord_lat = $posititon[1];

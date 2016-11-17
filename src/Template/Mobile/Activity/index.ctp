@@ -208,20 +208,13 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             tab_activity: 2,
             tab_top: 3,
             cur_tab: 1,  //记录当前显示的tab
-            tabInitLoad: [0, 0, 0, 0], //第一次加载
+            tabInitLoad: [0, 1, 1, 1], //第一次加载
             tabPage: [1, 1, 1, 1], //当前第几页
             tabLoadEnd: [0, 0, 0, 0], //页码加载结束
             tabLoadHold: [0, 0, 0, 0], //页码加载结束
             tabDataTpl: ['', '#date-list-tpl', '#activity-list-tpl', '#top-list-tpl'],
             listId: ['', '#date_list', '#party_list', '#winer_list'],
             tabDataUrl: ['', '/date/get-all-dates-in-page/', '/activity/get-all-dates-in-page/', '/activity/index/'],
-            date_curpage: 1,   //记录约会当前页
-            party_curpage: 1,  //记录派对当前页
-            top_curpage: 1,    //记录封面女神当前页
-            activity_curpage: 1,
-            currentlist_tpl: '',
-            currentlist_container: '',
-            current_action: '',
         }
         $.extend(this, this.opt, o);
 
@@ -232,7 +225,6 @@ $activity_action = '/activity/index/';  //定义派对请求地址
         init: function () {
             this.tabEvent();
             this.scroll();
-
         },
         tabEvent: function () {
             var obj = this;
@@ -264,33 +256,22 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             });
         },
         tabInit: function (index) {
-            if (this.tabInitLoad[index]) return;
-            this.tabInitLoad[index] = 1;
+            if (!this.tabInitLoad[index]) return;
+            this.tabInitLoad[index] = 0;
             //首次加载数据
             this.asyLoadData(this.cur_tab);
-
-            switch (index) {
-                case 1:
-                    break;
-                case 2:
-                    $('#party-coverimg').html("<img src='/mobile/css/icon/banner1.jpg'/>");
-                    break;
-                case 3:
-                    break;
-            }
 
         },
         scroll: function () {
             var obj = this;
             $(window).on("scroll", function () {
-                if (!obj.tabInitLoad[obj.cur_tab]) return;
+                if (obj.tabInitLoad[obj.cur_tab]) return;
                 var st = document.body.scrollTop;
-                var cbodyH = $(obj.listId[obj.cur_tab]).height();
+                var cbodyH = $(obj.listId[obj.cur_tab]).height() - 600;
 
                 //console.log([$(document).height(), $(window).height(),$(document).height()-$(window).height()-200,st].join('-'));
                 //if (st >= (($(document).height() - 150))) {
                 //console.log([st, cbodyH, st - cbodyH].join('-'));
-                console.log(st + "|" + cbodyH);
                 if (st >= cbodyH) {
                     obj.asyLoadData(obj.cur_tab);
                 }
@@ -317,6 +298,27 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                         obj.tabPage[curtab]++;
                     }
 
+                    switch (curtab) {
+                        case obj.tab_date:
+                            if(!obj.tabInitLoad[curtab]) {
+
+
+                            }
+                            break;
+                        case obj.tab_activity:
+                            if(!obj.tabInitLoad[curtab]) {
+
+                                $('#party-coverimg').html("<img src='/mobile/css/icon/banner1.jpg'/>");
+
+                            }
+                            break;
+                        case obj.tab_top:
+                            if(!obj.tabInitLoad[curtab]) {
+
+
+                            }
+                            break;
+                    }
                     //obj.tabInitLoad[curtab] ? $(obj.listId[curtab]).append(rendered) : $(obj.listId[obj.cur_tab]).html(rendered);
                     $(obj.listId[curtab]).append(rendered);
                 }
