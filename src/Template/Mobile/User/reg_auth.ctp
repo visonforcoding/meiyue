@@ -58,21 +58,20 @@
                 <dl class="Idcard">
                     <dt>
                     <img id="front_img" src="/mobile/images/upimg.png" alt="" />
-                    <input id="front" type="file" />
+                    <input id="idfront" name="idfront" type="hidden" />
                     </dt>
 
                 </dl>
                 <dl class="Idcard">
                     <dt>
                     <img id="back_img" src="/mobile/images/upimg.png" alt="" />
-                    <input id="back" type="file" />
+                    <input id="idback" name="idback" type="hidden" />
                     </dt>
-
                 </dl>
                 <dl class="Idcard personimg">
                     <dt>
                     <img id="person_img" src="/mobile/images/upimg.png" alt="" />
-                    <input id="person" name="ID" type="file" />
+                    <input id="idperson" name="idperson" type="hidden" />
                     </dt>
                 </dl>
             </div>
@@ -83,34 +82,47 @@
 <a id="submit" class="identify_footer_potion">开始审核</a>
 <?= $this->start('script'); ?>
 <script>
-    $.util.singleImgPreView('front', 'front_img');
-    $.util.singleImgPreView('back', 'back_img');
-    $.util.singleImgPreView('person', 'person_img');
+    $('.Idcard img').on('tap', function () {
+        alert('点击了图片上传');
+        $obj = $(this);
+        if ($.util.isAPP) {
+            alert('我要调app的东西了');
+            LEMON.event.uploadPic('{"dir":"user/idcard"}', function (data) {
+                var data = JSON.parse(data);
+                if (data.status === true) {
+                    $obj.next('input').val(data.path);
+                    $obj.attr('src', data.urlpath);
+                } else {
+                    $.util.alert('app上传失败');
+                }
+            });
+            return false;
+        }
+    });
     $('#submit').on('tap', function () {
-        var front = document.getElementById('front').files[0];
-        var back = document.getElementById('back').files[0];
-        var person = document.getElementById('person').files[0];
-        if(!front){
+        var idfront = $('#idfront').val();
+        var idback = $('#idback').val();
+        var idperson = $('#idperson').val();
+        if (!idfront) {
             $.util.alert('请上传正面照');
             return false;
         }
-        if(!back){
+        if (!idback) {
             $.util.alert('请上传背面照');
             return false;
         }
-        if(!person){
+        if (!idperson) {
             $.util.alert('请上传背面照');
             return false;
         }
-        var fd = new FormData();
-        fd.append('front', front);
-        fd.append('back', back);
-        fd.append('person', person);
-        $.util.zajax('','POST',fd,function(res){
-            if(res.status){
-                document.location.href = '/user/reg-basic-pic';
-            }else{
-                $.util.alert(res.msg);
+        $.util.ajax({
+            data: {idfront: idfront, idback: idback, idperson: idperson},
+            func: function (res) {
+                if (res.status) {
+                    document.location.href = '/user/reg-basic-pic';
+                } else {
+                    $.util.alert(res.msg);
+                }
             }
         });
     });

@@ -9,7 +9,7 @@
         <div class="password validate">
             <i class="iconfont">&#xe607;</i>
             <input tabindex="2" type="text" id="vcode" placeholder="验证码" class="valicode" id="validate" />
-            <a href="#this" id="gcode" class="fogetpwd getvalid disabled">获取验证码</a>
+            <a href="javascript:void(0)" id="gcode" class="fogetpwd getvalid disabled">获取验证码</a>
         </div>
         <div class="password">
             <i class="iconfont">&#xe606;</i>
