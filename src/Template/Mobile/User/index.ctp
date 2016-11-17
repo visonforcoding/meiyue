@@ -22,8 +22,8 @@
                         </a>
                     </li>
                     <li class="follow">
-                        <span>喜欢 <i>12</i></span>
-                        <a href="/userc/fans"><span>粉丝 <i>122</i></span></a>
+                        <span class='like'>喜欢 <i>12</i></span>
+                        <a href="/userc/fans" class='like'>粉丝 <i>122</i></a>
                     </li>
                 </ul>
             </div>
