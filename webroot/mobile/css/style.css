@@ -116,6 +116,7 @@ header{overflow: hidden;}
 .cover_left_info h3 i{color:#f1cc7b;margin-left:.1rem;}
 .cover_left_info .follow{line-height: .8rem;font-size:13px;color:#fffffe;}
 .cover_left_info .follow span{margin-right:.6rem;}
+.cover_left_info .follow .like{color:#fffffe;margin-right:.6rem;}
 .cover_left_info .follow i{margin-left:.1rem;}
 .home_items_list .tips{display: inline-block;width:10px;height:10px;border-radius: 50%;background: #ff545d;margin-right:.1rem;}
 .home_items_list .items_basic_list .iconfont{color:#959da7;}
@@ -228,7 +229,7 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .cardpay{color:#f4a074;}
 .wxpay{color:#8ad86a;}
 .choose_account li .paydes{padding-left:.64rem;}
-.raper{position:fixed;top:0;bottom:0;background: rgba(0,0,0,.8);z-index:9;overflow: hidden;width:100%;max-width: 750px;}
+.raper{position:fixed;top:0;bottom:0;background: rgba(0,0,0,.8);z-index:11;overflow: hidden;width:100%;max-width: 750px;}
 .hide{max-height: 0;transition: all .3s ease-in;opacity: 0;}
 .show{max-height: 999;transition: all .3s ease-in;opacity: 9;}
 .choose_account .paydes span{display: block;line-height: 14px;}
@@ -315,9 +316,9 @@ color:#444;position:relative;}
 .choose_mark .r_btn{right:.3rem;position:absolute;}
 .choose_mark .r_btn .complete{margin-left:.5rem;font-size: 15px;}
 .choose_mark__items .choose_marks{text-align: center;margin:0 auto;}
-.choose_mark__items .choose_marks span{display: block;color:#e8b967;font-size:24px;height:42px;line-height: 40px;width:.8rem;text-align: center;}
-.choose_mark__items .choosed span{border:1px #e8b967 solid;border-radius: 3px;margin-bottom:5px;}
-.choose_mark__items .choose_marks i{font-size:11px;color:#666666;}
+.choose_mark__items .choose_marks span{display: block;color:#e8b967;font-size:24px;height:42px;line-height: 40px;width:.8rem;margin:0 auto;border:1px transparent solid;}
+.choose_mark__items .choosed span{border:1px #e8b967 solid;border-radius: 3px;}
+.choose_mark__items .choose_marks i{font-size:11px;color:#666666;word-break: break-all;display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden;-webkit-line-clamp: 2;margin-top:4px;}
 /*订单管理*/
 .order_header div{width:30%;}
 .order_header .headertab{position:relative;}
@@ -376,7 +377,7 @@ color:#fff; line-height: 20px;padding-right: .1rem;}
 .home_page_basic .home_name em i{margin-right:.05rem;}
 .home_page_basic .home_name_info{color:#959da7;font-size: 12px;margin-top:.36rem;}
 .home_page_basic .home_name_info .iconfont{font-size: 14px;}
-.home_page_basic .commend{margin-top:.3rem;font-size: 12px;color:#eab96a;padding-bottom:.4rem;border-bottom:1px #efefef solid;}
+.home_page_basic .commend{margin-top:.3rem;font-size: 13px;color:#eab96a;padding-bottom:.4rem;border-bottom:1px #efefef solid;}
 .home_page_basic .otherinfo{overflow: hidden;padding:.22rem 0;}
 .home_page_basic .otherinfo li:last-of-type{border-right:none;}
 .home_page_basic .otherinfo li{text-align: center;border-right:1px #efefef solid;width:1.85rem;}
@@ -384,8 +385,9 @@ color:#fff; line-height: 20px;padding-right: .1rem;}
 .home_page_basic .otherinfo .b_desc{color:#959da7;font-size: 12px;}
 .home_pic_info,.home_basic_mark,.home_basic_ability{background: #fff;padding:.4rem 0;}
 .home_pic_info ul{overflow: hidden;}
-.home_pic_info li{width:1.6rem;height:1.6rem;border-radius: 5px;overflow: hidden;}
-.home_pic_info li img{width:100%;height:auto;overflow: hidden;}
+.home_pic_info li{width:1.6rem;height:1.6rem;border-radius: 5px;overflow: hidden;margin-right:.16rem;}
+.home_pic_info li:nth-of-type(4n){margin-right:0;}
+.home_pic_info li img{width:100%;height:100%;overflow: hidden;}
 .home_pic_info li a.ablock{position: relative;width:1.6rem;height:1.6rem;z-index: 1;}
 .home_pic_info li a.ablock span{line-height: 1.6rem;width:1.6rem;height:1.6rem;font-size: 12px;color:#fff;position: absolute;background: rgba(0,0,0,0.6);z-index:999;top:0;left:0;text-align: center;}
 .home_pic_info .home_video{width:100%;height:3.2rem;border-radius: 5px;overflow: hidden;}
@@ -421,7 +423,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .home_page_footer li a.active{color:#EAB96A;}
 .home_page_footer li a.active i{color:#EAB96A;}
 .home_page_footer li i{margin-right:.08rem; color:#666;}
-.togift{width:50px;height:50px;background: #eab96a;border-radius: 50%;position: fixed;bottom:60px;right:.3rem;box-shadow: 0 0 3px rgba(234,185,106,.3);z-index: 10;}
+.togift{width:50px;height:50px;background: #eab96a;border-radius: 50%;position: fixed;bottom:60px;right:.3rem;box-shadow: 0 0 3px rgba(234,185,106,.3);z-index: 8;}
 .togift i{font-size:23px;color:#fff;}
 /*分享*/
 .share_items_list{padding:.2rem 0 0 0;background: #fff;}
