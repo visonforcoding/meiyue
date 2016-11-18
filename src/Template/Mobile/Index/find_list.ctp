@@ -80,23 +80,6 @@
 <?= $this->element('footer', ['active' => 'find']) ?>
 <?php $this->start('script'); ?>
 <script type="text/javascript">
-var scale = document.getElementById('scale');
-var line = document.getElementById('line');
-scale.min = 160;
-scale.max = 180;
-scale.step = 1;
-scale.value = 160;
-var num = (scale.value - scale.min) / 20 * 100 + '%';
-line.style.width = num;
-console.log(num);
-scale.addEventListener("touchmove", function () {
-    console.log(this.value);
-    num = (this.value - scale.min) / 20 * 100 + '%';
-    console.log(num);
-    line.style.width = num;
-});
-</script>
-<script type="text/javascript">
     var curpage = 1;
     var skill = 0;
     var age = 0;
@@ -143,6 +126,10 @@ scale.addEventListener("touchmove", function () {
     });
     window.onTopRight = function(){
         $('#selectMenu_box').toggle();
+        if(!window.search_height){
+            window.search_height = new ranger({dom:$('#height'), range:[160, 175]});
+            window.search_age = new ranger({dom:$('#age'), range:[160, 175]});
+        }
     }
     $('#search').on('click',function(){
         $('#selectMenu_box').hide();
