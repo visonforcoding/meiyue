@@ -104,11 +104,20 @@ function getUsedStatus($status_code = -1) {
     }
 }
 
+
+/**
+ * 资金流水类型
+ * @param type $index
+ * @return string
+ */
 function getFlowType($index = null) {
     $flowType = [
         '1' => '约技能支付预约金',
         '2' => '约技能支付尾款',
         '3' => '约技能收款',
+        '4' => '用户充值',
+        '5' => '男士取消约单预约金退回',
+        '6' => '女士取消约单预约金退回',
     ];
     if ($index) {
         return $flowType[$index];
