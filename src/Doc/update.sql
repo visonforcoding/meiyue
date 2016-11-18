@@ -359,3 +359,6 @@ AUTO_INCREMENT=4
 #user表添加唯一索引
 ALTER TABLE `lm_user`
 	ADD UNIQUE INDEX `phone` (`phone`);
+#充值总额记录字段
+ALTER TABLE `lm_user`
+	ADD COLUMN `recharge` FLOAT NULL DEFAULT '0' COMMENT '充值总额' AFTER `video_cover`;

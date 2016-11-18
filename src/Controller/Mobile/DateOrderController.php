@@ -6,7 +6,7 @@ use Cake\I18n\Time;
 
 
 /**
- * DateOrder Controller
+ * DateOrder Controller  约单处理
  *
  * @property \App\Model\Table\DateOrderTable $DateOrder
  * @property \App\Controller\Component\BdmapComponent $Bdmap
@@ -84,6 +84,7 @@ class DateOrderController extends AppController
                'dater_name'=>  $date->user->truename,
                'date_time'=>  $lasth,
                'consumer'=>  $this->user->truename,
+               'status'=>'',
                'user_skill_id'=>$data['user_skill_id'],
                'site'=>$data['place_name'],
                'site_lat'=>$data['coord_lat'],
@@ -154,4 +155,338 @@ class DateOrderController extends AppController
         $places = $this->Bdmap->placeSearchNearBy('咖啡', $this->coord,$page);
         return $this->Util->ajaxReturn(['places'=>$places]);
     }
+    
+    /**
+     * 取消约单 不同的节点不同的处理 处于状态3时
+     * 男方支付完预付金
+     * 女方拒绝接单和男方取消订单 都退回预约金给男方
+     */
+    public function cancelDateOrder3(){
+        $this->handCheckLogin();
+        $order_id = $this->request->data('order_id');
+        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+        $dateorder = $DateorderTable->get($order_id,[
+            'contain'=>[
+                'Buyer'=>function($q){
+                    return $q->select(['phone','id','money']);
+                }
+                ,'Dater'=>function($q){
+                    return $q->select(['id','nick','money']);
+                }
+                ,'UserSkill.Skill'
+            ]
+        ]);
+         //订单状态更改
+         if($dateorder->status!=3){
+             throw new Exception('请求非法');
+         }       
+        if($this->user->gender==1){
+                //男士已支付预约金 女士确认接单之前
+                //退还男士预约金
+                //订单状态更改
+                $dateorder->status = 4;
+                $type = 5;
+                $remark = '男士取消订单退回预约金';
+        }else{
+            //男士
+            $dateorder->status = 5;
+            $type = 6;
+            $remark = '女士取消订单退回预约金';
+        }        
+        
+        //返还预约金
+        $pre_pay = $dateorder->pre_pay;
+        $pre_money = $dateorder->buyer->money;
+        $dateorder->buyer->money = $dateorder->buyer->money+$dateorder->pre_pay;
+        $after_amount = $dateorder->buyer->money;
+        $dateorder->dirty('buyer',true);
+         //生成流水
+        $FlowTable = TableRegistry::get('Flow');
+        $flow = $FlowTable->newEntity([
+           'user_id'=> $dateorder->buyer->id,
+           'buyer_id'=>  0,
+           'relate_id'=>$dateorder->id,
+           'type'=>$type,
+           'type_msg'=>'取消约单退回预约金',
+           'income'=>1,
+           'amount'=>$pre_pay,
+           'price'=>$pre_pay,
+           'pre_amount'=>$pre_amount,
+           'after_amount'=>$after_amount,
+           'paytype'=>2, 
+           'remark'=> '取消约单退回预约金'
+        ]);
+         $transRes = $DateorderTable->connection()
+                 ->transactional(function()use(&$flow,$FlowTable,&$dateorder,$DateorderTable){
+               return $FlowTable->save($flow)&&$DateorderTable->save($dateorder);      
+        });
+       if($transRes){
+            return $this->Util->ajaxReturn(true,'取消成功');
+           }else{
+            return $this->Util->ajaxReturn(false,'取消失败');
+        }
+        
+    }
+    
+    /**
+     * 取消约单 不同的节点不同的处理 处于状态7时
+     * 女方有2个操作 拒绝和接受  拒绝->退回预约金给男方  扣除女方10%约单金额
+     * 男方只有1个操作   支付
+     * 1.订单状态更改 ->8
+     * 2.退回男方预付金
+     * 3.扣除女方10%违约金
+     * 4.男方退回资金流水
+     * 5.女方扣除资金流水
+     */
+    public function cancelDateOrder7(){
+        $this->handCheckLogin();
+        $order_id = $this->request->data('order_id');
+        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+        $dateorder = $DateorderTable->get($order_id,[
+            'contain'=>[
+                'Buyer'=>function($q){
+                    return $q->select(['phone','id','money']);
+                }
+                ,'Dater'=>function($q){
+                    return $q->select(['id','nick','money']);
+                }
+                ,'UserSkill.Skill'
+            ]
+        ]);
+         //订单状态更改
+         if($dateorder->status!=7){
+             throw new Exception('请求非法');
+         }       
+        if($this->user->gender==2){
+                //男士已支付预约金 女士确认接单之前
+                //退还男士预约金
+                $dateorder->status = 4;
+                $type = 7;
+                $remark = '女士在接受订单后取消订单退回预约金';
+        }else{
+            throw new Exception('身份认证不通过');
+        }
+        //订单状态更改
+        $dateorder->status = 8;
+        //返还预约金
+        $pre_pay = $dateorder->pre_pay;
+        $m_pre_money = $dateorder->buyer->money;
+        $dateorder->buyer->money = $dateorder->buyer->money+$dateorder->pre_pay;
+        $m_after_amount = $dateorder->buyer->money;
+        
+        $dateorder->dirty('buyer',true);
+         //生成流水
+        $FlowTable = TableRegistry::get('Flow');
+        $m_flow = $FlowTable->newEntity([
+           'user_id'=> $dateorder->buyer->id,
+           'buyer_id'=>  0,
+           'relate_id'=>$dateorder->id,
+           'type'=>$type,
+           'type_msg'=>'取消约单退回预约金',
+           'income'=>1,
+           'amount'=>$pre_pay,
+           'price'=>$pre_pay,
+           'pre_amount'=>$m_pre_money,
+           'after_amount'=>$m_after_amount,
+           'paytype'=>2, 
+           'remark'=> $remark
+        ]);
+        //扣除违约金
+        $breach_amount = 0.1*$dateorder->amount;
+        $w_pre_amount = $dateorder->dater->money;
+        $dateorder->dater->money = $dateorder->dater->money-$breach_amount;
+        $w_after_amount = $dateorder->dater->money;
+        $dateorder->dirty('dater',true);
+        //女方的资金流水
+        $w_flow = $FlowTable->newEntity([
+           'user_id'=> 0,
+           'buyer_id'=>  $dateorder->dater->id,
+           'relate_id'=>$dateorder->id,
+           'type'=>$type,
+           'type_msg'=>'取消约单退回预约金',
+           'income'=>2,
+           'amount'=>$breach_amount,
+           'price'=>$breach_amount,
+           'pre_amount'=>$w_pre_amount,
+           'after_amount'=>$w_after_amount,
+           'paytype'=>1, 
+           'remark'=> $remark
+        ]);
+        $transRes = $DateorderTable->connection()
+                 ->transactional(function()use(&$w_flow,$FlowTable,&$m_flow,&$dateorder,$DateorderTable){
+               return $FlowTable->save($m_flow)&&$DateorderTable->save($dateorder)&&$FlowTable->save($w_flow);      
+        });
+       if($transRes){
+            return $this->Util->ajaxReturn(true,'取消成功');
+           }else{
+            return $this->Util->ajaxReturn(false,'取消失败');
+        }
+        
+    }
+    
+    
+      /**
+     * 取消约单 不同的节点不同的处理 处于状态10时
+     * 在约会之前可双方才可取消
+     * 开始前2个小时 前与后 规则不同
+     * 男士退单 ： 
+     */
+    public function cancelDateOrder10(){
+        $this->handCheckLogin();
+        $order_id = $this->request->data('order_id');
+        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+        $dateorder = $DateorderTable->get($order_id,[
+            'contain'=>[
+                'Buyer'=>function($q){
+                    return $q->select(['phone','id','money']);
+                }
+                ,'Dater'=>function($q){
+                    return $q->select(['id','nick','money']);
+                }
+                ,'UserSkill.Skill'
+            ]
+        ]);
+         if(strtotime($dateorder->start_time)<time()){
+             //已到约会时间
+             return $this->Util->ajaxReturn(false,'已到约会时间不可取消约单');
+             
+         }       
+         //订单状态更改
+         if($dateorder->status!=10){
+             throw new Exception('请求非法');
+         }       
+        $FlowTable = TableRegistry::get('Flow');
+        if($this->user->gender==2){
+                //男士已支付预约金 女士确认接单之前
+                //退还男士预约金
+                $dateorder->status = 12;
+                $type = 8;
+                $remark = '女士在接受订单后取消订单退回预约金';
+                
+                //返还全额 约单价格
+                $m_pre_money = $dateorder->buyer->money;
+                $dateorder->buyer->money = $dateorder->buyer->money+$dateorder->amount;
+                $m_after_amount = $dateorder->buyer->money;
+                $m_income = 1;
+                //扣除违约金
+                $breach_amount = 0.2*$dateorder->amount;
+                $w_pre_amount = $dateorder->dater->money;
+                $dateorder->dater->money = $dateorder->dater->money-$breach_amount;
+                $w_after_amount = $dateorder->dater->money;
+                $w_income = 2;
+                
+                   //生成流水
+                $m_flow = $FlowTable->newEntity([
+                   'user_id'=> $dateorder->buyer->id,
+                   'buyer_id'=>  0,
+                   'relate_id'=>$dateorder->id,
+                   'type'=>'取消违约金退款',
+                   'type_msg'=>$type_msg,
+                   'income'=>$m_income,
+                   'amount'=>$m_amount,
+                   'price'=>$m_amount,
+                   'pre_amount'=>$m_pre_money,
+                   'after_amount'=>$m_after_amount,
+                   'paytype'=>2, 
+                   'remark'=> $remark
+                ]);
+
+                //女方的资金流水
+                $w_flow = $FlowTable->newEntity([
+                   'user_id'=> 0,
+                   'buyer_id'=>  $dateorder->dater->id,
+                   'relate_id'=>$dateorder->id,
+                   'type'=>'取消违约金扣款',
+                   'type_msg'=>$type_msg,
+                   'income'=>$w_income,
+                   'amount'=>$w_amount,
+                   'price'=>$w_amount,
+                   'pre_amount'=>$w_pre_amount,
+                   'after_amount'=>$w_after_amount,
+                   'paytype'=>1, 
+                   'remark'=> $remark
+                ]);
+        }else{
+            $dateorder->status = 11;
+            $type = 9;
+            $type_msg = '取消约单退回约单金额';
+            if((strtotime($dateorder->start_time)-time())>= 2*60*60){
+                //2小时外
+                $remark = '男士在接受订单后约会时间2小时之外取消订单退回预约金';
+                 //返还男士70%约单价格
+                $m_pre_money = $dateorder->buyer->money;
+                $m_amount = 0.7*$dateorder->amount;
+                $dateorder->buyer->money = $dateorder->buyer->money+$m_amount;
+                $m_after_amount = $dateorder->buyer->money;
+                $m_income = 1;
+                //返还女士30%的约单价格
+                $w_amount = 0.3*$dateorder->amount;
+                $w_pre_amount = $dateorder->dater->money;
+                $dateorder->dater->money = $dateorder->dater->money-$w_amount;
+                $w_after_amount = $dateorder->dater->money;
+                $w_income = 1;
+               
+            }else{
+                $remark = '男士在接受订单后约会时间2小时之内取消订单退回预约金';
+                 //返还男士30%约单价格
+                $m_pre_money = $dateorder->buyer->money;
+                $m_amount = 0.7*$dateorder->amount;
+                $dateorder->buyer->money = $dateorder->buyer->money+$m_amount;
+                $m_after_amount = $dateorder->buyer->money;
+                $m_income = 1;
+                //返还女士70%的约单价格
+                $w_amount = 0.3*$dateorder->amount;
+                $w_pre_amount = $dateorder->dater->money;
+                $dateorder->dater->money = $dateorder->dater->money-$w_amount;
+                $w_after_amount = $dateorder->dater->money;
+                $w_income = 1;
+            }
+              //生成流水
+                $m_flow = $FlowTable->newEntity([
+                   'user_id'=> $dateorder->buyer->id,
+                   'buyer_id'=>  0,
+                   'relate_id'=>$dateorder->id,
+                   'type'=>$type,
+                   'type_msg'=>$type_msg,
+                   'income'=>$m_income,
+                   'amount'=>$m_amount,
+                   'price'=>$m_amount,
+                   'pre_amount'=>$m_pre_money,
+                   'after_amount'=>$m_after_amount,
+                   'paytype'=>1, 
+                   'remark'=> $remark
+                ]);
+
+                //女方的资金流水
+                $w_flow = $FlowTable->newEntity([
+                   'user_id'=> $dateorder->dater->id,
+                   'buyer_id'=>  0,
+                   'relate_id'=>$dateorder->id,
+                   'type'=>$type,
+                   'type_msg'=>$type_msg,
+                   'income'=>$w_income,
+                   'amount'=>$w_amount,
+                   'price'=>$w_amount,
+                   'pre_amount'=>$w_pre_amount,
+                   'after_amount'=>$w_after_amount,
+                   'paytype'=>1, 
+                   'remark'=> $remark
+                ]);
+        }
+        
+        $dateorder->dirty('buyer',true);
+        $dateorder->dirty('dater',true);
+        $transRes = $DateorderTable->connection()
+                 ->transactional(function()use(&$w_flow,$FlowTable,&$m_flow,&$dateorder,$DateorderTable){
+               return $FlowTable->save($m_flow)&&$DateorderTable->save($dateorder)&&$FlowTable->save($w_flow);      
+        });
+       if($transRes){
+            return $this->Util->ajaxReturn(true,'取消成功');
+           }else{
+            return $this->Util->ajaxReturn(false,'取消失败');
+        }
+        
+    }
+    
+    
 }

@@ -233,7 +233,7 @@
     });
     $('#focusIt').on('tap', function () {
         //加关注
-        var id = <?= $user->id ?>;
+        var id = <?= $user->id ?>;  //该对象
         var $obj = $(this);
         if (!$obj.hasClass('active')) {
             //取消关注

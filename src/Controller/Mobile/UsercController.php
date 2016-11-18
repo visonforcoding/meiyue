@@ -20,7 +20,7 @@ class UsercController extends AppController {
     }
 
     /**
-     * 美女粉丝
+     * 美女粉丝  男赞赏我的
      */
     public function fans($page=null) {
         if($this->request->is('json')){
@@ -38,9 +38,40 @@ class UsercController extends AppController {
             })->toArray();
             $this->set(['fans' => $fans]);
         }
+        $pageTitle = '赞赏我的';
+        if($this->user->gender==2){
+            $pageTitle = '我的粉丝';
+        }
+        $this->set(['pageTitle'=>$pageTitle]);
+    }
+    
+    
+    /**
+     * 美女喜欢
+     */
+    public function likes(){
         $this->set(['pageTitle'=>'我的粉丝']);
     }
 
+    
+    /**
+     * 获取美女喜欢列表
+     */
+    public function getLikesList($page=null){
+        $limit = 10;
+        $UserFansTable = \Cake\ORM\TableRegistry::get('UserFans');
+        $likes = $UserFansTable->find()->hydrate(false)->contain(['Follower'=>function($q){
+                return $q->select(['id','birthday','avatar','nick']);
+        }])->where(['user_id' => $this->user->id])->limit(intval($limit))
+                ->page(intval($page))->formatResults(function($items) {
+            return $items->map(function($item) {
+                        $item['follower']['avatar'] = createImg($item['follower']['avatar']) . '?w=44&h=44&fit=stretch';
+                        $item['follower']['age'] = (Time::now()->year) - $item['follower']['birthday']->year;
+                        return $item;
+                    });
+        })->toArray();
+        return $this->Util->ajaxReturn(['likes'=>$likes]);
+    }
 
     /**
      * 我的-我的派对
@@ -463,6 +494,25 @@ class UsercController extends AppController {
      * 我的钱包
      */
     public function myPurse(){
+        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+        $top5flows = $FlowTable->find()
+                ->where(['user_id'=>  $this->user->id])
+                ->orWhere(['buyer_id'=>  $this->user->id])
+                ->orderDesc('create_time')
+                ->toArray();
+        $this->set([
+            'pageTitle'=>'我的钱包',
+            'user'=>  $this->user,
+            'top5flows'=>$top5flows    
+        ]);
+    }
+    
+    /**
+     * 获取资金数据参数
+     * @param type $page
+     * @param type $limit
+     */
+    public function getFlows($page,$limit = 10){
         
     }
 }

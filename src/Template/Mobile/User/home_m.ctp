@@ -13,8 +13,8 @@
                     <li class="blight userinfo">
                         <a href="#this" class="cover_block">
                             <h3>
-                                <span>帅哥帅哥<i class="iconfont">&#xe628;</i></span>
-                                <span class="flag price">>10万金币</span>
+                                <span><?=$user->nick?><i class="iconfont">&#xe628;</i></span>
+                                <span class="flag price">><?=$this->Number->format($user->money)?>美币</span>
                             </h3>
                             <span class="cover_r_ico">
                                 <i class="iconfont">&#xe605;</i>
@@ -22,8 +22,8 @@
                         </a>
                     </li>
                     <li class="follow flex flex_justify">
-                        <div>赞赏我 <i>12</i></div>
-                        <div>关注 <i>122</i></div>
+                        <div><a href="/userc/fans"><span>赞赏我 <i>12</i></span></a></div>
+                        <div><a href="/userc/likes"><span>关注 <i>12</i></span></a></div>
                         <div>访客 <i>122</i></div>
                     </li>
                 </ul>
@@ -35,7 +35,7 @@
     <div class="home_items_list mt40">
         <ul>
             <li>
-                <a href="#this"  class="home_items">
+                <a href="/userc/my-purse"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe60e;</i><span class="itemsname">我的钱包</span></div>
                     <div class="home_list_r_info">
                         <span class="cashpic"><img src="/mobile/images/cash.png" alt="" /><?=$this->Number->format($user->money)?></span>

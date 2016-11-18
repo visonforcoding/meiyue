@@ -29,7 +29,7 @@
                 {{#finish_prepay}}
                 <h3 class="pay_desc color_y">已预付：{{pre_pay}}美币</h3>
                 <div class="groupbtn">
-                    <span class="refuse">拒绝</span>
+                    <span data-orderid="{{id}}" class="refuse">拒绝</span>
                     <span data-orderid="{{id}}" class="receive_order">接单</span>
                 </div>
                 {{/finish_prepay}}
