@@ -948,7 +948,7 @@ color:#999;padding:.1rem;}
 /*滑块*/
 .range {position: relative;width: 5.4rem;height: 5px;font-size: 0;line-height: 0;border-radius: 10px;background: #383024;}
 .meaBox {position: absolute;left:0;right:0;height: 5px;background: #EAB96A;top:0;bottom:0;margin:auto;}
-.mea{position: absolute;width: 16px;height: 16px;border-radius: 50%;background: #fff;top:-6px;box-shadow: 0 1px 1px rgba(0,0,0,.2);}
+.mea{position: absolute;width: 20px;height: 20px;border-radius: 50%;background: #fff;top:-8px;box-shadow: 0 1px 1px rgba(0,0,0,.2);}
 .surebtn{background: #EAB96A;color:#fff;}
 
 
