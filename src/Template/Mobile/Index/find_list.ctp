@@ -17,7 +17,7 @@
     {{/users}}
 </script>
 <?php $this->end('static') ?>
-<header class="">
+<header class="fixedhead">
     <div class="header">
         <a href="/index/index"><span class="l_btn">切换地图</span></a>
         <h1>美约</h1>
@@ -41,21 +41,19 @@
 </div>
 <!--筛选-->
 <div id="selectMenu_box" class="raper" hidden>
-    <div  class="choose_parmes">
-        <div  class="inner">
+    <div class="choose_parmes">
+        <div class="inner">
             <div class="height flex">
                 <span class="height_left color_y">身高 <i class="">(cm)</i></span>
                 <div class="scale">
                     <div class="line flex flex_justify">
                         <h1>160</h1> <h1>170</h1> <h1>175</h1>
                     </div>
-                    <div class="block" style="position:relative">
-                        <input type="range" min="160" max="175" id="scale" />
-                        <div class="" id="line" style="position: absolute; height:6px;width:0;bottom:4px;background: #eab96a;border-radius: 15px;">
-
-                        </div>
+                    <div id='height' class="block range">
+                        <div class='meaBox'></div>
+                        <div data-bar="left" class='mea' style="left: 0"></div>
+                        <div data-bar="right" class='mea' style="right: 0"></div>
                     </div>
-
                 </div>
             </div>
             <div class="height flex">
@@ -64,13 +62,16 @@
                     <div class="line flex flex_justify">
                         <h1>12</h1> <h1>18</h1> <h1>24</h1> <h1>30</h1><h1>36</h1><h1>40+</h1>
                     </div>
-                    <input type="range" min="12" max="50" id="age" />
+                    <div id='age' class="block range">
+                        <div class='meaBox'></div>
+                        <div data-bar="left" class='mea' style="left: 0"></div>
+                        <div data-bar="right" class='mea' style="right: 0"></div>
+                    </div>
                 </div>
             </div>
-
         </div>
-        <div class="inner bdtop">
-            <span id="search" class="btn sure mt40 ">确定</span>
+        <div class="inner btlight">
+            <span class="btn surebtn mt40 ">确定</span>
         </div>
     </div>
 </div>
