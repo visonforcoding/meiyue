@@ -1,5 +1,6 @@
 <?php $this->start('static') ?>
 <script src="/mobile/js/mustache.min.js"></script>
+<script src="/mobile/js/loopScroll.js" type="text/javascript" charset="utf-8"></script>
 <script id="user-list-tpl" type="text/html">
     {{#users}}
     <dl>
