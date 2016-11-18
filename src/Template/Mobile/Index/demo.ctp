@@ -85,7 +85,7 @@
     </div>
     <!--上传-->
     <div class="up_identify_box bgff mt40">
-        <div class="inner">s
+        <div class="inner">
             <div class="title" onclick="(LEMON.sys.setSex('man'))">
                 <h3 class="color_black">设置用户性别LEMON.sys.setSex('man')</h3>
             </div>
@@ -95,11 +95,18 @@
     <div class="up_identify_box bgff mt40">
         <div class="inner">
             <div class="title" onclick="(LEMON.sys.setSex('falame'))">
-                <h3 class="color_black">设置用户性别LEMON.sys.getSex()</h3>
+                <h3 class="color_black">设置用户性别LEMON.sys.getSex('falame')</h3>
             </div>
         </div>
     </div>
     <!--上传-->
+    <div class="up_identify_box bgff mt40">
+        <div class="inner">
+            <div class="title" onclick="(LEMON.event.login(cbfun))">
+                <h3 class="color_black">登录LEMON.event.login(cbfun)</h3>
+            </div>
+        </div>
+    </div>
 </div>
 <div style="height:62px;"></div>
 <a href="#this" id='submit' class="identify_footer_potion">提交</a>
