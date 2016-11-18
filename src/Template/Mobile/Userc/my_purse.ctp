@@ -8,17 +8,21 @@
     <div class="purse_list">
         <div class="purse_list_top">
             <span class="purse_ico">
-                <img src="../images/cash1.png"/>
+                <img src="<?= $user->avatar ?>"/>
             </span>
             <h3 class="purse_list_tright">
                 <span class="balance">钱包余额</span>
-                <span class="numbers"><i>650000</i>美币</span>
+                <span class="numbers"><i><?= $user->money ?></i>美币</span>
             </h3>
         </div>
         <div class="purse_list_bottom">
-            <span class="btn btn_bg_t">兑换美币</span>
-            <!--<p class="tips">正在申请提现 20,000 美币</p>-->
-            <p><a href="#this" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
+            <?php if ($user->gender == 1): ?>
+                <span class="btn btn_bg_t">充值</span>
+                <p><a href="#this" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
+            <?php else: ?>
+                <span class="btn btn_bg_t">兑换美币</span>
+                <p class="tips">正在申请提现 20,000 美币</p>
+            <?php endif; ?>
         </div>
     </div>
     <div class="puse_bills mt20">
@@ -26,32 +30,27 @@
             <h3>账单明细</h3>
         </div>
         <ul class="puse_bills_con inner">
-            <li>
-                <div class="puse_bills_left">
-                    <h3>刘土豪消费1000美币提成刘土豪消费1000美币提成刘土豪消费1000美币提成刘土豪消费1000美币</h3>
-                    <time>2016-9-10</time>
-                </div>
-                <span class="puse_bills_right">+100.0</span>
-            </li>
-            <li>
-                <div class="puse_bills_left">
-                    <h3>范美美收入1000美币提成</h3>
-                    <time>2016-9-10</time>
-                </div>
-                <span class="puse_bills_right">+100.0</span>
-            </li>
-            <li>
-                <div class="puse_bills_left">
-                    <h3>约会买单</h3>
-                    <time>2016-9-10</time>
-                </div>
-                <span class="puse_bills_right">+100.0</span>
-            </li>
+            <?php foreach ($top5flows as $flow): ?>
+                <li>
+                    <div class="puse_bills_left">
+                        <h3><?= $flow->type_msg ?></h3>
+                        <time><?= $flow->create_time->format('Y-m-d') ?></time>
+                    </div>
+                    <span class="puse_bills_right">
+                        <?php if ($flow->income == 1): ?>
+                            +
+                        <?php else: ?>
+                            -
+                        <?php endif; ?>
+                        <?= $flow->amount ?>
+                    </span>
+                </li>
+            <?php endforeach; ?>
         </ul>
     </div>
 </div>
 <!--支付弹出层-->
-<div class="raper show">
+<div class="raper hide">
     <div class="choose_account">
         <div class="title">
             <h1>选择账户</h1>

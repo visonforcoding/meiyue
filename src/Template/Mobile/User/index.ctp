@@ -22,8 +22,9 @@
                         </a>
                     </li>
                     <li class="follow">
-                        <span class='like'>喜欢 <i>12</i></span>
+                        <a href="/userc/likes"><span>喜欢 <i>12</i></span></a>
                         <a href="/userc/fans" class='like'>粉丝 <i>122</i></a>
+
                     </li>
                 </ul>
             </div>
@@ -34,7 +35,7 @@
     <div class="home_items_list mt40">
         <ul>
             <li>
-                <a href="#this"  class="home_items">
+                <a href="/userc/my-purse"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe60e;</i><span class="itemsname">我的钱包</span></div>
                     <div class="home_list_r_info">
                         <span class="cashpic"><img src="/mobile/images/cash.png" alt="" /><?=$this->Number->format($user->money)?></span>

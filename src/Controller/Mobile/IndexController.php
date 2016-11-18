@@ -33,8 +33,24 @@ class IndexController extends AppController {
     }
 
     public function findRichList() {
+        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+        $limit = 10;
+        $top3 = $FlowTable->find()
+                    ->contain([
+                        'User'=>function($q){
+                                return $q->select(['id','avatar','nick']);
+                            },
+                     ])
+                    ->select(['user_id','total'=>'sum(amount)'])
+                     ->where(['type'=>4])                
+                    ->group('user_id')               
+                    ->orderDesc('total')
+                     ->offset(0)               
+                    ->limit(3)
+                    ->toArray();
         $this->set([
-            'pageTitle' => '土豪榜-美约'
+            'pageTitle' => '土豪榜-美约',
+            'top3'=>$top3
         ]);
     }
 
@@ -44,17 +60,23 @@ class IndexController extends AppController {
     public function getRichList($page){
         $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
         $limit = 10;
-        $richs = $FlowTable->find()
+        $query = $FlowTable->find()
                     ->contain([
                         'User'=>function($q){
-                                return $q->select(['id','avatar','nick']);
+                                return $q->select(['id','avatar','nick','phone','gender'])->where(['gender'=>1]);
                             },
                      ])
                     ->select(['user_id','total'=>'sum(amount)'])
+                    ->where(['type'=>4])                
+                    ->group('user_id')
                     ->orderDesc('total')
-                    ->limit($limit)
-                    ->page($page)
-                    ->toArray();                
+                    ->limit($limit);
+        if($page=1){
+            $query->offset(3);
+        }else{
+            $query->page($page);
+        }                                
+        $richs = $query->toArray();                
         return $this->Util->ajaxReturn(['richs'=>$richs]);                            
     }
     /**
