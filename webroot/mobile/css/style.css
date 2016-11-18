@@ -3,12 +3,12 @@
 .footer ul,.home_page_footer ul{overflow: hidden;}
 .home_page_footer ul{height:50px;}
 .home_page_footer li{width:33.3%;text-align: center;}
-.footer ul li{width:25%;float:left;text-align: center;padding:8px 0 5px;font-size: 12px;}
+.footer ul li{width:25%;float:left;text-align: center;padding:5px 0 3px;font-size: 12px;}
 .footer ul li a{line-height: 22px;}
-.footer ul li i{font-size:22px;color:#777777;display: block;display: block;}
+.footer ul li i{font-size:22px;color:#777777;display: block;height:22px;line-height: 26px;}
 .footer ul li.active i{color:#eab96a;}
 .footer ul li.active a{color:#EAB96A;}
-.fixedhead{width:100%;max-width: 750px;margin:0 auto;overflow-x:hidden;top:0;position: fixed;z-index: 10;}
+.fixedhead{width:100%;max-width: 750px;margin:0 auto;overflow-x:hidden;top:0;position: fixed;z-index: 12;}
 /*
  * 登录/注册
  * */
@@ -107,7 +107,7 @@ header{overflow: hidden;}
 .home_cover_info{padding:.2rem .39rem 0;}
 .home_items_list .home_list_r_info i.iconfont{color:#c2c2c2;}
 .home_cover_info .avatar{width:1.4rem;height:1.4rem;position:absolute;overflow:hidden;border-radius: 50%;}
-.home_cover_info .avatar img{width:100%;height:auto;display: block;}
+.home_cover_info .avatar img{width:100%;height:100%;display: block;}
 .cover_left_info{padding-left:1.7rem;color:#fffffe;}
 .cover_block{display:-webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: justify;color:#fff;padding:.2rem 0 .17rem;}
 .cover_left_info .flag{display: block;width:.48rem;height:.32rem;margin-top:.15rem;}
@@ -308,10 +308,10 @@ color:#444;position:relative;}
 .edit_date_box .marks_edit{height:auto;}
 /*选择标签弹窗*/
 .choose_mark .title{font-size: 14px;}
-.choose_mark{padding-bottom:.2rem;}
+.choose_mark{padding-bottom:.2rem;background: #f4f4f4;}
 .choose_mark li{height:70px;width:20%;}
 .choose_mark .cancel{position:absolute;left:.3rem;}
-.choose_mark__items ul{overflow: hidden;}
+.choose_mark__items ul{overflow: hidden;padding:.2rem 0;background: #fff;}
 .choose_mark__items ul li{float:left;}
 .choose_mark .r_btn{right:.3rem;position:absolute;}
 .choose_mark .r_btn .complete{margin-left:.5rem;font-size: 15px;}
@@ -624,7 +624,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .payment_choose_account .choosed .color_y{color:#eab96a;}
 
 /*她的技能*/
-.find_ability .choose_mark__items li{width:20%;padding:.2rem 0 .1rem;}
+.find_ability .choose_mark__items li{width:20%;}
 .find_ability .choose_marks span{margin:0 auto;}
 
 /*土豪榜*/
@@ -946,9 +946,9 @@ color:#999;padding:.1rem;}
 .allgift .yd span{width:8px;height:8px;border-radius: 50%;background: #efefef;display: block;margin-right:.1rem;}
 .allgift .yd span.current{background: #9ba3ac;}
 /*滑块*/
-.range {position: relative;width: 5.4rem;height: 8px;font-size: 0;line-height: 0;background: #fff;border-radius: 10px;background: #fff;}
-.meaBox {position: absolute;left:0;right:0;height: 8px;background: #EAB96A;top:0;bottom:0;margin:auto;}
-.mea{position: absolute;width: 16px;height: 16px;border-radius: 50%;background: #fff;top:-4px;box-shadow: 0 1px 1px rgba(0,0,0,.2);}
+.range {position: relative;width: 5.4rem;height: 5px;font-size: 0;line-height: 0;border-radius: 10px;background: #383024;}
+.meaBox {position: absolute;left:0;right:0;height: 5px;background: #EAB96A;top:0;bottom:0;margin:auto;}
+.mea{position: absolute;width: 16px;height: 16px;border-radius: 50%;background: #fff;top:-6px;box-shadow: 0 1px 1px rgba(0,0,0,.2);}
 .surebtn{background: #EAB96A;color:#fff;}
 
 
