@@ -101,7 +101,7 @@ header{overflow: hidden;}
 .home_items_list .home_list_l_info .itemsname{padding-left:.67rem;color:#000;}
 .home_items_list .cashpic{font-size:16px;font-weight: bold;color:#eab96a;/*margin-right:.3rem;*/height:.52rem;display: inline-block;line-height: .52rem;;}
 .home_items_list .cashpic img{width:auto;height:.52rem;vertical-align:top;margin-right:.1rem;}
-.homepage{background: url(icon/home_header.jpg) no-repeat center center;background-size:contain;width:7.5rem;height:3.38rem;}
+.homepage{background: url(icon/home_header.jpg) no-repeat center center;background-size:100% 2.3rem;width:7.5rem;height:2.3rem;}
 .homepage .header{background: none;}
 .homepage .header .install{position: absolute;right:.3rem;top:0;font-size:24px;}
 .home_cover_info{padding:.2rem .39rem 0;}
@@ -897,7 +897,7 @@ color:#999;padding:.1rem;}
 .aboutus_container h3.brand{font-size: 20px;margin-bottom:.2rem;}
 .aboutus_container h3.slogn{color:#000;margin-top:.6rem;letter-spacing: 1px;}
 /*男性个人主页*/
-.mhomepage{background: url(icon/home_header_m.jpg) no-repeat center center;background-size: contain;}
+.mhomepage{background: url(icon/home_header_m.jpg) no-repeat center center;background-size: 100% 2.3rem;}
 .cover_left_info .price{width:100%;font-size: 12px;color:#EAB96A;}
 .charge_container_list .con{background: #fff;height:45px;width:100%;}
 .charge_container_list .con input{text-align: right;}
