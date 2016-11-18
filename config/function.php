@@ -189,7 +189,7 @@ function getFormateDT($startTime, $endTime) {
 //获取年月日
 function getYMD($time) {
 
-    $timestr = $time->year . "年" . $time->month . "月" . $time->day;
+    $timestr = $time->month . "月" . $time->day;
     return $timestr;
 
 }
