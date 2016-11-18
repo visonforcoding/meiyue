@@ -90,6 +90,8 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         "sys.mediaPlay", //开始播放多媒体
         "sys.back", //设置返回链接
         "sys.clearWebCatch",
+        "sys.setSex",
+        "sys.getSex",
         "sys.logout",
         "sys.device", //获取唯一设备id
         "show.shareIco", //隐藏分享图标
@@ -153,6 +155,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                         }
                     });
                     break;
+                case "sys.getSex":
                 case "sys.version":
                 case "sys.device":
                 case "sys.isUseLOC":  //是否使用缓存  on  off
@@ -222,6 +225,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                         return JSApiInvoke(api, {tel: arguments[0]}, '');
                     });
                     break;
+                case "sys.setSex":
                 case "event.invite":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {str: arguments[0]}, '');
