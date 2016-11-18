@@ -268,7 +268,7 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .fixed_r_submit{width:66px;height:66px;border-radius: 50%;position:fixed;right:.3rem;bottom:.6rem;text-align: center;color:#fff;font-size: 15px;box-shadow: 0 5px 8px rgba(254,202,195,.8);border:1px #fff solid;display:-webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: center;background: -webkit-linear-gradient(top,#fe9872,#fd6a56);background: linear-gradient(top,#fe9872,#fd6a56);}
 /*约会详情页*/
 .date_detail_place{padding-bottom:.4rem;border-bottom:1px #efefef solid;background: #fff;}
-.date_detail_place .title{/*line-height: 1.1rem;*/font-size:16px;/*line-height: .72rem;*/text-align: justify;padding:.2rem 0;}
+.date_detail_place .title{/*line-height: 1.1rem;font-size:16px;*//*line-height: .72rem;*/text-align: justify;padding:.2rem 0;}
 .date_detail_place .place{width:2rem;height:2rem;display: block;overflow: hidden;position:absolute;}
 .date_detail_place .place_pic{height:2rem;}
 .date_detail_place .place img{width:100%;height:auto;display: block;}
