@@ -338,8 +338,8 @@ var ranger = function(o) {
         range:[], //数组  开始和末尾
         reRange:[],//滑动的结果
         highlightBar : null, //高亮的容器
-        moverleft : $(new Image()), //滑块按钮
-        moverright : $(new Image()), //滑块按钮
+        moverleft : null, //滑块按钮
+        moverright : null, //滑块按钮
         mover:null, //当前滑动的元素
         left:0,  // highlightBar  css left
         right:0, // highlightBar  css right
