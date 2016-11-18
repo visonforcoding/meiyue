@@ -520,7 +520,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .items_right_info span.color_gray{color:#999;}
 .items_right_info span.color_gray .iconfont{color:#ccc;}
 .items_right_info span .iconfont{display: block;font-size: 18px;}
-.getdatebtn{margin-top:.3rem;}
+.getdatebtn{margin-top:.3rem;width:1.4rem;}
 /*派对日期*/
 .home_paty_container .items_right_info span .iconfont{display: inline;margin-right:.05rem;}
 .home_paty_container .items_right_info .party_time{font-size: 11px;color:#999;margin-top:.1rem;}
