@@ -17,7 +17,7 @@
     {{/users}}
 </script>
 <?php $this->end('static') ?>
-<header class="fixedhead">
+<header class="">
     <div class="header">
         <a href="/index/index"><span class="l_btn">切换地图</span></a>
         <h1>美约</h1>
