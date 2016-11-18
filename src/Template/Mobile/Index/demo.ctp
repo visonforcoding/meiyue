@@ -86,7 +86,7 @@
     <!--上传-->
     <div class="up_identify_box bgff mt40">
         <div class="inner">s
-            <div class="title" onclick="alert(LEMON.sys.setSex('man'))">
+            <div class="title" onclick="(LEMON.sys.setSex('man'))">
                 <h3 class="color_black">设置用户性别LEMON.sys.setSex('man')</h3>
             </div>
         </div>
@@ -94,7 +94,7 @@
     <!--上传-->
     <div class="up_identify_box bgff mt40">
         <div class="inner">
-            <div class="title" onclick="alert(LEMON.sys.setSex('falame'))">
+            <div class="title" onclick="(LEMON.sys.setSex('falame'))">
                 <h3 class="color_black">设置用户性别LEMON.sys.getSex()</h3>
             </div>
         </div>
