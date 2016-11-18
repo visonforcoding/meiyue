@@ -2,7 +2,7 @@
 <script src="/mobile/js/mustache.min.js"></script>
 <script id="myAct-list-tpl" type="text/html">
     {{#datas}}
-    <li>
+    <li onclick="window.location.href = '/activity/view/{{activity.id}}'">
         <div class="items_date_info flex flex_justify">
             <div class="items_left_info">
 							<span class="items_left_picinfo">
@@ -16,7 +16,7 @@
             <div class="items_right_info">
                 <span class="color_y"><i class="iconfont">&#xe622;</i>{{date}}</span>
                 <time class="party_time">{{time}}</time>
-                <span class="getdatebtn button btn_bg_active">{{bustr}}</span>
+                <span class="getdatebtn button {{bucls}}">{{bustr}}</span>
             </div>
         </div>
     </li>
@@ -51,13 +51,13 @@
     var curpage = 1;
     var url = '/userc/get-acts-in-page/';
     var tmpl = '#myAct-list-tpl';
-    var conid = '#list-con';
+    var conid = 'list-con';
     $.util.asyLoadData({
         gurl: url,
         page: curpage,
         query: '?query=1',
         tpl: tmpl,
-        id: conid,
+        id: '#' + conid,
         key: 'datas',
         func: calFunc
     });
@@ -79,7 +79,7 @@
             page: curpage,
             query: query,
             tpl: tmpl,
-            id: conid,
+            id: '#' + conid,
             key: 'datas',
             func: calFunc
         });
@@ -87,26 +87,42 @@
     });
 
 
-    /*setTimeout(function () {
-     //滚动加载
-     $(window).on("scroll", function () {
-     $.util.listScroll('order-list', function () {
-     $.util.asyLoadData({
-     gurl: '/userc/get-acts-in-page/', page: curpage,
-     tpl: '#myAct-list-tpl', id: '#list-con', more: true, key: 'datas', func: calFunc
-     });
-     })
-     });
-     }, 2000);*/
+    setTimeout(function () {
+        //滚动加载
+        $(window).on("scroll", function () {
+            $.util.listScroll(conid, function () {
+                $.util.asyLoadData({
+                    gurl: url, page: curpage,
+                    tpl: tmpl, id: '#' + conid, more: true, key: 'datas', func: calFunc
+                });
+            })
+        });
+    }, 2000);
 
 
     //可以定制输出内容data.datas为数据列表
     function calFunc(data) {
-        //返回格式化回调
+
         if (data.datas) {
+            var curdatetime = new Date();
+            var datas = data.datas;
+            for (key in datas) {
+
+                tmp = datas[key];
+                if (tmp.bustr == '已经结束') {
+                    tmp.bucls = 'btn_light';
+                } else if (tmp.bustr == '正在进行') {
+                    tmp.bucls = 'btn_bg_active';
+                } else if (tmp.bustr == '即将开始') {
+                    tmp.bucls = 'btn_dark';
+                }
+                //返回格式化回调
+                datas[key] = tmp;
+
+            }
+            data.datas = datas;
 
         }
-        console.log(data);
         return data;
     }
 </script>

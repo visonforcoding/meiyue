@@ -62,10 +62,10 @@ class UsercController extends AppController {
         $query = $this->request->query('query');
         switch ($query) {
             case 1:
-                $where = array_merge($where, ['Activity.end_time <=' => new Time()]);
+                $where = array_merge($where, ['Activity.end_time >=' => new Time()]);
                 break;
             case 2:
-                $where = array_merge($where, ['Activity.end_time >'=>new Time()]);
+                $where = array_merge($where, ['Activity.end_time <'=>new Time()]);
                 break;
             default:
                 break;
@@ -75,23 +75,24 @@ class UsercController extends AppController {
             ->where($where)
             ->limit($limit)
             ->page($page)
+            ->orderAsc('Activity.start_time')
             ->map(function($row) {
 
                 $row->date = getYMD($row->activity->start_time);
                 $row->time = getHIS($row->activity->start_time, $row->activity->end_time);
                 $curdatetime = new Time();
                 $row->bustr = '';
-                if($row->activity->end_time > $curdatetime) {
+                if($row->activity->end_time < $curdatetime) {
 
-                    $row->bustr = '已结束';
+                    $row->bustr = '已经结束';
 
-                } else if ($row->activity->start < $curdatetime) {
+                } else if (($row->activity->start_time < $curdatetime) && ($curdatetime < $row->activity->end_time)) {
 
-                    $row->bustr = '将开启';
+                    $row->bustr = '正在进行';
 
-                } else if (($row->activity->start < $curdatetime) && ($curdatetime < $row->activity->end)) {
+                } else if ($row->activity->start_time > $curdatetime) {
 
-                    $row->bustr = '进行中';
+                    $row->bustr = '即将开始';
 
                 }
 
