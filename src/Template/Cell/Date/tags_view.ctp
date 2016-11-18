@@ -8,10 +8,10 @@
             </div>
         </div>
         <!--内容-->
-        <div class="choose_mark_con inner">
+        <div class="choose_mark_con">
             <?php foreach ($list as $item): ?>
                 <div class="choose_mark__items">
-                    <h3 class="commontitle mt20"><?= $item['name']?></h3>
+                    <h3 class="commontitle mt20 inner"><?= $item['name']?></h3>
                     <ul class="bgff">
                         <?php foreach ($item['children'] as $i): ?>
                             <li class="tag-item" tag-id="<?= $i['id']?>" tag-name="<?= $i['name'] ?>">
