@@ -106,6 +106,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         'login.wx',
         'pay.wx',
         'pay.ali',
+        "event.login",
         "event.unrefresh",
         "event.back", //后退事件
         "event.getWXCode",
@@ -232,6 +233,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                     });
                     break;
                     //无参数 只用到callback
+                case 'event.login':
                 case 'login.wx':
                 case "event.getWXCode":
                 case "event.getLocation":
