@@ -468,6 +468,7 @@ $.util = {
      */
     asyLoadData: function (opt) {
         $.util.showPreloader();
+        var url;
         var gurl = opt.gurl;
         var more = opt['more'];
         var template = $(opt.tpl).html();

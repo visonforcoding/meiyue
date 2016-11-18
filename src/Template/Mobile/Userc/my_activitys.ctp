@@ -48,7 +48,7 @@
 </div>
 
 <script>
-    var curpage = parseInt(1);
+    var curpage = 1;
     var url = '/userc/get-acts-in-page/';
     var tmpl = '#myAct-list-tpl';
     var conid = '#list-con';
@@ -71,12 +71,13 @@
 
         });
         $(this).addClass('cur');
-        var query = $(this).data('query');
+        var query = "?query=" + $(this).data('query');
+        console.log(query);
         var curpage = 1;
         $.util.asyLoadData({
             gurl: url,
             page: curpage,
-            query: '',
+            query: query,
             tpl: tmpl,
             id: conid,
             key: 'datas',
