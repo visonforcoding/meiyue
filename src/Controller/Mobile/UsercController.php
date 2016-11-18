@@ -47,7 +47,7 @@ class UsercController extends AppController {
      */
     public function myActivitys()
     {
-
+       $this->set(['pageTitle'=>'我的派对']);
     }
 
 
@@ -83,15 +83,15 @@ class UsercController extends AppController {
                 $row->bustr = '';
                 if($row->activity->end_time > $curdatetime) {
 
-                    $row->bustr = '已经结束';
+                    $row->bustr = '已结束';
 
                 } else if ($row->activity->start < $curdatetime) {
 
-                    $row->bustr = '即将开启';
+                    $row->bustr = '将开启';
 
                 } else if (($row->activity->start < $curdatetime) && ($curdatetime < $row->activity->end)) {
 
-                    $row->bustr = '正在进行';
+                    $row->bustr = '进行中';
 
                 }
 

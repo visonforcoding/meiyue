@@ -79,23 +79,13 @@ class ActivityController extends AppController
                 ->where(['Actregistrations.status' => 1]);
         }]]);
 
-        //检查是否已经参与
-        $regist_item = null;
-        $actregistrations = $activity['actregistrations'];
-        foreach ($actregistrations as $actregistration) {
-            if($this->user->id == $actregistration['user']['id'] && $actregistration['cancel_time'] == null) {
-                $regist_item = $actregistration;
-                break;
-            }
-        }
-
+        $botBtSts = 0;  //底部按钮显示状态：0#我要报名 1#人数已满 2#我要取消 3#报名成功（此时是不可以取消的）
         //检查报名人数是否已满
-        $lim_flag = false;
         if($this->user->gender == 1) {
 
             if($activity['male_rest'] == 0) {
 
-                $lim_flag = true;
+                $botBtSts = 1;
 
             }
 
@@ -103,12 +93,31 @@ class ActivityController extends AppController
 
             if($activity['female_rest'] == 0) {
 
-                $lim_flag = true;
+                $botBtSts = 1;
 
             }
         }
 
-        $this->set(['lim_flag' => $lim_flag, 'regist_item' => $regist_item, 'user' => $this->user, 'activity' => $activity, 'pageTitle' => '美约-活动详情']);
+        //检查是否已经参与
+        $actregistrations = $activity['actregistrations'];
+        foreach ($actregistrations as $actregistration) {
+            if($this->user->id == $actregistration['user']['id'] && $actregistration['cancel_time'] == null) {
+                $botBtSts = 2;
+                break;
+            }
+        }
+
+        $current_time = new Time();
+        //检查是否在规定可取消时间
+        if($current_time->diffInDays($activity['start_time'], false) < 3) {
+
+
+            $botBtSts = 3;
+
+        }
+
+
+        $this->set(['botBtSts' => $botBtSts, 'user' => $this->user, 'activity' => $activity, 'pageTitle' => '美约-活动详情']);
     }
 
 
@@ -187,8 +196,11 @@ class ActivityController extends AppController
 
                         }
 
+                    } else {
+
+                        return $this->Util->ajaxReturn(false, '无法取消！');
+
                     }
-                    return $this->Util->ajaxReturn(false, '操作失败');
 
                 }
 

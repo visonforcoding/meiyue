@@ -72,13 +72,17 @@
 <div style="height:63px;"></div>
 <div class="bottomblock">
     <div class="flex flex_end">
-        <?php if($regist_item != null): ?>
-            <a class="identify_footer_potion cancel-btn">取消参加</a>
-        <?php elseif($lim_flag): ?>
-            <a class="identify_footer_potion">人数已满</a>
-        <?php else: ?>
+        <?php if ($botBtSts == 0): ?>
             <span class="total"><span class="color_y"><i class="color_y lagernum"><?= ($user['gender'] == 1)?$activity['male_price']:$activity['female_price']; ?> </i>美币/人</span></span>
             <a class="nowpay">我要参加</a>
+        <?php elseif ($botBtSts == 1): ?>
+            <a class="identify_footer_potion">人数已满</a>
+        <?php elseif ($botBtSts == 2): ?>
+            <a class="identify_footer_potion cancel-btn">我要取消</a>
+        <?php elseif ($botBtSts == 3): ?>
+            <a class="identify_footer_potion">报名成功</a>
+        <?php else: ?>
+            <a class="identify_footer_potion">异常状态</a>
         <?php endif; ?>
     </div>
 </div>
