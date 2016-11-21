@@ -3,6 +3,7 @@ namespace App\Controller\Mobile;
 use Cake\Datasource\ResultSetInterface;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use League\Flysystem\Exception;
 
 /**
  * Activity Controller
@@ -370,17 +371,72 @@ class ActivityController extends AppController
     }
 
 
+    /**
+     * 活动-派对-已报名
+     * @param $activity_id
+     */
     public function memIndex($activity_id) {
 
         if($activity_id) {
 
             $actreTable = TableRegistry::get('Actregistration');
-            $actres = $actreTable->find('all', ['contain' => ['User' => function($q) {
-                return $q->select(['id', 'nick', 'birthday', 'gender', 'avatar']);
-            }]])->where(['activity_id' => $activity_id, 'Actregistration.status' => 1]);
+            $actres = $actreTable->find('all',
+                [
+                    'contain' => ['User' => function($q) {
+                            return $q->select(['id', 'nick', 'birthday', 'gender', 'avatar']);
+                        }
+                    ]
+                ])
+                ->where(['activity_id' => $activity_id, 'Actregistration.status' => 1]);
 
         }
         $this->set(['pageTitle' => '美约-派对已报名', 'actres' => $actres]);
+
+    }
+
+
+    /**
+     * 活动-头牌
+     */
+    public function getTopList($type = 'week')
+    {
+
+        try {
+            $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+            $where = Array(
+                'income' => 1
+            );
+
+            if('week' == $type) {
+                $where['Flow.create_time >='] = new Time('-7 days');
+            } else if('month' == $type) {
+                $where['Flow.create_time >='] = new Time('-30 days');
+            }
+
+            $i = 1;
+            $query = $FlowTable->find()
+                ->contain([
+                    'User'=>function($q){
+                        return $q->select(['id','avatar','nick','phone','gender','birthday'])
+                            ->where(['gender'=>2]);
+                    },
+                ])
+                ->select(['user_id','total'=>'sum(amount)'])
+                ->where($where)
+                ->group('user_id')
+                ->orderDesc('total')
+                ->map(function($row) use(&$i) {
+                    $row['user']['age'] = getAge($row['user']['birthday']);
+                    $row['index'] = $i;
+                    $i++;
+                    return $row;
+                });
+
+            $tops = $query->toArray();
+            return $this->Util->ajaxReturn(['datas'=>$tops, 'status' => true]);
+        } catch(Exception $e) {
+            return $this->Util->ajaxReturn(false, '服务器大姨妈啦~~');
+        }
 
     }
 }

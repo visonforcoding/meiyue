@@ -118,6 +118,7 @@ function getFlowType($index = null) {
         '4' => '用户充值',
         '5' => '男士取消约单预约金退回',
         '6' => '女士取消约单预约金退回',
+        '7' => '派对报名费',
     ];
     if ($index) {
         return $flowType[$index];
