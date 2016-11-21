@@ -7,14 +7,16 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 <script src="/mobile/js/mustache.min.js"></script>
 <script id="date-list-tpl" type="text/html">
     {{#datas}}
-    <div class="date_detail_place inner {{^is_first}}mt20{{/is_first}}" onclick="window.location.href = '/date-order/join/{{id}}'">
+    <div class="date_detail_place inner {{^is_first}}mt20{{/is_first}}"
+         onclick="window.location.href = '/date-order/join/{{id}}'">
         <h3 class="title"><i class="itemsname color_y">[{{user_skill.skill.name}}]</i> {{description}}</h3>
         <div class="place_pic">
 								<span class="place">
 									<img src="/mobile/images/date_place.jpg"/>
 								</span>
             <div class="place_info">
-                <h3 class="userinfo">{{user.nick}} <span>{{user.age}}岁</span> <em class="price color_y fr"><i class="lagernum">{{user_skill.cost.money}}</i>元/约会金</em>
+                <h3 class="userinfo">{{user.nick}} <span>{{user.age}}岁</span> <em class="price color_y fr"><i
+                            class="lagernum">{{user_skill.cost.money}}</i>元/约会金</em>
                 </h3>
                 <h3 class="otherinfo">
                     <time class="color_gray"><i class="iconfont">&#xe622;</i> {{time}}</time>
@@ -49,6 +51,28 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             </div>
         </div>
     </div>
+    {{/datas}}
+</script>
+
+<script id="top-list-tpl" type="text/html">
+    {{#datas}}
+    <li class="flex flex_justify">
+        <div class="flex">
+            <span class="place silver">{{index}}</span>
+            <div class="place_info">
+                <span class="avatar"><img src="/mobile/images/avatar.jpg"></span>
+                <h3>
+                                            <span class="place_name"><i class="name">{{user.nick}}</i> <i class="vip">VIP 5</i><i
+                                                    class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
+                                            <span class="place_number color_gray"><em class="color_y"><i
+                                                        class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
+														本周魅力值：<i class="color_y">{{total}}</i>
+													</span>
+                </h3>
+            </div>
+        </div>
+        <span class="button btn_dark">支持她</span>
+    </li>
     {{/datas}}
 </script>
 
@@ -96,97 +120,13 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 </div>
                 <div class="rank_list">
                     <ul class="rank_header">
-                        <li><span>周榜</span></li>
-                        <li><span>月榜</span></li>
-                        <li class="current"><span>土豪榜</span></li>
+                        <li class="top-tab current" act="top_week"><span>周榜</span></li>
+                        <li class="top-tab" act="top_month"><span>月榜</span></li>
+                        <li class="top-tab" act="rich_list"><span>土豪榜</span></li>
                     </ul>
                     <div class="rank_con">
-                        <ul class="inner outerblock">
-                            <li class="flex flex_justify">
-                                <div class="flex">
-                                    <span class="place silver">1</span>
-                                    <div class="place_info">
-                                        <span class="avatar"><img src="/mobile/images/avatar.jpg"></span>
-                                        <h3>
-                                            <span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 5</i><i
-                                                    class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
-                                            <span class="place_number color_gray"><em class="color_y"><i
-                                                        class="iconfont color_y">&#xe61d;</i> 23</em>
-														本周魅力值：<i class="color_y">255554222</i>
-													</span>
-                                        </h3>
-                                    </div>
-                                </div>
-                                <span class="button btn_dark">支持她</span>
-                            </li>
-                            <li class="flex flex_justify">
-                                <div class="flex">
-                                    <span class="place silver">2</span>
-                                    <div class="place_info">
-                                        <span class="avatar"><img src="/mobile/images/avatar.jpg"></span>
-                                        <h3>
-                                            <span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 5</i><i
-                                                    class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
-                                            <span class="place_number color_gray"><em class="color_y"><i
-                                                        class="iconfont color_y">&#xe61d;</i> 23</em>
-														本周魅力值：<i class="color_y">255554222</i>
-													</span>
-                                        </h3>
-                                    </div>
-                                </div>
-                                <span class="button btn_dark">支持她</span>
-                            </li>
-                            <li class="flex flex_justify">
-                                <div class="flex">
-                                    <span class="place silver">3</span>
-                                    <div class="place_info">
-                                        <span class="avatar"><img src="/mobile/images/avatar.jpg"></span>
-                                        <h3>
-                                            <span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 3</i><i
-                                                    class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
-                                            <span class="place_number color_gray"><em class="color_y"><i
-                                                        class="iconfont color_y">&#xe61d;</i> 23</em>
-														本周魅力值：<i class="color_y">255554222</i>
-													</span>
-                                        </h3>
-                                    </div>
-                                </div>
-                                <span class="button btn_dark">支持她</span>
-                            </li>
-                            <li class="flex flex_justify">
-                                <div class="flex">
-                                    <span class="place">4</span>
-                                    <div class="place_info">
-                                        <span class="avatar"><img src="/mobile/images/avatar.jpg"></span>
-                                        <h3>
-                                            <span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 3</i><i
-                                                    class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
-                                            <span class="place_number color_gray"><em class="color_y"><i
-                                                        class="iconfont color_y">&#xe61d;</i> 23</em>
-														本周魅力值：<i class="color_y">255554222</i>
-													</span>
-                                        </h3>
-                                    </div>
-                                </div>
-                                <span class="button btn_bg_active">支持她</span>
-                            </li>
-                            <li class="flex flex_justify">
-                                <div class="flex">
-                                    <span class="place">5</span>
-                                    <div class="place_info">
-                                        <span class="avatar"><img src="/mobile/images/avatar.jpg"></span>
-                                        <h3>
-                                            <span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 1</i><i
-                                                    class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
-                                            <span class="place_number color_gray"><em class="color_y"><i
-                                                        class="iconfont color_y">&#xe61d;</i> 23</em>
-														本周魅力值：<i class="color_y">255554222</i>
-													</span>
-                                        </h3>
-                                    </div>
-                                </div>
-                                <span class="button btn_dark">支持她</span>
-                            </li>
+                        <ul class="inner outerblock" id="top-list">
+                            <!-- 头牌列表 -->
                         </ul>
                     </div>
                 </div>
@@ -202,7 +142,6 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 <script>
 
     var activity = function (o) {
-
         this.opt = {
             tab_date: 1,
             tab_activity: 2,
@@ -214,14 +153,13 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             tabLoadHold: [0, 0, 0, 0], //页码加载结束
             tabDataTpl: ['', '#date-list-tpl', '#activity-list-tpl', '#top-list-tpl'],
             listId: ['', '#date_list', '#party_list', '#winer_list'],
-            tabDataUrl: ['', '/date/get-all-dates-in-page/', '/activity/get-all-dates-in-page/', '/activity/index/'],
+            tabDataUrl: ['', '/date/get-all-dates-in-page/', '/activity/get-all-dates-in-page/', '/activity/get-top-list/'],
+            top_obj: null
         }
         $.extend(this, this.opt, o);
-
     }
 
     $.extend(activity.prototype, {
-
         init: function () {
             this.tabEvent();
             this.scroll();
@@ -244,14 +182,20 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 viewDom: $('.activity_list'),
                 fun: function (index) {
                     index = parseInt(index);
-
-                    if (obj.cur_tab == index && !this.isInit) {
-                        return;
+                    if (index != 3) {
+                        if (obj.cur_tab == index && !this.isInit) {
+                            return;
+                        }
+                        window.scrollTo(0, 0);
+                        this.isInit = false;
+                        obj.cur_tab = index;
+                        obj.tabInit(index);
+                    } else {
+                        if (!obj.top_obj) {
+                            obj.top_obj = new topPage();
+                            obj.top_obj.init();
+                        }
                     }
-                    window.scrollTo(0, 0);
-                    this.isInit = false;
-                    obj.cur_tab = index;
-                    obj.tabInit(index);
                 }
             });
         },
@@ -269,10 +213,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 var st = document.body.scrollTop;
                 var cbodyH = $(obj.listId[obj.cur_tab]).height() - 600;
 
-                //console.log([$(document).height(), $(window).height(),$(document).height()-$(window).height()-200,st].join('-'));
-                //if (st >= (($(document).height() - 150))) {
-                //console.log([st, cbodyH, st - cbodyH].join('-'));
-                if (st >= cbodyH) {
+                if (st >= cbodyH && obj.cur_tab != 3) {
                     obj.asyLoadData(obj.cur_tab);
                 }
             });
@@ -281,7 +222,6 @@ $activity_action = '/activity/index/';  //定义派对请求地址
         asyLoadData: function (curtab) {
             if (this.tabLoadHold[curtab] || this.tabLoadEnd[curtab]) return;
             this.tabLoadHold[curtab] = true;
-
             $.util.showPreloader();
             var template = $(this.tabDataTpl[curtab]).html();
             var url = this.tabDataUrl[curtab] + this.tabPage[curtab];
@@ -300,31 +240,87 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 
                     switch (curtab) {
                         case obj.tab_date:
-                            if(!obj.tabInitLoad[curtab]) {
-
+                            if (!obj.tabInitLoad[curtab]) {
 
                             }
                             break;
                         case obj.tab_activity:
-                            if(!obj.tabInitLoad[curtab]) {
-
+                            if (!obj.tabInitLoad[curtab]) {
                                 $('#party-coverimg').html("<img src='/mobile/css/icon/banner1.jpg'/>");
-
                             }
                             break;
                         case obj.tab_top:
-                            if(!obj.tabInitLoad[curtab]) {
-
-
+                            if (!obj.tabInitLoad[curtab]) {
                             }
                             break;
                     }
-                    //obj.tabInitLoad[curtab] ? $(obj.listId[curtab]).append(rendered) : $(obj.listId[obj.cur_tab]).html(rendered);
                     $(obj.listId[curtab]).append(rendered);
                 }
             });
         },
     });
+
+
+    var topPage = function (o) {
+
+        this.opt = {
+            week_tab: 1,
+            month_tab: 2,
+            rich_tab: 3,
+            cur_tab: 1,
+            tabDataTpl: ['', '#top-list-tpl', '#top-list-tpl', '#top-list-tpl'],
+            tab_action: ['/activity/get-top-list/week', '/activity/get-top-list/month', '/index/get-rich-list/1'],   //请求url
+            container_id: '#top-list',
+        };
+        $.extend(this, this.opt, o);
+
+    };
+
+    $.extend(topPage.prototype, {
+        init: function () {
+            this.addTabEvent();
+            this.loadDataWithoutPage(this.tab_action[0]);
+        },
+        addTabEvent: function () {
+            var obj = this;
+            $(".top-tab").on('click', function () {
+                $(".top-tab").each(function () {
+                    $(this).removeClass('current');
+                });
+                $(this).addClass('current');
+                if ($(this).attr('act') == 'top_week') {
+                    obj.loadDataWithoutPage(obj.tab_action[0]);
+                } else if ($(this).attr('act') == 'top_month') {
+                    obj.loadDataWithoutPage(obj.tab_action[1]);
+                } else if ($(this).attr('act') == 'rich_list') {
+                    obj.loadDataWithoutPage(obj.tab_action[2]);
+                }
+
+            });
+        },
+        loadDataWithoutPage: function (action) {
+            var obj = this;
+            var template = $(this.tabDataTpl[this.cur_tab]).html();
+            Mustache.parse(template);   // optional, speeds up future uses
+            $.util.showPreloader('加载中...');
+            $.ajax({
+                url: action,
+                type: "POST",
+                dataType: "json",
+                success: function (res) {
+                    $.util.hidePreloader();
+                    if (res.status) {
+                        var rendered = Mustache.render(template, res);
+                        console.log(res.datas);
+                        console.log(obj.container_id);
+                        console.log(rendered);
+                        $(obj.container_id).html(rendered);
+                    }
+                }
+            });
+        }
+    });
+
 
     var activityobj = new activity();
     activityobj.init();
