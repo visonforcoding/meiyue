@@ -362,3 +362,10 @@ ALTER TABLE `lm_user`
 #充值总额记录字段
 ALTER TABLE `lm_user`
 	ADD COLUMN `recharge` FLOAT NULL DEFAULT '0' COMMENT '充值总额' AFTER `video_cover`;
+
+
+##20161121
+ALTER TABLE `lm_user`
+	ADD COLUMN `wx_ishow` TINYINT NOT NULL DEFAULT '1' COMMENT '微信是否显示: 1#显示 2#不显示' AFTER `device`,
+	DROP COLUMN `wx_ishow`;
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='meiyue';
