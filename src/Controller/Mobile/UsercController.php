@@ -3,6 +3,7 @@
 namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
+use App\Model\Entity\User;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 
@@ -514,5 +515,62 @@ class UsercController extends AppController {
      */
     public function getFlows($page,$limit = 10){
         
+    }
+
+
+    /**
+     * 我的-编辑我的信息
+     */
+    public function editInfo()
+    {
+
+        $inlist = Array('phone', 'nick', 'truename', 'profession', 'email',
+            'gender', 'birthday', 'zodiac', 'weight', 'height', 'bwh', 'cup',
+            'hometown', 'city', 'avatar', 'state', 'career', 'place', 'food',
+            'music', 'movie', 'sport', 'sign', 'wxid', 'idpath', 'idfront', 'idback',
+            'idperson', 'images', 'video', 'video_cover');
+
+        $percent = 0;
+        $user = $this->user;
+        foreach($inlist as $item) {
+
+            if($user->$item) {
+
+                $percent ++;
+
+            }
+
+        }
+        $percent = round($percent / count($inlist) * 100);
+
+        $this->set(['percent' => $percent, 'user' => $user, 'pageTitle' => '美约-个人信息']);
+        $this->render('/Mobile/User/edit');
+
+    }
+
+
+    /**
+     * 我的-编辑基本信息
+     */
+    public function editBasic()
+    {
+
+        $userTb = TableRegistry::get("User");
+        $user = $userTb->get($this->user->id, ['contain' => ['Tags']]);
+        if($this->request->is('POST')) {
+
+            $userTb = TableRegistry::get('User');
+            $user = $userTb->patchEntity($user, $this->request->data());
+
+            if($userTb->save($user)) {
+
+                return $this->Util->ajaxReturn(true, '修改成功');
+
+            }
+            return $this->Util->ajaxReturn(false, '修改失败');
+        }
+        $this->set(['user' => $user, 'pageTitle' => '美约-个人信息']);
+        $this->render('/Mobile/User/edit_basic');
+
     }
 }
