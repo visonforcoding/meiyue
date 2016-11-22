@@ -30,8 +30,8 @@
             <p>注意提前预订好场地</p>
         </div>
         <div class="date_pay_rightcon">
-            <a href="#this" class="button btn_bg_active">查看订单</a>
-            <a href="#this" class="button btn_light_t">返回首页</a>
+            <a href="/userc/order-detail/<?=$order_id?>" class="button btn_bg_active">查看订单</a>
+            <a href="/index/find-list" class="button btn_light_t">返回首页</a>
         </div>
     </div>
     <!--其它活跃女神-->

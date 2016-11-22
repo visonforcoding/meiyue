@@ -190,7 +190,7 @@
 </div>
 <!--弹出层-->
 <!--约Ta弹出层-->
-<div class="raper show">
+<div class="raper hide">
     <div class='fullwraper flex flex_center'>
     <!--约Ta弹出层-->
     <div class="popup" id="showPay" style="display: none;">

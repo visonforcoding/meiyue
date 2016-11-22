@@ -359,16 +359,39 @@ AUTO_INCREMENT=4
 #user表添加唯一索引
 ALTER TABLE `lm_user`
 	ADD UNIQUE INDEX `phone` (`phone`);
+
 #充值总额记录字段
 ALTER TABLE `lm_user`
 	ADD COLUMN `recharge` FLOAT NULL DEFAULT '0' COMMENT '充值总额' AFTER `video_cover`;
+<<<<<<< .mine
+
+#增加日志记录表
+CREATE TABLE `lm_log` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`flag` VARCHAR(50) NOT NULL DEFAULT '',
+	`msg` VARCHAR(550) NOT NULL DEFAULT '',
+	`data` TEXT NULL,
+	`create_time` DATETIME NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='重要的信息日志记录'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=1
+;
+
+#约会单增加2个时间点
+ALTER TABLE `lm_dateorder`
+	ADD COLUMN `prepay_time` DATETIME NOT NULL COMMENT '支付预约金时间点' AFTER `date_time`,
+	ADD COLUMN `receive_time` DATETIME NOT NULL COMMENT '美女接单时间点' AFTER `prepay_time`;
+
 
 
 ##20161121
 ALTER TABLE `lm_user`
 	ADD COLUMN `wx_ishow` TINYINT NOT NULL DEFAULT '1' COMMENT '微信是否显示: 1#显示 2#不显示' AFTER `device`,
-	DROP COLUMN `wx_ishow`;
-SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='meiyue';
+
+
 
 ##20161122
 CREATE TABLE `lm_gift` (

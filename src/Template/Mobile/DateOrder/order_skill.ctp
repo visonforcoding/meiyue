@@ -265,6 +265,11 @@ $('#go-here').on('tap',function(){
 });
 $('#order_pay').on('tap',function(){
    //预约支付
+   var dom = $(this);
+   if(dom.hasClass('disabled')){
+       return false;
+   }
+   dom.addClass('disabled');
    var user_skill_id = <?=$data->id?>;
    var data = {user_skill_id:user_skill_id,
        place_name:place_name,
@@ -275,7 +280,11 @@ $('#order_pay').on('tap',function(){
    $.util.ajax({
        data:data,
        func:function(res){
-           $.util.alert(res.msg);
+           if(res.status){
+              window.location.href = res.redirect_url;
+           }else{
+               dom.removeClass('disabled');
+           }
        }
    });
 });

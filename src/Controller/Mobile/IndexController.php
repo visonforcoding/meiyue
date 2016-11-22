@@ -3,9 +3,6 @@
 namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
-use App\Utils\umeng\Umeng;
-use Cake\Utility\Security;
-use App\Utils\Word\TrieTree;
 use Cake\I18n\Time;
 
 /**
