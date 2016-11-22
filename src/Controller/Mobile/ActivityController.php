@@ -401,6 +401,7 @@ class ActivityController extends AppController
     public function getTopList($type = 'week')
     {
 
+
         try {
             $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
             $where = Array(
@@ -408,9 +409,10 @@ class ActivityController extends AppController
             );
 
             if('week' == $type) {
-                $where['Flow.create_time >='] = new Time('-7 days');
+                $where['Flow.create_time >='] = new Time('last sunday');
             } else if('month' == $type) {
-                $where['Flow.create_time >='] = new Time('-30 days');
+                $da = new Time();
+                $where['Flow.create_time >='] = new Time(new Time($da->year . '-' . $da->month . '-' . '01 00:00:00'));
             }
 
             $i = 1;
@@ -466,16 +468,16 @@ class ActivityController extends AppController
             $i = 1;
             $query = $FlowTable->find()
                 ->contain([
-                    'User'=>function($q){
+                    'Buyer'=>function($q){
                         return $q->select(['id','avatar','nick','phone','gender', 'birthday'])->where(['gender'=>1]);
                     },
                 ])
-                ->select(['user_id','total'=>'sum(amount)'])
+                ->select(['buyer_id','total'=>'sum(amount)'])
                 ->where(['type'=>4])
-                ->group('user_id')
+                ->group('buyer_id')
                 ->orderDesc('total')
                 ->map(function($row) use(&$i) {
-                    $row['user']['age'] = getAge($row['user']['birthday']);
+                    $row['buyer']['age'] = getAge($row['buyer']['birthday']);
                     $row['index'] = $i;
                     if($i == 1) {
                         $row['ishead'] = true;
