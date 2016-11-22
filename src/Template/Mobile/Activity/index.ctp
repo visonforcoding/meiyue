@@ -138,7 +138,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                     <img src="/mobile/images/cover.jpg" alt=""/>
                     <a href="#this" class="more"><img src="/mobile/images/more.png"/></a>
                 </div>
-                <?php if($user->gender == 2): ?>
+                <?php if(isset($user) && $user->gender == 2): ?>
                 <div class="invite">
                     <a href="#this" class="btn btn_t_border">邀请好友支持我</a>
                 </div>
