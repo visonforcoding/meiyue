@@ -85,9 +85,9 @@ $activity_action = '/activity/index/';  //定义派对请求地址
         <div class="flex">
             <span class="voted_place silver">{{index}}</span>
             <div class="voted_place_info">
-                <span class="avatar"><img src="{{user.avatar}}"/></span>
+                <span class="avatar"><img src="{{buyer.avatar}}"/></span>
                 <h3>
-                    <span class="voted_name">{{user.nick}}</span>
+                    <span class="voted_name">{{buyer.nick}}</span>
                     <span class="voted_number color_gray">已消费：{{total}}美币</span>
                 </h3>
             </div>
