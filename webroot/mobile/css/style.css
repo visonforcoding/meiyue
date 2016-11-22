@@ -647,6 +647,9 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .rich_list .voted_place_info h3{padding-top:.08rem;}
 .rich_list .silver{background: url(icon/tou1.png) no-repeat center center;background-size:contain; width:.72rem;height:.62rem;}
 .rich_list .voted_place{}
+.rich_list .voted_list .commico,.rich_list_first .beauty .commico{position:relative;color:#fd6a56;}
+.rich_list .voted_list .commico:after,.rich_list_first .beauty .commico:after{content: '\e61f';}
+.rich_list .voted_list .activeico:after,.rich_list_first .beauty .activeico:after{content: '\e61e';}
 /*活动*/
 .activity_list{overflow:hidden;}
 .activity_list .date_list{position:fixed;top:0;margin:auto;max-width: 750px;width:100%;z-index:11;box-shadow: 0 1px 5px rgba(0,0,0,.1);}
