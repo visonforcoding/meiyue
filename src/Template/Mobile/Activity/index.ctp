@@ -333,7 +333,6 @@ $activity_action = '/activity/index/';  //定义派对请求地址
         loadDataWithoutPage: function (action) {
             var obj = this;
             var template = $(this.tabDataTpl[this.cur_tab]).html();
-            console.log(this.cur_tab);
             Mustache.parse(template);   // optional, speeds up future uses
             $.util.showPreloader('加载中...');
             $.ajax({
@@ -342,11 +341,9 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 dataType: "json",
                 success: function (res) {
                     $.util.hidePreloader();
+                    console.log(res);
                     if (res.status) {
                         var rendered = Mustache.render(template, res);
-                        console.log(res.datas);
-                        console.log(obj.container_id);
-                        console.log(rendered);
                         $(obj.container_id).html(rendered);
                     }
                 }
