@@ -22,7 +22,7 @@
                         </a>
                     </li>
                     <li class="follow">
-                        <a href="/userc/likes"><span>喜欢 <i>12</i></span></a>
+                        <a href="/userc/likes" class='like'>喜欢 <i>12</i></a>
                         <a href="/userc/fans" class='like'>粉丝 <i>122</i></a>
 
                     </li>
