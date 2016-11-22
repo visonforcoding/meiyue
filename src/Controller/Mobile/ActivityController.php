@@ -438,8 +438,11 @@ class ActivityController extends AppController
                 });
             $tops = $query->toArray();
             $sortops = Array();
-            if($this->user->gender == 2) {
-                $sortops[] = $this->getMyTop($type);
+
+            if($this->user) {
+                if($this->user->gender == 2) {
+                    $sortops[] = $this->getMyTop($type);
+                }
             }
 
             $sortops = array_merge($sortops, $tops);
