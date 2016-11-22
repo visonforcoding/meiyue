@@ -10,9 +10,15 @@ use Cake\I18n\Time;
  *
  * @property \App\Model\Table\DateOrderTable $DateOrder
  * @property \App\Controller\Component\BdmapComponent $Bdmap
+ * @property \App\Controller\Component\SmsComponent $Sms
  */
 class DateOrderController extends AppController
 {
+    
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Sms');
+    }
 
     /**
      * 约会支付详情页--赴约流程
@@ -53,7 +59,7 @@ class DateOrderController extends AppController
        $data = $UserSkillTable->get($skill_id,[
            'contain'=>[
                'User'=>function($q){
-                    return $q->select(['id','avatar','birthday','nick','truename']);
+                    return $q->select(['id','avatar','birthday','nick','truename','phone']);
                },
                'Skill'=>function($q){
                     return $q->select(['skill_id'=>'Skill.id','name']);
@@ -84,7 +90,7 @@ class DateOrderController extends AppController
                'dater_name'=>  $date->user->truename,
                'date_time'=>  $lasth,
                'consumer'=>  $this->user->truename,
-               'status'=>'',
+               'status'=>'3',
                'user_skill_id'=>$data['user_skill_id'],
                'site'=>$data['place_name'],
                'site_lat'=>$data['coord_lat'],
@@ -93,6 +99,7 @@ class DateOrderController extends AppController
                'amount'=>$amount,
                'pre_pay'=>$pre_pay,
                'pre_precent'=>$pre_precent,
+               'prepay_time'=> date('Y-m-d H:i:s'),
                'start_time'=>$data['start_time'],
                'end_time'=>$data['end_time'],
            ]);
@@ -124,7 +131,8 @@ class DateOrderController extends AppController
                return $FlowTable->save($flow)&&$saveDate&&$UserTable->save($user);
            });
            if($transRes){
-               return $this->Util->ajaxReturn(true,'预约成功');
+               $this->Sms->sendByQf106($date->user->phone,'用户'.$user->nick.'已支付了您的'.$date->skill->name.'技能预约费,请尽快前往平台确认');
+               return $this->Util->ajaxReturn(['status'=>true,'redirect_url'=>'/date-order/order-success/'.$dateorder->id]);
            }else{
                errorMsg($flow, '失败');
                errorMsg($dateorder, '失败');
@@ -143,7 +151,10 @@ class DateOrderController extends AppController
      * @param type $dataorder_id
      */
     public function orderSuccess($dataorder_id){
-        
+        $this->set([
+            'order_id'=>$dataorder_id,
+            'pageTitle'=>'预约成功'
+        ]);
     }
 
 
@@ -196,7 +207,7 @@ class DateOrderController extends AppController
         
         //返还预约金
         $pre_pay = $dateorder->pre_pay;
-        $pre_money = $dateorder->buyer->money;
+        $pre_amount = $dateorder->buyer->money;
         $dateorder->buyer->money = $dateorder->buyer->money+$dateorder->pre_pay;
         $after_amount = $dateorder->buyer->money;
         $dateorder->dirty('buyer',true);
@@ -214,7 +225,7 @@ class DateOrderController extends AppController
            'pre_amount'=>$pre_amount,
            'after_amount'=>$after_amount,
            'paytype'=>2, 
-           'remark'=> '取消约单退回预约金'
+           'remark'=> $remark
         ]);
          $transRes = $DateorderTable->connection()
                  ->transactional(function()use(&$flow,$FlowTable,&$dateorder,$DateorderTable){
@@ -262,7 +273,6 @@ class DateOrderController extends AppController
                 //退还男士预约金
                 $dateorder->status = 4;
                 $type = 7;
-                $remark = '女士在接受订单后取消订单退回预约金';
         }else{
             throw new Exception('身份认证不通过');
         }
@@ -289,7 +299,7 @@ class DateOrderController extends AppController
            'pre_amount'=>$m_pre_money,
            'after_amount'=>$m_after_amount,
            'paytype'=>2, 
-           'remark'=> $remark
+           'remark'=> '女士在接受订单后取消订单退回预约金'
         ]);
         //扣除违约金
         $breach_amount = 0.1*$dateorder->amount;
@@ -303,14 +313,14 @@ class DateOrderController extends AppController
            'buyer_id'=>  $dateorder->dater->id,
            'relate_id'=>$dateorder->id,
            'type'=>$type,
-           'type_msg'=>'取消约单退回预约金',
+           'type_msg'=>'取消约单违约金',
            'income'=>2,
            'amount'=>$breach_amount,
            'price'=>$breach_amount,
            'pre_amount'=>$w_pre_amount,
            'after_amount'=>$w_after_amount,
            'paytype'=>1, 
-           'remark'=> $remark
+           'remark'=> '女士在接受订单后取消订单扣除10%的约单金额作为惩罚'
         ]);
         $transRes = $DateorderTable->connection()
                  ->transactional(function()use(&$w_flow,$FlowTable,&$m_flow,&$dateorder,$DateorderTable){
@@ -327,7 +337,7 @@ class DateOrderController extends AppController
     
       /**
      * 取消约单 不同的节点不同的处理 处于状态10时
-     * 在约会之前可双方才可取消
+     * 在约会之前双方才可取消
      * 开始前2个小时 前与后 规则不同
      * 男士退单 ： 
      */
@@ -365,12 +375,14 @@ class DateOrderController extends AppController
                 
                 //返还全额 约单价格
                 $m_pre_money = $dateorder->buyer->money;
+                $m_amount = $dateorder->amount;
                 $dateorder->buyer->money = $dateorder->buyer->money+$dateorder->amount;
                 $m_after_amount = $dateorder->buyer->money;
                 $m_income = 1;
                 //扣除违约金
                 $breach_amount = 0.2*$dateorder->amount;
                 $w_pre_amount = $dateorder->dater->money;
+                $w_amount = $breach_amount;
                 $dateorder->dater->money = $dateorder->dater->money-$breach_amount;
                 $w_after_amount = $dateorder->dater->money;
                 $w_income = 2;
@@ -380,8 +392,8 @@ class DateOrderController extends AppController
                    'user_id'=> $dateorder->buyer->id,
                    'buyer_id'=>  0,
                    'relate_id'=>$dateorder->id,
-                   'type'=>'取消违约金退款',
-                   'type_msg'=>$type_msg,
+                   'type'=> $type,
+                   'type_msg'=>'取消违约金退款',
                    'income'=>$m_income,
                    'amount'=>$m_amount,
                    'price'=>$m_amount,
@@ -396,8 +408,8 @@ class DateOrderController extends AppController
                    'user_id'=> 0,
                    'buyer_id'=>  $dateorder->dater->id,
                    'relate_id'=>$dateorder->id,
-                   'type'=>'取消违约金扣款',
-                   'type_msg'=>$type_msg,
+                   'type'=>$type,
+                   'type_msg'=>'取消违约金退款',
                    'income'=>$w_income,
                    'amount'=>$w_amount,
                    'price'=>$w_amount,
@@ -412,7 +424,8 @@ class DateOrderController extends AppController
             $type_msg = '取消约单退回约单金额';
             if((strtotime($dateorder->start_time)-time())>= 2*60*60){
                 //2小时外
-                $remark = '男士在接受订单后约会时间2小时之外取消订单退回预约金';
+                $m_remark = '男士在接受订单后约会时间2小时之外取消订单退回70%约单金';
+                $w_remark = '男士在接受订单后约会时间2小时之外取消订单退回30%约单金';
                  //返还男士70%约单价格
                 $m_pre_money = $dateorder->buyer->money;
                 $m_amount = 0.7*$dateorder->amount;
@@ -427,7 +440,8 @@ class DateOrderController extends AppController
                 $w_income = 1;
                
             }else{
-                $remark = '男士在接受订单后约会时间2小时之内取消订单退回预约金';
+                $m_remark = '男士在接受订单后约会时间2小时之内取消订单退回30%约单金';
+                $w_remark = '男士在接受订单后约会时间2小时之内取消订单退回70%约单金';
                  //返还男士30%约单价格
                 $m_pre_money = $dateorder->buyer->money;
                 $m_amount = 0.7*$dateorder->amount;
@@ -454,7 +468,7 @@ class DateOrderController extends AppController
                    'pre_amount'=>$m_pre_money,
                    'after_amount'=>$m_after_amount,
                    'paytype'=>1, 
-                   'remark'=> $remark
+                   'remark'=> $m_remark
                 ]);
 
                 //女方的资金流水
@@ -470,7 +484,7 @@ class DateOrderController extends AppController
                    'pre_amount'=>$w_pre_amount,
                    'after_amount'=>$w_after_amount,
                    'paytype'=>1, 
-                   'remark'=> $remark
+                   'remark'=> $w_remark
                 ]);
         }
         

@@ -318,6 +318,7 @@ class UsercController extends AppController {
         ]);
         if($dateorder){
             $dateorder->status = 7;
+            $dateorder->receive_time = date('Y-m-d H:i:s');
             if($DateorderTable->save($dateorder)){
                 $this->loadComponent('Sms');
                 $this->Sms->sendByQf106($dateorder->buyer->phone, $dateorder->dater->nick.
@@ -344,10 +345,20 @@ class UsercController extends AppController {
                 ,'UserSkill.Skill','Dater.Tags'
             ]
         ]);
+        if($this->user->gender==1){
+             if((strtotime($order->start_time)-time())>= 2*60*60){
+                $refuse_msg = '您将收到70%的约单消费退回';
+             }else{
+                $refuse_msg = '您将收到30%的约单消费退回';
+             }
+        }else{
+            $refuse_msg = '将会扣除约单20%的美币作为惩罚';
+        }       
         $this->set([
             'order'=>$order,
             'user'=>  $this->user,
-            'pageTitle'=>'订单详情'
+            'pageTitle'=>'订单详情',
+            'refuse_msg'=>$refuse_msg
         ]);                      
         
     }

@@ -11,7 +11,8 @@
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "*",
         "admad/cakephp-glide": "^2.0",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "cboden/ratchet": "^0.3.5"
     },
     "require-dev": {
         "psy/psysh": "@stable",

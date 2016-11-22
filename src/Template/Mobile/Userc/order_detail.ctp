@@ -88,16 +88,16 @@
                 <div>合计</div><div><?= $order->amount ?>美币</div>
             </li>
             <li class="flex flex_justify">
-                <?php if(in_array($order->status,['13','10'])): ?>
+                <?php if (in_array($order->status, ['13', '10'])): ?>
                     <div>已支付</div><div><?= $order->amount ?>美币</div>
                 <?php endif; ?>
             </li>
         </ul>
-        <?php if($order->status == 7): ?>
-        <div class="flex flex_justify date_bosses inner">
-            <div class="bold">剩余尾款</div><div class="color_y"><?= $order->amount - $order->pre_pay ?>美币</div>
-        </div>
-        <?php endif;?>
+        <?php if ($order->status == 7): ?>
+            <div class="flex flex_justify date_bosses inner">
+                <div class="bold">剩余尾款</div><div class="color_y"><?= $order->amount - $order->pre_pay ?>美币</div>
+            </div>
+        <?php endif; ?>
         <p class="commontips inner mt20"><a href="#this" class="color_y">退款规则</a></p>
     </div>
 </div>
@@ -107,23 +107,15 @@
         <div class="bottomblock">
             <div class="flex flex_end">
                 <span class="total">剩余尾款数:<span class="color_y"><?= $order->amount - $order->pre_pay ?> </i>美币</span></span>
-                <a href="javascript:void(0);" data-id="<?=$order->id?>" id="payall" class="nowpay">立即支付</a>
+                <a  data-id="<?= $order->id ?>" id="payall" class="nowpay">立即支付</a>
             </div>
         </div>
     <?php endif; ?>
-    <?php if ($order->status == 7): ?>
-        <div class="bottomblock">
-            <div class="flex flex_end">
-                <span class="total">剩余尾款数:<span class="color_y"><?= $order->amount - $order->pre_pay ?> </i>美币</span></span>
-                <a href="javascript:void(0);" data-id="<?=$order->id?>" id="payall" class="nowpay">立即支付</a>
-            </div>
-        </div>
-    <?php endif; ?>
-    <?php if ($order->status == 13): ?>
+    <?php if ($order->status == 10): ?>
         <div class="potion_footer flex flex_justify">
-			<span class="footerbtn cancel">取消约单</span>
-			<span id="godate" class="footerbtn gopay">赴约成功</span>
-		</div>
+            <span id="refuse_status_10" class="footerbtn cancel">取消约单</span>
+            <span id="godate" class="footerbtn gopay">赴约成功</span>
+        </div>
     <?php endif; ?>
 <?php else: ?>
     <?php if ($order->status == 7): ?>
@@ -131,34 +123,48 @@
     <?php endif; ?>
     <?php if ($order->status == 10): ?>
         <div class="potion_footer flex flex_justify">
-			<span class="footerbtn cancel">取消约单</span>
-			<span  id="godate" class="footerbtn gopay">到达约会目的地</span>
-		</div>
+            <span id="refuse_status_10" class="footerbtn cancel">取消约单</span>
+            <span  id="godate" class="footerbtn gopay">到达约会目的地</span>
+        </div>
     <?php endif; ?>
 <?php endif; ?>
 
 <?php $this->start('script'); ?>
 <script>
-    var orderid = <?=$order->id?>;
-    $('#payall').on('tap',function(){
+    var orderid = <?= $order->id ?>;
+    $('#payall').on('tap', function () {
         //立即支付尾款
+        console.log('test');
         var id = $(this).data('id');
         $.util.ajax({
-           url:'/userc/order-payall',
-           data:{order:id},
-           func:function(res){
-               $.util.alert(res.msg);
-           }
+            url: '/userc/order-payall',
+            data: {order: id},
+            func: function (res) {
+                $.util.alert(res.msg);
+            }
         });
     });
-    $('#godate').on('tap',function(){
+    var refuse_msg = '<?=$refuse_msg?>';
+    $(document).on('tap', '#refuse_status_10', function () {
+        //状态10时 取消订单
+        $.util.confirm('确定要取消订单吗?', refuse_msg, function () {
+            $.util.ajax({
+                url: '/date-order/cancel-date-order-10',
+                data: {order_id: orderid},
+                func: function (res) {
+                    $.util.alert(res.msg);
+                }
+            })
+        })
+    });
+    $('#godate').on('tap', function () {
         //赴约成功
         $.util.ajax({
-           url:'/userc/order-go',
-           data:{order:orderid},
-           func:function(res){
-               $.util.alert(res.msg);
-           }
+            url: '/userc/order-go',
+            data: {order: orderid},
+            func: function (res) {
+                $.util.alert(res.msg);
+            }
         });
     });
 </script>

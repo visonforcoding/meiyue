@@ -26,13 +26,13 @@ $.util = {
                 '</button><button class="alert7-action-item btnR">' + bR
                 + '</button></div></div></div>';
         $('body').append(confirm);
-        $(document).on('tap', '.alert7-action-item.btnL', function () {
+        $(document).on('click', '.alert7-action-item.btnL', function () {
             if (hL && hL instanceof Function) {
                 hL();
             }
             $('.alert7-confirm').remove();
         })
-        $(document).on('tap', '.alert7-action-item.btnR', function () {
+        $(document).on('click', '.alert7-action-item.btnR', function () {
             if (hR && hR instanceof Function) {
                 hR();
             }

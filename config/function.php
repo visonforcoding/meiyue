@@ -122,8 +122,6 @@ function buildLinkString($params) {
     return $string;
 }
 
-
-
 /**
  * 计算2点间距离
  * @param type $coordinate1
@@ -131,7 +129,7 @@ function buildLinkString($params) {
  * @return 米  两点间距离
  * @throws Exception
  */
-function getDistance($coordinate1, $lng,$lat) {
+function getDistance($coordinate1, $lng, $lat) {
     $coordinate1_arr = explode(',', $coordinate1);
     if (!is_array($coordinate1_arr) || empty($coordinate1_arr)) {
         throw new Exception;
@@ -139,8 +137,8 @@ function getDistance($coordinate1, $lng,$lat) {
         $lng1 = $coordinate1_arr[0];
         $lat1 = $coordinate1_arr[1];
     }
-        $lng2 = $lng;
-        $lat2 = $lat;
+    $lng2 = $lng;
+    $lat2 = $lat;
 //    $earthRadius = 6367000; //approximate radius of earth in meters
     $earthRadius = 6371000; //百度地图用的参数
     /*
@@ -167,15 +165,14 @@ function getDistance($coordinate1, $lng,$lat) {
     $stepTwo = 2 * asin(min(1, sqrt($stepOne)));
     $calculatedDistance = $earthRadius * $stepTwo;
 
-    $dis =  round($calculatedDistance);
-    if($dis<1000){
-        return $dis.'m';
-    }else{
-        return round($dis/1000,1).'km';
+    $dis = round($calculatedDistance);
+    if ($dis < 1000) {
+        return $dis . 'm';
+    } else {
+        return round($dis / 1000, 1) . 'km';
     }
 //     return round($calculatedDistance);
 }
-
 
 //仅适用于本项目对应数据库约会表start_time，end_time字段
 //用户将开始时间和结束时间合成页面需要的格式
@@ -183,7 +180,6 @@ function getFormateDT($startTime, $endTime) {
 
     $timestr = $startTime->year . "-" . $startTime->month . "-" . $startTime->day . " " . $startTime->hour . ":00~" . $endTime->hour . ":00";
     return $timestr;
-
 }
 
 //获取年月日
@@ -191,7 +187,6 @@ function getYMD($time) {
 
     $timestr = $time->month . "月" . $time->day;
     return $timestr;
-
 }
 
 //仅适用于本项目对应数据库约会表start_time，end_time字段
@@ -200,7 +195,6 @@ function getHIS($startTime, $endTime) {
 
     $timestr = $startTime->hour . ":00~" . $endTime->hour . ":00";
     return $timestr;
-
 }
 
 //根据出生日期计算年龄
@@ -208,9 +202,7 @@ function getAge($birthday) {
 
     $currentday = new Date();
     return ($currentday->year - $birthday->year);
-
 }
-
 
 /**
  * //根据开始时间，结束时间，单价计算总价和付费百分比计算价格
@@ -223,7 +215,6 @@ function getAge($birthday) {
 function getCost($start_time, $end_time, $price, $percent = 1.0) {
 
     return ($end_time->hour - $start_time->hour) * $price * $percent;
-
 }
 
 /**
@@ -236,3 +227,27 @@ function randomFloat($min = 0, $max = 1) {
     return $min + mt_rand() / mt_getrandmax() * ($max - $min);
 }
 
+/**
+ * 对重要信息的数据库日志记录，例如订单漏单
+ * @param string $flag 
+ * @param string $msg
+ * @param string $data
+ */
+function dblog($flag, $msg, $data = null) {
+    $LogTable = \Cake\ORM\TableRegistry::get('Log');
+
+    $log = $LogTable->newEntity();
+    if ($data) {
+        $log->data = var_export($data, true);
+    }
+    $log = $LogTable->patchEntity($log, [
+        'flag' => $flag,
+        'msg' => $msg
+    ]);
+    try {
+        $LogTable->save($log);
+    } catch (\Exception $exc) {
+        Cake\Log\Log::error('devlog',$log->errors());
+        Cake\Log\Log::error('devlog',$exc->getTraceAsString());
+    }
+}
