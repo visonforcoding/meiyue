@@ -6,74 +6,100 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 <?php $this->start('static') ?>
 <script src="/mobile/js/mustache.min.js"></script>
 <script id="date-list-tpl" type="text/html">
-    {{#datas}}
-    <div class="date_detail_place inner {{^is_first}}mt20{{/is_first}}"
-         onclick="window.location.href = '/date-order/join/{{id}}'">
-        <h3 class="title"><i class="itemsname color_y">[{{user_skill.skill.name}}]</i> {{description}}</h3>
-        <div class="place_pic">
-								<span class="place">
-									<img src="/mobile/images/date_place.jpg"/>
-								</span>
-            <div class="place_info">
-                <h3 class="userinfo">{{user.nick}} <span>{{user.age}}岁</span> <em class="price color_y fr"><i
-                            class="lagernum">{{user_skill.cost.money}}</i>元/约会金</em>
-                </h3>
-                <h3 class="otherinfo">
-                    <time class="color_gray"><i class="iconfont">&#xe622;</i> {{time}}</time>
-                    <address class="color_gray"><i class="iconfont">&#xe623;</i>{{site}}</address>
-                </h3>
-            </div>
+{{#datas}}
+<div class="date_detail_place inner {{^is_first}}mt20{{/is_first}}"
+     onclick="window.location.href = '/date-order/join/{{id}}'">
+    <h3 class="title"><i class="itemsname color_y">[{{user_skill.skill.name}}]</i> {{description}}</h3>
+    <div class="place_pic">
+                            <span class="place">
+                                <img src="/mobile/images/date_place.jpg"/>
+                            </span>
+        <div class="place_info">
+            <h3 class="userinfo">{{user.nick}} <span>{{user.age}}岁</span> <em class="price color_y fr"><i
+                        class="lagernum">{{user_skill.cost.money}}</i>元/约会金</em>
+            </h3>
+            <h3 class="otherinfo">
+                <time class="color_gray"><i class="iconfont">&#xe622;</i> {{time}}</time>
+                <address class="color_gray"><i class="iconfont">&#xe623;</i>{{site}}</address>
+            </h3>
         </div>
     </div>
-    {{/datas}}
+</div>
+{{/datas}}
 </script>
 
 <script id="activity-list-tpl" type="text/html">
-    {{#datas}}
-    <div class="items">
-        <div class="items_pic">
-            <img src="/mobile/css/icon/party1.jpg"/>
-        </div>
-        <div class="items_con">
-            <h3 class="items_title">{{title}}</h3>
-            <div class="items_time flex flex_justify mt20">
-                <div>{{ad}}</div>
-                <div>
-                    <i class="iconfont ico">&#xe64b;</i>
-                    {{time}}
-                </div>
-            </div>
-        </div>
-        <div class="items_adress flex flex_justify">
-            <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
-            <div class="button btn_dark" onclick="window.location.href='/activity/view/{{id}}'">
-                我要报名
+{{#datas}}
+<div class="items">
+    <div class="items_pic">
+        <img src="/mobile/css/icon/party1.jpg"/>
+    </div>
+    <div class="items_con">
+        <h3 class="items_title">{{title}}</h3>
+        <div class="items_time flex flex_justify mt20">
+            <div>{{ad}}</div>
+            <div>
+                <i class="iconfont ico">&#xe64b;</i>
+                {{time}}
             </div>
         </div>
     </div>
-    {{/datas}}
+    <div class="items_adress flex flex_justify">
+        <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
+        <div class="button btn_dark" onclick="window.location.href='/activity/view/{{id}}'">
+            我要报名
+        </div>
+    </div>
+</div>
+{{/datas}}
 </script>
 
 <script id="top-list-tpl" type="text/html">
-    {{#datas}}
-    <li class="flex flex_justify">
+{{#datas}}
+<li class="flex flex_justify">
+    <div class="flex">
+        <span class="place silver">{{index}}</span>
+        <div class="place_info">
+            <span class="avatar"><img src="/mobile/images/avatar.jpg"></span>
+            <h3>
+                <span class="place_name"><i class="name">{{user.nick}}</i> <i class="vip">VIP 5</i><i
+                        class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
+                <span class="place_number color_gray"><em class="color_y"><i
+                            class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
+                            本周魅力值：<i class="color_y">{{total}}</i>
+                        </span>
+            </h3>
+        </div>
+    </div>
+    <span class="button btn_dark">支持她</span>
+</li>
+{{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
+{{/datas}}
+</script>
+
+
+<script id="rich-list-tpl" type="text/html">
+{{#datas}}
+<li>
+    <div class="voted_con flex flex_justify">
         <div class="flex">
-            <span class="place silver">{{index}}</span>
-            <div class="place_info">
-                <span class="avatar"><img src="/mobile/images/avatar.jpg"></span>
+            <span class="voted_place silver">{{index}}</span>
+            <div class="voted_place_info">
+                <span class="avatar"><img src="{{user.avatar}}"/></span>
                 <h3>
-                                            <span class="place_name"><i class="name">{{user.nick}}</i> <i class="vip">VIP 5</i><i
-                                                    class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
-                                            <span class="place_number color_gray"><em class="color_y"><i
-                                                        class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
-														本周魅力值：<i class="color_y">{{total}}</i>
-													</span>
+                    <span class="voted_name">{{user.nick}}</span>
+                    <span class="voted_number color_gray">已消费：{{total}}美币</span>
                 </h3>
             </div>
         </div>
-        <span class="button btn_dark">支持她</span>
-    </li>
-    {{/datas}}
+        <div>
+            <div data-id="{{user.id}}" class="likeIt alignright"><i class='iconfont'>&#xe61e;</i></div>
+            <div class="alignright"><i class='lagernum color_active'>{{total}}</i></div>
+        </div>
+    </div>
+</li>
+{{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
+{{/datas}}
 </script>
 
 <?php $this->end('static') ?>
@@ -112,12 +138,15 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                     <img src="/mobile/images/cover.jpg" alt=""/>
                     <a href="#this" class="more"><img src="/mobile/images/more.png"/></a>
                 </div>
+                <?php if($user->gender == 2): ?>
                 <div class="invite">
                     <a href="#this" class="btn btn_t_border">邀请好友支持我</a>
                 </div>
+                <?php else: ?>
                 <div class="cover_bottom_header mt20">
                     <img src="/mobile/images/tp.jpg"/>
                 </div>
+                <?php endif; ?>
                 <div class="rank_list">
                     <ul class="rank_header">
                         <li class="top-tab current" act="top_week"><span>周榜</span></li>
@@ -268,8 +297,8 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             month_tab: 2,
             rich_tab: 3,
             cur_tab: 1,
-            tabDataTpl: ['', '#top-list-tpl', '#top-list-tpl', '#top-list-tpl'],
-            tab_action: ['/activity/get-top-list/week', '/activity/get-top-list/month', '/index/get-rich-list/1'],   //请求url
+            tabDataTpl: ['', '#top-list-tpl', '#top-list-tpl', '#rich-list-tpl'],
+            tab_action: ['/activity/get-top-list/week', '/activity/get-top-list/month', '/activity/get-rich-list'],   //请求url
             container_id: '#top-list',
         };
         $.extend(this, this.opt, o);
@@ -289,10 +318,13 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 });
                 $(this).addClass('current');
                 if ($(this).attr('act') == 'top_week') {
+                    obj.cur_tab = obj.week_tab;
                     obj.loadDataWithoutPage(obj.tab_action[0]);
                 } else if ($(this).attr('act') == 'top_month') {
+                    obj.cur_tab = obj.month_tab;
                     obj.loadDataWithoutPage(obj.tab_action[1]);
                 } else if ($(this).attr('act') == 'rich_list') {
+                    obj.cur_tab = obj.rich_tab;
                     obj.loadDataWithoutPage(obj.tab_action[2]);
                 }
 
@@ -301,6 +333,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
         loadDataWithoutPage: function (action) {
             var obj = this;
             var template = $(this.tabDataTpl[this.cur_tab]).html();
+            console.log(this.cur_tab);
             Mustache.parse(template);   // optional, speeds up future uses
             $.util.showPreloader('加载中...');
             $.ajax({

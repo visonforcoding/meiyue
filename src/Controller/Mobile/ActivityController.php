@@ -428,15 +428,67 @@ class ActivityController extends AppController
                 ->map(function($row) use(&$i) {
                     $row['user']['age'] = getAge($row['user']['birthday']);
                     $row['index'] = $i;
+                    $row['ishead'] = false;
                     $i++;
                     return $row;
                 });
-
             $tops = $query->toArray();
-            return $this->Util->ajaxReturn(['datas'=>$tops, 'status' => true]);
+            $sortops = Array();
+            $mytop = null;
+            //如果是女性，需要获取其排名
+            if($this->user->gender == 2) {
+                $level = '';
+                foreach($tops as $top) {
+                    if($top->user->id == $this->user->id) {
+                        $mytop = clone $top;
+                        $mytop->ishead = true;
+                        $sortops[] = $mytop;
+                    }
+                }
+            }
+            $sortops = array_merge($sortops, $tops);
+            return $this->Util->ajaxReturn(['datas'=>$sortops,'status' => true]);
         } catch(Exception $e) {
             return $this->Util->ajaxReturn(false, '服务器大姨妈啦~~');
         }
 
+    }
+
+
+    /**
+     * 活动-头牌-土豪榜
+     */
+    public function getRichList()
+    {
+
+        try {
+            $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+            $i = 1;
+            $query = $FlowTable->find()
+                ->contain([
+                    'User'=>function($q){
+                        return $q->select(['id','avatar','nick','phone','gender', 'birthday'])->where(['gender'=>1]);
+                    },
+                ])
+                ->select(['user_id','total'=>'sum(amount)'])
+                ->where(['type'=>4])
+                ->group('user_id')
+                ->orderDesc('total')
+                ->map(function($row) use(&$i) {
+                    $row['user']['age'] = getAge($row['user']['birthday']);
+                    $row['index'] = $i;
+                    if($i == 1) {
+                        $row['ishead'] = true;
+                    } else {
+                        $row['ishead'] = false;
+                    }
+                    $i++;
+                    return $row;
+                });
+            $richs = $query->toArray();
+            return $this->Util->ajaxReturn(['datas'=>$richs,'status' => true]);
+        } catch(Exception $e) {
+            return $this->Util->ajaxReturn(false, '服务器大姨妈啦~~');
+        }
     }
 }
