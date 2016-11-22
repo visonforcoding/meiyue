@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div>
-                <div data-id="{{user.id}}" class="alignright likeIt"><i class='iconfont'>&#xe61e;</i></div>
+                <div data-id="{{user.id}}" class="alignright likeIt"><i class='iconfont commico'>&#xe61f;</i></div>
                 <div class="alignright"><i class='lagernum color_active'>{{total}}</i></div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                 <span class="coast color_friends">已消费：<?= $top3[0]->total ?></span>
             </div>
             <div class="rich_first_right">
-                <div data-id="<?= $top3[0]->user->id ?>" class="first_r_info beauty likeIt">魅力值 <i class='iconfont'>&#xe61e;</i></div>
+                <div data-id="<?= $top3[0]->user->id ?>" class="first_r_info beauty likeIt">魅力值 <i class='iconfont commico'></i></div>
                 <span class="color_active lagernum"><?= $top3[0]->total ?></span>
             </div>
         </div>
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                             <div>
-                                <div data-id="<?= $top->user->id ?>" class="likeIt alignright"><i class='iconfont'>&#xe61e;</i></div>
+                                <div data-id="<?= $top->user->id ?>" class="likeIt alignright"><i class='iconfont commico'></i></div>
                                 <div class="alignright"><i class='lagernum color_active'><?= $top->total ?></i></div>
                             </div>
                         </div>
@@ -121,7 +121,7 @@ function followIt(id, $obj) {
         url: '/user/follow',
         data: {id: id},
         func: function (res) {
-            $obj.find('i').toggleClass('color_active');
+            $obj.find('i').toggleClass('activeico');
             $.util.alert(res.msg);
         }
     })
