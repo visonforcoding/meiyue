@@ -369,3 +369,16 @@ ALTER TABLE `lm_user`
 	ADD COLUMN `wx_ishow` TINYINT NOT NULL DEFAULT '1' COMMENT '微信是否显示: 1#显示 2#不显示' AFTER `device`,
 	DROP COLUMN `wx_ishow`;
 SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='meiyue';
+
+##20161122
+CREATE TABLE `lm_gift` (
+	`id` INT(11) NOT NULL,
+	`price` DOUBLE NOT NULL DEFAULT '0' COMMENT '礼物价格',
+	`name` VARCHAR(50) NULL DEFAULT NULL COMMENT '礼物名称',
+	`pic` VARCHAR(50) NOT NULL COMMENT '礼物图片',
+	`remark` VARCHAR(255) NULL DEFAULT NULL COMMENT '备注说明',
+	PRIMARY KEY (`id`)
+)
+COMMENT='礼物表'
+ENGINE=InnoDB
+;
