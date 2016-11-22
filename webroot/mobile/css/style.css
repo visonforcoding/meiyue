@@ -536,7 +536,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .voted_list li .title .r_con{font-size: 12px;}
 .voted_list .voted_place{background: url(icon/tou.png) no-repeat center center;background-size:contain;display: block;width:.6rem;height:.68rem;text-align: center;line-height: .62rem;font-size: 18px;color:#666;font-weight: bold;}
 .voted_list .avatar{width:.86rem;height:.86rem;display:block;position: absolute;border-radius: 50%;overflow: hidden;}
-.voted_list .avatar img{width:100%;height:auto;display: block;}
+.voted_list .avatar img{width:100%;height:100%;display: block;}
 .voted_list .voted_con{padding:.2rem .3rem;}
 .voted_list .voted_place_info{height:.86rem;margin-right:.2rem;}
 .voted_list .voted_place_info h3{padding-left:1.1rem;padding-top:.1rem;}
@@ -635,7 +635,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .rich_list_first  .first_info{margin-bottom:.2rem;overflow: hidden;position:relative;width:3.35rem;height:2.95rem;}
 .rich_list_first  .first_info .first_info_bg{background: url(icon/first.png) no-repeat left top;background-size:contain;width:3.35rem;height:2.95rem;position: absolute;}
 .rich_list_first  .first_info .first_info_img{width:2.25rem;height:2.25rem;overflow: hidden;border-radius: 50%;position: absolute;top:.32rem;left:.6rem;}
-.rich_list_first  .first_info .first_info_img img{width:100%;height:auto;display: block;}
+.rich_list_first  .first_info .first_info_img img{width:100%;height:100%;display: block;}
 .rich_list_first .coast{font-size:12px;text-indent: .88rem;display: block;}
 .rich_list_first .beauty{color:#826439;font-size:15px;margin-bottom:.2rem;}
 .rich_list_first .rich_first_right{text-align: right;width:1.8rem;padding-bottom:1.4rem;}

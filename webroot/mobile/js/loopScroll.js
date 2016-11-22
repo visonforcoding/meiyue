@@ -200,9 +200,6 @@ $.extend(scroll.prototype, {
 
 // 入口函数  new scroll(opt);
 
-
-
-
 //var aa = new simpleScroll({moveDom:$('#outerUL'), viewDom:$('#outer')});
 
 var simpleScroll = function(o) {
