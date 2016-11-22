@@ -404,6 +404,7 @@ class ActivityController extends AppController
 
         try {
             $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+            $limit = 10;
             $where = Array(
                 'income' => 1
             );
@@ -427,6 +428,7 @@ class ActivityController extends AppController
                 ->where($where)
                 ->group('user_id')
                 ->orderDesc('total')
+                ->limit($limit)
                 ->map(function($row) use(&$i) {
                     $row['user']['age'] = getAge($row['user']['birthday']);
                     $row['index'] = $i;
@@ -436,23 +438,69 @@ class ActivityController extends AppController
                 });
             $tops = $query->toArray();
             $sortops = Array();
-            $mytop = null;
-            //如果是女性，需要获取其排名
             if($this->user->gender == 2) {
-                $level = '';
-                foreach($tops as $top) {
-                    if($top->user->id == $this->user->id) {
-                        $mytop = clone $top;
-                        $mytop->ishead = true;
-                        $sortops[] = $mytop;
-                    }
-                }
+                $sortops[] = $this->getMyTop($type);
             }
+
             $sortops = array_merge($sortops, $tops);
             return $this->Util->ajaxReturn(['datas'=>$sortops,'status' => true]);
         } catch(Exception $e) {
             return $this->Util->ajaxReturn(false, '服务器大姨妈啦~~');
         }
+
+    }
+
+
+    /**
+     * 获取我的排名对象
+     * @param string $type
+     * @return mixed|null
+     */
+    protected function getMyTop($type = 'week') {
+
+        $mytop = null;
+        //获取我的排名
+        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+        $query = $FlowTable->find();
+        $user = $this->user;
+        $query->contain(['User' => function($q) use($user) {
+            return $q->select(['id','avatar','nick','phone','gender','birthday'])->where(['User.id' => $user->id]);
+        }])
+            ->select(['total' => 'sum(amount)'])
+            ->where(['income' => 1])
+            ->map(function($row) {
+                $row['user']['age'] = getAge($row['user']['birthday']);
+                $row['ishead'] = false;
+                return $row;
+            });
+        $mytop = $query->first();
+        $mytop->user->age = getAge($mytop->user->birthday);
+        $mytop->ishead = true;
+
+        //获取我的排名对象
+        $where = Array(
+            'income' => 1
+        );
+        if('week' == $type) {
+            $where['Flow.create_time >='] = new Time('last sunday');
+        } else if('month' == $type) {
+            $da = new Time();
+            $where['Flow.create_time >='] = new Time(new Time($da->year . '-' . $da->month . '-' . '01 00:00:00'));
+        }
+        $iquery = $FlowTable->find('list')
+            ->contain([
+                'User'=>function($q) use($mytop) {
+                    return $q->where(['gender'=>2, 'User.id !=' => $mytop->user->id]);
+                },
+            ])
+            ->select(['total' => 'sum(amount)'])
+            ->where($where)
+            ->group('Flow.user_id')
+            ->having(['total >= ' => $mytop->total]);
+
+        //计算排名
+        $mytop->index = $iquery->count() + 1;
+        return $mytop;
 
     }
 
