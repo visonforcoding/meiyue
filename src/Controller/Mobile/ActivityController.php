@@ -49,7 +49,6 @@ class ActivityController extends AppController
      * @return \Cake\Network\Response|null
      */
     public function getAllDatesInPage($page) {
-
         $limit = 10;
         $datas = $this->Activity->find("all")->where(['status' => 1, 'Activity.start_time >' => new Time()]);
         $datas->limit($limit);

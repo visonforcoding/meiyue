@@ -1,18 +1,13 @@
 <?php
-
 namespace App\Shell;
 
 use Cake\Console\Shell;
-// Your shell script
-use Ratchet\WebSocket\WsServer;
-use Ratchet\Http\HttpServer;
-use Ratchet\Server\IoServer;
-use App\Pack\Chat;
 
 /**
- * Websocket shell command.
+ * Queuesadilla shell command.
  */
-class WebsocketShell extends Shell {
+class QueuesadillaShell extends Shell
+{
 
     /**
      * Manage the available sub-commands along with their arguments and help
@@ -21,7 +16,8 @@ class WebsocketShell extends Shell {
      *
      * @return \Cake\Console\ConsoleOptionParser
      */
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
 
         return $parser;
@@ -32,17 +28,8 @@ class WebsocketShell extends Shell {
      *
      * @return bool|int Success or error code.
      */
-    public function main() {
+    public function main() 
+    {
         $this->out($this->OptionParser->help());
     }
-
-    public function run() {
-        $ws = new WsServer(new Chat);
-        $ws->disableVersion(0); // old, bad, protocol version
-        // Make sure you're running this as root
-        $server = IoServer::factory(new HttpServer($ws),8088);
-        $server->run();
-    }
-    
-
 }
