@@ -20,7 +20,7 @@ class ApiController extends AppController {
 
     protected $noAcl = [
         'upload', 'wxtoken', 'ckregister', 'recordphone', 'saveuserbasicpic',
-        'saveuserbasicvideo', 'getmapusers'
+        'saveuserbasicvideo', 'getmapusers','gettoken'
     ];
 
     public function initialize() {
@@ -146,7 +146,7 @@ class ApiController extends AppController {
             $response['status'] = true;
             $response['msg'] = $res['msg'];
             $response['path'] = $res['info'][0]['path'];
-            $response['urlpath'] = $this->Util->getServerDomain().$res['info'][0]['path'];
+            $response['urlpath'] = $this->Util->getServerDomain() . $res['info'][0]['path'];
         } else {// 上传成功 获取上传文件信息
             $response['status'] = false;
             $response['msg'] = $res['msg'];
@@ -313,10 +313,10 @@ class ApiController extends AppController {
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $users = $UserTable->find()->select(['id', 'avatar', 'login_coord_lng', 'login_coord_lat'])
                 ->where(["getDistance($lng,$lat,login_coord_lng,login_coord_lat) <=" => 1000])
-                ->where(['gender'=>2])
+                ->where(['gender' => 2])
                 ->limit(10)->formatResults(function($items) {
                     return $items->map(function($item) {
-                                $item['avatar'] = 'http://m-my.smartlemon.cn/' . createImg($item['avatar']) . 
+                                $item['avatar'] = 'http://m-my.smartlemon.cn/' . createImg($item['avatar']) .
                                         '?w=184&h=184&fit=stretch';
                                 return $item;
                             });
@@ -331,19 +331,59 @@ class ApiController extends AppController {
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $users = $UserTable->find()->select(['id', 'avatar', 'login_coord_lng', 'login_coord_lat'])
 //                ->where(["getDistance($lng,$lat,login_coord_lng,login_coord_lat) <=" => 1000])
-                ->where(['gender'=>2])
-                ->limit(10)->formatResults(function($items)use($lng,$lat) {
-                    return $items->map(function($item)use($lng,$lat) {
-                                $item['id'] = mt_rand(1,100);
-                                $item['avatar'] = 'http://m-my.smartlemon.cn' . createImg($item['avatar']) . 
+                ->where(['gender' => 2])
+                ->limit(10)->formatResults(function($items)use($lng, $lat) {
+                    return $items->map(function($item)use($lng, $lat) {
+                                $item['id'] = mt_rand(1, 100);
+                                $item['avatar'] = 'http://m-my.smartlemon.cn' . createImg($item['avatar']) .
                                         '?w=184&h=184&fit=stretch';
-                                $item['login_coord_lng'] = $lng+  randomFloat()*0.1;
-                                $item['login_coord_lat'] = $lat+  randomFloat()*0.1;
+                                $item['login_coord_lng'] = $lng + randomFloat() * 0.1;
+                                $item['login_coord_lat'] = $lat + randomFloat() * 0.1;
                                 return $item;
                             });
                 })
                 ->toArray();
         $this->jsonResponse(['result' => $users]);
+    }
+
+    /**
+     * app登录
+     */
+    public function getToken() {
+        $u = $this->request->data('u');
+        $p = $this->request->data('p');
+        $lng = $this->request->data('lng');
+        $lat = $this->request->data('lat');
+        if (!$u || !$p) {
+            $this->jsonResponse(false, '缺少必要的参数');
+        }
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $user = $UserTable->find()->select(['id', 'user_token','gender','pwd'])
+                ->where(['phone' => $u, 'enabled' => 1, 'is_del' => 0])
+                ->first();
+        $pwd = $this->request->data('pwd');
+        if (!$user) {
+            $this->jsonResponse(['status' => false, 'msg' => '该手机号未注册或被禁用']);
+        }
+        if (!(new \Cake\Auth\DefaultPasswordHasher)->check($p, $user->pwd)) {
+            $this->jsonResponse(false, '密码不正确');
+        } else {
+            $user_token = $user->user_token;
+            $data['login_time'] = date('Y-m-d H:i:s');
+            if ($lng&&$lat) {
+                $data['login_coord_lng'] = $lng;
+                $data['login_coord_lat'] = $lat;
+            }
+            $user = $UserTable->patchEntity($user, $data);
+            $UserTable->save($user);
+            $redirect_url = '/index/index';
+            if (($redirect_url == '/index/index' || $redirect_url == '/') && $user->gender == '2') {
+                //女性用户首页
+                $redirect_url = '/index/find-rich-list';
+            }
+            return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,
+                        'token_uin' => $user_token, 'msg' => '登入成功']);
+        }
     }
 
 }
