@@ -95,7 +95,7 @@
     <div class="up_identify_box bgff mt40">
         <div class="inner">
             <div class="title" onclick="(LEMON.sys.setSex('falame'))">
-                <h3 class="color_black">设置用户性别LEMON.sys.getSex('falame')</h3>
+                <h3 class="color_black">设置用户性别LEMON.sys.setSex('falame')</h3>
             </div>
         </div>
     </div>
@@ -104,6 +104,14 @@
         <div class="inner">
             <div class="title" onclick="(LEMON.event.login(cbfun))">
                 <h3 class="color_black">登录LEMON.event.login(cbfun)</h3>
+            </div>
+        </div>
+    </div>
+    <!--上传-->
+    <div class="up_identify_box bgff mt40">
+        <div class="inner">
+            <div class="title" onclick="(LEMON.sys.setTopRight('确定'))">
+                <h3 class="color_black">设置右上角文字 和onTopRight关联 LEMON.sys.setTopRight('确定')</h3>
             </div>
         </div>
     </div>
@@ -134,6 +142,9 @@
 
     function cbfun (p) {
         alert(p);
+    }
+    window.onTopRight = function () {
+        alert('window.onTopRight');
     }
 
 </script>
