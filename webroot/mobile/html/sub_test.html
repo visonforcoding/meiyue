@@ -25,9 +25,10 @@
 </html>
 
 <script>
-    LEMON.event.addBtn({'btnText':'发送','cb':'func'});
-    function func(){
-        alert('老子被APP点了');
+    LEMON.sys.setTopRight('确定')
+//    LEMON.event.addBtn({'btnText':'发送','cb':'func'});'
+    window.onTopRight = function(){
+        alert('被点击了');
     }
 </script>
 
