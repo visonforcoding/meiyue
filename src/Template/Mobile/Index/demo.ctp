@@ -19,7 +19,7 @@
                 </dl>
                 <dl class="Idcard">
                     <dt>
-                        <img src="/mobile/images/avatar.jpg" alt="" />
+                    <img src="/mobile/images/avatar.jpg" alt="" />
                     </dt>
                 </dl>
             </div>
@@ -60,8 +60,8 @@
             <div class="fact_identify">
                 <dl class="Idcard">
                     <dt id="up_video">
-                        <img src="/mobile/images/upimg.png" alt="" />
-                        <i class="iconfont playbtn">&#xe600;</i>
+                    <img src="/mobile/images/upimg.png" alt="" />
+                    <i class="iconfont playbtn">&#xe600;</i>
                     </dt>
                 </dl>
             </div>
@@ -107,7 +107,18 @@
             </div>
         </div>
     </div>
-    <!--上传-->
+
+
+    <div class="up_identify_box bgff mt40">
+        <div class="inner">
+            <a href="/mobile/html/sub_test.html">
+                <h3 class="color_black">设置右上角文字 和onTopRight关联</h3>
+                <h3 class="color_black">LEMON.sys.setTopRight('确定')</h3>
+            </a>
+        </div>
+    </div>
+
+<!--    上传
     <div class="up_identify_box bgff mt40">
         <div class="inner">
             <div class="upload_more_title" onclick="(LEMON.sys.setTopRight('确定'))">
@@ -115,10 +126,12 @@
                 <h3 class="color_black">LEMON.sys.setTopRight('确定')</h3>
             </div>
         </div>
-    </div>
+    </div>-->
+
 </div>
 <div style="height:62px;"></div>
 <a href="#this" id='submit' class="identify_footer_potion">提交</a>
+
 <!--<a href="#this" id='submit' class="identify_footer_potion">提交审核</a>-->
 <?= $this->start('script'); ?>
 <script>
@@ -127,21 +140,25 @@
     $.util.chooseVideo('up_video');
     //$.util.chooseVideo('up_video2');
 
-    $('#submit').on('tap',function(){
-        if($('#demoImg').data('max') === '0') LEMON.event.uploadPics({key:'demoImg', user_id:'3', param:'id:123,uid:456'});
-        if($('#demoImg2').data('max') === '0') LEMON.event.uploadPics({key:'demoImg2', user_id:'3', param:'{id:12322,uid:45644}'});
-        if($('#up_video').data('choosed')) LEMON.event.uploadVideo({key:'up_video', user_id:'3'});
-        if($('#up_video2').data('choosed')) LEMON.event.uploadVideo({key:'up_video2', user_id:'3'});
+    $('#submit').on('tap', function () {
+        if ($('#demoImg').data('max') === '0')
+            LEMON.event.uploadPics({key: 'demoImg', user_id: '3', param: 'id:123,uid:456'});
+        if ($('#demoImg2').data('max') === '0')
+            LEMON.event.uploadPics({key: 'demoImg2', user_id: '3', param: '{id:12322,uid:45644}'});
+        if ($('#up_video').data('choosed'))
+            LEMON.event.uploadVideo({key: 'up_video', user_id: '3'});
+        if ($('#up_video2').data('choosed'))
+            LEMON.event.uploadVideo({key: 'up_video2', user_id: '3'});
     })
 
     $('#demoImg2').on('click', function () {
-        LEMON.event.uploadPic('{"dir":"user/avatar"}', function(res){
+        LEMON.event.uploadPic('{"dir":"user/avatar"}', function (res) {
             alert(res);
 
         })
     })
 
-    function cbfun (p) {
+    function cbfun(p) {
         alert(p);
     }
     window.onTopRight = function () {

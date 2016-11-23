@@ -90,7 +90,7 @@
                 </a>
             </li>
             <li>
-                <a href="#this"  class="home_items">
+                <a href="/userc/my-tracle"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe610;</i><span class="itemsname">我的动态</span></div>
                     <div class="home_list_r_info">
 
