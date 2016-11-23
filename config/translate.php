@@ -125,6 +125,7 @@ function getFlowType($index = null) {
         '11' => '接受约单后6小时未支付尾款',
         '12' => '24小时订单自动完成',
         '13' => '派对报名费',
+        '14' => '送礼物费用'
     ];
     if ($index) {
         return $flowType[$index];

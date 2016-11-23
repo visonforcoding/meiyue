@@ -14,6 +14,7 @@
         <script src="/mobile/js/view.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript" src="/mobile/js/util.js"></script>
         <script type="text/javascript" src="/mobile/js/jsapi.js"></script>
+        <script src="/mobile/js/loopScroll.js" type="text/javascript" charset="utf-8"></script>
         <?= $this->fetch('css') ?>
         <?= $this->fetch('static') ?>
         <script id="hideHeaderTpl" type="text/html">
