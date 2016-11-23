@@ -584,4 +584,21 @@ class UsercController extends AppController {
         $this->render('/Mobile/User/edit_basic');
 
     }
+    
+    /**
+     * 我的动态
+     */
+    public function myTracle(){
+        
+    }
+    
+    /**
+     * 发布图片动态
+     */
+    public function traclePic(){
+        $this->set([
+            'pageTitle'=>'发布动态',
+            'user'=>  $this->user
+        ]);
+    }
 }
