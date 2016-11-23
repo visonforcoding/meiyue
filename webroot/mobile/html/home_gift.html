@@ -185,12 +185,20 @@
 					</li>
 				</ul>
 				<div class="yd" id="imgTab">
-					<span class="current"></span>
+					<span class="cur"></span>
 					<span></span>
 					<span></span>
 					<span></span>
 				</div>
 			</div>
 		</div>
+		  <script>
+                var loop = $.util.loopImg(
+                	$('#imgBox'),
+                	$('#imgBox li'),
+                	$('#imgTab span'),
+                	$('.allgift')
+                	);
+            </script>
 	</body>
 </html>
