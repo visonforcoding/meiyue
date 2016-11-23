@@ -948,7 +948,7 @@ color:#999;padding:.1rem;}
 .allgift .bottomtext .ico{display: inline-block;width:.52rem;height:.52rem;overflow: hidden;vertical-align: middle;}
 .allgift .yd{width:100%;display: -webkit-box;display:box;-webkit-box-align: center;-webkit-box-pack: center;height:60px;}
 .allgift .yd span{width:8px;height:8px;border-radius: 50%;background: #efefef;display: block;margin-right:.1rem;}
-.allgift .yd span.current{background: #9ba3ac;}
+.allgift .yd span.cur{background: #9ba3ac;}
 /*滑块*/
 .range {position: relative;width: 5.4rem;height: 5px;font-size: 0;line-height: 0;border-radius: 10px;background: #383024;}
 .meaBox {position: absolute;left:0;right:0;height: 5px;background: #EAB96A;top:0;bottom:0;margin:auto;}
