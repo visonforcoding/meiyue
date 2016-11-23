@@ -33,12 +33,10 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         LEMON.share[type](window.shareConfig, function () {
         });
     };
-    window.onBottom = window.onBottom || function () {
-    };
-    window.onBackView = window.onBackView || function () {
-    };
-    window.onActiveView = window.onActiveView || function () {
-    };
+    window.onBottom = window.onBottom || function () {};
+    window.onTopRight = window.onTopRight || function () {};
+    window.onBackView = window.onBackView || function () {};
+    window.onActiveView = window.onActiveView || function () {};
     var LEMON = {};
     window.__isAPP = LEMON.isAPP = window.JSApi || navigator.userAgent.toLowerCase().indexOf("smartlemon") >= 0;  //判断页面是否在app的环境中
 
@@ -90,6 +88,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         "sys.mediaPlay", //开始播放多媒体
         "sys.back", //设置返回链接
         "sys.clearWebCatch",
+        "sys.setTopRight", //设置右上角文字&功能
         "sys.setSex",
         "sys.getSex",
         "sys.logout",
@@ -227,6 +226,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                     });
                     break;
                 case "sys.setSex":
+                case "sys.setTopRight":
                 case "event.invite":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {str: arguments[0]}, '');
