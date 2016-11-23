@@ -16,7 +16,7 @@
                                 <span><?=$user->nick?><i class="iconfont">&#xe628;</i></span>
                                 <span class="flag price">><?=$this->Number->format($user->money)?>美币</span>
                             </h3>
-                            <span class="cover_r_ico">
+                            <span class="cover_r_ico" onclick="window.location.href='/userc/edit-info'">
                                 <i class="iconfont">&#xe605;</i>
                             </span>
                         </a>

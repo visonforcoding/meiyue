@@ -101,8 +101,10 @@
 
     });
 
+
     function cancel() {
 
+        <?php if($regist_item): ?>
         if(confirm("取消将扣除报名费<?= $regist_item['punish_percent'] ?>%(即<?= $regist_item['punish'] ?>美币）作为惩罚，确定取消吗？")) {
             $.ajax({
                 url: '/activity/cancel/<?= $regist_item['id']; ?>',
@@ -120,6 +122,7 @@
                 }
             })
         }
+        <?php endif; ?>
 
     }
 

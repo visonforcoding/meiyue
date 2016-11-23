@@ -20,7 +20,7 @@ class ActivityController extends AppController
      */
     public function index($user_id = null)
     {
-        if($this->request->is("post")) {
+        /*if($this->request->is("post")) {
 
             $datas = $this->Activity->find("all")->where(['status' => 1, 'Activity.start_time >' => new Time()])
                 ->map(function($row) {
@@ -39,7 +39,7 @@ class ActivityController extends AppController
             }
             return $this->Util->ajaxReturn(['datas' => $datas->toArray(), 'status' => true]);
 
-        }
+        }*/
         $this->set(["user" => $this->user, 'pageTitle' => '美约-活动']);
     }
 
@@ -117,7 +117,7 @@ class ActivityController extends AppController
         }
 
 
-        $this->set(['botBtSts' => $botBtSts, 'user' => $this->user, 'activity' => $activity, 'pageTitle' => '美约-活动详情']);
+        $this->set(['regist_item' => $actregistrations, 'botBtSts' => $botBtSts, 'user' => $this->user, 'activity' => $activity, 'pageTitle' => '美约-活动详情']);
     }
 
 
@@ -315,7 +315,7 @@ class ActivityController extends AppController
             $flow = $FlowTable->newEntity([
                 'user_id'=>0,
                 'buyer_id'=>  $this->user->id,
-                'type'=>$FlowTable::TYPE_ACTREGIST,
+                'type'=>13,
                 'type_msg'=>'报名派对支出',
                 'income'=>2,
                 'amount'=>$price * $num,
@@ -403,6 +403,7 @@ class ActivityController extends AppController
 
         try {
             $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+            $user = $this->user;
             $limit = 10;
             $where = Array(
                 'income' => 1
@@ -428,18 +429,19 @@ class ActivityController extends AppController
                 ->group('user_id')
                 ->orderDesc('total')
                 ->limit($limit)
-                ->map(function($row) use(&$i) {
+                ->map(function($row) use(&$i, $user) {
                     $row['user']['age'] = getAge($row['user']['birthday']);
                     $row['index'] = $i;
                     $row['ishead'] = false;
+                    $row['ismale'] = ($user->gender == 1)?true:false;
                     $i++;
                     return $row;
                 });
             $tops = $query->toArray();
             $sortops = Array();
 
-            if($this->user) {
-                if($this->user->gender == 2) {
+            if($user) {
+                if($user->gender == 2) {
                     $sortops[] = $this->getMyTop($type);
                 }
             }

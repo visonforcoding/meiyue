@@ -71,7 +71,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             </h3>
         </div>
     </div>
-    <span class="button btn_dark">支持她</span>
+    {{#ismale}}<span class="button btn_dark" onclick="window.location.href='/gift/index/{{user.id}}'">支持她</span>{{/ismale}}
 </li>
 {{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
 {{/datas}}

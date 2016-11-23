@@ -17,7 +17,7 @@
                                 <span class="flag"><img src="/mobile/images/zui.png" alt="" /></span>
                             </h3>
                             <span class="cover_r_ico">
-                                <i class="iconfont">&#xe605;</i>
+                                <i class="iconfont" onclick="window.location.href='/userc/edit-info'">&#xe605;</i>
                             </span>
                         </a>
                     </li>
