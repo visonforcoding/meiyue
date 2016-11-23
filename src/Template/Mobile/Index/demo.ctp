@@ -111,7 +111,8 @@
     <div class="up_identify_box bgff mt40">
         <div class="inner">
             <div class="upload_more_title" onclick="(LEMON.sys.setTopRight('确定'))">
-                <p class="color_black">设置右上角文字 和onTopRight关联 <br/>LEMON.sys.setTopRight('确定')</p>
+                <h3 class="color_black">设置右上角文字 和onTopRight关联</h3>
+                <h3 class="color_black">LEMON.sys.setTopRight('确定')</h3>
             </div>
         </div>
     </div>
