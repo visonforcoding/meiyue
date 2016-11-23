@@ -254,6 +254,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                 case "event.changePic":
                 case "event.choosePic":
                 case "event.chooseVideo":
+                case "event.addBtn":
                     registerAPI(null, api, function () {
                         if(api == 'event.choosePic') window.lemonChoosePic = arguments[1]; //这里使用固定回调  android会一次选择 多次回调
                         JSApiInvoke(api, {param: arguments[0]}, apiCallback(arguments[1]));
