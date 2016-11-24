@@ -348,13 +348,27 @@ class ActivityController extends AppController
             }
 
             $activityTable = $this->Activity;
-            $transRes = $actregistrationTable->connection()->transactional(function()use($flow,$FlowTable,&$actregistration,$actregistrationTable,$activity,$activityTable,$user){
-                $UserTable = TableRegistry::get('User');
-                $saveActr = $actregistrationTable->save($actregistration);
-                $flow->relate_id = $actregistration['id'];
-                $saveAct = $activityTable->save($activity);
-                return $FlowTable->save($flow)&&$saveActr&&$saveAct&&$UserTable->save($user);
-            });
+            $transRes = $actregistrationTable
+                ->connection()
+                ->transactional(
+                    function() use (
+                        $flow,
+                        $FlowTable,
+                        &$actregistration,
+                        $actregistrationTable,
+                        $activity,
+                        $activityTable,
+                        $user
+                    ){
+                        $UserTable = TableRegistry::get('User');
+                        $saveActr = $actregistrationTable->save($actregistration);
+                        $flow->relate_id = $actregistration['id'];
+                        $saveAct = $activityTable->save($activity);
+                        return $FlowTable->save($flow)
+                                &&$saveActr
+                                &&$saveAct
+                                &&$UserTable->save($user);
+                    });
 
             if($transRes){
                 return $this->Util->ajaxReturn(true,'参加成功');
@@ -399,11 +413,13 @@ class ActivityController extends AppController
      */
     public function getTopList($type = 'week')
     {
-
         try {
             $this->loadComponent('Util');
             $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
-            $user = $this->user;
+            $user = null;
+            if($this->user) {
+                $user = $this->user;
+            }
             $limit = 10;
             $where = Array(
                 'income' => 1
@@ -413,7 +429,10 @@ class ActivityController extends AppController
                 $where['Flow.create_time >='] = new Time('last sunday');
             } else if('month' == $type) {
                 $da = new Time();
-                $where['Flow.create_time >='] = new Time(new Time($da->year . '-' . $da->month . '-' . '01 00:00:00'));
+                $where['Flow.create_time >='] =
+                    new Time(
+                        new Time($da->year . '-' . $da->month . '-' . '01 00:00:00')
+                    );
             }
 
             $i = 1;
@@ -433,7 +452,9 @@ class ActivityController extends AppController
                     $row['user']['age'] = getAge($row['user']['birthday']);
                     $row['index'] = $i;
                     $row['ishead'] = false;
-                    $row['ismale'] = ($user->gender == 1)?true:false;
+                    if($user) {
+                        $row['ismale'] = ($user->gender == 1)?true:false;
+                    }
                     $i++;
                     return $row;
                 });

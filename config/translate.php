@@ -125,7 +125,8 @@ function getFlowType($index = null) {
         '11' => '接受约单后6小时未支付尾款',
         '12' => '24小时订单自动完成',
         '13' => '派对报名费',
-        '14' => '送礼物费用'
+        '14' => '送礼物费用',
+        '15' => '用户充值'
     ];
     if ($index) {
         return $flowType[$index];
@@ -165,4 +166,33 @@ function getBaiduPOICF() {
         '政府机构'
     );
     return $cfs;
+}
+
+
+/**
+ * 获取套餐类型
+ * @param null $num
+ * @return array
+ */
+function getPackageType($num = null) {
+
+    $types = Array(
+        1 => 'VIP套餐',
+        2 => '充值套餐',
+        3 => '其他套餐'
+    );
+
+    if($num) {
+        return $types[$num];
+    }
+    return $types;
+}
+
+
+/**
+ * 返回表示无限的数字
+ * @return int
+ */
+function getEndlessNum() {
+    return -1;
 }

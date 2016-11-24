@@ -421,3 +421,64 @@ ENGINE=InnoDB
 AUTO_INCREMENT=5
 ;
 
+##20161124
+CREATE TABLE `lm_package` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`title` VARCHAR(50) NOT NULL DEFAULT '0' COMMENT '套餐名称',
+	`type` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '套餐类型：1#vip套餐 2#充值套餐 3#其他套餐',
+	`chat_num` INT(11) NOT NULL DEFAULT '0' COMMENT '美女聊天名额',
+	`browse_num` INT(11) NOT NULL DEFAULT '0' COMMENT '查看动态名额',
+	`vir_money` DOUBLE NOT NULL DEFAULT '0' COMMENT '美币数量',
+	`price` DOUBLE NOT NULL DEFAULT '0' COMMENT '价格',
+	`stock` INT(11) NOT NULL DEFAULT '0' COMMENT '库存',
+	`vali_time` INT(11) NULL DEFAULT '0' COMMENT '有效期（单位:天）：-1表示无限',
+	`create_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建日期',
+	`update_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改日期',
+	`show_order` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT '显示顺序',
+	`is_used` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '是否启用：1#启用 0#禁用',
+	PRIMARY KEY (`id`)
+)
+COMMENT='套餐表（包括vip、充值、其他等）'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=9
+;
+
+
+CREATE TABLE `lm_user_package` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`title` VARCHAR(50) NOT NULL DEFAULT '0' COMMENT '套餐名称',
+	`user_id` INT(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+	`package_id` INT(11) NOT NULL DEFAULT '0' COMMENT '套餐id',
+	`chat_num` INT(11) NOT NULL DEFAULT '0' COMMENT '美女聊天名额',
+	`rest_chat` INT(11) NOT NULL DEFAULT '0' COMMENT '剩余聊天名额',
+	`browse_num` INT(11) NOT NULL DEFAULT '0' COMMENT '查看动态名额',
+	`rest_browse` INT(11) NOT NULL DEFAULT '0' COMMENT '剩余查看动态名额',
+	`type` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '套餐类型：1#vip套餐 2#充值套餐 3#其他套餐',
+	`cost` DOUBLE NOT NULL DEFAULT '0' COMMENT '购买价格',
+	`vir_money` DOUBLE NOT NULL DEFAULT '0' COMMENT '美币面额',
+	`deathline` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '失效时间',
+	`create_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '购买时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='用户-套餐购买记录表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `lm_used_package` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL DEFAULT '0' COMMENT '使用者id',
+	`used_id` INT(11) NOT NULL DEFAULT '0' COMMENT '作用对象id',
+	`package_id` INT(11) NOT NULL DEFAULT '0' COMMENT '所购买的套餐id',
+	`type` INT(11) NOT NULL DEFAULT '0' COMMENT '消费类型：1#查看动态服务 2#聊天服务',
+	`vali_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '该消费有效期',
+	`create_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '使用日期',
+	PRIMARY KEY (`id`)
+)
+COMMENT='用户使用套餐情况表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
