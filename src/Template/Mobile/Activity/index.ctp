@@ -56,11 +56,13 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 
 <script id="top-list-tpl" type="text/html">
 {{#datas}}
-<li class="flex flex_justify">
+<li class="flex flex_justify" onclick="window.location.href='/index/homepage/{{user.id}}'">
     <div class="flex">
         <span class="place silver">{{index}}</span>
         <div class="place_info">
-            <span class="avatar"><img src="/mobile/images/avatar.jpg"></span>
+            <span class="avatar">
+                <img src="/mobile/images/avatar.jpg">
+            </span>
             <h3>
                 <span class="place_name"><i class="name">{{user.nick}}</i> <i class="vip">VIP 5</i><i
                         class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
@@ -71,7 +73,11 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             </h3>
         </div>
     </div>
-    {{#ismale}}<span class="button btn_dark" onclick="window.location.href='/gift/index/{{user.id}}'">支持她</span>{{/ismale}}
+    {{#ismale}}
+    <span class="button btn_dark" onclick="window.location.href='/gift/index/{{user.id}}';event.stopPropagation(); ">
+        支持她
+    </span>
+    {{/ismale}}
 </li>
 {{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
 {{/datas}}
@@ -93,7 +99,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             </div>
         </div>
         <div>
-            <div data-id="{{user.id}}" class="likeIt alignright"><i class='iconfont'>&#xe61e;</i></div>
+            <div data-id="{{buyer.id}}" class="likeIt alignright"><i class='iconfont commico {{#followed}}activeico{{/followed}}'></i></div>
             <div class="alignright"><i class='lagernum color_active'>{{total}}</i></div>
         </div>
     </div>
@@ -108,7 +114,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
     <div class="activity_list">
         <div class="date_list">
             <div class="date_list_header" id="imgTab">
-                <div id="tab-1" class="alldate cur"><span class="headertab">约会</span></div>
+                <div id="tab-1" class="alldate"><span class="headertab">约会</span></div>
                 |
                 <div id="tab-2" class="todate"><span class="headertab">派对</span></div>
                 |
@@ -119,7 +125,9 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             <!--活动-->
             <section>
                 <!-- 约会列表 -->
-                <div id="date_list"></div>
+                <div id="date_list">
+                    &nbsp;
+                </div>
             </section>
 
             <!--派对-->
@@ -130,6 +138,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 </div>
                 <div id="party_list" class="party_content">
                     <!-- 派对列表 -->
+                    &nbsp;
                 </div>
             </section>
             <!--头牌-->
@@ -153,8 +162,8 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                         <li class="top-tab" act="top_month"><span>月榜</span></li>
                         <li class="top-tab" act="rich_list"><span>土豪榜</span></li>
                     </ul>
-                    <div class="rank_con">
-                        <ul class="inner outerblock" id="top-list">
+                    <div class="rank_con rich_list">
+                        <ul class="inner outerblock voted_list" id="top-list">
                             <!-- 头牌列表 -->
                         </ul>
                     </div>
@@ -190,6 +199,14 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 
     $.extend(activity.prototype, {
         init: function () {
+            var curtr = '<?= isset($curtab)?$curtab:'date'; ?>';
+            if(curtr == 'date') {
+                this.cur_tab = 1;
+            } else if(curtr == 'party') {
+                this.cur_tab = 2;
+            } else if(curtr == 'top') {
+                this.cur_tab = 3;
+            }
             this.tabEvent();
             this.scroll();
         },
@@ -207,33 +224,34 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 autoTime: 0,
                 lockScrY: true,
                 //imgInitLazy: 1000,
-                index: 1,
+                index: obj.cur_tab,
                 viewDom: $('.activity_list'),
                 fun: function (index) {
                     index = parseInt(index);
-                    if (index != 3) {
-                        if (obj.cur_tab == index && !this.isInit) {
-                            return;
-                        }
-                        window.scrollTo(0, 0);
-                        this.isInit = false;
-                        obj.cur_tab = index;
-                        obj.tabInit(index);
-                    } else {
-                        if (!obj.top_obj) {
-                            obj.top_obj = new topPage();
-                            obj.top_obj.init();
-                        }
+                    //判断是否是在当前页，禁止本页触发tab切换事件
+                    if (obj.cur_tab == index && !this.isInit) {
+                        return;
                     }
+                    //更新cur_tab
+                    obj.cur_tab = index;
+                    window.scrollTo(0, 0);
+                    this.isInit = false;
+                    obj.tabInit(index);
                 }
             });
         },
         tabInit: function (index) {
             if (!this.tabInitLoad[index]) return;
-            this.tabInitLoad[index] = 0;
+            //this.tabInitLoad[index] = 0;
             //首次加载数据
-            this.asyLoadData(this.cur_tab);
-
+            if(index != this.tab_top) {
+                this.asyLoadData(this.cur_tab);
+            } else {
+                if (!this.top_obj) {
+                    this.top_obj = new topPage();
+                    this.top_obj.init();
+                }
+            }
         },
         scroll: function () {
             var obj = this;
@@ -249,15 +267,16 @@ $activity_action = '/activity/index/';  //定义派对请求地址
         },
 
         asyLoadData: function (curtab) {
-            if (this.tabLoadHold[curtab] || this.tabLoadEnd[curtab]) return;
-            this.tabLoadHold[curtab] = true;
+            if (this.tabLoadEnd[curtab]) return;
+            //if (this.tabLoadHold[curtab] || this.tabLoadEnd[curtab]) return;
+            //this.tabLoadHold[curtab] = true;
             $.util.showPreloader();
             var template = $(this.tabDataTpl[curtab]).html();
             var url = this.tabDataUrl[curtab] + this.tabPage[curtab];
             Mustache.parse(template);   // optional, speeds up future uses
             var obj = this;
             $.getJSON(url, function (data) {
-                obj.tabLoadHold[curtab] = false;
+                //obj.tabLoadHold[curtab] = false;
                 $.util.hidePreloader();
                 if (data.code === 200) {
                     var rendered = Mustache.render(template, data);
@@ -269,21 +288,27 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 
                     switch (curtab) {
                         case obj.tab_date:
-                            if (!obj.tabInitLoad[curtab]) {
+                            if (obj.tabInitLoad[curtab]) {
 
                             }
                             break;
                         case obj.tab_activity:
-                            if (!obj.tabInitLoad[curtab]) {
+                            if (obj.tabInitLoad[curtab]) {
                                 $('#party-coverimg').html("<img src='/mobile/css/icon/banner1.jpg'/>");
                             }
                             break;
                         case obj.tab_top:
-                            if (!obj.tabInitLoad[curtab]) {
+                            if (obj.tabInitLoad[curtab]) {
                             }
                             break;
                     }
-                    $(obj.listId[curtab]).append(rendered);
+
+                    if(obj.tabInitLoad[curtab]) {
+                        $(obj.listId[curtab]).html(rendered);
+                        obj.tabInitLoad[curtab] = 0;
+                    } else {
+                        $(obj.listId[curtab]).append(rendered);
+                    }
                 }
             });
         },
@@ -298,7 +323,11 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             rich_tab: 3,
             cur_tab: 1,
             tabDataTpl: ['', '#top-list-tpl', '#top-list-tpl', '#rich-list-tpl'],
-            tab_action: ['/activity/get-top-list/week', '/activity/get-top-list/month', '/activity/get-rich-list'],   //请求url
+            tab_action: [
+                '/activity/get-top-list/week',
+                '/activity/get-top-list/month',
+                '/activity/get-rich-list'
+            ],   //请求url
             container_id: '#top-list',
         };
         $.extend(this, this.opt, o);
@@ -341,7 +370,6 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 dataType: "json",
                 success: function (res) {
                     $.util.hidePreloader();
-                    console.log(res);
                     if (res.status) {
                         var rendered = Mustache.render(template, res);
                         $(obj.container_id).html(rendered);
@@ -354,5 +382,22 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 
     var activityobj = new activity();
     activityobj.init();
+
+
+    $(document).on('tap', '.likeIt', function () {
+        var user_id = $(this).data('id');
+        var $obj = $(this);
+        followIt(user_id,$obj);
+    });
+    function followIt(id, $obj) {
+        $.util.ajax({
+            url: '/user/follow',
+            data: {id: id},
+            func: function (res) {
+                $obj.find('i').toggleClass('activeico');
+                $.util.alert(res.msg);
+            }
+        })
+    }
 
 </script>

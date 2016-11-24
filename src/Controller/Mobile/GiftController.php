@@ -107,8 +107,7 @@ class GiftController extends AppController
                 });
 
             if($transRes) {
-                die();
-                //return $this->Util->ajaxReturn(true, '感谢您的支持');
+                return $this->Util->ajaxReturn(true, '感谢您的支持');
             }
             return $this->Util->ajaxReturn(false, '操作失败');
 

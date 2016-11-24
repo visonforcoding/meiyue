@@ -44,6 +44,14 @@ class UserTable extends Table {
             'foreignKey'=>'user_id',
             'targetForeignKey'=>'tag_id'
         ]);
+        $this->hasMany('Fans', [
+            'className' => 'UserFans',
+            'foreignKey' => 'following_id'
+        ]);
+        $this->hasMany('Follows', [
+            'className' => 'UserFans',
+            'foreignKey' => 'user_id'
+        ]);
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
