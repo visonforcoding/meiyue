@@ -1,9 +1,9 @@
 <header>
     <div class="homepage">
-        <div class="header">
+       <!--  <div class="header">
             <h1>我的</h1>
             <i class="iconfont install">&#xe661;</i>
-        </div>
+        </div> -->
         <div class="home_cover_info">
             <span class="avatar">
                 <img src="<?=  createImg($user->avatar).'?w=77'?>"/>
