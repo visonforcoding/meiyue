@@ -536,15 +536,17 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .voted_list li .title .r_con{font-size: 12px;}
 .voted_list .voted_place{background: url(icon/tou.png) no-repeat center center;background-size:contain;display: block;width:.6rem;height:.68rem;text-align: center;line-height: .62rem;font-size: 18px;color:#666;font-weight: bold;}
 .voted_list .avatar{width:.86rem;height:.86rem;display:block;position: absolute;border-radius: 50%;overflow: hidden;}
+.voted_l_info .voted_place{position: absolute;}
 .voted_list .avatar img{width:100%;height:100%;display: block;}
 .voted_list .voted_con{padding:.2rem .3rem;}
+.voted_l_info .voted_place_info{padding-left:.7rem;}
 .voted_list .voted_place_info{height:.86rem;margin-right:.2rem;}
-.voted_list .voted_place_info h3{padding-left:1.1rem;padding-top:.1rem;}
+.voted_list .voted_place_info h3{padding-left:1.1rem;/*padding-top:.1rem;*/}
 .voted_list .voted_place_info h3 span{display: block;}
 .voted_list .voted_name{color:#1a1713;font-weight: 800;}
 .voted_list .voted_number{font-size: 12px;margin-top:.12rem;}
 .voted_list .voted_number .iconfont{font-size: 14px;vertical-align: middle;}
-.voted_list .voted_con .button{}
+.voted_list .voted_con .button{font-size:13px;width:1.4rem;}
 .imgchange{font-size: 24px;position:absolute;bottom:0;right:0;color:rgba(0,0,0,.5);line-height: normal;}
 /*约会详情*/
 .find_date_detail .date_top_con .place{width:1.6rem;height:1.6rem;overflow:hidden;display: block;}
