@@ -417,4 +417,31 @@ class UserController extends AppController {
         }
     }
 
+
+    /**
+     * 评选
+     */
+    public function voted($id = null)
+    {
+        $this->loadComponent('Util');
+        $title = '我的评选';
+        $isme = true;
+        if($id) {
+            $title = '她的评选';
+            $isme = false;
+        } else {
+            $id = $this->user->id;
+        }
+        $wektop = $this->Util->getMyTop('week', $id);
+        $montop = $this->Util->getMyTop('month', $id);
+        $this->set([
+            'isme' => $isme,
+            'user' => $this->user,
+            'herid' => $id,
+            'wektop' => $wektop,
+            'montop' => $montop,
+            'pageTitle' => $title
+        ]);
+    }
+
 }

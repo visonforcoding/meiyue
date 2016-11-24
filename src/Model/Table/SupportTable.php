@@ -31,18 +31,6 @@ class SupportTable extends Table
         $this->table('lm_support');
         $this->primaryKey('id');
 
-        $this->belongsTo('Supporter', [
-            'className' => 'User',
-            'foreignKey' => 'supporter_id',
-            'joinType' => 'INNER'
-        ]);
-
-        $this->belongsTo('Supported', [
-            'className' => 'User',
-            'foreignKey' => 'supported_id',
-            'joinType' => 'INNER'
-        ]);
-
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
@@ -75,18 +63,4 @@ class SupportTable extends Table
         return $validator;
     }
 
-
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->existsIn(['supporter_id'], 'Supporter'));
-        $rules->add($rules->existsIn(['supported_id'], 'Supported'));
-        return $rules;
-    }
 }

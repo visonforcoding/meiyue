@@ -98,7 +98,7 @@
             </a>
         </li>
         <li>
-            <a class="items flex flex_justify">
+            <a class="items flex flex_justify" href="/user/voted/<?=$user->id?>">
                 <span class="seach_name">Ta的评选</span>
                 <span class="golook"><i class="iconfont r_icon">&#xe605;</i></span>
             </a>

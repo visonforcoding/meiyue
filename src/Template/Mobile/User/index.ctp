@@ -61,7 +61,7 @@
                 </a>
             </li>
             <li>
-                <a href="#this"  class="home_items">
+                <a href="/user/voted"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe60c;</i><span class="itemsname">我的评选</span></div>
                     <div class="home_list_r_info">
 

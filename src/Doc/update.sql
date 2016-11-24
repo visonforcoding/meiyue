@@ -405,3 +405,19 @@ CREATE TABLE `lm_gift` (
 COMMENT='礼物表'
 ENGINE=InnoDB
 ;
+
+##20161123
+CREATE TABLE `lm_support` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`supporter_id` INT(11) NOT NULL DEFAULT '0' COMMENT '支持者id',
+	`supported_id` INT(11) NOT NULL DEFAULT '0' COMMENT '被支持者id',
+	`gift_id` INT(11) NOT NULL DEFAULT '0' COMMENT '礼物id',
+	`create_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='支持列表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=5
+;
+
