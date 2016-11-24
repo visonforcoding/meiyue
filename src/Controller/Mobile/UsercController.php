@@ -601,4 +601,137 @@ class UsercController extends AppController {
             'user'=>  $this->user
         ]);
     }
+
+
+    /**
+     * 我的-会员中心
+     */
+    public function vipCenter()
+    {
+        $this->handCheckLogin();
+        $userPackTb = TableRegistry::get('UserPackage');
+        $query = $userPackTb
+            ->find('all')
+            ->select([
+                'chat_count' => 'sum(chat_num)',
+                'browse_count' => 'sum(browse_num)',
+                'chat_rest' => 'sum(rest_chat)',
+                'browse_rest' => 'sum(rest_browse)'
+            ])
+            ->where([
+                'user_id' => $this->user->id,
+                'deadline >' => new Time()
+            ]);
+
+        $counter = $query->first();
+        $this->set([
+            'counter' => $counter,
+            'pageTitle'=>'会员中心',
+        ]);
+    }
+
+
+    /**
+     * 会员中心-购买套餐
+     */
+    public function vipBuy()
+    {
+        $packTb = TableRegistry::get('Package');
+        $packs = $packTb
+            ->find()
+            ->where(['is_used' => 1])
+            ->orderDesc('show_order');
+
+        $this->set([
+            'packs' => $packs,
+            'pageTitle'=>'购买套餐',
+        ]);
+    }
+
+
+    /**
+     * 套餐支付
+     * @param $packid
+     */
+    public function packpay($packid)
+    {
+        $packTb = TableRegistry::get('Package');
+        $pack = $packTb->get($packid);
+        $this->set([
+            'pack' => $pack,
+            'user' => $this->user,
+            'pageTitle'=>'支付',
+        ]);
+    }
+
+
+    /**
+     * 支付接口
+     */
+    public function lmpay($packid)
+    {
+        $this->handCheckLogin();
+        if($this->request->is("POST")) {
+            $packTb = TableRegistry::get('Package');
+            $pack = $packTb->get($packid);
+            //支付
+
+            //生成购买记录
+            $deadline = new Time("+$pack->vali_time day");
+            $userPackTb = TableRegistry::get('UserPackage');
+            $userPack = $userPackTb->newEntity([
+                'title' => $pack->title,
+                'user_id' => $this->user->id,
+                'package_id' => $pack->id,
+                'chat_num' => $pack->chat_num,
+                'rest_chat' => $pack->chat_num,
+                'browse_num' => $pack->browse_num,
+                'rest_browse' => $pack->browse_num,
+                'type' => $pack->type,
+                'cost' => $pack->price,
+                'vir_money' => $pack->vir_money,
+                'deadline' => $deadline,
+            ]);
+
+            $user = $this->user;
+            $transRes = $userPackTb
+                ->connection()
+                ->transactional(
+                    function() use ($user, $pack, $userPack, $userPackTb){
+                        $flowres = true;
+                        $useres = true;
+                        //检查是否需要添加用户美币并生成流水
+                        if($pack->vir_money > 0) {
+                            //扣除 报名费用
+                            $pre_amount = $user->money;
+                            $user->money = $user->money + $pack->vir_money;
+                            $after_amount = $user->money;
+                            //生成流水
+                            $FlowTable = TableRegistry::get('Flow');
+                            $flow = $FlowTable->newEntity([
+                                'user_id'=>$user->id,
+                                'buyer_id'=>0,
+                                'type'=>15,
+                                'type_msg'=>'购买充值套餐',
+                                'income'=>1,
+                                'amount'=>$pack->vir_money,
+                                'price'=>$pack->vir_money,
+                                'pre_amount'=>$pre_amount,
+                                'after_amount'=>$after_amount,
+                                'paytype'=>1,   //余额支付
+                                'remark'=> '购买充值套餐'
+                            ]);
+
+                            $flowres = $FlowTable->save($flow);
+                            $useres = TableRegistry::get('User')->save($user);
+                        }
+                        return $flowres&&$useres&&$userPackTb->save($userPack);
+                    });
+
+            if($transRes) {
+                return $this->Util->ajaxReturn(true, '支付成功');
+            }
+            return $this->Util->ajaxReturn(false, '支付失败');
+        }
+    }
 }

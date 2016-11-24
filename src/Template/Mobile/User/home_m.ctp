@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li>
-                <a href="#this"  class="home_items">
+                <a href="/userc/my-activitys"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe60b;</i><span class="itemsname">我的派对</span></div>
                     <div class="home_list_r_info">
                         <span class="color_y">3</span>
@@ -67,7 +67,7 @@
     <div class="home_items_list mt40">
         <ul>
             <li>
-                <a href="#this"  class="home_items">
+                <a href='/userc/vip-center'  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe658;</i><span class="itemsname">会员中心</span></div>
                     <div class="home_list_r_info">
 
