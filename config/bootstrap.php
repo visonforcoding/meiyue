@@ -247,6 +247,24 @@ Log::config('devlog', [
     'scopes' => ['devlog'],
     'file' => 'devlog',
 ]);
+
+//js 日志文件
+Log::config('jslog', [
+    'className' => 'Cake\Log\Engine\FileLog',
+    'path' => LOGS,
+    'levels' => [],
+    'scopes' => ['jslog'],
+    'file' => 'jslog',
+]);
+//crontab 日志文件
+Log::config('cron', [
+    'className' => 'Cake\Log\Engine\FileLog',
+    'path' => LOGS,
+    'levels' => [],
+    'scopes' => ['cron'],
+    'file' => 'cron',
+]);
+
 //载入插件
 Plugin::load('Migrations');
 Plugin::load('Wpadmin', ['bootstrap' => true, 'routes' => true]);
