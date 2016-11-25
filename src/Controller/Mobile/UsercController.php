@@ -839,10 +839,6 @@ class UsercController extends AppController {
      */
     public function checkRight() {
         $this->handCheckLogin();
-        if() {
-
-            
-        }
 
     }
 }
