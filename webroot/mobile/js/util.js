@@ -123,8 +123,17 @@ $.util = {
             if (json.code == 403) {
                 $.util.alert('请先登录');
                 setTimeout(function () {
-                    window.location.href = json.redirect_url;
-                }, 1000);
+                    if($.util.isWX){
+                        window.location.href = json.redirect_url;
+                    }else{
+                        LEMON.event.login(function(res){
+                          res = JSON.parse(res);
+                          $.util.setCookie('token_uin', res.token_uin, 99999999);
+                          LEMON.db.set('token_uin', res.token_uin);
+                          //window.location.reload();
+                        });
+                    }
+                }, 500);
             }
             if (json.code == 500) {
                 var msg = Bollean(json['message']) ? json['message'] : json.msg;
@@ -479,7 +488,7 @@ $.util = {
             url = gurl + opt.page + opt['query'];
         }
         $.getJSON(url, function (data) {
-            if(opt['func']){
+            if (opt['func']) {
                 data = opt['func'](data);
             }
             window.holdLoad = false
@@ -562,6 +571,81 @@ $.util = {
                 dom.data('choosed', 'ok');
             });
         })
+    },
+    /**
+     * 获取当前时间
+     * @returns {String}
+     */
+    getFormatTime: function (date) {
+        if(!date)date = new Date();
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        var h = date.getHours();
+        var minute = date.getMinutes();
+        minute = minute < 10 ? ('0' + minute) : minute;
+        var second = date.getSeconds();
+        second = second < 10 ? ('0' + second) : second;
+        return y + '-' + m + '-' + d + ' ' + h + ':' + minute+':'+second;
+    },
+    /**
+     * 处理js错误
+     * @param {type} a
+     * @param {type} b
+     * @param {type} c
+     * @param {type} d
+     * @param {type} e
+     * @returns {undefined|Boolean}
+     */
+    windowError: function (a, b, c, d, e) {
+        function f(a) {
+            var b, c;
+            if ("object" == typeof a) {
+                if (null === a)
+                    return "null";
+                if (window.JSON && window.JSON.stringify)
+                    return JSON.stringify(a);
+                c = g(a), b = [];
+                for (var d in a)
+                    b.push((c ? "" : '"' + d + '":') + f(a[d]));
+                return b = b.join(), c ? "[" + b + "]" : "{" + b + "}";
+            }
+            return "undefined" == typeof a ? "undefined" : "number" == typeof a || "function" == typeof a ? a.toString() : a ? '"' + a + '"' : '""';
+        }
+
+        function g(a) {
+            return "[object Array]" == Object.prototype.toString.call(a);
+        }
+
+        var h, i = window;
+        if (d = d || i.event && i.event.errorCharacter || 0, e && e.stack) {
+            a = e.stack.toString();
+        } else if (arguments.callee) {
+            for (var j = [a], k = arguments.callee.caller, l = 3; k && --l > 0 && (j.push(k.toString()), k !== k.caller); )
+                k = k.caller;
+            j = j.join(","), a = j;
+        }
+        if (h = f(a) + (b ? ";URL:" + b : "") + (c ? ";Line:" + c : "") + (d ? ";Column:" + d : ""), i._last_err_msg) {
+            if (i._last_err_msg.indexOf(a) > -1)
+                return;
+            i._last_err_msg += "|" + a;
+        } else
+            i._last_err_msg = a;
+
+        setTimeout(function () {
+            console.log("ERROR:" + h);
+//                    alert("JS ERROR:" + h);
+            (new Image).src = '/wx/jslog?content=' + encodeURIComponent(h);
+            //var a = encodeURIComponent(h), b = new Image;
+            //b.src = "//wq.jd.com/webmonitor/collect/badjs.json?Content=" + a + "&t=" + Math.random();
+            //当前用户登录ID、时间、手机号码、上报URL
+            //b.src = "/BadJS/index.html?Content=" + a + "&t=" + Math.random();
+
+        }, 500);
+
+        return !1;
     }
 };
 
