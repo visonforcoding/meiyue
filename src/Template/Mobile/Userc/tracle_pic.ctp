@@ -35,19 +35,16 @@
     $.util.choosImgs('add_tracle');
     LEMON.sys.setTopRight('发送')
     window.onTopRight = function () {
-        alert('被点击了');
         var tracle_body = $('#body').val();
         var param = {};
         param['action'] = 'add_tracle_pic';
         param['tracle_body'] = tracle_body;
         param['create_time'] = $.util.getFormatTime();
         param = JSON.stringify(param);
-        alert(param);
-        alert($('#add_tracle').data('max'));
         if ($('#add_tracle').data('max') === '0') {
             LEMON.event.uploadPics({key: 'add_tracle', user_id: user_id, param: param},function(res){
                 if(res){
-                    $.util.alert('动态已发送');
+                    $.util.alert('动态已发送,等待平台审核');
                 }
             });
         }

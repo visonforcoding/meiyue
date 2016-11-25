@@ -28,6 +28,23 @@
             </style>
         </script>
         <script>
+            function addParem(param, url) {
+                if (!param)
+                    return '';
+                if (!url)
+                    url = location.href;
+                return url + (url.indexOf('?') > 0 ? '&' : '?') + param;
+            }
+
+            (function () {  //对ajax url加随机数
+                var _ajaxO = $.ajax;
+                $.ajax = function (obj) {
+                    if (typeof obj.url == 'string') {
+                        obj.url = addParem('t=' + Math.random(), obj.url);
+                    }
+                    _ajaxO(obj);
+                }
+            })();
             if (navigator.userAgent.toLowerCase().indexOf('smartlemon') != -1) {
                 document.write($('#hideHeaderTpl').text());
             }

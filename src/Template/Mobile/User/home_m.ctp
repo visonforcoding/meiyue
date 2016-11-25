@@ -1,22 +1,22 @@
-<header>
+<div>
     <div class="homepage mhomepage">
-        <div class="header">
-            <h1>我的</h1>
-            <i class="iconfont install">&#xe661;</i>
-        </div>
+        <!--        <div class="header">
+                    <h1>我的</h1>
+                    <i class="iconfont install">&#xe661;</i>
+                </div>-->
         <div class="home_cover_info">
             <span class="avatar">
-                <img src="<?=  createImg($user->avatar).'?w=77'?>"/>
+                <img src="<?= createImg($user->avatar) . '?w=77' ?>"/>
             </span>
             <div class="cover_left_info">
                 <ul>
                     <li class="blight userinfo">
                         <a href="#this" class="cover_block">
                             <h3>
-                                <span><?=$user->nick?><i class="iconfont">&#xe628;</i></span>
-                                <span class="flag price">><?=$this->Number->format($user->money)?>美币</span>
+                                <span><?= $user->nick ?><i class="iconfont">&#xe628;</i></span>
+                                <span class="flag price">><?= $this->Number->format($user->money) ?>美币</span>
                             </h3>
-                            <span class="cover_r_ico" onclick="window.location.href='/userc/edit-info'">
+                            <span class="cover_r_ico" onclick="window.location.href = '/userc/edit-info'">
                                 <i class="iconfont">&#xe605;</i>
                             </span>
                         </a>
@@ -30,7 +30,7 @@
             </div>
         </div>
     </div>
-</header>
+</div>
 <div class="wraper">
     <div class="home_items_list mt40">
         <ul>
@@ -38,7 +38,7 @@
                 <a href="/userc/my-purse"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe60e;</i><span class="itemsname">我的钱包</span></div>
                     <div class="home_list_r_info">
-                        <span class="cashpic"><img src="/mobile/images/cash.png" alt="" /><?=$this->Number->format($user->money)?></span>
+                        <span class="cashpic"><img src="/mobile/images/cash.png" alt="" /><?= $this->Number->format($user->money) ?></span>
                         <i class="iconfont">&#xe605;</i>
                     </div>
                 </a>
@@ -111,6 +111,15 @@
             <li>
                 <a href="#this"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont ico">&#xe612;</i><span class="itemsname">分享</span></div>
+                    <div class="home_list_r_info">
+
+                        <i class="iconfont">&#xe605;</i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/userc/install"  class="home_items">
+                    <div class="home_list_l_info"><i class="iconfont ico">&#xe612;</i><span class="itemsname">设置</span></div>
                     <div class="home_list_r_info">
 
                         <i class="iconfont">&#xe605;</i>

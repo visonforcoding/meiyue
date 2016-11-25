@@ -766,6 +766,9 @@ class UsercController extends AppController {
             ]);
 
             $user = $this->user;
+
+
+
             $transRes = $userPackTb
                 ->connection()
                 ->transactional(
@@ -790,7 +793,6 @@ class UsercController extends AppController {
                                 ->where(['user_id' => $user->id, 'deadline >=' => new Time()])
                                 ->execute();
                         }
-
                         $flowres = true;
                         $useres = true;
                         //检查是否需要添加用户美币并生成流水
@@ -832,7 +834,28 @@ class UsercController extends AppController {
             return $this->Util->ajaxReturn(false, '支付失败');
         }
     }
-
+    
+    /**
+     * 设置
+     */
+    public function install(){
+        $this->set([
+            'pageTitle'=>'设置'
+        ]);
+    }
+    
+    public function loginOut(){
+        if($this->request->is('ajax')){
+            if($this->user->gender==1){
+                $redirect_url = '/index/index';
+            }else{
+                $redirect_url = '/index/find-rich-list';
+            }
+            $this->request->session()->delete('User.mobile');
+            $this->request->session()->destroy();
+            return $this->Util->ajaxReturn(['status'=>true,'msg'=>'您已成功退出','redirect_url'=>$redirect_url]);
+        }
+    }
 
     /**
      * 与美女聊天、查看美女动态

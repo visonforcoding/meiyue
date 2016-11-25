@@ -482,3 +482,29 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
+##支付订单 对接支付宝和微信
+CREATE TABLE `lm_payorder` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`type` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '订单类型1约见',
+	`relate_id` INT(11) NOT NULL DEFAULT '0' COMMENT '关联id',
+	`user_id` INT(11) NOT NULL DEFAULT '0' COMMENT '用户id(买家id)',
+	`seller_id` INT(11) NOT NULL DEFAULT '0' COMMENT '卖家id',
+	`title` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '订单标题',
+	`order_no` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '订单号',
+	`out_trade_no` VARCHAR(50) NULL DEFAULT '' COMMENT '支付方的订单号',
+	`paytype` TINYINT(4) NULL DEFAULT '0' COMMENT '实际支付方式：1微信2支付宝',
+	`price` DECIMAL(10,2) NOT NULL COMMENT '定价',
+	`fee` DECIMAL(10,2) NOT NULL COMMENT '实际支付',
+	`remark` VARCHAR(50) NOT NULL COMMENT '备注',
+	`status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '订单状态0未完成1已完成',
+	`create_time` DATETIME NOT NULL,
+	`update_time` DATETIME NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='支付订单表对接微信支付宝支付'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=108
+;
+
+

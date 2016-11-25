@@ -17,7 +17,7 @@
         </div>
         <div class="purse_list_bottom">
             <?php if ($user->gender == 1): ?>
-                <span class="btn btn_bg_t">充值</span>
+            <span class="btn btn_bg_t"><a href="/purse/recharge">充值</a></span>
                 <p><a href="#this" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
             <?php else: ?>
                 <span class="btn btn_bg_t">兑换美币</span>
