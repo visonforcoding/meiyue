@@ -1,23 +1,23 @@
-<header>
+<div>
     <div class="homepage">
-       <!--  <div class="header">
-            <h1>我的</h1>
-            <i class="iconfont install">&#xe661;</i>
-        </div> -->
+        <!--  <div class="header">
+             <h1>我的</h1>
+             <i class="iconfont install">&#xe661;</i>
+         </div> -->
         <div class="home_cover_info">
             <span class="avatar">
-                <img src="<?=  createImg($user->avatar).'?w=77'?>"/>
+                <img src="<?= createImg($user->avatar) . '?w=77' ?>"/>
             </span>
             <div class="cover_left_info">
                 <ul>
                     <li class="bbottom userinfo">
                         <a href="#this" class="cover_block">
                             <h3>
-                                <span><?=$user->nick?><i class="iconfont">&#xe628;</i></span>
+                                <span><?= $user->nick ?><i class="iconfont">&#xe628;</i></span>
                                 <span class="flag"><img src="/mobile/images/zui.png" alt="" /></span>
                             </h3>
                             <span class="cover_r_ico">
-                                <i class="iconfont" onclick="window.location.href='/userc/edit-info'">&#xe605;</i>
+                                <i class="iconfont" onclick="window.location.href = '/userc/edit-info'">&#xe605;</i>
                             </span>
                         </a>
                     </li>
@@ -30,7 +30,7 @@
             </div>
         </div>
     </div>
-</header>
+</div>
 <div class="wraper">
     <div class="home_items_list mt40">
         <ul>
@@ -38,7 +38,7 @@
                 <a href="/userc/my-purse"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe60e;</i><span class="itemsname">我的钱包</span></div>
                     <div class="home_list_r_info">
-                        <span class="cashpic"><img src="/mobile/images/cash.png" alt="" /><?=$this->Number->format($user->money)?></span>
+                        <span class="cashpic"><img src="/mobile/images/cash.png" alt="" /><?= $this->Number->format($user->money) ?></span>
                         <i class="iconfont">&#xe605;</i>
                     </div>
                 </a>
@@ -120,9 +120,33 @@
                     </div>
                 </a>
             </li>
+            <li>
+                <a href="/userc/install"  class="home_items">
+                    <div class="home_list_l_info"><i class="iconfont ico">&#xe612;</i><span class="itemsname">设置</span></div>
+                    <div class="home_list_r_info">
+
+                        <i class="iconfont">&#xe605;</i>
+                    </div>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
 <div style="height:1.4rem"></div>
 <!--底部-->
 <?= $this->element('footer', ['active' => 'me']) ?>
+<?php $this->start('script'); ?>
+<script type="text/javascript">
+    //$.util.showPreloader('前往登录..');
+    window.onActiveView = function () {
+        if (!$.util.getCookie('token_uin')) {
+            LEMON.event.login(function (res) {
+                res = JSON.parse(res);
+                $.util.setCookie('token_uin', res.token_uin, 99999999);
+                LEMON.db.set('token_uin', res.token_uin);
+                window.location.reload();
+            });
+        }
+    }
+</script>
+<?php $this->end('script'); ?>

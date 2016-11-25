@@ -17,8 +17,15 @@ class UserController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        $this->handCheckLogin(); 
-        $Dateorders = \Cake\ORM\TableRegistry::get('Dateorder');
+        if(!$this->request->is('lemon')){
+            //$this->handCheckLogin();
+        }
+        if(!$this->user){
+            $this->set([
+                'pageTitle'=>'登录'
+            ]);
+            return $this->render('nologin');
+        }
         $template = 'index';
         if ($this->user->gender == 1) {
             $template = 'home_m';
