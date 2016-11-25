@@ -423,7 +423,7 @@ class UserController extends AppController {
      */
     public function voted($id = null)
     {
-        $this->loadComponent('Util');
+        $this->loadComponent('Business');
         $title = '我的评选';
         $isme = true;
         if($id) {
@@ -432,8 +432,8 @@ class UserController extends AppController {
         } else {
             $id = $this->user->id;
         }
-        $wektop = $this->Util->getMyTop('week', $id);
-        $montop = $this->Util->getMyTop('month', $id);
+        $wektop = $this->Business->getMyTop('week', $id);
+        $montop = $this->Business->getMyTop('month', $id);
         $this->set([
             'isme' => $isme,
             'user' => $this->user,
