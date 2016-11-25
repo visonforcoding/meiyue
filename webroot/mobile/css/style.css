@@ -987,5 +987,5 @@ color:#999;padding:.1rem;}
 .submit_chat .sub-chat{min-height:32px;}
 .sub-chat .icon{font-size:28px;color:#e1e4e6;margin-right:.2rem;}
 .sub-chat .sub-text{width:4.8rem;margin-right:.2rem;overflow: hidden;min-height:34px;}
-.sub-chat .sub-text .test_box{border:none;padding:5px;margin:0;width:4.8rem;min-height:34px;border:1px #e1e3e6 solid;border-radius: 5px;overflow-y:hidden;;overflow-x:hidden;outline: none;}
+.sub-chat .sub-text .test_box{border:none;padding:5px;margin:0;width:4.8rem;min-height:34px;border:1px #e1e3e6 solid;border-radius: 5px;overflow-y:auto;overflow-x:hidden;outline: none;max-height:2rem;}
 .sub-chat .sub-btn{width:1rem;height:32px;background: #EAB96A;border-radius: 5px;color:#fff;text-align: center;line-height: 32px;}
