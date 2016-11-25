@@ -52,24 +52,27 @@
     <div class="center_detail_list mt60">
         <h3 class="inner commontitle">购买记录</h3>
         <ul class="outerblock bdbottom btop inner">
-            <li class="flex flex_justify">
-                <div class="l_info">
-                    <h3>普通VIP</h3>
-                    <time class="smalldes">2012-1-12</time>
-                </div>
-                <div class="r_info smalldes">
-                    <span>查看3</span> | <span>聊天3</span>
-                </div>
-            </li>
-            <li class="flex flex_justify">
-                <div class="l_info">
-                    <h3>3999 美币充值套餐</h3>
-                    <time class="smalldes">2012-1-12</time>
-                </div>
-                <div class="r_info smalldes">
-                    <span>查看3</span> | <span>聊天3</span>
-                </div>
-            </li>
+            <?php foreach($userPacks as $item): ?>
+                <li class="flex flex_justify">
+                    <div class="l_info">
+                        <h3><?= $item->title; ?></h3>
+                        <time class="smalldes">
+                            <?= getYMD($item->create_time) ?>
+                        </time>
+                    </div>
+                    <div class="r_info smalldes">
+                        <span>
+                            查看
+                            <?= ($item->chat_num - $item->rest_chat)?>
+                        </span>
+                        |
+                        <span>
+                            聊天
+                            <?= ($item->browse_num - $item->rest_browse) ?>
+                        </span>
+                    </div>
+                </li>
+            <?php endforeach; ?>
         </ul>
     </div>
 
