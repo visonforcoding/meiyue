@@ -36,32 +36,56 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 control-label">聊天名额(-1表示无限)</label>
+            <label class="col-md-2 control-label">聊天名额</label>
             <div class="col-md-8">
                 <?php
                 echo $this->Form->input(
                     'chat_num',
                     [
                         'label' => false,
-                        'class' => 'form-control'
+                        'class' => 'form-control',
+                        'value' => (checkIsEndless($package->chat_num))?0:$package->chat_num
                     ]
                 );
                 ?>
             </div>
+            <label>
+                无限
+                <?php
+                    echo $this->Form->checkbox(
+                    'chat_endless',
+                    [
+                        'value' => (checkIsEndless($package->chat_num))?1:0,
+                        'hiddenField' => false,
+                        'checked' => (checkIsEndless($package->chat_num))?true:false
+                    ]);?>
+            </label>
         </div>
         <div class="form-group">
-            <label class="col-md-2 control-label">查看动态名额(-1表示无限)</label>
+            <label class="col-md-2 control-label">查看动态名额</label>
             <div class="col-md-8">
                 <?php
                 echo $this->Form->input(
                     'browse_num',
                     [
                         'label' => false,
-                        'class' => 'form-control'
+                        'class' => 'form-control',
+                        'value' => (checkIsEndless($package->browse_num))?0:$package->browse_num
                     ]
                 );
                 ?>
             </div>
+            <label>
+                无限
+                <?php
+                    echo $this->Form->checkbox(
+                    'browse_endless',
+                    [
+                        'value' => (checkIsEndless($package->browse_num))?1:0,
+                        'hiddenField' => false,
+                        'checked' => (checkIsEndless($package->browse_num))?true:false
+                    ]);?>
+            </label>
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">充值美币</label>

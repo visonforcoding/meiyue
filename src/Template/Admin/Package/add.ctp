@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 control-label">聊天名额(-1表示无限)</label>
+            <label class="col-md-2 control-label">聊天名额</label>
             <div class="col-md-8">
                 <?php
                 echo $this->Form->input(
@@ -49,9 +49,13 @@
                 );
                 ?>
             </div>
+            <label>
+                无限
+                <?php echo $this->Form->checkbox('chat_endless');?>
+            </label>
         </div>
         <div class="form-group">
-            <label class="col-md-2 control-label">查看动态名额(-1表示无限)</label>
+            <label class="col-md-2 control-label">查看动态名额</label>
             <div class="col-md-8">
                 <?php
                 echo $this->Form->input(
@@ -63,6 +67,10 @@
                 );
                 ?>
             </div>
+            <label>
+                无限
+                <?php echo $this->Form->checkbox('browse_endless');?>
+            </label>
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">充值美币</label>

@@ -119,7 +119,7 @@ class UsercController extends AppController {
             ->orderAsc('Activity.start_time')
             ->map(function($row) {
 
-                $row->date = getYMD($row->activity->start_time);
+                $row->date = getMD($row->activity->start_time);
                 $row->time = getHIS($row->activity->start_time, $row->activity->end_time);
                 $curdatetime = new Time();
                 $row->bustr = '';
@@ -660,6 +660,7 @@ class UsercController extends AppController {
         $query = $userPackTb
             ->find('all')
             ->select([
+                'deadline' => 'deadline',
                 'chat_count' => 'sum(chat_num)',
                 'browse_count' => 'sum(browse_num)',
                 'chat_rest' => 'sum(rest_chat)',
@@ -713,7 +714,7 @@ class UsercController extends AppController {
 
 
     /**
-     * 支付接口
+     * 购买套餐支付接口
      */
     public function lmpay($packid)
     {
@@ -723,9 +724,33 @@ class UsercController extends AppController {
             $pack = $packTb->get($packid);
             //支付
 
-            //生成购买记录
-            $deadline = new Time("+$pack->vali_time day");
+            //查询当前用户账户下套餐的最长有效期
+            $addDays = $pack->vali_time+1;
+            $deadline = new Time("+$addDays day");
+            $deadline->hour = 0;
+            $deadline->second = 0;
+            $deadline->minute = 0;
             $userPackTb = TableRegistry::get('UserPackage');
+            $query = $userPackTb
+                ->find()
+                ->select(['longestdl' => 'max(deadline)'])
+                ->where([
+                    'user_id' => $this->user->id,
+                    'deadline >' => new Time()
+                ]);
+            $ownPach = $query->first();
+            //计算出最长有效期
+            //是否需要更新UserPackage表和UsedPackage表该用户的截止日期标志
+            $udFlag = false;
+            if($ownPach->longestdl) {
+                $longestdl = new Time($ownPach->longestdl);
+                if($deadline > $longestdl) {
+                    //购买的套餐以最长截止日期为准
+                    $udFlag = true;
+                }
+            }
+
+            //生成购买记录
             $userPack = $userPackTb->newEntity([
                 'title' => $pack->title,
                 'user_id' => $this->user->id,
@@ -744,7 +769,28 @@ class UsercController extends AppController {
             $transRes = $userPackTb
                 ->connection()
                 ->transactional(
-                    function() use ($user, $pack, $userPack, $userPackTb){
+                    function() use ($user, $pack, $userPack, $userPackTb, $udFlag, $deadline){
+                        $updateUsedres = true;
+                        $updateUseres = true;
+                        //更新UserPackage表和UsedPackage表该用户的截止日期
+                        //如果用户买了新的套餐，该套餐截止日期比现有的长，则更新所有未过期的已购买套餐
+                        if($udFlag) {
+                            $usedPackTb = TableRegistry::get('UsedPackage');
+                            $updateUsedres = $usedPackTb
+                                ->query()
+                                ->update()
+                                ->set(['deadline' => $deadline])
+                                ->where(['user_id' => $user->id, 'deadline >=' => new Time()])
+                                ->execute();
+
+                            $updateUseres = $userPackTb
+                                ->query()
+                                ->update()
+                                ->set(['deadline' => $deadline])
+                                ->where(['user_id' => $user->id, 'deadline >=' => new Time()])
+                                ->execute();
+                        }
+
                         $flowres = true;
                         $useres = true;
                         //检查是否需要添加用户美币并生成流水
@@ -772,7 +818,12 @@ class UsercController extends AppController {
                             $flowres = $FlowTable->save($flow);
                             $useres = TableRegistry::get('User')->save($user);
                         }
-                        return $flowres&&$useres&&$userPackTb->save($userPack);
+                        return
+                            $flowres
+                            &&$useres
+                            &&$userPackTb->save($userPack)
+                            &&$updateUsedres
+                            &&$updateUseres;
                     });
 
             if($transRes) {
@@ -782,4 +833,16 @@ class UsercController extends AppController {
         }
     }
 
+
+    /**
+     * 检查是否有权限
+     */
+    public function checkRight() {
+        $this->handCheckLogin();
+        if() {
+
+            
+        }
+
+    }
 }

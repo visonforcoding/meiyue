@@ -47,7 +47,16 @@ class PackageController extends AppController
     {
         $package = $this->Package->newEntity();
         if ($this->request->is('post')) {
-            $package = $this->Package->patchEntity($package, $this->request->data);
+            $data = $this->request->data;
+            if($data['chat_endless']) {
+                $data['chat_num'] = getDefultEndless();
+            }
+            if($data['browse_endless']) {
+                $data['browse_num'] = getDefultEndless();
+            }
+
+            $package = $this->Package->patchEntity($package, $data);
+
             if ($this->Package->save($package)) {
                  $this->Util->ajaxReturn(true,'添加成功');
             } else {
@@ -74,7 +83,14 @@ class PackageController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['post','put'])) {
-            $package = $this->Package->patchEntity($package, $this->request->data);
+            $data = $this->request->data;
+            if(isset($data['chat_endless'])) {
+                $data['chat_num'] = getDefultEndless();
+            }
+            if(isset($data['browse_endless'])) {
+                $data['browse_num'] = getDefultEndless();
+            }
+            $package = $this->Package->patchEntity($package, $data);
             if ($this->Package->save($package)) {
                   $this->Util->ajaxReturn(true,'修改成功');
             } else {

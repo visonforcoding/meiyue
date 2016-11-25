@@ -15,8 +15,17 @@
                     <h3>查看动态</h3>
                 </div>
                 <div class="r_info">
-                    <h3 class="topinfo">还可以看 <i class="lagernum color_y">9</i> 人</h3>
-                    <h3 class="smalldes"><span>总共可以看10人</span> | <time>2017年11月13日到期</time></h3>
+                    <h3 class="topinfo">
+                        还可以看
+                        <i class="lagernum color_y">
+                            <?= checkIsEndless($counter->browse_rest)?'无限':$counter->browse_rest; ?>
+                        </i>
+                        人
+                    </h3>
+                    <h3 class="smalldes">
+                        <span>
+                            共可以看<?= checkIsEndless($counter->browse_count)?'无限':$counter->browse_count; ?>人</span>|<time><?= getYMD($counter->deadline); ?>到期</time>
+                    </h3>
                 </div>
             </li>
             <li class="flex flex_justify inner">
@@ -27,8 +36,15 @@
                     <h3>聊天人数</h3>
                 </div>
                 <div class="r_info">
-                    <h3 class="topinfo">还可以看 <i class="lagernum">9</i> 人</h3>
-                    <h3 class="smalldes"><span>总共可以看10人</span> | <time>2017年11月13日到期</time></h3>
+                    <h3 class="topinfo">
+                        还可以和
+                        <i class="lagernum color_y">
+                            <?= checkIsEndless($counter->chat_rest)?'无限':$counter->chat_rest; ?>
+                        </i>
+                        人聊天
+                    </h3>
+                    <h3 class="smalldes">
+                        <span>共可以和<?= checkIsEndless($counter->chat_count)?'无限':$counter->chat_count; ?>人聊天</span>|<time><?= getYMD($counter->deadline) ?>到期</time></h3>
                 </div>
             </li>
         </ul>
