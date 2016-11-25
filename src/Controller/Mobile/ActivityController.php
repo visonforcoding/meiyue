@@ -414,7 +414,7 @@ class ActivityController extends AppController
     public function getTopList($type = 'week')
     {
         try {
-            $this->loadComponent('Util');
+            $this->loadComponent('Business');
             $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
             $user = null;
             if($this->user) {
@@ -463,7 +463,7 @@ class ActivityController extends AppController
 
             if($user) {
                 if($user->gender == 2) {
-                    $sortops[] = $this->Util->getMyTop($type, $this->user->id);
+                    $sortops[] = $this->Business->getMyTop($type, $this->user->id);
                 }
             }
 

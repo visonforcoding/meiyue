@@ -835,10 +835,42 @@ class UsercController extends AppController {
 
 
     /**
+     * 与美女聊天、查看美女动态
      * 检查是否有权限
      */
     public function checkRight() {
         $this->handCheckLogin();
+        if($this->request->is("POST")) {
+            $datas = $this->request->data;
+            if(isset($datas['userid'])&&isset($datas['usedid'])&&isset($datas['type'])) {
+               return $this->Util->ajaxReturn(false, '缺少必要参数！');
+            }
+            $userid = $datas['userid'];
+            $usedid = $datas['usedid'];
+            $type = $datas['type'];
 
+            //检查是否有权限看
+            $usedPackTb = TableRegistry::get('UsedPackage');
+            $userPackTb = TableRegistry::get('UserPackage');
+
+            $usedPack = $usedPackTb
+                ->find()
+                ->select('id')
+                ->where(
+                    [
+                        'user_id' => $userid,
+                        'used_id' => $usedid,
+                        'type' => $type,
+                        'deadline >' => new Time()
+                    ])
+                ->first();
+            if($usedPack->id) {
+                return $this->Util->ajaxReturn(true, '检查通过！');
+            } else {
+
+
+                return $this->Util->ajaxReturn(['status' => true, 'datas' => '']);
+            }
+        }
     }
 }
