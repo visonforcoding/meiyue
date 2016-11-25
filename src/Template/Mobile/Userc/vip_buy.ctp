@@ -41,14 +41,14 @@
                                     <p>
                                         <i class="iconfont color_y">&#xe654;</i>
                                         查看
-                                        <?= ($item->browse_num == getEndlessNum())?'无限':$item->browse_num; ?>
+                                        <?= (checkIsEndless($item->browse_num))?'无限':$item->browse_num; ?>
                                         个美女所发布的全部动态
                                     </p>
                                 <?php endif; ?>
                                 <?php if($item->chat_num): ?>
                                     <p>
                                         <i class="iconfont color_y">&#xe654;</i>
-                                        和<?= ($item->chat_num == getEndlessNum())?'无限':$item->chat_num; ?>
+                                        和<?= checkIsEndless($item->chat_num)?'无限':$item->chat_num; ?>
                                         个美女聊天
                                     </p>
                                 <?php endif; ?>
@@ -96,14 +96,14 @@
                                     <p>
                                         <i class="iconfont color_y">&#xe654;</i>
                                         查看
-                                        <?= ($item->browse_num == getEndlessNum())?'无限':$item->browse_num; ?>
+                                        <?= checkIsEndless($item->browse_num)?'无限':$item->browse_num; ?>
                                         个美女所发布的全部动态
                                     </p>
                                     <?php endif; ?>
                                     <?php if($item->chat_num): ?>
                                     <p>
                                         <i class="iconfont color_y">&#xe654;</i>
-                                        和<?= ($item->chat_num == getEndlessNum())?'无限':$item->chat_num; ?>个美女聊天
+                                        和<?= checkIsEndless($item->chat_num)?'无限':$item->chat_num; ?>个美女聊天
                                     </p>
                                     <?php endif; ?>
                                 </div>

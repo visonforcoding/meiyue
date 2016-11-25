@@ -190,9 +190,25 @@ function getPackageType($num = null) {
 
 
 /**
- * 返回表示无限的数字
+ * 检查是否是无限
+ * 仅适用于套餐的数字
  * @return int
  */
-function getEndlessNum() {
-    return -1;
+function checkIsEndless($num = null) {
+    $endless = 100000;  //定义10w为无限
+    if($num !== null) {
+        return ($num >= $endless);
+    }
+    return $endless;
+}
+
+
+/**
+ * 返回表示无限的数字
+ * 仅适用于套餐的数字
+ * @return int
+ */
+function getDefultEndless() {
+    $defaultEndless = 1000000;  //管理员勾选‘无限’时自动填入数据库的数量
+    return $defaultEndless;
 }

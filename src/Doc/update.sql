@@ -473,7 +473,7 @@ CREATE TABLE `lm_used_package` (
 	`used_id` INT(11) NOT NULL DEFAULT '0' COMMENT '作用对象id',
 	`package_id` INT(11) NOT NULL DEFAULT '0' COMMENT '所购买的套餐id',
 	`type` INT(11) NOT NULL DEFAULT '0' COMMENT '消费类型：1#查看动态服务 2#聊天服务',
-	`vali_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '该消费有效期',
+	`deadline` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '该消费有效期',
 	`create_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '使用日期',
 	PRIMARY KEY (`id`)
 )

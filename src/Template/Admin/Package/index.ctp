@@ -75,8 +75,9 @@
                     editable:true,
                     align:'center',
                     formatter:function(cellvalue, options, rowObject) {
-                        var endlessNum = <?= (getEndlessNum())?getEndlessNum():-1 ?>;
-                        if(endlessNum == cellvalue) {
+
+                        var endlessNum = <?= checkIsEndless(); ?>;
+                        if(cellvalue >= endlessNum) {
                             cellvalue = '无限'
                         }
                         return cellvalue;
@@ -87,8 +88,8 @@
                     editable:true,
                     align:'center',
                     formatter:function(cellvalue, options, rowObject) {
-                        var endlessNum = <?= (getEndlessNum())?getEndlessNum():-1 ?>;
-                        if(endlessNum == cellvalue) {
+                        var endlessNum = <?= checkIsEndless(); ?>;
+                        if(cellvalue >= endlessNum) {
                             cellvalue = '无限'
                         }
                         return cellvalue;
