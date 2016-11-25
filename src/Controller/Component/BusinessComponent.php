@@ -2,7 +2,9 @@
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
-use Cake\Controller\ComponentRegistry;
+use Cake\I18n\Time;
+use Cake\ORM\TableRegistry;
+use ServiceType;
 
 /**
  * 项目业务组件
@@ -10,15 +12,13 @@ use Cake\Controller\ComponentRegistry;
  */
 class BusinessComponent extends Component
 {
-
     /**
      * Default configuration.
      *
      * @var array
      */
     protected $_defaultConfig = [];
-    
-    
+
     /**
      * 获取1级技能标签 从缓存或数据库当中
      */
@@ -88,4 +88,146 @@ class BusinessComponent extends Component
     }
 
 
+    /**
+     * 与美女聊天、查看美女动态
+     * 检查是否有权限
+     * data必须参数：
+     *      int userid 使用者id
+     *      int usedid 作用对象id
+     *      int type   使用类型，见ServiceType类
+     * 返回结果：
+     *      Array('status' => case [, 'rest' => int]) //case 2时有rest返回
+     *          case 0:不合法参数
+     *          case 1:可以访问（已经消耗过额度）
+     *          case 2:可以访问（尚未消耗额度）
+     *          case 3:不可以访问（没有额度可以消耗）
+     */
+    public function checkRight($userid = null, $usedid = null, $type = null) {
+        if(
+            $userid === null
+            &&$usedid === null
+            &&$type === null
+            &&!ServiceType::containType($type)
+        ) {
+            return Array(
+                'status' => 0,
+                'msg' => '非法参数'
+            );
+        }
+
+        //检查是否有权限看
+        $usedPackTb = TableRegistry::get('UsedPackage');
+        $usedPack = $usedPackTb
+            ->find()
+            ->select('id')
+            ->where(
+                [
+                    'user_id' => $userid,
+                    'used_id' => $usedid,
+                    'type' => $type,
+                    'deadline >' => new Time()
+                ])
+            ->first();
+        if($usedPack->id) {
+            return Array(
+                'status' => 1,
+                'msg' => '已经消耗过名额了'
+            );
+        } else {
+            $userPackTb = TableRegistry::get('UserPackage');
+            $key = "sum(" + ServiceType::getDBRestr($type) + ")";
+            $userPack = $userPackTb
+                ->find()
+                ->select(['rest' => $key])
+                ->where(
+                    [
+                        'deadline >' => new Time(),
+                    ])
+                ->first();
+            $rest = $userPack->rest;
+            if($rest > 0) {
+                return Array(
+                    'status' => 2,
+                    'rest' => $rest,
+                    'msg' => '有名额但尚未消耗'
+                );
+            }
+            return Array(
+                'status' => 3,
+                '没有名额可以消耗'
+            );
+        }
+    }
+
+
+    /**
+     * 直接消耗一个名额
+     * data必须参数：
+     *      int userid 使用者id
+     *      int usedid 作用对象id
+     *      int type   使用类型，见ServiceType类
+     */
+    public function consumeRightD($userid, $usedid, $type)
+    {
+        $userPackTb = TableRegistry::get("UserPackage");
+        $key = ServiceType::getDBRestr($type);
+        $userPack = $userPackTb
+            ->find()
+            ->where(
+                [
+                    'user_id' => $userid,
+                    $key.' >' => 0,
+                    'deadline >' => new Time(),
+                ])
+            ->orderAsc('create_time')
+            ->first();
+        if($userPack) {
+            $userPack->$key --;
+            //生成消费记录
+            $usedPackTb = TableRegistry::get("UsedPackage");
+            $usedPack = $usedPackTb
+                ->newEntity([
+                    'user_id' => $userPack->user_id,
+                    'used_id' => $usedid,
+                    'package_id' => $userPack->id,
+                    'type' => $type,
+                    'deadline' => $userPack->deadline,
+                ]);
+            $transRes = $usedPackTb
+                ->connection()
+                ->transactional(
+                    function() use ($userPack, $userPackTb, $usedPack, $usedPackTb){
+                        $upackres = $userPackTb->save($userPack);
+                        $dpackres = $usedPackTb->save($usedPack);
+                        return $upackres&&$dpackres;
+                    });
+            if($transRes) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * 消耗一个名额
+     * data必须参数：
+     *      int userid 使用者id
+     *      int usedid 作用对象id
+     *      int type   使用类型，见ServiceType类
+     */
+    public function consumeRight($userid, $usedid, $type)
+    {
+        $chres = $this->checkRight($userid, $usedid, $type);
+        switch($chres['status']) {
+            case 0:
+                return false;
+            case 1:
+                return true;
+            case 2:
+                return consumeRightD($userid, $usedid, $type);
+            case 3:
+                return false;
+        }
+    }
 }

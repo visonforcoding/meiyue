@@ -16,7 +16,7 @@
                         <div class="items flex flex_justify inner">
                             <h3 class="bright color_friends">
                                 <span class="lagernum">
-
+                                    <?= $item->title; ?>
                                 </span>
                                 <i class="unit"><?= $item->vali_time; ?>天</i>
                             </h3>
@@ -71,7 +71,7 @@
                             <div class="items flex flex_justify inner">
                                 <h3 class="bright color_friends">
                                 <span class="lagernum">
-
+                                    <?= $item->title; ?>
                                 </span>
                                     <i class="unit"><?= $item->vali_time; ?>天</i>
                                 </h3>

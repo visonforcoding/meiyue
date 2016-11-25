@@ -32,6 +32,12 @@ class UserPackageTable extends Table
         $this->table('lm_user_package');
         $this->displayField('title');
         $this->primaryKey('id');
+
+        $this->hasMany('UsedPackages', [
+            'className' => 'UsedPackage',
+            'foreignKey' => 'package_id'
+        ]);
+
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

@@ -212,3 +212,41 @@ function getDefultEndless() {
     $defaultEndless = 1000000;  //管理员勾选‘无限’时自动填入数据库的数量
     return $defaultEndless;
 }
+
+
+/**
+ * 消费类型：1#查看动态服务 2#聊天服务
+ */
+class ServiceType {
+    const BROWSE =  1;
+    const CHAT = 2;
+
+    public static function containType($type = null) {
+        if($type == ServiceType::BROWSE || $type == ServiceType::CHAT) {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * 返回数据库相应“剩余字段”
+     * @param null $type
+     * @return array
+     */
+    public static function getDBRestr($type = null) {
+        $keys = Array(
+            ServiceType::BROWSE => 'rest_browse',
+            ServiceType::CHAT => 'rest_chat'
+        );
+        if($type && isset($keys[$type])) {
+            return $keys[$type];
+        }
+        return null;
+    }
+}
+
+
+/**
+ *
+ */
