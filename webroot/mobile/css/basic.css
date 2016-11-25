@@ -9,7 +9,7 @@ img{border:0;}
 input{padding:0;}
 table { border-collapse: collapse; border-spacing: 0; }
 *{-webkit-tap-highlight-color: rgba(0, 0, 0, 0);tap-highlight-color: rgba(0, 0, 0, 0);   -webkit-box-sizing: border-box;box-sizing: border-box;}
-body {max-width: 750px;min-width:320px;min-height:100%;margin: 0 auto;-webkit-tap-highlight-color: rgba(0,0,0,0); font-size:14px;color:#303030;font-family: 'STHeiti','Microsoft YaHei',Helvetica,Arial,sans-serif;}
+body {max-width: 750px;min-width:320px;min-height:100%;width:100%;margin: 0 auto;-webkit-tap-highlight-color: rgba(0,0,0,0); font-size:14px;color:#303030;font-family: 'STHeiti','Microsoft YaHei',Helvetica,Arial,sans-serif;}
 input, textarea, button,select{ outline: 0; resize: none;font-size:100%;font:inherit;color:inherit;background: rgba(255,255,255,0);}
 i{font-style: normal;}
 h1,h2,h3,h4,h5,h6{}
@@ -159,6 +159,14 @@ table,tbody,tr,td,th,thead,tfoot{border:1px #e5e5e5 solid;}
 .inner{padding:0 .3rem;}
 input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;} 
 .ablock{display: block;}
+/*限制一行*/
+.line1,.line2,.line3{word-break: break-all;display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden;}
+/*一行*/
+.line1{-webkit-line-clamp: 1;}
+/*二行*/
+.line2{-webkit-line-clamp: 2;}
+/*三行*/
+.line3{-webkit-line-clamp: 3;}
 /*间隙*/
 .mt20{margin-top:.2rem;}
 .mt33{margin-top:33px;}
@@ -210,6 +218,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .flex_end{-webkit-box-pack: end;}
 .flex_justify{-webkit-box-pack: justify;}
 .box_start{-webkit-box-align: start;}
+.box_bottom{-webkit-box-align: end;}
 .flex_center{-webkit-box-pack:center;}
 .maxwid70{max-width:70%;}
 /*color*/
@@ -240,14 +249,14 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .ft20{font-size:20px;}
 .ft32{font-size: 32px;}
 /*字体图标*/
-@font-face {
+/*@font-face {
     font-family: 'iconfont';
     src: url('../font/iconfont.eot');
     src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'),
         url('../font/iconfont.woff') format('woff'),
         url('../font/iconfont.ttf') format('truetype'),
         url('../font/iconfont.svg#iconfont') format('svg');
-}
+}*/
 
 .iconfont{
     font-family:"iconfont" !important;
@@ -258,11 +267,11 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
     /*font-size:16px;*/
 }
 /*在线图标*/
-/*@font-face {
-  font-family: 'iconfont';
-  src: url('//at.alicdn.com/t/font_vj9y88c7o12oi529.eot');
-  src: url('//at.alicdn.com/t/font_vj9y88c7o12oi529.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_vj9y88c7o12oi529.woff') format('woff'),
-  url('//at.alicdn.com/t/font_vj9y88c7o12oi529.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_vj9y88c7o12oi529.svg#iconfont') format('svg');
-}*/
+@font-face {
+  font-family: 'iconfont';  /* project id："166621" */
+  src: url('//at.alicdn.com/t/font_v5kqq91oaujl9pb9.eot');
+  src: url('//at.alicdn.com/t/font_v5kqq91oaujl9pb9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_v5kqq91oaujl9pb9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_v5kqq91oaujl9pb9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_v5kqq91oaujl9pb9.svg#iconfont') format('svg');
+}
