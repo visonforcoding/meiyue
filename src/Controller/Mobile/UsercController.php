@@ -29,8 +29,10 @@ class UsercController extends AppController {
             $UserFansTable = \Cake\ORM\TableRegistry::get('UserFans');
             $fans = $UserFansTable->find()->hydrate(false)->contain(['User'=>function($q){
                     return $q->select(['id','birthday','avatar','nick']);
-            }])->where(['following_id' => $this->user->id])->limit(intval($limit))
-                    ->page(intval($page))->formatResults(function($items) {
+            }])->where(['following_id' => $this->user->id])
+                    ->limit(intval($limit))
+                    ->page(intval($page))
+                    ->formatResults(function($items) {
                 return $items->map(function($item) {
                             $item['user']['avatar'] = createImg($item['user']['avatar']) . '?w=44&h=44&fit=stretch';
                             $item['user']['age'] = (Time::now()->year) - $item['user']['birthday']->year;
@@ -61,16 +63,23 @@ class UsercController extends AppController {
     public function getLikesList($page=null){
         $limit = 10;
         $UserFansTable = \Cake\ORM\TableRegistry::get('UserFans');
-        $likes = $UserFansTable->find()->hydrate(false)->contain(['Follower'=>function($q){
-                return $q->select(['id','birthday','avatar','nick']);
-        }])->where(['user_id' => $this->user->id])->limit(intval($limit))
-                ->page(intval($page))->formatResults(function($items) {
-            return $items->map(function($item) {
+        $likes = $UserFansTable->find()
+                ->hydrate(false)
+                ->contain([
+                    'Follower'=>function($q){
+                        return $q->select(['id','birthday','avatar','nick']);
+                 }])     
+                ->where(['user_id' => $this->user->id])
+                ->limit(intval($limit))
+                ->page(intval($page))
+                ->formatResults(function($items) {
+                    return $items->map(function($item) {
                         $item['follower']['avatar'] = createImg($item['follower']['avatar']) . '?w=44&h=44&fit=stretch';
                         $item['follower']['age'] = (Time::now()->year) - $item['follower']['birthday']->year;
                         return $item;
                     });
-        })->toArray();
+                })
+                ->toArray();
         return $this->Util->ajaxReturn(['likes'=>$likes]);
     }
 
@@ -589,8 +598,32 @@ class UsercController extends AppController {
      * 我的动态
      */
     public function myTracle(){
-        
+        $this->set([
+            'pageTitle'=>'我的动态'
+        ]);   
     }
+    
+    
+    /**
+     * 获取动态
+     */
+    public function getTracleList($page){
+        $user_id = $this->user->id;
+        $MovementTable = TableRegistry::get('Movement');
+        $movements = $MovementTable->find()
+                                   ->contain([
+                                       'User'=>function($q){
+                                            return $q->select(['id','avatar','nick']);
+                                       }
+                                   ]) 
+                                   ->where(['user_id'=>$user_id,'status'=>2])
+                                   ->orderDesc('Movement.create_time')
+                                   ->limit(10)
+                                   ->page($page)
+                                   ->toArray();
+        return $this->Util->ajaxReturn(['movements'=>$movements]);
+    }
+    
     
     /**
      * 发布图片动态
@@ -601,6 +634,20 @@ class UsercController extends AppController {
             'user'=>  $this->user
         ]);
     }
+
+    
+    /**
+     * 发布图片动态
+     */
+    public function tracleVideo(){
+        $this->set([
+            'pageTitle'=>'发布动态',
+            'user'=>  $this->user
+        ]);
+    }
+    
+ 
+
 
 
     /**
@@ -734,4 +781,5 @@ class UsercController extends AppController {
             return $this->Util->ajaxReturn(false, '支付失败');
         }
     }
+
 }

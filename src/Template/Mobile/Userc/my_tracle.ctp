@@ -1,4 +1,54 @@
-
+<?php $this->start('static') ?>
+<script src="/mobile/js/mustache.min.js"></script>
+<script id="movement-list-tpl" type="text/html">
+    {{#movements}}
+    <section>
+        <div class="title inner flex">
+            <div class="tracle_title_left">
+                <span class="avatar"><img src="{{user.avatar}}"/></span>
+                <h3 class="user_info">
+                    <span>{{user.nick}}</span>
+                    <time>{{create_time}}</time>
+                </h3>
+            </div>
+        </div>
+        <div class="con inner">
+            <p class="text">{{body}}</p>
+            {{#is_pic}}
+            <ul class="piclist_con">
+                {{#images}}
+                <li><img src="{{.}}"/></li>
+                {{/images}}
+            </ul>
+            {{/is_pic}}
+            {{#is_video}}
+            <div class="piclist_con videolist">
+                <video id="really-cool-video"  class="video-js vjs-default-skin  vjs-16-9" 
+                       preload="auto" width="100%" height="264"  poster="{{video_cover}}" controls>
+                    <source src="{{video}}" type="video/mp4">
+                </video>
+            </div>
+            {{/is_video}}
+        </div>
+        <div class="tracle_footer flex flex_justify inner">
+            <div>
+                <span class="tracle_footer_info"><i class="iconfont">&#xe65c;</i>{{view_nums}}</span>
+                <span class="tracle_footer_info"><i class="iconfont">&#xe633;</i> {{praise_nums}}</span>
+            </div>
+            <div class="tracle_footer_info"><i class="iconfont">&#xe650;</i></div>
+        </div>
+    </section>
+    {{/movements}}
+</script>
+<?php $this->end('static') ?>
+<?php $this->start('css')?>
+<style>
+     .video-js{
+        background-color: #000;
+   		padding: 0 .1rem;
+    }
+</style>
+<?php $this->end('css')?>
 <header>
     <div class="header">
         <span class="iconfont toback">&#xe602;</span>
@@ -6,69 +56,19 @@
     </div>
 </header>
 <div class="wraper">
-    <div class="tracle_list">
-        <section>
-            <div class="title inner flex">
-                <div class="tracle_title_left">
-                    <span class="avatar"><img src="/mobile/images/avatar.jpg"/></span>
-                    <h3 class="user_info">
-                        <span>魅惑动人</span>
-                        <time>8月13日 13:12</time>
-                    </h3>
-                </div>
-            </div>
-            <div class="con inner">
-                <p class="text">不了解你最终要表达的意思，按常理来说，几天就是3~5天，一天24个小时，具体情况具体分析，发个写真照。</p>
-                <ul class="piclist_con">
-                    <li><img src="/mobile/images/user.jpg"/></li>
-                    <li><img src="/mobile/images/user.jpg"/></li>
-                    <li><img src="/mobile/images/user.jpg"/></li>
-                    <li><img src="/mobile/images/user.jpg"/></li>
-                    <li><img src="/mobile/images/user.jpg"/></li>
-                    <li><img src="/mobile/images/user.jpg"/></li>
-                    <li><img src="/mobile/images/user.jpg"/></li>
-                    <li><img src="/mobile/images/user.jpg"/></li>
-                    <li><img src="/mobile/images/user.jpg"/></li>
-                </ul>
-            </div>
-            <div class="tracle_footer flex flex_justify inner">
-                <div><span class="tracle_footer_info"><i class="iconfont">&#xe65c;</i> 2000</span><span class="tracle_footer_info"><i class="iconfont">&#xe633;</i> 2000</span></div>
-                <div class="tracle_footer_info"><i class="iconfont">&#xe650;</i></div>
-            </div>
-        </section>
-        <section class="mt20">
-            <div class="title inner flex">
-                <div class="tracle_title_left">
-                    <span class="avatar"><img src="/mobile/images/avatar.jpg"/></span>
-                    <h3 class="user_info">
-                        <span>魅惑动人</span>
-                        <time>8月13日 13:12</time>
-                    </h3>
-                </div>
-            </div>
-            <div class="con inner">
-                <p class="text">不了解你最终要表达的意思，按常理来说，几天就是3~5天，一天24个小时，具体情况具体分析，发个写真照。</p>
-                <div class="piclist_con videolist">
-                    <img src="../css/icon/party_detail.jpg" alt="" />
-                    <i class="iconfont playbtn">&#xe652;</i>
-                </div>
-            </div>
-            <div class="tracle_footer flex flex_justify inner">
-                <div><span class="tracle_footer_info"><i class="iconfont">&#xe65c;</i> 2000</span><span class="tracle_footer_info"><i class="iconfont">&#xe633;</i> 2000</span></div>
-                <div class="tracle_footer_info"><i class="iconfont">&#xe650;</i></div>
-            </div>
-        </section>
+    <div class="tracle_list" id="tracle-list">
+
     </div>
 </div>
 <!--发布约会-->
 <div class="footer_submit_btn">
     <div class="submit_ico_group">
-        <div class="submit_ico2 submit_ico" id="picbtn">
-            <a href="/userc/tracle-pic"><span class="iconfont">&#xe767;</span></a>
-        </div>
-        <div class="submit_ico3 submit_ico" id="videobtn">
+        <a href="/userc/tracle-pic" class="submit_ico2 submit_ico" id="picbtn">
+            <span class="iconfont">&#xe767;</span>
+        </a>
+        <a href="/userc/tracle-video" class="submit_ico3 submit_ico" id="videobtn">
             <span class="iconfont">&#xe652;</span>
-        </div>
+        </a>
         <div class="submit_ico1 submit_ico" id="submitbtn" data-type='0'>
             <span>发布<br />动态</span>
         </div>
@@ -89,23 +89,68 @@
     </div>
 </div>
 <script type="text/javascript">
-    $('#submitbtn').on('tap', function () {
-        var data = $(this).data('type');
-        switch (data) {
-            case '0':
-                $('#videobtn').removeClass('moveright').addClass('moveleft');
-                $('#picbtn').removeClass('movedown').addClass('moveup');
-                $(this).html('<i class="iconfont">&#xe653;</i>');
-                $(this).attr('data-type', '1');
-                break;
-            case '1':
-                $('#videobtn').removeClass('moveleft').addClass('moveright');
-                $('#picbtn').removeClass('moveup').addClass('movedown');
-                $(this).html('<span>发布<br />动态</span>');
-                $(this).attr('data-type', '0');
-                break;
-            default:
-                break;
-        }
-    })
+$('#submitbtn').on('tap', function () {
+    var data = $(this).data('type');
+    switch (data) {
+        case '0':
+            $('#videobtn').removeClass('moveright').addClass('moveleft');
+            $('#picbtn').removeClass('movedown').addClass('moveup');
+            $(this).html('<i class="iconfont">&#xe653;</i>');
+            $(this).attr('data-type', '1');
+            break;
+        case '1':
+            $('#videobtn').removeClass('moveleft').addClass('moveright');
+            $('#picbtn').removeClass('moveup').addClass('movedown');
+            $(this).html('<span>发布<br />动态</span>');
+            $(this).attr('data-type', '0');
+            break;
+        default:
+            break;
+    }
+})
 </script>
+<?php $this->start('script'); ?>
+<script>
+    var curpage = 1;
+    $.util.asyLoadData({gurl: '/tracle/get-tracle-list/', page: curpage, tpl: '#movement-list-tpl', id: '#tracle-list',
+        key: 'movements', func: calFunc});
+    setTimeout(function () {
+        //滚动加载
+        $(window).on("scroll", function () {
+            $.util.listScroll('tracle-list', function () {
+                $.util.asyLoadData({gurl: '/tracle/get-tracle-list/', page: curpage,
+                    tpl: '#movement-list-tpl', id: '#tracle-list', more: true, key: 'movements', func: calFunc});
+            })
+        });
+    }, 2000);
+    var count = 0;
+    function calFunc(data) {
+        //返回格式化回调
+        $.each(data.movements, function (i, n) {
+            count++;
+            data.movements[i]['count'] = count;
+            if (n.type === 1) {
+                data.movements[i]['is_pic'] = true;
+            } else {
+                data.movements[i]['is_video'] = true;
+            }
+        })
+        return data;
+    }
+    $(document).on('tap', '.likeIt', function () {
+        var user_id = $(this).data('id');
+        var $obj = $(this);
+        followIt(user_id, $obj);
+    });
+    function followIt(id, $obj) {
+        $.util.ajax({
+            url: '/user/follow',
+            data: {id: id},
+            func: function (res) {
+                $obj.find('i').toggleClass('activeico');
+                $.util.alert(res.msg);
+            }
+        })
+    }
+</script>
+<?php $this->end('script'); ?>

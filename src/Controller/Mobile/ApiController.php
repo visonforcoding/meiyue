@@ -20,11 +20,12 @@ class ApiController extends AppController {
 
     protected $noAcl = [
         'upload', 'wxtoken', 'ckregister', 'recordphone', 'saveuserbasicpic',
-        'saveuserbasicvideo', 'getmapusers','gettoken'
+        'saveuserbasicvideo', 'getmapusers', 'gettoken'
     ];
 
     public function initialize() {
         parent::initialize();
+        $this->autoRender = false;
     }
 
     public function beforeFilter(\Cake\Event\Event $event) {
@@ -247,6 +248,7 @@ class ApiController extends AppController {
         set_time_limit(0);
         $data = $this->request->data();
         $user_id = $this->request->data('user_id');
+        $param = $this->request->data('param');
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $user = $UserTable->get($user_id);
         if (!$user_id || !$user) {
@@ -254,17 +256,43 @@ class ApiController extends AppController {
         }
         $res = $this->Util->uploadFiles('user/images');
         $images = [];
+
         if ($res['status']) {
             $infos = $res['info'];
             foreach ($infos as $key => $info) {
                 $images[] = $info['path'];
             }
-            $user->images = serialize($images);
-            if ($UserTable->save($user)) {
-                $this->jsonResponse(true, '保存成功');
+            if ($param) {
+                $param = json_decode($param);
+                if (property_exists($param, 'action')) {
+                    if ($param->action == 'add_tracle_pic') {
+                        //处理发图片动态
+                        $tracle_type = 1;
+                        $MovementTable = \Cake\ORM\TableRegistry::get('Movement');
+                        $movement = $MovementTable->newEntity([
+                            'user_id' => $user_id,
+                            'images' => serialize($images),
+                            'body' => $param->tracle_body,
+                            'type' => $tracle_type
+                        ]);
+                        if ($MovementTable->save($movement)) {
+                            $this->jsonResponse(true, '保存成功');
+                        } else {
+                            $this->jsonResponse(true, $movement->errors());
+                            dblog('movement', '动态保存失败', $movement->errors());
+                        }
+                    }
+                }
             } else {
-                $this->jsonResponse(true, $user->errors());
+                $user->images = serialize($images);
+                if ($UserTable->save($user)) {
+                    $this->jsonResponse(true, '保存成功');
+                } else {
+                    dblog('user', '基本图片保存失败', $user->errors());
+                    $this->jsonResponse(true, $user->errors());
+                }
             }
+            $this->jsonResponse(false, '成功调取接口');
         } else {
             $this->jsonResponse($res);
         }
@@ -279,6 +307,7 @@ class ApiController extends AppController {
         $user_id = $this->request->data('user_id');
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $user = $UserTable->findById($user_id)->first();
+        $param = $this->request->data('param');
         if (!$user_id || !$user) {
             $this->jsonResponse(false, '身份认证失败');
         }
@@ -293,13 +322,38 @@ class ApiController extends AppController {
                     $data['video_cover'] = $info['path'];
                 }
             }
-            $user = $UserTable->patchEntity($user, $data);
-            if ($UserTable->save($user)) {
-                $this->jsonResponse(true, '保存成功');
+            if ($param) {
+                $param = json_decode($param);
+                if (property_exists($param, 'action')) {
+                    if ($param->action == 'add_tracle_video') {
+                        //处理发视频动态
+                        $tracle_type = 2;
+                        $MovementTable = \Cake\ORM\TableRegistry::get('Movement');
+                        $movement = $MovementTable->newEntity([
+                            'user_id' => $user_id,
+                            'video' =>  $data['video'],
+                            'video_cover' =>  $data['video_cover'],
+                            'body' => $param->tracle_body,
+                            'type' => $tracle_type
+                        ]);
+                        if ($MovementTable->save($movement)) {
+                            $this->jsonResponse(true, '保存成功');
+                        } else {
+                            $this->jsonResponse(true, $movement->errors());
+                            dblog('movement', '动态保存失败', $movement->errors());
+                        }
+                    }
+                }
             } else {
-                $this->jsonResponse(true, $user->errors());
+                $user = $UserTable->patchEntity($user, $data);
+                if ($UserTable->save($user)) {
+                    $this->jsonResponse(true, '保存成功');
+                } else {
+                    $this->jsonResponse(true, $user->errors());
+                }
             }
-        } else {
+            $this->jsonResponse(false, '成功调取接口');
+        }else {
             $this->jsonResponse($res);
         }
     }
@@ -358,7 +412,7 @@ class ApiController extends AppController {
             $this->jsonResponse(false, '缺少必要的参数');
         }
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $user = $UserTable->find()->select(['id', 'user_token','gender','pwd'])
+        $user = $UserTable->find()->select(['id', 'user_token', 'gender', 'pwd'])
                 ->where(['phone' => $u, 'enabled' => 1, 'is_del' => 0])
                 ->first();
         $pwd = $this->request->data('pwd');
@@ -370,7 +424,7 @@ class ApiController extends AppController {
         } else {
             $user_token = $user->user_token;
             $data['login_time'] = date('Y-m-d H:i:s');
-            if ($lng&&$lat) {
+            if ($lng && $lat) {
                 $data['login_coord_lng'] = $lng;
                 $data['login_coord_lat'] = $lat;
             }
@@ -381,8 +435,9 @@ class ApiController extends AppController {
                 //女性用户首页
                 $redirect_url = '/index/find-rich-list';
             }
-            return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,
-                        'token_uin' => $user_token, 'msg' => '登入成功']);
+            unset($user->pwd);
+            $this->jsonResponse(['status' => true, 'redirect_url' => $redirect_url,
+                        'token_uin' => $user_token, 'msg' => '登入成功','user'=>$user]);
         }
     }
 

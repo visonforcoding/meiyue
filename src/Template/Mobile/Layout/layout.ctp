@@ -37,17 +37,17 @@
         <?= $this->fetch('content') ?>
         <script>
             wx.config(<?= json_encode($wxConfig) ?>);
-            $.util.setCookie('coord', '114.044555,22.6453', 30); //测试时候的初始坐标
-            $.util.setCookie('coord_time',<?=  time()?>);
+            //$.util.setCookie('coord', '114.044555,22.6453', 30); //测试时候的初始坐标
+            //$.util.setCookie('coord_time',<?//=  time()?>);
             if ($.util.isAPP) {
                 //app定位
                 if (!$.util.getCookie('coord')) {
-                    LEMON.event.getLocation(function(res){
-                          var data = JSON.parse(res);
-                          if(data.success ==='ok'){
+                    LEMON.event.getLocation(function (res) {
+                        var data = JSON.parse(res);
+                        if (data.success === 'ok') {
                             $.util.setCookie('coord', data.lng + ',' + data.lng, 30);
-                            $.util.setCookie('coord_time',<?=  time()?>,30); 
-                          }
+                            $.util.setCookie('coord_time',<?= time() ?>, 30);
+                        }
                     });
                 }
             }
@@ -61,11 +61,29 @@
                             var speed = res.speed; // 速度，以米/每秒计
                             var accuracy = res.accuracy; // 位置精度
                             $.util.setCookie('coord', lng + ',' + lat, 30);
-                            $.util.setCookie('coord_time',<?=  time()?>,30);
+                            $.util.setCookie('coord_time',<?= time() ?>, 30);
                         }
                     })
                 }
             });
+            window.onerror = $.util.windowError;
+            (function () {  //cookie和jsapi直接互相设置token_uin
+                if (!$.util.isAPP)
+                    return;
+                var apptk = LEMON.db.get('token_uin'), cookietk = $.util.getCookie('token_uin');
+                if (apptk && cookietk) {
+                    if ((new Date()).getDay() != LEMON.db.get('tokenset')) {  //每天一次  检查一下
+                        LEMON.db.set('tokenset', (new Date()).getDay());
+                        LEMON.db.set('token_uin', cookietk);
+                    }
+
+                    return;
+                } else if (apptk) {
+                    $.util.setCookie('token_uin', apptk, 99999999);
+                } else if (cookietk) {
+                    LEMON.db.set('token_uin', cookietk);
+                }
+            })();
         </script>
         <?= $this->fetch('script') ?>
     </body>
