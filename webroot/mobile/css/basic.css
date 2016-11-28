@@ -235,6 +235,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .color_active{color:#fd6a56;}
 .bg_items{background: #29bbb1;}
 .bgff{background: #fff;}
+.color_light{color:#e5e5e5;}
 /*字号*/
 .lagernum{font-size: 18px;}
 .smalldes{font-size: 12px;color:#666;}
