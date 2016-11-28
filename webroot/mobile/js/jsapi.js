@@ -105,6 +105,8 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         'login.wx',
         'pay.wx',
         'pay.ali',
+        "event.imList",
+        "event.imTalk",
         "event.login",
         "event.unrefresh",
         "event.back", //后退事件
@@ -118,7 +120,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         "event.uploadVideo",  //上传视频
         "event.choosePic",  //选择多个图片 返回base64 小图
         "event.chooseVideo",  //选择视频
-        "event.changePic",  //替换某张图片
+        "event.changePic"  //替换某张图片
         ];
 
     for (var i = 0, len = apiList.length; i < len && apiList[i]; i++) {
@@ -192,6 +194,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                         return JSApiInvoke(api, {imgs: imgs, index: index}, '');
                     });
                     break;
+                case "event.imList":
                 case "event.unrefresh":
                 case "sys.clearWebCatch":
                 case "sys.openLOC":
@@ -215,19 +218,20 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                         return JSApiInvoke(api, {url: jump}, '');
                     });
                     break;
-                case "sys.update":
-                    registerAPI(null, api, function () {
-                        return JSApiInvoke(api, {url: arguments[0]}, '');
-                    });
-                    break;
                 case "event.tel":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {tel: arguments[0]}, '');
                     });
                     break;
+                case "event.imTalk":
+                    registerAPI(null, api, function () {
+                        return JSApiInvoke(api, {id: arguments[0]}, '');
+                    });
+                    break;
                 case "sys.setSex":
                 case "sys.setTopRight":
                 case "event.invite":
+                case "sys.update":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {str: arguments[0]}, '');
                     });

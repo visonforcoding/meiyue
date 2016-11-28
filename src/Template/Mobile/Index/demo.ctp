@@ -118,6 +118,24 @@
         </div>
     </div>
 
+
+    <div class="up_identify_box bgff mt40">
+        <div class="inner">
+            <div class="title" onclick="(LEMON.event.imList())">
+                <h3 class="color_black">打开聊天记录LEMON.event.imList()</h3>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="up_identify_box bgff mt40">
+        <div class="inner">
+            <div class="title" onclick="(LEMON.event.imTalk(12))">
+                <h3 class="color_black">和id12的人聊天LEMON.event.imTalk(12)</h3>
+            </div>
+        </div>
+    </div>
+
 <!--    上传
     <div class="up_identify_box bgff mt40">
         <div class="inner">
