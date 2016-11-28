@@ -279,6 +279,10 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 //obj.tabLoadHold[curtab] = false;
                 $.util.hidePreloader();
                 if (data.code === 200) {
+                    if((data.datas).length == 0) {
+                        $.util.alert('没有更多数据了');
+                        return;
+                    }
                     var rendered = Mustache.render(template, data);
                     if (!data.datas.length) {
                         obj.tabLoadEnd[curtab] = true;
