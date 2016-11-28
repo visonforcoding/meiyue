@@ -19,8 +19,8 @@
 			<div class="activity_list">
 				<div class="date_list">
 					<div class="date_list_header" id="imgTab">
-						<div class="alldate cur"><span class="headertab">约会</span></div> |
-						<div class="todate"><span class="headertab">派对</span></div> |
+						<div class="alldate cur"><span class="headertab">约会</span></div> 
+						<div class="todate"><span class="headertab">派对</span></div>  
 						<div class="todate"><span class="headertab">头牌</span></div>
 					</div>
 				</div>
@@ -233,6 +233,83 @@
 										<span class="button btn_dark">支持她</span>
 									</li>
 								</ul>
+								<ul class="inner outerblock" style='display:none;'>
+									<li class="flex flex_justify">
+										<div class="flex">
+											<span class="place silver">1</span>
+											<div class="place_info">
+												<span class="avatar"><img src="../images/avatar.jpg"></span>
+												<h3>
+													<span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 5</i><i class="cup"><img src="../images/cup.jpg"/></i></span>
+													<span class="place_number color_gray"><em class="color_y"><i class="iconfont color_y">&#xe61d;</i> 23</em>
+														本周魅力值：<i class="color_y">2555</i>
+													</span>
+												</h3>
+											</div>
+										</div>
+										<span class="button btn_dark">支持她</span>
+									</li>
+									<li class="flex flex_justify">
+										<div class="flex">
+											<span class="place silver">2</span>
+											<div class="place_info">
+												<span class="avatar"><img src="../images/avatar.jpg"></span>
+												<h3>
+													<span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 5</i><i class="cup"><img src="../images/cup.jpg"/></i></span>
+													<span class="place_number color_gray"><em class="color_y"><i class="iconfont color_y">&#xe61d;</i> 23</em>
+														本周魅力值：<i class="color_y">255554222</i>
+													</span>
+												</h3>
+											</div>
+										</div>
+										<span class="button btn_dark">支持她</span>
+									</li>
+									<li class="flex flex_justify">
+										<div class="flex">
+											<span class="place silver">3</span>
+											<div class="place_info">
+												<span class="avatar"><img src="../images/avatar.jpg"></span>
+												<h3>
+													<span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 3</i><i class="cup"><img src="../images/cup.jpg"/></i></span>
+													<span class="place_number color_gray"><em class="color_y"><i class="iconfont color_y">&#xe61d;</i> 23</em>
+														本周魅力值：<i class="color_y">255554222</i>
+													</span>
+												</h3>
+											</div>
+										</div>
+										<span class="button btn_dark">支持她</span>
+									</li>
+									<li class="flex flex_justify">
+										<div class="flex">
+											<span class="place">4</span>
+											<div class="place_info">
+												<span class="avatar"><img src="../images/avatar.jpg"></span>
+												<h3>
+													<span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 3</i><i class="cup"><img src="../images/cup.jpg"/></i></span>
+													<span class="place_number color_gray"><em class="color_y"><i class="iconfont color_y">&#xe61d;</i> 23</em>
+														本周魅力值：<i class="color_y">255</i>
+													</span>
+												</h3>
+											</div>
+										</div>
+										<span class="button btn_bg_active">支持她</span>
+									</li>
+									<li class="flex flex_justify">
+										<div class="flex">
+											<span class="place">5</span>
+											<div class="place_info">
+												<span class="avatar"><img src="../images/avatar.jpg"></span>
+												<h3>
+													<span class="place_name"><i class="name">范冰冰</i> <i class="vip">VIP 1</i><i class="cup"><img src="../images/cup.jpg"/></i></span>
+													<span class="place_number color_gray"><em class="color_y"><i class="iconfont color_y">&#xe61d;</i> 23</em>
+														本周魅力值：<i class="color_y">2555</i>
+													</span>
+												</h3>
+											</div>
+										</div>
+										<span class="button btn_dark">支持她</span>
+									</li>
+								</ul>
 								<ul class="voted_list outerblock"> 
 									<li>
 										<div class="voted_con flex flex_justify">
@@ -352,7 +429,7 @@
         		$('#rank li').on('tap',function(){
         			var index=$(this).index();
         			$(this).addClass('current').siblings().removeClass('current');
-        			$('#rankcon ul').eq(index)
+        			$('#rankcon ul').hide().eq(index).show();
         		})
             </script>
 	</body>
