@@ -32,11 +32,15 @@
 
                     <?php if(!$isme && $user->gender == 1):?>
                     <span class="button btn_dark"
-                          onclick="window.location.href='/gift/index/<?= $herid; ?>';event.stopPropagation(); ">
+                          onclick="window.location.href='/gift/index/<?= $herid; ?>';
+                              event.stopPropagation(); ">
                         支持她
                     </span>
                     <?php else: ?>
-                    <div></div>
+                        <span class="button btn_active"
+                              onclick="window.location.href='#this';
+                              event.stopPropagation(); ">谁支持我
+                        </span>
                     <?php endif;?>
                 </div>
             </li>
@@ -63,11 +67,15 @@
                     </div>
                     <?php if(!$isme && $user->gender == 1):?>
                     <span class="button btn_dark"
-                          onclick="window.location.href='/gift/index/<?= $herid; ?>';event.stopPropagation(); ">
+                          onclick="window.location.href='/gift/index/<?= $herid; ?>';
+                              event.stopPropagation(); ">
                         支持她
                     </span>
                     <?php else: ?>
-                    <div></div>
+                        <span class="button btn_active"
+                              onclick="window.location.href='#this';
+                              event.stopPropagation(); ">谁支持我
+                        </span>
                     <?php endif;?>
                 </div>
             </li>
