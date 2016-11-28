@@ -112,44 +112,33 @@
     }
 
     $("#show-skill-name").on('click', function () {
-
         new skillsPicker().show(chooseSkillCallBack);
-
     });
 
 
     //标签选择回调函数
     function chooseTagsCallBack(tagsData) {
-
         var html = "";
         for(key in tagsData) {
-
             var item = tagsData[key];
             html += "<a class='mark'>" + item['name'] +
                 "<input type='text' name='tags[_ids][]' value='" + item['id']
                 + "' tag-name='"+ item['name'] +"' hidden></a>";
-
         }
         $("#tag-container").html(html);
-
     }
 
     $("#tag-container").on('click', function () {
-
         var currentDatas = [];
         $("#tag-container").find("input").each(function () {
-
             currentDatas.push($(this).val());
-
         })
         new TagsPicker().show(chooseTagsCallBack, currentDatas);
-
     });
 
 
     //日期选择回调函数
     function choosedateCallBack(start_datetime, end_datetime) {
-
         var time_tmpstart = (start_datetime).split(" ");
         var time_tmpend = (end_datetime).split(" ");
         var year_month_date = time_tmpstart[0];
@@ -158,14 +147,13 @@
         $("#time").val(year_month_date + " " + start_hour_second + "~" + end_hour_second);
         $("#start-time").val(start_datetime);
         $("#end-time").val(end_datetime);
-
     }
 
 
+    var dPicker = new mydateTimePicker();
+    dPicker.init(choosedateCallBack);
     $("#time").on('click', function () {
-
-        new mydateTimePicker().show(choosedateCallBack);
-
+        dPicker.show();
     });
 
 
@@ -175,10 +163,8 @@
         var start_time = new Date($("#start-time").val());
         var current_time = new Date();
         if(Date.parse(start_time) < Date.parse(current_time)) {
-
-            alert("约会时间不能早于当前时间!");
+            $.util.alert("约会时间不能早于当前时间!");
             return;
-
         }
 
         $.ajax({
@@ -195,7 +181,7 @@
 
                     } else {
 
-                        alert(res.msg);
+                        $.util.alert(res.msg);
 
                     }
                 }
@@ -231,4 +217,9 @@
 
     })
 
+    LEMON.event.unrefresh();
+    LEMON.sys.setTopRight('重新发布')
+    window.onTopRight = function () {
+        $(".release-btn").trigger('click');
+    }
 </script>

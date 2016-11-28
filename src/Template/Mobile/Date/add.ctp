@@ -160,11 +160,10 @@
 
     }
 
-
+    var dPicker = new mydateTimePicker();
+    dPicker.init(choosedateCallBack);
     $("#time").on('click', function () {
-
-        new mydateTimePicker().show(choosedateCallBack);
-
+        dPicker.show();
     });
 
 
@@ -172,10 +171,8 @@
 
         $date_time = $("#time").val();
         if(!$date_time) {
-
-            alert("请选择约会时间!");
+            $.util.alert("请选择约会时间!");
             return;
-
         }
         $.ajax({
             type: 'POST',
@@ -185,19 +182,14 @@
             success: function (res) {
                 if (typeof res === 'object') {
                     if (res.status) {
-
-                        alert(res.msg);
+                        $.util.alert(res.msg);
                         window.location.href = '/date/index';
-
                     } else {
-
-                        alert(res.msg);
-
+                        $.util.alert(res.msg);
                     }
                 }
             }
         });
-
     })
 
 
@@ -206,11 +198,9 @@
 
         var tags = {};
         $('#tag-container input').each(function(){
-
             var tag_id = $(this).val();
             var tag_name = $(this).attr('tag-name');
             tags[tag_name] = tag_id;
-
         });
         var datas = {};
         datas['show-skill-name'] = $('#show-skill-name').val();
@@ -232,36 +222,26 @@
 
     //将cookie中数据重现页面
     function restoreDatas() {
-
         var datas = $.util.getCookie('date_add_datas_keeper');
         if(datas) {
-
             var datas = JSON.parse(datas);
-            console.log(datas);
             for(key in datas) {
-
                 if('tags' != key) {
-
                     $("#" + key).val(datas[key]);
-
                 }
-
             }
             var html = '';
             for(tag_key in datas['tags']) {
-
                 html += "<a class='mark'>" + tag_key +
                     "<input type='text' name='tags[_ids][]' value='" + datas['tags'][tag_key]
                     + "' tag-name='"+ tag_key +"' hidden></a>";
-
             }
             $("#tag-container").html(html);
-
             $.util.setCookie('date_add_datas_keeper', '');
-
         }
-
     }
-
-
+    LEMON.sys.setTopRight('发布');
+    window.onTopRight = function () {
+        window.location.href = '';
+    }
 </script>

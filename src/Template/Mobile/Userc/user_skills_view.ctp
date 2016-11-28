@@ -25,13 +25,15 @@
                     </div>
                 </li>
                 <li>
-                    <div class="items flex flex_justify">
+                    <div class="items flex flex_justify" id="cost-btn">
                         <div>技能价格</div>
                         <div class="r_info">
-                            <span>300<i class="smalldes">美币/小时</i></span>
-                            <!--<span><? /*= isset($userskill)?$userskill['cost']['money'].'<i class="smalldes">美币/小时</i>':'请选择'*/ ?></span>
-                        --><i class="iconfont rcon">&#xe605;</i>
-                            <input type="text" name="cost_id" value="1" hidden>
+                            <span id="show-cost">
+                                <?= isset($cost)?$cost['money']:0; ?>
+                                <i class="smalldes">美币/小时</i>
+                            </span>
+                            <i class="iconfont rcon">&#xe605;</i>
+                            <input id="cost-id-input" type="text" name="cost_id" value="" hidden>
                         </div>
                     </div>
                 </li>
@@ -48,9 +50,14 @@
                                 <i class="iconfont rcon">&#xe605;</i>
                             <?php else: ?>
                                 <?php foreach ($userskill['tags'] as $item): ?>
-                                    [<a class="mark"><?= $item['name'] ?><input type="text" name='tags[_ids][]'
-                                                                                value="<?= $item['id'] ?>"
-                                                                                tag-name="<?= $item['name'] ?>" hidden/></a>]
+                                    [<a class="mark">
+                                        <?= $item['name'] ?>
+                                        <input type="text"
+                                               name='tags[_ids][]'
+                                               value="<?= $item['id'] ?>"
+                                               tag-name="<?= $item['name'] ?>"
+                                               hidden/>
+                                    </a>]
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </div>
@@ -62,15 +69,21 @@
             <div class="date_text">
                 <div class="b_title">约会说明</div>
                 <div class="r_text">
-                    <textarea name="description" placeholder="100个字以内"><?= $userskill['description']; ?></textarea>
+                    <textarea name="description" placeholder="100个字以内"><?= empty($userskill['description'])?'':$userskill['description']; ?></textarea>
                 </div>
             </div>
         </div>
         <div class="ability_items mt40">
             <div class="switchbox flex flex_justify inner">
                 <div class="switch_str">上线</div>
-                <div class="switch <?= isset($userskill) ? (($userskill['is_used'] ==1)?'on':'off') : 'on' ?>"><i class="swithbtn"></i></div>
-                <input id="use_status" type="text" name="is_used" value="<?= isset($userskill) ? $userskill['is_used'] : 1 ?>" hidden>
+                <div class="switch <?= isset($userskill) ? (($userskill['is_used'] ==1)?'on':'off') : 'on' ?>">
+                    <i class="swithbtn"></i>
+                </div>
+                <input id="use_status"
+                       type="text"
+                       name="is_used"
+                       value="<?= isset($userskill) ? $userskill['is_used'] : 1 ?>"
+                       hidden>
             </div>
         </div>
     </form>
@@ -81,6 +94,8 @@
 <?= $this->cell('Date::adminSkillsView'); ?>
 <!--标签选择框-->
 <?= $this->cell('Date::tagsView'); ?>
+<!--价格选择框-->
+<?= $this->cell('Date::costsView'); ?>
 
 <script>
 
@@ -110,13 +125,9 @@
             success: function (res) {
                 if (typeof res === 'object') {
                     if (res.status) {
-
                         window.location.href = '/userc/user-skills-index';
-
                     } else {
-
-                        alert(res.msg);
-
+                        $.util.alert(res.msg);
                     }
                 }
             }
@@ -127,46 +138,34 @@
 
     //约会主题选择回调函数
     function chooseSkillCallBack(skill) {
-
         $("#skill-id-input").val(skill['id']);
         $("#show-skill-name").text(skill['name']);
-
     }
 
 
     $("#skill-btn").on('click', function () {
-
         new skillsPicker().show(chooseSkillCallBack);
-
     });
 
 
     //标签选择回调函数
     function chooseTagsCallBack(tagsData) {
-
         var html = "";
         for (key in tagsData) {
-
             var item = tagsData[key];
             html += "[<a class='mark'>" + item['name'] +
                 "<input type='text' name='tags[_ids][]' value='" + item['id']
                 + "' tag-name='" + item['name'] + "' hidden></a>]";
-
         }
         $("#tag-container").html(html);
-
     }
 
     $("#choose_tags_btn").on('click', function () {
-
         var currentDatas = [];
         $("#tag-container").find("input").each(function () {
-
             currentDatas.push($(this).val());
-
         })
         new TagsPicker().show(chooseTagsCallBack, currentDatas, 4);
-
     });
 
 
@@ -191,4 +190,23 @@
 
     })
 
+
+    function chooseCostCB(val) {
+        $('#show-cost').text(val + '美币/小时');
+        $('#cost-id-input').val(val);
+    }
+    var cPicker = new costsPicker();
+    cPicker.init(chooseCostCB);
+    $('#cost-btn').on('tap', function() {
+        cPicker.show();
+    });
+
+
+    LEMON.sys.setTopRight('发布')
+    window.onTopRight = function () {
+        $(".release-btn").trigger('click');
+    }
+
+
+    LEMON.event.unrefresh();
 </script>

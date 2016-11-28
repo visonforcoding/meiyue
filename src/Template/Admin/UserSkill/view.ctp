@@ -22,7 +22,7 @@
     
     <tr>
         <th>约会说明</th>
-        <td><?= h($userSkill->desc) ?></td>
+        <td><?= h($userSkill->description) ?></td>
     </tr>
     
     <tr>

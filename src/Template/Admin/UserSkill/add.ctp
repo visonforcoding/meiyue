@@ -20,7 +20,7 @@
             <label class="col-md-2 control-label">约会说明</label>
             <div class="col-md-8">
                 <?php
-                echo $this->Form->input('desc', ['label' => false, 'type'=>'textarea', 'class' => 'form-control']);
+                echo $this->Form->input('description', ['label' => false, 'type'=>'textarea', 'class' => 'form-control']);
                 ?>
             </div>
         </div>
