@@ -387,7 +387,6 @@ $activity_action = '/activity/index/';  //定义派对请求地址
     var activityobj = new activity();
     activityobj.init();
 
-
     $(document).on('tap', '.likeIt', function () {
         var user_id = $(this).data('id');
         var $obj = $(this);

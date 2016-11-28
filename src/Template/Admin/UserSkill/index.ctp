@@ -7,14 +7,19 @@
             <div class="table-bar form-inline">
                 <div class="form-group">
                     <label for="keywords">时间</label>
-                    <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords"
+                    <input type="text"
+                           name="begin_time"
+                           class="form-control date_timepicker_start"
+                           id="keywords"
                            placeholder="开始时间">
                     <label for="keywords">到</label>
-                    <input type="text" name="end_time" class="form-control date_timepicker_end" id="keywords"
+                    <input type="text"
+                           name="end_time"
+                           class="form-control date_timepicker_end"
+                           id="keywords"
                            placeholder="结束时间">
                 </div>
                 <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索</a>
-                <!--<a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>-->
             </div>
         </form>
         <table id="list">
@@ -48,7 +53,7 @@
                 colModel: [
                     {name: 'skill.name', editable: true, align: 'center'},
                     {name: 'cost.money', editable: true, align: 'center'},
-                    {name: 'desc', editable: true, align: 'center'},
+                    {name: 'description', editable: true, align: 'center'},
                     {name: 'tags', editable: true, align: 'center',formatter: function (cellvalue, options, rowObject) {
                         html = '';
                         for(index in cellvalue) {
@@ -62,10 +67,18 @@
                         }
                         return html;
                     }},
-                    {name: 'is_used', editable: true, align: 'center', formatter: function(cellvalue, options, rowObject){
-                        return usedStatuses[rowObject.is_used];
-                    }},
-                    {name: 'is_checked', editable: true, align: 'center',
+                    {
+                        name: 'is_used',
+                        editable: true,
+                        align: 'center',
+                        formatter: function(cellvalue, options, rowObject){
+                            return usedStatuses[rowObject.is_used];
+                        }
+                    },
+                    {
+                        name: 'is_checked',
+                        editable: true,
+                        align: 'center',
                         formatter: function(cellvalue, options, rowObject){
                             return checkStatuses[rowObject.is_checked];
                         }

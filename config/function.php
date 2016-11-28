@@ -178,7 +178,7 @@ function getDistance($coordinate1, $lng, $lat) {
 //用户将开始时间和结束时间合成页面需要的格式
 function getFormateDT($startTime, $endTime) {
 
-    $timestr = $startTime->year . "-" . $startTime->month . "-" . $startTime->day . " " . $startTime->hour . ":00~" . $endTime->hour . ":00";
+    $timestr = $startTime->year . "/" . $startTime->month . "/" . $startTime->day . " " . $startTime->hour . ":00~" . $endTime->hour . ":00";
     return $timestr;
 }
 

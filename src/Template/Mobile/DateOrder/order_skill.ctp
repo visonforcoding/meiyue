@@ -215,8 +215,11 @@ $(document).on('click','.place_link',function(){
    $('#page-placeDetail').prepend('<iframe width="100%" height="100%"></iframe>');
    $('#page-placeDetail').find('iframe').attr('src','http://map.baidu.com/mobile/webapp/search/search/qt=inf&uid='+uid+'/?third_party=uri_api');
 });
+
+var dPicker = new mydateTimePicker();
+dPicker.init(choosedateCallBack);
 $("#datetime").on('click', function () {
-    new mydateTimePicker().show(choosedateCallBack);
+    dPicker.show();
 });
 
 var curpage = 1;

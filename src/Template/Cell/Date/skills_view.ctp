@@ -12,7 +12,10 @@
                     <ul class="bgff">
                         <?php foreach ($userSkills as $skill): ?>
                             <?php if ($top->id == $skill->skill->parent_id): ?>
-                                <li class="skill-item" user-skill-id="<?= $skill['id']?>" skill-name="<?= $skill['skill']['name'] ?>" cost="<?= $skill['cost']['money'] ?>">
+                                <li class="skill-item"
+                                    user-skill-id="<?= $skill['id']?>"
+                                    skill-name="<?= $skill['skill']['name'] ?>"
+                                    cost="<?= $skill['cost']['money'] ?>">
                                     <div class="choose_marks">
                                         <span class="iconfont">&#xe624;</span>
                                         <i><?= $skill['skill']['name'] ?></i>
