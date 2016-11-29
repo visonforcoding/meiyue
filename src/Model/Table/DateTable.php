@@ -50,6 +50,14 @@ class DateTable extends Table
             'foreignKey' => 'date_id',
             'className' => "Tag",
         ]);
+
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'create_time' => 'new',
+                ]
+            ]
+        ]);
     }
 
     /**

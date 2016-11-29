@@ -299,7 +299,7 @@
                 if (typeof res === 'object') {
                     if (res.status) {
                         $.util.alert(res.msg);
-                        window.location.href = '/date/index';
+                        //window.location.href = '/date/index';
                     } else {
                         $.util.alert(res.msg);
                     }
