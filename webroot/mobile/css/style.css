@@ -105,7 +105,7 @@ header{overflow: hidden;}
 .homepage{background: url(icon/home_header.jpg) no-repeat center center;background-size:100% 2.3rem;width:7.5rem;height:2.3rem;}
 .homepage .header{background: none;}
 .homepage .header .install{position: absolute;right:.3rem;top:0;font-size:24px;}
-.home_cover_info{padding:.2rem 0 .39rem 0;}
+.home_cover_info{padding:.2rem 0 0 .39rem;}
 .cover_left_info li{padding-right:.39rem;}
 .home_items_list .home_list_r_info i.iconfont{color:#c2c2c2;}
 .home_cover_info .avatar{width:1.4rem;height:1.4rem;position:absolute;overflow:hidden;border-radius: 50%;}
@@ -116,7 +116,7 @@ header{overflow: hidden;}
 .cover_left_info .flag img{width:100%;height:auto;display: block;}
 .cover_left_info h3{font-size:16px;}
 .cover_left_info h3 i{color:#f1cc7b;margin-left:.1rem;}
-.cover_left_info .follow{line-height: .8rem;font-size:13px;color:#fffffe;}
+.cover_left_info .follow{line-height: .72rem;font-size:13px;color:#fffffe;}
 .cover_left_info .follow span{margin-right:.6rem;}
 .cover_left_info .follow .like{color:#fffffe;margin-right:.6rem;}
 .cover_left_info .follow i{margin-left:.1rem;}
@@ -893,7 +893,7 @@ color:#999;padding:.1rem;}
 .booking_box_list .con li .r_info i{font-weight: bold; color:#EAB96A;}
 .booking_box_list li.current .r_info i{color:#fff;}
 .booking_box_list .con li .l_info time{margin-right:.3rem;}
-.booking_box_info .content li{padding:0 .3rem;height:45px;}
+.booking_box_info .content li{padding:0 .3rem;height:45px;border-bottom:1px #efefef solid;}
 .booking_box_info .content li input{text-align: right;}
 /*设置*/
 .commonlayer{height:45px;display:-webkit-box;display:box;-webkit-box-align: center;-webkit-box-pack: justify;background: #fff;}
