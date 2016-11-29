@@ -154,22 +154,35 @@ class UsercController extends AppController {
     {
 
         $userSkillTable = \Cake\ORM\TableRegistry::get('UserSkill');
-        $query = $userSkillTable->find()->contain(['Skill', 'Cost'])
-            ->select(['id', 'is_used', 'Skill.name', 'Cost.money'])
-            ->where(['user_id' => $this->user->id, 'is_checked' => 1]);
+        $query = $userSkillTable
+            ->find()
+            ->contain([
+                'Skill',
+                'Cost'
+            ])
+            ->select([
+                'id',
+                'is_used',
+                'Skill.name',
+                'Cost.money'
+            ])
+            ->where([
+                'user_id' => $this->user->id,
+                'is_checked' => 1
+            ]);
         $userskills = $query->toArray();
         $is_all_used = true;
         foreach ($userskills as $item) {
-
             if($item['is_used'] == 0) {
-
                 $is_all_used = false;
-
             }
-
         }
-        $this->set(['userskills' => $userskills, 'is_all_used' => $is_all_used, 'user' => $this->user, 'pageTitle' => '美约-我的技能']);
-
+        $this->set([
+            'userskills' => $userskills,
+            'is_all_used' => $is_all_used,
+            'user' => $this->user,
+            'pageTitle' => '美约-我的技能'
+        ]);
     }
 
 
@@ -187,7 +200,9 @@ class UsercController extends AppController {
         $userSkillTable = \Cake\ORM\TableRegistry::get('UserSkill');;
         $userskill = null;
         if('edit' == $action) {
-            $userskill = $userSkillTable->get($userskill_id, ['contain' => ['Skill', 'Cost', 'Tags']]);
+            $userskill = $userSkillTable
+                ->get($userskill_id, [
+                    'contain' => ['Skill', 'Cost', 'Tags']]);
 
         }
         $this->set(['userskill' => $userskill, 'user' => $this->user, 'pageTitle' => $page_titles[$action]]);
@@ -201,29 +216,22 @@ class UsercController extends AppController {
      */
     public function userSkillSave($user_skill_id = null)
     {
-
         $userSkillTable = \Cake\ORM\TableRegistry::get('UserSkill');
-
         if($this->request->is("POST")) {
-
             //约定有用户技能id参数的为修改
             $userSkill = $userSkillTable->newEntity();
             $userSkill = $userSkillTable->patchEntity($userSkill, $this->request->data);
             $userSkill->user_id = $this->user->id;
             $userSkill->is_checked = 2;
             if(isset($user_skill_id)) {
-
                 $userSkill->id = $user_skill_id;
-
             }
             if ($userSkillTable->save($userSkill)) {
                 return $this->Util->ajaxReturn(true, "发布成功");
             } else {
                 return $this->Util->ajaxReturn(false, getMessage($userSkill->errors()));
             }
-
         }
-
     }
 
 

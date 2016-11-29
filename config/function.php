@@ -177,8 +177,16 @@ function getDistance($coordinate1, $lng, $lat) {
 //仅适用于本项目对应数据库约会表start_time，end_time字段
 //用户将开始时间和结束时间合成页面需要的格式
 function getFormateDT($startTime, $endTime) {
-
-    $timestr = $startTime->year . "/" . $startTime->month . "/" . $startTime->day . " " . $startTime->hour . ":00~" . $endTime->hour . ":00";
+    $timestr = $startTime->year
+        . "/"
+        . $startTime->month
+        . "/"
+        . $startTime->day
+        . " "
+        . $startTime->hour
+        . ":00~"
+        . $endTime->hour
+        . ":00";
     return $timestr;
 }
 
@@ -191,7 +199,6 @@ function getYMD($time) {
 
 //获取年月日
 function getMD($time) {
-
     $timestr = $time->month . "月" . $time->day;
     return $timestr;
 }
@@ -199,14 +206,12 @@ function getMD($time) {
 //仅适用于本项目对应数据库约会表start_time，end_time字段
 //用户将开始时间和结束时间合成页面需要的格式
 function getHIS($startTime, $endTime) {
-
     $timestr = $startTime->hour . ":00~" . $endTime->hour . ":00";
     return $timestr;
 }
 
 //根据出生日期计算年龄
 function getAge($birthday) {
-
     $currentday = new Date();
     return ($currentday->year - $birthday->year);
 }
@@ -220,7 +225,6 @@ function getAge($birthday) {
  * @return float;
  */
 function getCost($start_time, $end_time, $price, $percent = 1.0) {
-
     return ($end_time->hour - $start_time->hour) * $price * $percent;
 }
 
