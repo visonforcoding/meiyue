@@ -212,7 +212,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .outerblock{overflow: hidden;padding-left:.3rem;}
 .outerblock li{border-bottom:1px #efefef solid;padding-right:.3rem;}
 .outerblock li:last-of-type{border-bottom: none;}
-.commontitle{font-size: 12px;color:#666;line-height: .44rem;}
+.commontitle{font-size: 12px;color:#666;line-height: .6rem;}
 .commontips{color:#eab96a;font-size:11px;line-height: 20px;}
 .flex{display:-webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: start;}
 .flex_end{-webkit-box-pack: end;}
