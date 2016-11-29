@@ -1,11 +1,11 @@
-<header>
-    <div class="header">
-        <span class="l_btn cancel-btn">取消</span>
-        <span class="r_btn release-btn" date-id="<?= $date['id']?>">重新发布</span>
-    </div>
-</header>
 <!-- 添加约会主界面 -->
 <div class="wraper page-current" id="page-Date">
+    <header>
+        <div class="header">
+            <span class="l_btn cancel-btn">取消</span>
+            <span class="r_btn release-btn" date-id="<?= $date['id']?>">重新发布</span>
+        </div>
+    </header>
     <div class="edit_date_box">
         <form>
             <ul class="mt40 outerblock">

@@ -78,6 +78,7 @@
                 dataType: "json",
                 success: function (res) {
                     $.util.alert(res.msg);
+                    history.back();
                 }
             })
         }

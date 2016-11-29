@@ -1,14 +1,14 @@
 <?php
     use Cake\I18n\Time;
 ?>
-<header>
-    <div class="header">
-        <span class="l_btn" id="cancel-btn">取消</span>
-        <span class="r_btn" id="release-btn">发布</span>
-    </div>
-</header>
 <!-- 添加约会主界面 -->
 <div class="wraper page-current" id="page-Date">
+    <header>
+        <div class="header">
+            <span class="l_btn" id="cancel-btn">取消</span>
+            <span class="r_btn" id="release-btn">发布</span>
+        </div>
+    </header>
     <div class="edit_date_box">
         <form>
             <ul class="mt40 outerblock">
@@ -393,7 +393,7 @@
         $('#site_lng').val(coord_lng);
     });
 
-
+    LEMON.event.unrefresh();
     LEMON.sys.setTopRight('发布');
     window.onTopRight = function () {
         $("#release-btn").trigger('click');
