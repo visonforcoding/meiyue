@@ -6,7 +6,7 @@
 </header>
 <div class="wraper">
     <div class="inner">
-        <ul class="voted_list">
+        <ul class="voted_list voted-line">
             <li>
                 <a href="/activity/index/top" class="title ablock flex flex_justify">
                     <span class="rank color_y">
