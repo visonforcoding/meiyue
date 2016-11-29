@@ -201,11 +201,11 @@
                 <h3 class="place_info">
                     <span class="place_name">{{name}}</span>
                     <span class="color_gray place_address">{{address}}</span>
-                    <div class="con_mark">
+                    <!--<div class="con_mark">
                         <a href="#this" class="mark_name">安静</a>
                         <a href="#this" class="mark_name">美味</a>
                         <a href="#this" class="mark_name">高端</a>
-                    </div>
+                    </div>-->
                 </h3>
             </div>
             <div class="con_right">
