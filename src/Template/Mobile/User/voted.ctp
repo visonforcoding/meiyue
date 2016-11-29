@@ -6,7 +6,7 @@
 </header>
 <div class="wraper">
     <div class="inner">
-        <ul class="voted_list outerblock">
+        <ul class="voted_list">
             <li>
                 <a href="/activity/index/top" class="title ablock flex flex_justify">
                     <span class="rank color_y">
@@ -15,7 +15,7 @@
                     </span>
                     <span class="iconfont color_gray r_con">&#xe605;</span>
                 </a>
-                <div class="voted_con flex flex_justify">
+                <div class="voted_con voted-content flex flex_justify">
 
                     <span class="voted_place"><?= $wektop->index?></span>
                     <div class="voted_place_info">
