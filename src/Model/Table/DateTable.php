@@ -54,7 +54,7 @@ class DateTable extends Table
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
-                    'create_time' => 'new',
+                    'created_time' => 'new',
                 ]
             ]
         ]);

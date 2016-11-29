@@ -36,7 +36,7 @@ class DateController extends AppController
             if(isset($this->request->data['status'])) {
                 $datas->where([
                     "Date.status" => $this->request->data['status'],
-                    "Date.end_time >" => new Time()
+                    "Date.start_time >" => new Time()
                 ]);
             }
             $datas->formatResults(function(ResultSetInterface $results) {
