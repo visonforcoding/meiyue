@@ -13,7 +13,7 @@
 
     </div>
     <div class="ability_items mt20">
-        <ul class="outerblock inner">
+        <ul class="outerblock">
             <?php foreach ($userskills as $item): ?>
                 <li class="switchbox flex flex_justify skill-item" item-id="<?= $item['id'];?>">
                     <div><?= $item['skill']['name']; ?></div>

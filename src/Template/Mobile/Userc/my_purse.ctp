@@ -29,7 +29,7 @@
         <div class="commontitle inner">
             <h3>账单明细</h3>
         </div>
-        <ul class="puse_bills_con inner">
+        <ul class="puse_bills_con">
             <?php foreach ($top5flows as $flow): ?>
                 <li>
                     <div class="puse_bills_left">
