@@ -23,7 +23,7 @@
     </div>
     <p class="commonarea aligncenter inner mt20">注意要发布个人性感、具有诱惑力的性感私房照，且必须发9张</p>
     <div class="inner mt100">
-        <a class="commontitle aligncenter color_y" href='#this'>没有性感照片?</a>
+        <a class="commontitle aligncenter color_y ablock" href='#this'>没有性感照片?</a>
         <div class="inner">
             <a href="/tracle/tracle_order" class="btn btn_dark_t mt20">免费约拍</a>
         </div>
