@@ -209,10 +209,10 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .smallarea{font-size:12px;color:#999;}
 .impordes{font-size: 15px;color:#303030;}
 .importext{font-size:15px;color:#000;}
-.outerblock{overflow: hidden;}
-.outerblock li{border-bottom:1px #efefef solid;}
+.outerblock{overflow: hidden;padding-left:.3rem;}
+.outerblock li{border-bottom:1px #efefef solid;padding-right:.3rem;}
 .outerblock li:last-of-type{border-bottom: none;}
-.commontitle{font-size: 12px;color:#666;line-height: .57rem;}
+.commontitle{font-size: 12px;color:#666;line-height: .44rem;}
 .commontips{color:#eab96a;font-size:11px;line-height: 20px;}
 .flex{display:-webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: start;}
 .flex_end{-webkit-box-pack: end;}
@@ -236,6 +236,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .bg_items{background: #29bbb1;}
 .bgff{background: #fff;}
 .color_light{color:#e5e5e5;}
+.col-importent{color:#000;}
 /*字号*/
 .lagernum{font-size: 18px;}
 .smalldes{font-size: 12px;color:#666;}
@@ -249,6 +250,8 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 /*字号*/
 .ft20{font-size:20px;}
 .ft32{font-size: 32px;}
+/*透明度*/
+.opci{opacity: .8;}
 /*字体图标*/
 @font-face {
     font-family: 'iconfont';
