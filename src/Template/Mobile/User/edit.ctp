@@ -12,7 +12,8 @@
                 <span class="fl">上传图片</span>
                 <div class="iden_r_box fr">
                     <div class="iden_r_pic">
-                        <img src="<?= $user->avatar; ?>" alt="" />
+                        <img id="avatar_img" src="<?= $user->avatar; ?>" alt="" />
+                        <input type="hidden" name="avatar" />
                     </div>
                     <i class="iconfont potion">&#xe605;</i>
                 </div>
@@ -43,3 +44,38 @@
     </div>
     <div class="complete_basic_info mt100">完善个人资料有奖，<a href="#this">点击查看详情</a></div>
 </div>
+
+<?php $this->start('script'); ?>
+<script>
+    $('#avatar_img').on('tap', function () {
+        //点击选择图片
+        if ($.util.isAPP) {
+            LEMON.event.uploadPic('{"dir":"user/avatar","zip":"1"}', function (data) {
+                var data = JSON.parse(data);
+                if (data.status === true) {
+                    $('input[name="avatar"]').val(data.path);
+                    $('#avatar_img').attr('src', data.urlpath);
+                } else {
+                    $.util.alert('app上传失败');
+                }
+            });
+            return false;
+        } else if ($.util.isWX) {
+            $.util.wxUploadPic(function (id) {
+                $.util.ajax({
+                    url: "/user/getWxPic/" + id,
+                    func: function (msg) {
+                        $.util.alert(msg.msg);
+                        if (msg.status === true) {
+                            $('#upload_pic img').attr('src', msg.path);
+                            $('input[name="avatar"]').val(msg.path);
+                        }
+                    }
+                });
+            });
+        } else {
+            $.util.alert('请在微信或APP上传图片');
+        }
+    });
+</script>
+<?php $this->end(); ?>
