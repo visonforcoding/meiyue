@@ -68,7 +68,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                         class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
                 <span class="place_number color_gray"><em class="color_y"><i
                             class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
-                            本周魅力值：<i class="color_y">{{total}}</i>
+                            本周魅力值：<i class="color_y max-num">{{total}}</i>
                         </span>
             </h3>
         </div>
