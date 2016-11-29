@@ -34,7 +34,7 @@
         transition: height .2s ease-out;
     }
 
-    .picker .l_box {
+    .picker .l_box_cost {
         text-align: center;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
@@ -43,7 +43,7 @@
         height: 100px;
     }
 
-    .picker .l_box::-webkit-scrollbar, .r_box::-webkit-scrollbar {
+    .picker .l_box_cost::-webkit-scrollbar, .r_box::-webkit-scrollbar {
         display: none;
     }
 
@@ -77,7 +77,7 @@
         <span class="r_cancel" id="cost-submit-btn">确定</span>
     </div>
     <div class="c_date">
-        <div class="l_box" style='width:100%;'>
+        <div class="l_box_cost" style='width:100%;'>
             <ul class="items">
                 <li></li>
                 <?php foreach ($list as $item): ?>
@@ -105,7 +105,10 @@
         init: function (func) {
             this.calfun = func;
             this.addEvent();
-            this.curval = <?= (isset($list)&&(count($list[0]) > 0))?$list[0]['money']:0; ?>;
+            this.curval = {
+                'cost_id': <?= (isset($list)&&(count($list[0]) > 0))?$list[0]['id']:''; ?>,
+                'cost': <?= (isset($list)&&(count($list[0]) > 0))?$list[0]['money']:0; ?>
+            };
         },
         show: function() {
             $("#costs-picker").removeClass('hide_date');
@@ -117,6 +120,7 @@
             var obj = this;
             $('#cost-submit-btn').on('click', function() {
                 if(obj.calfun) {
+
                     obj.calfun(obj.curval);
                     obj.hide();
                 }
@@ -127,12 +131,13 @@
             })
 
             //滑动事件
-            $('.l_box').on('scroll', function () {
+            $('.l_box_cost').on('scroll', function () {
                 var scrollTop = $(this).get(0).scrollTop;
-                var height = $('.l_box li').height();
+                var height = $('.l_box_cost li').height();
                 var num = Math.floor(scrollTop / height) + 1;
-                $('.l_box li').removeClass('select').eq(num).addClass('select');
-                obj.curval = $('.l_box li').eq(num).attr('val');
+                $('.l_box_cost li').removeClass('select').eq(num).addClass('select');
+                obj.curval.cost_id = $('.l_box_cost li').eq(num).attr('val');
+                obj.curval.cost = $('.l_box_cost li').eq(num).text();
             })
         }
 
