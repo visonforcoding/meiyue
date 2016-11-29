@@ -58,8 +58,8 @@
     </div>
     <!--Ta的技能-->
     <div class="home_basic_ability mt40">
-        <div class="inner">
-            <div class="title">
+        <div class="">
+            <div class="title inner">
                 <h3>Ta的技能</h3>
             </div>
             <ul class="outerblock">
@@ -149,7 +149,7 @@
             </div>
         </li>
         <li>
-            <div class="items flex">
+            <div class="items items-con flex">
                 <span class="seach_name">个人签名</span>
                 <span class="golook"><?= $user->sign ?></span>
             </div>
