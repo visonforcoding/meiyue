@@ -540,7 +540,8 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .home_paty_container .items_right_info .getdatebtn{margin:.2rem auto 0;}
 .home_paty_container .items_left_textinfo{width:5rem;}
 /*评选*/
-.voted_list li{margin-top:.4rem;border:1px #e5e5e5 solid;border-radius: 3px;background: #fff;}
+.voted_list li{background: #fff;}
+.voted-line li{border:1px #e5e5e5 solid;border-radius: 3px;margin-top:.4rem;}
 .voted_list li .title{border-bottom:1px #efefef solid;padding:0 .3rem;height:30px;}
 .voted_list li .title span{display: block;}
 .voted_list li .title .iconfont{font-size: 16px;}
@@ -550,6 +551,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .voted_l_info .voted_place{position: absolute;}
 .voted_list .avatar img{width:100%;height:100%;display: block;}
 .voted_list .voted_con{padding:.2rem .3rem;}
+.voted_list .ul-con .voted_con{padding:0;}
 .voted_list .voted-content{padding:.2rem .3rem .4rem;}
 .voted_l_info .voted_place_info{padding-left:.7rem;}
 .voted_list .voted_place_info{height:.86rem;margin-right:.2rem;}
@@ -654,7 +656,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .rich_list_first .beauty{color:#826439;font-size:15px;margin-bottom:.2rem;}
 .rich_list_first .rich_first_right{text-align: right;width:1.8rem;padding-bottom:1.4rem;}
 /*与投票页面类似*/
-.rich_list .voted_list li{margin-top:0;border:none;border-bottom:1px #efefef solid;padding:0 .3rem;}
+.rich_list .voted_list li{margin-top:0;border:none;border-bottom:1px #efefef solid;padding:0 .3rem 0 0;}
 .rich_list .voted_list li .voted_name{font-weight: bold;}
 .rich_list .voted_list .voted_con{padding:.2rem 0}
 .rich_list .voted_list .voted_place_info{margin-left:.2rem;}
@@ -767,7 +769,8 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 text-align: center;line-height: .62rem;font-size: 18px;color: #666;font-weight: bold;margin-right: .3rem;}
 .rank_con .silver{background: url(icon/tou1.png) no-repeat center center;background-size: contain;width: .72rem;height: .62rem;display: block;color:#fd6a56;}
 .invite{padding:.3rem .3rem;background: #fff;}
-.rank_con li{padding:.2rem 0;}
+.rank_con li{padding:.25rem 0;}
+.rank_con li.ul-con{padding:.2rem .3rem .2rem 0;}
 .rank_con .place_info{height: .88rem;}
 .rank_con .place_info .avatar{width:.88rem;height:.88rem;overflow: hidden;position: absolute;border-radius: 50%;}
 .rank_con .place_info .avatar img,.rank_con .place_info h3 .place_name .cup img{width:100%;height:100%;display: block;}
