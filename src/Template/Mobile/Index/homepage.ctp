@@ -14,7 +14,7 @@
             <i class="iconfont color_y">&#xe61d;</i> <?= $age ?> <i class="job"><?= $user->profession ?></i> <i class="address"><?= $user->city ?></i>
         </div>
         <div class="commend aligncenter">
-            <i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont color_gray">&#xe62a;</i>
+            <i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont color_light">&#xe62a;</i>
             <span class="total">4.2分</span>
         </div>
         <ul class="otherinfo flex flex_justify bdbottom">
@@ -106,10 +106,10 @@
     </ul>
     <!--其它资料-->
     <ul class="home_seach_otherinfo outerblock mt40">
-        <li>
+        <li class='nobottom'>
             <a class="items flex flex_justify" href="#this">
                 <span class="seach_name importext">其它资料</span>
-                <span class="golook"><i class="iconfont r_icon">&#xe605;</i></span>
+                <span class="golook"><i class="iconfont r_icon"></i></span>
             </a>
         </li>
         <li>
