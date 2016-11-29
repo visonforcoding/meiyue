@@ -599,6 +599,26 @@ class UsercController extends AppController {
         $this->render('/Mobile/User/edit_basic');
 
     }
+
+
+    /**
+     * 我的-重新认证
+     */
+    public function editAuth()
+    {
+        $this->set(['user' => $this->user, 'pageTitle' => '美约-身份认证']);
+        $this->render('/Mobile/User/edit_auth');
+    }
+
+
+    /**
+     * 我的-重新认证
+     */
+    public function editBasicPic()
+    {
+        $this->set(['user' => $this->user, 'pageTitle' => '编辑基本照片与视频']);
+        $this->render('/Mobile/User/edit_basic_pic');
+    }
     
     /**
      * 我的动态
