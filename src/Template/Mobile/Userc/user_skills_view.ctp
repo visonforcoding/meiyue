@@ -33,7 +33,12 @@
                                 <i class="smalldes">美币/小时</i>
                             </span>
                             <i class="iconfont rcon">&#xe605;</i>
-                            <input id="cost-id-input" type="text" name="cost_id" value="" hidden>
+                            <input
+                                id="cost-id-input"
+                                type="text"
+                                name="cost_id"
+                                value="<?= (isset($userskill) && isset($userskill->cost))?$userskill->cost->id:''; ?>"
+                                hidden>
                         </div>
                     </div>
                 </li>
@@ -76,7 +81,8 @@
         <div class="ability_items mt40">
             <div class="switchbox flex flex_justify inner">
                 <div class="switch_str">上线</div>
-                <div class="switch <?= isset($userskill) ? (($userskill['is_used'] ==1)?'on':'off') : 'on' ?>">
+                <div class="switch
+                    <?= isset($userskill)?(($userskill['is_used'] ==1)?'on':'off'):'on' ?>">
                     <i class="swithbtn"></i>
                 </div>
                 <input id="use_status"
@@ -100,29 +106,24 @@
 <script>
 
     $('.toback').on('click', function(){
-
         history.back();
-
     })
 
     $(".release-btn").on('click', function () {
-
         var url = '';
         if ('<?= isset($userskill)?'edit':'add' ?>' == 'add') {
-
             url = '/userc/user-skill-save/';
-
         } else {
-
             url = '/userc/user-skill-save/<?= $userskill['id']?>';
-
         }
+        $.util.showPreloader();
         $.ajax({
             type: 'POST',
             url: url,
             data: $("form").serialize(),
             dataType: 'json',
             success: function (res) {
+                $.util.hidePreloader();
                 if (typeof res === 'object') {
                     if (res.status) {
                         window.location.href = '/userc/user-skills-index';
@@ -130,9 +131,11 @@
                         $.util.alert(res.msg);
                     }
                 }
+            },
+            error: function(res) {
+                $.util.hidePreloader();
             }
         });
-
     })
 
 

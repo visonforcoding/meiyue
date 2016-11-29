@@ -13,26 +13,28 @@
  * @param int $status
  * @return array|mixed|string
  */
-function getDateStatStr($status = -1) {
+class DateState {
+    const DATED = 1;
+    const NOT_YET = 2;
+    const DOWN = 3;
+    const BE_DOWN = 4;
 
-    $statuses = Array(
-        1 => "已有人赴约",
-        2 => "未有人赴约",
-        3 => "已下线",
-        4 => "被平台下架"
-    );
+    public static function getDateStatStr($status = null) {
 
-    if ($status == -1) {
-
-        return json_encode($statuses);
-    } elseif ($status == -2) {
-
-        return $statuses;
-    } else {
-
-        return isset($statuses[$status]) ? $statuses[$status] : "未知状态";
+        $statuses = Array(
+            DateState::DATED => "已有人赴约",
+            DateState::NOT_YET => "未有人赴约",
+            DateState::DOWN => "已下线",
+            DateState::BE_DOWN => "被平台下架"
+        );
+        if (!$status) {
+            return $statuses;
+        } else {
+            return isset($statuses[$status]) ? $statuses[$status] : "未知状态";
+        }
     }
 }
+
 
 /**
  * 技能分类转述

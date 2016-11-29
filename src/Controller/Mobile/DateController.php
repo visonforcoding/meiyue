@@ -2,6 +2,7 @@
 namespace App\Controller\Mobile;
 use Cake\Datasource\ResultSetInterface;
 use Cake\I18n\Time;
+use DateState;
 
 /**
  * Date Controller
@@ -19,33 +20,40 @@ class DateController extends AppController
      */
     public function index()
     {
-
         if($this->request->is("post")) {
-
-            $datas = $this->Date->find("all", ['contain' => ['UserSkill' => function($q){
-                return $q->contain(['Skill', 'Cost']);
-            }]]);
-
-            $datas = $datas->where(['Date.user_id' => $this->user->id]);
+            $datas = $this->Date
+                ->find("all", [
+                    'contain' => [
+                        'UserSkill' => function($q){
+                            return $q->contain(['Skill', 'Cost']);
+                        }
+                    ]
+                ]);
+            $datas = $datas
+                ->where([
+                    'Date.user_id' => $this->user->id
+                ]);
             if(isset($this->request->data['status'])) {
-
-                $datas->where(["Date.status" => $this->request->data['status']]);
-
+                $datas->where([
+                    "Date.status" => $this->request->data['status'],
+                    "Date.end_time >" => new Time()
+                ]);
             }
-
             $datas->formatResults(function(ResultSetInterface $results) {
-
                 return $results->map(function($row) {
                     $row->time = getFormateDT($row->start_time, $row->end_time);
+                    //到了约会开始时间还没有人赴约则显示已下线
+                    if(($row->start_time <= new Time())
+                        && $row->status == DateState::NOT_YET) {
+                        $row->status = DateState::DOWN;
+                    }
+                    $row->status = DateState::getDateStatStr($row->status);
                     return $row;
                 });
-
             });
             return $this->Util->ajaxReturn(['datas' => $datas->toArray(), 'status' => true]);
-
         }
         $this->set(["user" => $this->user, 'pageTitle' => '美约-约会管理']);
-
     }
 
     /**
@@ -58,10 +66,20 @@ class DateController extends AppController
     public function view($id = null)
     {
         $date = $this->Date->get($id, [
-            'contain' => ['UserSkill' => function($q){
-                return $q->contain(['Skill', 'Cost']);
-            }, 'User', 'Tags']
+            'contain' => [
+                'UserSkill' => function($q){
+                    return $q->contain(['Skill', 'Cost']);
+                },
+                'User',
+                'Tags'
+            ]
         ]);
+        if($date) {
+            if(($date->start_time <= new Time())
+                && $date->status == DateState::NOT_YET) {
+                $date->status = DateState::DOWN;
+            }
+        }
         $this->set(['date' => $date, 'pageTitle' => '美约-约会详情']);
 
     }
@@ -87,7 +105,6 @@ class DateController extends AppController
 
     /**
      * Edit method
-     *
      * @param string|null $id Date id.
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
@@ -95,24 +112,25 @@ class DateController extends AppController
     public function edit($id = null, $status = null)
     {
         $date = $this->Date->get($id, [
-            'contain' => ['UserSkill' => function($q){
-                return $q->contain(['Skill', 'Cost']);
-            }, 'User', 'Tags']
+            'contain' => [
+                'UserSkill' => function($q){
+                    return $q->contain(['Skill', 'Cost']);
+                },
+                'User',
+                'Tags'
+            ]
         ]);
         //修改信息
         if($this->request->is("POST")) {
-
             $date = $this->Date->patchEntity($date, $this->request->data);
             if ($this->Date->save($date)) {
                 return $this->Util->ajaxReturn(true, "发布成功");
             } else {
                 return $this->Util->ajaxReturn(false, "发布失败");
             }
-
         }
         //修改状态
         if($this->request->is("PUT")) {
-
             $date = $this->Date->get($id);
             $date->set("status", $status);
             if ($this->Date->save($date)) {
@@ -120,7 +138,6 @@ class DateController extends AppController
             } else {
                 return $this->Util->ajaxReturn(false, "下架失败");
             }
-
         }
         $this->set(['date' => $date, 'user'=>$this->user, 'pageTitle' => '美约-约会编辑']);
     }
@@ -146,32 +163,36 @@ class DateController extends AppController
     public function getAllDatesInPage($page)
     {
         $limit = 10;
-        $datas = $this->Date->find("all", ['contain' => ['UserSkill.Skill', 'UserSkill.Cost', 'User' => function ($q) {
-            return $q->select(['nick', 'birthday']);}]])
-            ->where(['Date.status' => 2, 'Date.start_time >' => new Time()]);
+        $datas = $this->Date->find("all", [
+            'contain' => [
+                'UserSkill.Skill',
+                'UserSkill.Cost',
+                'User' => function ($q) {
+                    return $q->select(['nick', 'birthday']);}
+                ]
+            ])
+            ->where([
+                'Date.status' => 2,
+                'Date.start_time >' => new Time()
+            ]);
         $posititon = parent::getPosition();
         $userCoord_lng = $posititon[0];
         $userCoord_lat = $posititon[1];
-
-        $datas->order(["getDistance($userCoord_lng, $userCoord_lat, login_coord_lng, login_coord_lat)"=>'asc',
-            'created_time' => 'desc']);
-
+        $datas->order([
+            "getDistance($userCoord_lng, $userCoord_lat, login_coord_lng, login_coord_lat)"=>'asc',
+            'created_time' => 'desc'
+        ]);
         $datas->limit($limit);
         $datas->page($page);
-
         $datas->formatResults(function(ResultSetInterface $results) {
-
             return $results->map(function($row) {
                 $row->time = getFormateDT($row->start_time, $row->end_time);
                 $row->user->age = getAge($row['user']['birthday']);
                 $row->total_price = ($row->end_time->hour - $row->start_time->hour) * $row->price;
                 return $row;
             });
-
         });
-
         return $this->Util->ajaxReturn(['datas' => $datas->toArray(), 'status' => true]);
-
     }
 
 }

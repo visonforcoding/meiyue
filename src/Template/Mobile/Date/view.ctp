@@ -44,9 +44,12 @@
     </div>
     <?php endif; ?>
 </div>
+
 <div class="inner">
-    <a class="btn btn_cancel mt60">取消发布</a>
-    <p class="commontips mt40 color_des aligncenter">点击此按钮后，此约会将从活动-约会模块中移除</p>
+    <?php if($date['status'] == DateState::NOT_YET): ?>
+        <a class="btn btn_cancel mt60">取消发布</a>
+        <p class="commontips mt40 color_des aligncenter">点击此按钮后，此约会将从活动-约会模块中移除</p>
+    <?php endif; ?>
 </div>
 
 <script>

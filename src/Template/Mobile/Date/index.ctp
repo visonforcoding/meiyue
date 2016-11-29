@@ -7,15 +7,21 @@
 <div class="wraper">
     <div class="date_list">
         <div class="date_list_header">
-            <div class="date-tab alldate cur" tab-action="all"><span class="headertab">全部</span></div> |
-            <div class="date-tab todate" tab-action="to"><span class="headertab">待抢单</span></div>
+            <div class="date-tab alldate cur" tab-action="all">
+                <span class="headertab">
+                    全部
+                </span>
+            </div> |
+            <div class="date-tab todate" tab-action="to">
+                <span class="headertab">
+                    待抢单
+                </span>
+            </div>
         </div>
         <div class="date_list_con">
             <section style="display: block">
                 <!--约会列表显示位置-->
                 <ul id="dates-list-container">
-
-
                 </ul>
             </section>
         </div>
@@ -23,7 +29,11 @@
 </div>
 <!--发布约会-->
 <div class="fixed_r_submit">
-    <span id="publish-date-info">发布<br />约会</span>
+    <span id="publish-date-info">
+        发布
+        <br />
+        约会
+    </span>
 </div>
 
 <script type="text/html" id="tpl">
@@ -48,71 +58,47 @@
 
     //首次获取列表数据
     getNetDatas("");
-
     $(".toback").on('click', function(){
-
         history.back();
-
     });
 
-    var statuses = <?= getDateStatStr(); ?>;
     $("#publish-date-info").on('click', function(){
-
         location.href = "/date/add";
-
     });
-
 
     //点击tab的切换效果
     $(".date-tab").on('click', function(){
-
         $(".date-tab").each(function () {
-
             $(this).removeClass('cur');
-
         });
         $(this).addClass('cur');
         var datas = "";
         if($(this).attr('tab-action') == 'to') {
-
             datas += "status=2";
-
         }
         getNetDatas(datas);
-
     });
 
-
     function getNetDatas(options) {
-
         $.ajax({
             url: "/date/index",
             type: "POST",
             data: options,
             dataType: "json",
             success:function(res) {
-
                 if(res.status) {
-
                     if((res.datas).length == 0) {
-
                         $('#dates-list-container').html('');
                         return;
-
                     }
                     $.util.dataToTpl("dates-list-container", "tpl", res.datas, function(d){
                         d.skill_name = d.user_skill.skill.name;
                         d.price = d.user_skill.cost.money;
-                        d.status = statuses[d.status];
                         return d;
                     });
-
                 }
-
             }
-
         });
-
     }
 
 </script>
