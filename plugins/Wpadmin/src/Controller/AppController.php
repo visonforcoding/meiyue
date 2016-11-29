@@ -143,10 +143,21 @@ class AppController extends Controller {
      * @return array total 总页数 page 当前页码 records 总记录数 rows 数据数组
      * 
      */
-    protected function getJsonForJqrid($page, $limit, $modelName = '', $sort = '', $order = '', $where = '') {
-        $Table = \Cake\ORM\TableRegistry::get(!empty($modelName) ? $modelName : $this->modelClass);
+    protected function getJsonForJqrid(
+        $page,
+        $limit,
+        $modelName = '',
+        $sort = '',
+        $order = '',
+        $where = '',
+        $contain = '')
+    {
+        $Table = TableRegistry::get(!empty($modelName) ? $modelName : $this->modelClass);
         $query = $Table->find();
         $query->hydrate(false);
+        if(!empty($contain)) {
+            $query->contain($contain);
+        }
         if (!empty($where)) {
             $query->where($where);
         }
@@ -165,7 +176,12 @@ class AppController extends Controller {
         } else {
             $total_pages = 0;
         }
-        $arr = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
+        $arr = array(
+            'page' => $page,
+            'total' => $total_pages,
+            'records' => $nums,
+            'rows' => $res
+        );
         return $arr;
     }
 

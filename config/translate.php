@@ -250,5 +250,26 @@ class ServiceType {
 
 
 /**
- *
+ * 约拍状态
  */
+class YuepaiStatus {
+
+    const NORMAL = 1;  //正常
+    const DOWN = 2;    //下架
+
+    const GETJSON = -1; //获取json数据
+    public static function getStatus($st = null) {
+        $status = Array(
+            YuepaiStatus::NORMAL => '正常',
+            YuepaiStatus::DOWN => '下架'
+        );
+        if(YuepaiStatus::GETJSON == $st) {
+            return json_encode($status);
+        }
+        if($st) {
+            return isset($status[$st])?$status[$st]:'异常';
+        }
+        return $status;
+    }
+
+}
