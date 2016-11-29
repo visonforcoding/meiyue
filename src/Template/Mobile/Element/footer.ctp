@@ -14,9 +14,9 @@
                 </a>
             </span>
         </li>
-        <li>
+        <li <?php if($active=='chat'): ?>class="chat"<?php endif;?>>
             <span class="bar-chat">
-                <a href="#this">
+                <a href="/chat/chat-list">
                     <i class="iconfont">&#xe603;</i>私聊
                 </a>
             </span>

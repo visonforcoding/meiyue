@@ -224,10 +224,6 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                     });
                     break;
                 case "event.imTalk":
-                    registerAPI(null, api, function () {
-                        return JSApiInvoke(api, {id: arguments[0]}, '');
-                    });
-                    break;
                 case "sys.setSex":
                 case "sys.setTopRight":
                 case "event.invite":

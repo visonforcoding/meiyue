@@ -15,6 +15,7 @@ use Cake\I18n\Time;
  * @property \App\Controller\Component\PushComponent $Push
  * @property \App\Controller\Component\BdmapComponent $Bdmap
  * @property \App\Controller\Component\BusinessComponent $Business
+ * @property \App\Controller\Component\NetimComponent $Netim
  */
 class TestController extends AppController {
 
@@ -205,5 +206,9 @@ class TestController extends AppController {
             }
         }
     }
-
+    
+    public function getImId($id){
+        $this->loadComponent('Netim');
+        $this->Netim->registerIm($id);
+    }
 }

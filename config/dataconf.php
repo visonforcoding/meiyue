@@ -62,5 +62,9 @@ return [
     ],
     'baidu'=>[
         'mapkey'=>'474572ab0a64485f5b02d3e8accaf09c'
+    ],
+    'netim'=>[
+       'app_key'=>'9e0e349ffbcf4345fdd777a65584fb68',
+       'app_secret'=>'1d4cb8f1d21b',
     ]
 ];

@@ -269,7 +269,6 @@ Log::config('cron', [
 Plugin::load('Migrations');
 Plugin::load('Wpadmin', ['bootstrap' => true, 'routes' => true]);
 Plugin::load('ADmad/Glide');
-
 //载入自定义配置文件
 Configure::load('wpadmin');
 Configure::load('dataconf');
