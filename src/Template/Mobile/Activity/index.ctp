@@ -86,7 +86,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 
 <script id="rich-list-tpl" type="text/html">
 {{#datas}}
-<li>
+<li class='ul-con'>
     <div class="voted_con flex flex_justify">
         <div class="flex">
             <span class="voted_place silver">{{index}}</span>
@@ -160,8 +160,8 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                         <li class="top-tab" act="top_month"><span>月榜</span></li>
                         <li class="top-tab" act="rich_list"><span>土豪榜</span></li>
                     </ul>
-                    <div class="rank_con rich_list">
-                        <ul class="inner outerblock voted_list" id="top-list">
+                    <div class="rank_con">
+                        <ul class="outerblock voted_list" id="top-list">
                             <!-- 头牌列表 -->
                         </ul>
                     </div>
