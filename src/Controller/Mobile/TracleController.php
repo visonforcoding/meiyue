@@ -63,7 +63,7 @@ class TracleController extends AppController {
      * 约拍
      */
     public function tracleOrder(){
-        
+        $this->set(['pageTitle' => '免费约拍报名']);
     }
     
 }
