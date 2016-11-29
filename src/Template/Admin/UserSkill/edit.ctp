@@ -72,7 +72,7 @@
                         if (typeof res === 'object') {
                             if (res.status) {
                                 layer.alert(res.msg, function () {
-                                    window.location.href = '/userskill/index';
+                                    window.location.href = '/user-skill/index';
                                 });
                             } else {
                                 layer.alert(res.msg, {icon: 5});
