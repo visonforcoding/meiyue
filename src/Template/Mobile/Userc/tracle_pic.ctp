@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <p class="commontitle aligncenter inner mt20">注意要发布个人性感、具有诱惑力的性感私房照，且必须发9张</p>
+    <p class="commonarea aligncenter inner mt20">注意要发布个人性感、具有诱惑力的性感私房照，且必须发9张</p>
     <div class="inner mt100">
         <p class="commontitle aligncenter color_y">没有性感照片?</p>
         <div class="inner">
