@@ -22,19 +22,19 @@
     </div>
     <div class="identify_basic_info mt40">
         <ul class="inner">
-            <li class="clearfix" onclick="window.location.href = '/userc/edit-basic';">
+            <li class="clearfix" onclick="window.location.href='/userc/edit-basic';">
                 <a>
                     <span class="fl">基本信息</span>
                     <i class="iconfont right_ico fr">&#xe605;</i>
                 </a>
             </li>
-            <li class="clearfix">
+            <li class="clearfix" onclick="window.location.href='/userc/edit-auth';">
                 <a href="#this">
                     <span class="fl">身份认证</span>
                     <i class="iconfont right_ico fr">&#xe605;</i>
                 </a>
             </li>
-            <li class="clearfix">
+            <li class="clearfix" onclick="window.location.href='/userc/edit-basic-pic';">
                 <a href="#this">
                     <span class="fl">基本照片与视频上传</span>
                     <i class="iconfont right_ico fr">&#xe605;</i>
