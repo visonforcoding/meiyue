@@ -170,33 +170,14 @@ class WxController extends AppController {
      * 预约支付页  此页面URL 需在微信公众号的微信支付那里配置 支付域
      * @param int $id  订单id
      */
-    public function meetPay($id = null) {
-        $OrderTable = \Cake\ORM\TableRegistry::get('Order');
-        $theorder = $OrderTable->get($id);
-        $type = $theorder->type;
-        if ($type == 1) {
-            $order = $OrderTable->get($id, [
-                'contain' => ['SubjectBook', 'SubjectBook.Subjects']
-            ]);
-            $body = '预约话题《' . $order->subject_book->subject->title . '》支付';
-            $title = '并购帮-预约话题';
-            $order_detail = $order->subject_book->subject;
-        } else {
-            $order = $OrderTable->get($id, [
-                'contain' => ['Activityapplys', 'Activityapplys.Activities']
-            ]);
-            $body = '活动报名《' . $order->activityapply->activity->title . '》支付';
-            $title = '并购帮-活动报名';
-            $order_detail = $order->activityapply->activity;
-        }
-        $order_detail->price = $order->price;
-        $order_detail->type = $type;
-        $out_trade_no = $order->order_no;
-        $openid = $this->user->wx_openid;
-        if (empty($openid)) {
-            
-        }
-        $fee = $order->price;  //支付金额(分)
+    public function pay($id = null) {
+        $PayorderTable = \Cake\ORM\TableRegistry::get('Payorder');
+        $payorder = $PayorderTable->get($id);
+        $order = $PayorderTable->get($id, [
+        ]);
+        $out_trade_no = $payorder->order_no;
+//        $fee = $order->price;  //支付金额
+        $fee = 0.01;  //支付金额
         $this->loadComponent('Wxpay');
         $isApp = false;
         $aliPayParameters = '';
@@ -205,9 +186,13 @@ class WxController extends AppController {
             $isApp = true;
             $openid = $this->user->app_wx_openid;
             $this->loadComponent('Alipay');
+            $title = $payorder->title;
+            $body = $payorder->remark;
             $aliPayParameters = $this->Alipay->setPayParameter($out_trade_no, $title, $fee, $body);
         }
+        $openid = $this->user->wx_openid;
         if ($openid) {
+            $body = $payorder->title;
             $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
         }
         $this->set(array(
@@ -215,9 +200,10 @@ class WxController extends AppController {
             'isWx' => $this->request->is('weixin') ? true : false,
             'aliPayParameters' => $aliPayParameters,
         ));
-
-        $this->set(['pageTitle' => '订单支付']);
-        $this->set(compact('order_detail', 'order'));
+        $this->set([
+            'payorder' => $payorder,
+            'pageTitle' => '美币充值'
+        ]);
     }
 
     /**
@@ -242,11 +228,11 @@ class WxController extends AppController {
         $user->union_id = $union_id;
         $user->app_wx_openid = $openid;
         $UserTable->save($user); //记录open_id 等微信信息
-        $this->request->session()->write('User.mobile', $user);//并更新session
+        $this->request->session()->write('User.mobile', $user); //并更新session
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
         $order = $OrderTable->get($id);
         if ($order->type == 1) {
-             $order = $OrderTable->get($id, [
+            $order = $OrderTable->get($id, [
                 'contain' => ['SubjectBook', 'SubjectBook.Subjects']
             ]);
             $body = '预约话题《' . $order->subject_book->subject->title . '》支付';
@@ -268,7 +254,7 @@ class WxController extends AppController {
             $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
         }
         return $this->Util->ajaxReturn([
-            'jsApiParameters' => $jsApiParameters
+                    'jsApiParameters' => $jsApiParameters
         ]);
     }
 
@@ -312,7 +298,7 @@ class WxController extends AppController {
             $union_id = $res->unionid;
             $open_id = $res->openid;
             //$user = $this->User->findByUnion_id($union_id)->first();
-            $user = $this->User->find()->where(['union_id'=>$union_id,'enabled'=>1,'is_del'=>0])->first();
+            $user = $this->User->find()->where(['union_id' => $union_id, 'enabled' => 1, 'is_del' => 0])->first();
             if ($user) {
                 //直接登陆
                 if (empty($user->app_wx_opeinid)) {
@@ -380,7 +366,7 @@ class WxController extends AppController {
                 $url = '/activity/details/' . $id;
             } elseif ($controller == 'user') {
                 $url = '/meet/view/' . $id;
-            } elseif ($controller == 'beauty'){
+            } elseif ($controller == 'beauty') {
                 $url = '/beauty/homepage/' . $id;
             }
         } else {

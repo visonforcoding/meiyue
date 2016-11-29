@@ -35,7 +35,17 @@ class PurseController extends AppController {
     public function createPayorder(){
         $PayorderTable = TableRegistry::get('Payorder');
         $payorder = $PayorderTable->newEntity([
+            'user_id'=>  $this->user->id,
+            'title'=>'美约美币充值',
+            'order_no'=>time() . $this->user->id . createRandomCode(4, 1),
+            'price'=>  $this->request->data('mb'),
+            'remark'=>  '充值美币'.$this->request->data('mb').'个',
         ]);
+        if($PayorderTable->save($payorder)){
+            return $this->Util->ajaxReturn(['status'=>true,'redirect_url'=>'/wx/pay/'.$payorder->id]);
+        }else{
+            return $this->Util->ajaxReturn(['status'=>false,'msg'=>  errorMsg($payorder, '服务器出错')]);
+        }
     }
     
 }

@@ -7,6 +7,7 @@ use Cake\Controller\ComponentRegistry;
 
 /**
  * 支付宝
+ * 商家签约支付
  * Alipay component
  * @property \App\Controller\Component\BusinessComponent $Business
  * @property \App\Controller\Component\UtilComponent $Util

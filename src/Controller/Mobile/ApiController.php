@@ -412,7 +412,7 @@ class ApiController extends AppController {
             $this->jsonResponse(false, '缺少必要的参数');
         }
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $user = $UserTable->find()->select(['id', 'user_token', 'gender', 'pwd'])
+        $user = $UserTable->find()->select(['id', 'user_token', 'gender', 'pwd','imtoken'])
                 ->where(['phone' => $u, 'enabled' => 1, 'is_del' => 0])
                 ->first();
         $pwd = $this->request->data('pwd');

@@ -71,10 +71,6 @@ class PayorderTable extends Table {
                 ->integer('id')
                 ->allowEmpty('id', 'create');
 
-        $validator
-                ->integer('type')
-                ->requirePresence('type', 'create')
-                ->notEmpty('type');
 
         $validator
                 ->requirePresence('title', 'create')
@@ -108,7 +104,6 @@ class PayorderTable extends Table {
      */
     public function buildRules(RulesChecker $rules) {
         $rules->add($rules->existsIn(['user_id'], 'User'));
-        $rules->add($rules->existsIn(['seller_id'], 'Sellers'));
 
         return $rules;
     }
