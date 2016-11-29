@@ -115,9 +115,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
         <div class="date_list">
             <div class="date_list_header" id="imgTab">
                 <div id="tab-1" class="alldate"><span class="headertab">约会</span></div>
-                |
                 <div id="tab-2" class="todate"><span class="headertab">派对</span></div>
-                |
                 <div id="tab-3" class="todate"><span class="headertab">头牌</span></div>
             </div>
         </div>
@@ -172,7 +170,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
         </div>
     </div>
 </div>
-
+<div style='height:57px;'></div>
 <!--底部-->
 <?= $this->element('footer', ['active' => 'activity']) ?>
 
