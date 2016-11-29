@@ -9,11 +9,11 @@
 </header>
 <div class="wraper">
     <form>
-        <div class="edit_ability bgff inner">
+        <div class="edit_ability bgff">
             <ul class="outerblock">
                 <li>
                     <div id="skill-btn" class="items flex flex_justify">
-                        <div>技能名称</div>
+                        <div class='col-importent'>技能名称</div>
                         <div class="r_info">
                         <span id="show-skill-name">
                             <?= isset($userskill) ? $userskill['skill']['name'] : '请选择' ?>
@@ -26,7 +26,7 @@
                 </li>
                 <li>
                     <div class="items flex flex_justify" id="cost-btn">
-                        <div>技能价格</div>
+                        <div class='col-importent'>技能价格</div>
                         <div class="r_info">
                             <span id="show-cost">
                                 <?= (isset($userskill) && isset($userskill->cost))?$userskill->cost->money:0; ?>
@@ -44,11 +44,11 @@
                 </li>
             </ul>
         </div>
-        <div class="edit_ability bgff inner mt40">
+        <div class="edit_ability bgff mt40">
             <ul class="outerblock">
                 <li>
                     <div id="choose_tags_btn" class="items flex flex_justify">
-                        <div>个人标签</div>
+                        <div class='col-importent'>个人标签</div>
                         <div id="tag-container" class="r_info">
                             <?php if (!isset($userskill)): ?>
                                 <i class="smalldes">4个以内</i>
@@ -72,7 +72,7 @@
         </div>
         <div class="edit_ability bgff inner mt40">
             <div class="date_text">
-                <div class="b_title">约会说明</div>
+                <div class="b_title col-importent">约会说明</div>
                 <div class="r_text">
                     <textarea name="description" placeholder="100个字以内"><?= empty($userskill['description'])?'':$userskill['description']; ?></textarea>
                 </div>
@@ -80,7 +80,7 @@
         </div>
         <div class="ability_items mt40">
             <div class="switchbox flex flex_justify inner">
-                <div class="switch_str">上线</div>
+                <div class="switch_str col-importent">上线</div>
                 <div class="switch
                     <?= isset($userskill)?(($userskill['is_used'] ==1)?'on':'off'):'on' ?>">
                     <i class="swithbtn"></i>
