@@ -9,7 +9,7 @@
                 <img src="<?= createImg($user->avatar) . '?w=77' ?>"/>
             </span>
             <div class="cover_left_info">
-                <ul>
+                <ul class='opci'>
                     <li class="blight userinfo">
                         <a href="#this" class="cover_block">
                             <h3>
