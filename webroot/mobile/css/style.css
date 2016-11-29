@@ -22,15 +22,15 @@
 .loginbox .valicode{width:52%;display:block}
 .login_box_btn .login_group{display:box;display: -webkit-box;-webkit-box-pack: justify;}
 .login_box_btn .login_group .btn{width:48%;}
-.loginbox .getvalid{text-decoration: none;border:1px #5d5a57 solid;text-align:center;display: block;color:#fff;width:2.1rem;height:28px;line-height: 26px;font-size:12px;}
+.loginbox .getvalid{text-decoration: none;border:1px #5d5a57 solid;text-align:center;display: block;color:#fff;padding:0 .06rem;height:28px;line-height: 26px;font-size:12px;max-width:2.1rem;}
 .loginbox .getvalid.disabled{text-decoration: none;border:1px #5d5a57 solid;text-align:center;color:#c8c9cb;display: inline-block;width:1.8rem;height:28px;line-height: 26px;}
 .fogetpwd{color:#eab96a;font-size:13px;text-decoration: underline;}
 .loginbox div{border-bottom:1px #4a3d28 solid; padding:.3rem 0;margin-top:.16rem;padding-left:.2rem;color:#eab96a;font-size:16px;}
 .loginbox input::-webkit-input-placeholder { /* WebKit browsers */ color: #514128 } 
 .loginbox div i{margin-right:.3rem;}
-.outerlogin,.register_bottom_tips{width:100%;text-align: center;margin-top:1.1rem;}
+.outerlogin,.register_bottom_tips{width:100%;text-align: center;margin-top:1.1rem;position: fixed;bottom:.4rem;}
 .outerlogin a{color:#987845;}
-.register_bottom_tips a{color:#fff}
+.register_bottom_tips a{color:#fff;opacity:.5;}
 .getlogin{text-align: center;font-size:12px;margin-top: 15px;}
 .getlogin a{color:#cc9930;}
 @media only screen and (max-width: 320px){
@@ -45,7 +45,7 @@
  * 认证填写
  * */
 header{overflow: hidden;}
-.header{height:1rem;background: #1a1713;color:#eab96a;text-align: center;line-height: 1rem;font-size:18px;position:relative;}
+.header{height:1rem;background: #1a1713;color:#eab96a;text-align: center;line-height: 1rem;font-size:18px;position:relative;display:none;}
 .header .l_btn{position: absolute;left:0;color:#eab96a;font-size: 14px;top:0;padding:0 .3rem;opacity: .8;}
 .header .r_btn{position: absolute;right:0;color:#eab96a;font-size: 14px;top:0;padding:0 .3rem;opacity: .8;}
 .header .ico{font-size: 20px;}
@@ -408,7 +408,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .home_basic_mark .bottom .title,.home_basic_mark p{font-size: 12px;line-height: 20px;}
 .home_basic_mark p{text-align: justify;}
 .home_basic_ability ul{overflow: hidden;padding-top:.16rem;}
-.home_basic_ability li{padding:.2rem 0;}
+.home_basic_ability li{padding:.2rem .3rem .2rem 0;}
 .home_basic_ability .itms{height:28px;}
 .home_basic_ability .items .date{width:1.2rem;height:28px;display: inline-block;border-radius:3px;line-height: 28px;background: #EAB96A;text-align: center;color:#fff;}
 .home_basic_ability .items .nodate{width:1.2rem;height:28px;display: inline-block;border-radius:3px;line-height: 28px;text-align: center;border:1px #caced3 solid;color:#959da7;background: #fff;}
@@ -423,8 +423,10 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .home_seach_otherinfo .nobottom{border-bottom:none;}
 .home_seach_info li,.home_seach_otherinfo li{padding-right:.3rem;}
 .home_seach_info .items span,.home_seach_otherinfo .items span{display: block;}
-.home_seach_info .items span.golook,.home_seach_otherinfo .items span.golook{font-size: 12px;color:#999;}
+.home_seach_info .items span.golook,.home_seach_otherinfo .items span.golook{color:#666;}
 .home_seach_info .items,.home_seach_otherinfo .items{height:45px;}
+.home_seach_otherinfo .items-con{height:auto;padding:.2rem 0;}
+.home_seach_otherinfo .items-con .golook{max-width:5rem;}
 .home_seach_info .items .golook i,.home_seach_otherinfo .items .golook i{font-size: 12px;margin-left:.2rem;color:#d7dade;}
 .home_seach_otherinfo .items .seach_name{margin-right:.1rem;width:1.7rem;}
 .home_seach_otherinfo .items .sport_items{width:2.5rem;}
