@@ -29,7 +29,7 @@
                         <div>技能价格</div>
                         <div class="r_info">
                             <span id="show-cost">
-                                <?= isset($cost)?$cost['money']:0; ?>
+                                <?= (isset($userskill) && isset($userskill->cost))?$userskill->cost->money:0; ?>
                                 <i class="smalldes">美币/小时</i>
                             </span>
                             <i class="iconfont rcon">&#xe605;</i>
@@ -192,8 +192,8 @@
 
 
     function chooseCostCB(val) {
-        $('#show-cost').text(val + '美币/小时');
-        $('#cost-id-input').val(val);
+        $('#show-cost').text(val.cost + '/小时');
+        $('#cost-id-input').val(val.cost_id);
     }
     var cPicker = new costsPicker();
     cPicker.init(chooseCostCB);

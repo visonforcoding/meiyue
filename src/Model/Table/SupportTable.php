@@ -31,6 +31,11 @@ class SupportTable extends Table
         $this->table('lm_support');
         $this->primaryKey('id');
 
+        $this->belongsTo('Supporter', [
+            'className' => 'User',
+            'foreignKey' => 'supporter_id'
+        ]);
+
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

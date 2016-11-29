@@ -180,16 +180,13 @@ class UsercController extends AppController {
     {
 
         $page_titles = Array(
-
             'add' => '美约-添加技能',
             'edit' => '美约-编辑技能',
-
         );
 
         $userSkillTable = \Cake\ORM\TableRegistry::get('UserSkill');;
         $userskill = null;
         if('edit' == $action) {
-
             $userskill = $userSkillTable->get($userskill_id, ['contain' => ['Skill', 'Cost', 'Tags']]);
 
         }

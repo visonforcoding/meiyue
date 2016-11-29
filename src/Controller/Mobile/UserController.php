@@ -3,6 +3,7 @@
 namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * User Controller
@@ -448,6 +449,51 @@ class UserController extends AppController {
             'wektop' => $wektop,
             'montop' => $montop,
             'pageTitle' => $title
+        ]);
+    }
+
+
+    /**
+     * 我的评选-谁支持我
+     * @param $id
+     */
+    public function support() {
+        $this->handCheckLogin();
+        $spTb = TableRegistry::get('Support');
+        $userTb = TableRegistry::get('User');
+
+        $supports = $spTb
+            ->find()
+            ->select(['supporter_id', 'spcount' => 'count(1)'])
+            ->where(['supported_id' => $this->user->id])
+            ->orderDesc('create_time')
+            ->group('supporter_id')
+            ->toArray();
+        $supporterids = [];
+        foreach($supports as $item) {
+            $supporterids[] = $item->supporter_id;
+        }
+
+        $flowsTb = TableRegistry::get('Flow');
+        $flows = $flowsTb
+            ->find()
+            ->contain([
+                'Buyer'=>function($q){
+                    return $q->select(['id','avatar','nick','phone','gender', 'birthday']);
+                },
+            ])
+            ->select(['total' => 'sum(amount)'])
+            ->where(['buyer_id IN' => $supporterids, 'type' => 4])
+            ->group('buyer_id')
+            ->toArray();
+        $sortFlows = [];
+        foreach($flows as $item) {
+            $sortFlows[$item->buyer->id] = $item;
+        }
+        $this->set([
+            'supports' => $supports,
+            'flows' => $sortFlows,
+            'pageTitle' => '支持我的人'
         ]);
     }
 
