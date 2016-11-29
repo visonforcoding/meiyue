@@ -24,7 +24,7 @@
 .login_box_btn .login_group .btn{width:48%;}
 .loginbox .getvalid{text-decoration: none;border:1px #5d5a57 solid;text-align:center;display: block;color:#fff;padding:0 .06rem;height:28px;line-height: 26px;font-size:12px;max-width:2.1rem;}
 .loginbox .getvalid.disabled{text-decoration: none;border:1px #5d5a57 solid;text-align:center;color:#c8c9cb;display: inline-block;width:1.8rem;height:28px;line-height: 26px;}
-.fogetpwd{color:#eab96a;font-size:13px;text-decoration: underline;}
+.fogetpwd{color:#eab96a;font-size:13px;text-decoration: underline;opacity: .8;}
 .loginbox div{border-bottom:1px #4a3d28 solid; padding:.3rem 0;margin-top:.16rem;padding-left:.2rem;color:#eab96a;font-size:16px;}
 .loginbox input::-webkit-input-placeholder { /* WebKit browsers */ color: #514128 } 
 .loginbox div i{margin-right:.3rem;}
@@ -135,7 +135,7 @@ header{overflow: hidden;}
 .home_fill_basic_info .home_list_l_info{text-align: justify;width:1.8rem;display:-webkit-box;-webkit-box-align:center;-webkit-box-pack:start;display: flex;-webkit-justify-content: space-between;justify-content: space-between;}
 .home_fill_basic_info .home_list_l_info .itemsname{color:#000;}
 .home_fill_basic_info ul{padding:0 0 0 .3rem;overflow: hidden;}
-.home_fill_basic_info ul li{padding:.26rem .3rem .26rem 0;}
+.home_fill_basic_info ul li{padding:.1rem .3rem .1rem 0;}
 .home_fill_basic_info .home_list_r_info{width: 5.2rem;text-align: right;}
 .home_fill_basic_info .home_list_r_info input{text-align: right;width:78%;color:#454545;}
 .home_fill_basic_info .home_list_r_info i.r_icon{margin-left:.1rem;color:#959da7;font-size:16px;}
@@ -316,11 +316,17 @@ color:#444;position:relative;}
 /*选择标签弹窗*/
 .choose_mark .title{font-size: 14px;}
 .choose_mark{padding-bottom:.2rem;background: #f4f4f4;}
+.choose-date-mark{position: absolute;bottom:0;width:100%;}
+.choose-date-mark .marks-box{padding:0 .3rem;width:100%;background: #fff;}
+.choose-date-mark .nav-title{line-height: 1rem;}
+.choose-date-mark .title{position: relative;height: 45px;line-height: 45px;background: #eab96a;font-size: 18px;color: #fff;text-align: center;font-size:14px;}
+.choose-date-mark ul{overflow: hidden;clear:both;}
+.choose-date-mark ul li{float:left; padding:0 .15rem;height:27px;line-height: 27px;color:#666;margin-bottom:17px;}
 .choose_mark li{height:70px;width:20%;}
-.choose_mark .cancel{position:absolute;left:.3rem;}
-.choose_mark__items ul{overflow: hidden;padding:.2rem 0;background: #fff;}
+.choose_mark .cancel,.choose-date-mark .cancel{position:absolute;left:.3rem;}
+.choose_mark__items ul{overflow: hidden;padding:.2rem 0;background: #fff; }
 .choose_mark__items ul li{float:left;}
-.choose_mark .r_btn{right:.3rem;position:absolute;}
+.choose_mark .r_btn,.choose-date-mark .r_btn{right:.3rem;position:absolute;}
 .choose_mark .r_btn .complete{margin-left:.5rem;font-size: 15px;}
 .choose_mark__items .choose_marks{text-align: center;margin:0 auto;}
 .choose_mark__items .choose_marks span{display: block;color:#e8b967;font-size:24px;height:42px;line-height: 40px;width:.8rem;margin:0 auto;border:1px transparent solid;}
