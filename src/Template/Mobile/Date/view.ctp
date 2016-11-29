@@ -8,7 +8,7 @@
 <div class="wraper">
     <div class="date_detail_place inner">
         <h3 class="title"><i class="itemsname color_y">
-                [<?= $date['user_skill']['skill']['name']?>]</i> <?= $date['title']?>
+                <?= $date['user_skill']['skill']['name']?></i> <?= $date['title']?>
         </h3>
         <div class="place_pic">
 					<span class="place">
@@ -17,7 +17,7 @@
             <div class="place_info">
                 <h3 class="userinfo"><?= $date['user']['nick']?>
                     <span>
-                        <?= getAge($date['user']['birthday']);?>岁
+                        <?= getAge($date['user']['birthday']);?>
                     </span></h3>
                 <h3 class="otherinfo">
                     <time><i class="iconfont color_y">&#xe622;</i>
