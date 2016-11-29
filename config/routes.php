@@ -53,7 +53,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->extensions(['json', 'xml', 'shtml']);
     //子域名模式
     $subdomain = substr(env('HTTP_HOST'), 0, strpos(env('HTTP_HOST'), '.'));
-    if (in_array($subdomain, ['admin', 'm','m-my'])) {
+    if (in_array($subdomain, ['admin', 'm','m-my','admin-my'])) {
         if($subdomain=='m-my'){
             $subdomain = 'mobile';
         }
