@@ -256,11 +256,11 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 /*字体图标*/
 @font-face {
     font-family: 'iconfont';
-    src: url('../font/iconfont.eot');
-    src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'),
-        url('../font/iconfont.woff') format('woff'),
-        url('../font/iconfont.ttf') format('truetype'),
-        url('../font/iconfont.svg#iconfont') format('svg');
+    src: url('../font/iconfont.eot?t=1128');
+    src: url('../font/iconfont.eot?t=1128#iefix') format('embedded-opentype'),
+        url('../font/iconfont.woff?t=1128') format('woff'),
+        url('../font/iconfont.ttf?t=1128') format('truetype'),
+        url('../font/iconfont.svg?t=1128#iconfont') format('svg');
 }
 
 .iconfont{
