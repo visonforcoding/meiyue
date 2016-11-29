@@ -23,9 +23,9 @@
             </div>
         </div>
     </div>
-    <p class="commontitle inner mt20">注意要发布个人性感、具有诱惑力的视频。</p>
+    <p class="commonarea inner mt20">注意要发布个人性感、具有诱惑力的视频。</p>
     <div class="inner mt100">
-        <p class="commontitle aligncenter color_y">没有性感视频?</p>
+        <a class="commontitle aligncenter color_y ablock" href='#this'>没有性感视频?</a>
         <div class="inner">
             <a href="/tracle/tracle_order" class="btn btn_dark_t mt20">免费约拍</a>
         </div>
