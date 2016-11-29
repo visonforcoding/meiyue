@@ -12,7 +12,7 @@
         </a>
     </div>
 
-    <ul class="mt20 outerblock bgff inner">
+    <ul class="mt20 bgff inner">
         <li>
             <a class="commonlayer ablock" href="home_install_tips.html">
                 <div>提醒设置</div>
@@ -29,7 +29,7 @@
             </a>
         </li>
     </ul>
-    <ul class="mt20 outerblock bgff inner">
+    <ul class="mt20 outerblock bgff">
         <li>
             <a class="commonlayer ablock">
                 <div>常见问题</div>
