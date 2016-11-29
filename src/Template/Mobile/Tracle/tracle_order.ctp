@@ -40,7 +40,7 @@
     <!--预约信息-->
     <div class="booking_box_info">
         <h3 class="commontitle inner mt20">预约信息</h3>
-        <ul class="outerblock content bgff">
+        <ul class="content bgff">
             <li class="flex flex_justify">
                 <div class="l_info">姓名</div>
                 <input type="text" placeholder="请输入姓名" />
