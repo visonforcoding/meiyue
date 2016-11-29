@@ -10,13 +10,15 @@
             <p>请抓紧时间，共有12人同时在支付中···</p>
         </div>-->
         <div class="date_detail_place inner">
-            <h3 class="title"><i class="itemsname color_y"><?= $date['user_skill']['skill']['name'] ?></i><?= $date['title'] ?></h3>
+            <h3 class="title">
+                <i class="itemsname color_y">[<?= $date['user_skill']['skill']['name'] ?>]</i><?= $date['title'] ?>
+            </h3>
             <div class="place_pic">
 							<span class="place">
 								<img src="/mobile/images/date_place.jpg"/>
 							</span>
                 <div class="place_info">
-                    <h3 class="userinfo"><?= $date['user']['nick'] ?><span> <?= getAge($date['user']['birthday']) ?></span></h3>
+                    <h3 class="userinfo"><?= $date['user']['nick'] ?><span> <?= getAge($date['user']['birthday']) ?>岁</span></h3>
                     <h3 class="otherinfo">
                         <time class="color_gray"><i class="iconfont">&#xe622;</i> <?= getFormateDT($date['start_time'], $date['end_time']);?></time>
                         <address class="color_gray"><i class="iconfont">&#xe623;</i> <?= $date['site'] ?></address>
