@@ -62,7 +62,7 @@
                     LEMON.event.getLocation(function (res) {
                         var data = JSON.parse(res);
                         if (data.success === 'ok') {
-                            $.util.setCookie('coord', data.lng + ',' + data.lng, 30);
+                            $.util.setCookie('coord', data.lng + ',' + data.lat, 30);
                             $.util.setCookie('coord_time',<?= time() ?>, 30);
                         }
                     });

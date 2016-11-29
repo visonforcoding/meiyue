@@ -396,7 +396,7 @@
 
     LEMON.sys.setTopRight('发布');
     window.onTopRight = function () {
-        window.location.href = '';
+        $("#release-btn").trigger('click');
     }
 
     //点击跳转到选择地址的页面并将原数据保存到cookie中
