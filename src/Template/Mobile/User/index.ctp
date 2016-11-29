@@ -11,15 +11,13 @@
             <div class="cover_left_info">
                 <ul class='opci'>
                     <li class="bbottom userinfo">
-                        <a href="#this" class="cover_block">
+                        <a href="/userc/edit-info" class="cover_block">
                             <h3>
                                 <span><?= $user->nick ?><i class="iconfont">&#xe628;</i></span>
                                 <span class="flag"><img src="/mobile/images/zui.png" alt="" /></span>
                             </h3>
                             <span class="cover_r_ico">
-                                <a href="/userc/edit-info"> 
-                                    <i class="iconfont" >&#xe605;</i>
-                                </a>
+                                <i class="iconfont" >&#xe605;</i>
                             </span>
                         </a>
                     </li>
