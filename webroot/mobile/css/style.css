@@ -321,7 +321,8 @@ color:#444;position:relative;}
 .choose-date-mark .nav-title{line-height: 1rem;}
 .choose-date-mark .title{position: relative;height: 45px;line-height: 45px;background: #eab96a;font-size: 18px;color: #fff;text-align: center;font-size:14px;}
 .choose-date-mark ul{overflow: hidden;clear:both;}
-.choose-date-mark ul li{float:left; padding:0 .15rem;height:27px;line-height: 27px;color:#666;margin-bottom:17px;}
+.choose-date-mark ul li{float:left; padding:0 .15rem;height:27px;line-height: 27px;color:#666;margin-bottom:17px;border:1px transparent solid;}
+.choose-date-mark ul li.active{border:1px #EAB96A solid;border-radius: 15px;}
 .choose_mark li{height:70px;width:20%;}
 .choose_mark .cancel,.choose-date-mark .cancel{position:absolute;left:.3rem;}
 .choose_mark__items ul{overflow: hidden;padding:.2rem 0;background: #fff; }
