@@ -46,7 +46,7 @@
             });
             $.zui.store.pageClear(); //刷新页面缓存清除
             $("#list").jqGrid({
-                url: "/userskill/getDataList",
+                url: "/user-skill/get-data-list",
                 datatype: "json",
                 mtype: "POST",
                 colNames: ['名称', '费用/小时', '约会说明', '标签', '是否启用', '审核状态', '操作'],
@@ -118,7 +118,7 @@
 
         function actionFormatter(cellvalue, options, rowObject) {
             response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-            response += '<a title="编辑" href="/userskill/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+            response += '<a title="编辑" href="/user-skill/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
             return response;
         }
 
@@ -130,7 +130,7 @@
                     type: 'post',
                     data: {id: id},
                     dataType: 'json',
-                    url: '/userskills/delete',
+                    url: '/user-skill/delete',
                     success: function (res) {
                         layer.msg(res.msg);
                         if (res.status) {

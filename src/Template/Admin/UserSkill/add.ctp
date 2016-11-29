@@ -79,7 +79,7 @@
                                 layer.confirm(res.msg, {
                                     btn: ['确认', '继续添加'] //按钮
                                 }, function () {
-                                    window.location.href = '/userskills/index';
+                                    window.location.href = '/user-skill/index';
                                 }, function () {
                                     window.location.reload();
                                 });
