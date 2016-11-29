@@ -397,8 +397,8 @@ color:#fff; line-height: 20px;padding-right: .1rem;}
 .home_page_basic .otherinfo li{text-align: center;border-right:1px #efefef solid;width:1.85rem;}
 .home_page_basic .otherinfo .t_desc{display: block;color:#170e00;font-size: 14px;margin-bottom:6px;}
 .home_page_basic .otherinfo .b_desc{color:#959da7;font-size: 12px;}
-.home_pic_info,.home_basic_mark,.home_basic_ability{background: #fff;padding:.2rem 0;}
-.home_basic_ability{background: #fff;padding:.2rem 0 0;}
+.home_pic_info,.home_basic_mark,.home_basic_ability{background: #fff;padding:.3rem 0;}
+/*.home_basic_ability{background: #fff;padding:.3rem 0 0;}*/
 .home_pic_info ul{overflow: hidden;}
 .home_pic_info li{width:1.6rem;height:1.6rem;border-radius: 5px;overflow: hidden;margin-right:.16rem;}
 .home_pic_info li:nth-of-type(4n){margin-right:0;}
@@ -427,7 +427,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .itms_list .more i{font-size: 22px;}
 /*查看微信*/
 .home_seach_info,.home_seach_otherinfo{background: #fff;padding:.1rem 0 .1rem .3rem;}
-.home_seach_otherinfo .nobottom{border-bottom:none;}
+.wraper .home_seach_otherinfo .nobottom{border-bottom:none;}
 .home_seach_info li,.home_seach_otherinfo li{padding-right:.3rem;}
 .home_seach_info .items span,.home_seach_otherinfo .items span{display: block;}
 .home_seach_info .items span.golook,.home_seach_otherinfo .items span.golook{color:#666;}
