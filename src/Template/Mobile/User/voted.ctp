@@ -16,20 +16,20 @@
                     <span class="iconfont color_gray r_con">&#xe605;</span>
                 </a>
                 <div class="voted_con voted-content flex flex_justify">
-
-                    <span class="voted_place"><?= $wektop->index?></span>
-                    <div class="voted_place_info">
-                        <span class="avatar"><img src="<?= $wektop->user->avatar;?>"/></span>
-                        <h3>
-                            <span class="voted_name"><?= $wektop->user->nick?></span>
-                            <span class="voted_number color_gray">
-                                <i class="iconfont color_y">&#xe61e;</i>
-                                <i class="color_y"><?= $wektop->total; ?></i>
-                                魅力值
-                            </span>
-                        </h3>
+                    <div class="voted_l_info">
+                        <span class="voted_place"><?= $wektop->index?></span>
+                        <div class="voted_place_info">
+                            <span class="avatar"><img src="<?= $wektop->user->avatar;?>"/></span>
+                            <h3>
+                                <span class="voted_name"><?= $wektop->user->nick?></span>
+                                <span class="voted_number color_gray">
+                                    <i class="iconfont color_y">&#xe61e;</i>
+                                    <i class="color_y"><?= $wektop->total; ?></i>
+                                    魅力值
+                                </span>
+                            </h3>
+                        </div>
                     </div>
-
                     <?php if(!$isme && $user->gender == 1):?>
                     <span class="button btn_dark"
                           onclick="window.location.href='/gift/index/<?= $herid; ?>';
