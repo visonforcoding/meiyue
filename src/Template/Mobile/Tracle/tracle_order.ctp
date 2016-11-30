@@ -93,7 +93,9 @@
                 if (typeof res === 'object') {
                     if (res.status) {
                         $.util.alert(res.msg);
-                        window.location.href = '/userc/my-tracle';
+                        setTimeout(function () {
+                            window.location.href = '/userc/my-tracle';
+                        }, 1500);
                     } else {
                         $.util.alert(res.msg);
                     }

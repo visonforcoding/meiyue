@@ -187,9 +187,24 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             tabPage: [1, 1, 1, 1], //当前第几页
             tabLoadEnd: [0, 0, 0, 0], //页码加载结束
             tabLoadHold: [0, 0, 0, 0], //页码加载结束
-            tabDataTpl: ['', '#date-list-tpl', '#activity-list-tpl', '#top-list-tpl'],
-            listId: ['', '#date_list', '#party_list', '#winer_list'],
-            tabDataUrl: ['', '/date/get-all-dates-in-page/', '/activity/get-all-dates-in-page/', '/activity/get-top-list/'],
+            tabDataTpl: [
+                '',
+                '#date-list-tpl',
+                '#activity-list-tpl',
+                '#top-list-tpl'
+            ],
+            listId: [
+                '',
+                '#date_list',
+                '#party_list',
+                '#winer_list'
+            ],
+            tabDataUrl: [
+                '',
+                '/date/get-all-dates-in-page/',
+                '/activity/get-all-dates-in-page/',
+                '/activity/get-top-list/'
+            ],
             top_obj: null
         }
         $.extend(this, this.opt, o);
@@ -240,7 +255,6 @@ $activity_action = '/activity/index/';  //定义派对请求地址
         },
         tabInit: function (index) {
             if (!this.tabInitLoad[index]) return;
-            //this.tabInitLoad[index] = 0;
             //首次加载数据
             if(index != this.tab_top) {
                 this.asyLoadData(this.cur_tab);
@@ -266,15 +280,12 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 
         asyLoadData: function (curtab) {
             if (this.tabLoadEnd[curtab]) return;
-            //if (this.tabLoadHold[curtab] || this.tabLoadEnd[curtab]) return;
-            //this.tabLoadHold[curtab] = true;
             $.util.showPreloader();
             var template = $(this.tabDataTpl[curtab]).html();
             var url = this.tabDataUrl[curtab] + this.tabPage[curtab];
             Mustache.parse(template);   // optional, speeds up future uses
             var obj = this;
             $.getJSON(url, function (data) {
-                //obj.tabLoadHold[curtab] = false;
                 $.util.hidePreloader();
                 if (data.code === 200) {
                     if((data.datas).length == 0) {
@@ -296,7 +307,8 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                             break;
                         case obj.tab_activity:
                             if (obj.tabInitLoad[curtab]) {
-                                $('#party-coverimg').html("<img src='/mobile/css/icon/banner1.jpg'/>");
+                                $('#party-coverimg')
+                                    .html("<img src='/mobile/css/icon/banner1.jpg'/>");
                             }
                             break;
                         case obj.tab_top:
