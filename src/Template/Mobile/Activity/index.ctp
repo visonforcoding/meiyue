@@ -289,15 +289,12 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 $.util.hidePreloader();
                 if (data.code === 200) {
                     if((data.datas).length == 0) {
+                        obj.tabLoadEnd[curtab] = true;
                         $.util.alert('没有更多数据了');
                         return;
                     }
                     var rendered = Mustache.render(template, data);
-                    if (!data.datas.length) {
-                        obj.tabLoadEnd[curtab] = true;
-                    } else {
-                        obj.tabPage[curtab]++;
-                    }
+                    obj.tabPage[curtab]++;
 
                     switch (curtab) {
                         case obj.tab_date:
