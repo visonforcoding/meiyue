@@ -255,6 +255,7 @@ class BusinessComponent extends Component
     protected function handType1Order(\App\Model\Entity\Payorder $order,$realFee,$payType,$out_trade_no) {
         $order->fee = $realFee;  //实际支付金额
         $order->paytype = $payType;  //实际支付方式
+        $flowPayType = $payType==1?'3':'4';
         $order->out_trade_no = $out_trade_no;  //第三方订单号
         $pre_amount = $order->user->money;
         $order->user->money += $order->price;    //专家余额+
@@ -271,6 +272,7 @@ class BusinessComponent extends Component
             'amount' => $order->price,
             'pre_amount' => $pre_amount,
             'after_amount' => $order->user->money,
+            'paytype'=>$flowPayType,
             'status' => 1,
             'remark' => '普通充值'.$order->price.'美币'
         ]);
