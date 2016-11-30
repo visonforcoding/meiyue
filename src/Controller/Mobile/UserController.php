@@ -466,8 +466,6 @@ class UserController extends AppController {
     public function support() {
         $this->handCheckLogin();
         $spTb = TableRegistry::get('Support');
-        $userTb = TableRegistry::get('User');
-
         $supports = $spTb
                 ->find()
                 ->select(['supporter_id', 'spcount' => 'count(1)'])
@@ -479,29 +477,39 @@ class UserController extends AppController {
         foreach ($supports as $item) {
             $supporterids[] = $item->supporter_id;
         }
-
         $flowsTb = TableRegistry::get('Flow');
-        $flows = $flowsTb
+        $sortFlows = [];
+        $flows = null;
+        if(count($supporterids)) {
+            $flows = $flowsTb
                 ->find()
                 ->contain([
-                    'Buyer' => function($q) {
-                        return $q->select(['id', 'avatar', 'nick', 'phone', 'gender', 'birthday']);
-                    },
-                        ])
-                        ->select(['total' => 'sum(amount)'])
-                        ->where(['buyer_id IN' => $supporterids, 'type' => 4])
-                        ->group('buyer_id')
-                        ->toArray();
-                $sortFlows = [];
-                foreach ($flows as $item) {
-                    $sortFlows[$item->buyer->id] = $item;
-                }
-                $this->set([
-                    'supports' => $supports,
-                    'flows' => $sortFlows,
-                    'pageTitle' => '支持我的人'
-                ]);
+                    'Buyer' => function ($q) {
+                        return $q->select([
+                            'id',
+                            'avatar',
+                            'nick',
+                            'phone',
+                            'gender',
+                            'birthday'
+                        ]);
+                    }])
+                ->select(['total' => 'sum(amount)'])
+                ->where(['buyer_id IN' => $supporterids, 'type' => 4])
+                ->group('buyer_id')
+                ->toArray();
+
+            foreach ($flows as $item) {
+                $sortFlows[$item->buyer->id] = $item;
             }
+        }
+
+        $this->set([
+            'supports' => $supports,
+            'flows' => $sortFlows,
+            'pageTitle' => '支持我的人'
+        ]);
+    }
 
 
     public function forget()

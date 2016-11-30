@@ -6,6 +6,7 @@
 </header>
 <div class="wraper">
     <ul class="praised_list mt20 bgff">
+        <?php if($supports): ?>
         <?php foreach($supports as $item): ?>
             <li>
                 <div class="praised_block">
@@ -42,5 +43,6 @@
                 </div>
             </li>
         <?php endforeach; ?>
+        <?php endif; ?>
     </ul>
 </div>
