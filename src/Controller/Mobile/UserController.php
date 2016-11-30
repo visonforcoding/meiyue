@@ -4,7 +4,7 @@ namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
 use Cake\ORM\TableRegistry;
-
+use Cake\Controller\Controller;
 /**
  * User Controller
  *
@@ -18,6 +18,8 @@ class UserController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
+//        $this->viewBuilder()->autoLayout(false);
+//        return $this->render('test');
         if(!$this->request->is('lemon')){
             //$this->handCheckLogin();
         }
