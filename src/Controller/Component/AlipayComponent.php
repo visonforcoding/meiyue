@@ -211,6 +211,7 @@ class AlipayComponent extends Component {
      */
     public function notify() {
         $data = $this->request->data();
+        \Cake\Log\Log::info('支付宝回调开始进行业务处理','devlog');
         if (isset($data['trade_status']) && $data['trade_status'] == 'TRADE_SUCCESS') {
             //支付宝端成功
             $order_no = $data['out_trade_no'];
