@@ -57,7 +57,7 @@
     </div>
     <div class="activity_initiate bgff mt20">
         <h3 class="title">活动详细介绍</h3>
-        <div>
+        <div class="bottom_info info inner">
             <?= $activity['detail']; ?>
         </div>
     </div>
