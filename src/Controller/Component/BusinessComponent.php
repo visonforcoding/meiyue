@@ -269,7 +269,8 @@ class BusinessComponent extends Component
             'relate_id'=>$order->id,   //关联的订单id
             'type_msg' => '账户充值',
             'income' => 1,
-            'amount' => $order->price,
+            'amount' => $realFee,
+            'price'=>$order->price,
             'pre_amount' => $pre_amount,
             'after_amount' => $order->user->money,
             'paytype'=>$flowPayType,
