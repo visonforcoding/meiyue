@@ -283,8 +283,9 @@ $('#order_pay').on('tap',function(){
    dom.addClass('disabled');
    var user_skill_id = <?=$data->id?>;
    var start_datetime = start_time.replace(/\//g, '-');
-    var end_datetime = end_time.replace(/\//g, '-');
-   var data = {user_skill_id:user_skill_id,
+   var end_datetime = end_time.replace(/\//g, '-');
+   var data = {
+       user_skill_id:user_skill_id,
        place_name:place_name,
        coord_lng:coord_lng,
        coord_lat:coord_lat,
@@ -294,7 +295,7 @@ $('#order_pay').on('tap',function(){
        data:data,
        func:function(res){
            if(res.status){
-              window.location.href = res.redirect_url;
+               window.location.href = res.redirect_url;
            }else{
                dom.removeClass('disabled');
            }
