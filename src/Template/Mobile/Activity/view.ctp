@@ -81,6 +81,10 @@
             <a class="identify_footer_potion cancel-btn">我要取消</a>
         <?php elseif ($botBtSts == 3): ?>
             <a class="identify_footer_potion">报名成功</a>
+        <?php elseif ($botBtSts == 4): ?>
+            <a class="identify_footer_potion">正在进行</a>
+        <?php elseif ($botBtSts == 5): ?>
+            <a class="identify_footer_potion">活动已结束</a>
         <?php else: ?>
             <a class="identify_footer_potion">异常状态</a>
         <?php endif; ?>

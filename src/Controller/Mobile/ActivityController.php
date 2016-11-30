@@ -20,27 +20,11 @@ class ActivityController extends AppController
      */
     public function index($curtab = 'date')
     {
-        /*if($this->request->is("post")) {
-
-            $datas = $this->Activity->find("all")->where(['status' => 1, 'Activity.start_time >' => new Time()])
-                ->map(function($row) {
-                    $row->time = getFormateDT($row->start_time, $row->end_time);
-                    return $row;
-            });
-            if($user_id) {
-
-                $datas = $datas->where(['Date.user_id' => $user_id]);
-                if(isset($this->request->data['status'])) {
-
-                    $datas->where(["Date.status" => $this->request->data['status']]);
-
-                }
-
-            }
-            return $this->Util->ajaxReturn(['datas' => $datas->toArray(), 'status' => true]);
-
-        }*/
-        $this->set(['curtab' => $curtab, "user" => $this->user, 'pageTitle' => '美约-活动']);
+        $this->set([
+            'curtab' => $curtab,
+            "user" => $this->user,
+            'pageTitle' => '美约-活动'
+        ]);
     }
 
 
@@ -75,49 +59,54 @@ class ActivityController extends AppController
     {
         $this->handCheckLogin();
         $activity = $this->Activity->get($id, ['contain' => ['Actregistrations'=> function($q){
-            return $q->contain(['User' => function($q) { return $q->select(['User.id', 'User.gender']);}])
+            return $q
+                ->contain([
+                    'User' => function($q) {
+                        return $q->select(['User.id', 'User.gender']);}
+                ])
                 ->where(['Actregistrations.status' => 1]);
         }]]);
 
-        $botBtSts = 0;  //底部按钮显示状态：0#我要报名 1#人数已满 2#我要取消 3#报名成功（此时是不可以取消的）
+        //底部按钮显示状态：0#我要报名 1#人数已满 2#我要取消 3#报名成功（此时是不可以取消的）
+        $botBtSts = 0;
         //检查报名人数是否已满
         if($this->user->gender == 1) {
-
             if($activity['male_rest'] == 0) {
-
                 $botBtSts = 1;
-
             }
-
         } else {
-
             if($activity['female_rest'] == 0) {
-
                 $botBtSts = 1;
-
             }
         }
 
         //检查是否已经参与
+        $regist_item = null;
         $actregistrations = $activity['actregistrations'];
         foreach ($actregistrations as $actregistration) {
-            if($this->user->id == $actregistration['user']['id'] && $actregistration['cancel_time'] == null) {
+            if($this->user->id == $actregistration['user']['id']
+                && $actregistration['cancel_time'] == null) {
                 $botBtSts = 2;
+                $regist_item = $actregistration;
                 break;
             }
         }
 
         $current_time = new Time();
         //检查是否在规定可取消时间
-        if($current_time->diffInDays($activity['start_time'], false) < 3) {
-
-
+        if($current_time->diffInDays($activity['start_time'], false) < 3 && ($botBtSts==2)) {
             $botBtSts = 3;
-
         }
 
+        //检查是否过期
+        $curtime = new Time();
+        if($activity->start_time < $curtime && $activity->end_time > $curtime) {
+            $botBtSts = 4;  //活动已开始
+        } else if($activity->end_time < $curtime) {
+            $botBtSts = 5;  //活动已结束
+        }
 
-        $this->set(['regist_item' => $actregistrations, 'botBtSts' => $botBtSts, 'user' => $this->user, 'activity' => $activity, 'pageTitle' => '美约-活动详情']);
+        $this->set(['regist_item' => $regist_item, 'botBtSts' => $botBtSts, 'user' => $this->user, 'activity' => $activity, 'pageTitle' => '美约-活动详情']);
     }
 
 
@@ -154,7 +143,7 @@ class ActivityController extends AppController
                         $flow = $FlowTable->newEntity([
                             'user_id'=>0,
                             'buyer_id'=>  $this->user->id,
-                            'type'=>$FlowTable::TYPE_ACTREGIST,
+                            'type'=>13,
                             'type_msg'=>'取消派对返还',
                             'income'=>2,
                             'amount'=>$return_count, //支付金额

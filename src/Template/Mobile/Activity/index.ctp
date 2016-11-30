@@ -220,6 +220,9 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             } else if(curtr == 'top') {
                 this.cur_tab = 3;
             }
+            if(/#1|#2|#3/.test(location.hash)) {
+                this.cur_tab = location.hash.replace('#', '');
+            }
             this.tabEvent();
             this.scroll();
         },
@@ -240,6 +243,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 index: obj.cur_tab,
                 viewDom: $('.activity_list'),
                 fun: function (index) {
+                    location.hash = '#'+index;
                     index = parseInt(index);
                     //判断是否是在当前页，禁止本页触发tab切换事件
                     if (obj.cur_tab == index && !this.isInit) {

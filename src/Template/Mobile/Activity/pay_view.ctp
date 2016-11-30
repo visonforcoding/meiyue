@@ -25,10 +25,6 @@
                     <span id="add-num" class="iconfont add color_y">&#xe65a;</span>
                 </div>
             </li>
-            <li class="flex flex_justify">
-                <div>使用优惠</div>
-                <div class="smalldes">无可用优惠 <i class="iconfont rcon">&#xe605;</i></div>
-            </li>
         </ul>
     </div>
     <div class="activity_pay_type mt20">
@@ -173,7 +169,7 @@
             return;
 
         }
-        if(confirm("输入付款密码")) {
+        //if(confirm("输入付款密码")) {
             $.ajax({
                 url: '/activity/mpay/<?= $activity['id']; ?>/' + num,
                 type: "POST",
@@ -189,7 +185,7 @@
 
                 }
             })
-        }
+        //}
 
     })
 
