@@ -6,6 +6,7 @@ use App\Controller\Mobile\AppController;
 use App\Model\Entity\User;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use PackType;
 use ServiceType;
 
 /**
@@ -731,6 +732,54 @@ class UsercController extends AppController {
         ]);
     }
 
+    /**
+     * 生成  支付订单
+     */
+    public function createPayorder($packid){
+        $this->handCheckLogin();
+        if($this->request->is('POST')) {
+            $packTb = TableRegistry::get('Package');
+            $pack = $packTb->get($packid);
+
+            $title = '';
+            if(!$pack) {
+                return $this->Util->ajaxReturn([
+                    'status'=>false,
+                    'msg' => '套餐不存在'
+                ]);
+            }
+            if(PackType::VIP == $pack->type) {
+                $title = 'VIP套餐购买';
+            } else if(PackType::RECHARGE == $pack->type) {
+                $title = '充值套餐购买';
+            } else {
+                return $this->Util->ajaxReturn([
+                    'status'=>false,
+                    'msg' => '不合法套餐'
+                ]);
+            }
+            $PayorderTable = TableRegistry::get('Payorder');
+            $payorder = $PayorderTable->newEntity([
+                'user_id'=>  $this->user->id,
+                'title'=>$title,
+                'order_no'=>time() . $this->user->id . createRandomCode(4, 1),
+                'price'=>  $pack->price,
+                'remark'=>  $title,
+            ]);
+            if($PayorderTable->save($payorder)){
+                return $this->Util->ajaxReturn([
+                        'status'=>true,
+                        'redirect_url'=>'/wx/pay/'.$payorder->id]
+                );
+            }else{
+                return $this->Util->ajaxReturn([
+                    'status'=>false,
+                    'msg'=>  errorMsg($payorder,  '服务器出错')
+                ]);
+            }
+        }
+    }
+
 
     /**
      * 套餐支付
@@ -751,7 +800,7 @@ class UsercController extends AppController {
     /**
      * 购买套餐支付接口
      */
-    public function lmpay($packid)
+    public function lmpay($packid, $paytype)
     {
         $this->handCheckLogin();
         if($this->request->is("POST")) {
@@ -804,7 +853,7 @@ class UsercController extends AppController {
             $transRes = $userPackTb
                 ->connection()
                 ->transactional(
-                    function() use ($user, $pack, $userPack, $userPackTb, $udFlag, $deadline){
+                    function() use ($paytype, $user, $pack, $userPack, $userPackTb, $udFlag, $deadline){
                         $updateUsedres = true;
                         $updateUseres = true;
                         //更新UserPackage表和UsedPackage表该用户的截止日期
@@ -826,33 +875,37 @@ class UsercController extends AppController {
                                 ->execute();
                         }
 
-                        $flowres = true;
-                        $useres = true;
                         //检查是否需要添加用户美币并生成流水
+                        $pre_amount = $user->money;
+                        $type_msg = '购买VIP套餐';
+                        $income = 2;
+                        $type = 16;
                         if($pack->vir_money > 0) {
                             //扣除 报名费用
-                            $pre_amount = $user->money;
                             $user->money = $user->money + $pack->vir_money;
-                            $after_amount = $user->money;
-                            //生成流水
-                            $FlowTable = TableRegistry::get('Flow');
-                            $flow = $FlowTable->newEntity([
-                                'user_id'=>$user->id,
-                                'buyer_id'=>0,
-                                'type'=>15,
-                                'type_msg'=>'购买充值套餐',
-                                'income'=>1,
-                                'amount'=>$pack->vir_money,
-                                'price'=>$pack->vir_money,
-                                'pre_amount'=>$pre_amount,
-                                'after_amount'=>$after_amount,
-                                'paytype'=>1,   //余额支付
-                                'remark'=> '购买充值套餐'
-                            ]);
-
-                            $flowres = $FlowTable->save($flow);
-                            $useres = TableRegistry::get('User')->save($user);
+                            $type_msg = '购买充值套餐';
+                            $income = 1;
+                            $type = 15;
                         }
+                        $after_amount = $user->money;
+                        //生成流水
+                        $FlowTable = TableRegistry::get('Flow');
+                        $flow = $FlowTable->newEntity([
+                            'user_id'=>$user->id,
+                            'buyer_id'=>0,
+                            'type'=>$type,
+                            'type_msg'=>$type_msg,
+                            'income'=>$income,
+                            'amount'=>$pack->vir_money,
+                            'price'=>$pack->vir_money,
+                            'pre_amount'=>$pre_amount,
+                            'after_amount'=>$after_amount,
+                            'paytype'=>$paytype,   //余额支付
+                            'remark'=> '略'
+                        ]);
+                        $flowres = $FlowTable->save($flow);
+                        $useres = TableRegistry::get('User')->save($user);
+
                         return
                             $flowres
                             &&$useres

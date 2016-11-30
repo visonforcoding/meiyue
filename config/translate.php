@@ -128,7 +128,8 @@ function getFlowType($index = null) {
         '12' => '24小时订单自动完成',
         '13' => '派对报名费',
         '14' => '送礼物费用',
-        '15' => '用户充值'
+        '15' => '用户充值套餐',
+        '16' => '购买VIP'
     ];
     if ($index) {
         return $flowType[$index];
@@ -176,19 +177,26 @@ function getBaiduPOICF() {
  * @param null $num
  * @return array
  */
-function getPackageType($num = null) {
+class PackType {
+    const VIP = 1;
+    const RECHARGE = 2;
+    const OTHER = 3;
 
-    $types = Array(
-        1 => 'VIP套餐',
-        2 => '充值套餐',
-        3 => '其他套餐'
-    );
+    public static function getPackageType($num = null) {
 
-    if($num) {
-        return $types[$num];
+        $types = Array(
+            PackType::VIP => 'VIP套餐',
+            PackType::RECHARGE => '充值套餐',
+            PackType::OTHER => '其他套餐'
+        );
+
+        if($num) {
+            return isset($types[$num])?$types[$num]:null;
+        }
+        return $types;
     }
-    return $types;
 }
+
 
 
 /**

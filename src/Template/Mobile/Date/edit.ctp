@@ -268,6 +268,8 @@
 
     //日期选择回调函数
     function choosedateCallBack(start_datetime, end_datetime) {
+        var start_datetime = start_datetime.replace(/\//g, '-');
+        var end_datetime = end_datetime.replace(/\//g, '-');
         var time_tmpstart = (start_datetime).split(" ");
         var time_tmpend = (end_datetime).split(" ");
         var year_month_date = time_tmpstart[0];

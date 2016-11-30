@@ -137,6 +137,19 @@
     //支付
     function payView($packid)
     {
-        window.location.href = "/userc/packpay/" + $packid;
+        $.ajax({
+            type: 'POST',
+            url: '/userc/create-payorder/' + $packid,
+            dataType: 'json',
+            success: function (res) {
+                if (typeof res === 'object') {
+                    if (res.status) {
+                        document.location.href = res.redirect_url;
+                    } else {
+                        alert(res.msg);
+                    }
+                }
+            }
+        });
     }
 </script>
