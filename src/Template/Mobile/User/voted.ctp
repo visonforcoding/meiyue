@@ -38,7 +38,7 @@
                     </span>
                     <?php else: ?>
                         <span class="button btn_active"
-                              onclick="window.location.href='/user/support/week/<?= $user->id;?>';
+                              onclick="window.location.href='/user/support'"
                               event.stopPropagation(); ">谁支持我
                         </span>
                     <?php endif;?>
@@ -75,7 +75,7 @@
                     </span>
                     <?php else: ?>
                         <span class="button btn_active"
-                              onclick="window.location.href='/user/support/month/<?= $user->id;?>';
+                              onclick="window.location.href='/user/support'"
                               event.stopPropagation(); ">谁支持我
                         </span>
                     <?php endif;?>
