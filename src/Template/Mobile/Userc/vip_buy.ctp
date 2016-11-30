@@ -13,8 +13,8 @@
                     <!-- VIP套餐 -->
                     <?php if($item->type == 1): ?>
                     <li>
-                        <div class="items flex flex_justify inner">
-                            <h3 class="bright color_friends">
+                        <div class="items flex flex_justify">
+                            <h3 class="commontext bright color_friends">
                                 <span class="lagernum">
                                     <?= $item->title; ?>
                                 </span>
@@ -27,6 +27,7 @@
                             <div class="color_y" onclick="payView(<?= $item->id; ?>)">
                                 <i class="smalldes">￥</i>
                                 <span class="lagernum"><?= $item->price; ?></span>
+                                <i class="iconfont rco">&#xe605;</i>  
                             </div>
                         </div>
                         <div class="content hidecon inner">
@@ -68,8 +69,8 @@
                     <!-- 充值套餐 -->
                     <?php if($item->type == 2): ?>
                         <li>
-                            <div class="items flex flex_justify inner">
-                                <h3 class="bright color_friends">
+                            <div class="items flex flex_justify">
+                                <h3 class="commontext bright color_friends">
                                 <span class="lagernum">
                                     <?= $item->title; ?>
                                 </span>
@@ -82,6 +83,7 @@
                                 <div class="color_y" onclick="payView(<?= $item->id; ?>)">
                                     <i class="smalldes">￥</i>
                                     <span class="lagernum"><?= $item->price; ?></span>
+                                    <i class="iconfont rco">&#xe605;</i>  
                                 </div>
                             </div>
                             <div class="content hidecon inner">
