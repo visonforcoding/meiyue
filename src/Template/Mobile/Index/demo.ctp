@@ -136,6 +136,8 @@
         </div>
     </div>
 
+    <iframe src="http://www.baidu.com" width="300" height="50"></iframe>
+
 <!--    上传
     <div class="up_identify_box bgff mt40">
         <div class="inner">
