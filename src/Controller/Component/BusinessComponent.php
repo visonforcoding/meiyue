@@ -249,7 +249,7 @@ class BusinessComponent extends Component
     }
     
      /**
-     * 处理type1  直接充值  改变余额 生成流水
+     * 处理type1  直接充值 支付订单状态更改  改变余额  生成流水
      * @param \App\Model\Entity\Order $order
      */
     protected function handType1Order(\App\Model\Entity\Payorder $order,$realFee,$payType,$out_trade_no) {
@@ -257,6 +257,7 @@ class BusinessComponent extends Component
         $order->paytype = $payType;  //实际支付方式
         $flowPayType = $payType==1?'3':'4';
         $order->out_trade_no = $out_trade_no;  //第三方订单号
+        $order->status = 1;
         $pre_amount = $order->user->money;
         $order->user->money += $order->price;    //专家余额+
         $order->user->recharge +=$realFee;
