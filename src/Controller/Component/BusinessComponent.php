@@ -276,7 +276,7 @@ class BusinessComponent extends Component
             'status' => 1,
             'remark' => '普通充值'.$order->price.'美币'
         ]);
-        $transRes = $OrderTable->connection()->transactional(function()use(&$order, $OrderTable, $FlowTable, $flow) {
+        $transRes = $OrderTable->connection()->transactional(function()use(&$order, $OrderTable, $FlowTable, &$flow) {
             return $OrderTable->save($order) &&  $FlowTable->save($flow);
         });
         if ($transRes) {
@@ -284,6 +284,8 @@ class BusinessComponent extends Component
             //资金流水记录
             return true;
         }else{
+            \Cake\Log\Log::debug($order->errors(),'devlog');
+            \Cake\Log\Log::debug($flow->errors(),'devlog');
             dblog('recharge','充值回调业务处理失败',$order->id);
             return false;
         }
