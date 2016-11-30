@@ -91,7 +91,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         "sys.setTopRight", //设置右上角文字&功能
         "sys.setSex",
         "sys.getSex",
-        "sys.logout",
+        "sys.logout",    //退出
         "sys.device", //获取唯一设备id
         "show.shareIco", //隐藏分享图标
         "share.banner", //调出分享的层
