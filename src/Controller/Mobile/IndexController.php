@@ -46,7 +46,7 @@ class IndexController extends AppController {
                     ->limit(3)
                     ->toArray();
         $this->set([
-            'pageTitle' => '土豪榜-美约',
+            'pageTitle' => '美约',
             'top3'=>$top3
         ]);
     }

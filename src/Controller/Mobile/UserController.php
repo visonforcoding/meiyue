@@ -503,5 +503,12 @@ class UserController extends AppController {
                 ]);
             }
 
-        }
-        
+
+    public function forget()
+    {
+        $this->set([
+            'pageTitle' => '忘记密码'
+        ]);
+    }
+
+}

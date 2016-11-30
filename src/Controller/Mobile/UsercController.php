@@ -706,7 +706,6 @@ class UsercController extends AppController {
             ])
             ->orderDesc('create_time')
             ->toArray();
-
         $this->set([
             'userPacks' => $userPacks,
             'counter' => $counter,

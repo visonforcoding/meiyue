@@ -18,13 +18,38 @@
                     <h3 class="topinfo">
                         还可以看
                         <i class="lagernum color_y">
-                            <?= checkIsEndless($counter->browse_rest)?'无限':$counter->browse_rest; ?>
+                            <?php
+                            use Cake\I18n\Time;
+                            if(isset($counter->browse_rest)){
+                                echo checkIsEndless($counter->browse_rest)?'无限':$counter->browse_rest;
+                            } else {
+                                echo '0';
+                            }
+                            ?>
                         </i>
                         人
                     </h3>
                     <h3 class="smalldes">
                         <span>
-                            共可以看<?= checkIsEndless($counter->browse_count)?'无限':$counter->browse_count; ?>人</span>|<time><?= getYMD($counter->deadline); ?>到期</time>
+                            共可以看
+                            <?php
+                                if(isset($counter->browse_count)){
+                                    echo checkIsEndless($counter->browse_count)?'无限':$counter->browse_count;
+                                } else {
+                                    echo '0';
+                                }
+                            ?>
+                            人</span>|
+                        <time>
+                            <?php
+                                if(isset($counter->deadline)){
+                                    echo getYMD($counter->deadline);
+                                } else {
+                                    echo getYMD(new Time());
+                                }
+                            ?>
+                            到期
+                        </time>
                     </h3>
                 </div>
             </li>
@@ -39,12 +64,37 @@
                     <h3 class="topinfo">
                         还可以和
                         <i class="lagernum color_y">
-                            <?= checkIsEndless($counter->chat_rest)?'无限':$counter->chat_rest; ?>
+                            <?php
+                                if(isset($counter->chat_rest)){
+                                    echo checkIsEndless($counter->chat_rest)?'无限':$counter->chat_rest;
+                                } else {
+                                    echo '0';
+                                }
+                            ?>
                         </i>
                         人聊天
                     </h3>
                     <h3 class="smalldes">
-                        <span>共可以和<?= checkIsEndless($counter->chat_count)?'无限':$counter->chat_count; ?>人聊天</span>|<time><?= getYMD($counter->deadline) ?>到期</time></h3>
+                        <span>共可以和
+                            <?php
+                            if(isset($counter->chat_count)){
+                                echo checkIsEndless($counter->chat_count)?'无限':$counter->chat_count;
+                            } else {
+                                echo '0';
+                            }
+                            ?>
+                            人聊天
+                        </span>|
+                        <time>
+                            <?php
+                            if(isset($counter->deadline)){
+                                echo getYMD($counter->deadline);
+                            } else {
+                                echo getYMD(new Time());
+                            }
+                            ?>
+                        </time>
+                    </h3>
                 </div>
             </li>
         </ul>
