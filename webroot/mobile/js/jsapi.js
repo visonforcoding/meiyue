@@ -118,9 +118,10 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         "event.uploadPic", //选择并上传单个图片 返回服务器地址
         "event.uploadPics", //上传9个图片
         "event.uploadVideo",  //上传视频
+        "event.uploadAvatar",  //上传头像 有正方形选择框
         "event.choosePic",  //选择多个图片 返回base64 小图
         "event.chooseVideo",  //选择视频
-        "event.changePic"  //替换某张图片
+        "event.changePic",  //替换某张图片
         ];
 
     for (var i = 0, len = apiList.length; i < len && apiList[i]; i++) {
@@ -249,6 +250,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                 case 'pay.wx':
                 case 'pay.ali':
                 case "event.uploadPic":
+                case "event.uploadAvatar":
                 case "event.uploadPics":
                 case "event.uploadVideo":
                 case "event.changePic":
