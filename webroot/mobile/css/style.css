@@ -45,7 +45,7 @@
  * 认证填写
  * */
 header{overflow: hidden;}
-.header{height:1rem;background: #1a1713;color:#eab96a;text-align: center;line-height: 1rem;font-size:18px;position:relative;display:none;}
+.header{height:1rem;background: #1a1713;color:#eab96a;text-align: center;line-height: 1rem;font-size:18px;position:relative;}
 .header .l_btn{position: absolute;left:0;color:#eab96a;font-size: 14px;top:0;padding:0 .3rem;opacity: .8;}
 .header .r_btn{position: absolute;right:0;color:#eab96a;font-size: 14px;top:0;padding:0 .3rem;opacity: .8;}
 .header .ico{font-size: 20px;}
