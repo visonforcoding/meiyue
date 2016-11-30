@@ -36,8 +36,8 @@ return [
         'master_domain'=>'m.chinamatop.com'    //中控服务器域名
     ],
     'alipay' => [
-        'partner' => '2088221650569093',  //合作者身份
-        'seller_id' => 'maclub@chinama.club',
+        'partner' => '2088521191540268',  //合作者身份
+        'seller_id' => 'service@beauty-engine.com',
         'notify_url'=>'/wx/ali-notify',
         'sslkey_path'=>dirname(__FILE__).'/alipay/cacert.pem',
         'private_key'=>  dirname(__FILE__).'/alipay/key/rsa_private_key.pem',
