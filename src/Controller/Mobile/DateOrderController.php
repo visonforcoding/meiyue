@@ -145,6 +145,112 @@ class DateOrderController extends AppController
            'user'=>  $this->user
        ]);    
     }
+
+
+    /**
+     * 赴约会
+     * 1.生成约单
+     * 2.扣除男方预约金
+     * 3.生成男方扣除资金流水
+     * @param type $skill_id
+     */
+    public function orderDate($date_id){
+        $this->handCheckLogin();
+        if($this->request->is('post')){
+            $DateTb = TableRegistry::get('Date');
+            $date = $DateTb->get($date_id,[
+                'contain'=>[
+                    'User'=>function($q){
+                        return $q
+                            ->select([
+                                'id',
+                                'avatar',
+                                'birthday',
+                                'nick',
+                                'truename',
+                                'phone'
+                            ]);
+                    },
+                ]
+            ]);
+            $lasth = ($date->end_time->hour-$date->start_time->hour);
+            $price = $date->price;
+            $amount = $price*$lasth;
+            if($this->user->money<$amount){
+                return $this->Util->ajaxReturn(false,'余额不足');
+            }
+            //生成约单
+            $DateorderTable = TableRegistry::get('Dateorder');
+            $dateorder = $DateorderTable->newEntity([
+                'consumer_id'=>  $this->user->id,
+                'dater_id'=>$date->user->id,
+                'dater_name'=>  $date->user->truename,
+                'date_time'=>  $lasth,
+                'consumer'=>  $this->user->truename,
+                'status'=>10,
+                'user_skill_id'=>$date->user_skill_id,
+                'site'=>$date->site,
+                'site_lat'=>$date->site_lat,
+                'site_lng'=>$date->site_lng,
+                'price'=>$price,
+                'amount'=>$amount,
+                'pre_pay'=>0,
+                'pre_precent'=>100,
+                'prepay_time'=> new Time(),
+                'start_time'=>$date->start_time,
+                'end_time'=>$date->end_time,
+            ]);
+            //扣除 预约金
+            $pre_amount = $this->user->money;
+            $this->user->money = $this->user->money - $amount;
+            $user = $this->user;
+            $after_amount = $this->user->money;
+            //生成流水
+            $FlowTable = TableRegistry::get('Flow');
+            $flow = $FlowTable->newEntity([
+                'user_id'=>0,
+                'buyer_id'=>$this->user->id,
+                'type'=>17,
+                'type_msg'=>'赴约支付约会金',
+                'income'=>2,
+                'amount'=>$amount,
+                'price'=>$price,
+                'pre_amount'=>$pre_amount,
+                'after_amount'=>$after_amount,
+                'paytype'=>1,   //余额支付
+                'remark'=> '赴约支出'
+            ]);
+
+            $transRes = $DateorderTable
+                ->connection()
+                ->transactional(
+                    function() use (&$flow,$FlowTable,&$dateorder,$DateorderTable,$user){
+                        $UserTable = TableRegistry::get('User');
+                        $saveDate = $DateorderTable->save($dateorder);
+                        $flow->relate_id = $dateorder->id;
+                        return $FlowTable->save($flow)&&$saveDate&&$UserTable->save($user);
+                });
+            if($transRes){
+                $this->Sms->sendByQf106($date->user->phone,
+                    '用户'
+                    .$user->nick
+                    .'已支付了您的约会['
+                    .$date->title
+                    .']'
+                );
+                return $this->Util->ajaxReturn([
+                    'status'=>true,
+                    'redirect_url'=>'/date-order/order-success/'.$dateorder->id
+                ]);
+            }else{
+                errorMsg($flow, '失败');
+                errorMsg($dateorder, '失败');
+                return $this->Util->ajaxReturn(false,'赴约失败');
+            }
+        }
+        return $this->Util->ajaxReturn(false,'非法操作');
+    }
+
     
     /**
      * 预约技能成功

@@ -62,14 +62,21 @@
                 </div>
             </div>
         </div>
-        <p class="common commontitle inner mt20"><i class="iconfont">&#xe619;</i>报名即代表你已同意<a href="#this" class="color_y undertext">用户协议。</a></p>
+        <p class="common commontitle inner mt20">
+            <i class="iconfont">&#xe619;</i>报名即代表你已同意
+            <a href="#this" class="color_y undertext">用户协议。</a>
+        </p>
     </div>
 </div>
 <div style="height:1.4rem;"></div>
 <div class="bottomblock">
     <div class="flex flex_end">
-        <span class="total">约会金：<i class="color_y"></i> <span class="color_y"><i class="color_y lagernum"><?= getCost($date['start_time'], $date['end_time'], $date['price']); ?></i>美币</span></span>
-        <a class="nowpay">立即支付</a>
+        <span class="total">约会金：<i class="color_y"></i>
+            <span class="color_y">
+                <i class="color_y lagernum"><?= getCost($date['start_time'], $date['end_time'], $date['price']); ?></i>美币
+            </span>
+        </span>
+        <a id="order_pay" class="nowpay">立即支付</a>
     </div>
 </div>
 
@@ -82,5 +89,25 @@
 
     })
 
+
+    $('#order_pay').on('tap',function(){
+        //预约支付
+        var dom = $(this);
+        if(dom.hasClass('disabled')){
+            return false;
+        }
+        dom.addClass('disabled');
+        $.util.ajax({
+            url: '/date-order/order-date/<?= $date->id; ?>',
+            func:function(res){
+                if(res.status){
+                    window.location.href = res.redirect_url;
+                }else{
+                    dom.removeClass('disabled');
+                }
+            }
+        });
+    });
+    LEMON.event.unrefresh();
 
 </script>

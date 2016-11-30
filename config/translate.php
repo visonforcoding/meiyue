@@ -129,7 +129,8 @@ function getFlowType($index = null) {
         '13' => '派对报名费',
         '14' => '送礼物费用',
         '15' => '用户充值套餐',
-        '16' => '购买VIP'
+        '16' => '购买VIP',
+        '17' => '赴约支付约金'
     ];
     if ($index) {
         return $flowType[$index];
