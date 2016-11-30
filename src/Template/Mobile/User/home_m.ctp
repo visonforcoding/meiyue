@@ -14,7 +14,7 @@
                         <a href="#this" class="cover_block">
                             <h3>
                                 <span><?= $user->nick ?><i class="iconfont">&#xe628;</i></span>
-                                <span class="flag price">><?= $this->Number->format($user->money) ?>美币</span>
+                                <span class="flag price"><?= $this->Number->format($user->money) ?>美币</span>
                             </h3>
                             <span class="cover_r_ico" onclick="window.location.href = '/userc/edit-info'">
                                 <i class="iconfont">&#xe605;</i>
@@ -132,3 +132,19 @@
 <div style="height:1.6rem"></div>
 <!--底部-->
 <?= $this->element('footer', ['active' => 'me']) ?>
+<?php $this->start('script'); ?>
+<script type="text/javascript">
+    //$.util.showPreloader('前往登录..');
+//    window.onActiveView = function () {
+//        if (!$.util.getCookie('token_uin')) {
+//            alert('我又没登陆');
+//            LEMON.event.login(function (res) {
+//                res = JSON.parse(res);
+//                $.util.setCookie('token_uin', res.token_uin, 99999999);
+//                LEMON.db.set('token_uin', res.token_uin);
+//                window.location.reload();
+//            });
+//        }
+//    }
+</script>
+<?php $this->end('script'); ?>
