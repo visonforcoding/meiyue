@@ -363,7 +363,7 @@ ALTER TABLE `lm_user`
 #充值总额记录字段
 ALTER TABLE `lm_user`
 	ADD COLUMN `recharge` FLOAT NULL DEFAULT '0' COMMENT '充值总额' AFTER `video_cover`;
-<<<<<<< .mine
+
 
 #增加日志记录表
 CREATE TABLE `lm_log` (
