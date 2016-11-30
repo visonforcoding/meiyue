@@ -274,12 +274,14 @@ $('#order_pay').on('tap',function(){
    }
    dom.addClass('disabled');
    var user_skill_id = <?=$data->id?>;
+   var start_datetime = start_time.replace(/\//g, '-');
+    var end_datetime = end_time.replace(/\//g, '-');
    var data = {user_skill_id:user_skill_id,
        place_name:place_name,
        coord_lng:coord_lng,
        coord_lat:coord_lat,
-       start_time:start_time,
-       end_time:end_time}
+       start_time:start_datetime,
+       end_time:end_datetime}
    $.util.ajax({
        data:data,
        func:function(res){
