@@ -216,7 +216,8 @@ class AlipayComponent extends Component {
             //支付宝端成功
             $order_no = $data['out_trade_no'];
             $OrderTable = \Cake\ORM\TableRegistry::get('Payorder');
-            $order = $OrderTable->find()->contain(['Seller', 'User'])->where(['Payorder.status' => 0, 'order_no' => $order_no])->first();
+            $order = $OrderTable->find()->contain(['User'])
+                    ->where(['Payorder.status' => 0, 'order_no' => $order_no])->first();
             $output = 'fail';
             if ($order) {
                 $realFee = $data['total_fee'];
