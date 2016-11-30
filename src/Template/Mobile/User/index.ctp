@@ -140,13 +140,13 @@
     //$.util.showPreloader('前往登录..');
     window.onActiveView = function () {
         if (!$.util.getCookie('token_uin')) {
-            alert('我又没登陆');
-            LEMON.event.login(function (res) {
-                res = JSON.parse(res);
-                $.util.setCookie('token_uin', res.token_uin, 99999999);
-                LEMON.db.set('token_uin', res.token_uin);
-                window.location.reload();
-            });
+//            alert('我又没登陆');
+//            LEMON.event.login(function (res) {
+//                res = JSON.parse(res);
+//                $.util.setCookie('token_uin', res.token_uin, 99999999);
+//                LEMON.db.set('token_uin', res.token_uin);
+//                window.location.reload();
+//            });
         }
     }
 </script>

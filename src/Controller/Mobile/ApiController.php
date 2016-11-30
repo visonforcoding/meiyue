@@ -49,8 +49,8 @@ class ApiController extends AppController {
     }
 
     protected function checkAcl() {
-        \Cake\Log\Log::debug('接口debug', 'devlog');
-        \Cake\Log\Log::debug($this->request->data(), 'devlog');
+        //\Cake\Log\Log::debug('接口debug', 'devlog');
+        //\Cake\Log\Log::debug($this->request->data(), 'devlog');
         if (!$this->request->isPost()) {
             return $this->jsonResponse(false, '请求受限', 405);
         }
@@ -67,8 +67,8 @@ class ApiController extends AppController {
     }
 
     protected function baseCheckAcl() {
-        \Cake\Log\Log::debug('接口debug', 'devlog');
-        \Cake\Log\Log::debug($this->request->data(), 'devlog');
+        //\Cake\Log\Log::debug('接口debug', 'devlog');
+        //\Cake\Log\Log::debug($this->request->data(), 'devlog');
         $timestamp = $this->request->data('timestamp');
         $access_token = $this->request->data('access_token');
         if (!$timestamp || !$access_token) {

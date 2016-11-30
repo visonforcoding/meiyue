@@ -5,6 +5,7 @@ namespace App\Controller\Mobile;
 use App\Controller\Mobile\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\Controller\Controller;
+
 /**
  * User Controller
  *
@@ -20,12 +21,12 @@ class UserController extends AppController {
     public function index() {
 //        $this->viewBuilder()->autoLayout(false);
 //        return $this->render('test');
-        if(!$this->request->is('lemon')){
+        if (!$this->request->is('lemon')) {
             //$this->handCheckLogin();
         }
-        if(!$this->user){
+        if (!$this->user) {
             $this->set([
-                'pageTitle'=>'登录'
+                'pageTitle' => '登录'
             ]);
             return $this->render('nologin');
         }
@@ -43,7 +44,7 @@ class UserController extends AppController {
 
     public function login() {
         $redirect_url = empty($this->request->query('redirect_url')) ? '/index/index' : $this->request->query('redirect_url');
-        if (in_array($redirect_url, ['/home/my-install', '/user/login','/user/index'])) {
+        if (in_array($redirect_url, ['/home/my-install', '/user/login', '/user/index'])) {
             $redirect_url = '/index/index';
         }
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -76,7 +77,7 @@ class UserController extends AppController {
                     }
                     $user = $this->User->patchEntity($user, $data);
                     $this->User->save($user);
-                    if(($redirect_url=='/index/index'||$redirect_url=='/')&&$user->gender =='2'){
+                    if (($redirect_url == '/index/index' || $redirect_url == '/') && $user->gender == '2') {
                         //女性用户首页
                         $redirect_url = '/index/find-rich-list';
                     }
@@ -218,7 +219,7 @@ class UserController extends AppController {
         $user = $this->user;
         if ($this->request->is('post')) {
             $user = $this->User->get($user->id);
-            $user = $this->User->patchEntity($user,  $this->request->data());
+            $user = $this->User->patchEntity($user, $this->request->data());
             if ($this->User->save($user)) {
                 return $this->Util->ajaxReturn(true, '保存成功');
             }
@@ -257,7 +258,7 @@ class UserController extends AppController {
         }
         $this->set([
             'pageTitle' => '美约-身份审核',
-            'user'=>$user
+            'user' => $user
         ]);
     }
 
@@ -270,9 +271,15 @@ class UserController extends AppController {
         ]);
     }
 
-    public function sendVcode() {
+    public function sendVcode($type) {
         $this->loadComponent('Sms');
         $mobile = $this->request->data('phone');
+        if ($type == 1) {
+            $ckReg = $this->User->find()->where(['phone' => $data['phone']])->first();
+            if ($ckReg) {
+                return $this->Util->ajaxReturn(false, '该手机号已经注册过,请直接登录');
+            }
+        }
         $code = createRandomCode(4, 2); //创建随机验证码
         $content = '您的动态验证码为' . $code . ',请妥善保管，切勿泄露给他人，该验证码10分钟内有效';
         $codeTable = \Cake\ORM\TableRegistry::get('smsmsg');
@@ -427,16 +434,14 @@ class UserController extends AppController {
         }
     }
 
-
     /**
      * 评选
      */
-    public function voted($id = null)
-    {
+    public function voted($id = null) {
         $this->loadComponent('Business');
         $title = '我的评选';
         $isme = true;
-        if($id) {
+        if ($id) {
             $title = '她的评选';
             $isme = false;
         } else {
@@ -454,7 +459,6 @@ class UserController extends AppController {
         ]);
     }
 
-
     /**
      * 我的评选-谁支持我
      * @param $id
@@ -465,38 +469,39 @@ class UserController extends AppController {
         $userTb = TableRegistry::get('User');
 
         $supports = $spTb
-            ->find()
-            ->select(['supporter_id', 'spcount' => 'count(1)'])
-            ->where(['supported_id' => $this->user->id])
-            ->orderDesc('create_time')
-            ->group('supporter_id')
-            ->toArray();
+                ->find()
+                ->select(['supporter_id', 'spcount' => 'count(1)'])
+                ->where(['supported_id' => $this->user->id])
+                ->orderDesc('create_time')
+                ->group('supporter_id')
+                ->toArray();
         $supporterids = [];
-        foreach($supports as $item) {
+        foreach ($supports as $item) {
             $supporterids[] = $item->supporter_id;
         }
 
         $flowsTb = TableRegistry::get('Flow');
         $flows = $flowsTb
-            ->find()
-            ->contain([
-                'Buyer'=>function($q){
-                    return $q->select(['id','avatar','nick','phone','gender', 'birthday']);
-                },
-            ])
-            ->select(['total' => 'sum(amount)'])
-            ->where(['buyer_id IN' => $supporterids, 'type' => 4])
-            ->group('buyer_id')
-            ->toArray();
-        $sortFlows = [];
-        foreach($flows as $item) {
-            $sortFlows[$item->buyer->id] = $item;
-        }
-        $this->set([
-            'supports' => $supports,
-            'flows' => $sortFlows,
-            'pageTitle' => '支持我的人'
-        ]);
-    }
+                ->find()
+                ->contain([
+                    'Buyer' => function($q) {
+                        return $q->select(['id', 'avatar', 'nick', 'phone', 'gender', 'birthday']);
+                    },
+                        ])
+                        ->select(['total' => 'sum(amount)'])
+                        ->where(['buyer_id IN' => $supporterids, 'type' => 4])
+                        ->group('buyer_id')
+                        ->toArray();
+                $sortFlows = [];
+                foreach ($flows as $item) {
+                    $sortFlows[$item->buyer->id] = $item;
+                }
+                $this->set([
+                    'supports' => $supports,
+                    'flows' => $sortFlows,
+                    'pageTitle' => '支持我的人'
+                ]);
+            }
 
-}
+        }
+        
