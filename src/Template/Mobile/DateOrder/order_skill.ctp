@@ -267,6 +267,14 @@ $('#go-here').on('tap',function(){
     $('#thePlace').html(place_name);
 });
 $('#order_pay').on('tap',function(){
+    if((!place_name)) {
+        $.util.alert('请选择地点')
+        return;
+    }
+    if((!start_time)) {
+        $.util.alert('请选择时间')
+        return;
+    }
    //预约支付
    var dom = $(this);
    if(dom.hasClass('disabled')){
@@ -293,5 +301,7 @@ $('#order_pay').on('tap',function(){
        }
    });
 });
+
+    LEMON.event.unrefresh();
 </script>
 <?php $this->end('script'); ?>
