@@ -521,6 +521,29 @@ ENGINE=InnoDB
 AUTO_INCREMENT=5
 ;
 
+-- 动态表
+CREATE TABLE `lm_movement` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+	`type` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '1:图片动态2.视频动态',
+	`body` VARCHAR(550) NULL DEFAULT NULL COMMENT '动态内容',
+	`images` TEXT NULL,
+	`video` VARCHAR(250) NULL DEFAULT NULL,
+	`video_cover` VARCHAR(250) NULL DEFAULT NULL,
+	`view_nums` INT(11) NULL DEFAULT '0' COMMENT '查看数',
+	`praise_nums` INT(11) NULL DEFAULT '0' COMMENT '点赞数',
+	`status` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '1待审核2审核通过3审核不通过',
+	`create_time` DATETIME NOT NULL,
+	`update_time` DATETIME NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='动态'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=4
+;
+
+
 ##约拍申请表
 CREATE TABLE `lm_yuepai_user` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
