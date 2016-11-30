@@ -10,13 +10,28 @@
             </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
+                <input
+                    type="text"
+                    name="keywords"
+                    class="form-control"
+                    id="keywords"
+                    placeholder="输入关键字">
             </div>
             <div class="form-group">
                 <label for="keywords">时间</label>
-                <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
+                <input
+                    type="text"
+                    name="begin_time"
+                    class="form-control date_timepicker_start"
+                    id="keywords"
+                    placeholder="开始时间">
                 <label for="keywords">到</label>
-                <input type="text" name="end_time" class="form-control date_timepicker_end" id="keywords" placeholder="结束时间">
+                <input
+                    type="text"
+                    name="end_time"
+                    class="form-control date_timepicker_end"
+                    id="keywords"
+                    placeholder="结束时间">
             </div>
             <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索</a>
             <!--<a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>-->
@@ -46,17 +61,24 @@
             colNames:   
 ['派对名称','时间','地点','男性报名费用','男性剩余名额/总名额','女性出场费','女性剩余名额','活动退出扣钱比例','报名情况','派对状态','操作'],
             colModel: [
-{name:'title',editable:true,align:'center'},
-{name:'start_time',editable:true,align:'center'},
-{name:'site',editable:true,align:'center'},
-{name:'male_price',editable:true,align:'center'},
-{name:'male_rest',editable:true,align:'center'},
-{name:'female_price',editable:true,align:'center'},
-{name:'female_rest',editable:true,align:'center'},
-{name:'status',editable:true,align:'center'},
-{name:'status',editable:true,align:'center'},
-{name:'status',editable:true,align:'center'},
-{name:'actionBtn',align:'center',viewable:false,sortable:false,frozen:true,formatter:actionFormatter}],
+                {name:'title',editable:true,align:'center'},
+                {name:'start_time',editable:true,align:'center'},
+                {name:'site',editable:true,align:'center'},
+                {name:'male_price',editable:true,align:'center'},
+                {name:'male_rest',editable:true,align:'center'},
+                {name:'female_price',editable:true,align:'center'},
+                {name:'female_rest',editable:true,align:'center'},
+                {name:'punish_percent',editable:true,align:'center'},
+                {name:'status',editable:true,align:'center'},
+                {name:'status',editable:true,align:'center'},
+                {
+                    name:'actionBtn',
+                    align:'center',
+                    viewable:false,
+                    sortable:false,
+                    frozen:true,
+                    formatter:actionFormatter}
+            ],
             pager: "#pager",
             rowNum: window._config.showDef,
             rowList: window._config.pages,

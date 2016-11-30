@@ -20,7 +20,7 @@
         <script id="hideHeaderTpl" type="text/html">
             <style>
                 header{
-                    display: none;  
+                    display: none;
                 }
                 .footer{
                     display: none;
