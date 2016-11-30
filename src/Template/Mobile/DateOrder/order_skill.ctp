@@ -199,7 +199,7 @@ function choosedateCallBack(start_datetime, end_datetime) {
 
 }
 var place_name,coord_lng,coord_lat;
-$(document).on('click','.place_link',function(){
+$(document).on('tap','.place_link',function(){
     //点击查看详情页
    $.util.showPreloader('加载中...');
    var uid = $(this).data('uid');
