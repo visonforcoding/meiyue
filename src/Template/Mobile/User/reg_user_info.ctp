@@ -46,7 +46,7 @@
         alert('点击了图片上传');
         if ($.util.isAPP) {
             alert('我要调app的东西了');
-            LEMON.event.uploadPic('{"dir":"user/avatar","zip":"1"}', function (data) {
+            LEMON.event.uploadAvatar('{"dir":"user/avatar","zip":"1"}', function (data) {
                 var data = JSON.parse(data);
                 if (data.status === true) {
                     $('input[name="avatar"]').val(data.path);
