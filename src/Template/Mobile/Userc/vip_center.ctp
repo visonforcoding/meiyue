@@ -71,8 +71,7 @@
                                     echo '0';
                                 }
                             ?>
-                        </i>
-                        人聊天
+                        </i>人聊天
                     </h3>
                     <h3 class="smalldes">
                         <span>共可以和
@@ -82,8 +81,7 @@
                             } else {
                                 echo '0';
                             }
-                            ?>
-                            人聊天
+                            ?>人聊天
                         </span>|
                         <time>
                             <?php
