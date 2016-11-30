@@ -43,6 +43,7 @@
                 <p><?= $date['description'] ?></p>
             </div>
         </div>
+        <?php if(count($date['tags']) > 0): ?>
         <div class="date_des mt20">
             <h3 class="commontitle inner">我的标签</h3>
             <div class="con con_mark">
@@ -51,14 +52,7 @@
                 <?php endforeach; ?>
             </div>
         </div>
-        <div class="date_des mt40">
-            <div class="con">
-                <div class="date_time  flex flex_justify">
-                    <span>使用优惠</span>
-                    <div class="color_gray">无可用优惠  <i class="iconfont">&#xe605;</i></div>
-                </div>
-            </div>
-        </div>
+        <?php endif; ?>
         <div class="date_des mt20">
             <h3 class="commontitle inner">支付方式</h3>
             <div class="con">
