@@ -307,7 +307,7 @@
                 if (typeof res === 'object') {
                     if (res.status) {
                         alert(res.msg);
-                        window.location.href = '/date/index';
+                        history.back();
                     } else {
                         $.util.alert(res.msg);
                     }
@@ -329,7 +329,7 @@
                     if (typeof res === 'object') {
                         if (res.status) {
                             $.util.alert(res.msg);
-                            history.back();
+                            window.location.href = '/date/index';
                         } else {
                             $.util.alert(res.msg);
                         }
