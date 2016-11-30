@@ -507,4 +507,35 @@ ENGINE=InnoDB
 AUTO_INCREMENT=108
 ;
 
+##约拍管理表
+CREATE TABLE `lm_yuepai` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`act_time` DATETIME NOT NULL COMMENT '约拍时间',
+	`rest_num` SMALLINT(6) NOT NULL COMMENT '剩余名额',
+	`status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '状态：1#正常 2#下架',
+	PRIMARY KEY (`id`)
+)
+COMMENT='后台管理员添加的约拍表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=5
+;
+
+##约拍申请表
+CREATE TABLE `lm_yuepai_user` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`yuepai_id` INT(11) NOT NULL COMMENT '约拍id',
+	`user_id` INT(11) NOT NULL COMMENT '用户id',
+	`name` VARCHAR(50) NOT NULL COMMENT '姓名',
+	`phone` VARCHAR(50) NOT NULL COMMENT '手机号',
+	`area` VARCHAR(50) NOT NULL COMMENT '所在地区',
+	`checked` TINYINT(4) NOT NULL COMMENT '审核状态：1#审核通过 2#未审核 3#审核不通过',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='约拍申请表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=3
+;
 

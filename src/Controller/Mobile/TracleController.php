@@ -63,7 +63,38 @@ class TracleController extends AppController {
      * 约拍
      */
     public function tracleOrder(){
-        $this->set(['pageTitle' => '免费约拍报名']);
+        $this->handCheckLogin();
+        $yuepaiTb = TableRegistry::get('Yuepai');
+        $yuepais = $yuepaiTb
+            ->find()
+            ->where(['act_time >' => new Time()])
+            ->map(function($row) {
+                $actTime = new Time($row->act_time);
+                $row->act_date = $actTime->i18nFormat('MM月dd日');
+                $row->act_week = getWeekStr($actTime->format('w'));
+                return $row;
+            });
+        $this->set(['datas' => $yuepais, 'pageTitle' => '免费约拍报名']);
     }
-    
+
+    /**
+     * 约拍申请
+     * @param $userid
+     * @param $yuepaid
+     */
+    public function yuepaiApply() {
+        $this->handCheckLogin();
+        if($this->request->is('POST')) {
+            $yuepaiUserTb = TableRegistry::get('YuepaiUser');
+            $yuepaiUser = $yuepaiUserTb->newEntity();
+            $yuepaiUser = $yuepaiUserTb->patchEntity($yuepaiUser, $this->request->data);
+            $yuepaiUser->checked = 2;
+            $yuepaiUser->user_id = $this->user->id;
+            if($yuepaiUserTb->save($yuepaiUser)) {
+                return $this->Util->ajaxReturn(true, '申请成功');
+            }
+            return $this->Util->ajaxReturn(false, '申请失败');
+        }
+        return $this->Util->ajaxReturn(false, '非法操作');
+    }
 }

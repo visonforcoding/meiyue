@@ -267,9 +267,56 @@ class YuepaiStatus {
             return json_encode($status);
         }
         if($st) {
-            return isset($status[$st])?$status[$st]:'异常';
+            return isset($status[$st])?$status[$st]:null;
         }
         return $status;
     }
 
+}
+
+
+/**
+ * 申请状态
+ * Class YPUserStatus
+ */
+class CheckStatus {
+    const CHECKED = 1;  //审核通过
+    const CHECKING = 2;    //尚未审核
+    const CHECKNO = 3;    //审核不通过
+
+    const GETJSON = -1; //获取json数据
+    public static function getStatus($st = null) {
+        $status = Array(
+            CheckStatus::CHECKED => '审核通过',
+            CheckStatus::CHECKING => '尚未审核',
+            CheckStatus::CHECKNO => '审核不通过'
+        );
+        if(CheckStatus::GETJSON == $st) {
+            return json_encode($status);
+        }
+        if($st) {
+            return isset($status[$st])?$status[$st]:null;
+        }
+        return $status;
+    }
+}
+
+
+/**
+ * 获取星期
+ */
+function getWeekStr($week = null) {
+    $weeks = Array(
+        1 => '星期一',
+        2 => '星期二',
+        3 => '星期三',
+        4 => '星期四',
+        5 => '星期五',
+        6 => '星期六',
+        7 => '星期日',
+    );
+    if($week) {
+        return isset($weeks[$week])?$weeks[$week]:null;
+    }
+    return $weeks;
 }
