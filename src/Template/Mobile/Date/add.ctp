@@ -301,7 +301,7 @@
                 if (typeof res === 'object') {
                     if (res.status) {
                         $.util.alert(res.msg);
-                        //window.location.href = '/date/index';
+                        history.back();
                     } else {
                         $.util.alert(res.msg);
                     }
