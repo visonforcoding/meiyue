@@ -1012,3 +1012,8 @@ color:#999;padding:.1rem;}
 .sub-chat .sub-text{width:4.8rem;margin-right:.2rem;overflow: hidden;min-height:32px;}
 .sub-chat .sub-text .test_box{border:none;padding:5px;margin:0;width:4.8rem;min-height:32px;border:1px #e1e3e6 solid;border-radius: 5px;overflow-y:auto;overflow-x:hidden;outline: none;max-height:2rem;}
 .sub-chat .sub-btn{width:1rem;height:32px;background: #EAB96A;border-radius: 5px;color:#fff;text-align: center;line-height: 32px;}
+/*未登录*/
+.shadow{background: rgba(0,0,0,.7);z-index:11;overflow: hidden;}
+.login-tips{background:rgba(255,255,255,1);width:100%;padding:.8rem 0;}
+.login-tips .jumpbtn{display:block;border:1px #EAB96A solid;border-radius: 5px;width:3rem;text-align: center;height:46px; line-height: 44px;margin:0 auto;font-size: 16px;color:#EAB96A;}
+.login-tips .slogin{text-align: center;line-height: 1rem;color:#15130f;height:1rem;margin-bottom:.2rem;}
