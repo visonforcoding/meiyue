@@ -90,7 +90,32 @@ class TracleController extends AppController {
             $yuepaiUser = $yuepaiUserTb->patchEntity($yuepaiUser, $this->request->data);
             $yuepaiUser->checked = 2;
             $yuepaiUser->user_id = $this->user->id;
-            if($yuepaiUserTb->save($yuepaiUser)) {
+            //检查是否申请过
+            $tmp = $yuepaiUserTb
+                    ->find()
+                    ->where([
+                        'yuepai_id' => $yuepaiUser->yuepai_id,
+                        'user_id' => $this->user->id
+                    ])
+                    ->first();
+            if($tmp) {
+                return $this->Util->ajaxReturn(false, '已经申请过了哦');
+            }
+            //同步约拍
+            $yuepaiTb = TableRegistry::get('Yuepai');
+            $yuepai = $yuepaiTb->get($yuepaiUser->yuepai_id);
+            if($yuepai->rest_num < 1) {
+                return $this->Util->ajaxReturn(false, '名额不足');
+            } else {
+                $yuepai->rest_num --;
+            }
+
+            $transRes = $yuepaiTb
+                ->connection()
+                ->transactional(function()use($yuepaiTb, $yuepai, $yuepaiUserTb, $yuepaiUser){
+                    return $yuepaiTb->save($yuepai)&&$yuepaiUserTb->save($yuepaiUser);
+                });
+            if($transRes) {
                 return $this->Util->ajaxReturn(true, '申请成功');
             }
             return $this->Util->ajaxReturn(false, '申请失败');
