@@ -152,5 +152,7 @@ $('#submitbtn').on('tap', function () {
             }
         })
     }
+
+    LEMON.sys.back('/user/index');
 </script>
 <?php $this->end('script'); ?>

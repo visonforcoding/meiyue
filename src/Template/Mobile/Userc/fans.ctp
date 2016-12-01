@@ -65,5 +65,7 @@ setTimeout(function () {
         })
     });
 }, 2000)
+
+LEMON.sys.back('/user/index');
 </script>
 <?php $this->end('script'); ?>

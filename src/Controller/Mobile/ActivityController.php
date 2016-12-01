@@ -38,7 +38,6 @@ class ActivityController extends AppController
         $datas->limit($limit);
         $datas->page($page);
         $datas->formatResults(function(ResultSetInterface $results) {
-
             return $results->map(function($row) {
                 $row->time = getFormateDT($row->start_time, $row->end_time);
                 return $row;
@@ -106,7 +105,13 @@ class ActivityController extends AppController
             $botBtSts = 5;  //活动已结束
         }
 
-        $this->set(['regist_item' => $regist_item, 'botBtSts' => $botBtSts, 'user' => $this->user, 'activity' => $activity, 'pageTitle' => '美约-活动详情']);
+        $this->set([
+            'regist_item' => $regist_item,
+            'botBtSts' => $botBtSts,
+            'user' => $this->user,
+            'activity' => $activity,
+            'pageTitle' => '美约-活动详情'
+        ]);
     }
 
 
@@ -117,20 +122,15 @@ class ActivityController extends AppController
      * 4.修改活动参加人数
      */
     public function cancel($id = null) {
-
         if($this->request->is("POST")) {
-
             if($id != null) {
-
                 $actreTable = TableRegistry::get('Actregistration');
                 if($actreTable) {
-
                     //检查当前时间是否在派对开始前XX小时
                     $actre = $actreTable->get($id, ['contain' => 'Activity']);
                     $start_time = $actre['activity']['start_time'];
                     $current_time = new Time();
                     if($current_time->diffInDays($start_time, false) >= 3) {
-
                         $return_count = $actre['cost'] - $actre['punish'];
                         //生成流水
                         //扣除 报名费用
@@ -151,58 +151,44 @@ class ActivityController extends AppController
                             'pre_amount'=>$pre_amount,
                             'after_amount'=>$after_amount,
                             'paytype'=>1,   //余额支付
-                            'remark'=> "扣除报名费".$actre['punish_percent']."%（即".$actre['punish'].")",
+                            'remark'=> "扣除报名费"
+                                    .$actre['punish_percent']."%（即".$actre['punish'].")",
                         ]);
-
 
                         $activityTable = $this->Activity;
                         $activity = $actre['activity'];
-
                         if($user->gender == 1) {
-
                             $activity->male_rest += $actre['num'];
-
                         } else {
-
                             $activity->female_rest += $actre['num'];
-
                         }
+                        $transRes = $actreTable
+                            ->connection()
+                            ->transactional(function()use($flow,$FlowTable,&$actre,$actreTable,$activity,$activityTable,$user){
+                                $UserTable = TableRegistry::get('User');
+                                //标记报名表项取消时间
+                                $actre['cancel_time'] = new Time();
+                                $actre['status'] = 2;
 
-                        $transRes = $actreTable->connection()->transactional(function()use($flow,$FlowTable,&$actre,$actreTable,$activity,$activityTable,$user){
-                            $UserTable = TableRegistry::get('User');
-                            //标记报名表项取消时间
-                            $actre['cancel_time'] = new Time();
-                            $actre['status'] = 2;
-
-                            $saveActr = $actreTable->save($actre);
-                            $flow->relate_id = $actre['id'];
-                            $saveAct = $activityTable->save($activity);
-                            return $FlowTable->save($flow)&&$saveActr&&$saveAct&&$UserTable->save($user);
-                        });
+                                $saveActr = $actreTable->save($actre);
+                                $flow->relate_id = $actre['id'];
+                                $saveAct = $activityTable->save($activity);
+                                return $FlowTable->save($flow)&&$saveActr&&$saveAct&&$UserTable->save($user);
+                            });
                         if($transRes) {
-
                             return $this->Util->ajaxReturn(true, '取消成功');
-
                         }
-
                     } else {
-
                         return $this->Util->ajaxReturn(false, '无法取消！');
-
                     }
-
                 }
-
             }
-
         }
         return $this->Util->ajaxReturn(false, '操作失败');
-
     }
 
 
     public function payView($id = null) {
-
         if($id) {
             $this->handCheckLogin();
             $activity = $this->Activity->get($id);
@@ -220,10 +206,14 @@ class ActivityController extends AppController
                 $lim = $activity['female_lim'];
 
             }
-            $this->set(['user' => $this->user, 'lim' => $lim, 'price' => $price,'activity' => $activity, 'pageTitle' => '美约-活动支付']);
-
+            $this->set([
+                'user' => $this->user,
+                'lim' => $lim,
+                'price' => $price,
+                'activity' => $activity,
+                'pageTitle' => '美约-活动支付'
+            ]);
         }
-
     }
 
     /**
@@ -248,39 +238,35 @@ class ActivityController extends AppController
             }]]);
             //检查是否参与过
             $actregistrationTable = TableRegistry::get('Actregistration');
-            $count = $actregistrationTable->find()->where(['user_id' => $this->user->id, 'activity_id' => $id, 'cancel_time' => null])->count();
+            $count = $actregistrationTable
+                ->find()
+                ->where([
+                    'user_id' => $this->user->id,
+                    'activity_id' => $id,
+                    'cancel_time' => null
+                ])
+                ->count();
             if($count > 0) {
-
                 return $this->Util->ajaxReturn(false, '您已经参与过了！');
-
             }
 
             //获取需要费用
             //检查报名人数是否已满
             $price = 0;
             if($this->user->gender == 1) {
-
                 $price = $activity['male_price'];
                 if($activity->male_rest == 0) {
-
                     return $this->Util->ajaxReturn(false, '报名人数已满！');
-
                 }
-
             } else {
-
                 $price = $activity['female_price'];
                 if($activity->female_rest == 0) {
-
                     return $this->Util->ajaxReturn(false, '报名人数已满！');
-
                 }
             }
             //判断余额是否充足
             if($this->user->money < $price * $num) {
-
                 return $this->Util->ajaxReturn(false, '美币余额不足！');
-
             }
 
             //生成报名表
@@ -428,7 +414,8 @@ class ActivityController extends AppController
             $query = $FlowTable->find()
                 ->contain([
                     'User'=>function($q){
-                        return $q->select(['id','avatar','nick','phone','gender','birthday'])
+                        return $q
+                            ->select(['id','avatar','nick','phone','gender','birthday'])
                             ->where(['gender'=>2]);
                     },
                 ])
