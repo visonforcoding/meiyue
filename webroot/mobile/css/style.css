@@ -2,6 +2,7 @@
 .footer,.home_page_footer{width:100%;max-width: 750px;margin:0 auto;overflow-x:hidden;-webkit-box-shadow: 0 0 10px 0 rgba(155,143,143,0.6);box-shadow: 0 0 10px 0 rgba(155,143,143,0.6);background: #fff;bottom:0;position: fixed;z-index: 10;}
 .footer ul,.home_page_footer ul{overflow: hidden;}
 .home_page_footer ul{height:50px;}
+.home_page_footer ul.changeli li{width:50%;}
 .home_page_footer li{width:33.3%;text-align: center;}
 .footer ul li{width:25%;float:left;text-align: center;padding:5px 0 3px;font-size: 12px;}
 .footer ul li a{line-height: 22px;}
