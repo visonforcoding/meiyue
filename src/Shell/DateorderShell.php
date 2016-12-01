@@ -37,6 +37,7 @@ class DateorderShell extends Shell {
      * 订单的自动检测
      */
     public function check(){
+        \Cake\Log\Log::info('进入自动检测订单任务','cron');                        
         set_time_limit(0);
         $Daterorder = \Cake\ORM\TableRegistry::get('Dateorder');
         $orders = $Daterorder->find()
