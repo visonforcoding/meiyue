@@ -1,6 +1,6 @@
 <header>
     <div class="header">
-        <span class="l_btn">取消</span>
+        <span class="l_btn" onclick="history.back();">取消</span>
         <h1>添加动态</h1>
         <span id="send" class="r_btn">发布</span>
     </div>
