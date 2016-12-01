@@ -932,11 +932,7 @@ class UsercController extends AppController {
     
     public function loginOut(){
         if($this->request->is('ajax')){
-            if($this->user->gender==1){
-                $redirect_url = '/index/index';
-            }else{
-                $redirect_url = '/index/find-rich-list';
-            }
+            $redirect_url = '/user/index';
             $this->request->session()->delete('User.mobile');
             $this->request->session()->destroy();
             return $this->Util->ajaxReturn(['status'=>true,'msg'=>'您已成功退出','redirect_url'=>$redirect_url]);
