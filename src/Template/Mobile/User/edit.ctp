@@ -79,7 +79,7 @@
 
 
     //上传头像
-    public function uploadAvatar(path, urlpath) {
+    function uploadAvatar(path, urlpath) {
         if (!path) {
             return false;
         }
