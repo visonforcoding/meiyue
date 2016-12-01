@@ -466,6 +466,8 @@ class UserController extends AppController {
     public function support() {
         $this->handCheckLogin();
         $spTb = TableRegistry::get('Support');
+        $userTb = TableRegistry::get('User');
+
         $supports = $spTb
                 ->find()
                 ->select(['supporter_id', 'spcount' => 'count(1)'])
@@ -477,46 +479,43 @@ class UserController extends AppController {
         foreach ($supports as $item) {
             $supporterids[] = $item->supporter_id;
         }
+
         $flowsTb = TableRegistry::get('Flow');
-        $sortFlows = [];
-        $flows = null;
-        if(count($supporterids)) {
-            $flows = $flowsTb
+        $flows = $flowsTb
                 ->find()
                 ->contain([
-                    'Buyer' => function ($q) {
-                        return $q->select([
-                            'id',
-                            'avatar',
-                            'nick',
-                            'phone',
-                            'gender',
-                            'birthday'
-                        ]);
+                    'Buyer' => function($q) {
+                        return $q->select(['id', 'avatar', 'nick', 'phone', 'gender', 'birthday']);
                     }])
                 ->select(['total' => 'sum(amount)'])
                 ->where(['buyer_id IN' => $supporterids, 'type' => 4])
                 ->group('buyer_id')
                 ->toArray();
-
-            foreach ($flows as $item) {
-                $sortFlows[$item->buyer->id] = $item;
-            }
+        $sortFlows = [];
+        foreach ($flows as $item) {
+            $sortFlows[$item->buyer->id] = $item;
         }
-
         $this->set([
             'supports' => $supports,
             'flows' => $sortFlows,
             'pageTitle' => '支持我的人'
         ]);
     }
+    
+    /**
+     * ajax 检测登陆
+     */
+    public function clogin(){
+        $this->handCheckLogin();
+        return $this->Util->ajaxReturn(true);
+    }
 
-
-    public function forget()
+      public function forget()
     {
         $this->set([
             'pageTitle' => '忘记密码'
         ]);
     }
 
-}
+ }
+        
