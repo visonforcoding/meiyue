@@ -81,10 +81,11 @@ class DateorderShell extends Shell {
         if ((time()-strtotime($order->prepay_time)) >= 30 * 60 && 
                 (time()-strtotime($order->prepay_time)) < 60 * 60) {
                     //超过30分钟  人工干预
+            //\Cake\Log\Log::info('约单:'.$order->id.'超过30分钟无响应,正在被自动处理','cron');
         }
         
-        if ((time()-strtotime($order->start_time)) >= 60 * 60) {
-            \Cake\Log\Log::info('约单:'.$order->id.'超过60分钟无响应,正在被自动处理');
+        if ((time()-strtotime($order->prepay_time)) > 60 * 60) {
+            \Cake\Log\Log::info('约单:'.$order->id.'超过60分钟无响应,正在被自动处理','cron');
             //超过60分钟  自动退单 
             //1.订单状态改变
             //2.退回预约金
