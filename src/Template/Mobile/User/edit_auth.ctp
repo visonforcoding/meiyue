@@ -114,12 +114,14 @@
             return false;
         }
         $.util.ajax({
+            url: '/user/reg-auth',
+            method: 'POST',
             data: {idfront: idfront, idback: idback, idperson: idperson},
             func: function (res) {
+                $.util.alert(res.msg);
                 if (res.status) {
-                    document.location.href = '/user/edit-info';
+                    document.location.href = '/userc/edit-info';
                 } else {
-                    $.util.alert(res.msg);
                 }
             }
         });
