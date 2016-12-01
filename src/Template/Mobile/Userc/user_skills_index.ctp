@@ -19,7 +19,17 @@
                     <div><?= $item['skill']['name']; ?></div>
                     <div class="flex">
                         <i class="smalldes"><?= $item['cost']['money']; ?>美币/小时</i>
-                        <div class="switch <?= ($item['is_used'] == 1)?'on':'off' ?>" item-id="<?= $item['id'];?>"><i class="swithbtn"></i></div>
+                        <?php if($item->is_checked == 1): ?>
+                        <div
+                            class="switch <?= ($item['is_used'] == 1)?'on':'off' ?>"
+                            item-id="<?= $item['id'];?>">
+                            <i class="swithbtn"></i>
+                        </div>
+                        <?php elseif($item->is_checked == 2): ?>
+                        未审核
+                        <?php elseif($item->is_checked == 0): ?>
+                        审核不通过
+                        <?php endif; ?>
                     </div>
 
                 </li>
