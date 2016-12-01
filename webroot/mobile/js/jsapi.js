@@ -93,6 +93,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         "sys.getSex",
         "sys.logout",    //退出
         "sys.device", //获取唯一设备id
+        "sys.loginSuccess", //js 端成功执行登录操作
         "show.shareIco", //隐藏分享图标
         "share.banner", //调出分享的层
         "share.QQ",
@@ -207,6 +208,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                 case "sys.hideKeyboard":
                 case "sys.QRcode":
                 case "sys.logout":
+                case "sys.loginSuccess":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {}, '');
                     });
