@@ -164,12 +164,13 @@ class UsercController extends AppController {
             ->select([
                 'id',
                 'is_used',
+                'is_checked',
                 'Skill.name',
                 'Cost.money'
             ])
             ->where([
                 'user_id' => $this->user->id,
-                'is_checked' => 1
+                //'is_checked' => 1
             ]);
         $userskills = $query->toArray();
         $is_all_used = true;
