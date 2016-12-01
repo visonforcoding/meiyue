@@ -23,7 +23,7 @@ class ChatController extends AppController {
      * 消息列表
      */
     public function chatList(){
-        if($this->user){
+        if(!$this->user){
             return $this->render('chat_list_nologin');
         }
         $UserTable = TableRegistry::get('User');
