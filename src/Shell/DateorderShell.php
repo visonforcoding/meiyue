@@ -37,7 +37,7 @@ class DateorderShell extends Shell {
      * 订单的自动检测
      */
     public function check(){
-        \Cake\Log\Log::info('进入自动检测订单任务','cron');                        
+        //\Cake\Log\Log::info('进入自动检测订单任务','cron');                        
         set_time_limit(0);
         $Daterorder = \Cake\ORM\TableRegistry::get('Dateorder');
         $orders = $Daterorder->find()
@@ -53,7 +53,7 @@ class DateorderShell extends Shell {
                             ->where(['Dateorder.status in'=>['3','7','10']])
                             ->toArray();
         $counts = count($orders);
-        \Cake\Log\Log::info($counts.'条订单进入时间处理','cron');                        
+        //\Cake\Log\Log::info($counts.'条订单进入时间处理','cron');                        
         foreach ($orders as $key => $order) {
             switch ($order->status) {
                 case 3:
@@ -84,6 +84,7 @@ class DateorderShell extends Shell {
         }
         
         if ((time()-strtotime($order->start_time)) >= 60 * 60) {
+            \Cake\Log\Log::info('约单:'.$order->id.'超过60分钟无响应,正在被自动处理');
             //超过60分钟  自动退单 
             //1.订单状态改变
             //2.退回预约金

@@ -35,11 +35,28 @@
 <div class="shadow fullwraper flex box_bottom">
     <div class="login-tips">
         <h3 class="slogin">美约，生活更美好每一天每一天！</h3>
-        <a href="#this" class="jumpbtn">
+        <a id="go-login" class="jumpbtn">
             登录/注册
         </a>
     </div>
 </div>
+<?php $this->start('script'); ?>
 <script type="text/javascript">
     $('html,body').css({'height': '100%', 'overflow': 'hidden'})
+    $('#go-login').on('tap',function(){
+        if (!$.util.isAPP) {
+            window.location.href = '/user/login';
+        } else {
+            LEMON.event.login(function (res) {
+                res = JSON.parse(res);
+                $.util.setCookie('token_uin', res.token_uin, 99999999);
+                LEMON.db.set('token_uin', res.token_uin);
+                LEMON.db.set('im_token', res.user.imtoken);
+                LEMON.db.set('im_accid', 'meiyue_'+res.user.id);
+                window.location.reload();
+                
+            });
+        }
+    })
 </script>
+<?php $this->end('script'); ?>
