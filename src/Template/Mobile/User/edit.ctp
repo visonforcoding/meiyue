@@ -10,9 +10,9 @@
         <ul class="inner">
             <li class="clearfix">
                 <span class="fl">上传图片</span>
-                <div class="iden_r_box fr">
+                <div class="iden_r_box fr" id="avatar_img">
                     <div class="iden_r_pic">
-                        <img id="avatar_img" src="<?= $user->avatar; ?>" alt="" />
+                        <img src="<?= $user->avatar; ?>" alt="" />
                         <input type="hidden" name="avatar" />
                     </div>
                     <i class="iconfont potion">&#xe605;</i>
