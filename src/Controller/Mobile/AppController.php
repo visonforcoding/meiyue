@@ -64,6 +64,7 @@ class AppController extends Controller {
             ['user', 'register'],
             ['news', 'index'],
             ['news', 'view'],
+            ['chat', 'chatlist'],
         );
     }
 
