@@ -315,7 +315,7 @@ color:#444;position:relative;}
 .edit_date_box .marks_edit{height:auto;}
 /*选择标签弹窗*/
 .choose_mark .title{font-size: 14px;}
-.choose_mark{/*padding-bottom:.2rem;--选择标签底部间距*/background: #f4f4f4;max-width:7rem;overflow: auto;}
+.choose_mark{/*padding-bottom:.2rem;--选择标签底部间距*/background: #f4f4f4;max-height:7rem;overflow: auto;}
 .choose-date-mark{position: absolute;bottom:0;width:100%;}
 .choose-date-mark .marks-box{padding:0 .3rem;width:100%;background: #fff;}
 .choose-date-mark .nav-title{line-height: 1rem;}
@@ -1014,6 +1014,9 @@ color:#999;padding:.1rem;}
 .sub-chat .sub-text{width:4.8rem;margin-right:.2rem;overflow: hidden;min-height:32px;}
 .sub-chat .sub-text .test_box{border:none;padding:5px;margin:0;width:4.8rem;min-height:32px;border:1px #e1e3e6 solid;border-radius: 5px;overflow-y:auto;overflow-x:hidden;outline: none;max-height:2rem;}
 .sub-chat .sub-btn{width:1rem;height:32px;background: #EAB96A;border-radius: 5px;color:#fff;text-align: center;line-height: 32px;}
+.chatBox .a-height{height:45px;}
+.chatBox .l-info-name{font-size: 15px;}
+.chatBox .tips-box .tips{display: inline-block;width:10px;height:10px;border-radius: 50%;background: #ff545d;margin-right:.15rem;}
 /*未登录*/
 .shadow{background: rgba(0,0,0,.7);z-index:11;overflow: hidden;}
 .login-tips{background:rgba(255,255,255,1);width:100%;padding:.8rem 0;}
