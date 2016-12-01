@@ -51,6 +51,8 @@ class DateorderShell extends Shell {
                             ])
                             ->where(['Dateorder.status in'=>['3','7','10']])
                             ->toArray();
+        $counts = count($orders);
+        \Cake\Log\Log::info($counts.'条订单进入时间处理','cron');                        
         foreach ($orders as $key => $order) {
             switch ($order->status) {
                 case 3:
