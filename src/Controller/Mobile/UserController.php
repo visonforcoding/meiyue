@@ -466,22 +466,21 @@ class UserController extends AppController {
     public function support() {
         $this->handCheckLogin();
         $spTb = TableRegistry::get('Support');
-        $userTb = TableRegistry::get('User');
-
         $supports = $spTb
-                ->find()
-                ->select(['supporter_id', 'spcount' => 'count(1)'])
-                ->where(['supported_id' => $this->user->id])
-                ->orderDesc('create_time')
-                ->group('supporter_id')
-                ->toArray();
+            ->find()
+            ->select(['supporter_id', 'spcount' => 'count(1)'])
+            ->where(['supported_id' => $this->user->id])
+            ->orderDesc('create_time')
+            ->group('supporter_id')
+            ->toArray();
         $supporterids = [];
+        $sortFlows = [];
         foreach ($supports as $item) {
             $supporterids[] = $item->supporter_id;
         }
-
-        $flowsTb = TableRegistry::get('Flow');
-        $flows = $flowsTb
+        if(count($supporterids) > 0) {
+            $flowsTb = TableRegistry::get('Flow');
+            $flows = $flowsTb
                 ->find()
                 ->contain([
                     'Buyer' => function($q) {
@@ -491,9 +490,9 @@ class UserController extends AppController {
                 ->where(['buyer_id IN' => $supporterids, 'type' => 4])
                 ->group('buyer_id')
                 ->toArray();
-        $sortFlows = [];
-        foreach ($flows as $item) {
-            $sortFlows[$item->buyer->id] = $item;
+            foreach ($flows as $item) {
+                $sortFlows[$item->buyer->id] = $item;
+            }
         }
         $this->set([
             'supports' => $supports,
