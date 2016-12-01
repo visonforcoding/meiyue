@@ -60,7 +60,6 @@
 </div>
 <div style="height:62px;"></div>
 <a href="#this" id='submit' class="identify_footer_potion">提交</a>
-<!--<a href="#this" id='submit' class="identify_footer_potion">提交审核</a>-->
 <?= $this->start('script'); ?>
 <script>
     var user_id = <?=$user->id?>;
