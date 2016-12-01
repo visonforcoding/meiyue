@@ -53,7 +53,7 @@
             LEMON.event.uploadAvatar('{"dir":"user/avatar","zip":"1"}', function (data) {
                 var data = JSON.parse(data);
                 if (data.status === true) {
-                    $('#avatar_img img').attr('src', data.path);
+                    $('#avatar_img img').attr('src', data.urlpath);
                     uploadAvatar(data.path);
                 } else {
                     $.util.alert('app上传失败');
@@ -85,7 +85,8 @@
             return false;
         }
         $.util.ajax({
-            url: 'user/reg-user-info',
+            url: '/user/reg-user-info',
+            method: 'POST',
             data: {avatar: path},
             func: function (res) {
                 $.util.alert(res.msg);
