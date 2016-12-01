@@ -19,8 +19,6 @@ class TracleController extends AppController {
         parent::initialize();
     }
 
-   
-    
     /**
      * 获取动态列表
      * @param type $page
@@ -58,7 +56,94 @@ class TracleController extends AppController {
                    ->toArray();
         return $this->Util->ajaxReturn(['movements'=>$movements]);
     }
-    
+
+
+    /**
+     * 她的动态
+     */
+    public function taTracle() {
+        $this->set([
+            "user" => $this->user,
+            'pageTitle' => $this->user->nick.'的动态'
+        ]);
+    }
+
+
+    /**
+     * 获取她的动态
+     */
+    public function getTaTracles($page, $uid) {
+        $user_id = $this->user->id;
+        $MovementTable = TableRegistry::get('Movement');
+        $movements = $MovementTable->find()
+            ->contain([
+                'User'=>function($q){
+                    return $q->select(['id','avatar','nick']);
+                }
+            ])
+            ->where(['user_id'=>$user_id,'Movement.status'=>2])
+            ->orderDesc('Movement.create_time')
+            ->limit(10)
+            ->page($page)
+            ->formatResults(function($items) {
+                return $items->map(function($item) {
+                    $item['images'] = unserialize($item['images']);
+                    //时间语义化转换
+                    $item['create_time'] = (new Time($item['create_time']))->timeAgoInWords(
+                        [ 'accuracy' => [
+                            'year' => 'year',
+                            'month' => 'month',
+                            'week' => 'week',
+                            'day' => 'day',
+                            'hour' => 'hour'
+                        ], 'end' => '+10 year']
+                    );
+                    return $item;
+                });
+            })
+            ->toArray();
+        return $this->Util->ajaxReturn(['movements'=>$movements]);
+    }
+
+    /**
+     * 获取TA动态列表
+     * @param type $page
+     * @return type
+     */
+    public function getHerTracleList($page){
+        $user_id = $this->user->id;
+        $MovementTable = TableRegistry::get('Movement');
+        $movements = $MovementTable->find()
+            ->contain([
+                'User'=>function($q){
+                    return $q->select(['id','avatar','nick']);
+                }
+            ])
+            ->where(['user_id'=>$user_id,'Movement.status'=>2])
+            ->orderDesc('Movement.create_time')
+            ->limit(10)
+            ->page($page)
+            ->formatResults(function($items) {
+                return $items->map(function($item) {
+                    $item['images'] = unserialize($item['images']);
+                    //时间语义化转换
+                    $item['create_time'] = (new Time($item['create_time']))->timeAgoInWords(
+                        [ 'accuracy' => [
+                            'year' => 'year',
+                            'month' => 'month',
+                            'week' => 'week',
+                            'day' => 'day',
+                            'hour' => 'hour'
+                        ], 'end' => '+10 year']
+                    );
+                    return $item;
+                });
+            })
+            ->toArray();
+        return $this->Util->ajaxReturn(['movements'=>$movements]);
+    }
+
+
     /**
      * 约拍
      */
@@ -122,4 +207,5 @@ class TracleController extends AppController {
         }
         return $this->Util->ajaxReturn(false, '非法操作');
     }
+
 }

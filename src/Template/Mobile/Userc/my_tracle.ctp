@@ -51,7 +51,7 @@
 <?php $this->end('css')?>
 <header>
     <div class="header">
-        <span class="iconfont toback">&#xe602;</span>
+        <span class="iconfont toback" onclick="history.back();">&#xe602;</span>
         <h1>我的动态</h1>
     </div>
 </header>
