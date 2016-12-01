@@ -36,13 +36,20 @@
                 </li>
                 <li class="birthdate">
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">出</span><span
-                                class="itemsname">生</span><span class="itemsname">日</span><span
-                                class="itemsname">期：</span></div>
+                        <div class="home_list_l_info">
+                            <span class="itemsname">出</span>
+                            <span class="itemsname">生</span>
+                            <span class="itemsname">日</span>
+                            <span class="itemsname">期：</span>
+                        </div>
                         <div class="home_list_r_info">
                             <div class="outerinput">
-                                <input name="birthday" type="date" placeholder="请输入日期" value="<?= $user->birthday; ?>"/></div>
-                            <i class="iconfont r_icon">&#xe605;</i>
+                                <input
+                                    name="birthday"
+                                    type="date"
+                                    placeholder="请输入日期"
+                                    value="<?= $user->birthday; ?>"/>
+                            </div>
                         </div>
                     </div>
                 </li>
@@ -78,7 +85,6 @@
                         </div>
                         <div class="home_list_r_info">
                             <input name="weight" type="text" placeholder="您的体重" value="<?= $user->weight; ?>"/>&nbsp;kg
-                            <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
                 </li>
@@ -88,7 +94,6 @@
                                 class="itemsname">高：</span><i class="iconfont ico"></i></div>
                         <div class="home_list_r_info">
                             <input name="height" type="text" placeholder="您的身高" value="<?= $user->height; ?>"/>&nbsp;cm
-                            <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
                 </li>
@@ -98,16 +103,25 @@
                         </div>
                         <div class="home_list_r_info">
                             <input name="bwh" type="text" placeholder="请输入三围" value="<?= $user->bwh; ?>"/>
-                            <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
                 </li>
-                <li>
+                <li class="start_sign">
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">罩</span><span class="itemsname">杯：</span>
                         </div>
                         <div class="home_list_r_info">
-                            <input name="cup" type="text" placeholder="请输入罩杯" value="<?= $user->cup; ?>"/>
+                            <div class="outerselect">
+                                <select name="cup">
+                                    <option value="A" <?= ($user->cup == 'A')?'selected':''; ?>>A</option>
+                                    <option value="B" <?= ($user->cup == 'B')?'selected':''; ?>>B</option>
+                                    <option value="C" <?= ($user->cup == 'C')?'selected':''; ?>>C</option>
+                                    <option value="D" <?= ($user->cup == 'D')?'selected':''; ?>>D</option>
+                                    <option value="E" <?= ($user->cup == 'E')?'selected':''; ?>>E</option>
+                                    <option value="F" <?= ($user->cup == 'F')?'selected':''; ?>>F</option>
+                                    <option value="G" <?= ($user->cup == 'G')?'selected':''; ?>>G</option>
+                                </select>
+                            </div>
                             <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
@@ -118,7 +132,7 @@
                         </div>
                         <div class="home_list_r_info">
                             <input name="profession" type="text" placeholder="请输入职业" value="<?= $user->profession; ?>"/>
-                            <i class="iconfont r_icon">&#xe605;</i>
+                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
@@ -128,7 +142,7 @@
                                 class="itemsname">乡</span></div>
                         <div class="home_list_r_info">
                             <input name="hometown" type="text" placeholder="请输入家乡" value="<?= $user->hometown; ?>"/>
-                            <i class="iconfont r_icon">&#xe605;</i>
+                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
@@ -139,7 +153,7 @@
                                 class="itemsname">区：</span></div>
                         <div class="home_list_r_info">
                             <input name="city" type="text" placeholder="请输入所在地区" value="<?= $user->city; ?>"/>
-                            <i class="iconfont r_icon">&#xe605;</i>
+                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
@@ -168,7 +182,7 @@
                                 class="itemsname">历：</span></div>
                         <div class="home_list_r_info">
                             <input name="career" type="text" placeholder="工作经历" value="<?= $user->career; ?>"/>
-                            <i class="iconfont r_icon">&#xe605;</i>
+                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
@@ -261,7 +275,7 @@
                         <div class="home_list_l_info"><span class="itemsname">微信号：</span></div>
                         <div class="home_list_r_info">
                             <input name="wxid" type="text" placeholder="请输入" value="<?= $user->wxid; ?>"/>
-                            <i class="iconfont r_icon">&#xe605;</i>
+                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
