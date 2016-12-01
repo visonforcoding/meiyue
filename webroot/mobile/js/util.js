@@ -149,7 +149,7 @@ $.util = {
             }
         };
         obj.error = function (XMLHttpRequest, textStatus, errorThrown) {
-            $.util.alert('服务器繁忙');
+            //$.util.alert('服务器繁忙');
             console.log(errorThrown);
         };
         $.ajax(obj);

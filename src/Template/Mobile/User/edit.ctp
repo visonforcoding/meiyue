@@ -53,7 +53,8 @@
             LEMON.event.uploadAvatar('{"dir":"user/avatar","zip":"1"}', function (data) {
                 var data = JSON.parse(data);
                 if (data.status === true) {
-                    uploadAvatar(data.path, data.urlpath);
+                    $('#avatar_img img').attr('src', data.path);
+                    uploadAvatar(data.path);
                 } else {
                     $.util.alert('app上传失败');
                 }
@@ -66,7 +67,7 @@
                     func: function (msg) {
                         $.util.alert(msg.msg);
                         if (msg.status === true) {
-                            $('#upload_pic img').attr('src', msg.path);
+                            $('#avatar_img img').attr('src', msg.path);
                             $('input[name="avatar"]').val(msg.path);
                         }
                     }
@@ -79,7 +80,7 @@
 
 
     //上传头像
-    function uploadAvatar(path, urlpath) {
+    function uploadAvatar(path) {
         if (!path) {
             return false;
         }
@@ -88,9 +89,6 @@
             data: {avatar: path},
             func: function (res) {
                 $.util.alert(res.msg);
-                if (res.status) {
-                    $('#avatar_img').attr('src', urlpath);
-                }
             }
         });
     }
