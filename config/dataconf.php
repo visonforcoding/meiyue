@@ -53,10 +53,6 @@ return [
         'AppMasterSecret' => 'yfmgulh7mqcyfbbmax5wpmughka4mwv2',
 //        'UmengMessageSecret' => '795ffe74e61cd9b28cba5efd98f97171',
     ],
-    'redis_server'=>[
-      'host'=> Cake\Core\Configure::read('debug')&&$_SERVER['SERVER_ADDR']=='127.0.0.1'?'192.168.1.7':'127.0.0.1',
-      'port'=>'6379'  
-    ],
     'pvlog'=>[
       'store_nums'=>100, //pvlog的redis 缓冲区数目 
     ],
