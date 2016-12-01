@@ -11,7 +11,7 @@
             <div class="cover_left_info">
                 <ul class='opci'>
                     <li class="blight userinfo">
-                        <a href="#this" class="cover_block">
+                        <a href="/userc/edit-info" class="cover_block">
                             <h3>
                                 <span><?= $user->nick ?><i class="iconfont">&#xe628;</i></span>
                                 <span class="flag price"><?= $this->Number->format($user->money) ?>美币</span>
@@ -134,17 +134,5 @@
 <?= $this->element('footer', ['active' => 'me']) ?>
 <?php $this->start('script'); ?>
 <script type="text/javascript">
-    //$.util.showPreloader('前往登录..');
-//    window.onActiveView = function () {
-//        if (!$.util.getCookie('token_uin')) {
-//            alert('我又没登陆');
-//            LEMON.event.login(function (res) {
-//                res = JSON.parse(res);
-//                $.util.setCookie('token_uin', res.token_uin, 99999999);
-//                LEMON.db.set('token_uin', res.token_uin);
-//                window.location.reload();
-//            });
-//        }
-//    }
 </script>
 <?php $this->end('script'); ?>

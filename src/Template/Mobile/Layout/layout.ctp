@@ -84,23 +84,23 @@
                 }
             });
             window.onerror = $.util.windowError;
-//            (function () {  //cookie和jsapi直接互相设置token_uin
-//                if (!$.util.isAPP)
-//                    return;
-//                var apptk = LEMON.db.get('token_uin'), cookietk = $.util.getCookie('token_uin');
-//                if (apptk && cookietk) {
-//                    if ((new Date()).getDay() != LEMON.db.get('tokenset')) {  //每天一次  检查一下
-//                        LEMON.db.set('tokenset', (new Date()).getDay());
-//                        LEMON.db.set('token_uin', cookietk);
-//                    }
-//
-//                    return;
-//                } else if (apptk) {
-//                    $.util.setCookie('token_uin', apptk, 99999999);
-//                } else if (cookietk) {
-//                    LEMON.db.set('token_uin', cookietk);
-//                }
-//            })();
+            (function () {  //cookie和jsapi直接互相设置token_uin
+                if (!$.util.isAPP)
+                    return;
+                var apptk = LEMON.db.get('token_uin'), cookietk = $.util.getCookie('token_uin');
+                if (apptk && cookietk) {
+                    if ((new Date()).getDay() != LEMON.db.get('tokenset')) {  //每天一次  检查一下
+                        LEMON.db.set('tokenset', (new Date()).getDay());
+                        LEMON.db.set('token_uin', cookietk);
+                    }
+                    
+                    return;
+                } else if (apptk) {
+                    $.util.setCookie('token_uin', apptk, 99999999);
+                } else if (cookietk) {
+                    LEMON.db.set('token_uin', cookietk);
+                }
+            })();
         </script>
         <?= $this->fetch('script') ?>
     </body>
