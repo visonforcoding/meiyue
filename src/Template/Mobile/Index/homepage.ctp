@@ -177,7 +177,7 @@
             </li>
         <?php endif; ?>
         <li>
-            <a href="/index/find-skill/<?=$user->id?>">
+            <a id="dateit">
                 <i class="iconfont">&#xe632;</i>约Ta
             </a>
         </li>
@@ -260,5 +260,15 @@
             }
         })
     }
+    $('#dateit').on('tap',function(){
+        $.util.ajax({
+            url:'/user/clogin',
+            func:function(res){
+                 if(res.status){
+                     window.location.href = '/index/find-skill/<?=$user->id?>';
+                 }
+            }
+        })
+    })
 </script>
 <?php $this->end('script'); ?>

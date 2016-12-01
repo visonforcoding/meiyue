@@ -127,7 +127,7 @@ $.util = {
                         window.location.href = json.redirect_url;
                     }else{
                         LEMON.event.login(function(res){
-                          res = JSON.parse(res);
+//                          res = JSON.parse(res);
                           $.util.setCookie('token_uin', res.token_uin, 99999999);
                           LEMON.db.set('token_uin', res.token_uin);
                           //window.location.reload();
