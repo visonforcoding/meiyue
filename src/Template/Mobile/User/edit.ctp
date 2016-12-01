@@ -51,11 +51,9 @@
         //点击选择图片
         if ($.util.isAPP) {
             LEMON.event.uploadAvatar('{"dir":"user/avatar","zip":"1"}', function (data) {
-                alert(data);
                 var data = JSON.parse(data);
                 if (data.status === true) {
-                    $('input[name="avatar"]').val(data.path);
-                    $('#avatar_img').attr('src', data.urlpath);
+                    uploadAvatar(data.path, data.urlpath);
                 } else {
                     $.util.alert('app上传失败');
                 }
@@ -78,5 +76,23 @@
             $.util.alert('请在微信或APP上传图片');
         }
     });
+
+
+    //上传头像
+    public function uploadAvatar(path, urlpath) {
+        if (!path) {
+            return false;
+        }
+        $.util.ajax({
+            url: 'user/reg-user-info',
+            data: {avatar: path},
+            func: function (res) {
+                $.util.alert(res.msg);
+                if (res.status) {
+                    $('#avatar_img').attr('src', urlpath);
+                }
+            }
+        });
+    }
 </script>
 <?php $this->end(); ?>
