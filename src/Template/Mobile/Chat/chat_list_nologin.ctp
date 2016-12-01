@@ -27,48 +27,6 @@
         </li>
     </ul>
     <ul class="chatBox mt40">
-        <li>
-            <a href="chat_detail.html" class="ablock flex flex_justify">
-                <div class="chat-left-info flex">
-                    <div class="avatar">
-                        <img src="../images/avatar.jpg"/>
-                    </div>
-                    <div class="chat-text">
-                        <h3 class="name">范美美</h3>
-                        <span class="last-info line1">今晚有空吗今晚有空吗今晚有空吗今晚有空吗今晚有空吗今晚有空吗今晚有空吗？</span>
-                    </div>
-                </div>
-                <time class="smalldes">16/06/03 18:00</time>
-            </a>
-        </li>
-        <li>
-            <a href="chat_detail.html" class="ablock flex flex_justify">
-                <div class="chat-left-info flex">
-                    <div class="avatar">
-                        <img src="../images/avatar.jpg"/>
-                    </div>
-                    <div class="chat-text">
-                        <h3 class="name">范美美</h3>
-                        <span class="last-info line1">今晚有空吗今晚有空吗今晚有空吗今晚有空吗今晚有空吗今晚有空吗今晚有空吗？</span>
-                    </div>
-                </div>
-                <time class="smalldes">18:00</time>
-            </a>
-        </li>
-        <li>
-            <a href="chat_detail.html" class="ablock flex flex_justify">
-                <div class="chat-left-info flex">
-                    <div class="avatar">
-                        <img src="../images/avatar.jpg"/>
-                    </div>
-                    <div class="chat-text">
-                        <h3 class="name">范美美</h3>
-                        <span class="last-info line1">今晚有空吗？</span>
-                    </div>
-                </div>
-                <time class="smalldes">18:00</time>
-            </a>
-        </li>
     </ul>
 </div>
 <div style="height:1.4rem"></div>
