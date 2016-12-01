@@ -51,6 +51,7 @@
         //点击选择图片
         if ($.util.isAPP) {
             LEMON.event.uploadAvatar('{"dir":"user/avatar","zip":"1"}', function (data) {
+                alert(data);
                 var data = JSON.parse(data);
                 if (data.status === true) {
                     $('input[name="avatar"]').val(data.path);
