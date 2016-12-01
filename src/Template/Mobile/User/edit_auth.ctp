@@ -55,20 +55,20 @@
                 <h3 class="color_black">如上图所示请上传认证照片</h3>
             </div>
             <div class="fact_identify">
-                <dl class="Idcard">
+                <dl class="Idcard id-upload">
                     <dt>
                         <img id="front_img" src="/mobile/images/upimg.png" alt="" />
                         <input id="idfront" name="idfront" type="hidden" />
                     </dt>
 
                 </dl>
-                <dl class="Idcard">
+                <dl class="Idcard id-upload">
                     <dt>
                         <img id="back_img" src="/mobile/images/upimg.png" alt="" />
                         <input id="idback" name="idback" type="hidden" />
                     </dt>
                 </dl>
-                <dl class="Idcard personimg">
+                <dl class="Idcard personimg id-upload">
                     <dt>
                         <img id="person_img" src="/mobile/images/upimg.png" alt="" />
                         <input id="idperson" name="idperson" type="hidden" />
@@ -82,7 +82,7 @@
 <a id="submit" class="identify_footer_potion">开始审核</a>
 <?= $this->start('script'); ?>
 <script>
-    $('.Idcard img').on('tap', function () {
+    $('.id-upload img').on('tap', function () {
         $obj = $(this);
         if ($.util.isAPP) {
             LEMON.event.uploadPic('{"dir":"user/idcard"}', function (data) {

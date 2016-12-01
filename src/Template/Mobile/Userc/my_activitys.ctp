@@ -125,4 +125,5 @@
         }
         return data;
     }
+    LEMON.sys.back('/user/index');
 </script>

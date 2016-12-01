@@ -188,6 +188,7 @@ class DateOrderController extends AppController
                 'date_time'=>  $lasth,
                 'consumer'=>  $this->user->truename,
                 'status'=>10,
+                'date_id' => $date->id,
                 'user_skill_id'=>$date->user_skill_id,
                 'site'=>$date->site,
                 'site_lat'=>$date->site_lat,
@@ -195,7 +196,7 @@ class DateOrderController extends AppController
                 'price'=>$price,
                 'amount'=>$amount,
                 'pre_pay'=>0,
-                'pre_precent'=>100,
+                'pre_precent'=>0,
                 'prepay_time'=> new Time(),
                 'start_time'=>$date->start_time,
                 'end_time'=>$date->end_time,
@@ -232,11 +233,11 @@ class DateOrderController extends AppController
                 });
             if($transRes){
                 $this->Sms->sendByQf106($date->user->phone,
-                    '用户'
+                    '用户【'
                     .$user->nick
-                    .'已支付了您的约会['
+                    .'】已支付了您的约会【'
                     .$date->title
-                    .']'
+                    .'】,祝约会愉快'
                 );
                 return $this->Util->ajaxReturn([
                     'status'=>true,

@@ -44,7 +44,7 @@ class BusinessComponent extends Component
 
         $mytop = null;
         //获取我的排名
-        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+        $FlowTable = TableRegistry::get('Flow');
         $query = $FlowTable->find();
         $query->contain(['User' => function($q) use($userid) {
             return $q->select(['id','avatar','nick','phone','gender','birthday'])
@@ -60,6 +60,9 @@ class BusinessComponent extends Component
         $mytop = $query->first();
         $mytop->user->age = getAge($mytop->user->birthday);
         $mytop->ishead = true;
+        if(!$mytop->total) {
+            $mytop->total = 0;
+        }
 
         //获取我的排名对象
         $where = Array(
@@ -69,18 +72,20 @@ class BusinessComponent extends Component
             $where['Flow.create_time >='] = new Time('last sunday');
         } else if('month' == $type) {
             $da = new Time();
-            $where['Flow.create_time >='] = new Time(new Time($da->year . '-' . $da->month . '-' . '01 00:00:00'));
+            $where['Flow.create_time >='] =
+                new Time(new Time($da->year . '-' . $da->month . '-' . '01 00:00:00'));
         }
-        $iquery = $FlowTable->find('list')
+        $where['User.gender'] = 2;
+        $where['User.id !='] = $mytop->user->id;
+        $iquery = $FlowTable
+            ->find('all')
             ->contain([
-                'User'=>function($q) use($mytop) {
-                    return $q->where(['gender'=>2, 'User.id !=' => $mytop->user->id]);
-                },
+                'User'
             ])
-            ->select(['total' => 'sum(amount)'])
+            //->select(['total' => 'sum(amount)'])
             ->where($where)
             ->group('Flow.user_id')
-            ->having(['total >= ' => $mytop->total]);
+            ->having(['sum(amount) >= ' => $mytop->total]);
 
         //计算排名
         $mytop->index = $iquery->count() + 1;

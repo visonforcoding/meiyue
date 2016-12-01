@@ -80,3 +80,7 @@
         </ul>
     </div>
 </div>
+
+<script>
+    LEMON.sys.back('/user/index');
+</script>

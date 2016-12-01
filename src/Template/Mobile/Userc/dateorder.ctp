@@ -171,5 +171,7 @@ function calFunc(data) {
     console.log(data);
     return data;
 }
+
+LEMON.sys.back('/user/index');
 </script>
 <?php $this->end('script'); ?>
