@@ -126,10 +126,21 @@
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">活动详细说明</label>
-            <div class="col-md-8">
+            <!--<div class="col-md-8">
                 <?php
-                echo $this->Form->input('detail', ['label' => false, 'class' => 'form-control']);
-                ?>
+/*                echo $this->Form->input('detail', ['label' => false, 'class' => 'form-control']);
+                */?>
+            </div>-->
+
+            <div class="col-md-8">
+                <script
+                    name='detail'
+                    id='detail'
+                    rows='2'
+                    type="text/plain"
+                    class='form-control-editor'>
+                    <?= $activity->detail ?>
+                </script>
             </div>
         </div>
         <div class="form-group">
@@ -162,13 +173,13 @@
     <script type="text/javascript"
             src="/wpadmin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
     <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
-    <!--<script src="/wpadmin/lib/ueditor/ueditor.config.js" ></script>
+    <script src="/wpadmin/lib/ueditor/ueditor.config.js" ></script>
     <script src="/wpadmin/lib/ueditor/ueditor.all.js" ></script>
-    <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>    -->
+    <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>
     <script>
         $(function () {
             // initJqupload('cover', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
-            //var ue = UE.getEditor('content'); //初始化富文本编辑器
+            var ue = UE.getEditor('detail'); //初始化富文本编辑器
             $('form').validationEngine({
                 focusFirstField: true,
                 autoPositionUpdate: true,
