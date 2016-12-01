@@ -156,13 +156,15 @@
         </li>
     </ul>
 </div>
-<div class="togift flex flex_center">
+<div class="togift flex flex_center"
+     onclick="window.location.href='/gift/index/<?= $user->id; ?>';event.stopPropagation(); ">
     <i class="iconfont">&#xe614;</i>
 </div>
 <div style="height:1.6rem"></div>
 <!--底部-->
 <div class="home_page_footer">
-    <ul class="clearfix  flex flex_justify">
+    <ul class="clearfix flex flex_justify
+        <?= (count($user->user_skills) == 0)?'changeli':''; ?>">
         <?php if ($isFollow): ?>
             <li>
                 <a id="focusIt">
@@ -176,11 +178,13 @@
                 </a>
             </li>
         <?php endif; ?>
+        <?php if (count($user->user_skills) > 0): ?>
         <li>
             <a id="dateit">
                 <i class="iconfont">&#xe632;</i>约Ta
             </a>
         </li>
+        <?php endif; ?>
         <li>
             <a href="#this">
                 <i class="iconfont">&#xe603;</i>私聊
@@ -270,5 +274,6 @@
             }
         })
     })
+
 </script>
 <?php $this->end('script'); ?>

@@ -24,7 +24,12 @@ class GiftController extends AppController
         $userTb = TableRegistry::get("User");
         $user = $userTb->get($id, ['select' => ['id', 'nick', 'avatar']]);
         $gifts = $this->Gift->find('all')->orderAsc('price');
-        $this->set(['user' => $user, 'me' => $this->user, 'gifts' => $gifts->toArray(), 'pageTitle' => '礼物',]);
+        $this->set([
+            'user' => $user,
+            'me' => $this->user,
+            'gifts' => $gifts->toArray(),
+            'pageTitle' => '礼物',
+        ]);
     }
 
 
