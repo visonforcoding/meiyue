@@ -315,7 +315,7 @@ color:#444;position:relative;}
 .edit_date_box .marks_edit{height:auto;}
 /*选择标签弹窗*/
 .choose_mark .title{font-size: 14px;}
-.choose_mark{padding-bottom:.2rem;background: #f4f4f4;}
+.choose_mark{/*padding-bottom:.2rem;--选择标签底部间距*/background: #f4f4f4;max-width:7rem;overflow: auto;}
 .choose-date-mark{position: absolute;bottom:0;width:100%;}
 .choose-date-mark .marks-box{padding:0 .3rem;width:100%;background: #fff;}
 .choose-date-mark .nav-title{line-height: 1rem;}
