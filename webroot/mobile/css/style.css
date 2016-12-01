@@ -1009,6 +1009,8 @@ color:#999;padding:.1rem;}
 .chart-con-box .pull-left .chatbox{margin-left:15px;background: #fff;color:#000;}
 .chart-con-box .pull-right .chatbox{margin-right:15px;background: #eab96a;color:#fff;}
 .submit_chat{position:fixed;bottom:0;padding:10px .3rem;background:#fff;width:100%;max-width: 750px;bottom:0;z-index:10;box-shadow: 0 -1px 2px rgba(0,0,0,.1);}
+.visited li{padding:.3rem;}
+.visited li .praised_block{height:.8rem;-webkit-box-align: start;}
 .submit_chat .sub-chat{min-height:32px;}
 .sub-chat .icon{font-size:28px;color:#e1e4e6;margin-right:.2rem;}
 .sub-chat .sub-text{width:4.8rem;margin-right:.2rem;overflow: hidden;min-height:32px;}
@@ -1017,6 +1019,9 @@ color:#999;padding:.1rem;}
 .chatBox .a-height{height:45px;}
 .chatBox .l-info-name{font-size: 15px;}
 .chatBox .tips-box .tips{display: inline-block;width:10px;height:10px;border-radius: 50%;background: #ff545d;margin-right:.15rem;}
+.chart-systerm-box .infobox{margin-top:.2rem;}
+.chart-systerm-box .infobox p{padding:.3rem .2rem;color:#000;background: #fff;border:1px #efefef solid;border-radius: 3px;max-width:86%;margin:0 auto;}
+.chart-systerm-box .timebox{text-align: center;margin-top:.6rem;color:#999999;font-size: 11px;}
 /*未登录*/
 .shadow{background: rgba(0,0,0,.7);z-index:11;overflow: hidden;}
 .login-tips{background:rgba(255,255,255,1);width:100%;padding:.8rem 0;}
