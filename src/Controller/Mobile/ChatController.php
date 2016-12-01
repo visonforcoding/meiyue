@@ -24,6 +24,9 @@ class ChatController extends AppController {
      */
     public function chatList(){
         if(!$this->user){
+            $this->set([
+                'pageTitle'=>'消息'
+            ]);      
             return $this->render('chat_list_nologin');
         }
         $UserTable = TableRegistry::get('User');
