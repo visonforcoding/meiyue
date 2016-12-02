@@ -58,7 +58,7 @@
             <div class="con">
                 <div class="date_time  flex flex_justify">
                     <span>我的钱包</span>
-                    <div class="color_y"><?= $user['money'] ?> 美币</div>
+                    <div class="color_y"><?= isset($user)?$user['money']:'0' ?> 美币</div>
                 </div>
             </div>
         </div>

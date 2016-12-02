@@ -72,10 +72,13 @@
                 <?php foreach ($user->user_skills as $user_skill): ?>
                     <li class="itms_list">
                         <div class="items flex flex_justify">
-                            <span class="items_name"><i class="iconfont color_y">&#xe631;</i><?= $user_skill->skill->name ?></span>
+                            <span class="items_name">
+                                <i class="iconfont color_y">&#xe631;</i>
+                                <?= $user_skill->skill->name ?>
+                            </span>
                             <div>
-                                <span class="price"><i><?= $user_skill->cost->money ?></i> 美币/小时</span>
-                                <a href="#this" class="date">约他</a>
+                                <span class="price"><i><?= $user_skill->cost->money ?></i>美币/h</span>
+                                <a href="/date-order/order-skill/<?= $user_skill->id; ?>" class="date">约TA</a>
                             </div>
                         </div>
                     </li>
