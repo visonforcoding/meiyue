@@ -562,3 +562,16 @@ ENGINE=InnoDB
 AUTO_INCREMENT=3
 ;
 
+##动态点赞表
+CREATE TABLE `lm_mvpraise` (
+	`id` INT(11) NOT NULL,
+	`movement_id` INT(11) NOT NULL COMMENT '动态id',
+	`user_id` INT(11) NOT NULL COMMENT '用户id',
+	`create_time` INT(11) NOT NULL COMMENT '点赞时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='动态点赞表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
