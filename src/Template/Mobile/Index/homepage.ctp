@@ -29,9 +29,10 @@
         <ul class="inner flex">
             <?php if (@unserialize($user->images)): ?>
                 <?php foreach (unserialize($user->images) as $image): ?>
-                    <li><img src="<?= createImg($image) ?>"/></li>
+                    <!--<li><img src="<?/*= createImg($image) */?>"/></li>-->
                 <?php endforeach; ?>
-                <li><a href="#this" class='ablock'><img src="/mobile/images//avatar.jpg"/><span>更 多 私 房</span></a></li>
+                <li><img src="<?= createImg($image) ?>"/></li>
+                <li><a href="/tracle/ta-tracle/<?= $user->id; ?>" class='ablock' ><img src="/mobile/images/avatar.jpg"/><span>更 多 私 房</span></a></li>
             <?php endif; ?>
         </ul>
         <div class="inner home_video mt20">
