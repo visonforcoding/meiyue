@@ -143,9 +143,9 @@
             LEMON.event.login(function (res) {
                 res = JSON.parse(res);
                 $.util.setCookie('token_uin', res.token_uin, 99999999);
-                LEMON.db.set('token_uin', res.token_uin);
-                LEMON.db.set('im_token', res.user.imtoken);
-                LEMON.db.set('im_accid', 'meiyue_'+res.user.id);
+                //LEMON.db.set('token_uin', res.token_uin);
+                //LEMON.db.set('im_token', res.user.imtoken);
+                //LEMON.db.set('im_accid', 'meiyue_'+res.user.id);
                 window.location.reload();
                 
             });

@@ -1,11 +1,33 @@
+
 <header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <h1>消息</h1>
+        <span class="r_btn">忽略全部</span>
     </div>
 </header>
 <div class="wraper">
     <ul class="chatBox">
+        <li>
+            <a href="#this" class="a-height flex flex_justify">
+                <div class="l-info-name">邀请注册</div>
+                <i class="iconfont rcon">&#xe605;</i>
+            </a>
+        </li>
+        <li>
+            <a href="#this" class="a-height flex flex_justify">
+                <div class="l-info-name">我的访客</div>
+                <i class="iconfont rcon">&#xe605;</i>
+            </a>
+        </li>
+        <li>
+            <a href="#this" class="a-height flex flex_justify">
+                <div class="l-info-name">平台消息</div>
+                <div class="tips-box"><span class="tips"></span><i class="iconfont rcon">&#xe605;</i></div>
+            </a>
+        </li>
+    </ul>
+    <ul class="chatBox mt40">
         <?php foreach ($users as $user): ?>
             <li>
                 <a data-accid="meiyue_<?= $user->id ?>" data-avatar="<?= $user->avatar ?>" data-nick="<?= $user->nick ?>"  
@@ -30,15 +52,6 @@
 <?= $this->element('footer', ['active' => 'chat']) ?>
 <?php $this->start('script'); ?>
 <script type="text/javascript">
-    //$.util.showPreloader('前往登录..');
-//    window.onActiveView = function () {
-//        LEMON.event.login(function (res) {
-//            res = JSON.parse(res);
-//            $.util.setCookie('token_uin', res.token_uin, 99999999);
-//            LEMON.db.set('token_uin', res.token_uin);
-//            window.location.reload();
-//        });
-//    }
     $('.user').on('tap', function () {
         var param = {};
         var accid = $(this).data('accid');
