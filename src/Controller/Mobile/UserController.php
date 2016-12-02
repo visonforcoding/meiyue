@@ -271,13 +271,20 @@ class UserController extends AppController {
         ]);
     }
 
+    /**
+     * 
+     * @param type $type  验证码类型
+     * @return type
+     */
     public function sendVcode($type) {
         $this->loadComponent('Sms');
         $mobile = $this->request->data('phone');
         if ($type == 1) {
-            $ckReg = $this->User->find()->where(['phone' => $data['phone']])->first();
+            $ckReg = $this->User->find()->where(['phone' => $mobile])->first();
             if ($ckReg) {
-                return $this->Util->ajaxReturn(false, '该手机号已经注册过,请直接登录');
+                return $this->Util->ajaxReturn(['status'=>false, 
+                    'msg'=>'该手机号已经注册过,请直接登录','code'=>'201'
+                    ]);
             }
         }
         $code = createRandomCode(4, 2); //创建随机验证码
