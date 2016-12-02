@@ -7,6 +7,8 @@ use App\Model\Entity\User;
 use Cake\Database\Expression\QueryExpression;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use SerRight;
+use ServiceType;
 
 /**
  * Userc Controller 动态
@@ -60,15 +62,38 @@ class TracleController extends AppController {
 
 
     /**
+     * 查看美女动态
+     */
+    public function browse($uid) {
+        $this->handCheckLogin();
+        if($this->request->is('POST')) {
+            $this->loadComponent('Business');
+            //检查权限和名额剩余
+            $res = $this->Business->checkRight($this->user->id, $uid, ServiceType::BROWSE);
+            return $this->Util->ajaxReturn(['right' => $res]);
+        }
+    }
+
+
+    /**
      * 她的动态
      */
     public function taTracle($uid) {
-        $uTb = TableRegistry::get('User');
-        $user = $uTb->get($uid);
-        $this->set([
-            "userid" => $user->id,
-            'pageTitle' => $user->nick.'的动态'
-        ]);
+        $this->handCheckLogin();
+        $this->autoRender = false;
+        $this->loadComponent('Business');
+        //检查权限和名额剩余
+        $res = $this->Business->consumeRight($this->user->id, $uid, ServiceType::BROWSE);
+
+        if($res) {
+            $uTb = TableRegistry::get('User');
+            $user = $uTb->get($uid);
+            $this->set([
+                "userid" => $user->id,
+                'pageTitle' => $user->nick.'的动态'
+            ]);
+            $this->render();
+        }
     }
 
 
@@ -76,55 +101,61 @@ class TracleController extends AppController {
      * 获取她的动态
      */
     public function getTaTracles($page, $uid) {
-        $MovementTable = TableRegistry::get('Movement');
-        $movements = $MovementTable->find()
-            ->contain([
-                'User'=>function($q){
-                    return $q->select(['id','avatar','nick']);
-                },
-                'Mvpraise' => function($q) {
-                    return $q->where(['user_id' => $this->user->id]);
-                }
-            ])
-            ->where(['user_id'=>$uid,'Movement.status'=>2])
-            ->orderDesc('Movement.create_time')
-            ->limit(10)
-            ->page($page)
-            ->formatResults(function($items) {
-                return $items->map(function($item) {
-                    $item['images'] = unserialize($item['images']);
-                    //时间语义化转换
-                    $item['create_time'] = (new Time($item['create_time']))->timeAgoInWords(
-                        [ 'accuracy' => [
-                            'year' => 'year',
-                            'month' => 'month',
-                            'week' => 'week',
-                            'day' => 'day',
-                            'hour' => 'hour'
-                        ], 'end' => '+10 year']
-                    );
-                    $item['view_nums'] ++;
-                    if(count($item['mvpraise']) > 0) {
-                        $item['praised'] = true;
-                    } else {
-                        $item['praised'] = false;
+        $this->handCheckLogin();
+        $this->loadComponent('Business');
+        //检查权限和名额剩余
+        $res = $this->Business->checkRight($this->user->id, $uid, ServiceType::BROWSE);
+        if($res == SerRight::OK_CONSUMED) {
+            $MovementTable = TableRegistry::get('Movement');
+            $movements = $MovementTable->find()
+                ->contain([
+                    'User'=>function($q){
+                        return $q->select(['id','avatar','nick']);
+                    },
+                    'Mvpraise' => function($q) {
+                        return $q->where(['user_id' => $this->user->id]);
                     }
-                    return $item;
-                });
-            })
-            ->toArray();
+                ])
+                ->where(['user_id'=>$uid,'Movement.status'=>2])
+                ->orderDesc('Movement.create_time')
+                ->limit(10)
+                ->page($page)
+                ->formatResults(function($items) {
+                    return $items->map(function($item) {
+                        $item['images'] = unserialize($item['images']);
+                        //时间语义化转换
+                        $item['create_time'] = (new Time($item['create_time']))->timeAgoInWords(
+                            [ 'accuracy' => [
+                                'year' => 'year',
+                                'month' => 'month',
+                                'week' => 'week',
+                                'day' => 'day',
+                                'hour' => 'hour'
+                            ], 'end' => '+10 year']
+                        );
+                        $item['view_nums'] ++;
+                        if(count($item['mvpraise']) > 0) {
+                            $item['praised'] = true;
+                        } else {
+                            $item['praised'] = false;
+                        }
+                        return $item;
+                    });
+                })
+                ->toArray();
 
-        //修改动态阅读次数
-        $mvids = [];
-        foreach($movements as $movement) {
-            $mvids[] = $movement->id;
+            //修改动态阅读次数
+            $mvids = [];
+            foreach($movements as $movement) {
+                $mvids[] = $movement->id;
+            }
+            if($mvids) {
+                $expression = new QueryExpression('view_nums = view_nums + 1');
+                $MovementTable->updateAll([$expression], ['id IN' => $mvids]);
+            }
+            return $this->Util->ajaxReturn(['movements'=>$movements]);
         }
-        if($mvids) {
-            $expression = new QueryExpression('view_nums = view_nums + 1');
-            $MovementTable->updateAll([$expression], ['id IN' => $mvids]);
-        }
-
-        return $this->Util->ajaxReturn(['movements'=>$movements]);
+        return $this->Util->ajaxReturn(['movements'=>[]]);
     }
 
 

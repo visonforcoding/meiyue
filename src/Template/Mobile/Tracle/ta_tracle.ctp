@@ -1,6 +1,6 @@
 <header>
     <div class="header">
-        <span class="iconfont toback">&#xe602;</span>
+        <span class="iconfont toback" onclick="history.back();">&#xe602;</span>
         <h1><?= $pageTitle;?></h1>
     </div>
 </header>
@@ -13,15 +13,15 @@
 <script id="movement-list-tpl" type="text/html">
     {{#movements}}
     <section>
-        <div class="title inner flex">
+        <div class="title inner flex flex_justify">
             <div class="tracle_title_left">
                 <span class="avatar"><img src="{{user.avatar}}"/></span>
                 <h3 class="user_info">
                     <span>{{user.nick}}</span>
                     <time>{{create_time}}</time>
-                    <a class='likeIt' data-id="<?= $userid; ?>">【关注她】</a>
                 </h3>
             </div>
+            <span class="focusbtn likeIt" data-id="<?= $userid; ?>">+ 关注</span>
         </div>
         <div class="con inner">
             <p class="text">{{body}}</p>
@@ -123,10 +123,10 @@
             data: {id: id},
             func: function (res) {
                 if(res.status) {
-                    if($('.likeIt').first().text() == '【关注她】') {
-                        $('.likeIt').text('【取消关注】');
+                    if($('.likeIt').first().text() == '+ 关注') {
+                        $('.likeIt').text('取消关注');
                     } else {
-                        $('.likeIt').text('【关注她】');
+                        $('.likeIt').text('+ 关注');
                     }
                 }
             }
