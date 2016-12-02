@@ -123,14 +123,14 @@ $.util = {
             if (json.code == 403) {
                 $.util.alert('请先登录');
                 setTimeout(function () {
-                    if($.util.isWX){
+                    if ($.util.isWX) {
                         window.location.href = json.redirect_url;
-                    }else{
-                        LEMON.event.login(function(res){
+                    } else {
+                        LEMON.event.login(function (res) {
 //                          res = JSON.parse(res);
-                          $.util.setCookie('token_uin', res.token_uin, 99999999);
-                          LEMON.db.set('token_uin', res.token_uin);
-                          //window.location.reload();
+                            $.util.setCookie('token_uin', res.token_uin, 99999999);
+                            LEMON.db.set('token_uin', res.token_uin);
+                            //window.location.reload();
                         });
                     }
                 }, 500);
@@ -577,7 +577,8 @@ $.util = {
      * @returns {String}
      */
     getFormatTime: function (date) {
-        if(!date)date = new Date();
+        if (!date)
+            date = new Date();
         var y = date.getFullYear();
         var m = date.getMonth() + 1;
         m = m < 10 ? ('0' + m) : m;
@@ -588,7 +589,7 @@ $.util = {
         minute = minute < 10 ? ('0' + minute) : minute;
         var second = date.getSeconds();
         second = second < 10 ? ('0' + second) : second;
-        return y + '-' + m + '-' + d + ' ' + h + ':' + minute+':'+second;
+        return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
     },
     /**
      * 处理js错误
@@ -646,6 +647,18 @@ $.util = {
         }, 500);
 
         return !1;
+    },
+    lmlogin: function () {
+        if ($.util.isWX) {
+            window.location.href = '/user/login';
+        } else {
+            LEMON.event.login(function (res) {
+//                          res = JSON.parse(res);
+                $.util.setCookie('token_uin', res.token_uin, 99999999);
+                LEMON.db.set('token_uin', res.token_uin);
+                //window.location.reload();
+            });
+        }
     }
 };
 
