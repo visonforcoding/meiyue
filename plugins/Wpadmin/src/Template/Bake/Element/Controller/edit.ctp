@@ -55,4 +55,11 @@ $compact = ["'" . $singularName . "'"];
         endforeach;
         %>
         $this->set(compact(<%= join(', ', $compact) %>));
+        $this->set([
+      'pageTitle'=>'<%= $pluralName %>修改',
+      'bread'=>[
+            'first'=>['name'=>'xxx'],
+            'second'=>['name'=>'<%= $pluralName %>修改'],
+        ],
+      ]);
     }

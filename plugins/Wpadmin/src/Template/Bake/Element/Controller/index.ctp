@@ -22,4 +22,11 @@
 public function index()
 {
 $this->set('<%= $pluralName %>', $this-><%= $currentModelName %>);
+$this->set([
+      'pageTitle'=>'<%= $pluralName %>管理',
+      'bread'=>[
+            'first'=>['name'=>'xxx'],
+            'second'=>['name'=>'<%= $pluralName %>管理'],
+        ],
+      ]);
 }
