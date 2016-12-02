@@ -63,7 +63,7 @@ Router::scope('/', function (RouteBuilder $routes) {
         $routes->connect('/:controller/:action/*', ['prefix' => $subdomain]);
     }
     if ($subdomain == 'admin') {
-        $routes->connect('/', ['plugin' => 'wpadmin', 'controller' => 'index', 'action' => 'index']);
+   
         //wpadmin 的路由重置
         $routes->connect('/admin/login', ['plugin' => 'wpadmin', 'controller' => 'admin', 'action' => 'login']);
         $routes->connect('/admin/index', ['plugin' => 'wpadmin', 'controller' => 'admin', 'action' => 'index']);
@@ -71,7 +71,6 @@ Router::scope('/', function (RouteBuilder $routes) {
         $routes->connect('/menu/index', ['plugin' => 'wpadmin', 'controller' => 'menu', 'action' => 'index']);
         $routes->connect('/menu/edit/*', ['plugin' => 'wpadmin', 'controller' => 'menu', 'action' => 'edit']);
         $routes->connect('/menu/add/*', ['plugin' => 'wpadmin', 'controller' => 'menu', 'action' => 'add']);
-        $routes->connect('/index/index', ['plugin' => 'wpadmin', 'controller' => 'index', 'action' => 'index']);
         $routes->connect('/group/index', ['plugin' => 'wpadmin', 'controller' => 'group', 'action' => 'index']);
         $routes->connect('/group/add', ['plugin' => 'wpadmin', 'controller' => 'group', 'action' => 'add']);
         $routes->connect('/group/edit', ['plugin' => 'wpadmin', 'controller' => 'group', 'action' => 'edit']);
