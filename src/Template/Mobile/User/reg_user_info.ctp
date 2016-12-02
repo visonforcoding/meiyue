@@ -43,9 +43,9 @@
 <script>
     $('#avatar_img').on('tap', function () {
         //点击选择图片
-        alert('点击了图片上传');
+        //alert('点击了图片上传');
         if ($.util.isAPP) {
-            alert('我要调app的东西了');
+            //alert('我要调app的东西了');
             LEMON.event.uploadAvatar('{"dir":"user/avatar","zip":"1"}', function (data) {
                 var data = JSON.parse(data);
                 if (data.status === true) {
@@ -75,7 +75,7 @@
     });
     $('#submit').on('tap', function () {
         var avatar = $('input[name="avatar"]').val();
-        alert(avatar);
+        //alert(avatar);
         if (!avatar) {
             return false;
         }

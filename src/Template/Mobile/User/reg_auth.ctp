@@ -83,10 +83,10 @@
 <?= $this->start('script'); ?>
 <script>
     $('.Idcard img').on('tap', function () {
-        alert('点击了图片上传');
+        //alert('点击了图片上传');
         $obj = $(this);
         if ($.util.isAPP) {
-            alert('我要调app的东西了');
+            //alert('我要调app的东西了');
             LEMON.event.uploadPic('{"dir":"user/idcard"}', function (data) {
                 var data = JSON.parse(data);
                 if (data.status === true) {

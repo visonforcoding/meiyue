@@ -9,7 +9,7 @@
         <div class="password validate flex">
             <i class="iconfont">&#xe607;</i>
             <input tabindex="2" type="text" id="vcode" placeholder="验证码" class="valicode" id="validate" />
-            <a href="javascript:void(0)" id="gcode" class="fogetpwd getvalid disabled">获取验证码</a>
+            <a  id="gcode" class="fogetpwd getvalid disabled">获取验证码</a>
         </div>
         <div class="password">
             <i class="iconfont">&#xe606;</i>
@@ -30,7 +30,7 @@
             return false;
         }
         var phone = $('#phone').val();
-        $.post('/user/sendVCode', {phone: phone}, function (res) {
+        $.post('/user/sendVCode/1', {phone: phone}, function (res) {
             if (res.status === true) {
                 obj.addClass('disabled');
                 var text = '<span id="timer">' + 30 + '</span>秒后重新发送';
@@ -47,7 +47,13 @@
                     }
                 }, 1000);
             } else {
-                //$.toast(res.msg);
+               if(res.code=='201'){
+                   $.util.alert(res.msg);
+                   setTimeout(function(){
+                       $.util.lmlogin();
+                   },1000);
+               }
+               
             }
         }, 'json');
     });
@@ -88,7 +94,7 @@
         console.log('11');
         if (phone && vcode && pwd) {
             $.post('', {phone: phone, vcode: vcode, pwd: pwd}, function (res) {
-                $.util.alert(res.msg);
+                //$.util.alert(res.msg);
                 if (res.status) {
                     obj.addClass('disabled');
                     setTimeout(function () {
