@@ -59,15 +59,22 @@
         </div>
         <div id="main-content">
             <div id="breadcrumb">
-                <?= $this->cell('Wpadmin.Menu::bread') ?>
+                <ul class="breadcrumb">
+                    <a id="switch-left-bar" style=" margin-right: 10px; cursor:pointer;"><i class="icon-bars"></i></a>
+                    <li>
+                        <a href="<?=PROJ_PREFIX?>/index/index"><i class="icon icon-home"></i> 主页</a>
+                    </li>
+                    <li>
+                        <a  href="#"><?= $bread['first']['name'] ?></a>
+                    </li>
+                    <li>
+                        <a href="#"><?= $bread['second']['name'] ?></a>
+                    </li>
+                </ul>
             </div>
             <div id="page-content">
                 <div class="page-header" >
-                    <?php if (isset($PageHeader)): ?>
-                        <?= $this->cell('Wpadmin.Menu::title', [$PageHeader]) ?>
-                    <?php else: ?>
-                        <?= $this->cell('Wpadmin.Menu::title') ?>
-                    <?php endif; ?>
+                    <h1><?= $pageTitle ?></h1>
                 </div>
                 <div class="page-main" style="margin-top: 10px;">
                     <?php if (isset($NO_PERMISSION)): ?>

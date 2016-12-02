@@ -81,7 +81,7 @@ class MenuCell extends Cell {
         $controller = strtolower(preg_replace('/((?<=[a-z])(?=[A-Z]))/', '-', $controller));
         $action = $this->request->param('action');
         $action = strtolower(preg_replace('/((?<=[a-z])(?=[A-Z]))/', '-', $action));
-        $url = '/admin/' . $controller . '/' . $action;
+        $url = PROJ_PREFIX.'/' . $controller . '/' . $action;
         $this->_url = $url;
         $active = null;
         foreach ($menus as $value) {

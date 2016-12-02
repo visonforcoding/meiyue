@@ -24,22 +24,29 @@ class IndexController extends AppController {
         //待处理提现总数
         $WithdrawTable = \Cake\ORM\TableRegistry::get('Withdraw');
         $withdrawCounts = $WithdrawTable->find()->where(['status' => 0])->count();
-        //活动赞助待处理
-        $ActivityapplyTable = \Cake\ORM\TableRegistry::get('Activityapply');
-        $applyCounts = $ActivityapplyTable->find()->contain(['Activities'])->where(['Activityapply.is_check' => 0, 'must_check' => 1])->count();
-        //活动报名待处理
-        $SponsorTable = \Cake\ORM\TableRegistry::get('Sponsor');
-        $sponsorCounts = $SponsorTable->find()->where(['status' => 0])->count();
-        //发票申请待处理
-        $InvoiceTable = \Cake\ORM\TableRegistry::get('invoice');
-        $invoiceCounts = $InvoiceTable->find()->where(['is_shipment' =>'0'])->count();
+//        //活动赞助待处理
+//        $ActivityapplyTable = \Cake\ORM\TableRegistry::get('Activityapply');
+//        $applyCounts = $ActivityapplyTable->find()->contain(['Activities'])
+//                ->where(['Activityapply.is_check' => 0, 'must_check' => 1])
+//                ->count();
+//        //活动报名待处理
+//        $SponsorTable = \Cake\ORM\TableRegistry::get('Sponsor');
+//        $sponsorCounts = $SponsorTable->find()->where(['status' => 0])->count();
+//        //发票申请待处理
+//        $InvoiceTable = \Cake\ORM\TableRegistry::get('invoice');
+//        $invoiceCounts = $InvoiceTable->find()->where(['is_shipment' =>'0'])->count();
         $this->set([
             'savantCounts' => $savantCounts,
-            'needCounts' => $needCounts,
-            'withdrawCounts' => $withdrawCounts,
-            'sponsorCounts' => $sponsorCounts,
-            'applyCounts' => $applyCounts,
-            'invoiceCounts' => $invoiceCounts,
+            'needCounts' => 0,
+            'withdrawCounts' => 0,
+            'sponsorCounts' => 0,
+            'applyCounts' => 0,
+            'invoiceCounts' => 0,
+            'pageTitle' => '欢迎您',
+            'bread' => [
+                'first' => ['name' => '后台管理'],
+                'second' => ['name' => '首页'],
+            ],
         ]);
     }
 
@@ -71,7 +78,7 @@ class IndexController extends AppController {
      * @param type $month
      */
     public function getNewUserByDayWithMonth($month = null) {
-        if(!$month) {
+        if (!$month) {
             $month = date('m');
         }
         $connection = \Cake\Datasource\ConnectionManager::get('default');
@@ -101,7 +108,7 @@ class IndexController extends AppController {
         exit();
     }
 
-    public function getMeetByDayWithMonth($month=null) {
+    public function getMeetByDayWithMonth($month = null) {
         if (!$month) {
             $month = date('m');
         }
@@ -118,7 +125,7 @@ class IndexController extends AppController {
     /**
      * 资金收入
      */
-    public function getFlowByDayWithMonth($month=null) {
+    public function getFlowByDayWithMonth($month = null) {
         if (!$month) {
             $month = date('m');
         }
