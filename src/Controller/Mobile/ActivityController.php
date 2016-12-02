@@ -34,7 +34,12 @@ class ActivityController extends AppController
      */
     public function getAllDatesInPage($page) {
         $limit = 10;
-        $datas = $this->Activity->find("all")->where(['status' => 1, 'Activity.start_time >' => new Time()]);
+        $datas = $this->Activity
+            ->find("all")
+            ->where([
+                'status' => 1,
+                'Activity.start_time >' => new Time()
+            ]);
         $datas->limit($limit);
         $datas->page($page);
         $datas->formatResults(function(ResultSetInterface $results) {
@@ -462,7 +467,10 @@ class ActivityController extends AppController
             $user = $this->user;
             $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
             $followTb = TableRegistry::get('UserFans');
-            $followlist = $followTb->find('all')->where(['user_id' => $this->user->id]);
+            $followlist = [];
+            if($user) {
+                $followTb->find('all')->where(['user_id' => $this->user->id]);
+            }
             $i = 1;
             $query = $FlowTable->find()
                 ->contain([
@@ -485,7 +493,7 @@ class ActivityController extends AppController
                     }
                     //判断我的性别
                     $row['ismale'] = true;
-                    if($user->gender == 2) {
+                    if(!$user || $user->gender == 2) {
                         $row['ismale'] = false;
                     }
                     $row['buyer']['age'] = getAge($row['buyer']['birthday']);
