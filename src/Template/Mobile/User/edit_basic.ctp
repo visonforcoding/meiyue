@@ -44,11 +44,12 @@
                         </div>
                         <div class="home_list_r_info">
                             <div class="outerinput">
-                                <input
+                                <label for="birthday">1111</label>
+                                <input id="birthday"
                                     name="birthday"
                                     type="date"
                                     placeholder="请输入日期"
-                                    value="sdfisjdf" />
+                                    value="2015/03/27" />
                             </div>
                         </div>
                     </div>
