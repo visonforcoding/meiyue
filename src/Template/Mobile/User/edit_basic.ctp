@@ -18,9 +18,7 @@
                             <i class="iconfont ico"></i>
                         </div>
                         <div class="home_list_r_info">
-                            <input name="nick" type="text" placeholder="请输入昵称" value="<?= use Cake\I18n\Time;
-
-                            $user->nick; ?>"/>
+                            <input name="nick" type="text" placeholder="请输入昵称" value="<?= $user->nick; ?>"/>
                             <i class="iconfont r_icon"></i>
                         </div>
                     </div>
@@ -50,7 +48,7 @@
                                     name="birthday"
                                     type="date"
                                     placeholder="请输入日期"
-                                    value="654654" />
+                                    value="sdfisjdf" />
                             </div>
                         </div>
                     </div>
