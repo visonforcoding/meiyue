@@ -350,7 +350,7 @@ class UsercController extends AppController {
      * 预约订单详情
      */
     public function orderDetail($id){
-        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+        $DateorderTable = TableRegistry::get('Dateorder');
         $order = $DateorderTable->get($id,[
             'contain'=>[
                 'Buyer'=>function($q){
@@ -762,6 +762,7 @@ class UsercController extends AppController {
             $PayorderTable = TableRegistry::get('Payorder');
             $payorder = $PayorderTable->newEntity([
                 'user_id'=>  $this->user->id,
+                'type' => 2,   //购买套餐
                 'title'=>$title,
                 'order_no'=>time() . $this->user->id . createRandomCode(4, 1),
                 'price'=>  $pack->price,

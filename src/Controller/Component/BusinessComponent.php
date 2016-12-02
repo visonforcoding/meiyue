@@ -4,6 +4,7 @@ namespace App\Controller\Component;
 use Cake\Controller\Component;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use SerRight;
 use ServiceType;
 
 /**
@@ -94,6 +95,7 @@ class BusinessComponent extends Component
 
 
     /**
+     * @author: kebin
      * 与美女聊天、查看美女动态
      * 检查是否有权限
      * data必须参数：
@@ -133,14 +135,11 @@ class BusinessComponent extends Component
                     'deadline >' => new Time()
                 ])
             ->first();
-        if($usedPack->id) {
-            return Array(
-                'status' => 1,
-                'msg' => '已经消耗过名额了'
-            );
+        if($usedPack) {
+            return SerRight::OK_CONSUMED;
         } else {
             $userPackTb = TableRegistry::get('UserPackage');
-            $key = "sum(" + ServiceType::getDBRestr($type) + ")";
+            $key = "sum(" . ServiceType::getDBRestr($type) . ")";
             $userPack = $userPackTb
                 ->find()
                 ->select(['rest' => $key])
@@ -149,30 +148,27 @@ class BusinessComponent extends Component
                         'deadline >' => new Time(),
                     ])
                 ->first();
-            $rest = $userPack->rest;
-            if($rest > 0) {
-                return Array(
-                    'status' => 2,
-                    'rest' => $rest,
-                    'msg' => '有名额但尚未消耗'
-                );
+            if($userPack) {
+                $rest = $userPack->rest;
+                if($rest > 0) {
+                    return SerRight::NO_HAVENUM;
+                }
             }
-            return Array(
-                'status' => 3,
-                '没有名额可以消耗'
-            );
+            return SerRight::NO_HAVENONUM;
         }
     }
 
 
     /**
+     * @author: kebin
+     * 名额充足的情况下
      * 直接消耗一个名额
      * data必须参数：
      *      int userid 使用者id
      *      int usedid 作用对象id
      *      int type   使用类型，见ServiceType类
      */
-    public function consumeRightD($userid, $usedid, $type)
+    function consumeRightD($userid, $usedid, $type)
     {
         $userPackTb = TableRegistry::get("UserPackage");
         $key = ServiceType::getDBRestr($type);
@@ -215,6 +211,9 @@ class BusinessComponent extends Component
 
 
     /**
+     * @author: kebin
+     * 会检查权限和名额剩余
+     * 如果已经消费了则直接返回true而不消费名额
      * 消耗一个名额
      * data必须参数：
      *      int userid 使用者id
@@ -224,16 +223,12 @@ class BusinessComponent extends Component
     public function consumeRight($userid, $usedid, $type)
     {
         $chres = $this->checkRight($userid, $usedid, $type);
-        switch($chres['status']) {
-            case 0:
-                return false;
-            case 1:
-                return true;
-            case 2:
-                return consumeRightD($userid, $usedid, $type);
-            case 3:
-                return false;
+        if($chres == SerRight::OK_CONSUMED) {
+            return true;
+        } else if($chres == SerRight::NO_HAVENUM) {
+            return $this->consumeRightD($userid, $usedid, $type);
         }
+        return false;
     }
     
      /**

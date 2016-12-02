@@ -105,6 +105,7 @@
         if (payMethod == 'ali') {
             if ($.util.isAPP) {
                 LEMON.pay.ali('<?= $aliPayParameters ?>', function (res) {
+                    alert(res);
                     if (res == '9000') {
                         $.util.alert('支付成功');
                         setTimeout(function () {

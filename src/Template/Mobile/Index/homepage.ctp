@@ -32,7 +32,12 @@
                     <!--<li><img src="<?/*= createImg($image) */?>"/></li>-->
                 <?php endforeach; ?>
                 <li><img src="<?= createImg($image) ?>"/></li>
-                <li><a href="/tracle/ta-tracle/<?= $user->id; ?>" class='ablock' ><img src="/mobile/images/avatar.jpg"/><span>更 多 私 房</span></a></li>
+                <li id="see-movements">
+                    <a class='ablock' >
+                        <img src="/mobile/images/avatar.jpg"/>
+                        <span>更 多 私 房</span>
+                    </a>
+                </li>
             <?php endif; ?>
         </ul>
         <div class="inner home_video mt20">
@@ -276,5 +281,41 @@
         })
     })
 
+
+    $('#see-movements').on('click', function() {
+        $.util.ajax({
+            url:'/tracle/browse/<?=$user->id?>',
+            method: 'POST',
+            func:function(res){
+                switch(res.right) {
+                    case <?= SerRight::OK_CONSUMED; ?>:
+                        window.location.href = '/tracle/ta-tracle/<?=$user->id?>';
+                        break;
+                    case <?= SerRight::NO_HAVENUM; ?>:
+                        $.util.confirm(
+                            '查看美女动态',
+                            '将会消耗一个查看名额',
+                            function() {
+                                window.location.href = '/tracle/ta-tracle/<?=$user->id?>';
+                            },
+                            null
+                        );
+                        break;
+                    case <?= SerRight::NO_HAVENONUM; ?>:
+                        $.util.confirm(
+                            '查看美女动态',
+                            '需要成为会员才能查看人家的动态哦~',
+                            function() {
+                                window.location.href = '/userc/vip-buy';
+                            },
+                            null,
+                            null,
+                            '购买会员'
+                        );
+                        break;
+                }
+            }
+        })
+    });
 </script>
 <?php $this->end('script'); ?>

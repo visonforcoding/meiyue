@@ -259,6 +259,17 @@ class ServiceType {
 
 
 /**
+ * @author: kebin
+ * 服务权限：
+ */
+class SerRight {
+    const OK_CONSUMED = 1; //已经消费，具有权限
+    const NO_HAVENUM = 2;  //剩余名额，还没有权限
+    const NO_HAVENONUM = 3; //没有名额，还没有权限
+}
+
+
+/**
  * 约拍状态
  */
 class YuepaiStatus {
