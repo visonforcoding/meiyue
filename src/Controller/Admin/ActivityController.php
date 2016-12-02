@@ -18,7 +18,14 @@ class ActivityController extends AppController
 */
 public function index()
 {
-$this->set('activity', $this->Activity);
+    $this->set([
+        'activity' => $this->Activity,
+        'pageTitle' => '派对管理',
+        'bread' => [
+            'first' => ['name' => 'xxx'],
+            'second' => ['name' => '派对管理'],
+        ],
+    ]);
 }
 
     /**

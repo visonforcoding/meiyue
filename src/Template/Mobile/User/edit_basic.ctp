@@ -48,7 +48,7 @@
                                     name="birthday"
                                     type="date"
                                     placeholder="请输入日期"
-                                    value="<?= $user->birthday; ?>"/>
+                                    value="<?= ($user->birthday)?$user->birthday:new Time() ?>" />
                             </div>
                         </div>
                     </div>

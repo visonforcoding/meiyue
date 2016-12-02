@@ -71,17 +71,22 @@
             $.util.alert('您的余额不足~~');
             return;
         }
-        if(confirm('您准备赠送给“<?= $user->nick;?>”一件[' + giftname + ']作为支持她的礼物,价值[' + giftprice + '美币],确定吗？')) {
-            $.ajax({
-                url: '/gift/send/<?= $user->id; ?>/' + giftid,
-                type: "POST",
-                dataType: "json",
-                success: function (res) {
-                    $.util.alert(res.msg);
-                    history.back();
-                }
-            })
-        }
 
+        $.util.confirm(
+            '赠送礼物',
+            '赠送一件【' + giftname + '】给 <?= $user->nick;?>',
+            function() {
+                $.ajax({
+                    url: '/gift/send/<?= $user->id; ?>/' + giftid,
+                    type: "POST",
+                    dataType: "json",
+                    success: function (res) {
+                        $.util.alert(res.msg);
+                        history.back();
+                    }
+                })
+            },
+            null
+        );
     })
 </script>
