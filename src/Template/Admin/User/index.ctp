@@ -44,13 +44,12 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['手机号', '姓名', '等级,1:普通2:专家', '职位', '邮箱', '1,男，2女', '常驻城市', '头像', '账户余额', '实名认证状态：1.实名待审核2审核通过0审核不通过', '账号状态 ：1.可用0禁用(控制登录)', '是否假删除：1,是0否', '注册设备', '创建时间', '修改时间', '唯一码（用于扫码登录）', '操作'],
+                                ['编号','手机号', '昵称','真实姓名', '性别', '常驻城市', '头像', '账户余额', '审核', '账号状态 ：1.可用0禁用(控制登录)', '是否假删除：1,是0否', '注册设备', '创建时间', '修改时间', '唯一码（用于扫码登录）', '操作'],
                         colModel: [
+                            {name: 'myno', editable: true, align: 'center'},
                             {name: 'phone', editable: true, align: 'center'},
+                            {name: 'nick', editable: true, align: 'center'},
                             {name: 'truename', editable: true, align: 'center'},
-                            {name: 'level', editable: true, align: 'center'},
-                            {name: 'position', editable: true, align: 'center'},
-                            {name: 'email', editable: true, align: 'center'},
                             {name: 'gender', editable: true, align: 'center'},
                             {name: 'city', editable: true, align: 'center'},
                             {name: 'avatar', editable: true, align: 'center'},

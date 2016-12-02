@@ -562,6 +562,34 @@ ENGINE=InnoDB
 AUTO_INCREMENT=3
 ;
 
+
+-- 2016-12-2
+ALTER TABLE `lm_user`
+	CHANGE COLUMN `status` `status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '审核状态1待审核2审核不通过3审核通过0不审核(男)' AFTER `money`;
+
+
+
+CREATE TABLE `lm_withdraw` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL DEFAULT '0' COMMENT '对象id',
+	`admin_id` INT(11) NULL DEFAULT NULL,
+	`amount` FLOAT NOT NULL DEFAULT '0' COMMENT '提现金额',
+	`cardno` VARCHAR(50) NOT NULL COMMENT '银行卡号',
+	`bank` VARCHAR(50) NOT NULL COMMENT '银行',
+	`truename` VARCHAR(50) NOT NULL COMMENT '持卡人姓名',
+	`fee` FLOAT NOT NULL DEFAULT '0' COMMENT '手续费',
+	`remark` VARCHAR(200) NOT NULL DEFAULT '0' COMMENT '备注',
+	`status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '状态,0未审核，1审核通过',
+	`create_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`update_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+	PRIMARY KEY (`id`)
+)
+COMMENT='提现表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+ROW_FORMAT=COMPACT
+;
+
 ##动态点赞表
 CREATE TABLE `lm_mvpraise` (
 	`id` INT(11) NOT NULL,
@@ -574,4 +602,5 @@ COMMENT='动态点赞表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
+
 
