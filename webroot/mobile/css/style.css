@@ -1024,8 +1024,21 @@ color:#999;padding:.1rem;}
 .chart-systerm-box .infobox{margin-top:.2rem;}
 .chart-systerm-box .infobox p{padding:.3rem .2rem;color:#000;background: #fff;border:1px #efefef solid;border-radius: 3px;max-width:86%;margin:0 auto;}
 .chart-systerm-box .timebox{text-align: center;margin-top:.6rem;color:#999999;font-size: 11px;}
+
 /*未登录*/
 .shadow{background: rgba(0,0,0,.7);z-index:11;overflow: hidden;}
 .login-tips{background:rgba(255,255,255,1);width:100%;padding:.8rem 0;}
 .login-tips .jumpbtn{display:block;border:1px #EAB96A solid;border-radius: 5px;width:3rem;text-align: center;height:46px; line-height: 44px;margin:0 auto;font-size: 16px;color:#EAB96A;}
 .login-tips .slogin{text-align: center;line-height: 1rem;color:#15130f;height:1rem;margin-bottom:.2rem;}
+/*空状态*/
+.visited-box{text-align: center;padding:2rem 0 5rem;}
+.visited-box .visited-ico{font-size: 64px;color:#eab96a;}
+.visited-box .visited-num{color:#454545;margin:.3rem 0;}
+.empty_container .empty-content{text-align: center;color:#999;}
+.empty_container .empty-tips{color:#999;margin-top: .5rem;font-size: 12px;}
+.empty_container .empty-ico-box{width:80px;height:80px;border-radius: 50%;color:#fff;display: block;text-align: center;line-height: 80px;margin:0 auto;font-size:35px;}
+.empty_container .empty-ico-box .empty-ico{color:#fff;}
+.empty-ico{color:#cdcdcd;font-size:36px;}
+.empty_container .empty-btn{margin-top:.5rem;}
+.empty-text .empty-tips{color:#666;line-height: 25px;}
+.empty-text{padding:.6rem 0;}
