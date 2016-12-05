@@ -38,21 +38,25 @@
             </div>
         </div>
         <div class="date_des mt20">
-            <h3 class="commontitle inner">约会说明</h3>
-            <div class="con date_keyword">
-                <p><?= $date['description'] ?></p>
-            </div>
+             <ul class="outerblock bgff">
+                <li>
+                    <h3 class="commontitle pt10">约会说明</h3>
+                    <div class="con date_keyword">
+                        <p><?= $date['description'] ?></p>
+                    </div>
+                </li>
+                <li class="flex">
+                     <?php if(count($date['tags']) > 0): ?><h3 class="commontitle">我的标签</h3>
+                        <div class="con con_mark flex">
+                            <?php foreach ($date['tags'] as $item): ?>
+                                 <a class="mark"><?= $item['name'] ?></a>
+                             <?php endforeach; ?>
+                        </div>
+                     <?php endif; ?>
+                </li>
+             </ul>
         </div>
-        <?php if(count($date['tags']) > 0): ?>
-        <div class="date_des mt20">
-            <h3 class="commontitle inner">我的标签</h3>
-            <div class="con con_mark">
-                <?php foreach ($date['tags'] as $item): ?>
-                    <a class="mark"><?= $item['name'] ?></a>
-                <?php endforeach; ?>
-            </div>
-        </div>
-        <?php endif; ?>
+       
         <div class="date_des mt20">
             <h3 class="commontitle inner">支付方式</h3>
             <div class="con">
