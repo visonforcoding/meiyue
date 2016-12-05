@@ -52,22 +52,25 @@
                 <span class="date_much"><i><?= $data->cost->money ?></i> 美币/小时</span>
             </h3>
         </div>
-        <div class="date_des mt20">
-            <h3 class="commontitle inner">约会说明</h3>
-            <div class="con date_keyword">
-                <p><?= $data->description ?></p>
-            </div>
+        <div class="date_des change-date-detail mt20">
+            <ul class="outerblock bgff">
+                <li>
+                    <h3 class="commontitle pt10">约会说明</h3>
+                    <div class="con date_keyword">
+                        <p><?= $data->description ?></p>
+                    </div>
+                </li>
+                <li class="flex">
+                    <h3 class="commontitle">我的标签</h3>
+                    <div class="con con_mark flex">
+                        <?php foreach ($data->tags as $tag): ?>
+                         <a href="#this"><?= $tag->name ?></a>
+                        <?php endforeach; ?>
+                    </div>
+                </li>
+            </ul>
         </div>
         <div class="date_des mt20">
-            <h3 class="commontitle inner">我的标签</h3>
-            <div class="con con_mark">
-                <?php foreach ($data->tags as $tag): ?>
-                    <a href="#this"><?= $tag->name ?></a>
-                <?php endforeach; ?>
-            </div>
-        </div>
-        <div class="date_des mt20">
-            <h3 class="commontitle inner">邀约时间与地点</h3>
             <div class="con com_choose_time">
                 <ul class="outerblock">
                     <li>
@@ -95,8 +98,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="date_des">
-                <h3 class="commontitle inner">总费用</h3>
+            <div class="date_des mt20">
                 <div class="con">
                     <ul class="outerblock">
                         <li>
@@ -117,10 +119,8 @@
                         </li>
                     </ul>
                 </div>
-                <p class="commontips mt10 inner">* 预约金是您对对方的许诺,占总费用的20%;若对方同意后，您爽单，则预约金归对方所有；若对方不同意，则预约金全数退还。</p>
             </div>
             <div class="date_des mt20">
-                <h3 class="commontitle inner">支付方式</h3>
                 <div class="con">
                     <div class="date_time  flex flex_justify">
                         <span>我的钱包</span>
@@ -128,6 +128,7 @@
                     </div>
                 </div>
             </div>
+             <p class="commontips mt10 inner">* 预约金是您对对方的许诺,占总费用的20%;若对方同意后，您爽单，则预约金归对方所有；若对方不同意，则预约金全数退还。</p>
         </div>
     </div>
     <div style="height:1.4rem;"></div>
