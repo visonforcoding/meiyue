@@ -19,22 +19,11 @@
             <a href="login.html" class="check_sex_login">登录</a>
 			<h3 class="check_sex_title">您的性别</h3>
 			<div class="check_sex_type">
-				<a data-sex="男" class="btn sex btn_bg_y">男</a>
-				<a data-sex="女" class="btn sex btn_bg_t mt40">女</a>
+				<a data-sex="男" href="/index/find-list" class="btn sex btn_bg_y">男</a>
+				<a data-sex="女" href="index/find-rich-list" class="btn sex btn_bg_t mt40">女</a>
 			</div>
 		</div>
         <script>
-            $('.sex').on('tap',function(){
-                var sex = $(this).data('sex');
-                $.util.ajax({
-                   data:{sex:sex},
-                   func:function(res){
-                       if(res.status){
-                           window.location.href = res.redirect_url;
-                       }
-                   }
-                });
-            });
         </script>
 	</body>
 </html>

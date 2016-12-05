@@ -72,7 +72,7 @@
         if($('#up_video').data('choosed')) LEMON.event.uploadVideo({key:'up_video', user_id:user_id});
         $.util.alert('完成注册');
         setTimeout(function(){
-            location.href = '/index/index';
+            location.href = '/index/find-rich-list';
         },1000);
     })
 

@@ -212,4 +212,15 @@ class TestController extends AppController {
         $this->loadComponent('Netim');
         $this->Netim->registerIm($id);
     }
+    
+    public function testhtml(){
+//        $AreaTable = \Cake\ORM\TableRegistry::get('Area');
+//        $area = $AreaTable->find('threaded', [
+//                            'keyField' => 'id',
+//                            'parentField' => 'pid'
+//                        ])->select(['name','id','pid'])->hydrate(false)
+//                ->where(['status' => 1, '`type` in' => [2,3]])->toArray();
+//        file_put_contents('city.json',  json_encode($area,JSON_UNESCAPED_UNICODE));
+//        debug($area);exit();
+    }
 }
