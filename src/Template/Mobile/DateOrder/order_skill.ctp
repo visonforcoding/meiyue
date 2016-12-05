@@ -79,7 +79,7 @@
                             <div id="datetime">
 <!--                                <span>09-28 21:00~22:00</span>
                                 <i class="iconfont r_con">&#xe605;</i>-->
-                                <input id="time" type="text" readonly="true"  value="" placeholder="请选择约会时间" />
+                                <input id="time" type="text" readonly="true"  value="" placeholder="请选择约会时间" class='alignright color_y' />
                                 <input id="start-time" name="start_time" type="text" readonly="true" hidden value=""/>
                                 <input id="end-time" name="end_time" type="text" readonly="true" hidden value=""/>
                             </div>
@@ -121,7 +121,7 @@
                 </div>
             </div>
             <div class="date_des mt20">
-                <div class="con">
+                <div class="con inner">
                     <div class="date_time  flex flex_justify">
                         <span>我的钱包</span>
                         <div class="color_y"><?= $user->money ?> 美币</div>
