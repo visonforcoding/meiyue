@@ -57,13 +57,13 @@
 	            		<li val='2001'  class="select">300美币</li>
 	            		<li val='2002'>300美币</li>
 	            		<li val='2003'>500美币</li>
-	            		<li val='2003'>600美币</li>
-	            		<li val='2002'>300美币</li>
-	            		<li val='2003'>500美币</li>
-	            		<li val='2003'>700美币</li>
-	            		<li val='2002'>800美币</li>
-	            		<li val='2003'>900美币</li>
-	            		<li val='2003'>1000美币</li>
+	            		<li val='2004'>600美币</li>
+	            		<li val='2005'>300美币</li>
+	            		<li val='2006'>500美币</li>
+	            		<li val='2007'>700美币</li>
+	            		<li val='2008'>800美币</li>
+	            		<li val='2009'>900美币</li>
+	            		<li val='2010'>1000美币</li>
 	            		<li></li>
 	            	</ul>
 	         	</div>
@@ -76,8 +76,11 @@
             		var height = $('.l_box li').height();
             		var num =  Math.floor(scrollTop/ height)+1;
             		$('.l_box li').removeClass().eq(num).addClass('select');
-            		_year = $('.l_box li').eq(num).attr('val');
-            		    console.log(_year );     		
+            		if($('.l_box li').hasClass('select')){
+            			_year = $('.l_box li').eq(num).attr('val');
+            		    console.log(_year );   
+            		}
+            		  		
             	})
             	function showDialog(input){
             		$('.picker').removeClass('hide_date');

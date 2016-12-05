@@ -13,7 +13,7 @@
 		<script src="../js/view.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
-		<header>
+		<header style="display: none;">
 			<div class="header">
 				<span class="l_btn iconfont">&#xe602;</span>
 				<span class="r_btn iconfont">&#xe62d;</span>
@@ -21,13 +21,20 @@
 		</header>
 		<div class="wraper">
 			<div class="home_page">
-				<div class="header"></div>
+				<div class="header">
+					<span class="identify-info video-btn">视频已认证</span>
+					<span class="identify-info  id-btn">身份已认证</span>
+				</div>
 			</div>
 			<!--基本信息-->
 			<div class="home_page_basic">
-				<h3 class="aligncenter"><span class="home_name"><b>范冰冰</b><em><i class="iconfont">&#xe623;</i>5km</em></span></h3>
+				<h3 class="aligncenter">
+					<span class="home_name"><b>范冰冰</b></span>
+					<span class="hot"><img src="../images/hot.png" class="responseimg"/></span>
+					<span class="vip"><img src="../images/my-hot.png" class="responseimg"/></span>
+				</h3>
 				<div class="home_name_info aligncenter">
-					<i class="iconfont color_y">&#xe61d;</i> 23 <i class="job">经理助理</i> <i class="address">深圳</i>
+					<i class="iconfont color_y">&#xe61d;</i> 23 <i class="job">经理助理</i> <i class="address">深圳 <i class="iconfont ico">&#xe623;</i> 5km</i>
 				</div>
 				<div class="commend aligncenter">
 					<i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont color_light">&#xe62a;</i>
@@ -46,7 +53,7 @@
 					<li><img src="../images/avatar.jpg"/></li>
 					<li><img src="../images/avatar.jpg"/></li>
 					<li><img src="../images/avatar.jpg"/></li>
-					<li><a href="#this" class='ablock'><img src="../images/avatar.jpg"/><span>更 多 私 房</span></a></li>
+					<li><a href="#this" class='ablock'><img src="../images/avatar.jpg"/><span>更多私房</span></a></li>
 				</ul>
 				<div class="inner home_video mt20">
 					<img src="../images/vid.jpg"/>
