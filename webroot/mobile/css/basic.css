@@ -182,6 +182,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .mb10{margin-bottom:10px;}
 .mt10{margin-top:10px;}
 .mt40{margin-top:.4rem;}
+.pt10{padding-top:.1rem;}
 .pd45{padding-top:45px;}
 .pt40{padding-top:.4rem;}
 .btop{border-top: 1px #efefef solid;}
@@ -225,6 +226,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .flex_center{-webkit-box-pack:center;}
 .maxwid70{max-width:70%;}
 .max-num{/*display:table-cell;安卓不支持*/max-width:.8rem;overflow: hidden;}
+.r_con{color:#d2d2d2;}
 /*color*/
 .color_gray{color:#9f9f9f;}
 .bg_gray{background: #ddd;}
@@ -246,6 +248,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 /*字号*/
 .lagernum{font-size: 18px;}
 .smalldes{font-size: 12px;color:#666;}
+.smallnum{font-size: 12px;}
 .rcon{color:#c2c2c2;font-size: 12px;}
 .bold{font-weight: 800;}
 /*定位*/
@@ -258,6 +261,8 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 .ft32{font-size: 32px;}
 /*透明度*/
 .opci{opacity: .8;}
+/*响应式图片*/
+.responseimg{width:100%;height:auto;display: block;}
 /*字体图标*/
 @font-face {
     font-family: 'iconfont';
