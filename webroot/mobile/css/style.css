@@ -20,7 +20,7 @@
 .loginbox,.check_sex_type{padding:0 .74rem;margin-top:1.2rem;}
 .login_box_btn{padding:0 .74rem;}
 .loginbox .user{width:59%;}
-.loginbox .valicode{width:52%;display:block}
+.loginbox .valicode{width:50%;display:block}
 .login_box_btn .login_group{display:box;display: -webkit-box;-webkit-box-pack: justify;}
 .login_box_btn .login_group .btn{width:48%;}
 .loginbox .getvalid{text-decoration: none;border:1px #5d5a57 solid;text-align:center;display: block;color:#fff;padding:0 .06rem;height:28px;line-height: 26px;font-size:12px;/*max-width:2.1rem;*/}
@@ -297,6 +297,8 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .date_detail_place .otherinfo address{margin-top:.1rem;}
 .bottomblock .entroll-btn{width:50%;display: block;height:45px;line-height: 45px;text-align: center;}
 .bottomblock .entroll-btn .cancelbtn{color:#EAB96A;}
+.diamonds{display:inline-block;width:.25rem;height:.25rem;margin-left:.1rem;}
+.highter-vip{display:inline-block;width:.8rem;height:.24rem;margin-left:.1rem;}
 @media (min-width: 320px) and (max-width: 374px) {
 	.date_detail_place .place_info .userinfo{margin-bottom:.5rem;}
 }
@@ -580,6 +582,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .voted_list .voted_place_info{height:.86rem;margin-right:.2rem;}
 .voted_list .voted_place_info h3{padding-left:1.1rem;/*padding-top:.1rem;*/}
 .voted_list .voted_place_info h3 span{display: block;}
+.voted_list .voted_place_info h3 .hot,.voted_list .voted_place_info h3 .highter-vip{display: inline-block;margin-left:.1rem;}
 .voted_list .voted_name{color:#1a1713;font-weight: 800;}
 .voted_list .voted_number{font-size: 12px;/*margin-top:.12rem;*/}
 .voted_list .voted_number .iconfont{font-size: 14px;vertical-align: middle;}
@@ -600,10 +603,10 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .find_date_detail .date_guest i{margin-left:.08rem;}
 .find_date_detail .date_much{position: absolute;bottom:.2rem;right:0;font-size: 12px;color:#EAB96A;}
 .find_date_detail .date_much i{font-size: 18px;font-weight: 400;}
-.find_date_detail .date_keyword{/*padding-top:.2rem;*/padding-bottom:.2rem;font-size: 13px;line-height: 18px;color:#666;}
+.find_date_detail .date_keyword{/*padding-top:.2rem;*/padding-bottom:.2rem;font-size: 13px;line-height: 18px;color:#666;overflow: hidden;}
 .find_date_detail .con_mark{font-size: 0;padding:.2rem 0 .1rem;}
 .change-date-detail .con_mark{margin-left:.2rem;padding:.2rem 0;}
-.find_date_detail .con_mark a{display: inline-block;width:1.3rem;height:28px;line-height:28px;color:#fff;font-size:14px;background: #EAB96A;border-radius: 20px;text-align: center;margin-bottom:.2rem;margin-right: .15rem;}
+.find_date_detail .con_mark a{display: inline-block;padding:0 .1rem;height:24px;line-height:24px;color:#fff;font-size:13px;background: #EAB96A;border-radius: 20px;text-align: center;margin-bottom:.2rem;margin:.1rem;}
 .change-date-detail .con_mark a{margin-bottom:0;}
 .find_date_detail .con_mark a:nth-of-type(4n){margin-right: 0;}
 .find_date_detail .con li,.find_date_detail .date_time{height:45px;}
@@ -955,10 +958,11 @@ color:#999;padding:.1rem;}
 .charge_container_con{background: #fff;padding:.4rem .3rem;}
 .charge_container_con .rco{font-size: 15px;margin-left:.1rem;}
 .charge_container_con .title{margin-bottom:.4rem;}
-.charge_container_con .items{background: #fffeee;border:1px #eab96a solid;height:60px;border-radius: 5px;padding:0 .1rem 0 0;}
-.charge_container_con .commontext{width:2.7rem;text-align: center;}
+.charge_container_con .items{background: #fffeee;border:1px #eab96a solid;height:60px;border-radius: 5px;padding:0 .2rem;}
+.charge_container_con .commontext{padding-right:.2rem;text-align: center;}
 .charge_container_con .items .unit{font-size:12px;}
 .charge_container_con .bright{border-right:1px dotted #EAB96A;height:60px;line-height: 58px;}
+.charge_container_con .high-vip{width:1.2rem;height:.36rem;overflow: hidden;display: inline-block;vertical-align: middle;margin-right: .1rem;}
 .charge_container_con .content{font-size: 13px;overflow: hidden;border-bottom:1px #efefef solid;}
 .charge_container_con .content .innerblock{padding-bottom:.2rem;}
 .charge_container_con .hidecon{-webkit-transition: max-height .2s ease-in-out;max-height:0;}
