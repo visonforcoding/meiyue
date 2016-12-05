@@ -136,6 +136,7 @@ class UserController extends AppController {
                     $user_token = $user->user_token;
                 }
                 //redis push 记录
+                
                 return $this->Util->ajaxReturn(['status' => true, 'msg' => $msg, 'url' => $jumpUrl]);
             } else {
                 \Cake\Log\Log::error($user->errors());
