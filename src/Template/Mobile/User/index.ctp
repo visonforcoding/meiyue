@@ -5,26 +5,31 @@
              <i class="iconfont install">&#xe661;</i>
          </div> -->
         <div class="home_cover_info">
-            <span class="avatar">
-                <img src="<?= createImg($user->avatar) . '?w=77' ?>"/>
-            </span>
+					<span class="avatar">
+						<img src="<?= createImg($user->avatar) . '?w=77' ?>" class="avatar-pic"/>
+						<div class="vip"><img src="/mobile/images/vip.png" class="responseimg"/></div>
+					</span>
             <div class="cover_left_info">
-                <ul class='opci'>
-                    <li class="bbottom userinfo">
-                        <a href="/userc/edit-info" class="cover_block">
+                <ul class="">
+                    <li class="bbottom userinfo" onclick="window.location.href='/userc/edit-info'">
+                        <a href="#this" class="cover_block">
                             <h3>
-                                <span><?= $user->nick ?><i class="iconfont">&#xe628;</i></span>
-                                <span class="flag"><img src="/mobile/images/zui.png" alt="" /></span>
+                                <span><?= $user->nick ?>
+                                    <span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>
+                                </span>
+                                <div class="bottom-btn">
+                                    <span class="identify-info id-btn">身份已认证</span>
+                                    <span class="identify-info video-btn">视频已认证</span>
+                                </div>
                             </h3>
-                            <span class="cover_r_ico">
-                                <i class="iconfont" >&#xe605;</i>
-                            </span>
+									<span class="cover_r_ico">
+										<i class="iconfont">&#xe605;</i>
+									</span>
                         </a>
                     </li>
                     <li class="follow">
-                        <a href="/userc/likes" class='like'>喜欢 <i>12</i></a>
-                        <a href="/userc/fans" class='like'>粉丝 <i>122</i></a>
-
+                        <a class="like">喜欢 <i>12</i></a>
+                        <a class="like">粉丝 <i>122</i></a>
                     </li>
                 </ul>
             </div>
