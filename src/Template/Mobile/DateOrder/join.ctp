@@ -58,8 +58,7 @@
         </div>
        
         <div class="date_des mt20">
-            <h3 class="commontitle inner">支付方式</h3>
-            <div class="con">
+            <div class="con inner">
                 <div class="date_time  flex flex_justify">
                     <span>我的钱包</span>
                     <div class="color_y"><?= isset($user)?$user['money']:'0' ?> 美币</div>
