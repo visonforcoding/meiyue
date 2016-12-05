@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="date_des mt20">
+        <div class="date_des change-date-detail  mt20">
              <ul class="outerblock bgff">
                 <li>
                     <h3 class="commontitle pt10">约会说明</h3>
