@@ -133,7 +133,7 @@ class UserController extends AppController {
 
 
     /**
-     * 获取美女列表
+     * 获取男性用户列表
      */
     public function getMales() {
         $this->request->allowMethod('ajax');
@@ -160,11 +160,7 @@ class UserController extends AppController {
             $query->where($where);
         }
         $query->contain([
-            'Fans',
-            'Follows',
-            'Flows' => function($q) {
-                return $q->select(['user_id', 'amounts' => 'sum(amount)']);
-            }
+            'Fans'
         ]);
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
@@ -179,12 +175,6 @@ class UserController extends AppController {
                 $item['age'] = getAge($item['birthday']);
                 $item['status'] = UserStatus::getStatus($item['status']);
                 $item['fancount'] = count($item['fans']);
-                $item['followcount'] = count($item['follows']);
-                if(count($item['flows']) > 0) {
-                    $item['meili'] = $item['flows'][0]['amounts'];
-                } else {
-                    $item['meili'] = 0;
-                }
                 //时间语义化转换
                 return $item;
             });

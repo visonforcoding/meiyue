@@ -160,7 +160,7 @@
     <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>-->
 <script>
     $(function () {
-        initJqupload('avatar', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
+        initJqupload('avatar', '/wpadmin/util/doUpload?dir=user/avatar', 'jpg,png,gif,jpeg'); //初始化图片上传
         //var ue = UE.getEditor('content'); //初始化富文本编辑器
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('form').submit(function () {

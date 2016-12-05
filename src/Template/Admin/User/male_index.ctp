@@ -40,7 +40,7 @@ $(function () {
     });
     $.zui.store.pageClear(); //刷新页面缓存清除
     $("#list").jqGrid({
-        url: "/user/get-females",
+        url: "/user/get-males",
         datatype: "json",
         mtype: "POST",
         colNames:
@@ -70,7 +70,7 @@ $(function () {
             {name: 'age', editable: true, align: 'center'},
             {name: 'city', editable: true, align: 'center'},
             {name: 'wxid', editable: true, align: 'center'},
-            {name: 'followcount', editable: true, align: 'center'},
+            {name: 'fancount', editable: true, align: 'center'},
             {name: 'followcount', editable: true, align: 'center'},
             {name: 'followcount', editable: true, align: 'center'},
             {name: 'followcount', editable: true, align: 'center'},
