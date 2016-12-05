@@ -10,12 +10,12 @@
     <!--基本信息-->
     <div class="home_page_basic">
         <h3 class="aligncenter">
-            <span class="home_name"><b><?= $user->nick ?></b><em><i class="iconfont">&#xe623;</i><?= $distance ?></em></span>
-            <span class="hot"><img src="../images/hot.png" class="responseimg"/></span>
-            <span class="vip"><img src="../images/my-hot.png" class="responseimg"/></span>
+            <span class="home_name"><b><?= $user->nick ?></b></span>
+            <span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>
+            <span class="vip"><img src="/mobile/images/my-hot.png" class="responseimg"/></span>
         </h3>
         <div class="home_name_info aligncenter">
-            <i class="iconfont color_y">&#xe61d;</i> <?= $age ?> <i class="job"><?= $user->profession ?></i> <i class="address"><?= $user->city ?><i class="iconfont ico">&#xe623;</i> 5km</i>
+            <i class="iconfont color_y">&#xe61d;</i> <?= $age ?> <i class="job"><?= $user->profession ?></i> <i class="address"><?= $user->city ?><i class="iconfont">&#xe623;</i><?= $distance ?></i>
         </div>
         <div class="commend aligncenter">
             <i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont color_light">&#xe62a;</i>
