@@ -367,3 +367,51 @@ function getWeekStr($week = null) {
     }
     return $weeks;
 }
+
+
+/**
+ * 轮播图位置
+ * Class carouselPosition
+ */
+class CarouselPosition {
+    const ACTIVITY = 1;  //活动轮播图显示位
+
+    const GETJSON = -1;
+    public static function getStr($st = null) {
+        $positions = Array(
+            CarouselPosition::ACTIVITY => '活动轮播图显示位',
+        );
+        if(CarouselPosition::GETJSON == $st) {
+            return json_encode($positions);
+        } else if($st) {
+            return isset($positions[$st])?$positions[$st]:null;
+        }
+        return $positions;
+    }
+}
+
+
+/**
+ * 轮播图状态
+ */
+class CarouselStatus {
+
+    const NORMAL = 1;  //正常
+    const DOWN = 2;    //下架
+
+    const GETJSON = -1; //获取json数据
+    public static function getStatus($st = null) {
+        $status = Array(
+            CarouselStatus::NORMAL => '正常',
+            CarouselStatus::DOWN => '下架'
+        );
+        if(CarouselStatus::GETJSON == $st) {
+            return json_encode($status);
+        }
+        if($st) {
+            return isset($status[$st])?$status[$st]:'未知';
+        }
+        return $status;
+    }
+
+}

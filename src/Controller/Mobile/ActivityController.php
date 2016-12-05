@@ -3,6 +3,7 @@ namespace App\Controller\Mobile;
 use Cake\Datasource\ResultSetInterface;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use CarouselPosition;
 use League\Flysystem\Exception;
 
 /**
@@ -29,7 +30,7 @@ class ActivityController extends AppController
 
 
     /**
-     *
+     *  派对列表
      * @return \Cake\Network\Response|null
      */
     public function getAllDatesInPage($page) {
@@ -49,8 +50,17 @@ class ActivityController extends AppController
             });
 
         });
-        return $this->Util->ajaxReturn(['datas' => $datas->toArray(), 'status' => true]);
 
+        $carousel = null;
+        if($page = 1) {
+            $carouselTb = TableRegistry::get('Carousel');
+            $carousel = $carouselTb->find()->where(['position' => CarouselPosition::ACTIVITY])->first();
+        }
+        return $this->Util->ajaxReturn([
+            'datas' => $datas->toArray(),
+            'carousel' => $carousel,
+            'status' => true
+        ]);
     }
 
 

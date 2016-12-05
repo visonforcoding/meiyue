@@ -88,7 +88,14 @@ public function index()
                $this->Util->ajaxReturn(false,getMessage($errors));
             }
         }
-                  $this->set(compact('activity'));
+        $this->set(compact('activity'));
+        $this->set([
+            'pageTitle' => '派对管理',
+            'bread' => [
+                'first' => ['name' => '派对管理'],
+                'second' => ['name' => '编辑派对'],
+            ],
+        ]);
     }
 
     /**

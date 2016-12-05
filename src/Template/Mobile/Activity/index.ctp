@@ -2,114 +2,6 @@
 $date_action = '/date/get-all-dates-in-page/';  //定义约会请求地址
 $activity_action = '/activity/index/';  //定义派对请求地址
 ?>
-
-<?php $this->start('static') ?>
-<script src="/mobile/js/mustache.min.js"></script>
-<script id="date-list-tpl" type="text/html">
-{{#datas}}
-<div class="date_detail_place inner {{^is_first}}mt20{{/is_first}}"
-     onclick="window.location.href = '/date-order/join/{{id}}'">
-    <h3 class="title"><i class="itemsname color_y">[{{user_skill.skill.name}}]</i> {{description}}</h3>
-    <div class="place_pic">
-                            <span class="place">
-                                <img src="/mobile/images/date_place.jpg"/>
-                            </span>
-        <div class="place_info">
-            <h3 class="userinfo">{{user.nick}} <span>{{user.age}}岁</span> <em class="price color_y fr"><i
-                        class="lagernum">{{user_skill.cost.money}}</i>元/约会金</em>
-            </h3>
-            <h3 class="otherinfo">
-                <time class="color_gray"><i class="iconfont">&#xe622;</i> {{time}}</time>
-                <address class="color_gray"><i class="iconfont">&#xe623;</i>{{site}}</address>
-            </h3>
-        </div>
-    </div>
-</div>
-{{/datas}}
-</script>
-
-<script id="activity-list-tpl" type="text/html">
-{{#datas}}
-<div class="items">
-    <div class="items_pic">
-        <img src="/mobile/css/icon/party1.jpg"/>
-    </div>
-    <div class="items_con">
-        <h3 class="items_title">{{title}}</h3>
-        <div class="items_time flex flex_justify mt20">
-            <div>{{ad}}</div>
-            <div>
-                <i class="iconfont ico">&#xe64b;</i>
-                {{time}}
-            </div>
-        </div>
-    </div>
-    <div class="items_adress flex flex_justify">
-        <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
-        <div class="button btn_dark" onclick="window.location.href='/activity/view/{{id}}'">
-            我要报名
-        </div>
-    </div>
-</div>
-{{/datas}}
-</script>
-
-<script id="top-list-tpl" type="text/html">
-{{#datas}}
-<li class="flex flex_justify" onclick="window.location.href='/index/homepage/{{user.id}}'">
-    <div class="flex">
-        <span class="place silver">{{index}}</span>
-        <div class="place_info">
-            <span class="avatar">
-                <img src="/mobile/images/avatar.jpg">
-            </span>
-            <h3>
-                <span class="place_name"><i class="name">{{user.nick}}</i> <i class="vip">VIP 5</i><i
-                        class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
-                <span class="place_number color_gray"><em class="color_y"><i
-                            class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
-                            本周魅力值：<i class="color_y max-num">{{total}}</i>
-                        </span>
-            </h3>
-        </div>
-    </div>
-    {{#ismale}}
-    <span class="button btn_dark suport-btn" onclick="window.location.href='/gift/index/{{user.id}}';event.stopPropagation(); ">
-        支持她
-    </span>
-    {{/ismale}}
-</li>
-{{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
-{{/datas}}
-</script>
-
-
-<script id="rich-list-tpl" type="text/html">
-{{#datas}}
-<li class='ul-con'>
-    <div class="voted_con flex flex_justify">
-        <div class="flex">
-            <span class="voted_place silver">{{index}}</span>
-            <div class="voted_place_info">
-                <span class="avatar"><img src="{{buyer.avatar}}"/></span>
-                <h3>
-                    <span class="voted_name">{{buyer.nick}}</span>
-                    <span class="voted_number color_gray">已消费：{{total}}美币</span>
-                </h3>
-            </div>
-        </div>
-        <div>
-            <div data-id="{{buyer.id}}" class="likeIt alignright"><i class='iconfont commico {{#followed}}activeico{{/followed}}'></i></div>
-            <div class="alignright"><i class='lagernum color_active'>{{total}}</i></div>
-        </div>
-    </div>
-</li>
-{{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
-{{/datas}}
-</script>
-
-<?php $this->end('static') ?>
-
 <div class="wraper pd45">
     <div class="activity_list">
         <div class="date_list">
@@ -174,9 +66,124 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 <!--底部-->
 <?= $this->element('footer', ['active' => 'activity']) ?>
 
+<?php $this->start('static') ?>
+<script src="/mobile/js/mustache.min.js"></script>
+<script id="date-list-tpl" type="text/html">
+    {{#datas}}
+    <div class="date_detail_place inner {{^is_first}}mt20{{/is_first}}"
+         onclick="window.location.href = '/date-order/join/{{id}}'">
+        <h3 class="title"><i class="itemsname color_y">[{{user_skill.skill.name}}]</i> {{description}}</h3>
+        <div class="place_pic">
+                            <span class="place">
+                                <img src="/mobile/images/date_place.jpg"/>
+                            </span>
+            <div class="place_info">
+                <h3 class="userinfo">{{user.nick}} <span>{{user.age}}岁</span> <em class="price color_y fr"><i
+                            class="lagernum">{{user_skill.cost.money}}</i>元/约会金</em>
+                </h3>
+                <h3 class="otherinfo">
+                    <time class="color_gray"><i class="iconfont">&#xe622;</i> {{time}}</time>
+                    <address class="color_gray"><i class="iconfont">&#xe623;</i>{{site}}</address>
+                </h3>
+            </div>
+        </div>
+    </div>
+    {{/datas}}
+</script>
+
+<script id="activity-list-tpl" type="text/html">
+    {{#datas}}
+    <div class="items">
+        <div class="items_pic">
+            <img src="/mobile/css/icon/party1.jpg"/>
+        </div>
+        <div class="items_con">
+            <h3 class="items_title">{{title}}</h3>
+            <div class="items_time flex flex_justify mt20">
+                <div>{{ad}}</div>
+                <div>
+                    <i class="iconfont ico">&#xe64b;</i>
+                    {{time}}
+                </div>
+            </div>
+        </div>
+        <div class="items_adress flex flex_justify">
+            <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
+            <div class="button btn_dark" onclick="window.location.href='/activity/view/{{id}}'">
+                我要报名
+            </div>
+        </div>
+    </div>
+    {{/datas}}
+</script>
+
+<script id="top-list-tpl" type="text/html">
+    {{#datas}}
+    <li class="flex flex_justify" onclick="window.location.href='/index/homepage/{{user.id}}'">
+        <div class="flex">
+            <span class="place silver">{{index}}</span>
+            <div class="place_info">
+            <span class="avatar">
+                <img src="/mobile/images/avatar.jpg">
+            </span>
+                <h3>
+                <span class="place_name"><i class="name">{{user.nick}}</i> <i class="vip">VIP 5</i><i
+                        class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
+                <span class="place_number color_gray"><em class="color_y"><i
+                            class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
+                            本周魅力值：<i class="color_y max-num">{{total}}</i>
+                        </span>
+                </h3>
+            </div>
+        </div>
+        {{#ismale}}
+    <span class="button btn_dark suport-btn" onclick="window.location.href='/gift/index/{{user.id}}';event.stopPropagation(); ">
+        支持她
+    </span>
+        {{/ismale}}
+    </li>
+    {{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
+    {{/datas}}
+</script>
+
+
+<script id="rich-list-tpl" type="text/html">
+    {{#datas}}
+    <li class='ul-con'>
+        <div class="voted_con flex flex_justify">
+            <div class="flex">
+                <span class="voted_place silver">{{index}}</span>
+                <div class="voted_place_info">
+                    <span class="avatar"><img src="{{buyer.avatar}}"/></span>
+                    <h3>
+                        <span class="voted_name">{{buyer.nick}}</span>
+                        <span class="voted_number color_gray">已消费：{{total}}美币</span>
+                    </h3>
+                </div>
+            </div>
+            <div>
+                <div data-id="{{buyer.id}}" class="likeIt alignright"><i class='iconfont commico {{#followed}}activeico{{/followed}}'></i></div>
+                <div class="alignright"><i class='lagernum color_active'>{{total}}</i></div>
+            </div>
+        </div>
+    </li>
+    {{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
+    {{/datas}}
+</script>
+
+<script id="nodata-tpl" type="text/html">
+    <div class="empty_container">
+        <div class="empty-content  mt{{top}}">
+            <i class="iconfont empty-ico">&#{{icon}}</i>
+            <p class="empty-tips">{{text}}</p>
+        </div>
+    </div>
+</script>
+
+<?php $this->end('static') ?>
+
 <script src="/mobile/js/loopScroll.js" type="text/javascript" charset="utf-8"></script>
 <script>
-
     var activity = function (o) {
         this.opt = {
             tab_date: 1,
@@ -286,30 +293,37 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             if (this.tabLoadEnd[curtab]) return;
             $.util.showPreloader();
             var template = $(this.tabDataTpl[curtab]).html();
+            var nodataTmpl = $('#nodata-tpl').html();
             var url = this.tabDataUrl[curtab] + this.tabPage[curtab];
             Mustache.parse(template);   // optional, speeds up future uses
+            Mustache.parse(nodataTmpl);   // optional, speeds up future uses
             var obj = this;
             $.getJSON(url, function (data) {
                 $.util.hidePreloader();
                 if (data.code === 200) {
-                    if((data.datas).length == 0) {
-                        obj.tabLoadEnd[curtab] = true;
-                        $.util.alert('没有更多数据了');
-                        return;
-                    }
                     var rendered = Mustache.render(template, data);
+                    var nodataRend = '';
                     obj.tabPage[curtab]++;
 
                     switch (curtab) {
                         case obj.tab_date:
                             if (obj.tabInitLoad[curtab]) {
-
+                                nodataRend = Mustache.render(
+                                    nodataTmpl,
+                                    {'text':'约会即将发布，敬请期待哟~', 'icon':'xe60f;', 'top':'350'}
+                                );
                             }
                             break;
                         case obj.tab_activity:
                             if (obj.tabInitLoad[curtab]) {
-                                $('#party-coverimg')
-                                    .html("<img src='/mobile/css/icon/banner1.jpg'/>");
+                                nodataRend = Mustache.render(
+                                    nodataTmpl,
+                                    {'text':'选美即将上线，敬请期待哟~', 'icon':'xe645;', 'top':'80'}
+                                );
+                                if(data.carousel) {
+                                    $('#party-coverimg')
+                                        .html("<a href='"+data.carousel.to_url+"'><img src='"+data.carousel.url+"'/></a>");
+                                }
                             }
                             break;
                         case obj.tab_top:
@@ -319,9 +333,17 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                     }
 
                     if(obj.tabInitLoad[curtab]) {
+                        if((data.datas).length == 0) {
+                            rendered = nodataRend;
+                        }
                         $(obj.listId[curtab]).html(rendered);
                         obj.tabInitLoad[curtab] = 0;
                     } else {
+                        if((data.datas).length == 0) {
+                            obj.tabLoadEnd[curtab] = true;
+                            $.util.alert('没有更多数据了');
+                            return;
+                        }
                         $(obj.listId[curtab]).append(rendered);
                     }
                 }
