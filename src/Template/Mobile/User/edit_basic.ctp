@@ -44,12 +44,11 @@
                         </div>
                         <div class="home_list_r_info">
                             <div class="outerinput">
-                                <label for="birthday">1111</label>
                                 <input id="birthday"
                                     name="birthday"
                                     type="date"
                                     placeholder="请输入日期"
-                                    value="2015/03/27" />
+                                    value="<?= $user->birthday; ?>"
                             </div>
                         </div>
                     </div>

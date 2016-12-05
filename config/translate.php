@@ -37,6 +37,33 @@ class DateState {
 
 
 /**
+ * 用户审核状态
+ * Class YPUserStatus
+ */
+class UserStatus {
+    const CHECKING = 1;  //待审核
+    const NOPASS = 2;    //审核不通过
+    const PASS = 3;    //审核通过
+
+    const GETJSON = -1; //获取json数据
+    public static function getStatus($st = null) {
+        $status = Array(
+            UserStatus::CHECKING => '待审核',
+            UserStatus::NOPASS => '不通过',
+            UserStatus::PASS => '已通过'
+        );
+        if(CheckStatus::GETJSON == $st) {
+            return json_encode($status);
+        }
+        if($st) {
+            return isset($status[$st])?$status[$st]:null;
+        }
+        return $status;
+    }
+}
+
+
+/**
  * 技能分类转述
  * @param int $type
  * @return array|mixed|string

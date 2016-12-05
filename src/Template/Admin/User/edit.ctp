@@ -117,11 +117,19 @@
         </div>
     </div>
         <div class="form-group">
-        <label class="col-md-2 control-label">实名认证状态：1.实名待审核2审核通过0审核不通过</label>
+        <label class="col-md-2 control-label">实名认证状态:</label>
         <div class="col-md-8">
                         <?php
-            echo $this->Form->input('status', ['label' => false, 'class' => 'form-control']);
-            ?>
+                            echo $this->Form->select(
+                                'status',
+                                UserStatus::getStatus(),
+                                [
+                                    'label' => false,
+                                    'default' => $user->status,
+                                    'class' => 'form-control'
+                                ]
+                            );
+                        ?>
         </div>
     </div>
         <div class="form-group">

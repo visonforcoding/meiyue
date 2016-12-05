@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use UserStatus;
 use Wpadmin\Controller\AppController;
 
 /**
@@ -19,13 +20,193 @@ class UserController extends AppController {
     public function index() {
         $this->set('user', $this->User);
         $this->set([
-            'pageTitle' => 'user管理',
+            'pageTitle' => '用户列表',
             'bread' => [
                 'first' => ['name' => 'xxx'],
                 'second' => ['name' => 'user管理'],
             ],
         ]);
     }
+
+
+    /**
+     * 男性用户列表
+     */
+    public function maleIndex() {
+        $this->set([
+            'pageTitle' => '男性用户列表',
+            'bread' => [
+                'first' => ['name' => '用户管理'],
+                'second' => ['name' => '男性用户列表'],
+            ],
+        ]);
+    }
+
+
+    /**
+     * 美女用户列表视图
+     */
+    public function femaleIndex() {
+        $this->set([
+            'pageTitle' => '美女用户列表',
+            'bread' => [
+                'first' => ['name' => '用户管理'],
+                'second' => ['name' => '美女用户列表'],
+            ],
+        ]);
+    }
+
+
+    /**
+     * 获取美女列表
+     */
+    public function getFemales() {
+        $this->request->allowMethod('ajax');
+        $page = $this->request->data('page');
+        $rows = $this->request->data('rows');
+        $sort = 'User.' . $this->request->data('sidx');
+        $order = $this->request->data('sord');
+        $keywords = $this->request->data('keywords');
+        $begin_time = $this->request->data('begin_time');
+        $end_time = $this->request->data('end_time');
+        $where = [];
+        if (!empty($keywords)) {
+            $where[' username like'] = "%$keywords%";
+        }
+        if (!empty($begin_time) && !empty($end_time)) {
+            $begin_time = date('Y-m-d', strtotime($begin_time));
+            $end_time = date('Y-m-d', strtotime($end_time));
+            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
+        }
+        $where['gender'] = 2;
+        $query = $this->User->find();
+        $query->hydrate(false);
+        if (!empty($where)) {
+            $query->where($where);
+        }
+        $query->contain([
+            'Fans',
+            'Follows',
+            'Flows' => function($q) {
+                return $q->select(['user_id', 'amounts' => 'sum(amount)']);
+            }
+        ]);
+        $nums = $query->count();
+        if (!empty($sort) && !empty($order)) {
+            $query->order([$sort => $order]);
+        }
+
+        $query->limit(intval($rows))
+            ->page(intval($page));
+        $query->formatResults(function($items) {
+            return $items->map(function($item) {
+                $item['myno'] = 'my'.  str_pad($item['id'],8, 0,STR_PAD_LEFT);
+                $item['age'] = getAge($item['birthday']);
+                $item['status'] = UserStatus::getStatus($item['status']);
+                $item['fancount'] = count($item['fans']);
+                $item['followcount'] = count($item['follows']);
+                if(count($item['flows']) > 0) {
+                    $item['meili'] = $item['flows'][0]['amounts'];
+                } else {
+                    $item['meili'] = 0;
+                }
+                //时间语义化转换
+                return $item;
+            });
+        });
+        $res = $query->toArray();
+        if (empty($res)) {
+            $res = array();
+        }
+        if ($nums > 0) {
+            $total_pages = ceil($nums / $rows);
+        } else {
+            $total_pages = 0;
+        }
+        $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
+        $this->autoRender = false;
+        $this->response->type('json');
+        $this->response->body(json_encode($data));
+        $this->response->send();
+        $this->response->stop();
+    }
+
+
+    /**
+     * 获取美女列表
+     */
+    public function getMales() {
+        $this->request->allowMethod('ajax');
+        $page = $this->request->data('page');
+        $rows = $this->request->data('rows');
+        $sort = 'User.' . $this->request->data('sidx');
+        $order = $this->request->data('sord');
+        $keywords = $this->request->data('keywords');
+        $begin_time = $this->request->data('begin_time');
+        $end_time = $this->request->data('end_time');
+        $where = [];
+        if (!empty($keywords)) {
+            $where[' username like'] = "%$keywords%";
+        }
+        if (!empty($begin_time) && !empty($end_time)) {
+            $begin_time = date('Y-m-d', strtotime($begin_time));
+            $end_time = date('Y-m-d', strtotime($end_time));
+            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
+        }
+        $where['gender'] = 1;
+        $query = $this->User->find();
+        $query->hydrate(false);
+        if (!empty($where)) {
+            $query->where($where);
+        }
+        $query->contain([
+            'Fans',
+            'Follows',
+            'Flows' => function($q) {
+                return $q->select(['user_id', 'amounts' => 'sum(amount)']);
+            }
+        ]);
+        $nums = $query->count();
+        if (!empty($sort) && !empty($order)) {
+            $query->order([$sort => $order]);
+        }
+
+        $query->limit(intval($rows))
+            ->page(intval($page));
+        $query->formatResults(function($items) {
+            return $items->map(function($item) {
+                $item['myno'] = 'my'.  str_pad($item['id'],8, 0,STR_PAD_LEFT);
+                $item['age'] = getAge($item['birthday']);
+                $item['status'] = UserStatus::getStatus($item['status']);
+                $item['fancount'] = count($item['fans']);
+                $item['followcount'] = count($item['follows']);
+                if(count($item['flows']) > 0) {
+                    $item['meili'] = $item['flows'][0]['amounts'];
+                } else {
+                    $item['meili'] = 0;
+                }
+                //时间语义化转换
+                return $item;
+            });
+        });
+        $res = $query->toArray();
+        if (empty($res)) {
+            $res = array();
+        }
+        if ($nums > 0) {
+            $total_pages = ceil($nums / $rows);
+        } else {
+            $total_pages = 0;
+        }
+        $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
+        $this->autoRender = false;
+        $this->response->type('json');
+        $this->response->body(json_encode($data));
+        $this->response->send();
+        $this->response->stop();
+
+    }
+
 
     /**
      * View method

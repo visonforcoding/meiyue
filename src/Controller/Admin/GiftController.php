@@ -18,7 +18,14 @@ class GiftController extends AppController
      */
     public function index()
     {
-        $this->set(['gifts' => $this->Gift]);
+        $this->set([
+            'gifts' => $this->Gift,
+            'pageTitle' => '礼物设置 ',
+            'bread' => [
+                'first' => ['name' => '基础管理'],
+                'second' => ['name' => '礼物设置'],
+            ],
+        ]);
     }
 
     /**
