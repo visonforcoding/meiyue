@@ -603,4 +603,22 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
+#大图轮播表
+CREATE TABLE `lm_carousel` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`title` VARCHAR(50) NOT NULL,
+	`position` TINYINT(4) NOT NULL COMMENT '轮播图位置',
+	`to_url` VARCHAR(50) NOT NULL COMMENT '跳转链接',
+	`url` VARCHAR(50) NOT NULL COMMENT '图片链接',
+	`remark` VARCHAR(50) NOT NULL COMMENT '备注',
+	`status` TINYINT(4) NOT NULL COMMENT '状态：1#正常 2#下架',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL COMMENT '修改时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='轮播图表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=2
+;
 
