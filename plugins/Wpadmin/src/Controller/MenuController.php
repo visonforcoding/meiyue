@@ -17,7 +17,14 @@ class MenuController extends AppController {
      * @return void
      */
     public function index() {
-        $this->set('menu', $this->Menu);
+        $this->set([
+            'menu' =>$this->Menu,
+            'pageTitle' => '菜单管理',
+            'bread' => [
+                'first' => ['name' => '系统管理'],
+                'second' => ['name' => '菜单管理'],
+            ],
+        ]);
     }
 
     /**
@@ -66,7 +73,12 @@ class MenuController extends AppController {
         $menus = \Wpadmin\Utils\Util::tree($menus, 0, 'id', 'pid');
         $this->set(array(
             'menu' => $menu,
-            'menus' => $menus
+            'menus' => $menus,
+            'pageTitle' => '菜单管理',
+            'bread' => [
+                'first' => ['name' => '系统管理'],
+                'second' => ['name' => '菜单管理'],
+            ],
         ));
     }
 

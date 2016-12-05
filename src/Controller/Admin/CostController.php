@@ -11,15 +11,22 @@ use Wpadmin\Controller\AppController;
 class CostController extends AppController
 {
 
-/**
-* Index method
-*
-* @return void
-*/
-public function index()
-{
-$this->set('costs', $this->Cost);
-}
+    /**
+    * Index method
+    *
+    * @return void
+    */
+    public function index()
+    {
+        $this->set([
+            'costs' => $this->Cost,
+            'pageTitle' => '价格管理 ',
+            'bread' => [
+                'first' => ['name' => '基础管理'],
+                'second' => ['name' => '价格管理'],
+            ],
+        ]);
+    }
 
     /**
      * View method

@@ -18,7 +18,14 @@ class SkillController extends AppController
      */
     public function index()
     {
-        $this->set('skills', $this->Skill->find('threaded')->toArray());
+        $this->set([
+            'skills' => $this->Skill->find('threaded')->toArray(),
+            'pageTitle' => '技能管理 ',
+            'bread' => [
+                'first' => ['name' => '基础管理'],
+                'second' => ['name' => '技能管理'],
+            ],
+        ]);
     }
 
     /**

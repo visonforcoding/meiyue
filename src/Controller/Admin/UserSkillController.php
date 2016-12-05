@@ -26,7 +26,14 @@ class UserSkillController extends AppController
      */
     public function index()
     {
-        $this->set('userSkills', $this->UserSkill);
+        $this->set([
+            'userSkills' => $this->UserSkill,
+            'pageTitle' => '用户技能管理',
+            'bread' => [
+                'first' => ['name' => '客户服务'],
+                'second' => ['name' => '用户技能管理'],
+            ],
+        ]);
     }
 
     /**

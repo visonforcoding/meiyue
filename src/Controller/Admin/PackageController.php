@@ -18,7 +18,14 @@ class PackageController extends AppController
     */
     public function index()
     {
-    $this->set('package', $this->Package);
+    $this->set([
+        'package' => $this->Package,
+        'pageTitle' => '套餐购买管理 ',
+        'bread' => [
+            'first' => ['name' => '套餐管理'],
+            'second' => ['name' => '套餐购买管理'],
+        ],
+    ]);
     }
 
     /**

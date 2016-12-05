@@ -19,7 +19,14 @@ class YuepaiController extends AppController
     */
     public function index()
     {
-        $this->set('yuepai', $this->Yuepai);
+        $this->set([
+            'yuepai' => $this->Yuepai,
+            'pageTitle' => '约拍管理 ',
+            'bread' => [
+                'first' => ['name' => '基础管理'],
+                'second' => ['name' => '约拍管理'],
+            ],
+        ]);
     }
 
     /**

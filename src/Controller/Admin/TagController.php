@@ -18,7 +18,14 @@ class TagController extends AppController
 */
 public function index()
 {
-    $this->set('tags', $this->Tag->find('threaded')->toArray());
+    $this->set([
+        'tags' => $this->Tag->find('threaded')->toArray(),
+        'pageTitle' => '标签管理 ',
+        'bread' => [
+            'first' => ['name' => '基础管理'],
+            'second' => ['name' => '标签管理'],
+        ],
+    ]);
 }
 
     /**

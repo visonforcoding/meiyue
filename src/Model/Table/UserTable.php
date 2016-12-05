@@ -52,6 +52,10 @@ class UserTable extends Table {
             'className' => 'UserFans',
             'foreignKey' => 'user_id'
         ]);
+        $this->hasMany('Flows', [
+            'className' => 'Flow',
+            'foreignKey' => 'user_id'
+        ]);
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
