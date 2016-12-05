@@ -296,6 +296,7 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .activity_list section .date_detail_place:last-of-type{margin-bottom:0;}
 .date_detail_place .otherinfo address{margin-top:.1rem;}
 .bottomblock .entroll-btn{width:50%;display: block;height:45px;line-height: 45px;text-align: center;}
+.bottomblock .entroll-btn .cancelbtn{color:#EAB96A;}
 @media (min-width: 320px) and (max-width: 374px) {
 	.date_detail_place .place_info .userinfo{margin-bottom:.5rem;}
 }
