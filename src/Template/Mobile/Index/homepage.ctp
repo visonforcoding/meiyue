@@ -1,5 +1,5 @@
 <header>
-    <div class="home_page">
+    <div class="home_page" style='display:none;'>
         <div class="header">
             <span class="l_btn iconfont">&#xe602;</span>
             <span class="r_btn iconfont">&#xe62d;</span>
@@ -7,6 +7,12 @@
     </div>
 </header>
 <div class="wraper">
+    <div class="home_page">
+        <div class="header">
+            <span class="identify-info video-btn">视频已认证</span>
+            <span class="identify-info  id-btn">身份已认证</span>
+        </div>
+     </div>
     <!--基本信息-->
     <div class="home_page_basic">
         <h3 class="aligncenter">
@@ -52,7 +58,10 @@
             <?php endif; ?>
         </ul>
         <div class="inner home_video mt20">
-            <video src="<?= $user->video ?>" controls="controls" height="auto" width="auto"></video>
+
+           <video width="100%" height="auto" controls="controls" autoplay="autoplay" src="/upload/user/video/58457261d9674.mp4">
+            </video>
+            <!-- <video src="<?= $user->video ?>" controls="controls" height="auto" width="auto"></video> -->
         </div>
     </div>
     <!--Ta的资料-->
