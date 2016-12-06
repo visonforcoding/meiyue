@@ -15,26 +15,17 @@
                             <img src="<?= $flows[$item['supporter_id']]['buyer']['avatar'];?>" alt="" />
                         </span>
                         <h3>
-                            <div class="username">
-                                <?= $flows[$item['supporter_id']]['buyer']['nick'];?>
-                                <span class="age">
-                                <i class="iconfont color_y">&#xe61c;</i>
-                                    <?= getAge($flows[$item['supporter_id']]['buyer']['birthday']);?>
-                                    岁
-                            </span>
-                            </div>
-                            <div class="beauty_num">
-                                魅力值：
-                                <i class="color_friends">
+                            <div class="username"> <?= $flows[$item['supporter_id']]['buyer']['nick'];?><span class="age"><i class="iconfont color_y">&#xe61c;</i> <?= getAge($flows[$item['supporter_id']]['buyer']['birthday']);?>
+                                岁</span></div>
+                            <div class="beauty_num">魅力值： <i class="color_friends">
                                     <?= $flows[$item['supporter_id']]['total'];?>
-                                </i>
-                            </div>
+                                </i></div>
                         </h3>
                     </div>
                     <div class="praised_list_right">
                         <span class="support_num">
-                            支持
-                            <i class="color_y">
+                            已支持:  
+                            <i class="color_friends">
                                 <?= $item['spcount']; ?>
                             </i>
                             次
