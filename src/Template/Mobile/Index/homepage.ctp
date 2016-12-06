@@ -1,8 +1,9 @@
 <div class="wraper">
     <div class="home_page">
-        <div class="header">
-            <span class="l_btn iconfont">&#xe602;</span>
-            <span class="r_btn iconfont">&#xe62d;</span>
+        <div class="header" style="overflow:hidden">
+            <img src="<?= $user->avatar; ?>" class="responseimg"/>
+            <!--<span class="l_btn iconfont">&#xe602;</span>
+            <span class="r_btn iconfont">&#xe62d;</span>-->
             <span class="identify-info  id-btn">视频已认证</span>
             <span class="identify-info video-btn">身份已认证</span>
         </div>
@@ -46,8 +47,7 @@
         </ul>
         <?php if($user->video): ?>
         <div class="inner home_video mt20">
-
-           <video width="100%" height="auto" controls="controls" preload="preload" src="<?= $user->video ?>">
+           <video width="100%" height="auto" controls="controls" preload="preload" src="<?= $user->video ?>" poster="<?= $user->video_cover ?>">
             </video>
         </div>
         <?php endif;?>
@@ -204,13 +204,13 @@
         <?php if ($isFollow): ?>
             <li>
                 <a id="focusIt">
-                    <i class="iconfont">&#xe63d;</i>已关注
+                    <i class="iconfont">&#xe63d;</i><i class="status-txt">已关注</i>
                 </a>
             </li>
         <?php else: ?>
-            <li class="active">
+            <li>
                 <a id="focusIt" class="active">
-                    <i class="iconfont">&#xe63d;</i>关注
+                    <i class="iconfont">&#xe63d;</i><i class="status-txt">关注</i>
                 </a>
             </li>
         <?php endif; ?>
@@ -270,31 +270,31 @@
 <?php $this->start('script'); ?>
 <script src="/mobile/js/mustache.min.js"></script>
 <script>
-    $('#focusIt').on('tap', function () {
+    $('#focusIt').on('tap', function (e) {
         //加关注
         var id = <?= $user->id ?>;  //该对象
-        var $obj = $(this);
-        if (!$obj.hasClass('active')) {
+        var obj = $('#focusIt');
+        if (!obj.hasClass('active')) {
             //取消关注
             $.util.confirm('取消关注', '你确定取消关注她吗?', function () {
-                followIt(id,$obj);
+                followIt(id,obj);
             });
         } else {
-            followIt(id,$obj);
+            followIt(id,obj);
         }
 
     });
-    function followIt(id,$obj) {
+    function followIt(id,obj) {
         $.util.ajax({
             url: '/user/follow',
             data: {id: id},
             func: function (res) {
-                if($obj.hasClass('active')){
-                    $obj.html('<i class="iconfont">&#xe63d;</i>已关注');
+                if(obj.hasClass('active')){
+                    obj.find('.status-txt').first().text('已关注');
                 }else{
-                    $obj.html('<i class="iconfont">&#xe63d;</i>关注');
+                    obj.find('.status-txt').first().text('关注');
                 }
-                $obj.toggleClass('active');
+                obj.toggleClass('active');
                 $.util.alert(res.msg);
             }
         })
@@ -425,7 +425,6 @@
                 } else {
                     $.util.alert(res.msg);
                 }
-
             }
         })
     }

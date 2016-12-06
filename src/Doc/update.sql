@@ -643,3 +643,7 @@ ENGINE=InnoDB
 AUTO_INCREMENT=1
 ;
 
+#user表添加魅力值
+ALTER TABLE `lm_user`
+	ADD COLUMN `charm` FLOAT NULL DEFAULT '0' COMMENT '魅力值' AFTER `recharge`;
+

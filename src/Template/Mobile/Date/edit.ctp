@@ -423,6 +423,7 @@
     });
 
     LEMON.event.unrefresh();
+    LEMON.sys.back('/date/index');
     LEMON.sys.setTopRight('重新发布')
     window.onTopRight = function () {
         $(".release-btn").trigger('click');

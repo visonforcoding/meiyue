@@ -35,12 +35,13 @@ class UserFansTable extends Table {
         $this->table('lm_user_fans');
         $this->displayField('id');
         $this->primaryKey('id');
-
+        //粉丝
         $this->belongsTo('User', [
             'className' => 'User',
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+        //关注
         $this->belongsTo('Follower', [
             'className' => 'User',
             'foreignKey' => 'following_id',
