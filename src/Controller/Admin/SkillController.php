@@ -64,6 +64,13 @@ class SkillController extends AppController
             }
         }
         $this->set(compact('skill'));
+        $this->set([
+            'pageTitle' => '技能管理 ',
+            'bread' => [
+                'first' => ['name' => '基础管理'],
+                'second' => ['name' => '技能管理'],
+            ],
+        ]);
     }
 
     /**
@@ -86,6 +93,13 @@ class SkillController extends AppController
             }
         }
         $this->set(compact('skill'));
+        $this->set([
+            'pageTitle' => '技能管理 ',
+            'bread' => [
+                'first' => ['name' => '基础管理'],
+                'second' => ['name' => '技能管理'],
+            ],
+        ]);
     }
 
 

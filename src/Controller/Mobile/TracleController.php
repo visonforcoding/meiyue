@@ -84,7 +84,6 @@ class TracleController extends AppController {
         $this->loadComponent('Business');
         //检查权限和名额剩余
         $res = $this->Business->consumeRight($this->user->id, $uid, ServiceType::BROWSE);
-
         if($res) {
             $uTb = TableRegistry::get('User');
             $user = $uTb->get($uid);

@@ -22,20 +22,27 @@
             <span class="total">4.2分</span>
         </div>
         <ul class="otherinfo flex flex_justify bdbottom">
-            <li><span class="t_desc"><?= $user->height ?>cm</span><span class="b_desc">身高</span></li>
-            <li><span class="t_desc"><?= $user->weight ?>kg</span><span class="b_desc">体重</span></li>
-            <li><span class="t_desc"><?= $user->bwh ?></span><span class="b_desc">三围</span></li>
-            <li><span class="t_desc"><?= $birthday ?></span><span class="b_desc">生日</span></li>
+            <li><span class="t_desc"><?= ($user->height)?$user->height.'cm':'--' ?></span><span class="b_desc">身高</span></li>
+            <li><span class="t_desc"><?= ($user->weight)?$user->weight.'kg':'--' ?></span><span class="b_desc">体重</span></li>
+            <li><span class="t_desc"><?= ($user->bwh)?$user->bwh:'--' ?></span><span class="b_desc">三围</span></li>
+            <li><span class="t_desc"><?= ($birthday)?$birthday:'--' ?></span><span class="b_desc">生日</span></li>
         </ul>
     </div>
     <!--图片 && 视频展示-->
     <div class="home_pic_info mt40">
         <ul class="inner flex">
             <?php if (@unserialize($user->images)): ?>
-                <?php foreach (unserialize($user->images) as $image): ?>
-                    <!--<li><img src="<?/*= createImg($image) */?>"/></li>-->
-                <?php endforeach; ?>
-                <li><img src="<?= createImg($image) ?>"/></li>
+                <?php
+                    $imgs = unserialize($user->images);
+                    $lg = count($imgs);
+                    $max = 3;
+                    if($lg < 3) {
+                        $max = $lg;
+                    }
+                ?>
+                <?php for ($i=1; $i <= $max; $i++): ?>
+                    <li><img src="<?= createImg($imgs[$i]) ?>"/></li>
+                <?php endfor; ?>
                 <li id="see-movements">
                     <a class='ablock' >
                         <img src="/mobile/images/avatar.jpg"/>
@@ -45,7 +52,7 @@
             <?php endif; ?>
         </ul>
         <div class="inner home_video mt20">
-            <img src="/mobile/images//vid.jpg"/>
+            <video src="<?= $user->video ?>" controls="controls" height="auto" width="auto"></video>
         </div>
     </div>
     <!--Ta的资料-->
@@ -55,9 +62,7 @@
                 <h3>Ta的资料</h3>
             </div>
             <div class="con">
-                <a href="#this">24岁</a>
                 <a href="#this">处女座</a>
-                <a href="#this">三围  89/60/99</a>
                 <a href="#this">生日 1994/02/09</a>
             </div>
             <div class="bottom">
