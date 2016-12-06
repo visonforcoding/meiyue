@@ -144,7 +144,6 @@ class IndexController extends AppController {
             'contain' => ['UserSkills', 'UserSkills.Skill', 'UserSkills.Cost']
         ]);
         $distance = getDistance($userCoord, $user->login_coord_lng, $user->login_coord_lat);
-        $user->avatar = createImg($user->avatar) . '?w=184&h=184&fit=stretch';
         $age = (Time::now()->year) - ((new Time($user->birthday))->year);
         $birthday = date('m-d', strtotime($user->birthday));
 

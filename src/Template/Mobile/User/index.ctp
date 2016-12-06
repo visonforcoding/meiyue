@@ -29,7 +29,7 @@
                     </li>
                     <li class="follow">
                         <a class="like">喜欢 <i>12</i></a>
-                        <a class="like">粉丝 <i>122</i></a>
+                        <a class="like" onclick="window.location.href='/userc/follows'">粉丝 <i>122</i></a>
                     </li>
                 </ul>
             </div>

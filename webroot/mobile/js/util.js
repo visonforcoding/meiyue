@@ -26,17 +26,21 @@ $.util = {
                 '</button><button class="alert7-action-item btnR">' + bR
                 + '</button></div></div></div>';
         $('body').append(confirm);
+        $(document).off('click', '.alert7-action-item.btnL');
         $(document).on('click', '.alert7-action-item.btnL', function () {
+            console.log('Lclicking');
             if (hL && hL instanceof Function) {
                 hL();
             }
             $('.alert7-confirm').remove();
         })
+        $(document).off('click', '.alert7-action-item.btnR');
         $(document).on('click', '.alert7-action-item.btnR', function () {
+            console.log('Rclicking');
             if (hR && hR instanceof Function) {
                 hR();
             }
-            $('.alert7-confirm').remove();
+        $('.alert7-confirm').remove();
         })
     },
     showPreloader: function (str) {

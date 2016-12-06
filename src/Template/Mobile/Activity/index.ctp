@@ -72,7 +72,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
     {{#datas}}
     <div class="date_detail_place inner {{^is_first}}mt20{{/is_first}}"
          onclick="window.location.href = '/date-order/join/{{id}}'">
-        <h3 class="title"><i class="itemsname color_y">[{{user_skill.skill.name}}]</i> {{description}}</h3>
+        <h3 class="title"><i class="itemsname color_y">[{{user_skill.skill.name}}]</i> {{title}}</h3>
         <div class="place_pic">
                             <span class="place">
                                 <img src="/mobile/images/date_place.jpg"/>

@@ -5,14 +5,14 @@
     <li>
         <a href="#this" class="praised_block">
             <div class="praised_list_left">
-                <span class="avatar"><img src="{{follower.avatar}}" alt="" /></span>
+                <span class="avatar"><img src="{{user.avatar}}" alt="" /></span>
                 <h3>
-                    <span class="username">{{follower.nick}}</span>
-                    <span class="usersex"><i class="iconfont color_y">&#xe61c;</i>{{follower.age}}岁</span>
+                    <span class="username">{{user.nick}}</span>
+                    <span class="usersex"><i class="iconfont color_y">&#xe61c;</i>{{user.age}}岁</span>
                 </h3>
             </div>
             <div class="praised_list_right">
-                <span class="attractive ">魅力值<i class="numbers">{{follower.charm}}</i></span>
+                <span class="attractive ">魅力值<i class="numbers">{{user.recharge}}</i></span>
             </div>
         </a>
     </li>
@@ -33,7 +33,7 @@
 <?php $this->start('script'); ?>
 <script>
 var curpage = 1;
-$.util.asyLoadData({gurl: '/userc/get-likes-list/', page: curpage, tpl: '#like-list-tpl', id: '#like-list',
+$.util.asyLoadData({gurl: '/userc/get-follows-list/', page: curpage, tpl: '#like-list-tpl', id: '#like-list',
     key: 'likes'});
 setTimeout(function () {
     //滚动加载
