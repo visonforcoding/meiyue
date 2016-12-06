@@ -66,7 +66,6 @@
     $.extend($, {
         picker: function (cb) {
             LEMON.sys.hideKeyboard();
-            $('.picker-modal').removeClass('modal-hide');
             $('#province-select').on('scroll', function () {
                 var scrollTop = $(this).get(0).scrollTop;
                 var height = $('.picker-items-col-wrapper li').height();
@@ -106,7 +105,7 @@
                 }
             });
             $('#date-submit-btn').on('click',function(){
-                cb(_city);
+                cb();
                 $('.picker-modal').addClass('modal-hide');
             })
             $('#date-cancel-btn').on('click',function(){

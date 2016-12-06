@@ -10,6 +10,7 @@ use Cake\Controller\Controller;
  * User Controller
  *
  * @property \App\Model\Table\UserTable $User
+ * @property \App\Controller\Component\BusinessComponent $Business
  */
 class UserController extends AppController {
 
@@ -163,6 +164,12 @@ class UserController extends AppController {
             $user_id = $this->user->id;
             $user = $this->User->get($user_id);
             $user = $this->User->patchEntity($user, ['gender' => $gender]);
+            $this->loadComponent('Business');
+            $im = $this->Business->getNetim();
+            if($im){
+                $user->imaccid = $im['accid'];
+                $user->imtoken = $im['token'];
+            }
             if ($this->User->save($user)) {
                 return $this->Util->ajaxReturn(['status' => true, 'msg' => '设置成功', 'redirect_url' => '/user/reg-user-info']);
             } else {

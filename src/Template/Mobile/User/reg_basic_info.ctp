@@ -71,7 +71,7 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">体</span><span class="itemsname">重：</span></div>
                         <div class="home_list_r_info">
-                            <input name="weight" type="text" placeholder="您的体重" />&nbsp;kg
+                            <input id="width" name="weight" type="text" placeholder="您的体重" />&nbsp;kg
                             <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                     <div class="home_items">
                         <div class="home_list_l_info required"><span class="itemsname short_name">身</span><span class="itemsname">高：</span><i class="iconfont ico"></i></div>
                         <div class="home_list_r_info">
-                            <input name="height" type="text" placeholder="您的身高" />&nbsp;cm
+                            <input id="height" name="height" type="text" placeholder="您的身高" />&nbsp;cm
                             <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
@@ -152,15 +152,6 @@
                         </div>
                     </div>
                 </li>
-                <li>
-                    <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">工</span><span class="itemsname">作</span><span class="itemsname">经</span><span class="itemsname">历：</span></div>
-                        <div class="home_list_r_info">
-                            <input name="career" type="text" placeholder="工作经历" />
-                            <i class="iconfont r_icon">&#xe605;</i>
-                        </div>
-                    </div>
-                </li>
         </div>
         <!--爱好-->
         <div class="home_fill_basic_info">
@@ -172,7 +163,7 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">喜欢的美食：</span></div>
                         <div class="home_list_r_info">
-                            <input name="food" type="text" placeholder="请输入美食" />
+                            <input id="food" name="food" type="text" placeholder="请输入美食" />
                             <i class="iconfont r_icon"></i>
                         </div>
                     </div>
@@ -181,7 +172,7 @@
                     <div class="home_items sport_items">
                         <div class="home_list_l_info"><span class="itemsname">喜欢的运动/娱乐：</span></div>
                         <div class="home_list_r_info">
-                            <input name="sport" type="text" placeholder="运动/娱乐" />
+                            <input id="sport" name="sport" type="text" placeholder="运动/娱乐" />
                             <i class="iconfont r_icon"></i>
                         </div>
                     </div>
@@ -219,27 +210,66 @@
 
 <?= $this->start('script'); ?>
 <script>
-    $('#truename,#nick').keyup(function () {
+    $('#nick').keyup(function () {
         var v = $(this).val();
         if (v.length > 6) {
-
+            $.util.alert('昵称不要超过6个字符');
         }
     });
-    $('#city').on('tap',function(){
-        var obj = $(this);
-        console.log(obj);
-        $.picker(function(v){
-            obj.val(v);
-        });
+    $('#height,#wight').keyup(function () {
+        var v = $(this).val();
+        if (v.length > 3) {
+            $.util.alert('体重或身高输入不正确');
+        }
     });
-    $('#hometown').on('tap',function(){
-        var obj = $(this);
-        console.log(obj);
-        $.picker(function(v){
-            obj.val(v);
-        });
+    $('#food').keyup(function () {
+        var v = $(this).val();
+        if (v.length > 12) {
+            $.util.alert('喜欢的美食输入过长');
+        }
+    });
+    $('#sport').keyup(function () {
+        var v = $(this).val();
+        if (v.length > 12) {
+            $.util.alert('喜欢的运动输入过长');
+        }
+    });
+    $.picker(function () {
+        if (window.selecter == 'city') {
+            $('#city').val(_city);
+        } else {
+            $('#hometown').val(_city);
+        }
+    });
+    $('#city').on('tap', function () {
+        window.selecter = 'city';
+        $('.picker-modal').removeClass('modal-hide');
+    });
+    $('#hometown').on('tap', function () {
+        window.selecter = 'hometown';
+        $('.picker-modal').removeClass('modal-hide');
     });
     $('#submit').on('tap', function () {
+        if ($('#nick').length > 6) {
+            $.util.alert('昵称不要超过6个字符');
+            return false;
+        }
+        if ($('#height').length > 3) {
+            $.util.alert('身高输入不正确');
+            return false;
+        }
+        if ($('#wight').length > 3) {
+            $.util.alert('体重输入不正确');
+            return false;
+        }
+        if ($('#food').length > 12) {
+            $.util.alert('喜欢的美食输入过长');
+            return false;
+        }
+        if ($('#sport').length > 12) {
+            $.util.alert('喜欢的美食输入过长');
+            return false;
+        }
         var form = $('form');
         $.util.ajax({
             data: form.serialize(),
