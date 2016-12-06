@@ -15,9 +15,9 @@
                     <li>
                         <div class="items flex flex_justify">
                             <h3 class="commontext bright color_friends">
-                                <span class="lagernum">
-                                    <?= $item->title; ?>
-                                </span>
+                                <span class="high-vip">
+                                    <img src="/mobile/images/higther-vip.png" class="responseimg"/>
+                                </span> 
                                 <i class="unit"><?= $item->vali_time; ?>天</i>
                             </h3>
                             <div class="smalldes closed" data-type = "0">
