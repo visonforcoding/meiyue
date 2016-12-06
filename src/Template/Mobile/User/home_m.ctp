@@ -6,7 +6,7 @@
                 </div>-->
         <div class="home_cover_info">
             <span class="avatar">
-                <img src="<?= createImg($user->avatar) . '?w=77' ?>"/>
+                <img src="<?= createImg($user->avatar) . '?w=77' ?>"  class="avatar-pic"/>
             </span>
             <div class="cover_left_info">
                 <ul class='opci'>
@@ -22,8 +22,8 @@
                         </a>
                     </li>
                     <li class="follow flex flex_justify">
-                        <div><a href="/userc/fans"><span>赞赏我 <i>12</i></span></a></div>
-                        <div><a href="/userc/likes"><span>关注 <i>12</i></span></a></div>
+                        <div><a href="/userc/fans">赞赏我 <i>12</i></a></div>
+                        <div><a href="/userc/likes"> 关注 <i>12</i></a></div>
                         <div>访客 <i>122</i></div>
                     </li>
                 </ul>
