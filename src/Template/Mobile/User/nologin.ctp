@@ -6,7 +6,7 @@
         </div>-->
         <div class="home_cover_info">
             <span class="avatar">
-                <img src="/mobile/images/avatar.jpg"/>
+                <img src="/mobile/images/avatar.jpg" class="avatar-pic"/>
             </span>
             <div class="cover_left_info">
                 <ul class="opci">
