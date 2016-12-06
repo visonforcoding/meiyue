@@ -157,7 +157,7 @@ table,tbody,tr,td,th,thead,tfoot{border:1px #e5e5e5 solid;}
 .fullscreen{position:absolute;right:0;left:0;bottom:47px;top:1rem;}
 .fullwraper{position:absolute;top:0;bottom:0;width:100%;max-width:750px;}
 .inner{padding:0 .3rem;}
-input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;} 
+input::-webkit-input-placeholder { /* WebKit browsers */ color: #dadada;} 
 .ablock{display: block;}
 /*限制一行*/
 .line1,.line2,.line3{word-break: break-all;display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden;}
@@ -264,14 +264,14 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
 /*响应式图片*/
 .responseimg{width:100%;height:auto;display: block;}
 /*字体图标*/
-@font-face {
+/*@font-face {
     font-family: 'iconfont';
     src: url('../font/iconfont.eot?t=1128');
     src: url('../font/iconfont.eot?t=1128#iefix') format('embedded-opentype'),
         url('../font/iconfont.woff?t=1128') format('woff'),
         url('../font/iconfont.ttf?t=1128') format('truetype'),
         url('../font/iconfont.svg?t=1128#iconfont') format('svg');
-}
+}*/
 
 .iconfont{
     font-family:"iconfont" !important;
@@ -282,11 +282,11 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #777;}
     /*font-size:16px;*/
 }
 /*在线图标*/
-/*@font-face {
-  font-family: 'iconfont';
-  src: url('//at.alicdn.com/t/font_v5kqq91oaujl9pb9.eot');
-  src: url('//at.alicdn.com/t/font_v5kqq91oaujl9pb9.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_v5kqq91oaujl9pb9.woff') format('woff'),
-  url('//at.alicdn.com/t/font_v5kqq91oaujl9pb9.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_v5kqq91oaujl9pb9.svg#iconfont') format('svg');
-}*/
+@font-face {
+  font-family: 'iconfont';  /* project id 166621 */
+  src: url('//at.alicdn.com/t/font_i8bv6a3e6s7fd2t9.eot');
+  src: url('//at.alicdn.com/t/font_i8bv6a3e6s7fd2t9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_i8bv6a3e6s7fd2t9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_i8bv6a3e6s7fd2t9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_i8bv6a3e6s7fd2t9.svg#iconfont') format('svg');
+}
