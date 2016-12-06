@@ -292,4 +292,22 @@ class BusinessComponent extends Component
             return false;
         }
     }
+    
+    /**
+     * 获取网易im token 和accid
+     */
+    public function getNetim(){
+        $RedisConf = \Cake\Core\Configure::read('Redis.default');
+        $redis = new \Redis();
+        $redis->connect($RedisConf['host'], $RedisConf['port']);
+        $accid = $redis->sPop(self::REDIS_SET_KEY);
+        $token = $redis->hGet(self::REDIS_HASH_KEY,$accid);
+        if($accid===false){
+            return false;
+        }
+        return [
+            'accid'=>$accid,
+            'token'=>$token
+        ];
+    }
 }

@@ -603,6 +603,11 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
+
+##修改user
+ALTER TABLE `lm_user`
+	ADD COLUMN `imaccid` VARCHAR(150) NULL DEFAULT '' COMMENT '云信accid' AFTER `imtoken`,
+	ADD UNIQUE INDEX `imaccid` (`imaccid`);
 #大图轮播表
 CREATE TABLE `lm_carousel` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -620,5 +625,21 @@ COMMENT='轮播图表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=2
+;
+
+#im 账号池
+CREATE TABLE `lm_impool` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`accid` VARCHAR(50) NOT NULL,
+	`token` VARCHAR(128) NOT NULL,
+	`status` TINYINT(4) NOT NULL DEFAULT '0',
+	`create_time` DATETIME NOT NULL,
+	`update_time` DATETIME NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='im账号池'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=1
 ;
 
