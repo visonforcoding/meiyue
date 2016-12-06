@@ -121,7 +121,6 @@
                 $.util.alert(res.msg);
                 if (res.status) {
                     document.location.href = '/userc/edit-info';
-                } else {
                 }
             }
         });

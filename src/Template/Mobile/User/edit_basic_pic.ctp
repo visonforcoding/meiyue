@@ -71,18 +71,18 @@
             LEMON.event.uploadPics({
                 key:'demoImg',
                 user_id:user_id,
-                param:'id:123,uid:456'
             });
         if($('#up_video').data('choosed'))
             LEMON.event.uploadVideo({
                 key:'up_video',
                 user_id:user_id
             });
-        $.util.alert('上传成功');
         setTimeout(function(){
             location.href = '/userc/edit-info';
         },1000);
     })
+
+
 
 
 </script>
