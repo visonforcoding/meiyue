@@ -5,7 +5,8 @@
     </div>
 </header>
 <div class="wraper">
-    <div class="inner">
+    <div class="inner mt40">
+        <a href="#this" class="btn btn_t_border">邀请好友支持我</a>
         <ul class="voted_list voted-line">
             <li>
                 <a href="/activity/index/top" class="title ablock flex flex_justify">
