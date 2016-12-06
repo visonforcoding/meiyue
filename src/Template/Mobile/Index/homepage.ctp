@@ -1,16 +1,10 @@
-<header>
-    <div class="home_page" style='display:none;'>
-        <div class="header">
-            <span class="l_btn iconfont">&#xe602;</span>
-            <span class="r_btn iconfont">&#xe62d;</span>
-        </div>
-    </div>
-</header>
 <div class="wraper">
     <div class="home_page">
         <div class="header">
-            <span class="identify-info video-btn">视频已认证</span>
-            <span class="identify-info  id-btn">身份已认证</span>
+            <span class="l_btn iconfont">&#xe602;</span>
+            <span class="r_btn iconfont">&#xe62d;</span>
+            <span class="identify-info  id-btn">视频已认证</span>
+            <span class="identify-info video-btn">身份已认证</span>
         </div>
      </div>
     <!--基本信息-->
@@ -21,12 +15,12 @@
             <span class="vip"><img src="/mobile/images/my-hot.png" class="responseimg"/></span>
         </h3>
         <div class="home_name_info aligncenter">
-            <i class="iconfont color_y">&#xe61d;</i> <?= $age ?> <i class="job"><?= $user->profession ?></i> <i class="address"><?= $user->city ?> <i class="iconfont">&#xe623;</i> <?= $distance ?></i>
+            <i class="iconfont color_y"><?= ($user->gender)?'&#xe61d;':'&#xe61c;'; ?></i> <?= $age ?> <i class="job"><?= $user->profession ?></i> <i class="address"><?= $user->city ?> <i class="iconfont">&#xe623;</i> <?= $distance ?></i>
         </div>
-        <div class="commend aligncenter">
+        <!--<div class="commend aligncenter">
             <i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont color_light">&#xe62a;</i>
             <span class="total">4.2分</span>
-        </div>
+        </div>-->
         <ul class="otherinfo flex flex_justify bdbottom">
             <li><span class="t_desc"><?= ($user->height)?$user->height.'cm':'--' ?></span><span class="b_desc">身高</span></li>
             <li><span class="t_desc"><?= ($user->weight)?$user->weight.'kg':'--' ?></span><span class="b_desc">体重</span></li>
@@ -35,20 +29,13 @@
         </ul>
     </div>
     <!--图片 && 视频展示-->
+    <?php if (@unserialize($user->images) || $user->video): ?>
     <div class="home_pic_info mt40">
         <ul class="inner flex">
             <?php if (@unserialize($user->images)): ?>
-                <?php
-                    $imgs = unserialize($user->images);
-                    $lg = count($imgs);
-                    $max = 3;
-                    if($lg < 3) {
-                        $max = $lg;
-                    }
-                ?>
-                <?php for ($i=1; $i <= $max; $i++): ?>
-                    <li><img src="<?= createImg($imgs[$i]) ?>"/></li>
-                <?php endfor; ?>
+                <?php foreach(array_slice(unserialize($user->images), 0, 3) as $img): ?>
+                    <li><img src="<?= createImg($img) ?>"/></li>
+                <?php endforeach; ?>
                 <li id="see-movements">
                     <a class='ablock' >
                         <img src="/mobile/images/avatar.jpg"/>
@@ -57,13 +44,15 @@
                 </li>
             <?php endif; ?>
         </ul>
+        <?php if($user->video): ?>
         <div class="inner home_video mt20">
 
-           <video width="100%" height="auto" controls="controls" autoplay="autoplay" src="/upload/user/video/58457261d9674.mp4">
+           <video width="100%" height="auto" controls="controls" preload="preload" src="<?= $user->video ?>">
             </video>
-            <!-- <video src="<?= $user->video ?>" controls="controls" height="auto" width="auto"></video> -->
         </div>
+        <?php endif;?>
     </div>
+    <?php endif; ?>
     <!--Ta的资料-->
     <div class="home_basic_mark mt40">
         <div class="inner">
@@ -71,8 +60,8 @@
                 <h3>Ta的资料</h3>
             </div>
             <div class="con">
-                <a href="#this">处女座</a>
-                <a href="#this">生日 1994/02/09</a>
+                <?php if($user->zodiac): ?><a href="#this"><?= Zodiac::getStr($user->zodiac);?></a><?php endif;?>
+                <?php if($user->birthday): ?><a href="#this">生日 <?= $user->birthday;?></a><?php endif;?>
             </div>
             <div class="bottom">
                 <div class="title">工作经验:</div>
@@ -81,13 +70,14 @@
         </div>
     </div>
     <!--Ta的技能-->
+    <?php if(count($user->user_skills) > 0): ?>
     <div class="home_basic_ability mt40">
         <div class="">
             <div class="title inner">
                 <h3>Ta的技能</h3>
             </div>
             <ul class="outerblock">
-                <?php foreach ($user->user_skills as $user_skill): ?>
+                <?php foreach (array_slice($user->user_skills, 0, 3) as $user_skill): ?>
                     <li class="itms_list">
                         <div class="items flex flex_justify">
                             <span class="items_name">
@@ -101,26 +91,31 @@
                         </div>
                     </li>
                 <?php endforeach; ?>
-                <li class="itms_list">
+                <?php if(count($user->user_skills) > 3): ?>
+                <li class="itms_list" onclick="window.location.href = '/index/find-skill/<?=$user->id?>';">
                     <div class="items flex flex_center more">
                         <i class="iconfont more color_y">&#xe62f;</i>
                     </div>
                 </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
+    <?php endif;?>
 
     <!--查看Ta的微信-->
     <ul class="home_seach_info outerblock mt40">
+        <?php if($user->wx_ishow && $user->wxid): ?>
         <li>
             <a id="showWx" class="items flex flex_justify" >
                 <span class="seach_name">查看Ta的微信</span>
                 <span class="golook">点击查看<i class="iconfont r_icon">&#xe605;</i></span>
             </a>
         </li>
+        <?php endif; ?>
         <li>
             <a class="items flex flex_justify">
-                <span class="seach_name">Ta的约会/排队</span>
+                <span class="seach_name">Ta的约会/派对</span>
                 <span class="golook"><i class="iconfont r_icon">&#xe605;</i></span>
             </a>
         </li>
@@ -139,48 +134,62 @@
                 <span class="golook"><i class="iconfont r_icon"></i></span>
             </a>
         </li>
+        <?php if($user->state): ?>
         <li>
             <div class="items flex">
                 <span class="seach_name">情感状态</span>
-                <span class="golook">单身中</span>
+                <span class="golook"><?= UserState::getStatus($user->state);?></span>
             </div>
         </li>
+        <?php endif; ?>
+        <?php if($user->state): ?>
         <li>
             <div class="items flex">
                 <span class="seach_name">TA的家乡</span>
                 <span class="golook"><?= $user->hometown ?></span>
             </div>
         </li>
+        <?php endif; ?>
+        <?php if($user->state): ?>
         <li>
             <div class="items flex">
                 <span class="seach_name">喜欢的美食</span>
                 <span class="golook"><?= $user->food ?></span>
             </div>
         </li>
+        <?php endif; ?>
+        <?php if($user->music): ?>
         <li>
             <div class="items flex">
                 <span class="seach_name">喜欢的音乐</span>
                 <span class="golook"><?= $user->music ?></span>
             </div>
         </li>
+        <?php endif; ?>
+        <?php if($user->movie): ?>
         <li>
             <div class="items flex">
                 <span class="seach_name">喜欢的电影</span>
                 <span class="golook"><?= $user->movie ?></span>
             </div>
         </li>
+        <?php endif; ?>
+        <?php if($user->sport): ?>
         <li>
             <div class="items flex">
                 <span class="seach_name sport_items">喜欢的运动/娱乐</span>
                 <span class="golook"><?= $user->sport ?></span>
             </div>
         </li>
+        <?php endif; ?>
+        <?php if($user->sign): ?>
         <li>
             <div class="items items-con flex">
                 <span class="seach_name">个人签名</span>
                 <span class="golook"><?= $user->sign ?></span>
             </div>
         </li>
+        <?php endif; ?>
     </ul>
 </div>
 <div class="togift flex flex_center"
@@ -224,44 +233,43 @@
 <div class="raper hide">
     <div class='fullwraper flex flex_center'>
     <!--约Ta弹出层-->
-    <div class="popup" id="showPay" style="display: none;">
+    <div class="popup showxpay" hidden>
         <div class="popup_con">
-            <h3 class="aligncenter">需支付100美币才能看到她的微信需支付100美币才能看到她的微信需支付100美币才能看到她的微信</h3>
+            <h3 class="aligncenter">需支付100美币才能看到她的微信</h3>
         </div>
         <div class="popup_footer flex flex_justify">
             <span class="footerbtn cancel">取消</span>
             <span class="footerbtn gopay">立即支付</span>
         </div>
     </div>
+
     <!--查看微信弹出层-->
-    <div class="popup wx_popup" hidden>
-        <div class="popup_con">
-            <h3 class="aligncenter"><span class="wx_user">范冰冰微信<i class="iconfont color_wx">&#xe641;</i></span></h3>
-            <ul class="wx_copy_con">
-                <li class="flex flex_justify">
-                    <span class="wx_l_con">微信号：fangmeimei</span>
-                    <span class="wx_r_copy">复制</span>
-                </li>
-                <li class="flex flex_justify">
-                    <span class="wx_l_con">暗号：明天下雨吗？</span>
-                    <span class="wx_r_copy">复制</span>
-                </li>
-            </ul>
-            <h3 class="wx_tips smallarea">添加微信时，注意一定要填写暗号</h3>
-            <p class="wx_care_tips smallarea">若微信号为空假号，点击此处<a href="#this" class="color_ts">举报</a></p>
-        </div>
-        <span class="closed"><i class="iconfont">&#xe644;</i></span>
+    <div id="showx-container" class="popup wx_popup showx" hidden>
+
     </div>
     </div>
 </div>
+
+<script id="wxshower-tpl" type="text/html">
+<div class="popup_con">
+    <h3 class="aligncenter"><span class="wx_user">{{wxer.nick}}的微信<i class="iconfont color_wx">&#xe641;</i></span></h3>
+    <ul class="wx_copy_con">
+        <li class="flex flex_justify">
+            <span class="wxidtxt wx_l_con">微信号：<i>{{wxer.wxid}}</i></span><span class="copywxid wx_r_copy">复制</span>
+        </li>
+        <li class="flex flex_justify">
+            <span class="anhaotxt wx_l_con">暗&nbsp;&nbsp;&nbsp;号：<i>{{anhao}}</i></span><span class="copyanhao wx_r_copy">复制</span>
+        </li>
+    </ul>
+    <h3 class="wx_tips smallarea">添加微信时，注意一定要填写暗号</h3>
+    <p class="wx_care_tips smallarea">若微信号为空假号，点击此处<a href="#this" class="color_ts">举报</a></p>
+</div>
+<span class="closed"><i class="iconfont">&#xe644;</i></span>
+</script>
+
 <?php $this->start('script'); ?>
+<script src="/mobile/js/mustache.min.js"></script>
 <script>
-    $('#showWx').on('tap', function () {
-        console.log($(this));
-        $('.show.flex').attr('style', 'display:block');
-        $('#showPay').attr('style', 'display:block');
-        //$('.wx_popup').attr('style','display:block');
-    });
     $('#focusIt').on('tap', function () {
         //加关注
         var id = <?= $user->id ?>;  //该对象
@@ -338,5 +346,95 @@
             }
         })
     });
+
+
+    $('#showWx').on('tap', function() {
+        $.util.ajax({
+            url:'/index/check-wx-rig/<?=$user->id?>',
+            method: 'POST',
+            func:function(res){
+                console.log(res);
+                if(res.status) {
+                    showx();
+                } else {
+                    showxpay();
+                }
+
+            }
+        })
+    });
+
+
+    /**
+     * 显示微信查看微信支付提示
+     */
+    function showxpay() {
+        $('.raper').removeClass('hide');
+        $('.raper .showxpay').show();
+        $('.raper .cancel').on('click', function() {
+            $('.raper').addClass('hide');
+            $('.raper .showxpay').hide();
+        });
+        $('.raper .gopay').on('click', function() {
+            $.util.ajax({
+                url:'/index/pay4wx/<?= $user->id;?>',
+                method: 'POST',
+                func:function(res){
+                    if(res.status) {
+                        $('.raper').addClass('hide');
+                        $('.raper .showxpay').hide();
+                        showx();
+                    } else {
+                        $.util.alert('支付失败');
+                        $('.raper').addClass('hide');
+                        $('.raper .showxpay').hide();
+                    }
+                }
+            })
+        });
+    }
+
+
+    /**
+     * 显示微信框
+     */
+    function showx() {
+        $.util.ajax({
+            url:'/index/check-wx-rig/<?=$user->id?>',
+            method: 'POST',
+            func:function(res){
+                if(res.status) {
+                    var template = $('#wxshower-tpl').html();
+                    Mustache.parse(template);   // optional, speeds up future uses
+                    var rendered = Mustache.render(template, res.userwx);
+                    $('#showx-container').html(rendered);
+                    $('.raper').removeClass('hide');
+                    $('.raper .showx').show();
+                    $('.raper .copywxid').on('click', function() {
+                        window.clipboardData.setData("Text", $('.raper .wxidtxt i').text());
+                        $.util.alert('复制成功');
+                    });
+                    $('.raper .copyanhao').on('click', function() {
+                        window.clipboardData.setData("Text", $('.raper .anhaotxt i').text());
+                        $.util.alert('复制成功');
+                    });
+                    $('.raper .closed').on('click', function() {
+                        $('.raper').addClass('hide');
+                        $('.raper .showx').hide();
+                    });
+                } else {
+                    $.util.alert(res.msg);
+                }
+
+            }
+        })
+    }
+
+    LEMON.sys.back('/index/index');
+    LEMON.event.unrefresh();
+    LEMON.sys.setTopRight('分享')
+    window.onTopRight = function () {
+        $.util.alert('点击了分享');
+    }
 </script>
 <?php $this->end('script'); ?>

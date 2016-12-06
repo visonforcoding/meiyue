@@ -4,6 +4,7 @@ namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
 use Cake\I18n\Time;
+use Cake\ORM\TableRegistry;
 
 /**
  * Index Controller
@@ -206,6 +207,80 @@ class IndexController extends AppController {
         //var_dump(round('42.99687156342637',1));
         debug($this->Util->getServerDomain());
         exit();
+    }
+
+
+    /**
+     * 检查查看微信权限
+     */
+    public function checkWxRig($wxerid = null) {
+        $this->handCheckLogin();
+        if($this->request->is('POST') && $wxerid) {
+            $wxorderTb = TableRegistry::get('Wxorder');
+            $wxorder = $wxorderTb->find()
+                ->contain(['Wxer' => function($q) {
+                    return $q->select(['wxid', 'nick']);
+                }])
+                ->where(['user_id' => $this->user->id, 'wxer_id' => $wxerid])
+                ->first();
+            if($wxorder) {
+                return $this->Util->ajaxReturn([
+                    'status' => true,
+                    'msg' => '已经支付',
+                    'userwx' => $wxorder
+                ]);
+            }else {
+                return $this->Util->ajaxReturn(false, '尚未支付');
+            }
+        }
+    }
+
+
+    /**
+     * 查看微信支付
+     */
+    public function pay4wx($wxerid = null) {
+        $this->handCheckLogin();
+        if(!$wxerid) {
+            return $this->Util->ajaxReturn(false, '非法操作');
+        }
+        //扣除 预约金
+        $pre_amount = $this->user->money;
+        $this->user->money = $this->user->money - 100;
+        $user = $this->user;
+        $after_amount = $this->user->money;
+        //生成流水
+        $FlowTable = TableRegistry::get('Flow');
+        $flow = $FlowTable->newEntity([
+            'user_id'=>0,
+            'buyer_id'=>  $this->user->id,
+            'type'=>18,
+            'type_msg'=>getFlowType('18'),
+            'income'=>2,
+            'amount'=>100,
+            'price'=>100,
+            'pre_amount'=>$pre_amount,
+            'after_amount'=>$after_amount,
+            'paytype'=>1,   //余额支付
+            'remark'=> getFlowType('18')
+        ]);
+        //生成查看记录
+        $anhao = '美约'.mt_rand(10000, 99999);
+        $wxorderTb = TableRegistry::get('Wxorder');
+        $wxorder = $wxorderTb->newEntity([
+            'user_id' => $this->user->id,
+            'wxer_id' => $wxerid,
+            'anhao' => $anhao
+        ]);
+        $transRes = $FlowTable->connection()->transactional(function() use ($flow, $FlowTable, $user, $wxorderTb, $wxorder){
+            $UserTable = TableRegistry::get('User');
+            return $FlowTable->save($flow)&&$wxorderTb->save($wxorder)&&$UserTable->save($user);
+        });
+        if($transRes) {
+            return $this->Util->ajaxReturn(true, '支付成功');
+        } else {
+            return $this->Util->ajaxReturn(false, '支付失败');
+        }
     }
 
 }

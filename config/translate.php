@@ -157,7 +157,8 @@ function getFlowType($index = null) {
         '14' => '送礼物费用',
         '15' => '用户充值套餐',
         '16' => '购买VIP',
-        '17' => '赴约支付约金'
+        '17' => '赴约支付约金',
+        '18' => '支付微信查看金'
         ];
     if ($index) {
         return $flowType[$index];
@@ -414,4 +415,71 @@ class CarouselStatus {
         return $status;
     }
 
+}
+
+
+/**
+ * 星座
+ */
+class Zodiac {
+    const BAIYANG = 1;  //白羊座
+    const JINNIU = 2;    //金牛座
+    const SHUANGZI = 3;    //双子座
+    const JUXIE = 4;    //巨蟹座
+    const SHIZI = 5;    //狮子座
+    const CHUNV = 6;    //处女座
+    const TIANPING = 7;    //天秤座
+    const TIANXIE = 8;    //天蝎座
+    const SHESHOU = 9;    //射手座
+    const MOJIE = 10;    //摩羯座
+    const SHUIPING = 11;    //水瓶座
+    const SHUANGYU = 12;    //双鱼座
+
+    const GETJSON = -1; //获取json数据
+    public static function getStr($st = null) {
+        $types = Array(
+            Zodiac::BAIYANG => '白羊座',
+            Zodiac::JINNIU => '金牛座',
+            Zodiac::SHUANGZI => '双子座',
+            Zodiac::JUXIE => '巨蟹座',
+            Zodiac::SHIZI => '狮子座',
+            Zodiac::CHUNV => '处女座',
+            Zodiac::TIANPING => '天秤座',
+            Zodiac::TIANXIE => '天蝎座',
+            Zodiac::SHESHOU => '射手座',
+            Zodiac::MOJIE => '摩羯座',
+            Zodiac::SHUIPING => '水瓶座',
+            Zodiac::SHUANGYU => '双鱼座',
+        );
+        if(CarouselStatus::GETJSON == $st) {
+            return json_encode($types);
+        }
+        if($st) {
+            return isset($types[$st])?$types[$st]:'星座';
+        }
+        return $types;
+    }
+}
+
+
+/**
+ * 用户情感状态
+ */
+class UserState {
+    const SINGLE = 1;  //单身
+    const SECRITE = 2;    //私密
+    const GETJSON = -1; //获取json数据
+    public static function getStatus($st = null) {
+        $status = Array(
+            UserState::SINGLE => '单身',
+            UserState::SECRITE => '私密'
+        );
+        if(CarouselStatus::GETJSON == $st) {
+            return json_encode($status);
+        }
+        if($st) {
+            return isset($status[$st])?$status[$st]:'未知';
+        }
+        return $status;
+    }
 }
