@@ -8,7 +8,7 @@
     <div class="purse_list">
         <div class="purse_list_top">
             <span class="purse_ico">
-                <img src="<?= $user->avatar ?>"/>
+                <img src="/mobile/images/cash1.png"/>
             </span>
             <h3 class="purse_list_tright">
                 <span class="balance">钱包余额</span>
@@ -47,6 +47,9 @@
                 </li>
             <?php endforeach; ?>
         </ul>
+        <div class="loader-more">
+            <p>查看更多明细<i class="iconfont">&#xe605;</i></p>
+         </div>
     </div>
 </div>
 <!--支付弹出层-->
