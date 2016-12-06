@@ -9,7 +9,7 @@
                 <div class="voted_place_info">
                     <span class="avatar"><img src="{{user.avatar}}"/></span>
                     <h3>
-                        <span class="voted_name">{{user.nick}}</span>
+                        <span class="voted_name">{{user.nick}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip"><img src="/mobile/images/v.png" class="responseimg"/></span></span>
                         <span class="voted_number color_gray">已消费：{{total}}美币</span>
                     </h3>
                 </div>
