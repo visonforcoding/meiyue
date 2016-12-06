@@ -12,10 +12,16 @@
                 <ul class='opci'>
                     <li class="blight userinfo">
                         <a href="/userc/edit-info" class="cover_block">
-                            <h3>
-                                <span><?= $user->nick ?><i class="iconfont">&#xe628;</i></span>
-                                <span class="flag price"><?= $this->Number->format($user->money) ?>美币</span>
+                        <h3>
+                            <span><?= $user->nick ?><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="diamonds"><img src="/mobile/images/zs.png" class="responseimg"/></span><span class="highter-vip"><img src="/mobile/images/v.png" class="responseimg"/></span></span>
+                            <div class="bottom-btn">
+                                <span class="identify-info id-btn">身份已认证</span>
+                            </div>
                             </h3>
+                           <!--  <h3>
+                                <span><i class="iconfont">&#xe628;</i></span>
+                                <span class="flag price"><?= $this->Number->format($user->money) ?>美币</span>
+                            </h3> -->
                             <span class="cover_r_ico">
                                 <i class="iconfont">&#xe605;</i>
                             </span>
