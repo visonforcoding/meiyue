@@ -30,7 +30,7 @@
                     <li class="follow flex flex_justify">
                         <div><a href="/userc/fans">赞赏我 <i>12</i></a></div>
                         <div><a href="/userc/likes"> 关注 <i>12</i></a></div>
-                        <div>访客 <i>122</i></div>
+                        <div><a href="/userc/likes">访客 <i>122</i></a></div>
                     </li>
                 </ul>
             </div>
