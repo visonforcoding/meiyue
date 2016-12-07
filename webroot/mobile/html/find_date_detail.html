@@ -49,17 +49,6 @@
 						</li>
 					</ul>
 				</div>
-				<!--<div class="date_des mt20">
-					<h3 class="commontitle inner">我的标签</h3>
-					<div class="con con_mark">
-							<a href="#this">大长腿</a>
-							<a href="#this">不喝酒</a>
-							<a href="#this">大长腿</a>
-							<a href="#this">不喝酒</a>
-							<a href="#this">大长腿</a>
-							<a href="#this">不喝酒</a>
-					</div>
-				</div>-->
 				<div class="date_des mt20">
 					<!--<h3 class="commontitle inner">邀约时间与地点</h3>-->
 					<div class="con com_choose_time">
@@ -128,5 +117,47 @@
 				<a href="javascript:void(0);" class="nowpay">立即支付</a>
 			</div>
 		</div>
+		<!--支付弹窗-->
+		<div class="pay-shadow">
+			<div class="pay-containner flex flex_center fullwraper">
+				<div class="pay-containner-con">
+					<div class="title">
+						<i class="iconfont closed">&#xe653;</i>
+						<h3>请设置与输入支付密码</h3>
+					</div>
+					<div class="con"><i>5000</i>美币</div>
+					<div class="pay-footer">
+						<div class="pay-content">
+							<input type="tel" maxlength="6" class="pwd-input" id="pwd-input" unselectable="on" /> 
+							<div class="pwd-box flex flex_justify">  
+						        <input type="password" readonly="readonly"/>  
+						        <input type="password" readonly="readonly"/>  
+						        <input type="password" readonly="readonly"/>  
+						        <input type="password" readonly="readonly"/>  
+						        <input type="password" readonly="readonly"/>  
+						        <input type="password" readonly="readonly"/>  
+	    					</div> 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>  
+			var $input = $(".pwd-box input");  
+			            $("#pwd-input").on("input", function() {  
+			                var pwd = $(this).val().trim();  
+			                for (var i = 0, len = pwd.length; i < len; i++) {  
+			                    $input.eq("" + i + "").val(pwd[i]);  
+			                }  
+			                $input.each(function() {  
+			                    var index = $(this).index();  
+			                    if (index >= len) {  
+			                        $(this).val("");  
+			                    }  
+			                });  
+			                if (len == 6) {  
+			                }  
+			            });  
+			</script>  
 	</body>
 </html>

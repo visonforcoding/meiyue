@@ -264,14 +264,14 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #dadada;}
 /*响应式图片*/
 .responseimg{width:100%;height:auto;display: block;}
 /*字体图标*/
-/*@font-face {
+@font-face {
     font-family: 'iconfont';
     src: url('../font/iconfont.eot?t=1128');
     src: url('../font/iconfont.eot?t=1128#iefix') format('embedded-opentype'),
         url('../font/iconfont.woff?t=1128') format('woff'),
         url('../font/iconfont.ttf?t=1128') format('truetype'),
         url('../font/iconfont.svg?t=1128#iconfont') format('svg');
-}*/
+}
 
 .iconfont{
     font-family:"iconfont" !important;
@@ -282,11 +282,11 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #dadada;}
     /*font-size:16px;*/
 }
 /*在线图标*/
-@font-face {
-  font-family: 'iconfont';  /* project id 166621 */
-  src: url('//at.alicdn.com/t/font_i8bv6a3e6s7fd2t9.eot');
-  src: url('//at.alicdn.com/t/font_i8bv6a3e6s7fd2t9.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_i8bv6a3e6s7fd2t9.woff') format('woff'),
-  url('//at.alicdn.com/t/font_i8bv6a3e6s7fd2t9.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_i8bv6a3e6s7fd2t9.svg#iconfont') format('svg');
-}
+/*@font-face {
+  font-family: 'iconfont';
+  src: url('//at.alicdn.com/t/font_f3d1tooaeu5idx6r.eot');
+  src: url('//at.alicdn.com/t/font_f3d1tooaeu5idx6r.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_f3d1tooaeu5idx6r.woff') format('woff'),
+  url('//at.alicdn.com/t/font_f3d1tooaeu5idx6r.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_f3d1tooaeu5idx6r.svg#iconfont') format('svg');
+}*/

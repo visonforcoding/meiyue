@@ -170,6 +170,10 @@ header{overflow: hidden;}
 .other-info-jump{text-align: center;width:100%;max-width: 750px;margin-top:.6rem;}
 .other-info-jump a{display: block;}
 .nav-banner{width:100%;height:3.52rem;background:#1a1713 url(img/pwd.png) center center no-repeat;background-size:3.21rem 1.91rem;position: relative;}
+.iphone-banner{background:#1a1713 url(img/iphone.png) center center no-repeat;background-size:3.38rem 2.09rem;}
+.login-banner{background:#1a1713 url(img/login-pwd.png) center center no-repeat;background-size:2.41rem 1.71rem;}
+.pwd-banner{background: #f4f4f4;}
+.pwd-banner .tips{line-height: 24px;color:#999;}
 .nav-banner:after{content:'';height:22px;width:22px;background: #FFF;left:50%;margin-left: -11px;bottom:-14px;position: absolute;transform: rotate(45deg);border-radius: 3px;}
 .foget-pwd-box{background: #fff;padding:.7rem;}
 .foget-pwd-box .items{padding:20px 0 10px 5px;border-bottom:1px #efefef solid;font-size: 16px;}
@@ -177,6 +181,14 @@ header{overflow: hidden;}
 .foget-pwd-box .items .getvolid{font-size: 12px;color:#eab96a;border:1px #eab96a solid;border-radius: 3px;height:24px;line-height: 24px;display: block;padding:0 .08rem;}
 .foget-pwd-box .items .prenum{margin-right: .2rem;color:#eab96a;font-size: 18px; }
 .foget-pwd-box .items .valinum{width:3rem}
+.resetnum{font-size: 12px;color:#999;text-align: center;position: fixed;bottom:.6rem;width:100%;max-width: 750px;}
+/*约会地点搜索*/
+.search_place_header{background: #1a1713;height:52px;}
+.search_place_header .search-box{height:52px;}
+.search_place_header .search-btn{padding:.1rem .3rem;background: #fff;width:6.1rem;border-radius: 20px;}
+.search_place_header .search-btn .iconfont{color:#999;margin-right: .1rem;font-size: 17px;vertical-align: middle;}
+.search_place_header .search-btn input{color:#666;}
+.search-box
 /*
  *基本信息-- 身份认证
  * */
@@ -323,33 +335,50 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .date_detail_des .detail_des_mark{padding:.24rem .3rem 0;background: #fff;font-size:0;}
 .date_detail_des .detail_des_mark .mark{display: inline-block;width:1.5rem;height:28px;color:#fff;font-size: 14px;text-align: center;line-height: 28px;background: #eab96a;border-radius: 25px;margin-right:.2rem;margin-bottom:.2rem;}
 .date_detail_des .detail_des_mark .mark:nth-of-type(4n){margin-right:0;}
+/*约会详情--支付*/
+.pay-shadow{background: rgba(0,0,0,.8);width:100%;max-width: 750px;margin:auto; top:0;bottom:0;position: fixed;}
+.pay-shadow .pay-containner-con{background: #fff;width:90%;border-radius: 5px;padding-bottom:.6rem;}
+.pay-shadow .pay-containner-con .title{height:45px;line-height: 44px;position: relative;}
+.pay-shadow .pay-containner-con .con{text-align: center;padding:.6rem 0;font-size: 20px;color:#000;font-weight: 800;}
+.pay-footer{width:100%;padding:0 .45rem;}
+.pay-footer .pwd-box{width:100%;}
+.pay-footer .pay-content{border:1px #ccc solid;height:52px;position: relative;overflow: hidden;width:100%;}
+.pay-footer .pay-content input[type="tel"]{width:100%;height:50px;position: absolute;border:1px #000 solid;left:0;top:0;opacity: 0;z-index: 100;letter-spacing: 40px;color:#fff;}
+.pay-footer .pay-content input[type="password"]{border-right:1px #e5e5e5 solid;height:50px;width:16.6%;display: block;font-size: 30px;height:52px; text-align: center;border-radius: 0;color:#000;}
+.pay-footer .pay-content input[type="password"]:last-of-type{border-right: none;}
+.pay-shadow .pay-containner-con .title h3{text-align: center;border-bottom:1px #ccc solid;font-size: 16px;}
+.pay-shadow .pay-containner-con .title .closed{position: absolute;left:.4rem;color:#999999;font-size: 15px;}
+.pay-footer-tips{text-align: center;line-height: 60px;font-size: 16px;color:#666;}
 /*编辑约会*/
 .edit_date_box ul{background: #fff; padding-left:0.3rem;}
 .edit_date_box .edit_date_items{height:.9rem;line-height: .9rem;position: relative;}
 .edit_date_box .edit_date_items:after{content: " ";position:absolute;right:.3rem;width: 8px;height: 8px;border: 2px solid #c8c8c8;border-bottom: 2px solid transparent;border-left: 2px solid transparent;-webkit-transform: rotate(45deg);transform: rotate(45deg);top:50%;margin-top:-4px;}
 .edit_date_box .noafter .edit_date_items:after{width: 0;height: 0;border:none;border-left: none;border-bottom: none;}
 .edit_date_box .edit_l_con{width:1.5rem;color:#000;}
-.edit_date_box .edit_r_con{color:#777;width:5.2rem;}
+/*.edit_date_box*/ .edit_r_con{color:#777;width:5.2rem;}
 .edit_date_box .edit_r_con input{width:100%;}
 .edit_date_desc{padding-top:.15rem;background: #fff;}
 .edit_date_desc .title{color:#000;line-height: .6rem;}
 .edit_date_desc .text_con,.edit_date_desc .text_con textarea{width:100%;height:1.6rem;}
 .edit_date_desc .text_con textarea{padding:.1rem 0;font-size:12px;color:#777;border:none;text-align: justify;}
-.edit_date_box .edit_r_marks{width:80%;overflow: hidden;padding:.1rem .6rem .1rem 0;}
+/*.edit_date_box*/ .edit_r_marks{width:80%;overflow: hidden;padding:.1rem .6rem .1rem 0;}
 .edit_r_marks a{width:1.6rem;height:28px;display: inline-block;border:1px #ccc solid;line-height: 28px;text-align: center;border-radius: 15px;
 color:#444;position:relative;}
 .edit_r_marks a i{position: absolute;left:0;top:0;font-size: 14px;line-height: 0;}
 .edit_date_box .marks_edit{height:auto;}
 /*选择标签弹窗*/
 .choose_mark .title{font-size: 14px;}
-.choose_mark{/*padding-bottom:.2rem;--选择标签底部间距*/background: #f4f4f4;max-height:7rem;overflow: auto;}
-.choose-date-mark{position: absolute;bottom:0;width:100%;}
-.choose-date-mark .marks-box{padding:0 .3rem;width:100%;background: #fff;}
+.choose_mark{/*padding-bottom:.2rem;--选择标签底部间距*/background: #f4f4f4;max-height:7rem;}
+.choose-date-mark{position: absolute;bottom:0;width:100%;max-height: 100%;overflow: auto;}
+.choose-date-mark .marks-box{padding:0 .3rem;width:100%;background: #fff;margin-bottom:.4rem;}
+.choose-date-mark .marks-box:last-of-type{margin-bottom:0;}
+.choose-date-mark .mark-content{background: #e0e0e0;}
 .choose-date-mark .nav-title{line-height: 1rem;}
 .choose-date-mark .title{position: relative;height: 45px;line-height: 45px;background: #eab96a;font-size: 18px;color: #fff;text-align: center;font-size:14px;}
 .choose-date-mark ul{overflow: hidden;clear:both;}
-.choose-date-mark ul li{float:left; padding:0 .15rem;height:27px;line-height: 27px;color:#666;margin-bottom:17px;border:1px transparent solid;}
-.choose-date-mark ul li.active{border:1px #EAB96A solid;border-radius: 15px;}
+.choose-date-mark ul li{margin-right:.2rem;float:left; padding:0 .2rem;height:26px;line-height: 24px;color:#666;margin-bottom:17px;border:1px #ccc solid;border-radius: 15px;}
+.choose-date-mark ul li:nth-of-type(3n){}
+.choose-date-mark ul li.active{border:1px #EAB96A solid;background: #EAB96A;color:#fff;}
 .choose_mark li{height:70px;width:20%;}
 .choose_mark .cancel,.choose-date-mark .cancel{position:absolute;left:.3rem;}
 .choose_mark__items ul{overflow: hidden;padding:.2rem 0;background: #fff; }
@@ -1099,12 +1128,19 @@ color:#999;padding:.1rem;}
 .tocode .code-bottom h3{font-size: 18px;margin-bottom:.05rem;}
 /*约会地点选择*/
 .find_place_list .items-block .radio-btn{width:.6rem;font-size: 18px;color:#efefef;display: block;}
-.find_place_list .items-block  .place_name{margin-bottom:.1rem;}
+.find_place_list .items-block  .place_name{margin-bottom:.1rem;max-width:98%;}
 .find_place_list .items-block .choose .radio-btn{color:#EAB96A;}
 .find_place_list .items-block .commend{}
-.find_place_list .items-block .l_right .con_detail{height:22px;line-height: 20px;font-size: 11px;width:74px;margin-top:.9rem;}
+.find_place_list .items-block .l_right .con_detail{height:22px;line-height: 20px;font-size: 11px;width:74px;margin-top:.6rem;}
 .find_place_list .items-block .place_address{min-height: 1rem;}
 .place-choose-text{padding-right:.1rem;}
+.serch-history ul{overflow:hidden;}
+.serch-history ul li,.search-link ul li{border-bottom:1px #efefef solid;padding:0 .3rem;height:40px;}
+.serch-history ul .seach_name{color:#454545;}
+.serch-history ul .iconfont{color:#efefef;}
+.search-link{background: #fff;}
+.search-link ul .iconfont{color:#999;margin-right:.1rem;font-size: 14px;}
+
 /*未登录*/
 .shadow{background: rgba(0,0,0,.7);z-index:11;overflow: hidden;}
 .login-tips{background:rgba(255,255,255,1);width:100%;padding:.8rem 0;}
