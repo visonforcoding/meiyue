@@ -13,6 +13,9 @@ use ServiceType;
  */
 class BusinessComponent extends Component
 {
+    
+    const REDIS_HASH_KEY = 'meiyue_im_pool_hash';
+    const REDIS_SET_KEY = 'meiyue_im_pool';
     /**
      * Default configuration.
      *

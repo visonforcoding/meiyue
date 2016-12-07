@@ -97,6 +97,11 @@
                 //$.util.alert(res.msg);
                 if (res.status) {
                     obj.addClass('disabled');
+                    $.util.setCookie('token_uin',res.user.token);
+                    LEMON.db.set('gender',res.user.gender);
+                    LEMON.db.set('token_uin',res.user.token);
+                    LEMON.db.set('im_accid',res.user.imaccid);
+                    LEMON.db.set('im_token',res.user.imtoken);
                     setTimeout(function () {
                         window.location.href = res.url;
                     }, 1000);
