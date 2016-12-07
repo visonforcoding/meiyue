@@ -89,6 +89,9 @@
             method: 'POST',
             data: {avatar: path},
             func: function (res) {
+                if(res.status) {
+                    LEMON.db.set('avatar', path);
+                }
                 $.util.alert(res.msg);
             }
         });

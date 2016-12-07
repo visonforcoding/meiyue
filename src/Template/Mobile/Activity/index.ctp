@@ -79,7 +79,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 </span>
             <div class="place_info">
                 <h3 class="userinfo">{{user.nick}} <span>{{user.age}}岁</span> <em class="price color_y fr"><i
-                            class="lagernum">{{user_skill.cost.money}}</i>元/约会金</em>
+                            class="lagernum">{{total_price}}</i>元/约会金</em>
                 </h3>
                 <h3 class="otherinfo">
                     <time class="color_gray"><i class="iconfont">&#xe622;</i> {{time}}</time>

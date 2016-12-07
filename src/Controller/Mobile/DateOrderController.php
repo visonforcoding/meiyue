@@ -175,9 +175,9 @@ class DateOrderController extends AppController
             $dateorder = $DateorderTable->newEntity([
                 'consumer_id'=>  $this->user->id,
                 'dater_id'=>$date->user->id,
-                'dater_name'=>  $date->user->truename,
+                'dater_name'=>  $date->user->nick,
                 'date_time'=>  $lasth,
-                'consumer'=>  $this->user->truename,
+                'consumer'=>  $this->user->nick,
                 'status'=>10,
                 'date_id' => $date->id,
                 'user_skill_id'=>$date->user_skill_id,
@@ -216,11 +216,13 @@ class DateOrderController extends AppController
             $transRes = $DateorderTable
                 ->connection()
                 ->transactional(
-                    function() use (&$flow,$FlowTable,&$dateorder,$DateorderTable,$user){
+                    function() use (&$flow,$FlowTable,&$dateorder,$DateorderTable,$user, $DateTb, $date){
+                        $date->status = 1;
                         $UserTable = TableRegistry::get('User');
-                        $saveDate = $DateorderTable->save($dateorder);
+                        $saveDateorder = $DateorderTable->save($dateorder);
+                        $saveDate = $DateTb->save($date);
                         $flow->relate_id = $dateorder->id;
-                        return $FlowTable->save($flow)&&$saveDate&&$UserTable->save($user);
+                        return $FlowTable->save($flow)&&$saveDateorder&&$saveDate&&$UserTable->save($user);
                 });
             if($transRes){
                 $this->Sms->sendByQf106($date->user->phone,
