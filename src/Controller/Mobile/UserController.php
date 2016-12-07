@@ -125,9 +125,29 @@ class UserController extends AppController {
             if ($this->request->is('weixin')) {
                 $data['device'] = 'weixin';
             }
+            //默认头像
+            $user->avatar = '/mobile/images/m_avatar_2.png';
+            //定位记录
+            $coord = $this->getPosition();
+            if($coord){
+                $user->login_coord_lng = $coord[0];
+                $user->login_coord_lat = $coord[1];
+            }
+            //从im 池中获取im 账号绑定
+            $this->loadComponent('Business');
+            $im = $this->Business->getNetim();
+            if ($im) {
+                $user->imaccid = $im['accid'];
+                $user->imtoken = $im['token'];
+            }
+            //登录时间
+            $user->login_time = date('Y-m-d H:i:s');
             $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
-                $jumpUrl = '/user/reg-identify';
+                $jumpUrl = '/user/m-reg-basic-info';
+                if ($user->gender == 2) {
+                    $jumpUrl = '/user/reg-basic-info-1';
+                }
                 $msg = '注册成功';
                 $this->request->session()->write('User.mobile', $user);
                 $this->user = $user;
@@ -137,8 +157,7 @@ class UserController extends AppController {
                     $user_token = $user->user_token;
                 }
                 //redis push 记录
-                
-                return $this->Util->ajaxReturn(['status' => true, 'msg' => $msg, 'url' => $jumpUrl]);
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => $msg, 'url' => $jumpUrl,'user'=>$user]);
             } else {
                 \Cake\Log\Log::error($user->errors());
                 return $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($user->errors())]);
@@ -146,6 +165,91 @@ class UserController extends AppController {
         }
         $this->set([
             'pageTitle' => '美约-注册'
+        ]);
+    }
+    public function mRegBasicInfo(){
+        $user = $this->user;
+        if ($this->request->is('post')) {
+            $user = $this->User->get($user['id']);
+            $data = $this->request->data();
+            $user = $this->User->patchEntity($user, $data);
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(true, '保存成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
+          $this->set([
+            'pageTitle' => '美约-基本信息填写'
+        ]);
+    }
+
+    /**
+     * 女性注册第一步
+     */
+    public function regBasicInfo1() {
+        $this->handCheckLogin();
+        $user = $this->user;
+        if ($this->request->is('post')) {
+            $user = $this->User->get($user['id']);
+            $data = $this->request->data();
+            $data['bwh'] =  $data['b'].'/'.$data['w'].'/'.$data['h'];
+            $user = $this->User->patchEntity($user, $data);
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(true, '保存成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
+        $this->set([
+            'pageTitle' => '美约-基本信息填写'
+        ]);
+    }
+
+    /**
+     * 女性注册第二步
+     */
+    public function regBasicInfo2() {
+        $user = $this->user;
+        if ($this->request->is('post')) {
+            $user = $this->User->get($user->id);
+            $user = $this->User->patchEntity($user, $this->request->data());
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(true, '保存成功');
+            }
+            return $this->Util->ajaxReturn(false, '保存失败');
+        }
+        $this->set([
+            'pageTitle' => '美约-身份认证'
+        ]);
+    }
+
+    /**
+     * 女性注册第三步
+     */
+    public function regBasicInfo3() {
+        $user = $this->user;
+        $this->set([
+            'user'=>$user,
+            'pageTitle' => '美约-基本图片上传'
+        ]);
+    }
+
+    /**
+     * 女性注册第四步
+     */
+    public function regBasicInfo4() {
+        $user = $this->user;
+        if ($this->request->is('post')) {
+            $user = $this->User->get($user->id);
+            $user = $this->User->patchEntity($user, $this->request->data());
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(true, '保存成功');
+            }
+            return $this->Util->ajaxReturn(false, '保存失败');
+        }
+        $this->set([
+            'pageTitle' => '美约-完善信息'
         ]);
     }
 
@@ -166,7 +270,7 @@ class UserController extends AppController {
             $user = $this->User->patchEntity($user, ['gender' => $gender]);
             $this->loadComponent('Business');
             $im = $this->Business->getNetim();
-            if($im){
+            if ($im) {
                 $user->imaccid = $im['accid'];
                 $user->imtoken = $im['token'];
             }
@@ -290,9 +394,9 @@ class UserController extends AppController {
         if ($type == 1) {
             $ckReg = $this->User->find()->where(['phone' => $mobile])->first();
             if ($ckReg) {
-                return $this->Util->ajaxReturn(['status'=>false, 
-                    'msg'=>'该手机号已经注册过,请直接登录','code'=>'201'
-                    ]);
+                return $this->Util->ajaxReturn(['status' => false,
+                            'msg' => '该手机号已经注册过,请直接登录', 'code' => '201'
+                ]);
             }
         }
         $code = createRandomCode(4, 2); //创建随机验证码
@@ -482,54 +586,53 @@ class UserController extends AppController {
         $this->handCheckLogin();
         $spTb = TableRegistry::get('Support');
         $supports = $spTb
-            ->find()
-            ->select(['supporter_id', 'spcount' => 'count(1)'])
-            ->where(['supported_id' => $this->user->id])
-            ->orderDesc('create_time')
-            ->group('supporter_id')
-            ->toArray();
+                ->find()
+                ->select(['supporter_id', 'spcount' => 'count(1)'])
+                ->where(['supported_id' => $this->user->id])
+                ->orderDesc('create_time')
+                ->group('supporter_id')
+                ->toArray();
         $supporterids = [];
         $sortFlows = [];
         foreach ($supports as $item) {
             $supporterids[] = $item->supporter_id;
         }
-        if(count($supporterids) > 0) {
+        if (count($supporterids) > 0) {
             $flowsTb = TableRegistry::get('Flow');
             $flows = $flowsTb
-                ->find()
-                ->contain([
-                    'Buyer' => function($q) {
-                        return $q->select(['id', 'avatar', 'nick', 'phone', 'gender', 'birthday']);
-                    }])
-                ->select(['total' => 'sum(amount)'])
-                ->where(['buyer_id IN' => $supporterids, 'type' => 4])
-                ->group('buyer_id')
-                ->toArray();
-            foreach ($flows as $item) {
-                $sortFlows[$item->buyer->id] = $item;
+                    ->find()
+                    ->contain([
+                        'Buyer' => function($q) {
+                            return $q->select(['id', 'avatar', 'nick', 'phone', 'gender', 'birthday']);
+                        }])
+                            ->select(['total' => 'sum(amount)'])
+                            ->where(['buyer_id IN' => $supporterids, 'type' => 4])
+                            ->group('buyer_id')
+                            ->toArray();
+                    foreach ($flows as $item) {
+                        $sortFlows[$item->buyer->id] = $item;
+                    }
+                }
+                $this->set([
+                    'supports' => $supports,
+                    'flows' => $sortFlows,
+                    'pageTitle' => '支持我的人'
+                ]);
             }
+
+            /**
+             * ajax 检测登陆
+             */
+            public function clogin() {
+                $this->handCheckLogin();
+                return $this->Util->ajaxReturn(true);
+            }
+
+            public function forget() {
+                $this->set([
+                    'pageTitle' => '忘记密码'
+                ]);
+            }
+
         }
-        $this->set([
-            'supports' => $supports,
-            'flows' => $sortFlows,
-            'pageTitle' => '支持我的人'
-        ]);
-    }
-    
-    /**
-     * ajax 检测登陆
-     */
-    public function clogin(){
-        $this->handCheckLogin();
-        return $this->Util->ajaxReturn(true);
-    }
-
-      public function forget()
-    {
-        $this->set([
-            'pageTitle' => '忘记密码'
-        ]);
-    }
-
- }
         
