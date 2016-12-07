@@ -74,9 +74,9 @@ $activity_action = '/activity/index/';  //定义派对请求地址
          onclick="window.location.href = '/date-order/join/{{id}}'">
         <h3 class="title"><i class="itemsname color_y">[{{user_skill.skill.name}}]</i> {{title}}</h3>
         <div class="place_pic">
-                            <span class="place">
-                                <img src="/mobile/images/date_place.jpg"/>
-                            </span>
+                <span class="place">
+                    <img src="{{user.avatar}}"/>
+                </span>
             <div class="place_info">
                 <h3 class="userinfo">{{user.nick}} <span>{{user.age}}岁</span> <em class="price color_y fr"><i
                             class="lagernum">{{user_skill.cost.money}}</i>元/约会金</em>

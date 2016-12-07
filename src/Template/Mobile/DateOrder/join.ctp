@@ -15,7 +15,7 @@
             </h3>
             <div class="place_pic">
 							<span class="place">
-								<img src="/mobile/images/date_place.jpg"/>
+								<img src="<?= $date['user']['avatar'] ?>"/>
 							</span>
                 <div class="place_info">
                     <h3 class="userinfo">
@@ -87,9 +87,7 @@
 <script>
 
     $('.toback').on('click', function(){
-
         history.back();
-
     })
 
 

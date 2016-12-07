@@ -47,7 +47,7 @@
         </ul>
         <?php if($user->video): ?>
         <div class="inner home_video mt20">
-           <video width="100%" height="auto" controls="controls" preload="preload" src="<?= $user->video ?>" poster="<?= $user->video_cover ?>">
+           <video width="100%" height="150px" controls="controls" preload="preload" src="<?= $user->video ?>" poster="<?= $user->video_cover ?>">
             </video>
         </div>
         <?php endif;?>

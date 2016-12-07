@@ -26,6 +26,7 @@ class IndexController extends AppController {
      */
     public function index() {
         $this->set([
+            'user' => $this->user,
             'pageTitle' => '发现-美约'
         ]);
     }
@@ -47,6 +48,7 @@ class IndexController extends AppController {
                     ->limit(3)
                     ->toArray();
         $this->set([
+            'user' => $this->user,
             'pageTitle' => '美约',
             'top3'=>$top3
         ]);
