@@ -348,8 +348,11 @@ class UsercController extends AppController {
                    break;
            }
        }
-        $orders = $DateorderTable->find()
+       $orders = $DateorderTable->find()
                   ->contain([
+                      'Buyer' => function($q) {
+                          return $q->select(['nick']);
+                      },
                       'Dater'=>function($q){
                         return $q->select(['avatar']);
                       },'UserSkill','UserSkill.Skill'

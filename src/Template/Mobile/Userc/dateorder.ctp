@@ -5,8 +5,8 @@
     <li>
         <div class="date_item_des">
             <div class="flex flex_justify bdbottom">
-                <h3 class='maxwid70'><i class="itemsname color_y">[{{user_skill.skill.name}}]</i>{{user_skill.description}}</h3>
-                <span class="customer color_y">{{consumer}}</span>
+                <h3 class='maxwid70'><i class="itemsname color_y">[{{user_skill.skill.name}}]</i></h3>
+                <span class="customer color_y">{{buyer.nick}}</span>
             </div>
             <a style="display:block" href="/userc/order-detail/{{id}}">
                 <div class="place_pic flex flex_justify bdbottom">
@@ -146,6 +146,7 @@ $('.date_list_header div').on('tap', function () {
     var query = $(this).data('query');
     $('.date_list_header div').removeClass('cur current');
     $(this).addClass('cur current');
+    $(this).find('i').first().hide();
     $.util.asyLoadData({
         gurl: '/userc/getDateorders/',
         page: curpage,
@@ -168,7 +169,6 @@ function calFunc(data) {
             }
         });
     }
-    console.log(data);
     return data;
 }
 
