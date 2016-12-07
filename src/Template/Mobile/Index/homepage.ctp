@@ -40,7 +40,7 @@
                 <li id="see-movements">
                     <a class='ablock' >
                         <img src="/mobile/images/avatar.jpg"/>
-                        <span>更 多 私 房</span>
+                        <span>更多私房</span>
                     </a>
                 </li>
             <?php endif; ?>
