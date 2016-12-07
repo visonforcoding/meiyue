@@ -9,7 +9,7 @@
     <!--基本信息三步-->
     <div class="basicinfo-header">
         <div class="line-box">
-            <div class="line flex flex_justify">
+            <div class="info-line flex flex_justify">
                 <div class="active"></div>
                 <div></div>
             </div>

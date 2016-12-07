@@ -97,15 +97,17 @@
                 //$.util.alert(res.msg);
                 if (res.status) {
                     obj.addClass('disabled');
-                    $.util.setCookie('token_uin',res.user.token);
+                    $.util.setCookie('token_uin',res.user.user_token);
                     LEMON.db.set('gender',res.user.gender);
-                    LEMON.db.set('token_uin',res.user.token);
+                    LEMON.db.set('token_uin',res.user.user_token);
                     LEMON.db.set('im_accid',res.user.imaccid);
                     LEMON.db.set('im_token',res.user.imtoken);
+                    LEMON.db.set('avatar',res.user.avatar);
                     setTimeout(function () {
                         window.location.href = res.url;
                     }, 1000);
                 } else {
+                    $.util.alert(res.msg);
                     obj.removeClass('disabled');
                 }
             }, 'json');

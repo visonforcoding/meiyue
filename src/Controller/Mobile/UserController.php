@@ -155,6 +155,7 @@ class UserController extends AppController {
                     $this->request->session()->write('Login.login_token', $user->user_token);
                     $user_token = $user->user_token;
                 }
+                unset($user->pwd);
                 //redis push 记录
                 return $this->Util->ajaxReturn(['status' => true, 'msg' => $msg, 'url' => $jumpUrl,'user'=>$user]);
             } else {
@@ -166,6 +167,8 @@ class UserController extends AppController {
             'pageTitle' => '美约-注册'
         ]);
     }
+    
+    
     public function mRegBasicInfo(){
         $user = $this->user;
         if ($this->request->is('post')) {

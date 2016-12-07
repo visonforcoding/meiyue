@@ -30,7 +30,7 @@
     <ul class="chatBox mt40">
         <?php foreach ($users as $user): ?>
             <li>
-                <a data-accid="meiyue_<?= $user->id ?>" data-avatar="<?= $user->avatar ?>" data-nick="<?= $user->nick ?>"  
+                <a data-accid="<?= $user->imaccid ?>" data-avatar="<?= $user->avatar ?>" data-nick="<?= $user->nick ?>"  
                    class="ablock flex flex_justify user">
                     <div class="chat-left-info flex">
                         <div class="avatar">

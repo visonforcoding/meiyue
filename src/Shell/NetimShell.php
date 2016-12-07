@@ -67,6 +67,8 @@ class NetimShell extends Shell {
             $no = $counts + 1;
             $accid = 'meiyue_' . $no;
             $token = $Netim->registerIm($accid);
+            debug($accid);
+            debug($token);
             $data = [];
             if ($token) {
                 $data['accid'] = $accid;
@@ -106,6 +108,10 @@ class NetimShell extends Shell {
         $token = $redis->hGet(self::REDIS_HASH_KEY,$accid);
         debug($accid);
         debug($token);
+    }
+    
+    public function test(){
+        $this->addIm(1);
     }
 
 }

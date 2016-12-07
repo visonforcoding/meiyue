@@ -64,7 +64,7 @@
                 <div class="home_items">
                     <div class="home_list_l_info"><span class="itemsname">职</span><span class="itemsname">业：</span></div>
                     <div class="home_list_r_info">
-                        <input id="position" name="position" type="text" placeholder="请输入职业" />
+                        <input id="profession" name="profession" type="text" placeholder="请输入职业" />
                         <i class="iconfont r_icon">&#xe605;</i>
                     </div>
                 </div>

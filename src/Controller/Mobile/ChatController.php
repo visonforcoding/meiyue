@@ -31,7 +31,7 @@ class ChatController extends AppController {
         }
         $UserTable = TableRegistry::get('User');
         $users = $UserTable->find()
-                            ->select(['id','nick','avatar','imtoken'])
+                            ->select(['id','nick','avatar','imtoken','imaccid'])
                             ->where(['imtoken !='=>'','id !='=>  $this->user->id])->toArray();
         $this->set([
             'pageTitle'=>'消息',
