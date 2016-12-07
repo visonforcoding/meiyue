@@ -9,7 +9,7 @@
     <!--基本信息三步-->
     <div class="basicinfo-header">
         <div class="line-box">
-            <div class="line flex flex_justify">
+            <div class="info-line flex flex_justify">
                 <div></div>
                 <div></div>
             </div>
@@ -144,7 +144,7 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">职</span><span class="itemsname">业：</span></div>
                         <div class="home_list_r_info">
-                            <input id="position" name="position" type="text" placeholder="请输入职业" />
+                            <input id="profession" name="profession" type="text" placeholder="请输入职业" />
                             <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
@@ -317,7 +317,7 @@
             $.util.alert('所在地必填');
             return false;
         }
-        if (!$("#position").val()) {
+        if (!$("#profession").val()) {
             $.util.alert('职业未填写');
             return false;
         }

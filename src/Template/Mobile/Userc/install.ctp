@@ -63,6 +63,7 @@
                    $.util.setCookie('token_uin', '');
                    $.util.setCookie('login_status', '');
                    LEMON.db.set('token_uin', '');
+                   LEMON.db.set('gender', '');
                    LEMON.sys.logout();
                    location.href = res.redirect_url;
                }

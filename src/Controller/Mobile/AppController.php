@@ -101,6 +101,16 @@ class AppController extends Controller {
         }
         $this->coord = $this->request->cookie('coord')?$this->request->cookie('coord'):'114.044555,22.6453';
         //$this->coord = $this->request->cookie('coord');
+        $coord_time = $this->request->cookie('coord_time');
+        if(time()-$coord_time>30*60&&$this->user){
+            //30分钟有活动 更新坐标
+            $coord = $this->getPosition();
+            if($coord){
+                $this->user->login_coord_lng = $coord[0];
+                $this->user->login_coord_lat = $coord[1];
+                $UserTable->save($this->user);
+            }
+        }
         if (!$this->user && $this->request->isLemon()) {
             //debug($this->request->cookie('login_token'));
         }

@@ -361,13 +361,13 @@ class ApiController extends AppController {
     /**
      * 获取地图上的用户
      */
-    public function getMapUsersD() {
+    public function getMapUsers() {
         $lng = $this->request->data('lng');
         $lat = $this->request->data('lat');
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $users = $UserTable->find()->select(['id', 'avatar', 'login_coord_lng', 'login_coord_lat'])
                 ->where(["getDistance($lng,$lat,login_coord_lng,login_coord_lat) <=" => 1000])
-                ->where(['gender' => 2])
+                ->where(['gender' => 2,'status'=>3])
                 ->limit(10)->formatResults(function($items) {
                     return $items->map(function($item) {
                                 $item['avatar'] = 'http://m-my.smartlemon.cn/' . createImg($item['avatar']) .
@@ -379,7 +379,7 @@ class ApiController extends AppController {
         $this->jsonResponse(['result' => $users]);
     }
 
-    public function getMapUsers() {
+    public function getMapUsersD() {
         $lng = $this->request->data('lng');
         $lat = $this->request->data('lat');
         $UserTable = \Cake\ORM\TableRegistry::get('User');
@@ -412,7 +412,7 @@ class ApiController extends AppController {
             $this->jsonResponse(false, '缺少必要的参数');
         }
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $user = $UserTable->find()->select(['id', 'user_token', 'gender', 'pwd','imtoken','avatar'])
+        $user = $UserTable->find()->select(['imaccid', 'user_token', 'gender', 'pwd','imtoken','avatar'])
                 ->where(['phone' => $u, 'enabled' => 1, 'is_del' => 0])
                 ->first();
         $pwd = $this->request->data('pwd');
