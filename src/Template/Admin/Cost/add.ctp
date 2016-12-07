@@ -46,7 +46,7 @@
                             layer.confirm(res.msg, {
                                 btn: ['确认', '继续添加'] //按钮
                             }, function () {
-                                window.location.href = '/costs/index';
+                                window.location.href = '/cost/index';
                             }, function () {
                                 window.location.reload();
                             });

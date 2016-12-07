@@ -9,7 +9,7 @@
         bottom: 0;
         max-width: 750px;
         width: 100%;
-        height: 180px;
+        height: 245px;
         /*background: #fff url(../css/img/line.png) repeat-x  0 85px;*/
         background: #fff;
         -webkit-transition: height .2s ease;
@@ -40,7 +40,7 @@
         -webkit-overflow-scrolling: touch;
         z-index: 999;
         width: 100%;
-        height: 100px;
+        height: 200px;
     }
 
     .picker .l_box_cost::-webkit-scrollbar, .r_box::-webkit-scrollbar {
@@ -71,7 +71,8 @@
         color: #222;
     }
 </style>
-<div class="picker hide_date" id="costs-picker">
+<div class='raper show' id="costs-picker" hidden>
+<div class="picker">
     <div class="title inner flex flex_justify">
         <span class="l_sure" id="cost-cancel-btn">取消</span>
         <span class="r_cancel" id="cost-submit-btn">确定</span>
@@ -84,9 +85,12 @@
                     <li val='<?= $item->id; ?>'><?= $item->money; ?>美币</li>
                 <?php endforeach; ?>
                 <li></li>
+                <li></li>
+                <li></li>
             </ul>
         </div>
     </div>
+</div>
 </div>
 <script type="text/javascript">
 
@@ -111,10 +115,10 @@
             };
         },
         show: function() {
-            $("#costs-picker").removeClass('hide_date');
+            $("#costs-picker").show();
         },
         hide: function() {
-            $('#costs-picker').addClass('hide_date');
+            $('#costs-picker').hide();
         },
         addEvent: function () {
             var obj = this;

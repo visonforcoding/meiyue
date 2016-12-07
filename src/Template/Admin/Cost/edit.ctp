@@ -44,7 +44,7 @@
                     if (typeof res === 'object') {
                         if (res.status) {
                             layer.alert(res.msg, function () {
-                                window.location.href = '/costs/index';
+                                window.location.href = '/cost/index';
                             });
                         } else {
                             layer.alert(res.msg, {icon: 5});

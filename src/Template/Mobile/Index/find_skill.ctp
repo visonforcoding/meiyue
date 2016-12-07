@@ -1,6 +1,6 @@
 <header>
     <div class="header">
-        <i class="iconfont toback">&#xe602;</i>
+        <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>她的技能</h1>
     </div>
 </header>

@@ -41,7 +41,14 @@ class CostController extends AppController
         $cost = $this->Cost->get($id, [
             'contain' => []
         ]);
-        $this->set('cost', $cost);
+        $this->set([
+            'cost' => $cost,
+            'pageTitle' => '添加价格',
+            'bread' => [
+                'first' => ['name' => '价格管理'],
+                'second' => ['name' => '添加价格'],
+            ],
+        ]);
         $this->set('_serialize', ['cost']);
     }
 
@@ -62,7 +69,14 @@ class CostController extends AppController
                  $this->Util->ajaxReturn(['status'=>false, 'msg'=>getMessage($errors),'errors'=>$errors]);
             }
         }
-                $this->set(compact('cost'));
+        $this->set(compact('cost'));
+        $this->set([
+            'pageTitle' => '添加价格',
+            'bread' => [
+                'first' => ['name' => '价格管理'],
+                'second' => ['name' => '添加价格'],
+            ],
+        ]);
     }
 
     /**
@@ -86,7 +100,14 @@ class CostController extends AppController
                $this->Util->ajaxReturn(false,getMessage($errors));
             }
         }
-                  $this->set(compact('cost'));
+        $this->set(compact('cost'));
+        $this->set([
+            'pageTitle' => '编辑价格',
+            'bread' => [
+                'first' => ['name' => '价格管理'],
+                'second' => ['name' => '编辑价格'],
+            ],
+        ]);
     }
 
     /**

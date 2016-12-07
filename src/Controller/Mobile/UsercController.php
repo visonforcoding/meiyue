@@ -82,7 +82,7 @@ class UsercController extends AppController {
                 ->page(intval($page))
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
-                        $item['follower']['avatar'] = createImg($item['follower']['avatar']) . '?w=44&h=44&fit=stretch';
+                        $item['follower']['avatar'] = createImg($item['follower']['avatar']) . '?w=90&h=90&fit=stretch';
                         $item['follower']['age'] = (Time::now()->year) - $item['follower']['birthday']->year;
                         return $item;
                     });
@@ -108,7 +108,7 @@ class UsercController extends AppController {
             ->page(intval($page))
             ->formatResults(function($items) {
                 return $items->map(function($item) {
-                    $item['user']['avatar'] = createImg($item['user']['avatar']) . '?w=44&h=44&fit=stretch';
+                    $item['user']['avatar'] = createImg($item['user']['avatar']) . '?w=90&h=90&fit=stretch';
                     $item['user']['age'] = (Time::now()->year) - $item['user']['birthday']->year;
                     return $item;
                 });
@@ -246,11 +246,29 @@ class UsercController extends AppController {
 
 
     /**
+     * 删除用户技能
+     */
+    public function delUserSkill($uskid) {
+        $this->handCheckLogin();
+        if($this->request->is('POST')) {
+            $userSkillTable = TableRegistry::get('UserSkill');
+            $userSKill = $userSkillTable->get($uskid);
+            if($userSKill) {
+                if($userSkillTable->delete($userSKill)) {
+                    return $this->Util->ajaxReturn(true, '删除成功');
+                }
+            }
+            return $this->Util->ajaxReturn(false, '删除失败');
+        }
+    }
+
+
+    /**
      * 我的-我的技能-添加技能接口
      */
     public function userSkillSave($user_skill_id = null)
     {
-        $userSkillTable = \Cake\ORM\TableRegistry::get('UserSkill');
+        $userSkillTable = TableRegistry::get('UserSkill');
         if($this->request->is("POST")) {
             //约定有用户技能id参数的为修改
             $userSkill = $userSkillTable->newEntity();

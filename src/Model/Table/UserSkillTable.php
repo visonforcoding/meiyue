@@ -90,6 +90,8 @@ class UserSkillTable extends Table
             ->requirePresence('is_checked', 'create')
             ->notEmpty('is_checked', '非法请求');
 
+        $validator
+            ->lengthBetween('description', [1, 100]);
         return $validator;
     }
 

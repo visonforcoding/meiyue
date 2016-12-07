@@ -51,6 +51,13 @@ class UserSkillController extends AppController
         ]);
         $this->set('userSkill', $userSkill);
         $this->set('_serialize', ['userSkill']);
+        $this->set([
+            'pageTitle' => '用户技能管理',
+            'bread' => [
+                'first' => ['name' => '客户服务'],
+                'second' => ['name' => '用户技能管理'],
+            ],
+        ]);
     }
 
     /**
@@ -74,6 +81,13 @@ class UserSkillController extends AppController
         $costs = $this->UserSkill->Cost->find('list', ['limit' => 200]);
         $tags = $this->UserSkill->Tag->find('list');
         $this->set(compact('userSkill', 'skills', 'costs', 'tags'));
+        $this->set([
+            'pageTitle' => '用户技能管理',
+            'bread' => [
+                'first' => ['name' => '客户服务'],
+                'second' => ['name' => '用户技能管理'],
+            ],
+        ]);
     }
 
     /**
@@ -100,6 +114,13 @@ class UserSkillController extends AppController
         $skill = $this->UserSkill->Skill->find('list', ['limit' => 200]);
         $cost = $this->UserSkill->Cost->find('list', ['limit' => 200]);
         $this->set(compact('userSkill', 'skill', 'cost'));
+        $this->set([
+            'pageTitle' => '用户技能管理',
+            'bread' => [
+                'first' => ['name' => '客户服务'],
+                'second' => ['name' => '用户技能管理'],
+            ],
+        ]);
     }
 
     /**
