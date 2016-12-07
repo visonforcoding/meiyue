@@ -157,6 +157,7 @@ class UserController extends AppController {
                 }
                 unset($user->pwd);
                 //redis push 记录
+                $user->avatar = $this->Util->getServerDomain().$user->avatar;
                 return $this->Util->ajaxReturn(['status' => true, 'msg' => $msg, 'url' => $jumpUrl,'user'=>$user]);
             } else {
                 \Cake\Log\Log::error($user->errors());

@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="inner btlight">
-            <span class="btn surebtn mt40 ">确定</span>
+            <span id="search" class="btn surebtn mt40 ">确定</span>
         </div>
     </div>
 </div>
@@ -82,8 +82,10 @@
 <script type="text/javascript">
     var curpage = 1;
     var skill = 0;
-    var age = 0;
-    var height = 0;
+    var ageL = 0;
+    var ageR = 0;
+    var heightL = 0;
+    var heightR = 0;
     loadUser(curpage);
     function loadUser(page, more, query) {
         $.util.showPreloader();
@@ -128,14 +130,18 @@
         $('#selectMenu_box').toggle();
         if(!window.search_height){
             window.search_height = new ranger({dom:$('#height'), range:[160, 175]});
-            window.search_age = new ranger({dom:$('#age'), range:[160, 175]});
+            window.search_age = new ranger({dom:$('#age'), range:[12, 40]});
         }
     }
     $('#search').on('click',function(){
         $('#selectMenu_box').hide();
-        height = $('#sacle').val();
-        age = $('#age').val();
-        loadUser(1, false, '?skill=' + skill+'&age='+age+'&height='+height);
+        var height = window.search_height.reRange;
+        var age = window.search_age.reRange;
+        heightL = height[0];
+        heightR = height[1];
+        ageL = age[0];
+        ageR = age[1];
+        loadUser(1, false, '?skill=' + skill+'&ageL='+ageL+'&ageR='+ageR+'&heightL='+heightL+'&heighR='+heightR);
     });
     setTimeout(function () {
         $(window).on("scroll", function () {
