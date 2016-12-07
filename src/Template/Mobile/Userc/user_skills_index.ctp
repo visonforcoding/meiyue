@@ -5,13 +5,14 @@
     </div>
 </header>
 <div class="wraper">
+    <?php if(count($userskills)): ?>
     <div class="ability_items">
         <div class="switchbox flex flex_justify inner">
             <div>全部上线</div>
-            <div class="switch <?= $is_all_used?'on':'off' ?> switch-all"><i class="swithbtn"></i></div>
+            <div class="switch-btn switch <?= $is_all_used?'on':'off' ?> switch-all"><i class="swithbtn"></i></div>
         </div>
-
     </div>
+    <?php endif; ?>
     <div class="ability_items mt20">
         <ul class="outerblock">
             <?php foreach ($userskills as $item): ?>
@@ -21,14 +22,18 @@
                         <i class="smalldes"><?= $item['cost']['money']; ?>美币/小时</i>
                         <?php if($item->is_checked == 1): ?>
                         <div
-                            class="switch <?= ($item['is_used'] == 1)?'on':'off' ?>"
+                            class="switch-btn switch <?= ($item['is_used'] == 1)?'on':'off' ?>"
                             item-id="<?= $item['id'];?>">
                             <i class="swithbtn"></i>
                         </div>
                         <?php elseif($item->is_checked == 2): ?>
-                        未审核
+                            <div class="switch color_friends">
+                                审核中
+                            </div>
                         <?php elseif($item->is_checked == 0): ?>
-                        审核不通过
+                            <div class="switch color_friends">
+                                审核不通过
+                            </div>
                         <?php endif; ?>
                     </div>
 
@@ -59,7 +64,7 @@
     })
 
 
-    $('.switch').on('click', function (e) {
+    $('.switch-btn').on('click', function (e) {
 
         e.stopPropagation();
         //判断此时开关显示状态

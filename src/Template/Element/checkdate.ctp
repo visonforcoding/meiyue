@@ -57,76 +57,78 @@
 </style>
 <div class="wraper">
 </div>
-<div class="checkdate hide_date">
-    <div class="bottom_btn">
-        <span id="date-cancel-btn" class="l_sure">取消</span>
-        <span id="date-submit-btn" class="r_cancel">确定</span>
-    </div>
-    <p></p>
-    <div class="c_date">
-        <div class="l_box_date">
-            <ul class="month-date">
-            </ul>
+<div class='raper show' id="lm-datepicker" hidden>
+    <div class="checkdate">
+        <div class="bottom_btn">
+            <span id="date-cancel-btn" class="l_sure">取消</span>
+            <span id="date-submit-btn" class="r_cancel">确定</span>
         </div>
-        <div class="r_box_date_1">
-            <ul class="start-time">
-                <li val='00:00:00'>00:00</li>
-                <li val='01:00:00'>01:00</li>
-                <li val='02:00:00'>02:00</li>
-                <li val='03:00:00'>03:00</li>
-                <li val='04:00:00'>04:00</li>
-                <li val='05:00:00'>05:00</li>
-                <li val='06:00:00'>06:00</li>
-                <li val='07:00:00'>07:00</li>
-                <li val='08:00:00'>08:00</li>
-                <li val='09:00:00'>09:00</li>
-                <li val='10:00:00'>10:00</li>
-                <li val='11:00:00'>11:00</li>
-                <li val='12:00:00'>12:00</li>
-                <li val='13:00:00'>13:00</li>
-                <li val='14:00:00'>14:00</li>
-                <li val='15:00:00'>15:00</li>
-                <li val='16:00:00'>16:00</li>
-                <li val='17:00:00'>17:00</li>
-                <li val='18:00:00'>18:00</li>
-                <li val='19:00:00'>19:00</li>
-                <li val='20:00:00'>20:00</li>
-                <li val='21:00:00'>21:00</li>
-                <li val='22:00:00'>22:00</li>
-                <li val='23:00:00'>23:00</li>
-                <li ></li>
-                <li ></li>
-            </ul>
-        </div>
-        <div class="r_box_date_2">
-            <ul class="end-time">
-                <li val='00:00:00'>00:00</li>
-                <li val='01:00:00'>01:00</li>
-                <li val='02:00:00'>02:00</li>
-                <li val='03:00:00'>03:00</li>
-                <li val='04:00:00'>04:00</li>
-                <li val='05:00:00'>05:00</li>
-                <li val='06:00:00'>06:00</li>
-                <li val='07:00:00'>07:00</li>
-                <li val='08:00:00'>08:00</li>
-                <li val='09:00:00'>09:00</li>
-                <li val='10:00:00'>10:00</li>
-                <li val='11:00:00'>11:00</li>
-                <li val='12:00:00'>12:00</li>
-                <li val='13:00:00'>13:00</li>
-                <li val='14:00:00'>14:00</li>
-                <li val='15:00:00'>15:00</li>
-                <li val='16:00:00'>16:00</li>
-                <li val='17:00:00'>17:00</li>
-                <li val='18:00:00'>18:00</li>
-                <li val='19:00:00'>19:00</li>
-                <li val='20:00:00'>20:00</li>
-                <li val='21:00:00'>21:00</li>
-                <li val='22:00:00'>22:00</li>
-                <li val='23:00:00'>23:00</li>
-                <li ></li>
-                <li ></li>
-            </ul>
+        <p></p>
+        <div class="c_date">
+            <div class="l_box_date">
+                <ul class="month-date">
+                </ul>
+            </div>
+            <div class="r_box_date_1">
+                <ul class="start-time">
+                    <!--<li val='00:00:00'>00:00</li>
+                    <li val='01:00:00'>01:00</li>
+                    <li val='02:00:00'>02:00</li>
+                    <li val='03:00:00'>03:00</li>
+                    <li val='04:00:00'>04:00</li>
+                    <li val='05:00:00'>05:00</li>
+                    <li val='06:00:00'>06:00</li>
+                    <li val='07:00:00'>07:00</li>-->
+                    <li val='08:00:00'>08:00</li>
+                    <li val='09:00:00'>09:00</li>
+                    <li val='10:00:00'>10:00</li>
+                    <li val='11:00:00'>11:00</li>
+                    <li val='12:00:00'>12:00</li>
+                    <li val='13:00:00'>13:00</li>
+                    <li val='14:00:00'>14:00</li>
+                    <li val='15:00:00'>15:00</li>
+                    <li val='16:00:00'>16:00</li>
+                    <li val='17:00:00'>17:00</li>
+                    <li val='18:00:00'>18:00</li>
+                    <li val='19:00:00'>19:00</li>
+                    <li val='20:00:00'>20:00</li>
+                    <!--<li val='21:00:00'>21:00</li>
+                    <li val='22:00:00'>22:00</li>
+                    <li val='23:00:00'>23:00</li>-->
+                    <li ></li>
+                    <li ></li>
+                </ul>
+            </div>
+            <div class="r_box_date_2">
+                <ul class="end-time">
+                    <!--<li val='00:00:00'>00:00</li>
+                    <li val='01:00:00'>01:00</li>
+                    <li val='02:00:00'>02:00</li>
+                    <li val='03:00:00'>03:00</li>
+                    <li val='04:00:00'>04:00</li>
+                    <li val='05:00:00'>05:00</li>
+                    <li val='06:00:00'>06:00</li>
+                    <li val='07:00:00'>07:00</li>
+                    <li val='08:00:00'>08:00</li>
+                    <li val='09:00:00'>09:00</li>
+                    <li val='10:00:00'>10:00</li>-->
+                    <li val='11:00:00'>11:00</li>
+                    <li val='12:00:00'>12:00</li>
+                    <li val='13:00:00'>13:00</li>
+                    <li val='14:00:00'>14:00</li>
+                    <li val='15:00:00'>15:00</li>
+                    <li val='16:00:00'>16:00</li>
+                    <li val='17:00:00'>17:00</li>
+                    <li val='18:00:00'>18:00</li>
+                    <li val='19:00:00'>19:00</li>
+                    <li val='20:00:00'>20:00</li>
+                    <li val='21:00:00'>21:00</li>
+                    <li val='22:00:00'>22:00</li>
+                    <li val='23:00:00'>23:00</li>
+                    <li ></li>
+                    <li ></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -137,8 +139,8 @@
         var opt = {
             calfun: null,  //回调函数
             _year_month_date: null,
-            _start_time: '00:00:00',
-            _end_time: '03:00:00'
+            _start_time: '08:00:00',
+            _end_time: '11:00:00'
         }
         $.extend(this, this.opt, o);
     };
@@ -154,8 +156,8 @@
                 + (currentDate.getMonth() + 1)
                 + "/"
                 + currentDate.getDate();
-            this._start_time = '00:00:00';
-            this._end_time = '03:00:00';
+            this._start_time = '08:00:00';
+            this._end_time = '11:00:00';
 
             //获取当前时间
             var date = new Date();
@@ -227,10 +229,10 @@
         },
         show: function() {
             //显示
-            $('.checkdate').removeClass('hide_date');
+            $('#lm-datepicker').show();
         },
         hide: function() {
-            $('.checkdate').addClass('hide_date');
+            $('#lm-datepicker').hide();
         },
         submit: function() {
             var obj = this;

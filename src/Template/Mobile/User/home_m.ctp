@@ -6,7 +6,7 @@
                 </div>-->
         <div class="home_cover_info">
             <span class="avatar">
-                <img src="<?= createImg($user->avatar) . '?w=77' ?>"  class="avatar-pic"/>
+                <img src="<?= createImg($user->avatar) . '?w=150' ?>"  class="avatar-pic"/>
             </span>
             <div class="cover_left_info">
                 <ul class='opci'>

@@ -4,7 +4,7 @@
         <h1>
             <?= isset($userskill) ? '编辑技能' : '添加技能' ?>
         </h1>
-        <span class="r_btn release-btn">发布</span>
+        <span class="r_btn release-btn"><?= isset($userskill) ? '重新发布' : '发布' ?></span>
     </div>
 </header>
 <div class="wraper">
@@ -74,25 +74,31 @@
             <div class="date_text">
                 <div class="b_title col-importent">约会说明</div>
                 <div class="r_text">
-                    <textarea name="description" placeholder="100个字以内"><?= empty($userskill['description'])?'':$userskill['description']; ?></textarea>
+                    <textarea id="description-input" name="description" placeholder="100个字以内"><?= empty($userskill['description'])?'':$userskill['description']; ?></textarea>
                 </div>
             </div>
         </div>
-        <div class="ability_items mt40">
+        <input id="use_status"
+               type="text"
+               name="is_used"
+               value="1"
+               hidden>
+        <!--<div class="ability_items mt40">
             <div class="switchbox flex flex_justify inner">
                 <div class="switch_str col-importent">上线</div>
                 <div class="switch
-                    <?= isset($userskill)?(($userskill['is_used'] ==1)?'on':'off'):'on' ?>">
+                    <?/*= isset($userskill)?(($userskill['is_used'] ==1)?'on':'off'):'on' */?>">
                     <i class="swithbtn"></i>
                 </div>
-                <input id="use_status"
-                       type="text"
-                       name="is_used"
-                       value="<?= isset($userskill) ? $userskill['is_used'] : 1 ?>"
-                       hidden>
+
             </div>
-        </div>
+        </div>-->
     </form>
+    <?php if(isset($userskill)): ?>
+    <div class="inner">
+        <a class="btn btn_cancely mt60 mb60 delete-btn">删除</a>
+    </div>
+    <?php endif; ?>
 </div>
 
 <!--弹出层-->
@@ -105,10 +111,7 @@
 
 <script>
 
-    $('.toback').on('click', function(){
-        history.back();
-    })
-
+    addEvent();
     $(".release-btn").on('click', function () {
         var url = '';
         if ('<?= isset($userskill)?'edit':'add' ?>' == 'add') {
@@ -172,7 +175,7 @@
     });
 
 
-    $('.switch').on('click', function () {
+    /*$('.switch').on('click', function () {
 
         //判断此时开关显示状态
         if ($(".switch").hasClass('on')) {
@@ -191,7 +194,7 @@
 
         }
 
-    })
+    })*/
 
 
     function chooseCostCB(val) {
@@ -204,12 +207,42 @@
         cPicker.show();
     });
 
+    <?php if(isset($userskill)): ?>
+    $('.delete-btn').on('tap', function() {
+        $.util.confirm('删除技能', '确定要删除技能吗?',function() {
+            $.util.ajax({
+                url: '/userc/del-user-skill/<?= $userskill->id?>',
+                func: function (res) {
+                    $.util.alert(res.msg);
+                    if(res.status) {
+                        window.location.href='/userc/user-skills-index';
+                    }
+                }
+            }),
+            null
+        });
+    })
+    <?php endif; ?>
 
-    LEMON.sys.setTopRight('发布')
+    function addEvent() {
+        $('.toback').on('click', function(){
+            history.back();
+        })
+
+        $("#description-input").keyup(function(){
+            var len = $(this).val().length;
+            console.log(len);
+            if(len > 100){
+                $(this).val($(this).val().substring(0,100));
+            }
+        });
+    }
+
+    var rbtname = '<?= isset($userskill) ? '重新发布' : '发布' ?>';
+    LEMON.sys.setTopRight(rbtname)
     window.onTopRight = function () {
         $(".release-btn").trigger('click');
     }
-
 
     LEMON.event.unrefresh();
 </script>

@@ -63,10 +63,12 @@
                 <?php if($user->zodiac): ?><a href="#this"><?= Zodiac::getStr($user->zodiac);?></a><?php endif;?>
                 <?php if($user->birthday): ?><a href="#this">生日 <?= $user->birthday;?></a><?php endif;?>
             </div>
+            <?php if(trim($user->career)): ?>
             <div class="bottom">
                 <div class="title">工作经验:</div>
                 <p><?= $user->career ?></p>
             </div>
+            <?php endif; ?>
         </div>
     </div>
     <!--Ta的技能-->
@@ -142,7 +144,7 @@
             </div>
         </li>
         <?php endif; ?>
-        <?php if($user->state): ?>
+        <?php if(trim($user->hometown)): ?>
         <li>
             <div class="items flex">
                 <span class="seach_name">TA的家乡</span>
@@ -150,7 +152,7 @@
             </div>
         </li>
         <?php endif; ?>
-        <?php if($user->state): ?>
+        <?php if($user->food): ?>
         <li>
             <div class="items flex">
                 <span class="seach_name">喜欢的美食</span>
@@ -270,8 +272,9 @@
 <?php $this->start('script'); ?>
 <script src="/mobile/js/mustache.min.js"></script>
 <script>
-    $('#focusIt').on('tap', function (e) {
+    $('#focusIt').on('click', function (event) {
         //加关注
+        event.stopPropagation();
         var id = <?= $user->id ?>;  //该对象
         var obj = $('#focusIt');
         if (!obj.hasClass('active')) {
@@ -299,7 +302,8 @@
             }
         })
     }
-    $('#dateit').on('tap',function(){
+    $('#dateit').on('click',function(event){
+        event.stopPropagation();
         $.util.ajax({
             url:'/user/clogin',
             func:function(res){

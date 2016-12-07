@@ -28,7 +28,6 @@ $.util = {
         $('body').append(confirm);
         $(document).off('click', '.alert7-action-item.btnL');
         $(document).on('click', '.alert7-action-item.btnL', function () {
-            console.log('Lclicking');
             if (hL && hL instanceof Function) {
                 hL();
             }
@@ -36,7 +35,6 @@ $.util = {
         })
         $(document).off('click', '.alert7-action-item.btnR');
         $(document).on('click', '.alert7-action-item.btnR', function () {
-            console.log('Rclicking');
             if (hR && hR instanceof Function) {
                 hR();
             }

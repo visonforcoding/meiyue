@@ -117,7 +117,7 @@ class IndexController extends AppController {
             return $items->map(function($item)use($userCoord) {
                         $item['distance'] = $item['distance'] >= 1000 ?
                                 round($item['distance'] / 1000, 1) . 'km' : round($item['distance']) . 'm';
-                        $item['avatar'] = createImg($item['avatar']) . '?w=184&h=184&fit=stretch';
+                        $item['avatar'] = createImg($item['avatar']) . '?w=234&h=234&fit=stretch';
                         $item['age'] = (Time::now()->year) - ((new Time($item['birthday']))->year);
                         //时间语义化转换
                         $item['login_time'] = (new Time($item['login_time']))->timeAgoInWords(
@@ -141,7 +141,13 @@ class IndexController extends AppController {
         $userCoord = $this->coord;
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $user = $UserTable->get($id, [
-            'contain' => ['UserSkills', 'UserSkills.Skill', 'UserSkills.Cost']
+            'contain' => [
+                'UserSkills' => function($q) {
+                    return $q->where(['is_used' => 1, 'is_checked' => 1]);
+                },
+                'UserSkills.Skill',
+                'UserSkills.Cost'
+            ]
         ]);
         $distance = getDistance($userCoord, $user->login_coord_lng, $user->login_coord_lat);
         $age = (Time::now()->year) - ((new Time($user->birthday))->year);
@@ -171,10 +177,13 @@ class IndexController extends AppController {
      * @param type $id
      */
     public function findSkill($id) {
-        $UserSkillTable = \Cake\ORM\TableRegistry::get('UserSkill');
+        $UserSkillTable = TableRegistry::get('UserSkill');
         $this->loadComponent('Business');
         $topSkills = $this->Business->getTopSkill();
-        $userSkills = $UserSkillTable->find()->contain(['Skill'])->where(['user_id' => $id])->toArray();
+        $userSkills = $UserSkillTable->find()
+            ->contain(['Skill', 'Cost'])
+            ->where(['user_id' => $id, 'is_used' => 1, 'is_checked' => 1])
+            ->toArray();
         $this->set([
             'pageTitle' => '约她',
             'topSkills' => $topSkills,

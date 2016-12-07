@@ -34,7 +34,6 @@ class UserController extends AppController {
         $template = 'index';
         if ($this->user->gender == 1) {
             $template = 'home_m';
-            //$dateorder_counts = $Dateorders->find()->where([''])
         }
         $this->set([
             'pageTitle' => '美约-我的',
