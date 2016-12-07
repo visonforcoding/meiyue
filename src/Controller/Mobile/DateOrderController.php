@@ -30,7 +30,7 @@ class DateOrderController extends AppController
         $dateTable = TableRegistry::get("Date");
         $date = $dateTable->get($id, ['contain' => ['UserSkill' =>function($q){
             return $q->contain(['Skill', 'Cost']);}, 'Tags', 'User' => function ($q) {
-            return $q->select(['nick', 'birthday', 'gender', 'money']);
+            return $q->select(['nick', 'birthday', 'gender', 'money', 'avatar']);
         }]]);
         $this->set(['date' => $date, 'user' => $this->user, 'pageTitle' => '美约-约会详情']);
 
@@ -38,15 +38,6 @@ class DateOrderController extends AppController
     }
 
 
-    /**
-     * 约会支付接口--赴约流程
-     *
-     */
-    public function joinPay()
-    {
-
-    }
-    
     /**
      * 约技能
      * 1.生成约单

@@ -21,6 +21,21 @@ class ActivityController extends AppController
      */
     public function index($curtab = 'date')
     {
+        if($this->user) {
+            if($this->user->gender == 2) {
+                $this->autoRender = false;
+            }
+        }
+        $this->set([
+            'curtab' => $curtab,
+            "user" => $this->user,
+            'pageTitle' => '美约-活动'
+        ]);
+    }
+
+
+    public function findex($curtab = 'date')
+    {
         $this->set([
             'curtab' => $curtab,
             "user" => $this->user,

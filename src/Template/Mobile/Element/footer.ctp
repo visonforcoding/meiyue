@@ -9,9 +9,21 @@
         </li>
         <li <?php if($active=='activity'): ?>class="active"<?php endif;?>>
             <span class="bar-activity">
-                <a href="/activity/index">
-                    <i class="iconfont">&#xe64a;</i>活动
-                </a>
+                <?php if(isset($user)): ?>
+                    <?php if($user->gender == 1): ?>
+                        <a href="/activity/index">
+                            <i class="iconfont">&#xe64a;</i>活动
+                        </a>
+                    <?php else: ?>
+                        <a href="/activity/findex">
+                            <i class="iconfont">&#xe64a;</i>活动
+                        </a>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <a href="/activity/index">
+                        <i class="iconfont">&#xe64a;</i>活动
+                    </a>
+                <?php endif; ?>
             </span>
         </li>
         <li <?php if($active=='chat'): ?>class="chat"<?php endif;?>>

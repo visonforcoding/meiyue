@@ -99,8 +99,8 @@ class AppController extends Controller {
         if($this->user){
             $this->user = $UserTable->findById($this->user->id)->first();
         }
-//        $this->coord = $this->request->cookie('coord')?$this->request->cookie('coord'):'114.044555,22.6453';
-        $this->coord = $this->request->cookie('coord');
+        $this->coord = $this->request->cookie('coord')?$this->request->cookie('coord'):'114.044555,22.6453';
+        //$this->coord = $this->request->cookie('coord');
         if (!$this->user && $this->request->isLemon()) {
             //debug($this->request->cookie('login_token'));
         }

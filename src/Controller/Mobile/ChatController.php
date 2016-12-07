@@ -35,7 +35,8 @@ class ChatController extends AppController {
                             ->where(['imtoken !='=>'','id !='=>  $this->user->id])->toArray();
         $this->set([
             'pageTitle'=>'消息',
-            'users'=>$users
+            'users'=>$users,
+            'user' => $this->user,
         ]);
     }
     

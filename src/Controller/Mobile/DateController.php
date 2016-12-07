@@ -168,7 +168,7 @@ class DateController extends AppController
                 'UserSkill.Skill',
                 'UserSkill.Cost',
                 'User' => function ($q) {
-                    return $q->select(['nick', 'birthday']);}
+                    return $q->select(['nick', 'birthday', 'avatar']);}
                 ]
             ])
             ->where([
