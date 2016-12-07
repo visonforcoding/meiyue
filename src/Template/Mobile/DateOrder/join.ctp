@@ -65,10 +65,10 @@
                 </div>
             </div>
         </div>
-        <p class="common commontitle inner mt20">
+        <!--<p class="common commontitle inner mt20">
             <i class="iconfont">&#xe619;</i>报名即代表你已同意
             <a href="#this" class="color_y undertext">用户协议。</a>
-        </p>
+        </p>-->
     </div>
 </div>
 <div style="height:1.4rem;"></div>

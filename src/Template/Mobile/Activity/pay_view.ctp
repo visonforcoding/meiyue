@@ -47,84 +47,59 @@
 
 
     $('#reduce-num').on('click', function(){
-
         var lim = <?= isset($lim)?$lim:0; ?>;
         var curNum = parseInt($('#num').val());
         var nextNum = curNum - 1;
         if(nextNum == 1) {
-
             $('#num').val(nextNum);
             $(this).removeClass('color_y');
             $(this).removeClass('disabled');
             $(this).addClass('disabled');
-
         } else if (nextNum > 1) {
-
             $('#num').val(nextNum);
             $(this).removeClass('disabled');
             $(this).removeClass('color_y');
             $(this).addClass('color_y');
-
         } else {
-
             $.util.alert('数量不能少于一');
-
         }
-
         if(nextNum < lim) {
-
             $('#add-num').removeClass('disabled');
             $('#add-num').removeClass('color_y');
             $('#add-num').addClass('color_y');
-
         } else {
-
             $('#add-num').removeClass('disabled');
             $('#add-num').removeClass('color_y');
             $('#add-num').addClass('disabled');
-
         }
         changeCount();
-
     });
 
     $('#add-num').on('click', function() {
-
         var lim = <?= isset($lim)?$lim:0; ?>;
         var curNum = parseInt($('#num').val());
         var nextNum = curNum + 1;
         if(nextNum == lim) {
-
             $('#num').val(nextNum);
             $(this).removeClass('color_y');
             $(this).removeClass('disabled');
             $(this).addClass('disabled');
-
         } else if (nextNum < lim) {
-
             $('#num').val(nextNum);
             $(this).removeClass('disabled');
             $(this).removeClass('color_y');
             $(this).addClass('color_y');
-
         } else {
-
             $.util.alert('不能超过报名名额！')
-
         }
-
         if(nextNum > 1) {
-
             $('#reduce-num').removeClass('disabled');
             $('#reduce-num').removeClass('color_y');
             $('#reduce-num').addClass('color_y');
-
         } else {
-
             $('#reduce-num').removeClass('disabled');
             $('#reduce-num').removeClass('color_y');
             $('#reduce-num').addClass('disabled');
-
         }
         changeCount();
 
@@ -158,8 +133,8 @@
     });
 
 
-    $('#pay').on('click', function() {
-
+    $(document).on('tap', '#pay', function() {
+        console.log('paying');
         var num = parseInt($('#num').val());
         var price = <?= isset($price)?$price:0; ?>;
         var money = <?= isset($user)?$user->money:''; ?>;
@@ -170,21 +145,21 @@
 
         }
         //if(confirm("输入付款密码")) {
-            $.ajax({
-                url: '/activity/mpay/<?= $activity['id']; ?>/' + num,
-                type: "POST",
-                dataType: "json",
-                success: function (res) {
-
-                    $.util.alert(res.msg);
-                    if(res.status) {
-
-                        window.location.href = '/activity/view/<?= isset($activity)?$activity['id']:'' ?>';
-
-                    }
-
+        $(this).removeAttr('id');
+        var obj = $(this);
+        $.util.ajax({
+            url: '/activity/mpay/<?= $activity['id']; ?>/' + num,
+            type: "POST",
+            dataType: "json",
+            func: function (res) {
+                $.util.alert(res.msg);
+                if(res.status) {
+                    window.location.href = '/userc/my-activitys';
+                } else {
+                    obj.attr('id', 'pay');
                 }
-            })
+            }
+        })
         //}
 
     })

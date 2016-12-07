@@ -294,7 +294,7 @@ class UserController extends AppController {
             $avatar = $this->request->data('avatar');
             $user->avatar = $avatar;
             if ($this->User->save($user)) {
-                return $this->Util->ajaxReturn(true, '保存成功');
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '保存成功', 'realUrl' => $this->Util->getServerDomain().$avatar]);
             }
             return $this->Util->ajaxReturn(false, '保存失败');
         }
