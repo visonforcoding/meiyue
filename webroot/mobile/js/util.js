@@ -132,6 +132,10 @@ $.util = {
 //                          res = JSON.parse(res);
                             $.util.setCookie('token_uin', res.token_uin, 99999999);
                             LEMON.db.set('token_uin', res.token_uin);
+                            LEMON.db.set('gender',res.user.gender);
+                            LEMON.db.set('im_accid',res.user.imaccid);
+                            LEMON.db.set('im_token',res.user.imtoken);
+                            LEMON.db.set('avatar',res.user.avatar);
                             //window.location.reload();
                         });
                     }
