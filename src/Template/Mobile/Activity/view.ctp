@@ -78,7 +78,7 @@
         <?php elseif ($botBtSts == 1): ?>
             <a class="identify_footer_potion">人数已满</a>
         <?php elseif ($botBtSts == 2): ?>
-            <a class="identify_footer_potion cancel-btn">我要取消</a>
+            <a class="identify_footer_potion">报名成功</a>
         <?php elseif ($botBtSts == 3): ?>
             <a class="identify_footer_potion">报名成功</a>
         <?php elseif ($botBtSts == 4): ?>
@@ -106,8 +106,7 @@
     });
 
 
-    function cancel() {
-
+    /*function cancel() {
         <?php if($regist_item): ?>
         if(confirm("取消将扣除报名费<?= $regist_item['punish_percent'] ?>%(即<?= $regist_item['punish'] ?>美币）作为惩罚，确定取消吗？")) {
             $.ajax({
@@ -115,19 +114,14 @@
                 type: "POST",
                 dataType: "json",
                 success: function (res) {
-
                     $.util.alert(res.msg);
                     if(res.status) {
-
                         window.location.href = '/activity/view/<?= $activity['id']; ?>';
-
                     }
-
                 }
             })
         }
         <?php endif; ?>
-
-    }
+    }*/
 
 </script>

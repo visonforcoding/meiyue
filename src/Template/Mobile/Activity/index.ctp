@@ -93,7 +93,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 
 <script id="activity-list-tpl" type="text/html">
     {{#datas}}
-    <div class="items">
+    <div class="items act-item" data-id="{{id}}">
         <div class="items_pic">
             <img src="/mobile/css/icon/party1.jpg"/>
         </div>
@@ -109,8 +109,8 @@ $activity_action = '/activity/index/';  //定义派对请求地址
         </div>
         <div class="items_adress flex flex_justify">
             <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
-            <div class="button btn_dark" onclick="window.location.href='/activity/view/{{id}}'">
-                我要报名
+            <div class="{{#notjoin}}join-act{{/notjoin}} button btn_dark" data-id="{{id}}">
+                {{#joined}}您已报名{{/joined}}{{#notjoin}}我要报名{{/notjoin}}{{#norest}}人数已满{{/norest}}
             </div>
         </div>
     </div>
@@ -209,7 +209,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             tabDataUrl: [
                 '',
                 '/date/get-all-dates-in-page/',
-                '/activity/get-all-dates-in-page/',
+                '/activity/get-all-datas-in-page/',
                 '/activity/get-top-list/'
             ],
             top_obj: null
@@ -435,5 +435,15 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             }
         })
     }
+
+    $(document).on('tap', '.act-item', function() {
+        var actid = $(this).data('id');
+        window.location.href='/activity/view/' + actid;
+    });
+
+    $(document).on('tap', '.join-act', function() {
+        $actid = $(this).data('id');
+        window.location.href = '/activity/pay-view/' + $actid;
+    });
 
 </script>

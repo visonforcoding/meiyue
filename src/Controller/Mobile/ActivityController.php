@@ -48,8 +48,18 @@ class ActivityController extends AppController
      *  派对列表
      * @return \Cake\Network\Response|null
      */
-    public function getAllDatesInPage($page) {
+    public function getAllDatasInPage($page) {
         $limit = 10;
+        //添加用户参与活动状态
+        $acts = [];
+        if($this->user) {
+            $actTb = TableRegistry::get('Actregistration');
+            $acts = $actTb->find()
+                ->select(['activity_id'])
+                ->where(['user_id' => $this->user->id, 'status' => 1])
+                ->toArray();
+        }
+
         $datas = $this->Activity
             ->find("all")
             ->where([
@@ -58,9 +68,25 @@ class ActivityController extends AppController
             ]);
         $datas->limit($limit);
         $datas->page($page);
-        $datas->formatResults(function(ResultSetInterface $results) {
-            return $results->map(function($row) {
+        $datas->formatResults(function(ResultSetInterface $results) use($acts) {
+            return $results->map(function($row) use($acts) {
                 $row->time = getFormateDT($row->start_time, $row->end_time);
+                $row->joined = false; //参与标志
+                $row->notjoin = true; //没参与标志
+                $row->norest = false; //人数已满标志
+                if(!$row->male_rest || !$row->female_rest) {
+                    $row->joined = false; //参与标志
+                    $row->notjoin = false; //没参与标志
+                    $row->norest = true; //人数已满标志
+                }
+                foreach($acts as $act) {
+                    if($row->id == $act->activity_id) {
+                        $row->joined = true;
+                        $row->notjoin = false;
+                        $row->norest = false;
+                        break;
+                    }
+                }
                 return $row;
             });
 
@@ -71,6 +97,7 @@ class ActivityController extends AppController
             $carouselTb = TableRegistry::get('Carousel');
             $carousel = $carouselTb->find()->where(['position' => CarouselPosition::ACTIVITY])->first();
         }
+
         return $this->Util->ajaxReturn([
             'datas' => $datas->toArray(),
             'carousel' => $carousel,

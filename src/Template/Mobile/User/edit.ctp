@@ -90,7 +90,7 @@
             data: {avatar: path},
             func: function (res) {
                 if(res.status) {
-                    LEMON.db.set('avatar', path);
+                    LEMON.db.set('avatar',  res.realUrl);
                 }
                 $.util.alert(res.msg);
             }
