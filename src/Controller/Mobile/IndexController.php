@@ -110,8 +110,18 @@ class IndexController extends AppController {
             });
         }
         $query->where(['enabled' => 1, 'status' => 3, 'gender' => 2]);
-        $height = $this->request->query('height');
-        $query->where(['enabled' => 1, 'status']);
+        $heightL = $this->request->query('heightL');
+        $heightR = $this->request->query('heightR');
+        $ageL = $this->request->query('ageL');
+        $ageR = $this->request->query('ageR');
+        $birthdayL = Time::now()->year - intval($ageL);
+        $birthdayR = Time::now()->year - intval($ageR);
+        if($ageL&&$ageR){
+            $query->where(['year(`birthday`) >='=>$birthdayR,'year(`birthday`) <='=>$birthdayL]);
+        }
+        if($heightL&&$heightR){
+            $query->where(['height >='=>$heightL,'height <='=>$heightR]);
+        }
         $query->order(['distance' => 'asc', 'login_time' => 'desc']);
         $query->limit(intval($limit))
                 ->page(intval($page));

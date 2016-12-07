@@ -436,6 +436,7 @@ class ApiController extends AppController {
                 $redirect_url = '/index/find-rich-list';
             }
             unset($user->pwd);
+            $user->avatar = $this->Util->getServerDomain().$user->avatar;
             $this->jsonResponse(['status' => true, 'redirect_url' => $redirect_url,
                         'token_uin' => $user_token, 'msg' => '登入成功','user'=>$user]);
         }
