@@ -838,7 +838,7 @@ text-align: center;line-height: .62rem;font-size: 18px;color: #666;font-weight: 
  * */
 .ability_items{background: #fff;}
 .switchbox{height:70px;}
-.switchbox .switch{width:65px;height:32px;position:relative;border-radius: 15px;}
+.switchbox .switch{width:65px;height:32px;position:relative;border-radius: 15px;line-height:32px;text-align: center;}
 .switchbox .on{background: #eab96a;transition: all .2s ease-in;}
 .switchbox .switch i{display: block;width:28px;height:28px;border-radius: 50%;background: #fff;margin:2px;position:absolute;
 box-shadow: 0 0 1px rgba(0,0,0,.2);}
@@ -1087,12 +1087,24 @@ color:#999;padding:.1rem;}
 .chart-systerm-box .timebox{text-align: center;margin-top:.6rem;color:#999999;font-size: 11px;}
 .cover_left_info .hot{margin-left:.2rem;}
 /*生成海报*/
-.tocode{background: rgba(0,0,0,.6);position: fixed;width:100%;max-width: 750px;margin:auto;top:0;bottom:0;}
+.tocode{background: rgba(0,0,0,.8);position: fixed;width:100%;max-width: 750px;margin:auto;top:0;bottom:0;}
 .tocode .codebox{background: #fff;width:90%;border-radius: 5px;padding:.3rem .4rem;}
 .tocode .codebox .avatar{width:1.2rem;height:1.2rem;border-radius: 5px;overflow: hidden;}
+.tocode .codebox .usertext{margin-left:.3rem;display: block;}
+.tocode .codebox .usertext h3{font-size: 18px;margin-bottom:.1rem;}
 .tocode .codebox .avatar img{width:100%;height:100%;border-radius: 5px;display: block;}
-.tocode .code-con{width:5.13rem;height:5.13rem;overflow: hidden;}
+.tocode .code-con{width:5.13rem;height:5.13rem;overflow: hidden;margin:.4rem auto;}
 .tocode .code-con img{width:100%;height:100%;display: block;}
+.tocode .code-bottom{width:5.13rem;padding:.15rem 0 .2rem;text-align: center;border:1px #EAB96A solid;color:#EAB96A;border-radius: 3px;margin:.2rem auto 0;}
+.tocode .code-bottom h3{font-size: 18px;margin-bottom:.05rem;}
+/*约会地点选择*/
+.find_place_list .items-block .radio-btn{width:.6rem;font-size: 18px;color:#efefef;display: block;}
+.find_place_list .items-block  .place_name{margin-bottom:.1rem;}
+.find_place_list .items-block .choose .radio-btn{color:#EAB96A;}
+.find_place_list .items-block .commend{}
+.find_place_list .items-block .l_right .con_detail{height:22px;line-height: 20px;font-size: 11px;width:74px;margin-top:.9rem;}
+.find_place_list .items-block .place_address{min-height: 1rem;}
+.place-choose-text{padding-right:.1rem;}
 /*未登录*/
 .shadow{background: rgba(0,0,0,.7);z-index:11;overflow: hidden;}
 .login-tips{background:rgba(255,255,255,1);width:100%;padding:.8rem 0;}
