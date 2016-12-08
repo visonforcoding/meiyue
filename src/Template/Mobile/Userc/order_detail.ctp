@@ -11,22 +11,29 @@
             <div class="l_info">
                 <span class="avatar">
                     <?php if ($user->gender == 1): ?>
-                        <img src="<?= $order->buyer->avatar ?>"/>
-                    <?php else: ?>
                         <img src="<?= $order->dater->avatar ?>"/>
+                    <?php else: ?>
+                        <img src="<?= $order->buyer->avatar ?>"/>
                     <?php endif; ?>
                 </span>
                 <div class="l_con">
                     <?php if ($user->gender == 1): ?>
-                        <h3><?= $order->buyer->nick ?></h3>
-                    <?php else: ?>
                         <h3><?= $order->dater->nick ?></h3>
+                    <?php else: ?>
+                        <h3><?= $order->buyer->nick ?></h3>
                     <?php endif; ?>
-                    <div class="age color_y"><i class="iconfont translate">&#xe61d;</i>
+                    <div class="age color_y">
+                        <i class="iconfont translate">
+                            <?php if ($user->gender == 1): ?>
+                                &#xe61d;
+                            <?php else: ?>
+                                &#xe61c;
+                            <?php endif; ?>
+                        </i>
                         <?php if ($user->gender == 1): ?>
-                            <h3><?= getAge($order->buyer->birthday) ?></h3>
+                            <?= getAge($order->dater->birthday) ?>岁
                         <?php else: ?>
-                            <h3><?= getAge($order->dater->birthday) ?></h3>
+                            <?= getAge($order->buyer->birthday) ?>岁
                         <?php endif; ?>
                     </div>
                 </div>
@@ -53,7 +60,7 @@
     <!--约吃饭-->
     <div class="date_ability_list bgff mt20">
         <div class="title flex flex_justify inner">
-            <h3 class="color_y">[<?= $order->user_skill->skill->name ?>]</h3>
+            <h3><i class="color_y">[<?= $order->user_skill->skill->name ?>]</i> <?= ($order->date)?$order->date->title:'' ?></h3>
             <span class="smallarea"><?= $order->price ?>美币/小时</span>
         </div>
         <ul class="outerblock btop inner">

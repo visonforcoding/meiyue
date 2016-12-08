@@ -500,8 +500,9 @@ class ActivityController extends AppController
                     $sortops[] = $this->Business->getMyTop($type, $this->user->id);
                 }
             }
-
             $sortops = array_merge($sortops, $tops);
+
+
             return $this->Util->ajaxReturn(['datas'=>$sortops,'status' => true]);
         } catch(Exception $e) {
             return $this->Util->ajaxReturn(false, '服务器大姨妈啦~~');

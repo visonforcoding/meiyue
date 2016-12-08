@@ -44,9 +44,8 @@ class DateorderTable extends Table {
             'foreignKey' => 'consumer_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Dates', [
+        $this->belongsTo('Date', [
             'foreignKey' => 'date_id',
-            'joinType' => 'INNER'
         ]);
         //女性用户  被约
         $this->belongsTo('Dater', [
