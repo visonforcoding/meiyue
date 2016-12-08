@@ -31,9 +31,15 @@
             <li class="clearfix" onclick="window.location.href='/userc/edit-auth';">
                 <a href="#this">
                     <span class="fl">身份认证</span>
-                    <i class="iconfont right_ico fr">&#xe605;</i>
+                   <span class="fr color_gray">审核通过</span>
                 </a>
             </li>
+           <!--  <li class="clearfix" onclick="window.location.href='/userc/edit-auth';">
+                <a href="#this">
+                    <span class="fl">真人视频认证</span>
+                    <i class="iconfont right_ico fr">&#xe605;</i>
+                </a>
+            </li> -->
             <li class="clearfix" onclick="window.location.href='/userc/edit-basic-pic';">
                 <a href="#this">
                     <span class="fl">基本照片与视频上传</span>
