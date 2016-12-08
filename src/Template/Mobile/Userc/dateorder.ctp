@@ -5,7 +5,7 @@
     <li>
         <div class="date_item_des">
             <div class="flex flex_justify bdbottom">
-                <h3 class='maxwid70'><i class="itemsname color_y">[{{user_skill.skill.name}}]</i></h3>
+                <h3 class='maxwid70'><i class="itemsname color_y">[{{user_skill.skill.name}}]</i>{{user_skill.skill.name}}</h3>
                 <span class="customer color_y">{{buyer.nick}}</span>
             </div>
             <a style="display:block" href="/userc/order-detail/{{id}}">
@@ -17,7 +17,7 @@
                         <div class="place_info">
                             <h3 class="userinfo">{{dater_name}}</h3>
                             <h3 class="otherinfo">
-                                <time><i class="iconfont color_y">&#xe622;</i>今日 · 12:00-15:00</time>
+                                <time><i class="iconfont color_y">&#xe622;</i>{{time}}</time>
                                 <address><i class="iconfont color_y">&#xe623;</i>{{site}} </address>
                             </h3>
                         </div>

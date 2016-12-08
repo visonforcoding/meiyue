@@ -308,7 +308,7 @@ class UsercController extends AppController {
      */
     public function dateorder(){
         $this->set([
-            'pageTitle'=>'我的粉丝',
+            'pageTitle'=>'我的约单',
             'user'=>  $this->user,
             ]);
         
@@ -352,6 +352,10 @@ class UsercController extends AppController {
                   ->orderDesc('Dateorder.create_time')
                   ->limit($limit)
                   ->page($page)
+                  ->map(function($row) {
+                      $row->time = getFormateDT($row->start_time, $row->end_time);
+                      return $row;
+                  })
                   ->toArray();
        return $this->Util->ajaxReturn(['orders'=>$orders]);
        
@@ -403,7 +407,7 @@ class UsercController extends AppController {
                 ,'Dater'=>function($q){
                     return $q->select(['id','nick','avatar','birthday']);
                 }
-                ,'UserSkill.Skill','Dater.Tags'
+                ,'UserSkill.Skill','Dater.Tags','Date'
             ]
         ]);
         if($this->user->gender==1){

@@ -181,6 +181,7 @@
             for (var i = 0; i < 30; i ++) {
                 str += getMonthDateHtml(tem + i * 3600 * 24 * 1000);
             }
+            str += '<li></li><li></li>';
             $(".month-date").html(str);
 
             this.addEvent();
