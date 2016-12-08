@@ -38,7 +38,7 @@
                 <span>报名信息</span>
                 <div class="r_info">
                     <div class="r_info_pic flex">
-                        <span onclick="window.location.href = '/activity/mem-index/<?= $activity['id']; ?>'" class="number">共<?= ($activity['male_lim'] + $activity['female_lim']);?>人</span>
+                        <span onclick="window.location.href = '/activity/mem-index/<?= $activity['id']; ?>'" class="number">共<?= ($activity['male_lim'] - $activity['male_rest'] + $activity['female_lim'] - $activity['female_rest']);?>人</span>
                         <i class="iconfont">&#xe605;</i>
                     </div>
 
@@ -79,7 +79,9 @@
             <a class="identify_footer_potion">人数已满</a>
         <?php elseif ($botBtSts == 2): ?>
             <a class="identify_footer_potion">报名成功</a>
-        <?php elseif ($botBtSts == 3): ?>
+        <?php elseif ($botBtSts == 3 && $cancancle): ?>
+            <a class="identify_footer_potion" onclick="cancel();">我要取消</a>
+        <?php elseif ($botBtSts == 3 && !$cancancle): ?>
             <a class="identify_footer_potion">报名成功</a>
         <?php elseif ($botBtSts == 4): ?>
             <a class="identify_footer_potion">正在进行</a>
@@ -106,22 +108,27 @@
     });
 
 
-    /*function cancel() {
+    function cancel() {
         <?php if($regist_item): ?>
-        if(confirm("取消将扣除报名费<?= $regist_item['punish_percent'] ?>%(即<?= $regist_item['punish'] ?>美币）作为惩罚，确定取消吗？")) {
-            $.ajax({
-                url: '/activity/cancel/<?= $regist_item['id']; ?>',
-                type: "POST",
-                dataType: "json",
-                success: function (res) {
-                    $.util.alert(res.msg);
-                    if(res.status) {
-                        window.location.href = '/activity/view/<?= $activity['id']; ?>';
+        $.util.confirm(
+            '取消派对',
+            '将扣除报名费<?= $regist_item['punish_percent'] ?>%(即<?= $regist_item['punish'] ?>美币）作为惩罚',
+            function() {
+                $.util.ajax({
+                    url: '/activity/cancel/<?= $regist_item['id']; ?>',
+                    type: "POST",
+                    dataType: "json",
+                    func: function (res) {
+                        $.util.alert(res.msg);
+                        if(res.status) {
+                            window.location.href = '/userc/my-activitys';
+                        }
                     }
-                }
-            })
-        }
+                })
+            },
+            null
+        );
         <?php endif; ?>
-    }*/
+    }
 
 </script>

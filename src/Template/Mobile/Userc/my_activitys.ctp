@@ -2,7 +2,7 @@
 <script src="/mobile/js/mustache.min.js"></script>
 <script id="myAct-list-tpl" type="text/html">
     {{#datas}}
-    <li onclick="window.location.href = '/activity/view/{{activity.id}}'">
+    <li onclick="window.location.href = '/activity/view/{{activity.id}}/1'">
         <div class="items_date_info flex flex_justify">
             <div class="items_left_info">
 							<span class="items_left_picinfo">

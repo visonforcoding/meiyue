@@ -125,6 +125,14 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-md-2 control-label">取消截止天数</label>
+            <div class="col-md-8">
+                <?php
+                echo $this->Form->input('cancelday', ['label' => false, 'class' => 'form-control', 'default' => 3]);
+                ?>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-md-2 control-label">活动详细说明</label>
             <div class="col-md-8">
                 <script

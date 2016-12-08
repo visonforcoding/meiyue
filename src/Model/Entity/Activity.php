@@ -25,6 +25,7 @@ use Cake\ORM\Entity;
  * @property string $notice
  * @property int $status
  * @property string $remark
+ * @property int $cancelday
  */
 class Activity extends Entity
 {

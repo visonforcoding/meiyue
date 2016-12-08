@@ -62,7 +62,7 @@
                 url: "/activity/getDataList",
                 datatype: "json",
                 mtype: "POST",
-                colNames: ['派对名称', '时间', '地点', '男性报名费用', '男性剩余名额/总名额', '女性出场费', '女性剩余名额', '活动退出扣钱比例', '报名情况', '派对状态', '操作'],
+                colNames: ['派对名称', '时间', '地点', '男性报名费用', '男性剩余名额/总名额', '女性出场费', '女性剩余名额', '活动退出扣钱比例', '报名情况', '派对状态', '取消截止天数', '操作'],
                 colModel: [
                     {name: 'title', editable: true, align: 'center'},
                     {name: 'start_time', editable: true, align: 'center'},
@@ -74,6 +74,7 @@
                     {name: 'punish_percent', editable: true, align: 'center'},
                     {name: 'status', editable: true, align: 'center'},
                     {name: 'status', editable: true, align: 'center'},
+                    {name: 'cancelday', editable: true, align: 'center'},
                     {
                         name: 'actionBtn',
                         align: 'center',

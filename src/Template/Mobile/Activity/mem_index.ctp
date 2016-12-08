@@ -16,11 +16,11 @@
                                 <div class="username"><?= $item['user']['nick']; ?>
                                     <span class="age color_y"><i class="iconfont color_y">&#xe61c;</i><?= getAge($item['user']['birthday']); ?>岁</span>
                                 </div>
-                               <div class="smallnum color_y">魅力值：<i class="">3000</i></div>
+                               <div class="smallnum color_y">魅力值：<i class=""><?= $item['user']['recharge']; ?></i></div>
                             </h3>
                         </div>
                         <div class="praised_list_right">
-                           <span class="support_num">报名数量 <i class="lagernum color_friends">50</i></span>
+                           <span class="support_num">报名数量 <i class="lagernum color_friends"><?= $item['num'] ;?></i></span>
                         </div>
                     </a>
                 </li>
