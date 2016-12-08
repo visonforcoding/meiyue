@@ -55,7 +55,7 @@
                     </span>
                     <span class="iconfont color_gray r_con">&#xe605;</span>
                 </a>
-                <div class="voted_con flex flex_justify">
+                <div class="voted_con  voted-content  flex flex_justify">
                     <div class="voted_l_info">
                         <span class="voted_place"><?= $montop->index?></span>
                         <div class="voted_place_info">
