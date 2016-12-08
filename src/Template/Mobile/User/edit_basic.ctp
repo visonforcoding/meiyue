@@ -19,7 +19,6 @@
                         </div>
                         <div class="home_list_r_info">
                             <input name="nick" type="text" placeholder="请输入昵称" value="<?= $user->nick; ?>"/>
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
@@ -30,7 +29,6 @@
                                 class="itemsname">名：</span><i class="iconfont ico"></i></div>
                         <div class="home_list_r_info">
                             <input name="truename" type="text" placeholder="请输真实姓名" value="<?= $user->truename; ?>"/>
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
@@ -58,7 +56,7 @@
                         <div class="home_list_l_info"><span class="itemsname">星</span><span class="itemsname">座：</span>
                         </div>
                         <div class="home_list_r_info">
-                            <div class="outerselect">
+                           
                                 <select name="zodiac">
                                     <option value="0">星座</option>
                                     <option value="1" <?= ($user->zodiac == 1)?'selected':''; ?>>白羊座</option>
@@ -74,7 +72,7 @@
                                     <option value="11" <?= ($user->zodiac == 11)?'selected':''; ?>>水瓶座</option>
                                     <option value="12" <?= ($user->zodiac == 12)?'selected':''; ?>>双鱼座</option>
                                 </select>
-                            </div>
+                           
                             <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
@@ -84,7 +82,7 @@
                         <div class="home_list_l_info"><span class="itemsname">体</span><span class="itemsname">重：</span>
                         </div>
                         <div class="home_list_r_info">
-                            <input name="weight" type="text" placeholder="您的体重" value="<?= $user->weight; ?>"/>&nbsp;kg
+                            <input name="weight" type="text" placeholder="您的体重" value="<?= $user->weight; ?>"/>&nbsp;KG
                         </div>
                     </div>
                 </li>
@@ -93,16 +91,18 @@
                         <div class="home_list_l_info required"><span class="itemsname short_name">身</span><span
                                 class="itemsname">高：</span><i class="iconfont ico"></i></div>
                         <div class="home_list_r_info">
-                            <input name="height" type="text" placeholder="您的身高" value="<?= $user->height; ?>"/>&nbsp;cm
+                            <input name="height" type="text" placeholder="您的身高" value="<?= $user->height; ?>"/>&nbsp;CM
                         </div>
                     </div>
                 </li>
-                <li>
+                <li class='bwh'>
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">三</span><span class="itemsname">围：</span>
                         </div>
                         <div class="home_list_r_info">
-                            <input name="bwh" type="text" placeholder="请输入三围" value="<?= $user->bwh; ?>"/>
+                            <input type="tel" placeholder="腰围" style="width:30px;" /> | 
+                            <input type="tel" placeholder="胸围" style="width:30px;" /> | 
+                            <input type="tel" placeholder="臀围" style="width:30px;" />
                         </div>
                     </div>
                 </li>
@@ -111,7 +111,6 @@
                         <div class="home_list_l_info"><span class="itemsname">罩</span><span class="itemsname">杯：</span>
                         </div>
                         <div class="home_list_r_info">
-                            <div class="outerselect">
                                 <select name="cup">
                                     <option value="A" <?= ($user->cup == 'A')?'selected':''; ?>>A</option>
                                     <option value="B" <?= ($user->cup == 'B')?'selected':''; ?>>B</option>
@@ -121,7 +120,6 @@
                                     <option value="F" <?= ($user->cup == 'F')?'selected':''; ?>>F</option>
                                     <option value="G" <?= ($user->cup == 'G')?'selected':''; ?>>G</option>
                                 </select>
-                            </div>
                             <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
@@ -132,17 +130,15 @@
                         </div>
                         <div class="home_list_r_info">
                             <input name="profession" type="text" placeholder="请输入职业" value="<?= $user->profession; ?>"/>
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
                 <li>
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname short_name">家</span><span
-                                class="itemsname">乡</span></div>
+                                class="itemsname">乡：</span></div>
                         <div class="home_list_r_info">
                             <input name="hometown" type="text" placeholder="请输入家乡" value="<?= $user->hometown; ?>"/>
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
@@ -153,24 +149,21 @@
                                 class="itemsname">区：</span></div>
                         <div class="home_list_r_info">
                             <input name="city" type="text" placeholder="请输入所在地区" value="<?= $user->city; ?>"/>
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
-                <li>
+                <li class="emontion">
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">情</span><span
                                 class="itemsname">感</span><span class="itemsname">状</span><span
                                 class="itemsname">态：</span></div>
                         <div class="home_list_r_info">
-                            <div class="select_type">
                                 <select name="state">
-                                    <option value="1" <?= ($user->state == 1)?'selected':'';?>>单身</option>
+                                    <option value="1" <?= ($user->state == 1)?'selected':'';?>>单身中</option>
                                     <option value="2" <?= ($user->state == 2)?'selected':'';?>>恋爱中</option>
                                     <option value="3" <?= ($user->state == 3)?'selected':'';?>>已婚</option>
                                     <option value="4" <?= ($user->state == 4)?'selected':'';?>>离异</option>
                                 </select>
-                            </div>
                             <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
@@ -182,13 +175,12 @@
                                 class="itemsname">历：</span></div>
                         <div class="home_list_r_info">
                             <input name="career" type="text" placeholder="工作经历" value="<?= $user->career; ?>"/>
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
         </div>
         <!--爱好-->
-        <div class="home_fill_basic_info">
+        <div class="home_fill_basic_info home_fill_hobby">
             <div class="items_title">
                 <h3>兴趣爱好</h3>
             </div>
@@ -198,7 +190,6 @@
                         <div class="home_list_l_info"><span class="itemsname">常出没地点：</span></div>
                         <div class="home_list_r_info">
                             <input name="place" type="text" placeholder="请输入地点" value="<?= $user->place; ?>"/>
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
@@ -207,7 +198,6 @@
                         <div class="home_list_l_info"><span class="itemsname">喜欢的美食：</span></div>
                         <div class="home_list_r_info">
                             <input name="food" type="text" placeholder="请输入美食" value="<?= $user->food; ?>"/>
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
@@ -216,7 +206,6 @@
                         <div class="home_list_l_info"><span class="itemsname">喜欢的音乐：</span></div>
                         <div class="home_list_r_info">
                             <input name="music" type="text" placeholder="请输入音乐" value="<?= $user->music; ?>"/>
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
@@ -225,7 +214,6 @@
                         <div class="home_list_l_info"><span class="itemsname">喜欢的电影：</span></div>
                         <div class="home_list_r_info">
                             <input name="movie" type="text" placeholder="请输入电影" value="<?= $user->movie; ?>"/>
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
@@ -234,7 +222,6 @@
                         <div class="home_list_l_info"><span class="itemsname">喜欢的运动/娱乐：</span></div>
                         <div class="home_list_r_info">
                             <input name="sport" type="text" placeholder="运动/娱乐" value="<?= $user->sport; ?>"/>
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
@@ -243,7 +230,6 @@
                         <div class="home_list_l_info"><span class="itemsname">个性签名：</span></div>
                         <div class="home_list_r_info">
                             <input name="sign" type="text" placeholder="个性签名" value="<?= $user->sign; ?>"/>
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
