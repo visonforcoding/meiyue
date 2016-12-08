@@ -120,7 +120,7 @@
                     </div>
                 </li>
             </ul>
-            <ul class="mt40">
+            <ul class="outerblock mt40">
                 <li>
                     <div class="edit_date_items flex flex_justify marks_edit">
                         <span class="edit_l_con">个人标签</span>
