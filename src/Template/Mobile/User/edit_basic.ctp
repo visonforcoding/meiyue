@@ -42,41 +42,12 @@
                         </div>
                         <div class="home_list_r_info">
                             <div class="outerinput">
-                                <input id="birthday"
-                                    name="birthday"
-                                    type="date"
-                                    placeholder="请输入日期"
-                                    value="<?= $user->birthday; ?>"
+                                <input id="birthday" name="birthday" type="date" placeholder="请输入日期" value="<?= $user->birthday; ?>" />
                             </div>
                         </div>
                     </div>
                 </li>
-                <li class="start_sign">
-                    <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">星</span><span class="itemsname">座：</span>
-                        </div>
-                        <div class="home_list_r_info">
-                           
-                                <select name="zodiac">
-                                    <option value="0">星座</option>
-                                    <option value="1" <?= ($user->zodiac == 1)?'selected':''; ?>>白羊座</option>
-                                    <option value="2" <?= ($user->zodiac ==2)?'selected':''; ?>>金牛座</option>
-                                    <option value="3" <?= ($user->zodiac ==3)?'selected':''; ?>>双子座</option>
-                                    <option value="4" <?= ($user->zodiac == 4)?'selected':''; ?>>巨蟹座</option>
-                                    <option value="5" <?= ($user->zodiac == 5)?'selected':''; ?>>狮子座</option>
-                                    <option value="6" <?= ($user->zodiac == 6)?'selected':''; ?>>处女座</option>
-                                    <option value="7" <?= ($user->zodiac == 7)?'selected':''; ?>>天秤座</option>
-                                    <option value="8" <?= ($user->zodiac == 8)?'selected':''; ?>>天蝎座</option>
-                                    <option value="9" <?= ($user->zodiac == 9)?'selected':''; ?>>射手座</option>
-                                    <option value="10" <?= ($user->zodiac == 10)?'selected':''; ?>>摩羯座</option>
-                                    <option value="11" <?= ($user->zodiac == 11)?'selected':''; ?>>水瓶座</option>
-                                    <option value="12" <?= ($user->zodiac == 12)?'selected':''; ?>>双鱼座</option>
-                                </select>
-                           
-                            <i class="iconfont r_icon">&#xe605;</i>
-                        </div>
-                    </div>
-                </li>
+               
                 <li>
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">体</span><span class="itemsname">重：</span>
@@ -100,13 +71,36 @@
                         <div class="home_list_l_info"><span class="itemsname">三</span><span class="itemsname">围：</span>
                         </div>
                         <div class="home_list_r_info">
-                            <input type="tel" placeholder="腰围" style="width:30px;" /> | 
                             <input type="tel" placeholder="胸围" style="width:30px;" /> | 
+                            <input type="tel" placeholder="腰围" style="width:30px;" /> | 
                             <input type="tel" placeholder="臀围" style="width:30px;" />
                         </div>
                     </div>
                 </li>
-                <li class="start_sign">
+                 <li class="start_sign  right-ico">
+                    <div class="home_items">
+                        <div class="home_list_l_info"><span class="itemsname">星</span><span class="itemsname">座：</span>
+                        </div>
+                        <div class="home_list_r_info">
+                            <select name="zodiac">
+                                    <option value="0">选星座</option>
+                                    <option value="1" <?= ($user->zodiac == 1)?'selected':''; ?>>白羊座</option>
+                                    <option value="2" <?= ($user->zodiac ==2)?'selected':''; ?>>金牛座</option>
+                                    <option value="3" <?= ($user->zodiac ==3)?'selected':''; ?>>双子座</option>
+                                    <option value="4" <?= ($user->zodiac == 4)?'selected':''; ?>>巨蟹座</option>
+                                    <option value="5" <?= ($user->zodiac == 5)?'selected':''; ?>>狮子座</option>
+                                    <option value="6" <?= ($user->zodiac == 6)?'selected':''; ?>>处女座</option>
+                                    <option value="7" <?= ($user->zodiac == 7)?'selected':''; ?>>天秤座</option>
+                                    <option value="8" <?= ($user->zodiac == 8)?'selected':''; ?>>天蝎座</option>
+                                    <option value="9" <?= ($user->zodiac == 9)?'selected':''; ?>>射手座</option>
+                                    <option value="10" <?= ($user->zodiac == 10)?'selected':''; ?>>摩羯座</option>
+                                    <option value="11" <?= ($user->zodiac == 11)?'selected':''; ?>>水瓶座</option>
+                                    <option value="12" <?= ($user->zodiac == 12)?'selected':''; ?>>双鱼座</option>
+                                </select>
+                        </div>
+                    </div>
+                </li>
+                <li class="start_sign  right-ico">
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">罩</span><span class="itemsname">杯：</span>
                         </div>
@@ -120,7 +114,21 @@
                                     <option value="F" <?= ($user->cup == 'F')?'selected':''; ?>>F</option>
                                     <option value="G" <?= ($user->cup == 'G')?'selected':''; ?>>G</option>
                                 </select>
-                            <i class="iconfont r_icon">&#xe605;</i>
+                          </div>
+                    </div>
+                </li>
+                 <li class="emontion  right-ico">
+                    <div class="home_items">
+                        <div class="home_list_l_info"><span class="itemsname">情</span><span
+                                class="itemsname">感</span><span class="itemsname">状</span><span
+                                class="itemsname">态：</span></div>
+                        <div class="home_list_r_info">
+                                <select name="state">
+                                    <option value="1" <?= ($user->state == 1)?'selected':'';?>>单身</option>
+                                    <option value="2" <?= ($user->state == 2)?'selected':'';?>>恋爱</option>
+                                    <option value="3" <?= ($user->state == 3)?'selected':'';?>>已婚</option>
+                                    <option value="4" <?= ($user->state == 4)?'selected':'';?>>离异</option>
+                                </select>
                         </div>
                     </div>
                 </li>
@@ -152,22 +160,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="emontion">
-                    <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">情</span><span
-                                class="itemsname">感</span><span class="itemsname">状</span><span
-                                class="itemsname">态：</span></div>
-                        <div class="home_list_r_info">
-                                <select name="state">
-                                    <option value="1" <?= ($user->state == 1)?'selected':'';?>>单身中</option>
-                                    <option value="2" <?= ($user->state == 2)?'selected':'';?>>恋爱中</option>
-                                    <option value="3" <?= ($user->state == 3)?'selected':'';?>>已婚</option>
-                                    <option value="4" <?= ($user->state == 4)?'selected':'';?>>离异</option>
-                                </select>
-                            <i class="iconfont r_icon">&#xe605;</i>
-                        </div>
-                    </div>
-                </li>
+               
                 <li>
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">工</span><span
@@ -241,7 +234,7 @@
                 <h3>我的标签</h3>
             </div>
             <ul>
-                <li>
+                <li class='home_fill_hobby'>
                     <div id="tag-container" class="home_items">
                         <?php foreach($user->tags as $tag): ?>
                         [<a class='mark'><?= $tag['name']; ?><input type='text' name='tags[_ids][]' value='<?= $tag['id']; ?>' tag-name='<?= $tag['name']; ?>' hidden></a>]
@@ -251,17 +244,16 @@
             </ul>
         </div>
         <!--微信号-->
-        <div class="home_fill_basic_info">
+        <div class="home_fill_basic_info ">
             <div class="items_title">
                 <h3>我的微信 <i>（用户查看你的微信你会有收入哦）</i></h3>
             </div>
             <ul>
-                <li>
+                <li class='home_fill_hobby'>
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">微信号：</span></div>
                         <div class="home_list_r_info">
                             <input name="wxid" type="text" placeholder="请输入" value="<?= $user->wxid; ?>"/>
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>

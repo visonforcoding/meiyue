@@ -5,7 +5,7 @@
                 </div>-->
         <h3 class="aligncenter title">完善个人信息<br />可以提高魅力值哦~</h3>
     </div>
-    <div class="home_fill_basic_info home-other-info  mt40">
+    <div class="home_fill_basic_info home-other-info  home_fill_hobby mt40">
         <form>
             <ul>
                 <!--            <li>
@@ -24,11 +24,9 @@
                     <div class="home_items">
                         <div class="home_list_l_info ">
                             <span class="itemsname">喜欢的美食：</span>
-                            <i class="iconfont ico"></i>
                         </div>
                         <div class="home_list_r_info">
                             <input name="food" type="text" placeholder="请输入" />
-                            <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
                 </li>
@@ -36,11 +34,11 @@
                     <div class="home_items">
                         <div class="home_list_l_info ">
                             <span  class="itemsname">喜欢的音乐：</span>
-                            <i class="iconfont ico"></i>
+                           
                         </div>
                         <div class="home_list_r_info">
                             <input name="music" type="text" placeholder="请输入" />
-                            <i class="iconfont r_icon">&#xe605;</i>
+                           
                         </div>
                     </div>
                 </li>
@@ -48,11 +46,11 @@
                     <div class="home_items">
                         <div class="home_list_l_info ">
                             <span class="itemsname">喜欢的电影：</span>
-                            <i class="iconfont ico"></i>
+                          
                         </div>
                         <div class="home_list_r_info">
                             <input name="movie" type="text" placeholder="请输入" />
-                            <i class="iconfont r_icon">&#xe605;</i>
+                           
                         </div>
                     </div>
                 </li>
@@ -60,11 +58,11 @@
                     <div class="home_items">
                         <div class="home_list_l_info ">
                             <span class="itemsname">喜欢的运动/娱乐：</span>
-                            <i class="iconfont ico"></i>
+                           
                         </div>
                         <div class="home_list_r_info">
                             <input name="sport" type="text" placeholder="请输入" />
-                            <i class="iconfont r_icon">&#xe605;</i>
+                           
                         </div>
                     </div>
                 </li>
@@ -72,11 +70,11 @@
                     <div class="home_items">
                         <div class="home_list_l_info ">
                             <span class="itemsname">个性签名：</span>
-                            <i class="iconfont ico"></i>
+                           
                         </div>
                         <div class="home_list_r_info">
                             <input name="sign" type="text" placeholder="请输入" />
-                            <i class="iconfont r_icon">&#xe605;</i>
+                           
                         </div>
                     </div>
                 </li>
@@ -86,7 +84,7 @@
                             <div class="home_list_l_info"><span class="itemsname">个性标签：</span></div>
                             <div class="home_list_r_info">
                                 <input name="tag" type="text" placeholder="请选择" readonly="readonly" />
-                                <i class="iconfont r_icon">&#xe605;</i>
+                               
                             </div>
                         </div>
                     </div>
