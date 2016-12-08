@@ -85,12 +85,6 @@
         </div>
     </div>
 </div>
-<!--发布约会-->
-<?php if ($user->gender == '2'): ?>
-    <div class="fixed_r_submit">
-        <span>发布<br />约会</span>
-    </div>
-<?php endif; ?>
 <?php $this->start('script'); ?>
 <script>
 var curpage = 1;

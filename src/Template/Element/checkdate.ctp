@@ -52,13 +52,10 @@
     .r_cancel{text-align: center;width:50%;float:left;}
     .c_date{overflow:hidden;}
     .checkdate .select{font-size:16px;color:#222;}
-
-
 </style>
 <div class="wraper">
 </div>
-<div class='raper show' id="lm-datepicker" hidden>
-    <div class="checkdate">
+    <div class="checkdate" id="lm-datepicker" hidden>
         <div class="bottom_btn">
             <span id="date-cancel-btn" class="l_sure">取消</span>
             <span id="date-submit-btn" class="r_cancel">确定</span>
@@ -131,8 +128,6 @@
             </div>
         </div>
     </div>
-</div>
-
 <script type="text/javascript">
 
     var mydateTimePicker = function(o) {
@@ -186,38 +181,21 @@
 
             this.addEvent();
         },
-        addEvent() {
+        addEvent: function() {
             var obj = this;
             // 月日
             $('.l_box_date').on('scroll', function () {
                 obj._year_month_date = obj.scrollEvent(this, $('.l_box_date li'));
-                /*var scrollTop = $(this).get(0).scrollTop;
-                var height = $('.l_box_date li').height();
-                var num = Math.floor(scrollTop / height);
-                $('.l_box_date li').removeClass().eq(num).addClass('select');
-                obj._year_month_date = $('.l_box_date li').eq(num).attr('val');*/
             })
-
 
             // 开始时间
             $('.r_box_date_1').on('scroll', function () {
                 obj._start_time = obj.scrollEvent(this, $('.r_box_date_1 li'));
-                /*var scrollTop = $(this).get(0).scrollTop;
-                var height = $('.r_box_date_1 li').height();
-                var num = Math.floor(scrollTop / height);
-                $('.r_box_date_1 li').removeClass().eq(num).addClass('select');
-                obj._start_time = $('.r_box_date_1 li').eq(num).attr('val');*/
             });
-
 
             // 结束时间
             $('.r_box_date_2').on('scroll', function () {
                 obj._end_time = obj.scrollEvent(this, $('.r_box_date_2 li'));
-                /*var scrollTop = $(this).get(0).scrollTop;
-                var height = $('.r_box_date_2 li').height();
-                var num = Math.floor(scrollTop / height);
-                $('.r_box_date_2 li').removeClass().eq(num).addClass('select');
-                obj._end_time = $('.r_box_date_2 li').eq(num).attr('val');*/
             });
 
             $('#date-cancel-btn').on('click', function() {

@@ -46,11 +46,27 @@ class DateCell extends Cell
     public function skillsView($user_id)
     {
         $UserSkillTable = \Cake\ORM\TableRegistry::get('UserSkill');
-        $topSkills = $this->getTopSkill();
-        $userSkills = $UserSkillTable->find()->contain(['Skill', 'Cost'])->where(['UserSkill.user_id'=>$user_id, 'UserSkill.is_used' => 1, 'UserSkill.is_checked' => 1])->toArray();
+        $topSkills = $this->getTopSkills();
+        $userSkills = $UserSkillTable->find()
+            ->contain(['Skill', 'Cost'])
+            ->where([
+                'UserSkill.user_id'=>$user_id,
+                'UserSkill.is_used' => 1,
+                'UserSkill.is_checked' => 1])->toArray();
+        $sorts = [];
+        foreach($topSkills as $topSkill) {
+            $sorts[$topSkill->id] = [
+                0 => $topSkill,
+                1 => []
+            ];
+            foreach($userSkills as $userSkill) {
+                if($userSkill->skill->parent_id == $topSkill->id) {
+                    $sorts[$topSkill->id][1][] = $userSkill;
+                }
+            }
+        }
         $this->set([
-            'topSkills'=>$topSkills,
-            'userSkills'=>$userSkills
+            'skills'=>$sorts
         ]);
     }
 
@@ -80,9 +96,9 @@ class DateCell extends Cell
 
 
     /**
-     * 获取1级技能标签 从缓存或数据库当中
+     * 获取1级技能标签
      */
-    public function getTopSkill(){
+    public function getTopSkills(){
         $skills = \Cake\Cache\Cache::read('topskill');
         if(!$skills){
             $SkillTable = \Cake\ORM\TableRegistry::get('Skill');

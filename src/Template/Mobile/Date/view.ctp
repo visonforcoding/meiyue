@@ -12,7 +12,7 @@
         </h3>
         <div class="place_pic">
 					<span class="place">
-						<img src="/mobile/images/date_place.jpg"/>
+						<img src="<?= $date['user']['avatar'];?>"/>
 					</span>
             <div class="place_info">
                 <h3 class="userinfo"><?= $date['user']['nick']?>
@@ -53,7 +53,9 @@
         <p class="commontips mt40 color_des aligncenter">点击此按钮后，此约会将从活动-约会模块中移除</p>
     <?php endif; ?>
 </div>
-
+<?php if($date['status'] == DateState::BE_DOWN || $date['status'] == DateState::DOWN): ?>
+<p class='aligncenter color_gray mt80 '>此约会已下线</p>
+<?php endif; ?>
 <script>
 
     $(".toback").on('click', function(){
@@ -67,12 +69,14 @@
 
 
     $(".btn_cancel").on('click', function(){
-        if(confirm("确定取消发布?")) {
-            $.ajax({
+        $.util.confirm(
+            "取消发布",
+            '你的约会将下架',
+            $.util.ajax({
                 type: 'PUT',
-                url: '/date/edit/' + <?= $date['id'] ?> + "/3",
+                url: '/date/edit/' + <?= $date['id'] ?> +"/3",
                 dataType: 'json',
-                success: function (res) {
+                func: function (res) {
                     if (typeof res === 'object') {
                         if (res.status) {
                             $.util.alert(res.msg);
@@ -82,8 +86,9 @@
                         }
                     }
                 }
-            });
-        };
+            }),null
+        );
+
 
     });
 
