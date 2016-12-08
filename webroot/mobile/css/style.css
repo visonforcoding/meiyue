@@ -24,7 +24,7 @@
 .login_box_btn .login_group{display:box;display: -webkit-box;-webkit-box-pack: justify;}
 .login_box_btn .login_group .btn{width:48%;}
 .loginbox .getvalid{text-decoration: none;border:1px #5d5a57 solid;text-align:center;display: block;color:#fff;padding:0 .06rem;height:28px;line-height: 26px;font-size:12px;/*max-width:2.1rem;*/}
-.loginbox .getvalid.disabled{text-decoration: none;border:1px #5d5a57 solid;text-align:center;color:#c8c9cb;display: inline-block;width:1.8rem;height:28px;line-height: 26px;}
+.loginbox .getvalid.disabled{text-decoration: none;border:1px #5d5a57 solid;text-align:center;color:#c8c9cb;display: inline-block;height:28px;line-height: 26px;}
 .fogetpwd{color:#eab96a;font-size:13px;text-decoration: underline;opacity: .8;}
 .loginbox div{border-bottom:1px #4a3d28 solid; padding:.3rem 0;margin-top:.16rem;padding-left:.2rem;color:#eab96a;font-size:16px;}
 .loginbox input::-webkit-input-placeholder { /* WebKit browsers */ color: #514128 } 
@@ -1133,7 +1133,7 @@ color:#999;padding:.1rem;}
 .find_place_list .items-block .choose .radio-btn{color:#EAB96A;}
 .find_place_list .items-block .commend{}
 .find_place_list .items-block .l_right .con_detail{height:22px;line-height: 20px;font-size: 11px;width:74px;margin-top:.6rem;}
-.find_place_list .items-block .place_address{min-height: 1rem;}
+.find_place_list .items-block .place_address{min-height: 1rem;max-width:98%;}
 .place-choose-text{padding-right:.1rem;}
 .serch-history ul{overflow:hidden;}
 .serch-history ul li,.search-link ul li{border-bottom:1px #efefef solid;padding:0 .3rem;height:40px;}
