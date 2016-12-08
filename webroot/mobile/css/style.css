@@ -1138,7 +1138,7 @@ color:#999;padding:.1rem;}
 .chart-systerm-box .timebox{text-align: center;margin-top:.6rem;color:#999999;font-size: 11px;}
 .cover_left_info .hot{margin-left:.2rem;}
 .rechage-record{background: #fff;}
-.rechage-record li{height:40px;}
+.rechage-record li{height:40px;border-bottom:1px #efefef solid;padding:0 .3rem;}
 /*生成海报*/
 .tocode{background: rgba(0,0,0,.8);position: fixed;width:100%;max-width: 750px;margin:auto;top:0;bottom:0;}
 .tocode .codebox{background: #fff;width:90%;border-radius: 5px;padding:.3rem .4rem;}
