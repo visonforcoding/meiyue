@@ -108,10 +108,11 @@ class ActivityController extends AppController
 
     /**
      * @param string|null $id Activity id.
+     * @param int|0 $action 是否可取消0不可取消，1可取消.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($id = null, $action = 0)
     {
         $this->handCheckLogin();
         $activity = $this->Activity->get($id, ['contain' => ['Actregistrations'=> function($q){
@@ -150,7 +151,7 @@ class ActivityController extends AppController
 
         $current_time = new Time();
         //检查是否在规定可取消时间
-        if($current_time->diffInDays($activity['start_time'], false) < 3 && ($botBtSts==2)) {
+        if($current_time->diffInDays($activity['start_time'], false) > $activity['cancelday'] && ($botBtSts == 2)) {
             $botBtSts = 3;
         }
 
@@ -165,6 +166,7 @@ class ActivityController extends AppController
         $this->set([
             'regist_item' => $regist_item,
             'botBtSts' => $botBtSts,
+            'cancancle' => $action,
             'user' => $this->user,
             'activity' => $activity,
             'pageTitle' => '美约-活动详情'
@@ -187,7 +189,7 @@ class ActivityController extends AppController
                     $actre = $actreTable->get($id, ['contain' => 'Activity']);
                     $start_time = $actre['activity']['start_time'];
                     $current_time = new Time();
-                    if($current_time->diffInDays($start_time, false) >= 3) {
+                    if($current_time->diffInDays($start_time, false) >= $actre['activity']['cancelday']) {
                         $return_count = $actre['cost'] - $actre['punish'];
                         //生成流水
                         //扣除 报名费用
@@ -211,7 +213,6 @@ class ActivityController extends AppController
                             'remark'=> "扣除报名费"
                                     .$actre['punish_percent']."%（即".$actre['punish'].")",
                         ]);
-
                         $activityTable = $this->Activity;
                         $activity = $actre['activity'];
                         if($user->gender == 1) {
@@ -322,7 +323,7 @@ class ActivityController extends AppController
                 }
             }
             //判断余额是否充足
-            if($this->user->money < $price * $num) {
+            if($this->user->money < $price * $num && $price) {
                 return $this->Util->ajaxReturn(false, '美币余额不足！');
             }
 
@@ -428,7 +429,7 @@ class ActivityController extends AppController
             $actres = $actreTable->find('all',
                 [
                     'contain' => ['User' => function($q) {
-                            return $q->select(['id', 'nick', 'birthday', 'gender', 'avatar']);
+                            return $q->select(['id', 'nick', 'birthday', 'gender', 'avatar', 'recharge']);
                         }
                     ]
                 ])

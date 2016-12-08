@@ -138,11 +138,9 @@
         var num = parseInt($('#num').val());
         var price = <?= isset($price)?$price:0; ?>;
         var money = <?= isset($user)?$user->money:''; ?>;
-        if(num * price > money) {
-
+        if((num * price > money) && price) {
             $.util.alert('余额不足！');
             return;
-
         }
         //if(confirm("输入付款密码")) {
         $(this).removeAttr('id');

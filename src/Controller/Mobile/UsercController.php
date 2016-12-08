@@ -152,27 +152,18 @@ class UsercController extends AppController {
             ->page($page)
             ->orderAsc('Activity.start_time')
             ->map(function($row) {
-
                 $row->date = getMD($row->activity->start_time);
                 $row->time = getHIS($row->activity->start_time, $row->activity->end_time);
                 $curdatetime = new Time();
                 $row->bustr = '';
                 if($row->activity->end_time < $curdatetime) {
-
                     $row->bustr = '已经结束';
-
                 } else if (($row->activity->start_time < $curdatetime) && ($curdatetime < $row->activity->end_time)) {
-
                     $row->bustr = '正在进行';
-
                 } else if ($row->activity->start_time > $curdatetime) {
-
                     $row->bustr = '即将开始';
-
                 }
-
                 return $row;
-
             })
             ->toArray();
         return $this->Util->ajaxReturn(['datas'=>$datas]);

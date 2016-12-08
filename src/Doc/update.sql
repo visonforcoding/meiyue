@@ -647,3 +647,14 @@ AUTO_INCREMENT=1
 ALTER TABLE `lm_user`
 	ADD COLUMN `charm` FLOAT NULL DEFAULT '0' COMMENT '魅力值' AFTER `recharge`;
 
+#技能表添加字段
+ALTER TABLE `lm_skill`
+	ADD COLUMN `class` VARCHAR(50) NOT NULL COMMENT '技能图标' AFTER `name`,
+	ADD COLUMN `q_key` VARCHAR(50) NOT NULL COMMENT '地址关键字（多个关键字之间使用\'$\'隔开，最多10个关键字）' AFTER `class`,
+	ADD COLUMN `poi_cls` VARCHAR(50) NOT NULL COMMENT 'POI分类' AFTER `q_key`,
+	ADD COLUMN `is_shown` TINYINT NOT NULL DEFAULT '1' COMMENT '是否显示' AFTER `poi_cls`,
+	ADD COLUMN `shown_order` SMALLINT NOT NULL DEFAULT '0' COMMENT '显示顺序，数值越小越靠前' AFTER `is_shown`;
+
+#派对添加字段
+ALTER TABLE `lm_activity`
+	ADD COLUMN `cancelday` TINYINT NOT NULL DEFAULT '3' COMMENT '允许取消的时间必须早开始日期天数以上' AFTER `remark`;

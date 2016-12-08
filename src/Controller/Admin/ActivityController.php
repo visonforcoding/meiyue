@@ -43,6 +43,13 @@ public function index()
         ]);
         $this->set('activity', $activity);
         $this->set('_serialize', ['activity']);
+        $this->set([
+            'pageTitle' => '派对管理',
+            'bread' => [
+                'first' => ['name' => '活动管理'],
+                'second' => ['name' => '派对管理'],
+            ],
+        ]);
     }
 
     /**
@@ -64,7 +71,14 @@ public function index()
                  $this->Util->ajaxReturn(['status'=>false, 'msg'=>getMessage($errors),'errors'=>$errors]);
             }
         }
-                $this->set(compact('activity'));
+        $this->set(compact('activity'));
+        $this->set([
+            'pageTitle' => '添加派对',
+            'bread' => [
+                'first' => ['name' => '派对管理'],
+                'second' => ['name' => '添加派对'],
+            ],
+        ]);
     }
 
     /**
