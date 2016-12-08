@@ -370,8 +370,9 @@ class ApiController extends AppController {
                 ->where(['gender' => 2,'status'=>3])
                 ->limit(10)->formatResults(function($items) {
                     return $items->map(function($item) {
-                                $item['avatar'] = 'http://m-my.smartlemon.cn/' . createImg($item['avatar']) .
+                                $item['avatar'] = $this->Util->getServerDomain(). createImg($item['avatar']) .
                                         '?w=184&h=184&fit=stretch';
+                                $item['link'] = '/index/homepage/'.$item['id'];
                                 return $item;
                             });
                 })
