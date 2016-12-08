@@ -33,7 +33,6 @@
 							</div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="请输入昵称" />
-								<i class="iconfont r_icon"></i>
 							</div>
 						</div>
 					</li>
@@ -42,7 +41,6 @@
 							<div class="home_list_l_info required"><span class="itemsname">真</span><span class="itemsname">实</span><span class="itemsname">姓</span><span class="itemsname">名：</span><i class="iconfont ico"></i></div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="请输真实姓名" />
-								<i class="iconfont r_icon"></i>
 							</div>
 						</div>
 					</li>
@@ -50,37 +48,14 @@
 						<div class="home_items">
 							<div class="home_list_l_info"><span class="itemsname">出</span><span class="itemsname">生</span><span class="itemsname">日</span><span class="itemsname">期：</span></div>
 							<div class="home_list_r_info">
-								<div class="outerinput">
-									<input type="date" placeholder="请输入日期" value="2015-09-24"/></div>
-								<i class="iconfont r_icon">&#xe605;</i>
+								<input type="text" placeholder="请输入日期" value="2015-09-24"/>
 							</div>
-						</div>
-					</li>
-					<li class="start_sign">
-						<div class="home_items">
-							<div class="home_list_l_info"><span class="itemsname">星</span><span class="itemsname">座：</span></div>
-							<div class="home_list_r_info">
-								<div class="outerselect" style="opacity: 0;">
-									<span>星座</span>
-									<select name="start_sign">
-										<option value="" selected="selected">星座</option>
-										<option value="">水瓶座</option>
-										<option value="">白羊座</option>
-										<option value="">金牛座</option>
-										<option value="">双子座</option>
-										<option value="">巨蟹座</option>
-									</select>
-								</div>
-								<i class="iconfont r_icon">&#xe605;</i>
-							</div>
-						</div>
 					</li>
 					<li>
 						<div class="home_items">
 							<div class="home_list_l_info"><span class="itemsname">体</span><span class="itemsname">重：</span></div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="您的体重" />&nbsp;kg
-								<i class="iconfont r_icon">&#xe605;</i>
 							</div>
 						</div>
 					</li>
@@ -89,25 +64,55 @@
 							<div class="home_list_l_info required"><span class="itemsname short_name">身</span><span class="itemsname">高：</span><i class="iconfont ico"></i></div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="您的身高" />&nbsp;cm
-								<i class="iconfont r_icon">&#xe605;</i>
 							</div>
 						</div>
 					</li>
-					<li>
+					<li class="bwh">
 						<div class="home_items">
 							<div class="home_list_l_info"><span class="itemsname">三</span><span class="itemsname">围：</span></div>
 							<div class="home_list_r_info">
-								<input type="text" placeholder="请输入三围" />
-								<i class="iconfont r_icon">&#xe605;</i>
+								<input type="tel" placeholder="胸围" style="width:30px;" /> | <input type="tel" placeholder="腰围" style="width:30px;" /> | <input type="tel" placeholder="臀围" style="width:30px;" />
 							</div>
 						</div>
 					</li>
-					<li>
+					<li class="start_sign right-ico">
+						<div class="home_items">
+							<div class="home_list_l_info"><span class="itemsname">星</span><span class="itemsname">座：</span></div>
+							<div class="home_list_r_info">
+								<select name="start_sign">
+									<option value="" selected="selected">水平座</option>
+									<option value="">水瓶座</option>
+									<option value="">白羊座</option>
+									<option value="">金牛座</option>
+									<option value="">双子座</option>
+									<option value="">巨蟹座</option>
+								</select>
+							</div>
+						</div>
+					</li>
+					<li class="emontion  right-ico">
 						<div class="home_items">
 							<div class="home_list_l_info"><span class="itemsname">罩</span><span class="itemsname">杯：</span></div>
 							<div class="home_list_r_info">
-								<input type="text" placeholder="请输入罩杯" />
-								<i class="iconfont r_icon">&#xe605;</i>
+								<select name="state">
+									<option value="">a</option>
+									<option value="">b</option>
+									<option value="">c</option>
+									<option value="">d</option>
+								</select>
+							</div>
+						</div>
+					</li>
+					<li class="emontion right-ico">
+						<div class="home_items">
+							<div class="home_list_l_info"><span class="itemsname">情</span><span class="itemsname">感</span><span class="itemsname">状</span><span class="itemsname">态：</span></div>
+							<div class="home_list_r_info">
+								<select name="state">
+									<option value="">单身</option>
+									<option value="">恋爱</option>
+									<option value="">已婚</option>
+									<option value="">离异</option>
+								</select>
 							</div>
 						</div>
 					</li>
@@ -116,16 +121,14 @@
 							<div class="home_list_l_info"><span class="itemsname">职</span><span class="itemsname">业：</span></div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="请输入职业" />
-								<i class="iconfont r_icon">&#xe605;</i>
 							</div>
 						</div>
 					</li>
 					<li>
 						<div class="home_items">
-							<div class="home_list_l_info"><span class="itemsname short_name">家</span><span class="itemsname">乡</span></div>
+							<div class="home_list_l_info"><span class="itemsname short_name">家</span><span class="itemsname">乡：</span></div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="请输入家乡" />
-								<i class="iconfont r_icon">&#xe605;</i>
 							</div>
 						</div>
 					</li>
@@ -134,23 +137,6 @@
 							<div class="home_list_l_info"><span class="itemsname">所</span><span class="itemsname">在</span><span class="itemsname">地</span><span class="itemsname">区：</span></div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="请输入所在地区" />
-								<i class="iconfont r_icon">&#xe605;</i>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="home_items">
-							<div class="home_list_l_info"><span class="itemsname">情</span><span class="itemsname">感</span><span class="itemsname">状</span><span class="itemsname">态：</span></div>
-							<div class="home_list_r_info">
-								<div class="select_type">
-									<select name="state">
-										<option value="">单身</option>
-										<option value="">恋爱中</option>
-										<option value="">已婚</option>
-										<option value="">离异</option>
-									</select>
-								</div>
-								<i class="iconfont r_icon">&#xe605;</i>
 							</div>
 						</div>
 					</li>
@@ -159,13 +145,12 @@
 							<div class="home_list_l_info"><span class="itemsname">工</span><span class="itemsname">作</span><span class="itemsname">经</span><span class="itemsname">历：</span></div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="工作经历" />
-								<i class="iconfont r_icon">&#xe605;</i>
 							</div>
 						</div>
 					</li>
 			</div>
 			<!--爱好-->
-			<div class="home_fill_basic_info hobbies">
+			<div class="home_fill_basic_info home_fill_hobby">
 				<div class="items_title">
 					<h3>兴趣爱好</h3>
 				</div>
@@ -175,7 +160,6 @@
 							<div class="home_list_l_info"><span class="itemsname">常出没地点：</span></div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="请输入地点" />
-								<i class="iconfont r_icon"></i>
 							</div>
 						</div>
 					</li>
@@ -184,7 +168,6 @@
 							<div class="home_list_l_info"><span class="itemsname">喜欢的美食：</span></div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="请输入美食" />
-								<i class="iconfont r_icon"></i>
 							</div>
 						</div>
 					</li>
@@ -193,7 +176,6 @@
 							<div class="home_list_l_info"><span class="itemsname">喜欢的音乐：</span></div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="请输入音乐" />
-								<i class="iconfont r_icon"></i>
 							</div>
 						</div>
 					</li>
@@ -202,7 +184,6 @@
 							<div class="home_list_l_info"><span class="itemsname">喜欢的电影：</span></div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="请输入电影" />
-								<i class="iconfont r_icon"></i>
 							</div>
 						</div>
 					</li>
@@ -211,7 +192,6 @@
 							<div class="home_list_l_info"><span class="itemsname">喜欢的运动/娱乐：</span></div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="运动/娱乐" />
-								<i class="iconfont r_icon"></i>
 							</div>
 						</div>
 					</li>
@@ -219,15 +199,14 @@
 						<div class="home_items">
 							<div class="home_list_l_info"><span class="itemsname">个性签名：</span></div>
 							<div class="home_list_r_info">
-								<input type="text" placeholder="个性签名" />
-								<i class="iconfont r_icon">&#xe605;</i>
+								<div>宁愿在宝马里哭，也不要在自行车上笑</div>
 							</div>
 						</div>
 					</li>
 				</ul>
 			</div>
 			<!--个性标签-->
-			<div class="home_fill_basic_info">
+			<div class="home_fill_basic_info  home_fill_hobby">
 				<div class="items_title">
 					<h3>我的标签</h3>
 				</div>
@@ -237,14 +216,13 @@
 							<div class="home_list_l_info"><span class="itemsname">个性标签：</span></div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="请选择" readonly="readonly" />
-								<i class="iconfont r_icon">&#xe605;</i>
 							</div>
 						</div>
 					</li>
 				</ul>
 			</div>
 			<!--微信号-->
-			<div class="home_fill_basic_info">
+			<div class="home_fill_basic_info  home_fill_hobby">
 				<div class="items_title">
 					<h3>我的微信 <i>（用户查看你的微信你会有收入哦）</i></h3>
 				</div>
@@ -254,7 +232,6 @@
 							<div class="home_list_l_info"><span class="itemsname">微信号：</span></div>
 							<div class="home_list_r_info">
 								<input type="text" placeholder="请输入" />
-								<i class="iconfont r_icon">&#xe605;</i>
 							</div>
 						</div>
 					</li>
