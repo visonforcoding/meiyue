@@ -20,6 +20,7 @@ class DateController extends AppController
      */
     public function index()
     {
+        $this->handCheckLogin();
         if($this->request->is("post")) {
             $datas = $this->Date
                 ->find("all", [
@@ -51,7 +52,19 @@ class DateController extends AppController
                     return $row;
                 });
             });
-            return $this->Util->ajaxReturn(['datas' => $datas->toArray(), 'status' => true]);
+            //已下线的置底
+            $sortDowns = [];
+            $sortNorms = [];
+            foreach($datas as $data) {
+                if($data->status == DateState::getDateStatStr(DateState::DOWN)
+                    || $data->status == DateState::getDateStatStr(DateState::BE_DOWN)) {
+                    $sortDowns[] = $data;
+                }else {
+                    $sortNorms[] = $data;
+                }
+            }
+            $sort = array_merge($sortNorms, $sortDowns);
+            return $this->Util->ajaxReturn(['datas' => $sort, 'status' => true]);
         }
         $this->set(["user" => $this->user, 'pageTitle' => '美约-约会管理']);
     }

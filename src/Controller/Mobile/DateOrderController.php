@@ -46,6 +46,7 @@ class DateOrderController extends AppController
      * @param type $skill_id
      */
     public function orderSkill($skill_id){
+        $this->handCheckLogin();
        $UserSkillTable = TableRegistry::get('UserSkill');
        $data = $UserSkillTable->get($skill_id,[
            'contain'=>[

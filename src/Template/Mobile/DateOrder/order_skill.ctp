@@ -219,7 +219,7 @@ $(document).on('tap','.place_link',function(){
 
 var dPicker = new mydateTimePicker();
 dPicker.init(choosedateCallBack);
-$("#datetime").on('click', function () {
+$("#time").on('click', function () {
     dPicker.show();
 });
 

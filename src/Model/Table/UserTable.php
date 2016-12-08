@@ -48,6 +48,12 @@ class UserTable extends Table {
             'className' => 'UserFans',
             'foreignKey' => 'following_id'
         ]);
+        $this->belongsToMany('Skills', [
+            'className'=>'Skill',
+            'joinTable'=>'lm_user_skill',
+            'foreignKey'=>'user_id',
+            'targetForeignKey'=>'skill_id'
+        ]);
         $this->hasMany('Follows', [
             'className' => 'UserFans',
             'foreignKey' => 'user_id'

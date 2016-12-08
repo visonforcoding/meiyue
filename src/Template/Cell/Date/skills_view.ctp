@@ -6,25 +6,25 @@
         </div>
         <!--内容-->
         <div class="choose_mark_con inner">
-            <?php foreach ($topSkills as $top): ?>
+            <?php foreach ($skills as $item): ?>
+                <?php if(count($item[1]) > 0): ?>
                 <div class="choose_mark__items">
-                    <h3 class="commontitle mt20 "><?= $top->name ?></h3>
+                    <h3 class="commontitle mt20 "><?= $item[0]['name'] ?></h3>
                     <ul class="bgff">
-                        <?php foreach ($userSkills as $skill): ?>
-                            <?php if ($top->id == $skill->skill->parent_id): ?>
-                                <li class="skill-item"
-                                    user-skill-id="<?= $skill['id']?>"
-                                    skill-name="<?= $skill['skill']['name'] ?>"
-                                    cost="<?= $skill['cost']['money'] ?>">
-                                    <div class="choose_marks">
-                                        <span class="iconfont">&#xe624;</span>
-                                        <i><?= $skill['skill']['name'] ?></i>
-                                    </div>
-                                </li>
-                            <?php endif; ?>
+                        <?php foreach ($item[1] as $sitem): ?>
+                            <li class="skill-item"
+                                user-skill-id="<?= $sitem['id']?>"
+                                skill-name="<?= $sitem['skill']['name'] ?>"
+                                cost="<?= $sitem['cost']['money'] ?>">
+                                <div class="choose_marks">
+                                    <span class="iconfont">&#xe624;</span>
+                                    <i><?= $sitem['skill']['name'] ?></i>
+                                </div>
+                            </li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
+                <?php endif; ?>
             <?php endforeach; ?>
         </div>
     </div>
