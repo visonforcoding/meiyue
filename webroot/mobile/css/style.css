@@ -319,7 +319,7 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .date_detail_place .otherinfo .iconfont{margin-right:.05rem;font-size: 14px;vertical-align: middle;color:#c2c2c2;}
 .date_detail_place .place_info .ft0{font-size:0;}
 .date_detail_place .place_info .ft0 .name{font-size: 14px;vertical-align: middle;color:#666;}
-.date_detail_place .place_info .ft0 .age{vertical-align: middle;}
+.date_detail_place .place_info .ft0 .age{vertical-align: middle;line-height:18px;}
 .date_detail_place .place_info .userinfo span{display: inline-block;width:.64rem;height:18px;background: #eab96a;color:#fff;text-align: center;font-size: 10px;border-radius: 3px;margin-left:5px;}
 .date_detail_place{margin-bottom:.2rem;}
 .activity_list section .date_detail_place:last-of-type{margin-bottom:0;}
@@ -845,7 +845,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .rank_list .rank_header li span{display: inline-block;padding:0 .2rem;height:32px;}
 .rank_list .rank_header li.current span{border-bottom:2px #EAB96A solid;color:#eab96a;}
 .rank_con .place {background: url(icon/tou.png) no-repeat center center;background-size: contain;display: block;width: .6rem;height: .68rem;
-text-align: center;line-height: .62rem;font-size: 18px;color: #666;font-weight: bold;margin-right: .3rem;}
+text-align: center;line-height: .62rem;font-size: 18px;color: #666;margin-right: .3rem;}
 .rank_con .silver{background: url(icon/tou1.png) no-repeat center center;background-size: contain;width: .72rem;height: .62rem;display: block;color:#fd6a56;}
 .invite{padding:.3rem .3rem;background: #fff;}
 .rank_con li{padding:.25rem 0;}
