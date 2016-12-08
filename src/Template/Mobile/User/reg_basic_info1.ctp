@@ -50,7 +50,6 @@
                         </div>
                         <div class="home_list_r_info">
                             <input id="nick" name="nick" type="text" placeholder="请输入昵称" />
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
@@ -59,7 +58,6 @@
                         <div class="home_list_l_info "><span class="itemsname">真</span><span class="itemsname">实</span><span class="itemsname">姓</span><span class="itemsname">名：</span><i class="iconfont ico"></i></div>
                         <div class="home_list_r_info">
                             <input id="truename" name="truename" type="text" placeholder="请输真实姓名" />
-                            <i class="iconfont r_icon"></i>
                         </div>
                     </div>
                 </li>
@@ -68,16 +66,59 @@
                         <div class="home_list_l_info"><span class="itemsname">出</span><span class="itemsname">生</span><span class="itemsname">日</span><span class="itemsname">期：</span></div>
                         <div class="home_list_r_info">
                             <input id="birthday" name="birthday" type="date" placeholder="请输入日期" value="1992-09-24"/>
-                            <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
                 </li>
-                <li class="start_sign">
+               
+                <li>
+                    <div class="home_items">
+                        <div class="home_list_l_info"><span class="itemsname">体</span><span class="itemsname">重：</span></div>
+                        <div class="home_list_r_info">
+                            <input id="weight" name="weight" type="number" placeholder="您的体重" />&nbsp;<i class="ml10">KG</i>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="home_items">
+                        <div class="home_list_l_info "><span class="itemsname short_name">身</span><span class="itemsname">高：</span><i class="iconfont ico"></i></div>
+                        <div class="home_list_r_info">
+                            <input id="height" name="height" type="number" placeholder="您的身高" />&nbsp;CM
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="home_items">
+                        <div class="home_list_l_info"><span class="itemsname">三</span><span class="itemsname">围：</span></div>
+                        <div class="home_list_r_info">
+                            <input name="b" type="number" placeholder="腰围" style="width:30px;" />
+                            <input name="w" type="number" placeholder="胸围" style="width:30px;" />
+                            <input name="h" type="number" placeholder="臀围" style="width:30px;" />
+                        </div>
+                    </div>
+                </li>
+                 
+                <li class="emontion  right-ico">
+                    <div class="home_items">
+                        <div class="home_list_l_info"><span class="itemsname">罩</span><span class="itemsname">杯：</span></div>
+                        <div class="home_list_r_info">
+                            <select name="cup">
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C" selected="selected">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                            </select>
+                        </div>
+                    </div>
+                </li>
+                <li class="start_sign  right-ico">
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">星</span><span class="itemsname">座：</span></div>
                         <div class="home_list_r_info">
-                            <select id="zodiac"  name="zodiac" style="-webkit-appearance: none;">
-                                <option value="0" selected="selected">星座</option>
+                            <select id="zodiac"  name="zodiac">
+                                <option value="0" selected="selected">选星座</option>
                                 <option value="1">白羊座</option>
                                 <option value="2">金牛座</option>
                                 <option value="3">双子座</option>
@@ -91,52 +132,17 @@
                                 <option value="11">水瓶座</option>
                                 <option value="12">双鱼座</option>
                             </select>
-                            <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
                 </li>
-                <li>
+                 <li class="emontion   right-ico">
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">体</span><span class="itemsname">重：</span></div>
+                        <div class="home_list_l_info"><span class="itemsname">情</span><span class="itemsname">感</span><span class="itemsname">状</span><span class="itemsname">态：</span></div>
                         <div class="home_list_r_info">
-                            <input id="weight" name="weight" type="number" placeholder="您的体重" />&nbsp;<i class="ml10">KG</i><i class="iconfont r_icon">&#xe605;</i>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="home_items">
-                        <div class="home_list_l_info "><span class="itemsname short_name">身</span><span class="itemsname">高：</span><i class="iconfont ico"></i></div>
-                        <div class="home_list_r_info">
-                            <input id="height" name="height" type="number" placeholder="您的身高" />&nbsp;cm
-                            <i class="iconfont r_icon">&#xe605;</i>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">三</span><span class="itemsname">围：</span></div>
-                        <div class="home_list_r_info">
-                            <input name="b" type="number" placeholder="腰围" style="width:30px;" />
-                            <input name="w" type="number" placeholder="胸围" style="width:30px;" />
-                            <input name="h" type="number" placeholder="臀围" style="width:30px;" />
-                            <i class="iconfont r_icon">&#xe605;</i>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">罩</span><span class="itemsname">杯：</span></div>
-                        <div class="home_list_r_info">
-                            <select name="cup">
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C" selected="selected">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
-                                <option value="F">F</option>
-                                <option value="G">G</option>
+                            <select id="state" name="state">
+                                <option value="1">单身</option>
+                                <option value="2">私密</option>
                             </select>
-                            <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
                 </li>
@@ -145,16 +151,15 @@
                         <div class="home_list_l_info"><span class="itemsname">职</span><span class="itemsname">业：</span></div>
                         <div class="home_list_r_info">
                             <input id="profession" name="profession" type="text" placeholder="请输入职业" />
-                            <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
                 </li>
+
                 <li>
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname short_name">家</span><span class="itemsname">乡</span></div>
+                        <div class="home_list_l_info"><span class="itemsname short_name">家</span><span class="itemsname">乡：</span></div>
                         <div class="home_list_r_info">
                             <input id="hometown" name="hometown" type="text" placeholder="请输入家乡" />
-                            <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
                 </li>
@@ -163,22 +168,10 @@
                         <div class="home_list_l_info"><span class="itemsname">所</span><span class="itemsname">在</span><span class="itemsname">地</span><span class="itemsname">区：</span></div>
                         <div class="home_list_r_info">
                             <input id="city" name="city" type="text" placeholder="请输入所在地区" />
-                            <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
                 </li>
-                <li class="emontion">
-                    <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">情</span><span class="itemsname">感</span><span class="itemsname">状</span><span class="itemsname">态：</span></div>
-                        <div class="home_list_r_info">
-                            <select id="state" name="state">
-                                <option value="1">单身</option>
-                                <option value="2">私密</option>
-                            </select>
-                            <i class="iconfont r_icon">&#xe605;</i>
-                        </div>
-                    </div>
-                </li>
+               
                 <!--            <li>
                                 <div class="home_items">
                                     <div class="home_list_l_info"><span class="itemsname">工</span><span class="itemsname">作</span><span class="itemsname">经</span><span class="itemsname">历：</span></div>

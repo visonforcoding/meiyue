@@ -26,11 +26,11 @@
                 <div class="home_items">
                     <div class="home_list_l_info ">
                         <span class="itemsname">昵</span><span class="itemsname">称：</span>
-                        <i class="iconfont ico"></i>
+                       
                     </div>
                     <div class="home_list_r_info">
                         <input name="nick" id="nick" type="text" placeholder="请输入昵称" />
-                        <i class="iconfont r_icon"></i>
+                       
                     </div>
                 </div>
             </li>
@@ -39,7 +39,7 @@
                     <div class="home_list_l_info"><span class="itemsname">出</span><span class="itemsname">生</span><span class="itemsname">日</span><span class="itemsname">期：</span></div>
                     <div class="home_list_r_info">
                         <input id="birthday" name="birthday" type="date" placeholder="请输入日期" value="1989-09-24"/>
-                        <i class="iconfont r_icon">&#xe605;</i>
+                       
                     </div>
                 </div>
             </li>
@@ -47,7 +47,7 @@
                 <div class="home_items">
                     <div class="home_list_l_info"><span class="itemsname">体</span><span class="itemsname">重：</span></div>
                     <div class="home_list_r_info">
-                        <input id="weight" name="weight" type="number" placeholder="您的体重" />&nbsp;<i class="ml10">KG</i><i class="iconfont r_icon">&#xe605;</i>
+                        <input id="weight" name="weight" type="number" placeholder="您的体重" />&nbsp;KG
                     </div>
                 </div>
             </li>
@@ -56,7 +56,6 @@
                     <div class="home_list_l_info "><span class="itemsname short_name">身</span><span class="itemsname">高：</span><i class="iconfont ico"></i></div>
                     <div class="home_list_r_info">
                         <input id="height" name="height" type="number" placeholder="您的身高" />&nbsp;cm
-                        <i class="iconfont r_icon">&#xe605;</i>
                     </div>
                 </div>
             </li>
@@ -65,16 +64,14 @@
                     <div class="home_list_l_info"><span class="itemsname">职</span><span class="itemsname">业：</span></div>
                     <div class="home_list_r_info">
                         <input id="profession" name="profession" type="text" placeholder="请输入职业" />
-                        <i class="iconfont r_icon">&#xe605;</i>
                     </div>
                 </div>
             </li>
             <li>
                 <div class="home_items">
-                    <div class="home_list_l_info"><span class="itemsname short_name">家</span><span class="itemsname">乡</span></div>
+                    <div class="home_list_l_info"><span class="itemsname short_name">家</span><span class="itemsname">乡：</span></div>
                     <div class="home_list_r_info">
                         <input id="hometown" name="hometown" type="text" placeholder="请输入家乡" />
-                        <i class="iconfont r_icon">&#xe605;</i>
                     </div>
                 </div>
             </li>
@@ -83,7 +80,6 @@
                     <div class="home_list_l_info"><span class="itemsname">所</span><span class="itemsname">在</span><span class="itemsname">地</span><span class="itemsname">区：</span></div>
                     <div class="home_list_r_info">
                         <input id="city" name="city" type="text" placeholder="请输入所在地区" />
-                        <i class="iconfont r_icon">&#xe605;</i>
                     </div>
                 </div>
             </li>
