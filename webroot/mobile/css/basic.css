@@ -246,7 +246,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #dadada;}
 .bg-active{background:#eab96a;}
 .bg-light{background: #ccc;}
 /*字号*/
-.lagernum{font-size: 18px;}
+.lagernum{font-size: 17px;}
 .smalldes{font-size: 12px;color:#666;}
 .smallnum{font-size: 12px;}
 .rcon{color:#c2c2c2;font-size: 12px;}
