@@ -31,22 +31,26 @@ class IndexController extends AppController {
         ]);
     }
 
+    
+    /**
+     * 土豪榜
+     */
     public function findRichList() {
-        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
-        $limit = 10;
-        $top3 = $FlowTable->find()
-                    ->contain([
-                        'User'=>function($q){
-                                return $q->select(['id','avatar','nick']);
-                            },
-                     ])
-                    ->select(['user_id','total'=>'sum(amount)'])
-                     ->where(['type'=>4])                
-                    ->group('user_id')               
-                    ->orderDesc('total')
-                     ->offset(0)               
-                    ->limit(3)
-                    ->toArray();
+        $UserTable = TableRegistry::get('User');
+        $query = $UserTable->find()->select(['id','avatar','nick','recharge'])
+                              ->where(['enabled'=>1,'gender'=>1])
+                              ->orderDesc('recharge')
+                              ->offset(0)
+                              ->limit(3);
+        if($this->user){
+            $user_id = $this->user->id;
+            $query->contain([
+                            'Fans'=>function($q)use($user_id){
+                                return $q->where(['user_id'=>$user_id]);
+                            }
+                        ]);
+        }
+        $top3 = $query->toArray();
         $this->set([
             'user' => $this->user,
             'pageTitle' => '美约',
@@ -58,19 +62,19 @@ class IndexController extends AppController {
      * 获取土豪榜
      */
     public function getRichList($page){
-        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
-        $limit = 10;
-        $query = $FlowTable->find()
-                    ->contain([
-                        'User'=>function($q){
-                                return $q->select(['id','avatar','nick','phone','gender'])->where(['gender'=>1]);
-                            },
-                     ])
-                    ->select(['user_id','total'=>'sum(amount)'])
-                    ->where(['type'=>4])                
-                    ->group('user_id')
-                    ->orderDesc('total')
-                    ->limit($limit);
+        $UserTable = TableRegistry::get('User');
+        $query = $UserTable->find()->select(['id','avatar','nick','recharge'])
+                          ->where(['enabled'=>1,'gender'=>1])
+                          ->orderDesc('recharge')
+                          ->limit(10);
+        if($this->user){
+            $user_id = $this->user->id;
+            $query->contain([
+                            'Fans'=>function($q)use($user_id){
+                                return $q->where(['user_id'=>$user_id]);
+                            }
+                        ]);
+        }
         if($page=1){
             $query->offset(3);
         }else{
@@ -110,8 +114,10 @@ class IndexController extends AppController {
             });
         }
         $query->where(['enabled' => 1, 'status' => 3, 'gender' => 2]);
+        //身高范围
         $heightL = $this->request->query('heightL');
         $heightR = $this->request->query('heightR');
+        //年龄范围
         $ageL = $this->request->query('ageL');
         $ageR = $this->request->query('ageR');
         $birthdayL = Time::now()->year - intval($ageL);
