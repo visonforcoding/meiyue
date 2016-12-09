@@ -663,3 +663,7 @@ ALTER TABLE `lm_activity`
 #用户表添加字段
 ALTER TABLE `lm_user`
 	ADD COLUMN `consumed` FLOAT NULL DEFAULT '0' COMMENT '消费总额' AFTER `recharge`;
+
+#约单表添加字段
+ALTER TABLE `lm_dateorder`
+	ADD COLUMN `is_read` TINYINT NOT NULL DEFAULT '0' COMMENT '是否已被阅读' AFTER `prepay_time`;

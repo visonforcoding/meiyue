@@ -28,8 +28,8 @@
                         </a>
                     </li>
                     <li class="follow">
-                        <a class="like">喜欢 <i>12</i></a>
-                        <a class="like" onclick="window.location.href='/userc/follows'">粉丝 <i>122</i></a>
+                        <a class="like" onclick="window.location.href='/userc/fans'">喜欢 <i><?= $focount; ?></i></a>
+                        <a class="like" onclick="window.location.href='/userc/follows'">粉丝 <i><?= $facount; ?></i></a>
                     </li>
                 </ul>
             </div>
@@ -54,7 +54,7 @@
                 <a href="/userc/dateorder"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe60a;</i><span class="itemsname">订单管理</span></div>
                     <div class="home_list_r_info">
-                        <span class="tips"></span>
+                       <!-- <span class="tips"></span>-->
                         <i class="iconfont">&#xe605;</i>
                     </div>
                 </a>

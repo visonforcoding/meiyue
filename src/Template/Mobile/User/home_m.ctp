@@ -28,8 +28,8 @@
                         </a>
                     </li>
                     <li class="follow flex flex_justify">
-                        <div><a href="/userc/fans">赞赏我 <i>12</i></a></div>
-                        <div><a href="/userc/likes"> 关注 <i>12</i></a></div>
+                        <div><a href="/userc/fans">赞赏我 <i><?= $facount?></i></a></div>
+                        <div><a href="/userc/likes"> 关注 <i><?= $focount?></i></a></div>
                         <div><a href="/userc/likes">访客 <i>122</i></a></div>
                     </li>
                 </ul>
@@ -53,7 +53,7 @@
                 <a href="/userc/dateorder"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe60a;</i><span class="itemsname">我的约单</span></div>
                     <div class="home_list_r_info">
-                        <span class="color_y">3</span>
+                        <!--<span class="color_y">3</span>-->
                         <i class="iconfont">&#xe605;</i>
                     </div>
                 </a>
@@ -62,7 +62,7 @@
                 <a href="/userc/my-activitys"  class="home_items">
                     <div class="home_list_l_info"><i class="iconfont">&#xe60b;</i><span class="itemsname">我的派对</span></div>
                     <div class="home_list_r_info">
-                        <span class="color_y">3</span>
+                        <!--<span class="color_y">3</span>-->
                         <i class="iconfont">&#xe605;</i>
                     </div>
                 </a>

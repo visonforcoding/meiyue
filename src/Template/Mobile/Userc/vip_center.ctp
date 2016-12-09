@@ -16,7 +16,7 @@
                 </div>
                 <div class="r_info">
                     <h3 class="topinfo">
-                        还可以看
+                        剩余
                         <i class="lagernum color_y">
                             <?php
                             use Cake\I18n\Time;
@@ -31,7 +31,7 @@
                     </h3>
                     <h3 class="smalldes">
                         <span>
-                            共可以看
+                            共
                             <?php
                                 if(isset($counter->browse_count)){
                                     echo checkIsEndless($counter->browse_count)?'无限':$counter->browse_count;
@@ -130,4 +130,5 @@
 
 <script>
     LEMON.sys.back('/user/index');
+    LEMON.event.unrefresh();
 </script>
