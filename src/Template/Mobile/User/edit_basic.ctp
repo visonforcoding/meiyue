@@ -295,9 +295,9 @@
         for (key in tagsData) {
 
             var item = tagsData[key];
-            html += "[<a class='mark'>" + item['name'] +
+            html += "<a class='mark'>" + item['name'] +
                 "<input type='text' name='tags[_ids][]' value='" + item['id']
-                + "' tag-name='" + item['name'] + "' hidden></a>]";
+                + "' tag-name='" + item['name'] + "' hidden></a>";
 
         }
         $("#tag-container").html(html);
