@@ -4,7 +4,7 @@
     <div class="loginbox">
         <div class="username">
             <i class="iconfont">&#xe608;</i>
-            <input type="number" id="phone" value="" placeholder="手机号"  />
+            <input type="number" id="phone" value="" placeholder="手机号" autofocus='autofocus'  />
         </div>
         <div class="password">
             <i class="iconfont">&#xe606;</i>

@@ -161,14 +161,15 @@
                         </div>
                     </div>
                 </li>
-               
-                <li>
+                 <li class='plaintext-box'>
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">工</span><span
+                       <div class="home_list_l_info"><span class="itemsname">工</span><span
                                 class="itemsname">作</span><span class="itemsname">经</span><span
-                                class="itemsname">历：</span></div>
-                        <div class="home_list_r_info">
-                            <input name="career" type="text" placeholder="工作经历" value="<?= $user->career; ?>"/>
+                                class="itemsname">历：</span>
+                        </div>
+                        <div class="home_list_r_info  plaintext">
+                           <!--  <input name="sign" type="text" placeholder="个性签名" value=""/> -->
+                            <div class="plaintext-con" contenteditable="true"><?= $user->career; ?></div>
                         </div>
                     </div>
                 </li>
@@ -219,8 +220,8 @@
                         </div>
                     </div>
                 </li>
-                <li>
-                    <div class="home_items plaintext-box">
+                <li class='plaintext-box'>
+                    <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">个性签名：</span></div>
                         <div class="home_list_r_info  plaintext">
                            <!--  <input name="sign" type="text" placeholder="个性签名" value=""/> -->
@@ -236,7 +237,7 @@
                 <h3>我的标签</h3>
             </div>
             <ul>
-                <li class="home-basic-mark">
+                <li class="home-basic-mark right-ico">
                     <div id="tag-container" class="home_items home-mark-box">
                           <?php foreach($user->tags as $tag): ?>
                             <a class='mark'><?= $tag['name']; ?><input type='text' name='tags[_ids][]' value='<?= $tag['id']; ?>' tag-name='<?= $tag['name']; ?>' hidden></a>

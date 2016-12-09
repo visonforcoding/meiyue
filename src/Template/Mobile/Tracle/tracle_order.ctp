@@ -1,4 +1,5 @@
 <header>
+    <div class='header'>
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>免费约拍报名</h1>
         <span id="submit-btn" class="r_btn">提交</span>
