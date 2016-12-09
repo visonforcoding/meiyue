@@ -515,8 +515,52 @@ class ActivityController extends AppController
     {
 
         try {
-            $user = $this->user;
-            $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+            $userTb = TableRegistry::get('User');
+            //我关注过的人
+            $user = null;
+            $followlist = [];
+            $mypaiming = null;
+            if($this->user) {
+                //获取我的排名
+                //该算法需要优化
+                if($this->user->recharge > 0 && $this->user->gender == 1) {
+                    $mypaiming = $userTb->find()->select(['recharge'])->where(['recharge >' => $this->user->recharge, 'gender' => 1])->count() + 1;
+                    $this->user->paiming = $mypaiming;
+                }
+                $user = $this->user;
+                $followTb = TableRegistry::get('UserFans');
+                if($user) {
+                    $followlist = $followTb->find('all')->where(['user_id' => $this->user->id])->toArray();
+                }
+            }
+            $i = 1;
+            $richs = $userTb->find()
+                ->select(['recharge', 'consumed', 'nick', 'id', 'avatar'])
+                ->where(['recharge >' => 0])
+                ->orderDesc('recharge')
+                ->limit(10)
+                ->map(function($row) use(&$i, $followlist, $user) {
+                    //检查是否关注
+                    $row['followed'] = false;
+                    if($user) {
+                        foreach($followlist as $item) {
+                            if($item->following_id == $row->id) {
+                                $row['followed'] = true;
+                            }
+                        }
+                    }
+
+                    //判断我的性别
+                    $row['ismale'] = true;
+                    if(!$user || $user->gender == 2) {
+                        $row['ismale'] = false;
+                    }
+                    $row['index'] = $i;
+                    $i++;
+                    return $row;
+                });
+            //旧的算法
+            /*$FlowTable = \Cake\ORM\TableRegistry::get('Flow');
             $followTb = TableRegistry::get('UserFans');
             $followlist = [];
             if($user) {
@@ -556,9 +600,8 @@ class ActivityController extends AppController
                     }
                     $i++;
                     return $row;
-                });
-            $richs = $query->toArray();
-            return $this->Util->ajaxReturn(['datas'=>$richs,'status' => true]);
+                });*/
+            return $this->Util->ajaxReturn(['datas'=>$richs, 'mydata' => $this->user, 'status' => true]);
         } catch(Exception $e) {
             return $this->Util->ajaxReturn(false, '服务器大姨妈啦~~');
         }

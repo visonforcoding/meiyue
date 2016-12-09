@@ -53,9 +53,9 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                         <li class="top-tab" act="rich_list"><span>土豪榜</span></li>
                     </ul>
                     <div class="rank_con">
-                        <div id="my-top">
-
-                        </div>
+                        <ul class="outerblock voted_list" id="my-top">
+                            <!-- 我的头牌 -->
+                        </ul>
                         <ul class="outerblock voted_list" id="top-list">
                             <!-- 头牌列表 -->
                         </ul>
@@ -127,7 +127,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             <span class="place silver">{{index}}</span>
             <div class="place_info">
             <span class="avatar">
-                <img src="/mobile/images/avatar.jpg">
+                <img src="{{user.avatar}}">
             </span>
                 <h3>
                 <span class="place_name"><i class="name">{{user.nick}}</i> <i class="vip">VIP 5</i><i
@@ -147,36 +147,6 @@ $activity_action = '/activity/index/';  //定义派对请求地址
     </li>
     {{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
     {{/datas}}
-</script>
-
-
-<script id="mytop-list-tpl" type="text/html">
-    {{#mydata}}
-    <li class="flex flex_justify" onclick="window.location.href='/index/homepage/{{user.id}}'">
-        <div class="flex">
-            <span class="place silver">{{index}}</span>
-            <div class="place_info">
-            <span class="avatar">
-                <img src="/mobile/images/avatar.jpg">
-            </span>
-                <h3>
-                <span class="place_name"><i class="name">{{user.nick}}</i> <i class="vip">VIP 5</i><i
-                        class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
-                <span class="place_number color_gray"><em class="color_y"><i
-                            class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
-                            本周魅力值：<i class="color_y max-num">{{total}}</i>
-                        </span>
-                </h3>
-            </div>
-        </div>
-        {{#ismale}}
-    <span class="button btn_dark suport-btn" onclick="window.location.href='/gift/index/{{user.id}}';event.stopPropagation(); ">
-        支持她
-    </span>
-        {{/ismale}}
-    </li>
-    {{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
-    {{/mydata}}
 </script>
 
 
@@ -187,21 +157,45 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             <div class="flex">
                 <span class="voted_place silver">{{index}}</span>
                 <div class="voted_place_info">
-                    <span class="avatar"><img src="{{buyer.avatar}}"/></span>
+                    <span class="avatar"><img src="{{avatar}}"/></span>
                     <h3>
-                        <span class="voted_name">{{buyer.nick}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip"><img src="/mobile/images/v.png" class="responseimg"/></span></span>
-                        <span class="voted_number color_gray">已消费：{{total}}美币</span>
+                        <span class="voted_name">{{nick}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip"><img src="/mobile/images/v.png" class="responseimg"/></span></span>
+                        <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
                 </div>
             </div>
             <div>
                 <div data-id="{{buyer.id}}" class="likeIt alignright"><i class='iconfont commico {{#followed}}activeico{{/followed}}'></i></div>
-                <div class="alignright"><i class='lagernum color_active'>{{total}}</i></div>
+                <div class="alignright"><i class='lagernum color_active'>{{recharge}}</i></div>
             </div>
         </div>
     </li>
-    {{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
     {{/datas}}
+</script>
+
+
+<script id="myrich-tpl" type="text/html">
+    {{#mydata}}
+    <li class='ul-con'>
+        <div class="voted_con flex flex_justify">
+            <div class="flex">
+                <span class="voted_place silver">{{paiming}}</span>
+                <div class="voted_place_info">
+                    <span class="avatar">
+                        <img src="{{avatar}}"/>
+                    </span>
+                    <h3>
+                        <span class="voted_name">{{nick}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip"><img src="/mobile/images/v.png" class="responseimg"/></span></span>
+                        <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
+                    </h3>
+                </div>
+            </div>
+            <div>
+                <div class="alignright"><i class='lagernum color_active'>{{recharge}}</i></div>
+            </div>
+        </div>
+    </li>
+    {{/mydata}}
 </script>
 
 <script id="nodata-tpl" type="text/html">
@@ -441,6 +435,17 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 success: function (res) {
                     $.util.hidePreloader();
                     if (res.status) {
+                        if('rich_list' == tab) {
+                            if(res.mydata.paiming) {
+                                var mytmpl = $('#myrich-tpl').html();
+                                var myrend = Mustache.render(mytmpl, res);
+                                $('#my-top').html(myrend);
+                            }
+                            var rendered = Mustache.render(template, res);
+                            $(obj.container_id).html(rendered);
+                            return;
+                        }
+                        $('#my-top').html('');
                         var rendered = Mustache.render(template, res);
                         $(obj.container_id).html(rendered);
                     }
@@ -453,7 +458,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
     var activityobj = new activity();
     activityobj.init();
 
-    $(document).on('tap', '.likeIt', function () {
+    /*$(document).on('tap', '.likeIt', function () {
         var user_id = $(this).data('id');
         var $obj = $(this);
         followIt(user_id,$obj);
@@ -467,7 +472,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 $.util.alert(res.msg);
             }
         })
-    }
+    }*/
 
     $(document).on('tap', '.act-item', function() {
         var actid = $(this).data('id');

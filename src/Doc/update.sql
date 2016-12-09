@@ -658,3 +658,8 @@ ALTER TABLE `lm_skill`
 #派对添加字段
 ALTER TABLE `lm_activity`
 	ADD COLUMN `cancelday` TINYINT NOT NULL DEFAULT '3' COMMENT '允许取消的时间必须早开始日期天数以上' AFTER `remark`;
+
+
+#用户表添加字段
+ALTER TABLE `lm_user`
+	ADD COLUMN `consumed` FLOAT NULL DEFAULT '0' COMMENT '消费总额' AFTER `recharge`;
