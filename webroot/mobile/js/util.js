@@ -119,7 +119,7 @@ $.util = {
             obj['type'] = 'post';
         }
         obj.success = function (json) {
-            if (json.code == 200) {
+            if (json.code != 403||json.code !=500) {
                 tmp(json);
             }
             if (json.code == 403) {
