@@ -667,3 +667,8 @@ ALTER TABLE `lm_user`
 #约单表添加字段
 ALTER TABLE `lm_dateorder`
 	ADD COLUMN `is_read` TINYINT NOT NULL DEFAULT '0' COMMENT '是否已被阅读' AFTER `prepay_time`;
+#订单删除
+ALTER TABLE `lm_dateorder`
+	ADD COLUMN `is_del` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '0未删除1女性删除2男性删除3双方删除' AFTER `is_read`;
+ALTER TABLE `lm_dateorder`
+	CHANGE COLUMN `is_del` `is_del` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '0未删除1男性2女性删除3双方删除' AFTER `is_read`;

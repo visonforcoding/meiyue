@@ -52,7 +52,7 @@
 <?= $this->element('footer', ['active' => 'chat']) ?>
 <?php $this->start('script'); ?>
 <script type="text/javascript">
-    $('.user').on('tap', function () {
+    $('.user').on('click', function () {
         var param = {};
         var accid = $(this).data('accid');
         var nick = $(this).data('nick');
@@ -60,6 +60,7 @@
         param['accid'] = accid;
         param['nick'] = nick;
         param['avatar'] = avatar;
+        param['msgtype'] = 'finsh_prepay';
         //param = JSON.stringify(param);
         alert(param);
         LEMON.event.imTalk(param);

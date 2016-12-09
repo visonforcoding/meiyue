@@ -679,5 +679,85 @@ class DateOrderController extends AppController
         
     }
     
+    /**
+     * 删除订单  假删除
+     */
+    public function removeOrder(){
+        $this->handCheckLogin();
+        $order_id = $this->request->data('order_id');
+        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+        $dateorder = $DateorderTable->get($order_id);
+        if($dateorder->is_del>0){
+            $dateorder->is_del = 3; 
+        }else{
+            $dateorder->is_del = $this->user->gender;
+        }
+        if($DateorderTable->save($dateorder)){
+            return $this->Util->ajaxReturn(true,'成功删除');
+        }else{
+            return $this->Util->ajaxReturn(true,'服务器开小差');
+        }
+    }
     
+    /**
+     * 
+     */
+    public function goOrder(){
+        $this->handCheckLogin();
+        $order_id = $this->request->data('order_id');
+        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+        $order = $DateorderTable->get($order_id,[
+                'contain'=>[
+                     'Dater' => function($q) {
+                                return $q->select(['id', 'nick', 'money']);
+                        }, 
+                ]
+            ]);
+        if($order->gender == 2){
+            //女性确认到达
+            $order->status = 13;
+            $res = $DateorderTable->save($order);
+        }else{
+          //男性确认到达
+            $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+            $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+        
+            //1.订单状态改变
+            //2.女方获得约单金
+            $order->status = 15;   //订单完成 
+            $w_pre_money = $order->dater->money;
+            $w_amount = $order->amount;
+            $order->dater->money = $order->dater->money+$w_amount;
+            $w_after_amount = $order->dater->money;
+            $w_income = 1;
+            
+            //生成流水
+            $w_flow = $FlowTable->newEntity([
+               'user_id'=> $order->dater->id,
+               'buyer_id'=>  0,
+               'relate_id'=>$order->id,
+               'type'=>12,
+               'type_msg'=>'约技能收款',
+               'income'=>$w_income,
+               'amount'=>$w_amount,
+               'price'=>$w_amount,
+               'pre_amount'=>$w_pre_money,
+               'after_amount'=>$w_after_amount,
+               'paytype'=>2, 
+               'remark'=> '24小时无操作订单自动完成'
+            ]);
+            
+            $order->dirty('dater',true);
+            $res = $DateorderTable->connection()
+                    ->transactional(function()use($FlowTable,&$w_flow,&$order,$DateorderTable){
+                return $FlowTable->save($w_flow)&&$DateorderTable->save($order);      
+            });
+        }
+        if($res){
+             return $this->Util->ajaxReturn(true,'确认成功');
+        }else{
+             return $this->Util->ajaxReturn(true,'服务器开小差');
+        }
+        
+    }
 }

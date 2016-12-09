@@ -181,7 +181,7 @@ class DateorderShell extends Shell {
             //超过24小时 双方无操作 约单金额自动打到美女账户中 
             //1.订单状态改变
             //2.女方获得约单金
-            $order->status = 14;   //订单完成 
+            $order->status = 15;   //订单完成 
             $w_pre_money = $order->dater->money;
             $w_amount = $order->amount;
             $order->dater->money = $order->dater->money+$w_amount;

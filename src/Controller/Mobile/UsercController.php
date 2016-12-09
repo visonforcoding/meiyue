@@ -461,7 +461,7 @@ class UsercController extends AppController {
         //交易流水
         $pre_amount = $this->user->money;
         if($this->user->money < $payment){
-            return $this->Util->ajaxReturn(['status'=>false,'code'=>'110','账户美币不足']);
+            return $this->Util->ajaxReturn(['status'=>false,'code'=>'201','账户美币不足']);
         }
         $this->user->money = $this->user->money - $payment;
         $user = $this->user;
