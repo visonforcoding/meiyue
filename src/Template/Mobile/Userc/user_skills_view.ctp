@@ -9,7 +9,7 @@
 </header>
 <div class="wraper">
     <form>
-        <div class="edit_ability bgff">
+        <div class="edit_ability bgff mt40">
             <ul class="outerblock">
                 <li>
                     <div id="skill-btn" class="items flex flex_justify">
@@ -44,27 +44,31 @@
                 </li>
             </ul>
         </div>
-        <div class="edit_ability bgff mt40">
+        <div class="edit_ability edit_ability-marks bgff mt40">
             <ul class="outerblock">
                 <li>
                     <div id="choose_tags_btn" class="items flex flex_justify">
                         <div class='col-importent'>个人标签</div>
+                         <div class='ability-marks-box'>
                         <div id="tag-container" class="r_info">
+
                             <?php if (!isset($userskill)): ?>
                                 <i class="smalldes">4个以内</i>
                                 <i class="iconfont rcon">&#xe605;</i>
                             <?php else: ?>
+                           
                                 <?php foreach ($userskill['tags'] as $item): ?>
-                                    [<a class="mark">
+                                    <a class="mark">
                                         <?= $item['name'] ?>
                                         <input type="text"
                                                name='tags[_ids][]'
                                                value="<?= $item['id'] ?>"
                                                tag-name="<?= $item['name'] ?>"
                                                hidden/>
-                                    </a>]
+                                    </a>
                                 <?php endforeach; ?>
                             <?php endif; ?>
+                             </div>
                         </div>
                     </div>
                 </li>
@@ -159,9 +163,9 @@
         var html = "";
         for (key in tagsData) {
             var item = tagsData[key];
-            html += "[<a class='mark'>" + item['name'] +
+            html += "<a class='mark'>" + item['name'] +
                 "<input type='text' name='tags[_ids][]' value='" + item['id']
-                + "' tag-name='" + item['name'] + "' hidden></a>]";
+                + "' tag-name='" + item['name'] + "' hidden></a>";
         }
         $("#tag-container").html(html);
     }

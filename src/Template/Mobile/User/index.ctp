@@ -41,7 +41,7 @@
         <ul>
             <li>
                 <a href="/userc/my-purse"  class="home_items">
-                    <div class="home_list_l_info">
+                    <div class="home_list_l_info flex">
                         <i class="iconfont">&#xe60e;</i><span class="itemsname">我的钱包</span>
                     </div>
                     <div class="home_list_r_info">
@@ -52,7 +52,7 @@
             </li>
             <li>
                 <a href="/userc/dateorder"  class="home_items">
-                    <div class="home_list_l_info"><i class="iconfont">&#xe60a;</i><span class="itemsname">订单管理</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60a;</i><span class="itemsname">订单管理</span></div>
                     <div class="home_list_r_info">
                        <!-- <span class="tips"></span>-->
                         <i class="iconfont">&#xe605;</i>
@@ -61,7 +61,7 @@
             </li>
             <li>
                 <a href="/userc/my-activitys"  class="home_items">
-                    <div class="home_list_l_info"><i class="iconfont">&#xe60b;</i><span class="itemsname">我的派对</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60b;</i><span class="itemsname">我的派对</span></div>
                     <div class="home_list_r_info">
                         <i class="iconfont">&#xe605;</i>
                     </div>
@@ -69,7 +69,7 @@
             </li>
             <li>
                 <a href="/user/voted"  class="home_items">
-                    <div class="home_list_l_info"><i class="iconfont">&#xe60c;</i><span class="itemsname">我的评选</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60c;</i><span class="itemsname">我的评选</span></div>
                     <div class="home_list_r_info">
 
                         <i class="iconfont">&#xe605;</i>
@@ -82,7 +82,7 @@
         <ul>
             <li>
                 <a href="/userc/user-skills-index"  class="home_items">
-                    <div class="home_list_l_info"><i class="iconfont">&#xe60d;</i><span class="itemsname">我的技能</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60d;</i><span class="itemsname">我的技能</span></div>
                     <div class="home_list_r_info">
                         <i class="iconfont">&#xe605;</i>
                     </div>
@@ -90,7 +90,7 @@
             </li>
             <li id="my-dates-btn">
                 <a href="/date/index"  class="home_items">
-                    <div class="home_list_l_info"><i class="iconfont">&#xe60f;</i><span class="itemsname">我发起的约会</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60f;</i><span class="itemsname">我发起的约会</span></div>
                     <div class="home_list_r_info">
                         <i class="iconfont">&#xe605;</i>
                     </div>
@@ -98,7 +98,7 @@
             </li>
             <li>
                 <a href="/userc/my-tracle"  class="home_items">
-                    <div class="home_list_l_info"><i class="iconfont">&#xe610;</i><span class="itemsname">我的动态</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe610;</i><span class="itemsname">我的动态</span></div>
                     <div class="home_list_r_info">
 
                         <i class="iconfont">&#xe605;</i>
@@ -111,7 +111,7 @@
         <ul>
             <li>
                 <a href="#this"  class="home_items">
-                    <div class="home_list_l_info"><i class="iconfont ico">&#xe611;</i><span class="itemsname">联系客服</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe611;</i><span class="itemsname">联系客服</span></div>
                     <div class="home_list_r_info">
 
                         <i class="iconfont">&#xe605;</i>
@@ -120,7 +120,7 @@
             </li>
             <li>
                 <a href="#this"  class="home_items">
-                    <div class="home_list_l_info"><i class="iconfont ico">&#xe612;</i><span class="itemsname">分享</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe612;</i><span class="itemsname">分享</span></div>
                     <div class="home_list_r_info">
 
                         <i class="iconfont">&#xe605;</i>
@@ -129,7 +129,7 @@
             </li>
             <li>
                 <a href="/userc/install"  class="home_items">
-                    <div class="home_list_l_info"><i class="iconfont ico">&#xe612;</i><span class="itemsname">设置</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe612;</i><span class="itemsname">设置</span></div>
                     <div class="home_list_r_info">
 
                         <i class="iconfont">&#xe605;</i>
