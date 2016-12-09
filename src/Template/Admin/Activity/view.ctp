@@ -9,7 +9,6 @@
 <body>
 <div class="activity view large-9 medium-8 columns content">
     <table class="vertical-table table table-hover table-bordered">
-    
     <tr>
         <th>大图url</th>
         <td><?= h($activity->big_img) ?></td>
