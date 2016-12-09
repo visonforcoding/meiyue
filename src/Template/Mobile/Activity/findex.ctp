@@ -40,6 +40,9 @@
                         <li class="top-tab" act="rich_list"><span>土豪榜</span></li>
                     </ul>
                     <div class="rank_con">
+                        <ul id="my-top">
+                            <!-- 我的头牌 -->
+                        </ul>
                         <ul class="outerblock voted_list" id="top-list">
                             <!-- 头牌列表 -->
                         </ul>
@@ -108,6 +111,36 @@
     </li>
     {{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
     {{/datas}}
+</script>
+
+
+<script id="mytop-list-tpl" type="text/html">
+    {{#mydata}}
+    <li class="flex flex_justify" onclick="window.location.href='/index/homepage/{{user.id}}'">
+        <div class="flex">
+            <span class="place silver">{{index}}</span>
+            <div class="place_info">
+            <span class="avatar">
+                <img src="/mobile/images/avatar.jpg">
+            </span>
+                <h3>
+                <span class="place_name"><i class="name">{{user.nick}}</i> <i class="vip">VIP 5</i><i
+                        class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
+                <span class="place_number color_gray"><em class="color_y"><i
+                            class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
+                            本周魅力值：<i class="color_y max-num">{{total}}</i>
+                        </span>
+                </h3>
+            </div>
+        </div>
+        {{#ismale}}
+    <span class="button btn_dark suport-btn" onclick="window.location.href='/gift/index/{{user.id}}';event.stopPropagation(); ">
+        支持她
+    </span>
+        {{/ismale}}
+    </li>
+    {{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
+    {{/mydata}}
 </script>
 
 
@@ -332,7 +365,7 @@
     $.extend(topPage.prototype, {
         init: function () {
             this.addTabEvent();
-            this.loadDataWithoutPage(this.tab_action[0]);
+            this.loadDataWithoutPage(this.tab_action[0], 'top_week');
         },
         addTabEvent: function () {
             var obj = this;
@@ -343,18 +376,18 @@
                 $(this).addClass('current');
                 if ($(this).attr('act') == 'top_week') {
                     obj.cur_tab = obj.week_tab;
-                    obj.loadDataWithoutPage(obj.tab_action[0]);
+                    obj.loadDataWithoutPage(obj.tab_action[0], 'top_week');
                 } else if ($(this).attr('act') == 'top_month') {
                     obj.cur_tab = obj.month_tab;
-                    obj.loadDataWithoutPage(obj.tab_action[1]);
+                    obj.loadDataWithoutPage(obj.tab_action[1], 'top_month');
                 } else if ($(this).attr('act') == 'rich_list') {
                     obj.cur_tab = obj.rich_tab;
-                    obj.loadDataWithoutPage(obj.tab_action[2]);
+                    obj.loadDataWithoutPage(obj.tab_action[2], 'rich_list');
                 }
 
             });
         },
-        loadDataWithoutPage: function (action) {
+        loadDataWithoutPage: function (action, tab) {
             var obj = this;
             var template = $(this.tabDataTpl[this.cur_tab]).html();
             Mustache.parse(template);   // optional, speeds up future uses
@@ -366,6 +399,12 @@
                 success: function (res) {
                     $.util.hidePreloader();
                     if (res.status) {
+                        if(('top_week' == tab || 'top_month' == tab) && res.mydata) {
+                            var mytemp = $('#mytop-list-tpl').html();
+                            var myrend = Mustache.render(mytemp, res);
+                            console.log(myrend);
+                            $('#my-top').html(myrend);
+                        }
                         var rendered = Mustache.render(template, res);
                         $(obj.container_id).html(rendered);
                     }

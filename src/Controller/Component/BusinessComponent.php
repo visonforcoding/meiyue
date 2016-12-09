@@ -65,7 +65,8 @@ class BusinessComponent extends Component
         $mytop->user->age = getAge($mytop->user->birthday);
         $mytop->ishead = true;
         if(!$mytop->total) {
-            $mytop->total = 0;
+            //如果魅力值为0则不参与排名
+            return null;
         }
 
         //获取我的排名对象
