@@ -455,7 +455,7 @@ class ActivityController extends AppController
             }
             $limit = 10;
             $where = Array(
-                'income' => 1
+                'income' => 1,
             );
 
             if('week' == $type) {
@@ -493,17 +493,14 @@ class ActivityController extends AppController
                     return $row;
                 });
             $tops = $query->toArray();
-            $sortops = Array();
+            $mytop = Array();
 
             if($user) {
                 if($user->gender == 2) {
-                    $sortops[] = $this->Business->getMyTop($type, $this->user->id);
+                    $mytop = $this->Business->getMyTop($type, $this->user->id);
                 }
             }
-            $sortops = array_merge($sortops, $tops);
-
-
-            return $this->Util->ajaxReturn(['datas'=>$sortops,'status' => true]);
+            return $this->Util->ajaxReturn(['datas'=>$tops, 'mydata' => $mytop, 'status' => true]);
         } catch(Exception $e) {
             return $this->Util->ajaxReturn(false, '服务器大姨妈啦~~');
         }
