@@ -219,10 +219,11 @@
                     </div>
                 </li>
                 <li>
-                    <div class="home_items">
+                    <div class="home_items plaintext-box">
                         <div class="home_list_l_info"><span class="itemsname">个性签名：</span></div>
-                        <div class="home_list_r_info">
-                            <input name="sign" type="text" placeholder="个性签名" value="<?= $user->sign; ?>"/>
+                        <div class="home_list_r_info  plaintext">
+                           <!--  <input name="sign" type="text" placeholder="个性签名" value=""/> -->
+                            <div class="plaintext-con" contenteditable="true"><?= $user->sign; ?></div>
                         </div>
                     </div>
                 </li>
