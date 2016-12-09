@@ -13,8 +13,8 @@
 /*
  * 登录/注册
  * */
-.loginwraper{background: url(../images/login_bg.jpg) no-repeat center center;background-size:cover;top:0;left:0;right:0;bottom:0;overflow: hidden;position:fixed;max-width:750px;margin:0 auto;z-index: 1;}
-.loginpage{position:relative;z-index:2;}
+.loginwraper{max-width:750px;z-index: 1;background: url(../images/login_bg.jpg) no-repeat center center;background-size:cover;width:100%;height:100%;position: fixed;top:0;bottom:0;}
+.loginpage{z-index: 2;position: relative;}
 .loginpage .logo{width:1.39rem;height:1rem;margin:1rem auto 0;}
 .loginpage .logo img{width:100%;height:auto;display: block;}
 .loginbox,.check_sex_type{padding:0 .74rem;margin-top:1.2rem;}
@@ -29,7 +29,8 @@
 .loginbox div{border-bottom:1px #4a3d28 solid; padding:.3rem 0;margin-top:.16rem;padding-left:.2rem;color:#eab96a;font-size:16px;}
 .loginbox input::-webkit-input-placeholder { /* WebKit browsers */ color: #514128 } 
 .loginbox div i{margin-right:.3rem;}
-.outerlogin,.register_bottom_tips{width:100%;text-align: center;margin-top:1.1rem;position: fixed;bottom:.4rem;}
+.outerlogin{width:100%;text-align: center;margin-top:2.4rem;}
+.register_bottom_tips{width:100%;text-align: center;margin-top:.6rem;}
 .outerlogin a{color:#987845;}
 .register_bottom_tips a{color:#fff;opacity:.5;}
 .getlogin{text-align: center;font-size:12px;margin-top: 15px;}
@@ -37,7 +38,7 @@
 @media only screen and (max-width: 320px){
 	.loginpage .logo{margin:.8rem auto 0;}
 	.loginbox{margin-top:.6rem;}
-	/*.outerlogin{margin-top:.6rem;}*/
+	
 }
 @media only screen and (max-height: 500px){
 	.register_bottom_tips{margin-top:.8rem;}
@@ -63,7 +64,7 @@ header{overflow: hidden;}
 .iden_r_box{position: relative;width:2.5rem;}
 .iden_r_box .potion{position:absolute;right:0;top:0;color:#c2c2c2;}
 .identify_basic_info .right_ico{color:#959da7;}
-.identify_footer_potion,.identify_dark_potion{height:42px;width:100%;max-width: 750px;position:fixed;/*margin:0 auto;*/line-height: 42px;text-align: center;color:#fff;background: #eab96a;bottom:0;font-size:18px;z-index:99;}
+.identify_footer_potion,.identify_dark_potion{position:fixed;height:42px;width:100%;max-width: 750px;/*margin:0 auto;*/line-height: 42px;text-align: center;color:#fff;background: #eab96a;bottom:0;font-size:18px;z-index:99;}
 .disabledbtn{background: #c2c2c2;}
 .identify_dark_potion{background: #fff;color:#999;box-shadow: 0 0 1px rgba(0,0,0,.2);}
 /*
@@ -97,11 +98,12 @@ header{overflow: hidden;}
 .home_items_list ul,.home_fill_basic_info ul{padding:0 0 0 .3rem;overflow: hidden;}
 .home_items_list ul li,.home_fill_basic_info ul li{border-bottom: 1px #efefef solid;padding-right:.3rem;}
 .home_items_list ul li .home_items,.home_fill_basic_info ul li .home_items{display: -webkit-box;-webkit-box-align: center;-webkit-box-pack: justify;height:45px;}
-.home_items_list ul li .home_list_l_info{height:40px;line-height: 40px;}
+.home_items_list ul li .home_list_l_info{height:45px;/*line-height: 45px;*/}
 .home_items_list ul li:last-of-type,.home_fill_basic_info ul li:last-of-type{border-bottom:none;}
-.home_items_list .home_list_l_info i,.home_fill_basic_info .home_list_l_info i{font-size:20px;color:#eab96a;position: absolute;/*vertical-align: middle;line-height: 20px;4.4*/display: block;height:20px;}
+.home_items_list .home_list_l_info i,.home_fill_basic_info .home_list_l_info i{font-size:20px;color:#eab96a;position: absolute;/*vertical-align: middle;line-height: 20px;4.4*/display: block;}
+.home_items_list .home_list_l_info i{height:20px;line-height: 21px;position: inherit;}
 .home_items_list .home_list_l_info i.ico{color:#959da7;}
-.home_items_list .home_list_l_info .itemsname{padding-left:.67rem;color:#000;/*vertical-align: middle;line-height: 20px;4.4*/display: block;height:20px;}
+.home_items_list .home_list_l_info .itemsname{padding-left:.2rem;color:#000;display: block;}
 .home_items_list .cashpic{font-size:16px;font-weight: bold;color:#eab96a;/*margin-right:.3rem;*/height:.52rem;display: inline-block;line-height: .52rem;}
 .home_items_list .cashpic img{width:auto;height:.52rem;vertical-align:top;margin-right:.1rem;}
 .homepage{background: url(icon/home_header.jpg) no-repeat center center;background-size:100% 2.3rem;width:7.5rem;height:2.3rem;}
@@ -270,9 +272,9 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .purse_list_bottom  p{color:#303030;text-align: center;}
 .puse_bills_con{overflow:hidden;background: #fff;padding:0 0 0 .3rem;}
 .puse_bills_con li{border-bottom:1px #efefef solid;display:-webkit-box;display: box;-webkit-box-pack: justify;-webkit-box-align: center;padding-right:.3rem;}
-.puse_bills_con li .puse_bills_left{max-width: 75%;padding:.2rem 0 .4rem;}
-.puse_bills_con li .puse_bills_left h3{color:#303030;margin-bottom:.2rem;text-align: justify;word-break: break-word;}
-.puse_bills_con li .puse_bills_left  time{color:#777;font-size: 11px;}
+.puse_bills_con li .puse_bills_left{max-width: 75%;padding:.2rem 0;}
+.puse_bills_con li .puse_bills_left h3{color:#303030;margin-bottom:.05rem;text-align: justify;word-break: break-word;}
+.puse_bills_con li .puse_bills_left  time{color:#999;font-size: 12px;}
 .puse_bills_con li .puse_bills_right{font-size: 15px;color:#303030;}
 /**/
 /*谁支持我*/
@@ -310,17 +312,18 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 /*约会管理*/
 .activity_list_con{width:2000%;overflow:hidden;}
 .activity_list_con section{float:left;width:7.5rem;overflow: hidden;}
-.date_list_header{width:100%;background: #fff;height:45px;line-height:45px;color:#efefef;}
+.date_list_header{width:100%;background: #fff;height:45px;line-height:45px;color:#efefef;/*font-size:22px;*/}
 .date_list_header .headertab{display: inline-block;margin:0 auto;text-align: center;padding:0 .2rem;height:45px;}
 .date_list_header div.cur .headertab{border-bottom:2px #eab96a solid;}
 .date_list_header div{color:#303030;font-size:15px;text-align: center;width:48%;display: inline-block;}
 .date_list_header div.cur{color:#eab96a;}
 .date_list_con{}
+.date_item_des .price{color:#666;}
 .date_list_con section{width:100%;}
 .date_list_con section li{padding-left:.3rem;margin-top:.2rem;background: #fff;}
 .date_list_con .date_item_des div.flex{padding-right:.3rem;padding-top:.2rem;padding-bottom:.2rem;}
 .date_list_con .itemsname{margin-right:.2rem;}
-.date_list_con time,.date_list_con address{font-size: 11px;color:#9f9f9f;line-height: 11px;}
+.date_list_con time,.date_list_con address{font-size: 12px;color:#9f9f9f;line-height: 11px;}
 .date_list_con time i,.date_list_con address i{color:#c2c2c2;margin-right:.1rem;font-size:13px;vertical-align: middle;}
 .date_list_con address{margin-top:.1rem;}
 .date_type{font-size: 12px;}
@@ -336,9 +339,9 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .date_detail_place .place_info .otherinfo{font-size: 13px;color:#666;}
 .date_detail_place .otherinfo .iconfont{margin-right:.05rem;font-size: 14px;vertical-align: middle;color:#c2c2c2;}
 .date_detail_place .place_info .ft0{font-size:0;}
-.date_detail_place .place_info .ft0 .name{font-size: 14px;vertical-align: middle;color:#666;}
-.date_detail_place .place_info .ft0 .age{vertical-align: middle;line-height:18px;}
-.date_detail_place .place_info .userinfo span{display: inline-block;width:.64rem;height:18px;background: #eab96a;color:#fff;text-align: center;font-size: 10px;border-radius: 3px;margin-left:5px;}
+.date_detail_place .place_info .ft0 .name{font-size: 14px;/*vertical-align: middle;*/color:#666;}
+.date_detail_place .place_info .ft0 .age{/*vertical-align: middle;line-height:18px;*/}
+.date_detail_place .place_info .userinfo span{display: inline-block;width:.64rem;height:13px;line-height:14px;background: #eab96a;color:#fff;text-align: center;font-size: 10px;border-radius: 1px;margin-left:2px;margin-top:1px;vertical-align: top;}
 .date_detail_place{margin-bottom:.2rem;}
 .activity_list section .date_detail_place:last-of-type{margin-bottom:0;}
 .date_detail_place .otherinfo address{margin-top:.1rem;}
@@ -368,6 +371,7 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .pay-shadow .pay-containner-con .title .closed{position: absolute;left:.4rem;color:#999999;font-size: 15px;}
 .pay-footer-tips{text-align: center;line-height: 60px;font-size: 16px;color:#666;}
 /*编辑约会*/
+.wraper .edit_date_box li{padding-right:0;}/*重写outblock li*/
 .edit_date_box ul{background: #fff; padding-left:0.3rem;}
 .edit_date_box .edit_date_items{height:.9rem;position: relative;}
 .edit_date_box .edit_date_items:after,.right-ico:after{content: " ";position:absolute;right:.3rem;width: 8px;height:8px;border: 1px solid #c2c2c2;border-bottom: 1px solid transparent;border-left: 1px solid transparent;-webkit-transform: rotate(45deg);transform: rotate(45deg);top:50%;margin-top:-4px;}
@@ -379,8 +383,9 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .edit_date_desc .title{color:#000;line-height: .6rem;}
 .edit_date_desc .text_con,.edit_date_desc .text_con textarea{width:100%;height:1.6rem;}
 .edit_date_desc .text_con textarea{padding:.1rem 0;font-size:12px;color:#777;border:none;text-align: justify;}
-/*.edit_date_box*/ .edit_r_marks{width:80%;overflow: hidden;padding:.1rem .6rem .1rem 0;line-height: .7rem;}
-.edit_r_marks a{height:26px;display: inline-block;border:1px #efefef solid;line-height: 26px;text-align: center;border-radius: 15px;
+/*.edit_date_box*/ .edit_r_marks{width:80%;overflow: hidden;padding:.1rem 0.6rem .1rem 0;line-height: .7rem;}
+.edit_ability-marks .ability-marks-box{line-height: .7rem;margin-left:.2rem;}
+.edit_ability a,.edit_r_marks a{height:26px;display: inline-block;border:1px #efefef solid;line-height: 26px;text-align: center;border-radius: 15px;
 color:#444;position:relative;padding:0 .15rem;margin-right:.1rem;font-size: 13px;color:#666;}
 .edit_r_marks a i{position: absolute;left:0;top:0;font-size: 14px;line-height: 0;}
 .edit_date_box .marks_edit{height:auto;line-height: .9rem;}
@@ -460,7 +465,7 @@ color:#fff; line-height: 20px;padding-right: .1rem;}
 .home_page .header{height:6.2rem;position: relative;}
 .home_page .header span{color:#fff;font-size: 20px;}
 .home_page .header .identify-info{position: absolute;right:.3rem;font-size: 10px;height:18px;line-height: 16px;border:1px #fff solid;border-radius: 3px;padding:0 .1rem;}
-.home_page .header .video-btn{top:50px;}
+.home_page .header .video-btn{top:50px;opacity: .5;}
 .home_page .header .id-btn{top:82px;}
 .home_page_basic{background: #fff;padding-top:.4rem;}
 .home_page_basic .home_name{color:#170e00;font-size: 16px;}
@@ -566,6 +571,9 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .share_list_leftcon .beauty{margin-top:.1rem;}
 .share_list_leftcon .beauty i{margin-left:.1rem;}
 .share_list_rightcon i{font-size: 15px;margin-right:15px;}
+/**/
+.rank_con{background: #f4f4f4;}
+.rank_con ul:first-of-type{margin-bottom:.4rem;}
 /*弹窗*/
 .popup{width:5.8rem;background: #fff;border-radius: 5px;padding:.7rem 0 0;font-size: 16px;}
 .wx_popup{position:relative;margin-top:-60px;}
@@ -653,7 +661,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .voted_list .voted_number .iconfont{font-size: 14px;vertical-align: middle;}
 .voted_list .voted_con .button{font-size:13px;width:1.6rem;height:24px;line-height: 22px;}
 .imgchange{font-size: 24px;position:absolute;bottom:0;right:0;color:rgba(0,0,0,.5);line-height: normal;}
-.suport-btn{margin-top:.08rem;}
+.suport-btn{margin-top:.08rem;height:24px;line-height: 25px;font-size: 13px;}
 /*约会详情*/
 .find_date_detail .date_top_con .place{width:1.6rem;height:1.6rem;overflow:hidden;display: block;}
 .find_date_detail .date_top_con .place img{width:100%;height:auto;display: block;}
@@ -761,9 +769,9 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .rich_list .voted_place_info h3{padding-top:.08rem;}
 .rich_list .silver{background: url(icon/tou1.png) no-repeat center center;background-size:contain; width:.72rem;height:.62rem;}
 .rich_list .voted_place{}
-.rich_list .voted_list .commico,.rich_list_first .beauty .commico{position:relative;color:#fd6a56;}
-.rich_list .voted_list .commico:after,.rich_list_first .beauty .commico:after{content: '\e61f';}
-.rich_list .voted_list .activeico:after,.rich_list_first .beauty .activeico:after{content: '\e61e';}
+.voted_list .commico,.rich_list_first .beauty .commico{position:relative;color:#fd6a56;}
+ .voted_list .commico:after,.rich_list_first .beauty .commico:after{content: '\e61f';}
+.voted_list .activeico:after,.rich_list_first .beauty .activeico:after{content: '\e61e';}
 /*活动*/
 .activity_list{overflow:hidden;}
 .activity_list .date_list{position:fixed;top:0;margin:auto;max-width: 750px;width:100%;z-index:11;box-shadow: 0 1px 5px rgba(0,0,0,.1);}
@@ -874,11 +882,11 @@ text-align: center;line-height: .62rem;font-size: 18px;color: #666;margin-right:
 .rank_con .place_info{height: .88rem;}
 .rank_con .place_info .avatar{width:.88rem;height:.88rem;overflow: hidden;position: absolute;border-radius: 50%;}
 .rank_con .place_info .avatar img,.rank_con .place_info h3 .place_name .cup img{width:100%;height:100%;display: block;}
-.rank_con .place_info h3{padding-left:1.1rem;padding-top:.08rem;}
+.rank_con .place_info h3{padding-left:1.1rem;padding-top:.15rem;}
 .rank_con .place_info h3 .place_name{display: block;font-size: 0;}
 .rank_con .place_info h3 .place_number{font-size: 12px;}
 .rank_con .place_info h3 .place_name .name{font-weight: bold;font-size: 13px;}
-.rank_con .place_info h3 .place_name .vip{display: inline-block;height:14px;width:32px;color:#fff;background: #fd6a56;line-height: 14px;border-radius: 2px;font-size: 9px;text-align: center;font-weight: 600;}
+.rank_con .place_info h3 .place_name .rich-vip{display: inline-block;width:20px;color:#fff;background: #fd6a56;border-radius: 2px;font-size: 9px;text-align: center;font-weight: 600;height:12px;line-height: 13px;}
 .rank_con .place_info h3 .place_name .cup{display: inline-block;width:.22rem;height:.24rem;}
 .rank_con .place_info h3 .place_name i{margin-right:.1rem;vertical-align: middle;}
 
@@ -899,6 +907,8 @@ box-shadow: 0 0 1px rgba(0,0,0,.2);}
 .ability_items li{height:70px;}
 .ability_items li .switch{margin-left:.2rem;}
 .edit_ability li,.edit_ability li .items{height:45px;}
+.edit_ability-marks li{height:auto;padding-top:.2rem;padding-bottom:.2rem;}
+.edit_ability-marks li .items{height:auto;}
 .edit_ability .date_text{padding:.2rem 0;}
 .edit_ability .date_text textarea{width:100%;height:66px;font-size:13px;color:#666;margin-top:.1rem;border:none;}
 /*
@@ -1141,6 +1151,7 @@ color:#999;padding:.1rem;}
 .rechage-record li{height:40px;border-bottom:1px #efefef solid;padding:0 .3rem;}
 .home-basic-mark .mark{height:26px;line-height: 26px;border-radius: 15px;border:1px #ccc solid;font-size: 13px;padding:0 .15rem;display: inline-block;margin-right:.1rem;}
 .home_fill_basic_info ul li.home-basic-mark{padding-top:.2rem;padding-bottom:.2rem;}
+.home_fill_basic_info .home-basic-mark .home-mark-box{height:auto;min-height: 20px;}
  .home_fill_basic_info ul .home-basic-mark .home_items{height:auto}
 .home-basic-mark .home_list_r_info{min-height: 25px;text-align:left}
 .home-basic-mark .home-mark-box{line-height: 35px;}
@@ -1170,6 +1181,7 @@ color:#999;padding:.1rem;}
 .search-link{background: #fff;}
 .search-link ul .iconfont{color:#999;margin-right:.1rem;font-size: 14px;}
 .home_fill_basic_info ul li.plaintext-box{padding-top:.2rem;padding-bottom:.2rem;}
+ .home_fill_basic_info .plaintext-box .home_items{height:auto;min-height: 25px;}
  .home_fill_basic_info ul .plaintext-box .plaintext{height:auto;}
 .plaintext-box .plaintext-con{max-width:5rem;outline:none;text-align: justify;word-break:break-all;user-modify: read-write-plaintext-only}
 /*未登录*/
