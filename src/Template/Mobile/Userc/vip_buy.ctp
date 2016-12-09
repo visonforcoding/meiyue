@@ -22,7 +22,7 @@
                             </h3>
                             <div class="smalldes closed" data-type = "0">
                                 <i class="iconfont color_y">&#xe62f;</i>
-                                点击关闭详情
+                                <i class="slide-btn-name">点击展开详情</i>
                             </div>
                             <div class="color_y" onclick="payView(<?= $item->id; ?>)">
                                 <i class="smalldes">￥</i>
@@ -78,7 +78,7 @@
                                 </h3>
                                 <div class="smalldes closed" data-type = "0">
                                     <i class="iconfont color_y">&#xe62f;</i>
-                                    点击关闭详情
+                                    <i class="slide-btn-name">点击展开详情</i>
                                 </div>
                                 <div class="color_y" onclick="payView(<?= $item->id; ?>)">
                                     <i class="smalldes">￥</i>
@@ -125,10 +125,12 @@
             case '0':
                 ele.removeClass('hidecon').addClass('showcon');
                 $(this).attr('data-type','1');
+                $(this).find('.slide-btn-name').text('点击关闭详情');
                 break;
             case '1':
                 ele.removeClass('showcon').addClass('hidecon');
                 $(this).attr('data-type','0');
+                $(this).find('.slide-btn-name').text('点击展开详情');
                 break;
             default:break;
         }

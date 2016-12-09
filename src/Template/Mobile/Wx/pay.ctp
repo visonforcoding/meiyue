@@ -1,6 +1,6 @@
 <header>
     <div class="header">
-        <i class="iconfont toback">&#xe602;</i>
+        <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>支付</h1>
     </div>
 </header>
@@ -118,5 +118,7 @@
             }
         }
     });
+
+    LEMON.event.unrefresh();
 </script>
 <?php $this->end('script'); ?>

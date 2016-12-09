@@ -1,6 +1,6 @@
 <header>
     <div class="header">
-        <i class="iconfont toback">&#xe602;</i>
+        <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>约会详情</h1>
         <span class="r_btn iconfont ico">&#xe603;</span>
     </div>
@@ -11,9 +11,9 @@
             <div class="l_info">
                 <span class="avatar">
                     <?php if ($user->gender == 1): ?>
-                        <img src="<?= $order->dater->avatar ?>"/>
+                        <a href="/index/homepage/<?= $order->dater->id;?>"><img src="<?= $order->dater->avatar ?>"/></a>
                     <?php else: ?>
-                        <img src="<?= $order->buyer->avatar ?>"/>
+                        <a href=""><img src="<?= $order->buyer->avatar ?>"/></a>
                     <?php endif; ?>
                 </span>
                 <div class="l_con">

@@ -1,6 +1,7 @@
 <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
+        <span class="r_btn release-btn" id="submit">保存</span>
         <h1>基本信息</h1>
     </div>
 </header>
@@ -268,7 +269,7 @@
 </div>
 
 <div style="height:62px;"></div>
-<a id="submit" class="identify_footer_potion">提交</a>
+<!--<a id="submit" class="identify_footer_potion">提交</a>-->
 <!--标签选择框-->
 <?= $this->cell('Date::tagsView', ['tags-select-view']); ?>
 <?= $this->start('script'); ?>
@@ -332,5 +333,10 @@
 
     });
 
+    LEMON.sys.back('/userc/edit-info');
+    LEMON.sys.setTopRight('保存')
+    window.onTopRight = function () {
+        $("#submit").trigger('click');
+    }
 </script>
 <?= $this->end('script'); ?>

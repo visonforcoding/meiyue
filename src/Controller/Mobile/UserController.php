@@ -34,7 +34,15 @@ class UserController extends AppController {
         $template = 'index';
         if ($this->user->gender == 1) {
             $template = 'home_m';
+
         }
+        $fanTb = TableRegistry::get('UserFans');
+        $fans = $fanTb->find()->where(['following_id' => $this->user->id])->count();
+        $followers = $fanTb->find()->where(['user_id' => $this->user->id])->count();
+        $this->set([
+            'facount' => $fans,
+            'focount' => $followers
+        ]);
         $this->set([
             'pageTitle' => '美约-我的',
             'user' => $this->user

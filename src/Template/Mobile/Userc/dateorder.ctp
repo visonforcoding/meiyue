@@ -5,7 +5,7 @@
     <li>
         <div class="date_item_des">
             <div class="flex flex_justify bdbottom">
-                <h3 class='maxwid70'><i class="itemsname color_y">[{{user_skill.skill.name}}]</i>{{user_skill.skill.name}}</h3>
+                <h3 class='maxwid70'><i class="itemsname color_y">[{{user_skill.skill.name}}]</i></h3>
                 <span class="customer color_y">{{buyer.nick}}</span>
             </div>
             <a style="display:block" href="/userc/order-detail/{{id}}">
@@ -63,7 +63,7 @@
 <?php $this->end('static') ?>
 <header>
     <div class="header">
-        <i class="iconfont toback">&#xe602;</i>
+        <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>我的订单</h1>
     </div>
 </header>

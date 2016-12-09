@@ -22,7 +22,7 @@
 <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
-        <h1>我的粉丝</h1>
+        <h1><?= $pageTitle; ?></h1>
     </div>
 </header>
 <div class="wraper">
