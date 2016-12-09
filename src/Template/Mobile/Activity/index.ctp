@@ -130,7 +130,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 <img src="{{user.avatar}}">
             </span>
                 <h3>
-                <span class="place_name"><i class="name">{{user.nick}}</i> <i class="vip">VIP 5</i><i
+                <span class="place_name"><i class="name">{{user.nick}}</i> <i class="rich-vip">VIP</i><i
                         class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
                 <span class="place_number color_gray"><em class="color_y"><i
                             class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
@@ -150,6 +150,25 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 </script>
 
 
+
+<script id="mytop-list-tpl" type="text/html">
+    {{#mydata}}
+    <li class="flex flex_justify" onclick="window.location.href='/index/homepage/{{user.id}}'">
+        <div class="flex">
+            <span class="place silver">{{index}}</span>
+            <div class="place_info">
+            <span class="avatar">
+                <img src="/mobile/images/avatar.jpg">
+            </span>
+                <h3>
+                <span class="place_name"><i class="name">{{user.nick}}</i> <i class="rich-vip">VIP</i><i
+                        class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
+                <span class="place_number color_gray"><em class="color_y"><i
+                            class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
+                            本周魅力值：<i class="color_y max-num">{{total}}</i>
+                        </span>
+                </h3>
+</script>
 <script id="rich-list-tpl" type="text/html">
     {{#datas}}
     <li class='ul-con'>
