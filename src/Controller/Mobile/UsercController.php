@@ -327,6 +327,7 @@ class UsercController extends AppController {
        }else{
          $where = ['dater_id'=>  $this->user->id];  
        }
+       
        if($query>1){
            switch ($query) {
                case 2:
@@ -338,6 +339,10 @@ class UsercController extends AppController {
                default:
                    break;
            }
+       }else{
+            if($this->user->gender==2){
+                $where[] = ['Dateorder.status >'=>2];
+            }
        }
        $orders = $DateorderTable->find()
                   ->contain([

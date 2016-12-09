@@ -124,6 +124,11 @@ class UserController extends AppController {
             if ($this->request->is('weixin')) {
                 $data['device'] = 'weixin';
             }
+            //默认昵称
+            $counts = $this->User->find()->count();
+            $nickname = '美约'.  str_pad($counts,6, 0,STR_PAD_LEFT);
+            $user->nick = $nickname;
+            $user->truename = $nickname;
             //默认头像
             $user->avatar = '/mobile/images/m_avatar_2.png';
             //定位记录
@@ -169,7 +174,7 @@ class UserController extends AppController {
         ]);
     }
     
-    
+ 
     public function mRegBasicInfo(){
         $user = $this->user;
         if ($this->request->is('post')) {

@@ -37,12 +37,80 @@ class DateOrderController extends AppController
 
     }
 
+    
+    
+    /**
+     * 约技能生成订单
+     * 
+     */
+    public function orderSkillCreateOrder(){
+       $this->handCheckLogin();
+       $UserSkillTable = TableRegistry::get('UserSkill');
+       $request = $this->request->data();
+       $date = $UserSkillTable->get($request['user_skill_id'],[
+           'contain'=>[
+               'User'=>function($q){
+                    return $q->select(['id','avatar','birthday','nick','truename','phone']);
+               },
+//               'Skill'=>function($q){
+//                    return $q->select(['skill_id'=>'Skill.id','name','q_key','poi_cls']);
+//               },        
+               'Cost'      
+           ]    
+       ]);
+       $lasth = ((new Time($request['end_time']))->hour-(new Time($request['start_time']))->hour);
+       if($lasth < 3){
+           return $this->Util->ajaxReturn(false,'约会时长至少要3个小时');
+       }
+       $price = $date->cost->money;
+       $amount = $price*$lasth;
+       $pre_precent = 0.2;    //预约金比例
+       $pre_pay = $amount*$pre_precent;
+       $DateorderTable = TableRegistry::get('Dateorder');
+       //生成约单
+       $dateorder = $DateorderTable->newEntity([
+           'consumer_id'=>  $this->user->id,
+           'dater_id'=>$date->user->id,
+           'dater_name'=>  $date->user->nick,
+           'date_time'=>  $lasth,
+           'consumer'=>  $this->user->nick,
+           'status'=>'1',
+           'user_skill_id'=>$request['user_skill_id'],
+           'site'=>$request['place_name'],
+           'site_lat'=>$request['coord_lat'],
+           'site_lng'=>$request['coord_lng'],
+           'price'=>$price,
+           'amount'=>$amount,
+           'pre_pay'=>$pre_pay,
+           'pre_precent'=>$pre_precent,
+           'start_time'=>$request['start_time'],
+           'end_time'=>$request['end_time'],
+       ]);
+       $res = $DateorderTable->save($dateorder);
+       if($res){
+           if($this->user->money < $pre_pay){
+               return $this->Util->ajaxReturn([
+                   'status'=>false,
+                   'msg'=>'余额不足支付预约金,请先充值',
+                   'code'=>201,
+                   'redirect_url'=>'/purse/recharge?redirect_url=/userc/dateorder'
+                   ]);
+           }
+           //成功生成订单
+           return $this->Util->ajaxReturn(['status'=>true,'msg'=>'预约成功','order_id'=>$res->id]);
+       }else{
+           //
+           errorMsg($dateorder,'服务器开小差');
+           return $this->Util->ajaxReturn(false,'服务器开小差');
+       }
+    }
+    
+    public function test(){
+        return $this->Util->ajaxReturn(false,'test');
+    }
 
     /**
-     * 约技能
-     * 1.生成约单
-     * 2.扣除男方预约金
-     * 3.生成男方扣除资金流水
+     * 约她
      * @param type $skill_id
      */
     public function orderSkill($skill_id){
@@ -54,47 +122,48 @@ class DateOrderController extends AppController
                     return $q->select(['id','avatar','birthday','nick','truename','phone']);
                },
                'Skill'=>function($q){
-                    return $q->select(['skill_id'=>'Skill.id','name']);
+                    return $q->select(['skill_id'=>'Skill.id','name','q_key','poi_cls']);
                },        
                'Tags','Cost'      
            ]    
        ]);
-       if($this->request->is('post')){
+  
+       $this->set([
+           'pageTitle'=> '约他',
+           'data'=>$data,
+           'user'=>  $this->user
+       ]);    
+    }
+    
+    
+    /**
+     * 约技能  支付预约金
+     * 2.扣除男方预约金
+     * 3.生成男方扣除资金流水
+     * @param type $skill_id
+     */
+    public function orderPay($order_id){
+         if($this->request->is('post')){
            $this->handCheckLogin();
-           $date = $data;
-           $data = $this->request->data();
-           $lasth = ((new Time($data['end_time']))->hour-(new Time($data['start_time']))->hour);
-           if($lasth<3){
-               return $this->Util->ajaxReturn(false,'约会时长至少要3个小时');
-           }
-           $price = $date->cost->money;
-           $amount = $price*$lasth;
-           $pre_precent = 0.2;
-           $pre_pay = $amount*$pre_precent;
-           if($this->user->money<$pre_pay){
-               return $this->Util->ajaxReturn(false,'余额不足支付预约金');
-           }
            $DateorderTable = TableRegistry::get('Dateorder');
-           //生成约单
-           $dateorder = $DateorderTable->newEntity([
-               'consumer_id'=>  $this->user->id,
-               'dater_id'=>$date->user->id,
-               'dater_name'=>  $date->user->truename,
-               'date_time'=>  $lasth,
-               'consumer'=>  $this->user->truename,
-               'status'=>'3',
-               'user_skill_id'=>$data['user_skill_id'],
-               'site'=>$data['place_name'],
-               'site_lat'=>$data['coord_lat'],
-               'site_lng'=>$data['coord_lng'],
-               'price'=>$price,
-               'amount'=>$amount,
-               'pre_pay'=>$pre_pay,
-               'pre_precent'=>$pre_precent,
-               'prepay_time'=> date('Y-m-d H:i:s'),
-               'start_time'=>$data['start_time'],
-               'end_time'=>$data['end_time'],
+           $dateorder = $DateorderTable->get($order_id,[
+               'contain'=>[
+                   'Dater'=>function($q){
+                        return $q->select(['id','phone','nick']);
+                   },
+                   'UserSkill.Skill'        
+               ]
            ]);
+           $pre_pay = $dateorder->pre_pay;
+           if($this->user->money < $dateorder->pre_pay){
+               return $this->Util->ajaxReturn([
+                   'status'=>false, 'msg'=>'余额不足支付预约金,请先充值',
+                   'code'=>'201','redirect_url'=>'/purse/recharge?redirect_url=/userc/dateorder']);
+           }
+           $dateorder->status = 3;
+           $dateorder->prepay_time = date('Y-m-d H:i:s');
+
+           //生成约单
            //扣除 预约金
            $pre_amount = $this->user->money;
            $this->user->money = $this->user->money - $pre_pay;
@@ -116,26 +185,26 @@ class DateOrderController extends AppController
                'remark'=> '约技能支出'
            ]);
            
-           $transRes = $DateorderTable->connection()->transactional(function()use(&$flow,$FlowTable,&$dateorder,$DateorderTable,$user){
+           $transRes = $DateorderTable->connection()->transactional(function()use(
+                   &$flow,$FlowTable,&$dateorder,$DateorderTable,$user){
                $UserTable = TableRegistry::get('User');
                $saveDate = $DateorderTable->save($dateorder);
                $flow->relate_id = $dateorder->id;
                return $FlowTable->save($flow)&&$saveDate&&$UserTable->save($user);
            });
            if($transRes){
-               $this->Sms->sendByQf106($date->user->phone,'用户'.$user->nick.'已支付了您的'.$date->skill->name.'技能预约费,请尽快前往平台确认');
-               return $this->Util->ajaxReturn(['status'=>true,'redirect_url'=>'/date-order/order-success/'.$dateorder->id]);
+               $this->Sms->sendByQf106($dateorder->dater->phone,
+                       '用户'.  $this->user->nick.'已支付了您的'.$dateorder->user_skill->skill->name.'技能预约费,请尽快前往平台确认');
+               return $this->Util->ajaxReturn([
+                   'status'=>true,
+                   'redirect_url'=>'/date-order/order-success/'.$dateorder->id
+                       ]);
            }else{
                errorMsg($flow, '失败');
                errorMsg($dateorder, '失败');
                return $this->Util->ajaxReturn(false,'预约失败');
            }
         }
-       $this->set([
-           'pageTitle'=> '约他',
-           'data'=>$data,
-           'user'=>  $this->user
-       ]);    
     }
 
 
@@ -259,12 +328,19 @@ class DateOrderController extends AppController
     }
 
 
+   
     /**
      * 选择地点
+     * @param type $id   技能id  lm_skill表
+     * @param type $page 页码
+     * @return type
      */
-    public function findPlace($page){
+    public function findPlace($id,$page){
+        $SkillTable = TableRegistry::get('Skill');
+        $skill = $SkillTable->get($id);
+        $query = $skill->q_key;
         $this->loadComponent('Bdmap');
-        $places = $this->Bdmap->placeSearchNearBy('咖啡', $this->coord,$page);
+        $places = $this->Bdmap->placeSearchNearBy($query, $this->coord,$page);
         return $this->Util->ajaxReturn(['places'=>$places]);
     }
     

@@ -7,16 +7,16 @@
             <div class="flex">
                 <span class="voted_place">{{count}}</span>
                 <div class="voted_place_info">
-                    <span class="avatar"><img src="{{user.avatar}}"/></span>
+                    <span class="avatar"><img src="{{avatar}}"/></span>
                     <h3>
-                        <span class="voted_name">{{user.nick}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip"><img src="/mobile/images/v.png" class="responseimg"/></span></span>
-                        <span class="voted_number color_gray">已消费：{{total}}美币</span>
+                        <span class="voted_name">{{nick}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip"><img src="/mobile/images/v.png" class="responseimg"/></span></span>
+                        <span class="voted_number color_gray">已消费：{{recharge}}美币</span>
                     </h3>
                 </div>
             </div>
             <div>
-                <div data-id="{{user.id}}" class="alignright likeIt"><i class='iconfont commico'>&#xe61f;</i></div>
-                <div class="alignright"><i class='lagernum color_active'>{{total}}</i></div>
+                <div data-id="{{id}}" class="alignright likeIt"><i class='iconfont commico {{#like}}activeico{{/like}}'></i></div>
+                <div class="alignright"><i class='lagernum color_active'>{{recharge}}</i></div>
             </div>
         </div>
     </li>
@@ -37,15 +37,18 @@
             <div class="rich_first_left">
                 <div class="first_info">
                     <div class="first_info_img">
-                        <img src="<?= $top3[0]->user->avatar ?>" class="richman"/>
+                        <img src="<?= $top3[0]->avatar ?>" class="richman"/>
                     </div>
                     <div class="first_info_bg"></div>
                 </div>
-                <span class="coast color_friends">已消费：<?= $top3[0]->total ?></span>
+                <span class="coast color_friends">已消费：<?= $top3[0]->recharge ?></span>
             </div>
             <div class="rich_first_right">
-                <div data-id="<?= $top3[0]->user->id ?>" class="first_r_info beauty likeIt">魅力值 <i class='iconfont commico'></i></div>
-                <span class="color_active lagernum"><?= $top3[0]->total ?></span>
+                <div data-id="<?= $top3[0]->id ?>" class="first_r_info beauty likeIt">魅力值 
+                    <i class='iconfont commico <?php if(isset($top3[0]->fans)):?>
+                        <?php if($top3[0]->fans): ?>activeico<?php endif;?><?php endif;?>'></i>
+                </div>
+                <span class="color_active lagernum"><?= $top3[0]->recharge ?></span>
             </div>
         </div>
     <?php endif; ?>
@@ -64,16 +67,19 @@
                             <div class="flex">
                                 <span class="voted_place silver"><?= $count ?></span>
                                 <div class="voted_place_info">
-                                    <span class="avatar"><img src="<?= $top->user->avatar ?>"/></span>
+                                    <span class="avatar"><img src="<?= $top->avatar ?>"/></span>
                                     <h3>
-                                        <span class="voted_name"><?= $top->user->nick ?></span>
+                                        <span class="voted_name"><?= $top->nick ?></span>
                                         <span class="voted_number color_gray">已消费：<?= $top->total ?>美币</span>
                                     </h3>
                                 </div>
                             </div>
                             <div>
-                                <div data-id="<?= $top->user->id ?>" class="likeIt alignright"><i class='iconfont commico'></i></div>
-                                <div class="alignright"><i class='lagernum color_active'><?= $top->total ?></i></div>
+                                <div data-id="<?= $top->id ?>" class="likeIt alignright">
+                                    <i class='iconfont commico <?php if(isset($top->fans)):?>
+                                        <?php if($top->fans): ?>activeico<?php endif;?><?php endif;?>'></i>
+                                </div>
+                                <div class="alignright"><i class='lagernum color_active'><?= $top->recharge ?></i></div>
                             </div>
                         </div>
                     </li>
@@ -107,7 +113,12 @@ function calFunc(data) {
     //返回格式化回调
     $.each(data.richs, function (i, n) {
         count++;
+        var like = false;
+        if(n.hasOwnProperty('fans')){
+            like = n.fans.length>0?true:false;
+        }
         data.richs[i]['count'] = count;
+        data.richs[i]['like'] = like;
     })
     return data;
 }

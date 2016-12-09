@@ -103,7 +103,9 @@ class AppController extends Controller {
         //$this->coord = $this->request->cookie('coord');
         $coord_time = $this->request->cookie('coord_time');
         if(time()-$coord_time>30*60&&$this->user){
-            //30分钟有活动 更新坐标
+            //30分钟有活动 更新坐标 和 登录时间
+            $login_time = date('Y-m-d H:i:s');
+            $this->user->login_time = $login_time;
             $coord = $this->getPosition();
             if($coord){
                 $this->user->login_coord_lng = $coord[0];

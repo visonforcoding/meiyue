@@ -26,13 +26,21 @@
                 </div>
             </a>
             <div class="flex flex_justify">
+                {{#wait_prepay}}
+                <h3 class="pay_desc color_y">待支付预约金</h3>
+                <div class="groupbtn">
+                    <?php if ($user->gender == 1): ?>
+                        <span data-orderid="{{id}}"  class="refuse pay_status_1">付款</span>
+                    <?php endif; ?>
+                </div>
+                {{/wait_prepay}}
                 {{#finish_prepay}}
                 <h3 class="pay_desc color_y">已预付：{{pre_pay}}美币</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 1): ?>
-                        <span data-orderid="{{id}}" id="refuse_status_3" class="refuse">取消约单</span>
-                        <?php else:?>
-                        <span data-orderid="{{id}}" id="refuse_status_3" class="refuse">拒绝</span>
+                        <span data-orderid="{{id}}"  class="refuse refuse_status_3">取消约单</span>
+                    <?php else: ?>
+                        <span data-orderid="{{id}}"  class="refuse refuse_status_3">拒绝</span>
                         <span data-orderid="{{id}}"  class="receive_order">接单</span>
                     <?php endif; ?>
                 </div>
@@ -41,9 +49,9 @@
                 <h3 class="pay_desc color_y">待付尾款</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 1): ?>
-                    <span data-orderid="{{id}}" ><a href="/userc/order-detail/{{id}}">立即支付</a></span>
+                        <span data-orderid="{{id}}" ><a href="/userc/order-detail/{{id}}">立即支付</a></span>
                     <?php else: ?>
-                        <span data-orderid="{{id}}" id="refuse_status_7" class="cancel_order">取消订单</span>
+                        <span data-orderid="{{id}}"  class="cancel_order refuse_status_7">取消订单</span>
                     <?php endif; ?>
                 </div>
                 {{/finish_receive}}
@@ -99,6 +107,30 @@ setTimeout(function () {
         })
     });
 }, 2000);
+
+$(document).on('tap', '.pay_status_1', function () {
+    //支付预约金
+    var orderid = $(this).data('orderid');
+    $.util.confirm('确定支付？', '将扣除美币作为预约金', function () {
+        $.util.ajax({
+            url: '/date-order/order-pay/' + orderid,
+            func: function (resp) {
+                if (resp.status) {
+                    //聊天框
+                    //LEMON.event.imTalk();
+                } else {
+                    if (resp.code == '201') {
+                        //余额不足
+                        $.util.alert(res.msg);
+                        setTimeout(function () {
+                            window.location.href = res.redirect_url;
+                        }, 300);
+                    }
+                }
+            }
+        });
+    })
+});
 $(document).on('tap', '.receive_order', function () {
     //美女接收订单
     var orderid = $(this).data('orderid');
@@ -110,7 +142,7 @@ $(document).on('tap', '.receive_order', function () {
         }
     })
 });
-$(document).on('tap', '#refuse_status_3', function () {
+$(document).on('tap', '.refuse_status_3', function () {
     //状态3时的拒绝接单 和 取消订单
     var orderid = $(this).data('orderid');
     $.util.ajax({
@@ -121,10 +153,10 @@ $(document).on('tap', '#refuse_status_3', function () {
         }
     })
 });
-$(document).on('tap', '#refuse_status_7', function () {
+$(document).on('tap', '.refuse_status_7', function () {
     //状态7时 女方取消订单
     var orderid = $(this).data('orderid');
-    $.util.confirm('确定要取消订单吗?','将会扣除10%的约单金额作为惩罚。',function(){
+    $.util.confirm('确定要取消订单吗?', '将会扣除10%的约单金额作为惩罚。', function () {
         $.util.ajax({
             url: '/date-order/cancel-date-order-7',
             data: {order_id: orderid},
@@ -155,6 +187,9 @@ function calFunc(data) {
     //返回格式化回调
     if (data.orders.length) {
         $.each(data.orders, function (i, n) {
+            if ($.inArray(n.status, [1]) !== -1) {
+                data.orders[i]['wait_prepay'] = true;  //订单生成 未支付预约金
+            }
             if ($.inArray(n.status, [3]) !== -1) {
                 data.orders[i]['finish_prepay'] = true;  //男方支付完预约金 等待女方确认
             }
