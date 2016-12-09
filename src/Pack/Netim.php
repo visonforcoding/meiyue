@@ -7,6 +7,17 @@ class Netim {
     protected $appkey;
     protected $appSecret;
 
+    const TEXT_MSG = 0;
+    const IMG_MSG = 1;
+    const AUDIO_MSG = 2;
+    const VIDEO_MSG = 3;
+    const POS_MSG = 4;
+    const FILE_MSG = 5;
+    /**
+     * 自定义消息
+     */
+    const CUSTOM_MSG = 100;
+
     public function __construct() {
         $conf = \Cake\Core\Configure::read('netim');
         $this->appkey = $conf['app_key'];
@@ -24,7 +35,7 @@ class Netim {
      * @param  $icon      [云信ID头像URL，第三方可选填，最大长度1024]
      * @return $result    [返回array数组对象]
      */
-    public function createUserId($accid, $token='', $name = '', $props = '{}', $icon = '') {
+    public function createUserId($accid, $token = '', $name = '', $props = '{}', $icon = '') {
         $url = 'https://api.netease.im/nimserver/user/create.action';
         $data = array(
             'accid' => $accid,
@@ -42,7 +53,7 @@ class Netim {
     }
 
     /**
-     * 
+     * im 的通用请求方法
      * @param type $url
      * @param type $data
      * @return \Cake\Http\Client\Response
@@ -69,14 +80,14 @@ class Netim {
      * @param type $accid
      * @return boolean
      */
-    public function updateUserId($accid, $token='') {
+    public function updateUserId($accid, $token = '') {
         $data['accid'] = $accid;
         $url = 'https://api.netease.im/nimserver/user/refreshToken.action';
-        if($token){
+        if ($token) {
             $data['token'] = $token;
             $url = 'https://api.netease.im/nimserver/user/update.action';
         }
-        $res = $this->httpPost($url,$data);
+        $res = $this->httpPost($url, $data);
         if ($res->isOk()) {
             return json_decode($res->body());
         } else {
@@ -87,7 +98,7 @@ class Netim {
     /**
      * 注册或更新im
      */
-    public function registerIm($accid, $mtoken='') {
+    public function registerIm($accid, $mtoken = '') {
         $token = false;
         $res = $this->createUserId($accid, $mtoken);
         if (!$res) {
@@ -108,6 +119,40 @@ class Netim {
             return $token;
         }
         return false;
+    }
+    
+    /**
+     * 发送消息 单体
+     * @param type $from  发送方 accid
+     * @param type $to  接收方  accid
+     * @param array $body 消息体
+     * @param type $type  消息类型
+     * @param type $ope   发个人 or 发群
+     * @return bool 
+     */
+    public function sendMsg($from, $to, $body, $type = self::CUSTOM_MSG,$ope = 0) {
+        $url = 'https://api.netease.im/nimserver/msg/sendMsg.action';
+        $body['md5'] = md5(time());
+        $body = json_encode($body);
+        $data = [
+            'from'=>$from,
+            'to'=>$to,
+            'body'=>$body,
+            'type'=>$type,
+            'ope'=>$ope,
+        ];
+        $res = $this->httpPost($url, $data);
+        if($res->isOk()){
+            $resp = json_decode($res->body());
+            if($resp->code==200){
+                return true;
+            }else{
+                \Cake\Log\Log::error('Netim sendMsg'.$res->body(),'devlog');
+                return false;
+            }
+        }else{
+             return false;
+        }
     }
 
 }

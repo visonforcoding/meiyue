@@ -32,7 +32,15 @@ class ChatController extends AppController {
         $UserTable = TableRegistry::get('User');
         $users = $UserTable->find()
                             ->select(['id','nick','avatar','imtoken','imaccid'])
-                            ->where(['imtoken !='=>'','id !='=>  $this->user->id])->toArray();
+                            ->where(['imtoken !='=>'','id !='=>  $this->user->id])
+                            ->formatResults(function($items) {
+                                return $items->map(function($item) {
+                                            $item['avatar'] = 'http://m-my.smartlemon.cn' . createImg($item['avatar']) .
+                                                    '?w=184&h=184&fit=stretch';
+                                            return $item;
+                                        });
+                            })
+                            ->toArray();
         $this->set([
             'pageTitle'=>'消息',
             'users'=>$users,

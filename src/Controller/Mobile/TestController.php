@@ -223,4 +223,16 @@ class TestController extends AppController {
 //        file_put_contents('city.json',  json_encode($area,JSON_UNESCAPED_UNICODE));
 //        debug($area);exit();
     }
+    
+    public function testIm(){
+        $Netim = new \App\Pack\Netim();
+        $from =  'meiyue_11';
+        $to = 'meiyue_88';
+        $body  = [
+          'body'=>'美女XX已接受了你的请求,请及时赴约',
+          'msg_type'=>'receive_order'
+        ];
+        $res = $Netim->sendMsg($from, $to, $body);
+        debug($res);
+    }
 }
