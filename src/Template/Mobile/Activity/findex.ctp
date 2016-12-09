@@ -86,7 +86,7 @@
 
 <script id="top-list-tpl" type="text/html">
     {{#datas}}
-    <li class="flex flex_justify" onclick="window.location.href='/index/homepage/{{user.id}}'">
+    <li class="flex flex_justify">
         <div class="flex">
             <span class="place silver">{{index}}</span>
             <div class="place_info">
@@ -121,7 +121,7 @@
             <span class="place silver">{{index}}</span>
             <div class="place_info">
             <span class="avatar">
-                <img src="/mobile/images/avatar.jpg">
+                <img src="{{avatar}}">
             </span>
                 <h3>
                 <span class="place_name"><i class="name">{{user.nick}}</i> <i class="vip">VIP 5</i><i
@@ -145,25 +145,26 @@
 
 <script id="rich-list-tpl" type="text/html">
     {{#datas}}
-    <li class='ul-con'>
+    <li class='ul-con' onclick="window.location.href='/index/homepage/{{id}}'">
         <div class="voted_con flex flex_justify">
             <div class="flex">
                 <span class="voted_place silver">{{index}}</span>
                 <div class="voted_place_info">
-                    <span class="avatar"><img src="{{buyer.avatar}}"/></span>
+                    <span class="avatar">
+                        <img src="{{avatar}}"/>
+                    </span>
                     <h3>
-                        <span class="voted_name">{{buyer.nick}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip"><img src="/mobile/images/v.png" class="responseimg"/></span></span>
-                        <span class="voted_number color_gray">已消费：{{total}}美币</span>
+                        <span class="voted_name">{{nick}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip"><img src="/mobile/images/v.png" class="responseimg"/></span></span>
+                        <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
                 </div>
             </div>
             <div>
-                <div data-id="{{buyer.id}}" class="likeIt alignright"><i class='iconfont commico {{#followed}}activeico{{/followed}}'></i></div>
-                <div class="alignright"><i class='lagernum color_active'>{{total}}</i></div>
+                <div data-id="{{id}}" class="likeIt alignright"><i class='iconfont commico {{#followed}}activeico{{/followed}}'></i></div>
+                <div class="alignright"><i class='lagernum color_active'>{{recharge}}</i></div>
             </div>
         </div>
     </li>
-    {{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
     {{/datas}}
 </script>
 
@@ -399,11 +400,16 @@
                     $.util.hidePreloader();
                     if (res.status) {
                         if(('top_week' == tab || 'top_month' == tab) && res.mydata) {
-                            var mytemp = $('#mytop-list-tpl').html();
-                            var myrend = Mustache.render(mytemp, res);
-                            console.log(myrend);
-                            $('#my-top').html(myrend);
+                            if(res.mydata) {
+                                var mytemp = $('#mytop-list-tpl').html();
+                                var myrend = Mustache.render(mytemp, res);
+                                $('#my-top').html(myrend);
+                            }
+                            var rendered = Mustache.render(template, res);
+                            $(obj.container_id).html(rendered);
+                            return;
                         }
+                        $('#my-top').html('');
                         var rendered = Mustache.render(template, res);
                         $(obj.container_id).html(rendered);
                     }
