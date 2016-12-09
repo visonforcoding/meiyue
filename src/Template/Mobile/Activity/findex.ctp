@@ -40,7 +40,7 @@
                         <li class="top-tab" act="rich_list"><span>土豪榜</span></li>
                     </ul>
                     <div class="rank_con">
-                        <ul id="my-top">
+                        <ul class="outerblock" id="my-top">
                             <!-- 我的头牌 -->
                         </ul>
                         <ul class="outerblock voted_list" id="top-list">
@@ -139,7 +139,6 @@
     </span>
         {{/ismale}}
     </li>
-    {{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
     {{/mydata}}
 </script>
 
