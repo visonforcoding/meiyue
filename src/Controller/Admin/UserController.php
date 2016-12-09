@@ -200,19 +200,25 @@ class UserController extends AppController {
 
     /**
      * View method
-     *
      * @param string|null $id User id.
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null) {
-        $this->viewBuilder()->autoLayout(false);
         $user = $this->User->get($id, [
             'contain' => ['Tags', 'UserSkills', 'Fans', 'Follows']
         ]);
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
+        $this->set([
+            'pageTitle' => '用户审核',
+            'bread' => [
+                'first' => ['name' => '用户管理'],
+                'second' => ['name' => '用户审核'],
+            ],
+        ]);
     }
+
 
     /**
      * Add method
