@@ -41,6 +41,7 @@ class DateState {
  * Class YPUserStatus
  */
 class UserStatus {
+    const NONEED = 0;  //不用审核
     const CHECKING = 1;  //待审核
     const NOPASS = 2;    //审核不通过
     const PASS = 3;    //审核通过
@@ -48,6 +49,7 @@ class UserStatus {
     const GETJSON = -1; //获取json数据
     public static function getStatus($st = null) {
         $status = Array(
+            UserStatus::NONEED => '无需审核',
             UserStatus::CHECKING => '待审核',
             UserStatus::NOPASS => '不通过',
             UserStatus::PASS => '已通过'
@@ -55,7 +57,7 @@ class UserStatus {
         if(CheckStatus::GETJSON == $st) {
             return json_encode($status);
         }
-        if($st) {
+        if($st !== null) {
             return isset($status[$st])?$status[$st]:null;
         }
         return $status;
@@ -454,8 +456,8 @@ class Zodiac {
         if(CarouselStatus::GETJSON == $st) {
             return json_encode($types);
         }
-        if($st) {
-            return isset($types[$st])?$types[$st]:'星座';
+        if($st !== null) {
+            return isset($types[$st])?$types[$st]:'无';
         }
         return $types;
     }

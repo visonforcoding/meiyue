@@ -62,6 +62,10 @@ class UserTable extends Table {
             'className' => 'Flow',
             'foreignKey' => 'user_id'
         ]);
+        $this->hasMany('Upacks', [
+            'className' => 'UserPackage',
+            'foreignKey' => 'user_id'
+        ]);
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

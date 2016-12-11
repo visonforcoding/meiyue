@@ -37,7 +37,7 @@ class UserPackageTable extends Table
             'className' => 'UsedPackage',
             'foreignKey' => 'package_id'
         ]);
-
+        
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

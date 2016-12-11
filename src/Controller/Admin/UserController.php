@@ -41,6 +41,47 @@ class UserController extends AppController {
             ],
         ]);
     }
+    
+    
+    /**
+     * MView method
+     * @param string|null $id User id.
+     * @return void
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function mview($id = null) {
+        $paihang = $this->User->find()->select()->where(['recharge >' => $this->recharge])->count();
+        $packTb = \Cake\ORM\TableRegistry::get('');
+        $user = $this->User->find()
+                ->contain([
+                    'Tags', 
+                    'UserSkills.Skill',
+                    'Fans', 
+                    'Upacks' => function($q) {
+                        return $q->orderDesc('create_time')->limit(1);
+                    }
+                ])
+                ->where(['id' => $id])
+                ->map(function($row) use($paihang){
+                    $row->fanum = count($row->fans);
+                    $row->paihang = $paihang;
+                    $row->viptype = '无';
+                    if(count($row->upacks)) {
+                        $row->viptype = $row['upacks'][0]['title'];
+                    }
+                    return $row;
+                })
+                ->first();
+        $this->set('user', $user);
+        $this->set('_serialize', ['user']);
+        $this->set([
+            'pageTitle' => '用户审核',
+            'bread' => [
+                'first' => ['name' => '用户管理'],
+                'second' => ['name' => '用户审核'],
+            ],
+        ]);
+    }
 
 
     /**
@@ -56,6 +97,40 @@ class UserController extends AppController {
         ]);
     }
 
+    
+    /**
+     * FMView method
+     * @param string|null $id User id.
+     * @return void
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function fmview($id) {
+        $user = $this->User->find()
+                ->contain([
+                    'Tags', 
+                    'UserSkills.Skill',
+                    'Fans', 
+                    'Follows'
+                ])
+                ->where(['id' => $id])
+                ->map(function($row) {
+                    $row->fonum = count($row->follows);
+                    $row->fanum = count($row->fans);
+                    $row->follownum = count($row->follows);
+                    return $row;
+                })
+                ->first();
+        
+        $this->set('user', $user);
+        $this->set('_serialize', ['user']);
+        $this->set([
+            'pageTitle' => '用户审核',
+            'bread' => [
+                'first' => ['name' => '用户管理'],
+                'second' => ['name' => '用户审核'],
+            ],
+        ]);
+    }
 
     /**
      * 获取美女列表
@@ -131,6 +206,20 @@ class UserController extends AppController {
         $this->response->stop();
     }
 
+    
+    public function check($uid) {
+        
+        if($this->request->is('POST')) {
+            $user = $this->User->get($uid);
+            $user = $this->User->patchEntity($user, $this->request->data);
+            if ($this->User->save($user)) {
+                $this->Util->ajaxReturn(true, '修改成功');
+            } else {
+                $this->Util->ajaxReturn(false, '修改失败');
+            }
+        }
+        $this->Util->ajaxReturn(false, '修改失败');
+    }
 
     /**
      * 获取男性用户列表

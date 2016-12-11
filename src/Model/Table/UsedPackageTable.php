@@ -32,7 +32,7 @@ class UsedPackageTable extends Table
         $this->table('lm_used_package');
         $this->displayField('type');
         $this->primaryKey('id');
-
+        
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
