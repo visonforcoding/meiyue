@@ -700,7 +700,7 @@ class DateOrderController extends AppController
     }
     
     /**
-     * 
+     * 赴约成功 男女
      */
     public function goOrder(){
         $this->handCheckLogin();
@@ -758,6 +758,71 @@ class DateOrderController extends AppController
         }else{
              return $this->Util->ajaxReturn(true,'服务器开小差');
         }
+        
+    }
+    
+    /**
+     * 评价页
+     */
+    public function appraise($id){
+        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+        $order = $DateorderTable->get($id,[
+            'contain'=>[
+                 'Dater' => function($q) {
+                            return $q->select(['id', 'nick', 'money','avatar']);
+                    },
+                  'UserSkill.Skill'           
+            ]
+        ]);
+        if($this->request->is('ajax')){
+            $order->status = 16; //已评价
+            $order = $DateorderTable->patchEntity($order,  $this->request->data());
+            if($DateorderTable->save($order)){
+                return $this->Util->ajaxReturn(true,'评价成功');
+            }else{
+                return $this->Util->ajaxReturn(true,'服务器开小差');
+            }
+            
+        }            
+        $this->set([
+            'order'=>$order,
+            'pageTitle'=>'评价'
+        ]);
+    }
+    
+     /**
+     * 预约订单详情
+     */
+    public function orderDetail($id){
+        $DateorderTable = TableRegistry::get('Dateorder');
+        $order = $DateorderTable->get($id,[
+            'contain'=>[
+                'Buyer'=>function($q){
+                    return $q->select(['phone','id','avatar','nick','birthday']);
+                }
+                ,'Dater'=>function($q){
+                    return $q->select(['id','nick','avatar','birthday']);
+                }
+                ,'UserSkill.Skill','Dater.Tags','Date'
+            ]
+        ]);
+       $lasth = ((new Time($order->end_time))->hour-(new Time($order->start_time))->hour);        
+        if($this->user->gender==1){
+             if((strtotime($order->start_time)-time())>= 2*60*60){
+                $refuse_msg = '您将收到70%的约单消费退回';
+             }else{
+                $refuse_msg = '您将收到30%的约单消费退回';
+             }
+        }else{
+            $refuse_msg = '将会扣除约单20%的美币作为惩罚';
+        }       
+        $this->set([
+            'order'=>$order,
+            'user'=>  $this->user,
+            'pageTitle'=>'订单详情',
+            'refuse_msg'=>$refuse_msg,
+            'lasth'=>$lasth
+        ]);                      
         
     }
 }
