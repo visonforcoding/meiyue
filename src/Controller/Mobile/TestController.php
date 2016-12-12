@@ -224,13 +224,22 @@ class TestController extends AppController {
 //        debug($area);exit();
     }
     
-    public function testIm(){
+    public function testIm($from,$to){
         $Netim = new \App\Pack\Netim();
-        $from =  'meiyue_11';
-        $to = 'meiyue_88';
         $body  = [
-          'body'=>'美女XX已接受了你的请求,请及时赴约',
-          'msg_type'=>'receive_order'
+          'type'=>5,
+          'from'=>[
+              'msg_prefix'=>'',
+              'msg_body'=>'美女XX已接受了你的请求,请及时赴约',
+              'msg_link'=>$this->Util->getServerDomain().'/order/detail/1',
+              'msg_link_text'=>'查看详情'
+          ],
+          'to'=>[
+              'msg_prefix'=>'[约吃饭]',
+              'msg_body'=>'我希望你在拉格朗日餐厅等我，时间为',
+              'msg_link'=>$this->Util->getServerDomain().'/order/detail/1',
+              'msg_link_text'=>'查看详情'
+          ]
         ];
         $res = $Netim->sendMsg($from, $to, $body);
         debug($res);

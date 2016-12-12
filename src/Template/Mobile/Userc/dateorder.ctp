@@ -8,7 +8,7 @@
                 <h3 class='maxwid70'><i class="itemsname color_y">[{{user_skill.skill.name}}]</i></h3>
                 <span class="customer color_y">{{buyer.nick}}</span>
             </div>
-            <a style="display:block" href="/userc/order-detail/{{id}}">
+            <a style="display:block" href="/date-order/order-detail/{{id}}">
                 <div class="place_pic flex flex_justify bdbottom">
                     <div  class="place_info_desc">
                         <span class="place">
@@ -137,6 +137,49 @@
                     <?php endif; ?>
                 </div>
                 {{/cancel_status_12}}
+                {{#confirm_go}}
+                <?php if ($user->gender == 2): ?>
+                    <h3 class="pay_desc color_y">等待对方确认</h3>
+                    <div class="groupbtn">
+                        <span data-orderid="{{id}}" class="refuse" >我已到达</span>
+                    </div>
+                <?php else: ?>
+                    <h3 class="pay_desc color_y">对方已到达</h3>
+                    <div class="groupbtn">
+                        <span data-orderid="{{id}}" class="refuse complain" >投诉</span>
+                        <span data-orderid="{{id}}" class="refuse go_order" >赴约成功</span>
+                    </div>
+                <?php endif; ?>
+                {{/confirm_go}}
+                {{#finish_order}}
+                <?php if ($user->gender == 2): ?>
+                    <h3 class="pay_desc color_y">交易成功</h3>
+                    <div class="groupbtn">
+                        <span data-orderid="{{id}}" class="refuse" >查看评价</span>
+                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                    </div>
+                <?php else: ?>
+                    <h3 class="pay_desc color_y">交易成功</h3>
+                    <div class="groupbtn">
+                        <a href="/date-order/appraise/{{id}}"><span data-orderid="{{id}}" class="refuse appraise" >评价</span></a>
+                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                    </div>
+                <?php endif; ?>
+                {{/finish_order}}
+                {{#finish_appraise}}
+                <?php if ($user->gender == 2): ?>
+                    <h3 class="pay_desc color_y">交易成功</h3>
+                    <div class="groupbtn">
+                        <a href="/date-order/appraise/{{id}}"><span data-orderid="{{id}}" class="refuse" >查看评价</span></a>
+                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                    </div>
+                <?php else: ?>
+                    <h3 class="pay_desc color_y">交易成功</h3>
+                    <div class="groupbtn">
+                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                    </div>
+                <?php endif; ?>
+                {{/finish_appraise}}
             </div>
         </div>
     </li>
@@ -377,39 +420,47 @@
         if (data.orders.length) {
             $.each(data.orders, function (i, n) {
                 console.log(n.status);
-                if ($.inArray(n.status, [1]) !== -1) {
-                    data.orders[i]['wait_prepay'] = true;  //订单生成 未支付预约金
-                }
-                if ($.inArray(n.status, [3]) !== -1) {
-                    data.orders[i]['finish_prepay'] = true;  //男方支付完预约金 等待女方确认
-                }
-                if ($.inArray(n.status, [4]) !== -1) {
-                    data.orders[i]['cancel_status_4'] = true;  //男性取消订单
-                }
-                if ($.inArray(n.status, [7]) !== -1) {
-                    data.orders[i]['finish_receive'] = true;  //女方确认接单 等待支付尾款
-                }
-                if ($.inArray(n.status, [8]) !== -1) {
-                    data.orders[i]['cancel_status_8'] = true;  //女方确认接单 等待支付尾款
-                }
-                if ($.inArray(n.status, [9]) !== -1) {
-                    data.orders[i]['m_timeout_payall'] = true;  //受邀者超时未付尾款
-                }
-                if ($.inArray(n.status, [10]) !== -1) {
-                    if (new Date() > new Date(n.start_time)) {
-                        data.orders[i]['finsh_payall_begin'] = true;  //付了尾款并且到了约会时间
-                    } else {
-                        data.orders[i]['finsh_payall'] = true;  //受邀者付尾款
-                    }
-                }
-                if ($.inArray(n.status, [11]) !== -1) {
-                    data.orders[i]['cancel_status_11'] = true;  //受邀者超时未付尾款
-                }
-                if ($.inArray(n.status, [12]) !== -1) {
-                    data.orders[i]['cancel_status_12'] = true;  //受邀者超时未付尾款
-                }
-                if ($.inArray(n.status, [12]) !== -1) {
-                    data.orders[i]['cancel_status_12'] = true;  //受邀者超时未付尾款
+                switch (n.status) {
+                    case 1:
+                        data.orders[i]['wait_prepay'] = true;  //订单生成 未支付预约金
+                        break;
+                    case 3:
+                        data.orders[i]['finish_prepay'] = true;  //男方支付完预约金 等待女方确认
+                        break;
+                    case 4:
+                        data.orders[i]['cancel_status_4'] = true;  //男性取消订单
+                        break;
+                    case 7:
+                        data.orders[i]['finish_receive'] = true;  //女方确认接单 等待支付尾款
+                        break;
+                    case 8:
+                        data.orders[i]['cancel_status_8'] = true;  //女方确认接单 等待支付尾款
+                        break;
+                    case 9:
+                        data.orders[i]['m_timeout_payall'] = true;  //受邀者超时未付尾款
+                        break;
+                    case 10:
+                        if (new Date() > new Date(n.start_time)) {
+                            data.orders[i]['finsh_payall_begin'] = true;  //付了尾款并且到了约会时间
+                        } else {
+                            data.orders[i]['finsh_payall'] = true;  //受邀者付尾款
+                        }
+                        break;
+                    case 11:
+                        data.orders[i]['cancel_status_11'] = true;  //受邀者超时未付尾款
+                        break;
+                    case 12:
+                         data.orders[i]['cancel_status_12'] = true;  //受邀者超时未付尾款
+                        break;
+                    case 13:
+                        data.orders[i]['confirm_go'] = true;  //女性用户确认到达
+                        break;
+                    case 15:
+                        data.orders[i]['finish_order'] = true;  //女性用户确认到达
+                        break;
+                    case 16:
+                        data.orders[i]['finish_appraise'] = true;  //男性已评价
+                        break;
                 }
             });
         }

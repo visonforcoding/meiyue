@@ -399,39 +399,7 @@ class UsercController extends AppController {
         return $this->Util->ajaxReturn(false,'服务器开小差');
     }
     
-    /**
-     * 预约订单详情
-     */
-    public function orderDetail($id){
-        $DateorderTable = TableRegistry::get('Dateorder');
-        $order = $DateorderTable->get($id,[
-            'contain'=>[
-                'Buyer'=>function($q){
-                    return $q->select(['phone','id','avatar','nick','birthday']);
-                }
-                ,'Dater'=>function($q){
-                    return $q->select(['id','nick','avatar','birthday']);
-                }
-                ,'UserSkill.Skill','Dater.Tags','Date'
-            ]
-        ]);
-        if($this->user->gender==1){
-             if((strtotime($order->start_time)-time())>= 2*60*60){
-                $refuse_msg = '您将收到70%的约单消费退回';
-             }else{
-                $refuse_msg = '您将收到30%的约单消费退回';
-             }
-        }else{
-            $refuse_msg = '将会扣除约单20%的美币作为惩罚';
-        }       
-        $this->set([
-            'order'=>$order,
-            'user'=>  $this->user,
-            'pageTitle'=>'订单详情',
-            'refuse_msg'=>$refuse_msg
-        ]);                      
-        
-    }
+   
     
     /**
      * 支付约单尾款
