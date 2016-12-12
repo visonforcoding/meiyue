@@ -25,32 +25,36 @@
             <?php endif; ?>
         </div>
     </div>
-    <div class="puse_bills mt20">
-        <div class="commontitle inner">
-            <h3>账单明细</h3>
-        </div>
-        <ul class="puse_bills_con">
-            <?php foreach ($top5flows as $flow): ?>
-                <li>
-                    <div class="puse_bills_left">
-                        <h3><?= $flow->type_msg ?></h3>
-                        <time><?= $flow->create_time->format('Y-m-d') ?></time>
-                    </div>
+    <?php if(count($top5flows)): ?>
+        <div class="puse_bills mt20">
+            <div class="commontitle inner">
+                <h3>账单明细</h3>
+            </div>
+            <ul class="puse_bills_con">
+                <?php foreach ($top5flows as $flow): ?>
+                    <li>
+                        <div class="puse_bills_left">
+                            <h3><?= $flow->type_msg ?></h3>
+                            <time><?= $flow->create_time->format('Y-m-d') ?></time>
+                        </div>
                     <span class="puse_bills_right">
                         <?php if ($flow->income == 1): ?>
-                            +
+                        +
                         <?php else: ?>
-                            -
+                        -
                         <?php endif; ?>
                         <?= $flow->amount ?>
                     </span>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-        <div class="loader-more">
-            <p>查看更多明细<i class="iconfont">&#xe605;</i></p>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            <?php if(count($top5flows) >= 10): ?>
+            <div class="loader-more">
+                <p>查看更多明细<i class="iconfont">&#xe605;</i></p>
+            </div>
+            <?php endif; ?>
         </div>
-    </div>
+    <?php endif; ?>
 </div>
 <!--支付弹出层-->
 <div class="raper hide">

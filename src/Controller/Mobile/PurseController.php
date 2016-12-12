@@ -5,6 +5,7 @@ namespace App\Controller\Mobile;
 use App\Controller\Mobile\AppController;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use PackType;
 
 /**
  * Purse Controller 钱包
@@ -23,7 +24,13 @@ class PurseController extends AppController {
      * 充值
      */
     public function recharge(){
+        $packTb = TableRegistry::get('Package');
+        $packs = $packTb
+            ->find()
+            ->where(['is_used' => 1, 'type' => PackType::RECHARGE])
+            ->orderDesc('show_order');
         $this->set([
+            'packs' => $packs,
             'pageTitle'=>'充值'
         ]);
     }

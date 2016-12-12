@@ -121,7 +121,7 @@
 </div>
 <div style="height:62px;"></div>
 <?php if(!($user->idfront) || !($user->idback) || !($user->idperson)): ?>
-    <a id="submit" class="identify_footer_potion">开始审核</a>
+    <a id="submit" class="identify_footer_potion">提交审核</a>
 <?php elseif($user->id_status == UserStatus::NOPASS): ?>
     <a id="submit" class="identify_footer_potion">重新审核</a>
 <?php endif; ?>

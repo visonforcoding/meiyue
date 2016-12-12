@@ -69,8 +69,8 @@
 
 <?php $this->start('script'); ?>
 <script>
+    var loadflag = true;  //允许请求开关
     $('#submit-btn').on('click', function() {
-
         checkflag = true;
         $("form input").each(function() {
             var text = $(this).data('text');
@@ -85,12 +85,19 @@
             return;
         }
 
-        $.ajax({
+        if(!loadflag) {
+            return;
+        }
+        loadflag = false;
+        $.util.showPreloader();
+        $.util.ajax({
             type: 'POST',
             url: '/tracle/yuepai-apply',
             data: $("form").serialize(),
             dataType: 'json',
-            success: function (res) {
+            func: function (res) {
+                $.util.hidePreloader();
+                loadflag = true;
                 if (typeof res === 'object') {
                     if (res.status) {
                         $.util.alert(res.msg);

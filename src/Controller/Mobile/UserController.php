@@ -35,7 +35,6 @@ class UserController extends AppController {
         $template = 'index';
         if ($this->user->gender == 1) {
             $template = 'home_m';
-
         }
         $fanTb = TableRegistry::get('UserFans');
         $fans = $fanTb->find()->where(['following_id' => $this->user->id])->count();
@@ -641,19 +640,49 @@ class UserController extends AppController {
                 ]);
             }
 
-            /**
-             * ajax 检测登陆
-             */
-            public function clogin() {
-                $this->handCheckLogin();
-                return $this->Util->ajaxReturn(true);
-            }
+    /**
+     * ajax 检测登陆
+     */
+    public function clogin() {
+        $this->handCheckLogin();
+        return $this->Util->ajaxReturn(true);
+    }
 
-            public function forget() {
-                $this->set([
-                    'pageTitle' => '忘记密码'
-                ]);
-            }
+    public function forget() {
+        $this->set([
+            'pageTitle' => '忘记密码'
+        ]);
+    }
 
-        }
+
+    /**
+     * 男性
+     */
+    public function maleHomepage($uid)
+    {
+        $user = $this->User->find()
+            ->contain([
+                'Fans',
+                'Follows',
+                'Upacks' => function($q) use($uid) {
+                    return $q->orderDesc('create_time')->limit(1);
+                },
+            ])
+            ->where(['id' => $uid])
+            ->map(function($row) {
+                if(count($row['upacks'])) {
+                    $row->upakname = $row['upacks'][0]['title'];
+                }
+                $row->facount = count($row->fans);
+                $row->focount = count($row->follows);
+                return $row;
+            })
+            ->first();
+        $this->set([
+            'user' => $user,
+            'pageTitle' => '个人主页'
+        ]);
+    }
+
+}
         
