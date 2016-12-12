@@ -188,35 +188,39 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <li  class='plaintext-box'>
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">喜欢的美食：</span></div>
-                        <div class="home_list_r_info">
-                            <input name="food" type="text" placeholder="请输入美食" value="<?= $user->food; ?>"/>
+                        <div class="home_list_r_info  plaintext">
+                            <!-- <input name="food" type="text" placeholder="请输入美食" value="<?= $user->food; ?>"/> -->
+                            <div class="plaintext-con" contenteditable="true">请输入美食</div>
                         </div>
                     </div>
                 </li>
-                <li>
+                <li class='plaintext-box'>
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">喜欢的音乐：</span></div>
-                        <div class="home_list_r_info">
-                            <input name="music" type="text" placeholder="请输入音乐" value="<?= $user->music; ?>"/>
+                        <div class="home_list_r_info  plaintext">
+                            <!-- <input name="music" type="text" placeholder="请输入音乐" value="<?= $user->music; ?>"/> -->
+                              <div class="plaintext-con" contenteditable="true">请输入音乐</div>
                         </div>
                     </div>
                 </li>
-                <li>
+                <li class='plaintext-box'>
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">喜欢的电影：</span></div>
-                        <div class="home_list_r_info">
-                            <input name="movie" type="text" placeholder="请输入电影" value="<?= $user->movie; ?>"/>
+                        <div class="home_list_r_info  plaintext">
+                            <!-- <input name="movie" type="text" placeholder="请输入电影" value="<?= $user->movie; ?>"/> -->
+                              <div class="plaintext-con" contenteditable="true">请输入电影</div>
                         </div>
                     </div>
                 </li>
-                <li>
+                <li  class='plaintext-box'>
                     <div class="home_items sport_items">
-                        <div class="home_list_l_info"><span class="itemsname">喜欢的运动/娱乐：</span></div>
-                        <div class="home_list_r_info">
-                            <input name="sport" type="text" placeholder="运动/娱乐" value="<?= $user->sport; ?>"/>
+                        <div class="home_list_l_info"><span class="itemsname">喜欢的运动<br>/娱乐：</span></div>
+                        <div class="home_list_r_info   plaintext">
+                            <!-- <input name="sport" type="text" placeholder="运动/娱乐" value="<?= $user->sport; ?>"/> -->
+                             <div class="plaintext-con" contenteditable="true">请输入喜欢的运动/娱乐</div>
                         </div>
                     </div>
                 </li>
@@ -224,8 +228,8 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">个性签名：</span></div>
                         <div class="home_list_r_info  plaintext">
-                           <!--  <input name="sign" type="text" placeholder="个性签名" value=""/> -->
-                            <div class="plaintext-con" contenteditable="true"><?= $user->sign; ?></div>
+                           <!--  <input name="sign" type="text" placeholder="个性签名" value="<?= $user->sign; ?>"/> -->
+                            <div class="plaintext-con" contenteditable="true">个性签名</div>
                         </div>
                     </div>
                 </li>

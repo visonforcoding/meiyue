@@ -1,11 +1,11 @@
-<div class="wraper  bgff">
+<div class="wraper  bgff mt40">
     <div class="info-header-tips">
-        <!--        <div class="closed">
-                    <a href="#this" class="iconfont">&#xe684;</a>
-                </div>-->
+         <div class="closed">
+                <a href="#this" class="iconfont">&#xe684;</a>
+          </div>
         <h3 class="aligncenter title">完善个人信息<br />可以提高魅力值哦~</h3>
     </div>
-    <div class="home_fill_basic_info home-other-info  home_fill_hobby mt40">
+    <div class="home_fill_basic_info home_fill_hobby mt40">
         <form>
             <ul>
                 <!--            <li>
@@ -20,73 +20,72 @@
                                     </div>
                                 </div>
                             </li>-->
-                <li>
+                <li  class='plaintext-box'>
                     <div class="home_items">
                         <div class="home_list_l_info ">
                             <span class="itemsname">喜欢的美食：</span>
                         </div>
-                        <div class="home_list_r_info">
-                            <input name="food" type="text" placeholder="请输入" />
+                        <div class="home_list_r_info   plaintext">
+                            <!-- <input name="food" type="text" placeholder="请输入" /> -->
+                            <div class="plaintext-con" contenteditable="true">请输入美食</div>
                         </div>
                     </div>
                 </li>
-                <li>
+                <li  class='plaintext-box'>
                     <div class="home_items">
                         <div class="home_list_l_info ">
                             <span  class="itemsname">喜欢的音乐：</span>
                            
                         </div>
-                        <div class="home_list_r_info">
-                            <input name="music" type="text" placeholder="请输入" />
-                           
+                         <div class="home_list_r_info   plaintext">
+                            <!-- <input name="music" type="text" placeholder="请输入" /> -->
+                            <div class="plaintext-con" contenteditable="true">请输入</div>
                         </div>
                     </div>
                 </li>
-                <li>
+                <li  class='plaintext-box'>
                     <div class="home_items">
                         <div class="home_list_l_info ">
                             <span class="itemsname">喜欢的电影：</span>
                           
                         </div>
-                        <div class="home_list_r_info">
-                            <input name="movie" type="text" placeholder="请输入" />
-                           
+                          <div class="home_list_r_info   plaintext">
+                            <!-- <input name="movie" type="text" placeholder="请输入" /> -->
+                             <div class="plaintext-con" contenteditable="true">请输入</div>
                         </div>
                     </div>
                 </li>
-                <li>
+                <li  class='plaintext-box'>
                     <div class="home_items">
                         <div class="home_list_l_info ">
-                            <span class="itemsname">喜欢的运动/娱乐：</span>
+                            <span class="itemsname">喜欢的运动<br>/娱乐：</span>
                            
                         </div>
-                        <div class="home_list_r_info">
-                            <input name="sport" type="text" placeholder="请输入" />
-                           
+                         <div class="home_list_r_info   plaintext">
+                            <!-- <input name="sport" type="text" placeholder="请输入" /> -->
+                             <div class="plaintext-con" contenteditable="true">请输入</div>
                         </div>
                     </div>
                 </li>
-                <li>
+                <li  class='plaintext-box'>
                     <div class="home_items">
                         <div class="home_list_l_info ">
                             <span class="itemsname">个性签名：</span>
-                           
                         </div>
-                        <div class="home_list_r_info">
-                            <input name="sign" type="text" placeholder="请输入" />
-                           
-                        </div>
+                          <div class="home_list_r_info   plaintext">
+                            <!-- <input name="sign" type="text" placeholder="请输入" /> -->
+                              <div class="plaintext-con" contenteditable="true">请输入</div>
+                         </div>
                     </div>
                 </li>
-                <li>
+                <li class='edit_ability edit_ability-marks marks-line'>
                     <div class="home_items">
-                        <div id="tag-container" class="home_items">
                             <div class="home_list_l_info"><span class="itemsname">个性标签：</span></div>
-                            <div class="home_list_r_info">
-                                <input name="tag" type="text" placeholder="请选择" readonly="readonly" />
-                               
+                            <div class="home_list_r_info ability-marks-box">
+                                <div id="tag-container" class="r_info" style='width:5rem;'>
+                                    <input name="tag" type="text" placeholder="请选择" readonly="readonly" />
+                                </div>
                             </div>
-                        </div>
                     </div>
                 </li>
                 <li>

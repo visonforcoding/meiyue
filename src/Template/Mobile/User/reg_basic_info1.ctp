@@ -65,7 +65,7 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">出</span><span class="itemsname">生</span><span class="itemsname">日</span><span class="itemsname">期：</span></div>
                         <div class="home_list_r_info">
-                            <input id="birthday" name="birthday" type="date" placeholder="请输入日期" value="1992-09-24"/>
+                            <input id="birthday" name="birthday" type="text" placeholder="请输入日期" value="1992-09-24"/>
                         </div>
                     </div>
                 </li>
@@ -90,8 +90,8 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">三</span><span class="itemsname">围：</span></div>
                         <div class="home_list_r_info">
-                            <input name="b" type="number" placeholder="腰围" style="width:30px;" />
-                            <input name="w" type="number" placeholder="胸围" style="width:30px;" />
+                            <input name="b" type="number" placeholder="腰围" style="width:30px;" /> | 
+                            <input name="w" type="number" placeholder="胸围" style="width:30px;" /> | 
                             <input name="h" type="number" placeholder="臀围" style="width:30px;" />
                         </div>
                     </div>
