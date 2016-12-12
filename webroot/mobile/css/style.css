@@ -1,7 +1,7 @@
 /*Tab底部*/
 .footer,.home_page_footer{width:100%;max-width: 750px;margin:0 auto;overflow-x:hidden;-webkit-box-shadow: 0 0 10px 0 rgba(155,143,143,0.6);box-shadow: 0 0 10px 0 rgba(155,143,143,0.6);background: #fff;bottom:0;position: fixed;z-index: 10;}
 .footer ul,.home_page_footer ul{overflow: hidden;}
-.home_page_footer ul{height:50px;}
+.home_page_footer ul{height:50px;color:#d2d2d2;}
 .home_page_footer ul.changeli li{width:50%;}
 .home_page_footer li{width:33.3%;text-align: center;}
 .footer ul li{width:25%;float:left;text-align: center;padding:5px 0 3px;font-size: 12px;}
@@ -168,7 +168,7 @@ header{overflow: hidden;}
 .birthdate .outerinput{width:2.6rem;overflow: hidden;float:right;margin-right:.4rem;text-align: right;}
 .birthdate input[type='date']{-webkit-appearance: none;}
 .home_fill_basic_info .items_title i{font-size:11px;}
-.isDisplay{padding:.4rem .3rem 1rem;background: #f4f4f4;}
+.isDisplay{padding:.2rem .3rem 1rem;background: #f4f4f4;}
 .isDisplay span{margin-right:.4rem;}
 .isDisplay i{color:#ccc;font-size:16px;margin-right:10px;}
 .isDisplay span.choose i{color:#eab96a;}
@@ -435,7 +435,7 @@ color:#444;position:relative;padding:0 .15rem;margin-right:.1rem;font-size: 13px
 .navbar ul{height:1.35rem;}
 .navbar a{color:#eab96a;display: block;width:1.2rem;height:28px;line-height: 28px;background: #221f1d;text-align: center;border-radius: 2px;opacity: .8;}
 .navbar .current a{background:#eab96a; color:#fff;}
-.find_list_box{padding-top:.1rem;overflow: hidden;}
+.find_list_box{overflow: hidden;}
 .find_list_box dl{width:3.33rem;float:left;margin-right:.2rem;margin-top:.3rem;}
 .find_list_box dl:nth-of-type(2n){margin-right:0;}
 .find_list_box dt{width:3.33rem;height:3.33rem;overflow: hidden;position: relative;box-shadow: 0 0 3px rgba(0,0,0,.2);border-radius: 3px;}
@@ -446,7 +446,7 @@ color:#fff; line-height: 20px;padding-right: .1rem;}
 .find_list_con span{ display: block;}
 .find_list_con span i{margin-right:.08rem;}
 .find_list_con span.userinfo{font-size:12px;color:#eab96a;}
-.find_list_con span.userinfo .iconfont{font-size:14px;vertical-align: middle;}
+.find_list_con span.userinfo .iconfont{font-size:14px;}
 /*筛选*/
 .choose_parmes{/*margin-top:1rem;*/background: #1a1713;width:100%;padding-top:20px;padding-bottom:20px;}
 .choose_parmes .height_left{display: block;width:20%;margin-top:10px;font-weight: bold;}
@@ -465,8 +465,8 @@ color:#fff; line-height: 20px;padding-right: .1rem;}
 .home_page .header{height:6.2rem;position: relative;}
 .home_page .header span{color:#fff;font-size: 20px;}
 .home_page .header .identify-info{position: absolute;right:.3rem;font-size: 10px;height:18px;line-height: 16px;border:1px #fff solid;border-radius: 3px;padding:0 .1rem;}
-.home_page .header .video-btn{top:50px;opacity: .5;}
-.home_page .header .id-btn{top:82px;}
+.home_page .header .video-btn{top:50px;opacity: .8;}
+.home_page .header .id-btn{top:82px;opacity:.8}
 .home_page_basic{background: #fff;padding-top:.4rem;}
 .home_page_basic .home_name{color:#170e00;font-size: 16px;}
 /*.home_page_basic .home_name em{position:absolute;font-size: 10px;color:#959da7;}*/
@@ -493,6 +493,7 @@ color:#fff; line-height: 20px;padding-right: .1rem;}
 .home_pic_info li a.ablock{position: relative;width:1.6rem;height:1.6rem;z-index: 1;}
 .home_pic_info li a.ablock span{line-height: 1.6rem;width:1.6rem;height:1.6rem;font-size: 12px;color:#fff;position: absolute;background: rgba(0,0,0,.4);z-index:999;top:0;left:0;text-align: center;}
 .home_pic_info .home_video{width:100%;height:auto;border-radius: 5px;overflow: hidden;}
+.home_pic_info .home_video video{background: rgba(0,0,0,.9);}
 .home_pic_info .home_video img{width:100%;height:auto;display: block;}
 .home_basic_mark .title,.home_basic_ability .title{font-size: 15px;color:#1b1612;font-size:15px;}
 .home_basic_mark .con{padding:.4rem 0;font-size: 0;}
@@ -787,11 +788,11 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 
 /*约单支付成功*/
 .date_pay_content{background: #1a1713;color:#EAB96A;padding:.5rem .3rem .3rem;border-top:1px #2a2014 solid;}
-.date_pay_content .date_pay_leftcon .pay_tips{font-size: 16px;font-weight: 600;line-height: 33px;}
-.date_pay_content .date_pay_leftcon p{margin-bottom:.2rem;}
+.date_pay_content .date_pay_leftcon .pay_tips{font-size: 15px;line-height: 33px;opacity: .9;}
+.date_pay_content .date_pay_leftcon p{margin-bottom:.2rem;font-size:12px;opacity: .8;}
 .date_pay_rightcon .button{height:35px;width:2rem;line-height: 33px;margin-bottom:.2rem;}
-.pay_detail_content{background: #fff;padding-top:.2rem;}
-.pady_detail_tips{color:#666;text-align: center;height:1rem;line-height:1rem;}
+.pay_detail_content{background: #fff;padding-top:.3rem;}
+.pady_detail_tips{color:#666;text-align: center;height:.6rem;line-height:.6rem;}
 
 /*派队轮播*/
 .abanner{width:100%;height:4rem;overflow: hidden;}

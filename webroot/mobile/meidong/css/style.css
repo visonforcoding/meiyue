@@ -1,0 +1,65 @@
+.header-container{width:100%;height:700px;overflow: hidden;position: relative;}
+.header-container .banner{width:100%;height:700px;overflow: hidden;position: absolute;left:0;top:0;}
+.header-container .imgbox{width:100%;position: relative;}
+.header-container .banner li{width:100%;position: absolute;left:0;top:0;}
+/*.header-container .banner li:first-child{opacity: 1;transition: all .2s ease-in-out;}*/
+.header-container .banner li:first-child a{background: url(../image/banner1.jpg) no-repeat center center;display: block;width:100%;height:700px;background-size:cover;}
+/*.header-container .banner li:nth-of-type(2){opacity: 0;transition: all .2s ease-in-out;}*/
+.header-container .banner li:nth-of-type(2) a{background: url(../image/banner2.jpg) no-repeat center center;display: block;width:100%;height:700px;background-size:cover;}
+.header-container .banner li:nth-of-type(3) a{background: url(../image/banner3.jpg) no-repeat center center;display: block;width:100%;height:700px;background-size:cover;}
+.header-container .header{z-index:2;border-bottom:1px rgba(43,62,82,.2) solid;position: absolute;width:100%;height:78px;b}
+.header-container .header .logo{margin-top:11px;}
+.header .nav li{margin-left:15px;}
+.header .nav a{color:#fff; line-height: 78px;width:108px;display: block;text-align: center;}
+.header .nav .active{background: #eab96a;}
+.header-container .yd{position: absolute;bottom:40px;margin:0 auto;z-index:3;height:4px;width:100%;text-align: center;}
+.header-container .yd span{display: inline-block;width:80px;height:4px;background: #4a6176;margin:0 10px;}
+.header-container .yd span.active{background: #EAB96A;}
+/**
+ */
+.common-title{text-align: center;padding:100px 0 50px;width:720px;margin:0 auto;}
+.common-title h1{font-size: 36px;color:#555;font-weight: 200;}
+.common-title span{color:#808080;margin:0  auto;font-size: 15px;letter-spacing: 3px;display: block;height:15px;line-height: 15px;background: #fff;text-align: center;width:70%;position: absolute;z-index:3;top:0;left:50%;margin-left:-35%;}
+.common-title .position{position: relative;height:15px;margin-top: 10px;}
+.common-title .position .line{height:1px;background: #bdb1a2;position: absolute;width:100%;left:0;top:8px;}
+.product{text-align: center;}
+.nav-title h3{font-size: 26px;color:#555555;font-weight: 200;}
+.nav-title span{font-size: 12px;color:#a5a5a5;text-transform: uppercase;}
+.product .con-content ul{margin:0 auto;min-height: 100px;}
+.product .con-content li{margin-right:30px;margin-top:30px;}
+.product .con-content li:nth-of-type(3n){margin-right: 0;}
+/*新闻动态*/
+.tracle-container{width:100%;}
+.tracle-container .left-tracle{width:500px;}
+.tracle-container .title{height:60px;}
+.tracle-container .more{color:#eab96a;line-height: 60px;}
+.tracle-container .top-title{font-size: 26px;color:#555;display: block;font-weight: 100;}
+.newbox  ul{margin-top:25px;}
+.tracle-container .top-des{font-size: 12px;color:#a5a5a5;text-transform: uppercase;}
+.newbox li{line-height: 40px;}
+.tracle-container .right-tracle{width:500px;}
+.newsimgbox{margin-top:40px;}
+.newsimgbox li{margin-right:10px;}
+.newsimgbox li:nth-of-type(3n){margin-right:0;}
+/*合作伙伴*/
+.posifix{position: relative; height:230px;}
+.cooper-container{text-align: center;}
+.cooper-box{width:200%;}
+.cooper-box li{width:50%;}
+.cooper-box li a{display: block;float:left;border:1px #ddd solid;margin-right:2px;width:224px;height:186px;overflow: hidden;}
+.cooper-box li:last-of-type a{margin-right: 0;}
+.cooper-container .yd{width:100%;position: absolute;bottom:0;}
+.cooper-container .yd span{display: inline-block;border:1px #f4dcb4 solid;width:80px;height:4px;margin:0 10px;}
+.cooper-container .yd span.active{background: #EAB96A;border:1px #EAB96A solid;}
+.footer{background: #2b2b2b;height:373px;}
+.footer-logo{margin-top:60px;}
+.nav-menu{color:#fff;opacity: .6;margin-top: 20px;}
+.nav-menu .slogin{font-size: 16px;}
+.nav-menu ul a{color:#fff;opacity: .6;font-size: 12px;}
+.nav-menu ul li{margin-right:5px;font-size: 11px;}
+.company-info{margin-top:22px;}
+.company-info p,.company-info a{font-size: 12px;color:#fff;opacity: .2;}
+.link-footer{margin-top:130px;}
+.link-footer li{width:76px;height:76px;border-radius: 50%;background: #323232;text-align: center;margin-left:30px;}
+.link-footer li img{vertical-align: middle;}
+.link-footer a{display: table-cell;text-align: center;width:76px;height:76px;vertical-align: middle;}
