@@ -32,7 +32,12 @@ class UsedPackageTable extends Table
         $this->table('lm_used_package');
         $this->displayField('type');
         $this->primaryKey('id');
-        
+
+        $this->belongsTo('Used', [
+            'className' => 'User',
+            'foreignKey' => 'used_id'
+        ]);
+
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

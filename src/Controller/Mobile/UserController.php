@@ -5,6 +5,7 @@ namespace App\Controller\Mobile;
 use App\Controller\Mobile\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\Controller\Controller;
+use PackType;
 use UserStatus;
 
 /**
@@ -682,6 +683,53 @@ class UserController extends AppController {
             'user' => $user,
             'pageTitle' => '个人主页'
         ]);
+    }
+
+
+    public function usedPack()
+    {
+        $this->set([
+            'pageTitle' => '付费查看记录'
+        ]);
+    }
+
+
+    /**
+     * 获取付费记录
+     */
+    public function getUsedPacks($page = 1)
+    {
+        $this->handCheckLogin();
+        $query = $this->request->query('query');
+        $where = ['user_id' => $this->user->id];
+        $contain = ['Used' => function($q) {
+            return $q->select(['id', 'nick', 'gender', 'birthday', 'avatar']);
+        }];
+        $limit = 10;
+        switch ($query) {
+            case 1:
+                $where = array_merge($where, ['type' => 1]);
+                break;
+            case 2:
+                $where = array_merge($where, ['type'=> 2]);
+                break;
+            default:
+                break;
+        }
+        $tb = TableRegistry::get('UsedPackage');
+        $ups = $tb->find()
+            ->contain($contain)
+            ->where($where)
+            ->orderDesc('UsedPackage.create_time')
+            ->limit($limit)
+            ->page($page)
+            ->map(function($row) {
+                $row->used->age = getAge($row->used->birthday);
+                $row->deadline = getYMD($row->deadline);
+                return $row;
+            });
+
+        return $this->Util->ajaxReturn(['datas' => $ups->toArray(), 'status' => true]);
     }
 
 }
