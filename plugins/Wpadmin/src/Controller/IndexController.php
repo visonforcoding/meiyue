@@ -21,7 +21,15 @@ class IndexController extends AppController {
         //$admin = $AdminTable->get(1);
         //debug($admin->ctime);
         //echo $admin->ctime;
-        $this->set('test', '这是一个后台管理页');
+
+        $this->set([
+            'test' => '',
+            'pageTitle' => '欢迎您',
+            'bread' => [
+                'first' => ['name' => '后台管理'],
+                'second' => ['name' => '首页'],
+            ],
+        ]);
     }
 
     public function test() {

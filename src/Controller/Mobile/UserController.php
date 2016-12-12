@@ -5,6 +5,7 @@ namespace App\Controller\Mobile;
 use App\Controller\Mobile\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\Controller\Controller;
+use UserStatus;
 
 /**
  * User Controller
@@ -39,9 +40,12 @@ class UserController extends AppController {
         $fanTb = TableRegistry::get('UserFans');
         $fans = $fanTb->find()->where(['following_id' => $this->user->id])->count();
         $followers = $fanTb->find()->where(['user_id' => $this->user->id])->count();
+        $packTb = TableRegistry::get('UserPackage');
+        $pack = $packTb->find()->where(['user_id' => $this->user->id])->orderDesc('create_time')->limit(1);
         $this->set([
             'facount' => $fans,
-            'focount' => $followers
+            'focount' => $followers,
+            'pack' => $pack
         ]);
         $this->set([
             'pageTitle' => '美约-我的',
@@ -348,6 +352,7 @@ class UserController extends AppController {
         if ($this->request->is('post')) {
             $user = $this->User->get($user->id);
             $user = $this->User->patchEntity($user, $this->request->data());
+            $user->id_status = UserStatus::CHECKING;
             if ($this->User->save($user)) {
                 return $this->Util->ajaxReturn(true, '保存成功');
             }

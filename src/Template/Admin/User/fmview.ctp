@@ -182,17 +182,26 @@
             <caption><h1>审核</h1></caption>  
             <tr>
                 <th>审核状态</th>
+                <th>身份认证</th>
                 <th>账号状态</th>
                 <th>操作</th>
             </tr>
             <tr>
                 <td class="horizone-title">
                     待审核
-                    <input type="radio" <?= ($user->status == 1)?'checked="checked"':''?> name="status" value="1" />
+                    <input type="radio" <?= ($user->status == UserStatus::CHECKING)?'checked="checked"':''?> name="status" value="<?= UserStatus::CHECKING;?>" />
                     审核通过
-                    <input type="radio" <?= ($user->status == 3)?'checked="checked"':''?> name="status" value="2" />
+                    <input type="radio" <?= ($user->status == UserStatus::PASS)?'checked="checked"':''?> name="status" value="<?= UserStatus::PASS;?>" />
                     审核不通过
-                    <input type="radio" <?= ($user->status == 2)?'checked="checked"':''?> name="status" value="3" />
+                    <input type="radio" <?= ($user->status == UserStatus::NOPASS)?'checked="checked"':''?> name="status" value="<?= UserStatus::NOPASS;?>" />
+                </td>
+                <td class="horizone-title">
+                    待审核
+                    <input type="radio" <?= ($user->id_status == UserStatus::CHECKING)?'checked="checked"':''?> name="id_status" value="<?= UserStatus::CHECKING;?>" />
+                    审核通过
+                    <input type="radio" <?= ($user->id_status == UserStatus::PASS)?'checked="checked"':''?> name="id_status" value="<?= UserStatus::PASS;?>" />
+                    审核不通过
+                    <input type="radio" <?= ($user->id_status == UserStatus::NOPASS)?'checked="checked"':''?> name="id_status" value="<?= UserStatus::NOPASS;?>" />
                 </td>
                 <td class="horizone-title">
                     正常

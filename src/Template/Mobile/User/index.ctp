@@ -18,8 +18,12 @@
                                     <span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>
                                 </span>
                                 <div class="bottom-btn">
+                                    <?php if($user->id_status == UserStatus::PASS): ?>
                                     <span class="identify-info id-btn">身份已认证</span>
-                                    <span class="identify-info video-btn">视频已认证</span>
+                                    <?php else: ?>
+                                    <span class="identify-info id-btn">身份未认证</span>
+                                    <?php endif; ?>
+                                    <!--<span class="identify-info video-btn">视频已认证</span>-->
                                 </div>
                             </h3>
 									<span class="cover_r_ico">

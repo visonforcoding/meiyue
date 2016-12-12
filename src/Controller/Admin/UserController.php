@@ -51,7 +51,6 @@ class UserController extends AppController {
      */
     public function mview($id = null) {
         $paihang = $this->User->find()->select()->where(['recharge >' => $this->recharge])->count();
-        $packTb = \Cake\ORM\TableRegistry::get('');
         $user = $this->User->find()
                 ->contain([
                     'Tags', 

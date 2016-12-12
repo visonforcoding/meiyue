@@ -53,10 +53,10 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                         <li class="top-tab" act="rich_list"><span>土豪榜</span></li>
                     </ul>
                     <div class="rank_con">
-                        <ul class="outerblock voted_list" id="my-top">
+                        <ul class="outerblock voted_list bgff" id="my-top">
                             <!-- 我的头牌 -->
                         </ul>
-                        <ul class="outerblock voted_list" id="top-list">
+                        <ul class="outerblock voted_list bgff" id="top-list">
                             <!-- 头牌列表 -->
                         </ul>
                     </div>
