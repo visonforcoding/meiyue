@@ -4,7 +4,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 html{min-height:100%;overflow-x: hidden;background: #f4f4f4;/*background: #ccc;*/}
 ol, ul,li{ list-style: none; }
 a{text-decoration: none; color:#222c38;outline:none;}
-a.disabled{border-color: #c8c9cb;color: #c8c9cb;cursor: not-allowed;}
+a.disabled{border-color: #c8c9cb;color: #ccc;cursor: not-allowed;}
 img{border:0;}
 input{padding:0;}
 table { border-collapse: collapse; border-spacing: 0; }
