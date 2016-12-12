@@ -18,68 +18,45 @@
     <div class="charge_container_con  mt20">
         <h3 class="title">快捷充值送特权套餐</h3>
         <ul id="changed">
+            <?php foreach($packs as $item): ?>
             <li>
                 <div class="items flex flex_justify inner">
-                    <h3 class="bright color_friends"><span class="lagernum">3999</span> <i class="unit">美币</i></h3>
-                    <div class="smalldes closed" data-type = "0"><i class="iconfont color_y">&#xe62f;</i> 点击关闭详情</div>
-                    <div class="color_y"><i class="smalldes">￥</i> <span class="lagernum">3999</span> </div>
+                    <h3 class="bright color_friends"><span class="lagernum"><?= $item->title; ?></span> <i class="unit"><?= $item->vali_time; ?></i></h3>
+                    <div class="smalldes closed" data-type = "0"><i class="iconfont color_y">&#xe62f;</i> <i class="slide-btn-name">点击展开详情</i></div>
+                    <div class="color_y" onclick="payView(<?= $item->id; ?>)"><i class="smalldes">￥</i> <span class="lagernum"><?= $item->price; ?></span> </div>
                 </div>
                 <div class="content hidecon inner">
                     <div class="innerblock">
-                        <h1>享受的特权  <i class="color_friends">1个月</i></h1>
-                        <p><i class="iconfont color_y">&#xe654;</i>查看30个美女所发布的全部动态</p>
-                        <p><i class="iconfont color_y">&#xe654;</i>和1个美女聊天</p>
+                        <h1>享受的特权  <i class="color_friends"><?= $item->vali_time; ?>天</i></h1>
+                        <p><i class="iconfont color_y">&#xe654;</i> 查看
+                            <?= checkIsEndless($item->browse_num)?'无限':$item->browse_num; ?>
+                            个美女所发布的全部动态</p>
+                        <p><i class="iconfont color_y">&#xe654;</i>和<?= checkIsEndless($item->chat_num)?'无限':$item->chat_num; ?>个美女聊天</p>
                     </div>
                 </div>
             </li>
-            <li>
-                <div class="items flex flex_justify inner">
-                    <h3 class="bright color_friends"><span class="lagernum">3999</span> <i class="unit">美币</i></h3>
-                    <div class="smalldes closed" data-type = "0"><i class="iconfont color_y">&#xe62f;</i> 点击关闭详情</div>
-                    <div class="color_y"><i class="smalldes">￥</i> <span class="lagernum">3999</span> </div>
-                </div>
-                <div class="content hidecon inner">
-                    <div class="innerblock">
-                        <h1>享受的特权  <i class="color_friends">1个月</i></h1>
-                        <p><i class="iconfont color_y">&#xe654;</i>查看30个美女所发布的全部动态</p>
-                        <p><i class="iconfont color_y">&#xe654;</i>和1个美女聊天</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="items flex flex_justify inner">
-                    <h3 class="bright color_friends"><span class="lagernum">3999</span> <i class="unit">美币</i></h3>
-                    <div class="smalldes closed" data-type = "0"><i class="iconfont color_y">&#xe62f;</i> 点击关闭详情</div>
-                    <div class="color_y"><i class="smalldes">￥</i> <span class="lagernum">3999</span> </div>
-                </div>
-                <div class="content hidecon inner">
-                    <div class="innerblock">
-                        <h1>享受的特权  <i class="color_friends">1个月</i></h1>
-                        <p><i class="iconfont color_y">&#xe654;</i>查看30个美女所发布的全部动态</p>
-                        <p><i class="iconfont color_y">&#xe654;</i>和1个美女聊天</p>
-                    </div>
-                </div>
-            </li>
+            <?php endforeach; ?>
         </ul>
     </div>
 </div>
 <div style="height:62px;"></div>
 <a id="topay" class="identify_footer_potion">立即支付</a>
 <script type="text/javascript">
-    $('#changed .closed').on('tap', function () {
+    $('#changed .closed').on('tap',function(){
         var data = $(this).data('type');
         var ele = $(this).parent('.items').siblings();
-        switch (data) {
+        switch(data){
             case '0':
                 ele.removeClass('hidecon').addClass('showcon');
-                $(this).attr('data-type', '1');
+                $(this).attr('data-type','1');
+                $(this).find('.slide-btn-name').text('点击关闭详情');
                 break;
             case '1':
                 ele.removeClass('showcon').addClass('hidecon');
-                $(this).attr('data-type', '0');
+                $(this).attr('data-type','0');
+                $(this).find('.slide-btn-name').text('点击展开详情');
                 break;
-            default:
-                break;
+            default:break;
         }
     })
 </script>
@@ -97,5 +74,25 @@
             }
          });
      });
+
+
+     //支付
+     function payView($packid)
+     {
+         $.ajax({
+             type: 'POST',
+             url: '/userc/create-payorder/' + $packid,
+             dataType: 'json',
+             success: function (res) {
+                 if (typeof res === 'object') {
+                     if (res.status) {
+                         document.location.href = res.redirect_url;
+                     } else {
+                         alert(res.msg);
+                     }
+                 }
+             }
+         });
+     }
 </script>
 <?php $this->end('script'); ?>

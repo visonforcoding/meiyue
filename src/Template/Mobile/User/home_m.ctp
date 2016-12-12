@@ -98,7 +98,7 @@
             </li>
         </ul>
     </div>
-    <div class="home_items_list mt40">
+    <!--<div class="home_items_list mt40">
         <ul>
             <li>
                 <a href="#this"  class="home_items">
@@ -109,7 +109,7 @@
                 </a>
             </li>
         </ul>
-    </div>
+    </div>-->
     <div class="home_items_list items_basic_list mt40">
         <ul>
             <li>

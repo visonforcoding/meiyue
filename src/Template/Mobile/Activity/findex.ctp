@@ -145,7 +145,7 @@
 
 <script id="rich-list-tpl" type="text/html">
     {{#datas}}
-    <li class='ul-con' onclick="window.location.href='/index/homepage/{{id}}'">
+    <li class='ul-con' onclick="window.location.href='/user/male-homepage/{{id}}'">
         <div class="voted_con flex flex_justify">
             <div class="flex">
                 <span class="voted_place silver">{{index}}</span>

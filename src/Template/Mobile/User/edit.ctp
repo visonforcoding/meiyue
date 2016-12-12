@@ -43,7 +43,7 @@
                    </span>
                    <?php elseif($user->id_status == UserStatus::NOPASS): ?>
                    <span class="fr color_gray">
-                    审核不通过
+                   <i class="color_error">审核不通过</i><i class="iconfont right_ico fr">&#xe605;</i>
                    </span>
                    <?php endif; ?>
                 </a>
@@ -62,16 +62,17 @@
                             <i class="iconfont right_ico fr">&#xe605;</i>
                         <?php elseif($user->status == UserStatus::PASS): ?>
                             <span class="fr color_gray">
-                   审核通过
-                   </span>
+                            审核通过
+                            </span>
                         <?php elseif($user->status == UserStatus::CHECKING): ?>
                             <span class="fr color_gray">
-                    审核中<i class="iconfont right_ico fr">&#xe605;</i>
-                   </span>
+                            审核中<i class="iconfont right_ico fr">&#xe605;</i>
+                            </span>
+
                         <?php elseif($user->status == UserStatus::NOPASS): ?>
                             <span class="fr color_gray">
-                    审核不通过
-                   </span>
+                            <i class="color_error">审核不通过</i><i class="iconfont right_ico fr">&#xe605;</i>
+                           </span>
                         <?php endif; ?>
                     </a>
                 </li>
