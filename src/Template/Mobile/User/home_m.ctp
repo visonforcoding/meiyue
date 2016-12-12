@@ -13,11 +13,18 @@
                     <li class="blight userinfo">
                         <a href="/userc/edit-info" class="cover_block">
                         <h3>
-                            <span><?= $user->nick ?><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="diamonds"><img src="/mobile/images/zs.png" class="responseimg"/></span><span class="highter-vip"><img src="/mobile/images/v.png" class="responseimg"/></span></span>
-                            <div class="bottom-btn">
-                                <span class="identify-info id-btn">身份已认证</span>
-                            </div>
-                            </h3>
+                            <span>
+                                <?= $user->nick ?><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><?php if($user->recharge): ?><span class="diamonds"><img src="/mobile/images/zs.png" class="responseimg"/></span><?php endif; ?><?php if($user->pack): ?><span class="highter-vip"><img src="/mobile/images/v.png" class="responseimg"/></span><?php endif; ?></span>
+                            <?php if($user->id_status == UserStatus::PASS): ?>
+                                <div class="bottom-btn">
+                                    <span class="identify-info id-btn">身份已认证</span>
+                                </div>
+                            <?php else: ?>
+                                <div class="bottom-btn">
+                                    <span class="identify-info id-btn">身份未认证</span>
+                                </div>
+                            <?php endif; ?>
+                        </h3>
                            <!--  <h3>
                                 <span><i class="iconfont">&#xe628;</i></span>
                                 <span class="flag price"><?= $this->Number->format($user->money) ?>美币</span>

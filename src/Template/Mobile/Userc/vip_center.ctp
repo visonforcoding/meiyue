@@ -62,7 +62,7 @@
                 </div>
                 <div class="r_info">
                     <h3 class="topinfo">
-                        还可以和
+                        剩余
                         <i class="lagernum color_y">
                             <?php
                                 if(isset($counter->chat_rest)){
@@ -71,17 +71,17 @@
                                     echo '0';
                                 }
                             ?>
-                        </i>人聊天
+                        </i>人
                     </h3>
                     <h3 class="smalldes">
-                        <span>共可以和
+                        <span>共
                             <?php
                             if(isset($counter->chat_count)){
                                 echo checkIsEndless($counter->chat_count)?'无限':$counter->chat_count;
                             } else {
                                 echo '0';
                             }
-                            ?>人聊天
+                            ?>人
                         </span>|
                         <time>
                             <?php
@@ -91,6 +91,7 @@
                                 echo getYMD(new Time());
                             }
                             ?>
+                            到期
                         </time>
                     </h3>
                 </div>

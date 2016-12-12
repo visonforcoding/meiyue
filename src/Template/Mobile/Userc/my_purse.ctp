@@ -18,7 +18,7 @@
         <div class="purse_list_bottom">
             <?php if ($user->gender == 1): ?>
             <span class="btn btn_bg_t"><a href="/purse/recharge">充值</a></span>
-                <p><a href="#this" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
+                <p><a href="/activity/index#3" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
             <?php else: ?>
                 <span class="btn btn_bg_t">兑换美币</span>
                 <p class="tips">正在申请提现 20,000 美币</p>
@@ -49,7 +49,7 @@
         </ul>
         <div class="loader-more">
             <p>查看更多明细<i class="iconfont">&#xe605;</i></p>
-         </div>
+        </div>
     </div>
 </div>
 <!--支付弹出层-->
@@ -85,5 +85,9 @@
 </div>
 
 <script>
+
+    $('.loader-more').on('tap', function() {
+        window.location.href='/userc/purse-detail';
+    });
     LEMON.sys.back('/user/index');
 </script>

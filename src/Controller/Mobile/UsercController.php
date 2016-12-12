@@ -581,12 +581,44 @@ class UsercController extends AppController {
                 ->where(['user_id'=>  $this->user->id])
                 ->orWhere(['buyer_id'=>  $this->user->id])
                 ->orderDesc('create_time')
+                ->limit(10)
                 ->toArray();
         $this->set([
             'pageTitle'=>'我的钱包',
             'user'=>  $this->user,
             'top5flows'=>$top5flows    
         ]);
+    }
+
+
+    /**
+     * 账单明细
+     */
+    public function purseDetail()
+    {
+        $this->set([
+            'pageTitle'=>'账单明细',
+            'user'=>  $this->user,
+        ]);
+    }
+
+    /**
+     * 获取账单列表
+     * @param int $page
+     * @return \Cake\Network\Response|null
+     */
+    public function getPurses($page = 1)
+    {
+        $this->handCheckLogin();
+        $FlowTable = TableRegistry::get('Flow');
+        $flows = $FlowTable->find()
+            ->where(['user_id'=>$this->user->id])
+            ->orWhere(['buyer_id'=>  $this->user->id])
+            ->orderDesc('create_time')
+            ->limit(10)
+            ->page($page)
+            ->toArray();
+        return $this->Util->ajaxReturn(['flows'=>$flows]);
     }
     
     /**
