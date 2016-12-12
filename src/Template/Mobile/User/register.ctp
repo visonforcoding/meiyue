@@ -6,7 +6,7 @@
             <i class="iconfont">&#xe608;</i>
             <input tabindex="1" type="number" id="phone" value="" placeholder="手机号" id="user" />
         </div>
-        <div class="password validate flex">
+        <div class="password validate">
             <i class="iconfont">&#xe607;</i>
             <input tabindex="2" type="text" id="vcode" placeholder="验证码" class="valicode" id="validate" />
             <a  id="gcode" class="fogetpwd getvalid disabled">获取验证码</a>

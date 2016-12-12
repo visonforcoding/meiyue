@@ -2,7 +2,7 @@
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <h1>基本信息</h1>
-        <span id="next" class="r_btn">提交</span>
+        <span id="next" class="r_btn">下一步</span>
     </div>
 </header>
 <div class="wraper">
