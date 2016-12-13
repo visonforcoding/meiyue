@@ -349,7 +349,7 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .bottomblock .entroll-btn{width:50%;display: block;height:45px;line-height: 45px;text-align: center;}
 .bottomblock .entroll-btn .cancelbtn{color:#EAB96A;}
 .diamonds{display:inline-block;width:.25rem;height:.25rem;margin-left:.05rem;}
-.highter-vip{display:inline-block;padding:.01rem .04rem;margin-left:.05rem;background: #F1CC7B;font-size: 10px;background:-webkit-linear-gradient(top,#e7c184,#cf9f62);background: linear-gradient(top,#e7c184,#cf9f62);}
+.highter-vip{display:inline-block;padding:.01rem;margin-left:.05rem;background: #F1CC7B;font-size: 9px;background:-webkit-linear-gradient(top,#e7c184,#cf9f62);background: linear-gradient(top,#e7c184,#cf9f62);color:#fff;margin-top:-3px;border-radius: 1px;}
 @media (min-width: 320px) and (max-width: 374px) {
 	.date_detail_place .place_info .userinfo{margin-bottom:.5rem;}
 }
@@ -415,7 +415,7 @@ color:#444;position:relative;padding:0 .15rem;margin-right:.1rem;font-size: 13px
 .choose_mark__items .choosed span{border:1px #e8b967 solid;border-radius: 3px;}
 .choose_mark__items .choose_marks i{font-size:11px;color:#666666;word-break: break-all;display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden;-webkit-line-clamp: 2;margin-top:4px;}
 /*订单管理*/
-.order_header div{width:30%;}
+.order_header div{width:30.6%;}
 .order_header .headertab{position:relative;}
 .order_header .cur .headertab .tips_ico{position: absolute;width:8px;height:8px;background: red;border-radius: 50%;top:50%;right:0;margin-top:-8px;
 ;-webkit-border-radius: 50%;}
@@ -424,8 +424,8 @@ color:#444;position:relative;padding:0 .15rem;margin-right:.1rem;font-size: 13px
 .place_info_desc .place img{width:100%;height:auto;display: block;}
 .place_info_desc .place_info{padding-left:1.4rem;}
 .place_info_desc .userinfo{margin-bottom:.15rem;}
-.groupbtn span{display: inline-block;padding:0 .35rem;height:25px;line-height: 23px;border-radius: 3px;font-size: 12px;}
-.groupbtn span.refuse{border:1px #e0e0e0 solid;color:#666;margin-right:.1rem;}
+.groupbtn span{display: inline-block;padding:0 .35rem;height:25px;line-height: 23px;border-radius: 3px;font-size: 13px;}
+.groupbtn span.refuse{border:1px #e0e0e0 solid;color:#666;margin-left:.1rem;}
 .groupbtn span.orders{border:1px #eab96a solid;color:#eab96a;}
 @media (min-width: 320px) and (max-width: 374px) {
 	.place_info_desc .userinfo{margin-bottom:0;}
