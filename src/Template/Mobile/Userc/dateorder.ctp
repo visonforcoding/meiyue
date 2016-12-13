@@ -248,10 +248,10 @@
                     } else {
                         if (resp.code == '201') {
                             //余额不足
-                            $.util.alert(res.msg);
+                            $.util.alert(resp.msg);
                             setTimeout(function () {
-                                window.location.href = res.redirect_url;
-                            }, 300);
+                                window.location.href = resp.redirect_url;
+                            }, 500);
                         }
                     }
                 }
