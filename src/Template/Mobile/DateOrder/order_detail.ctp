@@ -152,7 +152,7 @@
             <h3><i class="color_y">[<?= $order->user_skill->skill->name ?>]</i> <?= ($order->date) ? $order->date->title : '' ?></h3>
             <span class="smallarea"><?= $order->price ?>美币/小时</span>
         </div>
-        <ul class="outerblock btop inner">
+        <ul class="outerblock btop">
             <li class="flex flex_justify">
                 <div class="date_info">
                     <h3 class="time"><i>时间 </i><?= getFormateDT($order->start_time, $order->end_time) ?></h3>
@@ -160,18 +160,19 @@
                 </div>
                 <span>共2小时</span>
             </li>
-            <li class="flex ">
+            <li class="flex date-desc">
                 <div class="date_info">
                     <h3 class="time">约会说明：<?= $order->user_skill->description ?></h3>
                 </div>
             </li>
-            <li class="flex">
-                <div class="date_info">
-                    <h3 class="time"><i>我的标签：</i>
+            <li class="date-mark-content">
+                <div class="date_info flex">
+                    <h3 class="time"><i>我的标签：</i></h3>
+                    <div class="mark-container">
                         <?php foreach ($order->dater->tags as $tag): ?>
-                            <a href="#this"><?= $tag->name ?></a>
-                        <?php endforeach; ?>
-                    </h3>
+                            <a href="#this" class='mark'><?= $tag->name ?></a>
+                         <?php endforeach; ?>
+                    </div>
                 </div>
             </li>
         </ul>
@@ -179,7 +180,7 @@
     <!--付款详情-->
     <div class="date_ability_pay mt20">
         <h3 class="commontitle inner">付款详情</h3>
-        <ul class="b_content outerblock bgff inner">
+        <ul class="b_content outerblock bgff">
             <li class="flex flex_justify">
                 <div>合计</div><div><?= $order->amount ?>美币</div>
             </li>
@@ -239,9 +240,9 @@
     <?php endif; ?>
     <?php if ($order->status == 10): ?>
         <div class="potion_footer flex flex_justify">
-            <span id="refuse_status_10" class="footerbtn cancel">取消约单</span>
+            <span id="refuse_status_10" class="identify_dark_potion">取消约单</span>
             <?php if ($order->start_time > date('Y-m-d H:i:s')): ?>
-                <span id="godate" class="footerbtn gopay">赴约成功</span>
+                <span id="godate" class="identify_footer_potion">赴约成功</span>
             <?php endif; ?>
         </div>
     <?php endif; ?>
@@ -260,7 +261,7 @@
     <?php if ($order->status == 13): ?>
         <div class="potion_footer flex flex_justify">
             <span id="complain" class="footerbtn cancel">投诉</span>
-            <span id="godate" class="footerbtn cancel">赴约成功</span>
+            <span id="godate" class="footerbtn gopay">赴约成功</span>
         </div>
     <?php endif; ?>
     <?php if ($order->status == 15): ?>
