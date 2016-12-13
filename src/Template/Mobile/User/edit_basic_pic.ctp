@@ -1,6 +1,6 @@
 <header>
     <div class="header">
-        <i class="iconfont toback">&#xe602;</i>
+        <i class="iconfont toback" onclick="window.location.href='/userc/edit-info'">&#xe602;</i>
         <h1>基本照片与视频上传</h1>
     </div>
 </header>
@@ -108,7 +108,7 @@
 </div>
 <div style="height:62px;"></div>
 <?php if(!($user->images) || !($user->video)): ?>
-    <a id="submit" class="identify_footer_potion">开始审核</a>
+    <a id="submit" class="identify_footer_potion">提交审核</a>
 <?php elseif($user->status == UserStatus::NOPASS): ?>
     <a id="submit" class="identify_footer_potion">重新审核</a>
 <?php endif; ?>
@@ -123,20 +123,24 @@
             LEMON.event.uploadPics({
                 key:'demoImg',
                 user_id:user_id,
+            }, function() {
+
             });
         if($('#up_video').data('choosed'))
             LEMON.event.uploadVideo({
                 key:'up_video',
                 user_id:user_id
             });
+        $.util.showPreloader();
+        $.util.setCookie('UPLOAD_IMGS_VID', true, 30);
+        $(this).removeAttr('id');
+        $(this).addClass('disabled');
         setTimeout(function(){
+            $.util.hidePreloader();
+            $.util.alert('处理中');
             location.href = '/userc/edit-info';
-        },1000);
+        },3000);
     })
-
-
-
-
 </script>
 <?= $this->end('script'); ?>
 

@@ -55,24 +55,24 @@
                 </a>
             </li> -->
             <?php if($user->gender == 2): ?>
-                <li class="clearfix" <?= (!($user->status == UserStatus::PASS))?'onclick="window.location.href=\'/userc/edit-basic-pic\';"':''?>>
-                   
+                <li class="clearfix">
+                    <a id="status-btn">
                         <span class="fl">基本照片与视频上传</span>
                         <?php if(!($user->images) || !($user->video)): ?>
-                            <i class="iconfont right_ico fr">&#xe605;</i>
+                            <i class="iconfont right_ico fr" onclick="window.location.href='/userc/edit-basic-pic';">&#xe605;</i>
                         <?php elseif($user->status == UserStatus::PASS): ?>
                             <span class="fr">
                                <i class="color_gray">审核通过</i>
                             </span>
                         <?php elseif($user->status == UserStatus::CHECKING): ?>
-                            <span class="fr">
-                             <i class="color_gray">审核中</i><i class="iconfont right_ico">&#xe605;</i>
-                             </span>
+                            <span class="fr color_gray" onclick="window.location.href='/userc/edit-basic-pic';">
+                            审核中<i class="iconfont right_ico fr">&#xe605;</i>
+                            </span>
 
                         <?php elseif($user->status == UserStatus::NOPASS): ?>
-                             <span class="fr color_gray">
+                            <span class="fr color_gray" onclick="window.location.href='/userc/edit-basic-pic';">
                                <i class="color_error">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
-                             </span>
+                           </span>
                         <?php endif; ?>
                     
                 </li>
@@ -137,3 +137,12 @@
     LEMON.sys.back('/user/index');
 </script>
 <?php $this->end(); ?>
+
+<script>
+    init();
+    function init() {
+        if($.util.getCookie('UPLOAD_IMGS_VID')) {
+            $('#status-btn').html('<span class="fl">基本照片与视频上传</span><span class="fr color_gray">处理中</span>');
+        }
+    }
+</script>

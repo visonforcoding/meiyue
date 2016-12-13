@@ -111,7 +111,7 @@ class TracleController extends AppController {
                     'User'=>function($q){
                         return $q->select(['id','avatar','nick']);
                     },
-                    'Mvpraise' => function($q) {
+                    'Mvpraises' => function($q) {
                         return $q->where(['user_id' => $this->user->id]);
                     }
                 ])
@@ -133,7 +133,7 @@ class TracleController extends AppController {
                             ], 'end' => '+10 year']
                         );
                         $item['view_nums'] ++;
-                        if(count($item['mvpraise']) > 0) {
+                        if(count($item['mvpraises']) > 0) {
                             $item['praised'] = true;
                         } else {
                             $item['praised'] = false;
@@ -169,7 +169,7 @@ class TracleController extends AppController {
                 return $this->Util->ajaxReturn(false, '女性不可以给女性点赞哦');
             }
             //是否点赞过
-            $praiseTb = TableRegistry::get('MvPraise');
+            $praiseTb = TableRegistry::get('Mvpraises');
             $praise = $praiseTb
                 ->find()
                 ->where(['movement_id' => $mvid, 'user_id' => $this->user->id])
