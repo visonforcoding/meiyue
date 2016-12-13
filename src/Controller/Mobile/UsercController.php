@@ -997,4 +997,18 @@ class UsercController extends AppController {
         }
     }
 
+
+    /**
+     * 账号管理
+     */
+    public function acctSet()
+    {
+        $this->handCheckLogin();
+        $phone = $this->user->phone;
+        substr_replace($phone, "****", 3, )
+        $this->set([
+            'phone' => $phone,
+            'pageTitle'=>'账号管理'
+        ]);
+    }
 }

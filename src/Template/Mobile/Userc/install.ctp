@@ -6,7 +6,7 @@
 </header>
 <div class="wraper">
     <div class="account_items">
-        <a class="commonlayer inner mt20 ablock" href="home_account.html">
+        <a class="commonlayer inner mt20 ablock" href="/userc/acct-set">
             <div>账号管理</div>
             <span class="iconfont rcon">&#xe605;</span>
         </a>
