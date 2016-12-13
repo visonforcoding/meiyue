@@ -927,15 +927,18 @@ li.marks-line{height:auto;padding-top:.2rem;padding-bottom:.2rem;}
 .date_head_info .l_con{padding-left:1.8rem;vertical-align: middle;height:1.6rem;display: table-cell;vertical-align: middle;}
 .date_head_info .l_info{}
 .date_head_info .l_info h3{font-size: 16px;color:#fffefe;margin-bottom:.2rem;}
-.date_head_info .translate{display: inline-block;width:12px;height:12px;font-size: 15px;background: #fFF;border-radius: 2px;line-height: 15px;margin-right: .1rem;background-size:contain ;}
+.date_head_info .translate{display: inline-block;width:12px;height:12px;font-size: 15px;border-radius: 2px;line-height: 15px;margin-right: .1rem;}
 /**/
 .date_ability_list .title{height:45px;}
 .date_ability_list li{height:55px;}
+.date_ability_list li.date-desc,.date_ability_list li.date-mark-content{min-height: 25px;height:auto;padding:.1rem 0;}
+.date-mark-content .date_info{min-height: 25px;height:auto;}
+.date-mark-content .date_info .mark-container{line-height: .7rem;max-width: 6rem;}
 .date_ability_list li .date_info h3{font-size: 13px;color:#999;line-height: 20px;}
 .date_info .mark{display:inline-block;height:22px;color:#999;font-size: 11px;background: #efefef;border-radius: 10px;padding:0 .12rem;line-height: 22px;}
 .date_ability_pay li{height:45px;}
 .date_bosses{background: #fff;height:45px;border-top:1px #efefef solid;}
-.potion_footer{height:40px;background: #fff;position: fixed;bottom:0;width:100%;max-width:750px;box-shadow: 0 -1px 1px rgba(0,0,0,.1);}
+.potion_footer{height:40px;background: #fff;position: fixed;bottom:0;width:100%;max-width:750px;/*box-shadow: 0 -1px 1px rgba(0,0,0,.1);*/}
 .potion_footer span{}
 .potion_footer .cancel{color:#999;display: block;width:50%;text-align: center;font-size: 18px;height:40px;line-height: 40px;}
 .potion_footer .gopay{color:#fff;background: #EAB96A;display: block;width:50%;text-align: center;font-size: 18px;height:40px;line-height: 40px;}
