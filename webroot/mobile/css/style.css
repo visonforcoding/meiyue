@@ -185,7 +185,8 @@ header{overflow: hidden;}
 .foget-pwd-box{background: #fff;padding:.7rem;}
 .foget-pwd-box .items{padding:20px 0 10px 5px;border-bottom:1px #efefef solid;font-size: 16px;}
 .foget-pwd-box .items .items-box{height:26px;}
-.foget-pwd-box .items .getvolid{font-size: 12px;color:#eab96a;border:1px #eab96a solid;border-radius: 3px;height:24px;line-height: 24px;display: block;padding:0 .08rem;}
+.foget-pwd-box .items .getvolid{font-size: 12px;color:#eab96a;border:1px #eab96a solid;border-radius: 3px;height:24px;line-height: 24px;display: block;padding:0 .08rem;transition: all .2s ease-in;}
+.foget-pwd-box .items .getvolid.disabled{color:#e5e5e5;border:1px #e5e5e5 solid;transition: all .2s ease-in;}
 .foget-pwd-box .items .prenum{margin-right: .2rem;color:#eab96a;font-size: 18px; }
 .foget-pwd-box .items .valinum{width:3rem}
 .resetnum{font-size: 12px;color:#999;text-align: center;position: fixed;bottom:.6rem;width:100%;max-width: 750px;}
