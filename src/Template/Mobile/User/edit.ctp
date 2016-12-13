@@ -35,15 +35,15 @@
                        <i class="iconfont right_ico fr">&#xe605;</i>
                    <?php elseif($user->id_status == UserStatus::PASS): ?>
                    <span class="fr">
-                   <i class="color_gray">审核通过</i>
+                   <i class="color_gray fr-des">审核通过</i>
                    </span>
                    <?php elseif($user->id_status == UserStatus::CHECKING): ?>
                    <span class="fr">
-                     <i class="color_gray">审核中</i><i class="iconfont right_ico">&#xe605;</i>
+                     <i class="color_gray fr-des">审核中</i><i class="iconfont right_ico">&#xe605;</i>
                    </span>
                    <?php elseif($user->id_status == UserStatus::NOPASS): ?>
                    <span class="fr">
-                   <i class="color_error">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
+                   <i class="color_error fr-des">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
                    </span>
                    <?php endif; ?>
                 
@@ -62,16 +62,16 @@
                             <i class="iconfont right_ico fr" onclick="window.location.href='/userc/edit-basic-pic';">&#xe605;</i>
                         <?php elseif($user->status == UserStatus::PASS): ?>
                             <span class="fr">
-                               <i class="color_gray">审核通过</i>
+                               <i class="color_gray fr-des">审核通过</i>
                             </span>
                         <?php elseif($user->status == UserStatus::CHECKING): ?>
                             <span class="fr" onclick="window.location.href='/userc/edit-basic-pic';">
-                            <i class="color_gray">审核中</i><i class="iconfont right_ico">&#xe605;</i>
+                            <i class="color_gray fr-des">审核中</i><i class="iconfont right_ico">&#xe605;</i>
                             </span>
 
                         <?php elseif($user->status == UserStatus::NOPASS): ?>
                             <span class="fr color_gray" onclick="window.location.href='/userc/edit-basic-pic';">
-                               <i class="color_error">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
+                               <i class="color_error fr-des">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
                            </span>
                         <?php endif; ?>
                     
@@ -141,6 +141,10 @@
 <script>
     init();
     function init() {
+        if(<?= ($user->images) && ($user->video); ?>) {
+            $.util.setCookie('UPLOAD_IMGS_VID', '')
+        }
+
         if($.util.getCookie('UPLOAD_IMGS_VID')) {
             $('#status-btn').html('<span class="fl">基本照片与视频上传</span><span class="fr color_gray">处理中</span>');
         }
