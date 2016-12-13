@@ -70,15 +70,21 @@
     </div>
 </div>
 <div style="height:63px;"></div>
+<div class="bottomblock">
         <?php if ($botBtSts == 0): ?>
-            <span class="total"><span class="color_y"><i class="color_y lagernum"><?= ($user['gender'] == 1)?$activity['male_price']:$activity['female_price']; ?> </i>美币/人</span></span>
-            <a class="nowpay">我要报名</a>
+            <div class="flex flex_end">
+                <span class="total"><span class="color_y"><?= ($user['gender'] == 1)?$activity['male_price']:$activity['female_price']; ?> </i>美币/人</span></span>
+                <a class="nowpay">我要报名</a>
+            </div>
         <?php elseif ($botBtSts == 1): ?>
             <a class="identify_footer_potion">人数已满</a>
         <?php elseif ($botBtSts == 2): ?>
             <a class="identify_footer_potion">报名成功</a>
         <?php elseif ($botBtSts == 3 && $cancancle): ?>
-            <div class="identify_footer_potion" onclick="cancel();">我要取消</div>
+            <div class="flex">
+                <span class="entroll-btn cancelbtn">报名数量：<?= $regist_item->num; ?></span>
+                <span onclick="cancel();" class="entroll-btn surebtn">我要取消</span>
+            </div>
         <?php elseif ($botBtSts == 3 && !$cancancle): ?>
             <a class="identify_footer_potion">报名成功</a>
         <?php elseif ($botBtSts == 4): ?>
@@ -88,7 +94,7 @@
         <?php else: ?>
             <a class="identify_footer_potion">异常状态</a>
         <?php endif; ?>
-    
+</div>
 
 <script>
 
@@ -127,5 +133,5 @@
         );
         <?php endif; ?>
     }
-
+    LEMON.sys.back('/user/index');
 </script>

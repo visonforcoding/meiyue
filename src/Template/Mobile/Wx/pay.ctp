@@ -8,7 +8,7 @@
     <div class="recharge_pay_container flex flex_justify inner mt20">
         <div class="l_info">
             <i class="iconfont">&#xe636;</i>
-            <span>购买 399美币 送大礼包</span>
+            <span><?= $title; ?></span>
         </div>
         <div class="r_info color_y">
             <i>￥</i>
