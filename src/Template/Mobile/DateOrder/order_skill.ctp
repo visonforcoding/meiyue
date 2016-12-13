@@ -87,7 +87,7 @@
                             <div>
                                 <a id="showChoosePlace">
                                     <span id="thePlace" class="color_gray">请选择</span>
-                                    <i class="iconfont r_con">&#xe605;</i>
+                                    <i class="iconfont r_con" style='margin-right:-.05rem;'>&#xe605;</i>
                                 </a>
                             </div>
                         </div>
