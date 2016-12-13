@@ -44,10 +44,12 @@
         param['create_time'] = $.util.getFormatTime();
         param = JSON.stringify(param);
         if ($('#add_tracle').data('choosed')) {
-            alert('test');
             LEMON.event.uploadVideo({key: 'add_tracle', user_id: user_id, param: param},function(res){
                 if(res){
                     $.util.alert('动态已发送');
+                    setTimeout(function() {
+                        window.location.href='/userc/my-tracle';
+                    }, 1000)
                 }
             });
         }

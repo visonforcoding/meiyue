@@ -113,10 +113,9 @@
     <div class="home_items_list items_basic_list mt40">
         <ul>
             <li>
-                <a href="#this"  class="home_items">
+                <a onclick="tel();"  class="home_items">
                     <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe611;</i><span class="itemsname">联系客服</span></div>
                     <div class="home_list_r_info">
-
                         <i class="iconfont">&#xe605;</i>
                     </div>
                 </a>
@@ -147,5 +146,17 @@
 <?= $this->element('footer', ['active' => 'me']) ?>
 <?php $this->start('script'); ?>
 <script type="text/javascript">
+    function tel() {
+        $.util.confirm(
+            '联系客服',
+            '拨打客服电话',
+            function() {
+                LEMON.event.tel({tel: '13763053901'});
+            },
+            null,
+            null,
+            '拨打'
+        )
+    }
 </script>
 <?php $this->end('script'); ?>
