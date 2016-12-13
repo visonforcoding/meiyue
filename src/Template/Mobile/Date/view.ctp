@@ -1,7 +1,9 @@
 <header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
-        <span class="edit-btn r_btn" date-id="<?= $date['id'] ?>">编辑</span>
+        <?php if($date['status'] != DateState::DATED): ?>
+            <span class="edit-btn r_btn" date-id="<?= $date['id'] ?>">编辑</span>
+        <?php endif; ?>
         <h1>约会详情</h1>
     </div>
 </header>
@@ -55,6 +57,8 @@
 </div>
 <?php if($date['status'] == DateState::BE_DOWN || $date['status'] == DateState::DOWN): ?>
 <p class='aligncenter color_gray mt80 '>此约会已下线</p>
+<?php elseif($date['status'] == DateState::DATED): ?>
+<p class='aligncenter color_gray mt80 '>此约会已有人赴约</p>
 <?php endif; ?>
 <script>
 
@@ -92,8 +96,10 @@
 
     });
 
+    <?php if($date['status'] != DateState::DATED): ?>
     LEMON.sys.setTopRight('编辑');
     window.onTopRight = function () {
         window.location.href = '/date/edit/<?= $date['id'] ?>';
     }
+    <?php endif; ?>
 </script>

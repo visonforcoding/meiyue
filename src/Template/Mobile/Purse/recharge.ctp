@@ -21,13 +21,13 @@
             <?php foreach($packs as $item): ?>
             <li>
                 <div class="items flex flex_justify inner">
-                    <h3 class="bright color_friends"><span class="lagernum"><?= $item->title; ?></span> <i class="unit"><?= $item->vali_time; ?></i></h3>
+                    <h3 class="bright color_friends"><span class="lagernum"><?= $item->title; ?></span> <i class="unit"><?= $item->vali_time; ?>天&nbsp;</i></h3>
                     <div class="smalldes closed" data-type = "0"><i class="iconfont color_y">&#xe62f;</i> <i class="slide-btn-name">点击展开详情</i></div>
                     <div class="color_y" onclick="payView(<?= $item->id; ?>)"><i class="smalldes">￥</i> <span class="lagernum"><?= $item->price; ?></span> </div>
                 </div>
                 <div class="content hidecon inner">
                     <div class="innerblock">
-                        <h1>享受的特权  <i class="color_friends"><?= $item->vali_time; ?>天</i></h1>
+                        <h1>享受的特权  <i class="color_friends"><?= $item->vali_time; ?>天&nbsp;</i></h1>
                         <p><i class="iconfont color_y">&#xe654;</i> 查看
                             <?= checkIsEndless($item->browse_num)?'无限':$item->browse_num; ?>
                             个美女所发布的全部动态</p>
