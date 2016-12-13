@@ -4,6 +4,7 @@ namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
 use App\Model\Entity\User;
+use Cake\Auth\DefaultPasswordHasher;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 use PackType;
@@ -1005,10 +1006,177 @@ class UsercController extends AppController {
     {
         $this->handCheckLogin();
         $phone = $this->user->phone;
-        substr_replace($phone, "****", 3, )
+        $phone = substr_replace($phone, "****", 3, 4);
         $this->set([
             'phone' => $phone,
             'pageTitle'=>'账号管理'
+        ]);
+    }
+
+
+    /**
+     * 重新绑定手机号码
+     */
+    public function rebindPhone()
+    {
+        if($this->request->is("ajax")) {
+            //验证验证码
+            $data = $this->request->data();
+            if(!$data['nphone']) {
+                return $this->Util->ajaxReturn(false, '手机号码不能为空');
+            }
+
+            $user = TableRegistry::get('User')->find()->where(['phone' => $data['nphone']])->count();
+            if($user) {
+                return $this->Util->ajaxReturn(false, '该手机已经被绑定');
+            }
+            $SmsTable = TableRegistry::get('Smsmsg');
+            $sms = $SmsTable->find()->where(['phone' => $data['nphone']])->orderDesc('create_time')->first();
+            if (!$sms) {
+                return $this->Util->ajaxReturn(false, '验证码错误');
+            } else {
+                if ($sms->code != $data['vcode']) {
+                    return $this->Util->ajaxReturn(false, '验证码错误');
+                }
+                if ($sms->expire_time < time()) {
+                    return $this->Util->ajaxReturn(false, '验证码已过期');
+                }
+            }
+            $query = $this->User->query();
+            $res = $query->update()
+                ->set(['phone' => $data['nphone']])
+                ->where(['id' => $this->user->id])
+                ->execute();
+            $jumpUrl = '/user/login';
+            if($res) {
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '绑定成功', 'url' => $jumpUrl]);
+            }
+        }
+        $this->set([
+            'pageTitle'=>'重绑手机号'
+        ]);
+    }
+
+    /**
+     * 修改密码步骤1
+     */
+    public function resetPw1()
+    {
+        $this->handCheckLogin();
+        if($this->request->is("ajax")) {
+            //验证验证码
+            $data = $this->request->data();
+            $SmsTable = TableRegistry::get('Smsmsg');
+            $sms = $SmsTable->find()->where(['phone' => $this->user->phone])->orderDesc('create_time')->first();
+            if (!$sms) {
+                return $this->Util->ajaxReturn(false, '验证码错误');
+            } else {
+                if ($sms->code != $data['vcode']) {
+                    return $this->Util->ajaxReturn(false, '验证码错误');
+                }
+                if ($sms->expire_time < time()) {
+                    return $this->Util->ajaxReturn(false, '验证码已过期');
+                }
+            }
+            $this->request->session()->write('PASS_VCODE_PHONE', $this->user->phone);
+            $jumpUrl = '/userc/reset-pw2/';
+            return $this->Util->ajaxReturn(['status' => true, 'msg' => '验证成功', 'url' => $jumpUrl]);
+        }
+        $this->set([
+            'user' => $this->user,
+            'pageTitle'=>'修改密码'
+        ]);
+    }
+
+
+    /**
+     * 修改密码步骤2
+     */
+    public function resetPw2()
+    {
+        if($this->request->is('ajax') && $this->request->session()->read('PASS_VCODE_PHONE')) {
+            $data = $this->request->data();
+            $pwd1 = $data['newpwd1'];
+            $pwd2 = $data['newpwd2'];
+            if($pwd1 && $pwd2 && ($pwd1 == $pwd2)) {
+                $query = $this->User->query();
+                $res = $query->update()
+                    ->set(['pwd' => (new DefaultPasswordHasher)->hash($pwd1)])
+                    ->where(['id' => $this->user->id])
+                    ->execute();
+                $jumpUrl = '/user/login';
+                if($res) {
+                    return $this->Util->ajaxReturn(['status' => true, 'msg' => '修改成功', 'url' => $jumpUrl]);
+                } else {
+                    return $this->Util->ajaxReturn(false, '修改失败');
+                }
+            } else {
+                return $this->Util->ajaxReturn(false, '密码有误');
+            }
+        }
+        $this->set([
+            'pageTitle'=>'修改密码'
+        ]);
+     }
+
+
+    /**
+     * 忘记密码步骤1
+     */
+    public function forgetPwd1()
+    {
+        $data = $this->request->data();
+        if($this->request->is("ajax") && $data['phone']) {
+            //验证验证码
+            $SmsTable = TableRegistry::get('Smsmsg');
+            $sms = $SmsTable->find()->where(['phone' => $data['phone']])->orderDesc('create_time')->first();
+            if (!$sms) {
+                return $this->Util->ajaxReturn(false, '验证码错误');
+            } else {
+                if ($sms->code != $data['vcode']) {
+                    return $this->Util->ajaxReturn(false, '验证码错误');
+                }
+                if ($sms->expire_time < time()) {
+                    return $this->Util->ajaxReturn(false, '验证码已过期');
+                }
+            }
+            $this->request->session()->write('PASS_VCODE_PHONE', $this->user->phone);
+            $jumpUrl = '/userc/forget-pwd2/';
+            return $this->Util->ajaxReturn(['status' => true, 'msg' => '验证成功', 'url' => $jumpUrl]);
+        }
+        $this->set([
+            'user' => $this->user,
+            'pageTitle'=>'忘记密码'
+        ]);
+    }
+
+    /**
+     * 忘记密码步骤2
+     */
+    public function forgetPwd2()
+    {
+        if($this->request->is('ajax') && $this->request->session()->read('PASS_VCODE_PHONE')) {
+            $data = $this->request->data();
+            $pwd1 = $data['newpwd1'];
+            $pwd2 = $data['newpwd2'];
+            if($pwd1 && $pwd2 && ($pwd1 == $pwd2)) {
+                $query = $this->User->query();
+                $res = $query->update()
+                    ->set(['pwd' => (new DefaultPasswordHasher)->hash($pwd1)])
+                    ->where(['id' => $this->user->id])
+                    ->execute();
+                $jumpUrl = '/user/login';
+                if($res) {
+                    return $this->Util->ajaxReturn(['status' => true, 'msg' => '密码重置成功', 'url' => $jumpUrl]);
+                } else {
+                    return $this->Util->ajaxReturn(false, '密码重置失败');
+                }
+            } else {
+                return $this->Util->ajaxReturn(false, '密码有误');
+            }
+        }
+        $this->set([
+            'pageTitle'=>'忘记密码'
         ]);
     }
 }

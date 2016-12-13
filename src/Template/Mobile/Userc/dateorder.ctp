@@ -5,8 +5,8 @@
     <li>
         <div class="date_item_des">
             <div class="flex flex_justify bdbottom">
-                <h3 class='maxwid70'><i class="itemsname color_y">[{{user_skill.skill.name}}]</i></h3>
-                <span class="customer color_y">{{buyer.nick}}</span>
+                <h3 class='maxwid70'><i class="itemsname">[{{user_skill.skill.name}}]</i></h3>
+                <span class="customer">{{buyer.nick}}</span>
             </div>
             <a style="display:block" href="/date-order/order-detail/{{id}}">
                 <div class="place_pic flex flex_justify bdbottom">
