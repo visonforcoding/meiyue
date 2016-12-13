@@ -348,8 +348,8 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .date_detail_place .otherinfo address{margin-top:.1rem;}
 .bottomblock .entroll-btn{width:50%;display: block;height:45px;line-height: 45px;text-align: center;}
 .bottomblock .entroll-btn .cancelbtn{color:#EAB96A;}
-.diamonds{display:inline-block;width:.25rem;height:.25rem;margin-left:.1rem;}
-.highter-vip{display:inline-block;width:.8rem;height:.24rem;margin-left:.1rem;}
+.diamonds{display:inline-block;width:.25rem;height:.25rem;margin-left:.05rem;}
+.highter-vip{display:inline-block;padding:.01rem .04rem;margin-left:.05rem;background: #F1CC7B;font-size: 10px;background:-webkit-linear-gradient(top,#e7c184,#cf9f62);background: linear-gradient(top,#e7c184,#cf9f62);}
 @media (min-width: 320px) and (max-width: 374px) {
 	.date_detail_place .place_info .userinfo{margin-bottom:.5rem;}
 }
@@ -1151,7 +1151,7 @@ color:#999;padding:.1rem;}
 .chart-systerm-box .infobox{margin-top:.2rem;}
 .chart-systerm-box .infobox p{padding:.3rem .2rem;color:#000;background: #fff;border:1px #efefef solid;border-radius: 3px;max-width:86%;margin:0 auto;}
 .chart-systerm-box .timebox{text-align: center;margin-top:.6rem;color:#999999;font-size: 11px;}
-.cover_left_info .hot{margin-left:.2rem;}
+.cover_left_info .hot{margin-left:.1rem;}
 .rechage-record{background: #fff;}
 .rechage-record li{height:40px;border-bottom:1px #efefef solid;padding:0 .3rem;}
 .home-basic-mark .mark{height:26px;line-height: 26px;border-radius: 15px;border:1px #ccc solid;font-size: 13px;padding:0 .15rem;display: inline-block;margin-right:.1rem;}
