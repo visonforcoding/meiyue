@@ -134,7 +134,6 @@ class Netim {
         $url = 'https://api.netease.im/nimserver/msg/sendMsg.action';
         $body['md5'] = md5(time());
         $body = json_encode($body);
-        debug($body);
         $data = [
             'from'=>$from,
             'to'=>$to,

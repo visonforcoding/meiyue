@@ -243,5 +243,6 @@ class TestController extends AppController {
         debug($msg);
         $res = $Netim->sendMsg($from, $to, $msg);
         debug($res);
+        exit();
     }
 }
