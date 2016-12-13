@@ -111,7 +111,7 @@
         <li>
             <a id="showWx" class="items flex flex_justify" >
                 <span class="seach_name">查看Ta的微信</span>
-                <span class="golook">点击查看<i class="iconfont r_icon">&#xe605;</i></span>
+                <span class="golook">点击查看</span>
             </a>
         </li>
         <?php endif; ?>
@@ -208,20 +208,20 @@
                 <a id="focusIt">
                     <i class="iconfont">&#xe63d;</i><i class="status-txt">已关注</i>
                 </a>
-            </li>
+            </li> | 
         <?php else: ?>
             <li>
                 <a id="focusIt" class="active">
                     <i class="iconfont">&#xe63d;</i><i class="status-txt">关注</i>
                 </a>
-            </li>
+            </li>  | 
         <?php endif; ?>
         <?php if (count($user->user_skills) > 0): ?>
         <li>
             <a id="dateit">
                 <i class="iconfont">&#xe632;</i>约Ta
             </a>
-        </li>
+        </li>   |    
         <?php endif; ?>
         <li>
             <a href="#this">
