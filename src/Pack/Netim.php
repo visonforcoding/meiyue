@@ -134,6 +134,7 @@ class Netim {
         $url = 'https://api.netease.im/nimserver/msg/sendMsg.action';
         $body['md5'] = md5(time());
         $body = json_encode($body);
+        debug($body);
         $data = [
             'from'=>$from,
             'to'=>$to,
@@ -153,6 +154,41 @@ class Netim {
         }else{
              return false;
         }
+    }
+    
+    
+    /**
+     * 生成自定义消息
+     * @param type $type  消息类型
+     * @param type $from  发送者消息
+     * @param type $to    接收者消息
+     * @return array Description
+     */
+    public function generateCustomMsg($type,$from,$to){
+       $data = [];
+       $data['type'] = $type;
+       $data['data'] = [
+         'from'=>$from,
+         'to'=>$to,
+       ];
+       return $data;
+    }
+    
+    /**
+     * 生成自定义消息体   
+     * @param type $body  消息内容
+     * @param type $link  消息链接
+     * @param type $link_text  消息链接文字
+     * @param type $prefix  消息前缀
+     * @return array
+     */
+    public function generateCustomMsgBody($body,$link,$link_text,$prefix){
+        return [
+            'msg_body'=>$body,
+            'msg_link'=>$link,
+            'msg_link_text'=>$link_text,
+            'msg_prefix'=>$prefix
+        ];
     }
 
 }
