@@ -166,7 +166,7 @@
             '联系客服',
             '拨打客服电话',
             function() {
-                LEMON.event.tel({tel: '13763053901'});
+                LEMON.event.tel('13763053901');
             },
             null,
             null,

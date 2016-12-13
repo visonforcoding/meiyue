@@ -409,14 +409,22 @@ class UserController extends AppController {
      * @param type $type  验证码类型
      * @return type
      */
-    public function sendVcode($type) {
+    public function sendVcode($type = null) {
         $this->loadComponent('Sms');
         $mobile = $this->request->data('phone');
-        if ($type == 1) {
+        if ($type == 1) {   //注册验证码
             $ckReg = $this->User->find()->where(['phone' => $mobile])->first();
             if ($ckReg) {
                 return $this->Util->ajaxReturn(['status' => false,
-                            'msg' => '该手机号已经注册过,请直接登录', 'code' => '201'
+                    'msg' => '该手机号已经注册过,请直接登录', 'code' => '201'
+                ]);
+            }
+        } else if($type == 2) {
+            $ckReg = $this->User->find()->where(['phone' => $mobile])->first();
+            if ($ckReg) {
+                return $this->Util->ajaxReturn([
+                    'status' => false,
+                    'msg' => '该手机号已经绑定过'
                 ]);
             }
         }
