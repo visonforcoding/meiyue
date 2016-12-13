@@ -15,7 +15,7 @@
             <div class="address color_gray"><i class="iconfont">&#xe623;</i><?= isset($activity)?$activity['site']:'' ?></div>
         </div>
     </div>
-    <div class="activity_pay_num inner">
+    <div class="activity_pay_num">
         <ul class="outerblock">
             <li class="flex flex_justify">
                 <div>购买数量</div>
@@ -28,9 +28,9 @@
         </ul>
     </div>
     <div class="activity_pay_type mt20">
-        <h3 class="commontitle inner ">我的钱包</h3>
+        <h3 class="commontitle inner ">支付方式</h3>
         <div class="con flex flex_justify inner">
-            <div>支付方式</div>
+            <div>我的钱包</div>
             <div class="color_y"><i class="lagernum"><?= isset($user)?$user->money:''; ?></i> 美币</div>
         </div>
     </div>
