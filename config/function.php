@@ -262,3 +262,8 @@ function dblog($flag, $msg, $data = null) {
         Cake\Log\Log::error('devlog',$exc->getTraceAsString());
     }
 }
+
+
+function generateImgUrl($url,$domain,$glide=false){
+    $url =  preg_replace('/upload/', 'imgs', $url);
+}

@@ -389,7 +389,7 @@
         var orderid = $(this).data('orderid');
         $.util.ajax({
             url: '/date-order/go-order',
-            data: {order_id: orderid},
+            data: {order: orderid},
             func: function (res) {
                 $.util.alert(res.msg);
                 setTimeout(function () {
