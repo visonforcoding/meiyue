@@ -42,7 +42,7 @@
                      <i class="color_gray">审核中</i><i class="iconfont right_ico">&#xe605;</i>
                    </span>
                    <?php elseif($user->id_status == UserStatus::NOPASS): ?>
-                   <span class="fr color_gray">
+                   <span class="fr">
                    <i class="color_error">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
                    </span>
                    <?php endif; ?>
@@ -65,8 +65,8 @@
                                <i class="color_gray">审核通过</i>
                             </span>
                         <?php elseif($user->status == UserStatus::CHECKING): ?>
-                            <span class="fr color_gray" onclick="window.location.href='/userc/edit-basic-pic';">
-                            审核中<i class="iconfont right_ico fr">&#xe605;</i>
+                            <span class="fr" onclick="window.location.href='/userc/edit-basic-pic';">
+                            <i class="color_gray">审核中</i><i class="iconfont right_ico">&#xe605;</i>
                             </span>
 
                         <?php elseif($user->status == UserStatus::NOPASS): ?>
