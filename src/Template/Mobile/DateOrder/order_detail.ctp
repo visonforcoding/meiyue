@@ -222,6 +222,14 @@
             </div>
         </div>
     <?php endif; ?>
+    <?php if (in_array($order->status,[4,5,6,8])): ?>
+        <div class="bottomblock">
+            <div class="flex flex_end">
+                <span id="remove_order" class="footerbtn cancel">删除订单</span>
+                <span id="godate" class="footerbtn gopay">退款成功</span>
+            </div>
+        </div>
+    <?php endif; ?>
     <?php if ($order->status == 7): ?>
         <div class="bottomblock">
             <div class="flex flex_end">
@@ -233,7 +241,33 @@
     <?php if ($order->status == 10): ?>
         <div class="potion_footer flex flex_justify">
             <span id="refuse_status_10" class="footerbtn cancel">取消约单</span>
+            <?php if($order->start_time > date('Y-m-d H:i:s')): ?>
             <span id="godate" class="footerbtn gopay">赴约成功</span>
+            <?php endif;?>
+        </div>
+    <?php endif; ?>
+    <?php if (in_array($order->status,[11,9])): ?>
+        <div class="potion_footer flex flex_justify">
+            <span id="refuse_status_10" class="footerbtn cancel">删除订单</span>
+            <span  class="footerbtn gopay">惩罚成功</span>
+        </div>
+    <?php endif; ?>
+    <?php if (in_array($order->status,[12,18])): ?>
+        <div class="potion_footer flex flex_justify">
+            <span id="remove_order" class="footerbtn cancel">删除订单</span>
+            <span  class="footerbtn gopay">补偿成功</span>
+        </div>
+    <?php endif; ?>
+    <?php if ($order->status == 13): ?>
+        <div class="potion_footer flex flex_justify">
+            <span id="complain" class="footerbtn cancel">投诉</span>
+            <span id="godate" class="footerbtn cancel">赴约成功</span>
+        </div>
+    <?php endif; ?>
+    <?php if ($order->status == 15): ?>
+        <div class="potion_footer flex flex_justify">
+             <a href="/date-order/appraise/<?= $order->id ?>" class="footerbtn cancel">评价</a>
+            <span  id="remove_order" class="footerbtn gopay">删除订单</span>
         </div>
     <?php endif; ?>
     <?php if ($order->status == 16): ?>
@@ -252,21 +286,32 @@
             </div>
         </div>
     <?php endif; ?>
-    <?php if ($order->status == 4): ?>
+    <?php if (in_array($order->status,[4,5,6])): ?>
         <div class="bottomblock">
             <div class="flex flex_end">
-                <span id="refuse_status_3" class="footerbtn cancel">拒绝</span>
-                <span  id="receive_order" class="footerbtn gopay">接单</span>
+                <span  id="remove_order" class="footerbtn gopay">删除订单</span>
             </div>
         </div>
     <?php endif; ?>
     <?php if ($order->status == 7): ?>
-        <a href="login_identify_jump.html" class="identify_dark_potion">取消约单</a>
+        <a id="refuse_status_7" class="identify_dark_potion">取消约单</a>
+    <?php endif; ?>
+    <?php if (in_array($order->status,[11,9])): ?>
+            <span id="remove_order" class="footerbtn cancel">删除订单</span>
+            <span class="footerbtn gopay">补偿成功</span>
     <?php endif; ?>
     <?php if ($order->status == 10): ?>
         <div class="potion_footer flex flex_justify">
-            <span id="refuse_status_10" class="footerbtn cancel">取消约单</span>
+            <span id="remove_order" class="footerbtn cancel">删除订单</span>
+            <?php if($order->start_time > date('Y-m-d H:i:s')): ?>
             <span  id="godate" class="footerbtn gopay">到达约会目的地</span>
+            <?php endif;?>
+        </div>
+    <?php endif; ?>
+    <?php if (in_array($order->status,[12,18])): ?>
+        <div class="potion_footer flex flex_justify">
+            <span id="remove_order" class="footerbtn cancel">删除订单</span>
+            <span  class="footerbtn gopay">惩罚成功</span>
         </div>
     <?php endif; ?>
     <?php if ($order->status == 16): ?>
@@ -322,7 +367,7 @@
     $('#godate').on('tap', function () {
         //赴约成功
         $.util.ajax({
-            url: '/userc/order-go',
+            url: '/date-order/go-order',
             data: {order: orderid},
             func: function (res) {
                 $.util.alert(res.msg);
@@ -347,7 +392,6 @@
                 }
             });
         })
-
     });
 </script>
 <?php $this->end('script'); ?>

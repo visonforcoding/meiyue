@@ -704,60 +704,63 @@ class DateOrderController extends AppController
      */
     public function goOrder(){
         $this->handCheckLogin();
-        $order_id = $this->request->data('order_id');
+        $order_id = $this->request->data('order');
         $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
         $order = $DateorderTable->get($order_id,[
-                'contain'=>[
-                     'Dater' => function($q) {
-                                return $q->select(['id', 'nick', 'money']);
-                        }, 
-                ]
-            ]);
-        if($order->gender == 2){
-            //女性确认到达
+            'contain'=>[
+                'Buyer'=>function($q){
+                    return $q->select(['phone','id','avatar','nick','birthday','money']);
+                }
+                ,'Dater'=>function($q){
+                    return $q->select(['id','nick','avatar','birthday','phone','money']);
+                }
+                ,'UserSkill.Skill'
+            ]
+        ]);
+        if($this->user->gender==2){
             $order->status = 13;
-            $res = $DateorderTable->save($order);
+            if($DateorderTable->save($order)){
+                $this->loadComponent('Sms');
+                $this->Sms->sendByQf106($order->buyer->phone, $order->dater->nick.
+                        '已到达约会目的地，请及时到场赴约.');
+                return $this->Util->ajaxReturn(true,'成功接受');
+            }
         }else{
-          //男性确认到达
-            $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
-            $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
-        
-            //1.订单状态改变
-            //2.女方获得约单金
-            $order->status = 15;   //订单完成 
-            $w_pre_money = $order->dater->money;
-            $w_amount = $order->amount;
-            $order->dater->money = $order->dater->money+$w_amount;
-            $w_after_amount = $order->dater->money;
-            $w_income = 1;
-            
+            $order->status = 15; //订单完成
+            //女方收款
+            $pre_amount = $order->dater->money;
+            $order->dater->money = $order->amount+$pre_amount;
+            $order->dirty('dater',true);
+            //资金流水
             //生成流水
-            $w_flow = $FlowTable->newEntity([
-               'user_id'=> $order->dater->id,
+            $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+            $flow = $FlowTable->newEntity([
+               'user_id'=>$order->dater_id,
                'buyer_id'=>  0,
                'relate_id'=>$order->id,
-               'type'=>12,
+               'type'=>3,
                'type_msg'=>'约技能收款',
-               'income'=>$w_income,
-               'amount'=>$w_amount,
-               'price'=>$w_amount,
-               'pre_amount'=>$w_pre_money,
-               'after_amount'=>$w_after_amount,
-               'paytype'=>2, 
-               'remark'=> '24小时无操作订单自动完成'
+               'income'=>1,
+               'amount'=>$order->amount,
+               'price'=>$order->amount,
+               'pre_amount'=>$pre_amount,
+               'after_amount'=>$order->dater->money,
+               'paytype'=>1,   //余额支付
+               'remark'=> '约技收取尾款'
             ]);
-            
-            $order->dirty('dater',true);
-            $res = $DateorderTable->connection()
-                    ->transactional(function()use($FlowTable,&$w_flow,&$order,$DateorderTable){
-                return $FlowTable->save($w_flow)&&$DateorderTable->save($order);      
-            });
+           $transRes = $DateorderTable->connection()->transactional(function()use(&$flow,$FlowTable,&$order,$DateorderTable){
+               $UserTable = \Cake\ORM\TableRegistry::get('User');
+               return $FlowTable->save($flow)&&$DateorderTable->save($order);
+           });
+            if($transRes){
+                return $this->Util->ajaxReturn(true,'订单完成');
+            }else{
+                errorMsg($flow, '失败');
+                errorMsg($order, '失败');
+                return $this->Util->ajaxReturn(false,'订单完成失败');
+            }
         }
-        if($res){
-             return $this->Util->ajaxReturn(true,'确认成功');
-        }else{
-             return $this->Util->ajaxReturn(true,'服务器开小差');
-        }
+        return $this->Util->ajaxReturn(false,'服务器开小差');
         
     }
     
@@ -806,7 +809,7 @@ class DateOrderController extends AppController
                 ,'UserSkill.Skill','Dater.Tags','Date'
             ]
         ]);
-       $lasth = ((new Time($order->end_time))->hour-(new Time($order->start_time))->hour);        
+        $lasth = ((new Time($order->end_time))->hour-(new Time($order->start_time))->hour);        
         if($this->user->gender==1){
              if((strtotime($order->start_time)-time())>= 2*60*60){
                 $refuse_msg = '您将收到70%的约单消费退回';
