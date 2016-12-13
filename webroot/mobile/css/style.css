@@ -63,7 +63,8 @@ header{overflow: hidden;}
 .iden_r_pic img{max-width:100%;height:auto;vertical-align: middle;}
 .iden_r_box{position: relative;width:2.5rem;}
 .iden_r_box .potion{position:absolute;right:0;top:0;color:#c2c2c2;}
-.identify_basic_info .right_ico{color:#959da7;}
+.identify_basic_info .right_ico{color:#c2c2c2;position: absolute;right:.3rem;}
+.identify_basic_info .fr-des{margin-right:.5rem;}
 .identify_footer_potion,.identify_dark_potion{position:fixed;height:42px;width:100%;max-width: 750px;/*margin:0 auto;*/line-height: 42px;text-align: center;color:#fff;background: #eab96a;bottom:0;font-size:18px;z-index:99;}
 .disabledbtn{background: #c2c2c2;}
 .identify_dark_potion{background: #fff;color:#999;box-shadow: 0 0 1px rgba(0,0,0,.2);}
