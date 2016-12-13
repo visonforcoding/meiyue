@@ -37,8 +37,8 @@
             <li class="flex flex_justify bdbottom">
                 <span>报名信息</span>
                 <div class="r_info">
-                    <div class="r_info_pic flex">
-                        <span onclick="window.location.href = '/activity/mem-index/<?= $activity['id']; ?>'" class="number">共<?= ($activity['male_lim'] - $activity['male_rest'] + $activity['female_lim'] - $activity['female_rest']);?>人</span>
+                    <div class="r_info_pic"  onclick="window.location.href = '/activity/mem-index/<?= $activity['id']; ?>'">
+                        <span class="number">共<?= ($activity['male_lim'] - $activity['male_rest'] + $activity['female_lim'] - $activity['female_rest']);?>人</span>
                         <i class="iconfont">&#xe605;</i>
                     </div>
 
