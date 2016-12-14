@@ -69,7 +69,7 @@
                         <div class="home_list_l_info"><span class="itemsname">星</span><span class="itemsname">座：</span></div>
                         <div class="home_list_r_info">
                                 <select name="zodiac">
-                                    <option value="0" selected="selected">星座</option>
+                                    <option value="0" selected="selected">选星座</option>
                                     <option value="1">白羊座</option>
                                     <option value="2">金牛座</option>
                                     <option value="3">双子座</option>
@@ -89,7 +89,7 @@
                 <li>
                     <div class="home_items  right-ico">
                         <div class="home_list_l_info"><span class="itemsname">罩</span><span class="itemsname">杯：</span></div>
-                        <div class="home_list_r_info" placeholder="请输入罩杯">
+                        <div class="home_list_r_info">
                             <select name="cup">
                                 <option value="A">A</option>
                                 <option value="B">B</option>
@@ -108,7 +108,7 @@
                         <div class="home_list_r_info">
                             <div class="select_type">
                                 <select name="state">
-                                    <option value="1">单身</option>
+                                    <option value="1"  selected="selected">单身</option>
                                     <option value="2">私密</option>
                                 </select>
                             </div>
@@ -147,8 +147,8 @@
                 <h3>兴趣爱好</h3>
             </div>
             <ul>
-                <li>
-                    <div class="home_items">
+                <li  class="plaintext-box">
+                    <div class="home_items  plaintexts">
                         <div class="home_list_l_info"><span class="itemsname">喜欢的美食：</span></div>
                         <div class="home_list_r_info">
                             <!--<input id="food" name="food" type="text" placeholder="请输入美食" />-->
@@ -156,9 +156,9 @@
                         </div>
                     </div>
                 </li>
-                <li>
-                    <div class="home_items sport_items">
-                        <div class="home_list_l_info"><span class="itemsname">喜欢的运动/娱乐：</span></div>
+                <li  class="plaintext-box">
+                    <div class="home_items plaintexts">
+                        <div class="home_list_l_info"><span class="itemsname">喜欢的运动<br>/娱乐：</span></div>
                         <div class="home_list_r_info">
                             <!--<input id="sport" name="sport" type="text" placeholder="运动/娱乐" />-->
                             <textarea id="sport" name="sport" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的运动/娱乐"></textarea>
@@ -178,6 +178,7 @@
                         <div class="home_list_l_info"><span class="itemsname">个性标签：</span></div>
                         <div class="home_list_r_info">
                             <input name="tag" type="text" placeholder="请选择" readonly="readonly" />
+                             <i class="iconfont r_icon">&#xe605;</i>
                         </div>
                     </div>
                 </li>

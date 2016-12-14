@@ -140,7 +140,7 @@
                         <div class="home_list_l_info"><span class="itemsname">情</span><span class="itemsname">感</span><span class="itemsname">状</span><span class="itemsname">态：</span></div>
                         <div class="home_list_r_info">
                             <select id="state" name="state">
-                                <option value="1">单身</option>
+                                <option value="1" selected="selected">单身</option>
                                 <option value="2">私密</option>
                             </select>
                         </div>
@@ -155,7 +155,7 @@
                     </div>
                 </li>
 
-                <li>
+                <li class='right-ico'>
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname short_name">家</span><span class="itemsname">乡：</span></div>
                         <div class="home_list_r_info">
@@ -172,15 +172,14 @@
                     </div>
                 </li>
                
-                <!--            <li>
-                                <div class="home_items">
-                                    <div class="home_list_l_info"><span class="itemsname">工</span><span class="itemsname">作</span><span class="itemsname">经</span><span class="itemsname">历：</span></div>
-                                    <div class="home_list_r_info">
-                                        <input type="text" placeholder="工作经历" />
-                                        <i class="iconfont r_icon">&#xe605;</i>
-                                    </div>
-                                </div>
-                            </li>-->
+                <li  class="plaintext-box">
+                    <div class="home_items plaintexts">
+                        <div class="home_list_l_info"><span class="itemsname">工</span><span class="itemsname">作</span><span class="itemsname">经</span><span class="itemsname">历：</span></div>
+                        <div class="home_list_r_info">
+                           <textarea id="sport" name="sport" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的运动/娱乐"></textarea>
+                        </div>
+                    </div>
+                </li>
         </div>
     </form>
 </div>
