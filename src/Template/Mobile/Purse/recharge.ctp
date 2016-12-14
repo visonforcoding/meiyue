@@ -65,7 +65,7 @@
      $('#topay').on('tap',function(res){
          var mb = $('#mb').val();
          $.util.ajax({
-            url:'/purse/create-payorder',
+            url:'/purse/create-payorder<?= isset($redurl)?"?redurl=".$redurl:""; ?>',
             data:{mb:mb},
             func:function(res){
                 if(res.status){
@@ -81,7 +81,7 @@
      {
          $.ajax({
              type: 'POST',
-             url: '/userc/create-payorder/' + $packid,
+             url: '/userc/create-payorder/' + $packid + '<?= isset($redurl)?"?redurl=".$redurl:""; ?>',
              dataType: 'json',
              success: function (res) {
                  if (typeof res === 'object') {

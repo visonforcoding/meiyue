@@ -99,15 +99,11 @@
 <script>
 
     $('.nowpay').on('click', function(){
-
         window.location.href = '/activity/pay-view/<?= $activity['id']; ?>';
-
     })
 
     $('.cancel-btn').on('click', function(){
-
         cancel();
-
     });
 
 

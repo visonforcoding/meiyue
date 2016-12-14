@@ -3,6 +3,9 @@
 namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
+use Cake\ORM\TableRegistry;
+use PackType;
+use PayOrderType;
 
 /**
  * User Controller
@@ -171,6 +174,7 @@ class WxController extends AppController {
      * @param int $id  订单id
      */
     public function pay($id = null, $title = '充值') {
+        $redurl = $this->request->query('redurl');
         $PayorderTable = \Cake\ORM\TableRegistry::get('Payorder');
         $payorder = $PayorderTable->get($id);
         $order = $PayorderTable->get($id, [
@@ -201,6 +205,7 @@ class WxController extends AppController {
             'aliPayParameters' => $aliPayParameters,
         ));
         $this->set([
+            'redurl' => $redurl,
             'title' => $title,
             'payorder' => $payorder,
             'pageTitle' => '美币充值'
@@ -324,15 +329,42 @@ class WxController extends AppController {
      * 支付成功
      */
     public function paySuccess($id = null) {
+        $st = [];
         if ($id) {
-            $OrderTable = \Cake\ORM\TableRegistry::get('Order');
+            $OrderTable = TableRegistry::get('Payorder');
             $order = $OrderTable->get($id);
+            if($order) {
+                $st = [
+                    'pageTitle' => '充值成功',
+                    'msg1' => '充值成功！',
+                    'msg2' => null,
+                    'rebtname' => '查看我的钱包',
+                    'reurl' => '/userc/my-purse'
+                ];
+                switch($order->type) {
+                    case PayOrderType::CHONGZHI:
+                        $st['msg2'] = '充值金额：'.$order->price.'美币';
+                        break;
+                    case PayOrderType::BUY_TAOCAN:
+                        $pack = TableRegistry::get('Package')->get($order->relate_id);
+                        if($pack->type == PackType::VIP) {
+                            $st['pageTitle'] = '购买成功';
+                            $st['msg1'] = '购买成功!';
+                            $st['rebtname'] = '查看会员中心';
+                            $st['reurl'] = '/userc/vip-center';
+                        } elseif($pack->type == PackType::RECHARGE) {
+                            $st['msg2'] = '充值金额：'.$pack->vir_money.'美币';
+                        }
+                        break;
+                }
+            }
         }
         $this->set([
-            'order' => $order,
-            'pageTitle' => '支付结果页'
+            'pageTitle' => isset($st['pageTitle'])?$st['pageTitle']:'',
+            'st' => $st
         ]);
     }
+
 
     /**
      * 微信的上传图片接口
@@ -378,5 +410,7 @@ class WxController extends AppController {
             'url' => $url,
         ]);
     }
+
+
 
 }
