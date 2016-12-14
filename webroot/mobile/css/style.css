@@ -146,7 +146,7 @@ header{overflow: hidden;}
 .home-other-info  .home_list_l_info{width:3rem;}
 .home_fill_basic_info .home_list_l_info .itemsname{color:#000;}
 .home_fill_basic_info ul{padding:0 0 0 .3rem;overflow: hidden;}
-.home_fill_basic_info li{padding:0 .4rem 0 0;}
+.home_fill_basic_info ul li{padding:0 .5rem 0 0;}
 .right-ico{position:relative;}
 .home_fill_basic_info ul li:after{}
 .home_fill_basic_info .home_list_r_info{/*width: 4.8rem;*/text-align: right;}
@@ -1192,7 +1192,7 @@ color:#999;padding:.1rem;}
 .home_fill_basic_info ul li.plaintext-box{padding-top:.2rem;padding-bottom:.2rem;}
  .home_fill_basic_info .plaintext-box .home_items{height:auto;min-height: 25px;}
  .home_fill_basic_info ul .plaintext-box .plaintext{height:auto;}
-.plaintext-box .plaintext-con{max-width:5rem;outline:none;text-align: justify;word-break:break-all;user-modify: read-write-plaintext-only}
+.plaintext-box .plaintext-con{max-width:5rem;outline:none;text-align: justify;word-break:break-all;user-modify: read-write-plaintext-only;border:none;text-align: right;height:20px;}
 /*未登录*/
 .shadow{background: rgba(0,0,0,.7);z-index:11;overflow: hidden;}
 .login-tips{background:rgba(255,255,255,1);width:100%;padding:.8rem 0;}
