@@ -361,23 +361,15 @@ class ActivityController extends AppController
 
             //修改活动表项
             if($user->gender == 1) {
-
                 if($activity->male_rest < $num) {
-
                     return $this->Util->ajaxReturn(false,'报名名额不足！');
-
                 }
                 $activity->male_rest -= $num;
-
             } else {
-
                 if($activity->female_rest < $num) {
-
                     return $this->Util->ajaxReturn(false,'报名名额不足！');
-
                 }
                 $activity->female_rest -= $num;
-
             }
 
             $activityTable = $this->Activity;
@@ -385,13 +377,13 @@ class ActivityController extends AppController
                 ->connection()
                 ->transactional(
                     function() use (
-                        $flow,
+                        &$flow,
                         $FlowTable,
                         &$actregistration,
                         $actregistrationTable,
-                        $activity,
+                        &$activity,
                         $activityTable,
-                        $user
+                        &$user
                     ){
                         $UserTable = TableRegistry::get('User');
                         $saveActr = $actregistrationTable->save($actregistration);
@@ -406,12 +398,12 @@ class ActivityController extends AppController
             if($transRes){
                 return $this->Util->ajaxReturn(true,'参加成功');
             }else{
-                errorMsg($flow, '失败');
-                errorMsg($actregistration, '失败');
+                debug($flow->errors());
+                debug($actregistration->errors());
+                debug($activity->errors());
+                debug($user->errors());
                 return $this->Util->ajaxReturn(false,'参加失败');
             }
-            return $this->Util->ajaxReturn(true, '参加成功');
-
         }
 
     }
