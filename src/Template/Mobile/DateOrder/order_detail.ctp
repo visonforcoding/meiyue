@@ -272,7 +272,7 @@
     <?php endif; ?>
     <?php if ($order->status == 16): ?>
         <div class="potion_footer flex flex_justify">
-            <a href="/date-order/appraise/<?= $order->id ?>" class="footerbtn cancel">查看评价</a>
+            <a href="/date-order/show-appraise/<?= $order->id ?>" class="footerbtn cancel">查看评价</a>
             <span  id="remove_order" class="footerbtn gopay">删除订单</span>
         </div>
     <?php endif; ?>
@@ -317,7 +317,7 @@
     <?php if ($order->status == 16): ?>
         <div class="potion_footer flex flex_justify">
             <span  id="remove_order" class="footerbtn gopay">删除订单</span>
-            <a href="/date-order/appraise/<?= $order->id ?>"><span  class="footerbtn cancel">查看评价</span></a>
+            <a href="/date-order/show-appraise/<?= $order->id ?>"><span  class="footerbtn cancel">查看评价</span></a>
         </div>
     <?php endif; ?>
 <?php endif; ?>

@@ -338,6 +338,9 @@ th[aria-selected=true] .ui-jqgrid-sortable {
 .ui-jqgrid .ui-icon-cancel:before {
     content: "\f00d";
 }
+.ui-jqgrid .ui-icon-save:before {
+    content: "\f0c7";
+}
 .ui-jqdialog{
     border:1px solid #808080;
 }

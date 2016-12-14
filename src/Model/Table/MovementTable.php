@@ -35,7 +35,9 @@ class MovementTable extends Table {
         $this->belongsTo('User',[
            'className'=>'User' 
         ]);
+
         $this->hasMany('Mvpraises',[
+            'className'=>'Mvpraise',
             'foreignKey' => 'movement_id',
         ]);
         $this->addBehavior('Timestamp', [

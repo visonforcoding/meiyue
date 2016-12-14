@@ -828,4 +828,24 @@ class DateOrderController extends AppController
         ]);                      
         
     }
+    
+    /**
+     * 订单评价
+     */
+    public function showAppraise($id){
+        $DateorderTable = TableRegistry::get('Dateorder');
+        $order = $DateorderTable->get($id,[
+            'select'=>['appraise_time','appraise_match','appraise_service'],
+            'contain'=>[
+                'Dater'=>function($q){
+                    return $q->select(['id','nick','avatar','birthday']);
+                }
+                ,'UserSkill.Skill'
+            ]
+        ]);
+        $this->set([
+            'order'=>$order,
+            'pageTitle'=>'评价'
+        ]);
+    }
 }
