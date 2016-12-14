@@ -1080,8 +1080,8 @@ color:#999;padding:.1rem;}
 .center_detail_list li .l_info h3{color:#666;}
 /*送礼物*/
 .allgift_container{background: #f4f4f4;padding-bottom:0;}
-.allgift{background: #fff;position: fixed;bottom:42px;}
-.allgift ul{overflow: hidden;width:2000%;padding-top:.4rem;border-bottom:1px #666 solid;}
+.allgift{position: fixed;bottom:42px;}
+.allgift ul{overflow: hidden;padding-top:.4rem;border-bottom:1px #666 solid;}
 .allgift ul li{float:left;width:7.5rem;float:left;}
 .allgift ul li .items{float:left;width:25%;background: #484643;border-right: 1px #666 solid;border-top:1px #666 solid;padding:.3rem 0 .4rem;
 position: relative;}
