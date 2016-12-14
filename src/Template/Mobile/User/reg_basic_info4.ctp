@@ -1,4 +1,4 @@
-<div class="wraper  bgff mt40">
+<div class="wraper fullwraper  bgff pt40">
     <div class="info-header-tips">
          <div class="closed">
                 <a href="#this" class="iconfont">&#xe684;</a>
@@ -74,15 +74,15 @@
                         </div>
                           <div class="home_list_r_info   plaintext">
                             <!-- <input name="sign" type="text" placeholder="请输入" /> -->
-                              <textarea name="sign" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入个性签名"></textarea>v>
+                              <textarea name="sign" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入个性签名"></textarea>
                          </div>
                     </div>
                 </li>
-                <li class='edit_ability edit_ability-marks marks-line'>
+                <li class='edit_ability edit_ability-marks marks-line right-ico'>
                     <div class="home_items">
                             <div class="home_list_l_info"><span class="itemsname">个性标签：</span></div>
                             <div class="home_list_r_info ability-marks-box">
-                                <div id="tag-container" class="r_info" style='width:5rem;'>
+                                <div id="tag-container" class="r_info">
                                     <input name="tag" type="text" placeholder="请选择" readonly="readonly" />
                                 </div>
                             </div>
@@ -105,6 +105,7 @@
     <div class="other-info-jump">
         <a id="submit" href="#this" class="color_y">填好了，进入首页</a>
     </div>
+
 </div>
 <!--标签选择框-->
 <?= $this->cell('Date::tagsView', ['tags-select-view']); ?>
