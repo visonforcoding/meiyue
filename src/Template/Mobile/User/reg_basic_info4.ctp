@@ -27,7 +27,7 @@
                         </div>
                         <div class="home_list_r_info   plaintext">
                             <!-- <input name="food" type="text" placeholder="请输入" /> -->
-                            <div class="plaintext-con" contenteditable="true">请输入美食</div>
+                            <textarea name="food" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的美食"></textarea>
                         </div>
                     </div>
                 </li>
@@ -39,7 +39,7 @@
                         </div>
                          <div class="home_list_r_info   plaintext">
                             <!-- <input name="music" type="text" placeholder="请输入" /> -->
-                            <div class="plaintext-con" contenteditable="true">请输入</div>
+                             <textarea name="music" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的音乐"></textarea>
                         </div>
                     </div>
                 </li>
@@ -51,7 +51,7 @@
                         </div>
                           <div class="home_list_r_info   plaintext">
                             <!-- <input name="movie" type="text" placeholder="请输入" /> -->
-                             <div class="plaintext-con" contenteditable="true">请输入</div>
+                            <textarea name="movie" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的电影"></textarea>
                         </div>
                     </div>
                 </li>
@@ -63,7 +63,7 @@
                         </div>
                          <div class="home_list_r_info   plaintext">
                             <!-- <input name="sport" type="text" placeholder="请输入" /> -->
-                             <div class="plaintext-con" contenteditable="true">请输入</div>
+                             <textarea name="sport" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的运动/娱乐"></textarea>
                         </div>
                     </div>
                 </li>
@@ -74,7 +74,7 @@
                         </div>
                           <div class="home_list_r_info   plaintext">
                             <!-- <input name="sign" type="text" placeholder="请输入" /> -->
-                              <div class="plaintext-con" contenteditable="true">请输入</div>
+                              <textarea name="sign" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入个性签名"></textarea>v>
                          </div>
                     </div>
                 </li>

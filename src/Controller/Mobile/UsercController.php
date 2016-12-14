@@ -819,7 +819,7 @@ class UsercController extends AppController {
             $PayorderTable = TableRegistry::get('Payorder');
             $payorder = $PayorderTable->newEntity([
                 'user_id'=>  $this->user->id,
-                'type' => 2,   //购买套餐
+                'type' => PayOrderType::BUY_TAOCAN,   //购买套餐
                 'title'=>$title,
                 'order_no'=>time() . $this->user->id . createRandomCode(4, 1),
                 'price'=>  $pack->price,
