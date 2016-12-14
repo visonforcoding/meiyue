@@ -402,6 +402,7 @@ class ActivityController extends AppController
                 debug($actregistration->errors());
                 debug($activity->errors());
                 debug($user->errors());
+                exit();
                 return $this->Util->ajaxReturn(false,'参加失败');
             }
         }
