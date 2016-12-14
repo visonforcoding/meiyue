@@ -20,10 +20,6 @@
                                 <div class="bottom-btn">
                                     <span class="identify-info id-btn">身份已认证</span>
                                 </div>
-                            <?php else: ?>
-                                <div class="bottom-btn">
-                                    <span class="identify-info id-btn">身份未认证</span>
-                                </div>
                             <?php endif; ?>
                         </h3>
                            <!--  <h3>

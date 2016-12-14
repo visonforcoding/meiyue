@@ -485,3 +485,38 @@ class UserState {
         return $status;
     }
 }
+
+
+/**
+ * 订单类型及相关操作
+ */
+class PayOrderType {
+    const DATE_TA = 1;  //约见
+    const BUY_TAOCAN = 20;    //购买套餐
+    const GETJSON = -1; //获取json数据
+    public static function getType($st = null) {
+        $status = Array(
+            PayOrderType::DATE_TA => '约见',
+            PayOrderType::BUY_TAOCAN => '购买套餐'
+        );
+        if(PayOrderType::GETJSON == $st) {
+            return json_encode($status);
+        }
+        if($st) {
+            return isset($status[$st])?$status[$st]:'未知';
+        }
+        return $status;
+    }
+
+    //获取支付跳转url
+    public static function getRedirectUrl($st) {
+        $urls = Array(
+            PayOrderType::DATE_TA => '/',
+            PayOrderType::BUY_TAOCAN => ''
+        );
+        if($st) {
+            return isset($urls[$st])?$urls[$st]:null;
+        }
+        return null;
+    }
+}

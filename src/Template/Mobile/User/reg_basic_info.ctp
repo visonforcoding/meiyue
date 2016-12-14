@@ -151,7 +151,8 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">喜欢的美食：</span></div>
                         <div class="home_list_r_info">
-                            <input id="food" name="food" type="text" placeholder="请输入美食" />
+                            <!--<input id="food" name="food" type="text" placeholder="请输入美食" />-->
+                            <textarea id="food" name="food" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入美食"></textarea>
                         </div>
                     </div>
                 </li>
@@ -159,8 +160,8 @@
                     <div class="home_items sport_items">
                         <div class="home_list_l_info"><span class="itemsname">喜欢的运动/娱乐：</span></div>
                         <div class="home_list_r_info">
-                            <input id="sport" name="sport" type="text" placeholder="运动/娱乐" />
-                            
+                            <!--<input id="sport" name="sport" type="text" placeholder="运动/娱乐" />-->
+                            <textarea id="sport" name="sport" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的运动/娱乐"></textarea>
                         </div>
                     </div>
                 </li>

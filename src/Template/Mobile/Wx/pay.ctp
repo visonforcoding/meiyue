@@ -37,7 +37,7 @@
                     </div>
                     <span data-pay="ali" class="iconfont choose">&#xe615;</span>
                 </li>
-                <li class="choosed">
+                <!--<li class="choosed">
                     <div class="paytype">
                         <i class="iconfont payico cardpay">&#xe621;</i>
                         <h3 class="paydes">
@@ -45,7 +45,7 @@
                         </h3>
                     </div>
                     <span data-pay="bank" class="iconfont choose">&#xe615;</span>
-                </li>
+                </li>-->
             </ul>
         </div>
     </div>
@@ -105,7 +105,6 @@
         if (payMethod == 'ali') {
             if ($.util.isAPP) {
                 LEMON.pay.ali('<?= $aliPayParameters ?>', function (res) {
-                    alert(res);
                     if (res == '9000') {
                         $.util.alert('支付成功');
                         setTimeout(function () {
