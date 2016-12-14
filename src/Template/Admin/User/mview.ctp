@@ -58,7 +58,7 @@
                 <td><?= h($user->nick); ?></td>
                 <td><?= h($user->truename); ?></td>
                 <td><?= h($user->phone); ?></td>
-                <td><?= h(getAge($user->birthday)); ?></td>
+                <td><?= h(isset($user->birthday)?getAge($user->birthday):'无'); ?></td>
                 <td><?= h($user->city); ?></td>
                 <td><?= h($user->wxid); ?></td>
                 <td><?= h($user->fanum); ?></td>
