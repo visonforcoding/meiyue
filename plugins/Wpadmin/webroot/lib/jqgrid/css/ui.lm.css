@@ -40,3 +40,6 @@
     border-bottom-color: inherit;
     border-bottom-style: solid;
 }
+.ui-jqgrid .ui-icon-save:before {
+    content: "\f0c7";
+}

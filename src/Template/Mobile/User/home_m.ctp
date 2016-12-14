@@ -12,6 +12,7 @@
                 <ul class='opci'>
                     <li class="blight userinfo">
                         <a href="/userc/edit-info" class="cover_block">
+
                         <h3>
                             <span>
                                 <?= $user->nick ?><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><?php if($user->recharge): ?><span class="diamonds"><img src="/mobile/images/zs.png" class="responseimg"/></span><?php endif; ?><?php if($pack): ?><span class="highter-vip">VIP 普通</span><?php endif; ?></span>
@@ -29,14 +30,15 @@
                                 <span><i class="iconfont">&#xe628;</i></span>
                                 <span class="flag price"><?= $this->Number->format($user->money) ?>美币</span>
                             </h3> -->
+
                             <span class="cover_r_ico">
                                 <i class="iconfont">&#xe605;</i>
                             </span>
                         </a>
                     </li>
                     <li class="follow flex flex_justify">
-                        <div><a href="/userc/fans">赞赏我 <i><?= $facount?></i></a></div>
-                        <div><a href="/userc/likes"> 关注 <i><?= $focount?></i></a></div>
+                        <div><a href="/userc/fans">赞赏我 <i><?= $facount ?></i></a></div>
+                        <div><a href="/userc/likes"> 关注 <i><?= $focount ?></i></a></div>
                         <div><a href="/userc/likes">访客 <i>122</i></a></div>
                     </li>
                 </ul>
