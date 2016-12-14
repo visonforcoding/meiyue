@@ -54,6 +54,7 @@ class UserController extends AppController {
         $this->render($template);
     }
 
+
     public function login() {
         $redirect_url = empty($this->request->query('redirect_url')) ? '/index/index' : $this->request->query('redirect_url');
         if (in_array($redirect_url, ['/home/my-install', '/user/login', '/user/index'])) {

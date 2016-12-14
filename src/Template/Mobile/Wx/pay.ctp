@@ -108,8 +108,12 @@
                     if (res == '9000') {
                         $.util.alert('支付成功');
                         setTimeout(function () {
+                            <?php if($redurl): ?>
+                            window.location.href = '<?= $redurl; ?>';
+                            <?php else: ?>
                             window.location.href = '/wx/pay-success/<?= $payorder->id ?>';
-                        }, 1000);
+                            <?php endif; ?>
+                        }, 2000);
                     } else {
                         $.util.alert('支付未成功');
                     }

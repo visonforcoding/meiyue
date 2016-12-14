@@ -1,9 +1,11 @@
 <?php
 namespace App\Controller\Component;
 
+use App\Model\Entity\Payorder;
 use Cake\Controller\Component;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use PayOrderType;
 use SerRight;
 use ServiceType;
 
@@ -243,12 +245,12 @@ class BusinessComponent extends Component
      * @param string $out_trade_no 第三方平台交易号
      */
     public function handOrder(\App\Model\Entity\Payorder $order,$realFee,$payType,$out_trade_no) {
-        if ($order->type == 1) {
+        if ($order->type == PayOrderType::CHONGZHI) {
             //处理预约
             return $this->handType1Order($order,$realFee,$payType,$out_trade_no);
-        } elseif ($order->type == 2) {
-            // 处理报名
-            return $this->handApplyOrder($order,$realFee,$payType,$out_trade_no);
+        } elseif ($order->type == PayOrderType::BUY_TAOCAN) {
+            //购买套餐成功
+            return $this->handPackPay($order,$realFee,$payType,$out_trade_no);
         }
     }
     
@@ -296,6 +298,132 @@ class BusinessComponent extends Component
             return false;
         }
     }
+
+
+    /**
+     * 购买套餐支付成功后处理接口
+     */
+    public function handPackPay(Payorder $order, $realFee, $payType, $out_trade_no)
+    {
+        //更新支付单信息
+        $order->fee = $realFee;  //实际支付金额
+        $order->paytype = $payType;  //实际支付方式
+        $flowPayType = $payType==1?'3':'4';
+        $order->out_trade_no = $out_trade_no;  //第三方订单号
+        $order->status = 1;
+        $pre_amount = $order->user->money;
+        $order->user->money += $order->price;    //专家余额+
+        $order->user->recharge += $realFee;
+        $order->dirty('user', true);  //这里的seller 一定得是关联属性 不是关联模型名称 可以理解为实体
+        $OrderTable = TableRegistry::get('Payorder');
+
+        //生成流水记录
+        $FlowTable = TableRegistry::get('Flow');
+        $flow = $FlowTable->newEntity([
+            'user_id' => $order->user_id,
+            'type' => 15,  //购买套餐
+            'relate_id'=>$order->id,   //关联的订单id
+            'type_msg' => '套餐购买',
+            'income' => 1,
+            'amount' => $realFee,
+            'price'=>$order->price,
+            'pre_amount' => $pre_amount,
+            'after_amount' => $order->user->money,
+            'paytype'=>$flowPayType,
+            'status' => 1,
+            'remark' => '套餐购买'
+        ]);
+
+        //生成套餐购买记录
+        $packTb = TableRegistry::get('Package');
+        $pack = $packTb->get($order->relate_id);
+        //查询当前用户账户下套餐的最长有效期
+        $addDays = $pack->vali_time + 1;
+        $deadline = new Time("+$addDays day");
+        $deadline->hour = 0;
+        $deadline->second = 0;
+        $deadline->minute = 0;
+        $userPackTb = TableRegistry::get('UserPackage');
+        $query = $userPackTb
+            ->find()
+            ->select(['longestdl' => 'max(deadline)'])
+            ->where([
+                'user_id' => $order->user->id,
+                'deadline >' => new Time()
+            ]);
+        $ownPach = $query->first();
+        //计算出最长有效期
+        //是否需要更新UserPackage表和UsedPackage表该用户的截止日期标志
+        $udFlag = false;
+        if($ownPach->longestdl) {
+            $longestdl = new Time($ownPach->longestdl);
+            if($deadline > $longestdl) {
+                //购买的套餐以最长截止日期为准
+                $udFlag = true;
+            } else {
+                $deadline = $longestdl;
+            }
+        }
+        $userPack = $userPackTb->newEntity([
+            'title' => $pack->title,
+            'user_id' => $order->user->id,
+            'package_id' => $pack->id,
+            'chat_num' => $pack->chat_num,
+            'rest_chat' => $pack->chat_num,
+            'browse_num' => $pack->browse_num,
+            'rest_browse' => $pack->browse_num,
+            'type' => $pack->type,
+            'cost' => $pack->price,
+            'vir_money' => $pack->vir_money,
+            'deadline' => $deadline,
+        ]);
+        $user = $order->user;
+        $transRes = $userPackTb
+            ->connection()
+            ->transactional(
+                function() use ($FlowTable, $flow, $OrderTable, $order, $user, $userPack, $userPackTb, $udFlag, $deadline){
+                    $updateUsedres = true;
+                    $updateUseres = true;
+                    //更新UserPackage表和UsedPackage表该用户的截止日期
+                    //如果用户买了新的套餐，该套餐截止日期比现有的长，则更新所有未过期的已购买套餐
+                    if($udFlag) {
+                        $usedPackTb = TableRegistry::get('UsedPackage');
+                        $updateUsedres = $usedPackTb
+                            ->query()
+                            ->update()
+                            ->set(['deadline' => $deadline])
+                            ->where(['user_id' => $user->id, 'deadline >=' => new Time()])
+                            ->execute();
+
+                        $updateUseres = $userPackTb
+                            ->query()
+                            ->update()
+                            ->set(['deadline' => $deadline])
+                            ->where(['user_id' => $user->id, 'deadline >=' => new Time()])
+                            ->execute();
+                    }
+                    $useres = TableRegistry::get('User')->save($user);
+                    $flowres = $FlowTable->save($flow);
+                    return
+                        $flowres
+                        &&$useres
+                        &&$userPackTb->save($userPack)
+                        &&$updateUsedres
+                        &&$updateUseres;
+                });
+
+        if ($transRes) {
+            //向专家和买家发送一条短信
+            //资金流水记录
+            return true;
+        }else{
+            \Cake\Log\Log::debug($order->errors(),'devlog');
+            \Cake\Log\Log::debug($flow->errors(),'devlog');
+            dblog('recharge','套餐回调业务处理失败',$order->id);
+            return false;
+        }
+    }
+
     
     /**
      * 获取网易im token 和accid

@@ -139,7 +139,10 @@
         var price = <?= isset($price)?$price:0; ?>;
         var money = <?= isset($user)?$user->money:''; ?>;
         if((num * price > money) && price) {
-            $.util.alert('余额不足！');
+            $.util.alert('余额不足，正在跳转到充值页...');
+            setTimeout(function() {
+                window.location.href='/purse/recharge?redurl=/activity/pay-view/<?= $activity['id']; ?>';
+            }, 1000);
             return;
         }
         //if(confirm("输入付款密码")) {

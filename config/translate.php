@@ -157,8 +157,7 @@ function getFlowType($index = null) {
         '12' => '24小时订单自动完成',
         '13' => '派对报名费',
         '14' => '送礼物费用',
-        '15' => '用户充值套餐',
-        '16' => '购买VIP',
+        '15' => '购买套餐',
         '17' => '赴约支付约金',
         '18' => '支付微信查看金'
         ];
@@ -168,9 +167,6 @@ function getFlowType($index = null) {
 
     return $flowType;
 }
-
-
-
 
 
 /**
@@ -491,13 +487,13 @@ class UserState {
  * 订单类型及相关操作
  */
 class PayOrderType {
-    const DATE_TA = 1;  //约见
-    const BUY_TAOCAN = 20;    //购买套餐
+    const CHONGZHI = 1;  //充值美币
+    const BUY_TAOCAN = 2;    //购买套餐
     const GETJSON = -1; //获取json数据
     public static function getType($st = null) {
         $status = Array(
-            PayOrderType::DATE_TA => '约见',
-            PayOrderType::BUY_TAOCAN => '购买套餐'
+            PayOrderType::CHONGZHI => '充值美币',
+            PayOrderType::BUY_TAOCAN => '购买套餐',
         );
         if(PayOrderType::GETJSON == $st) {
             return json_encode($status);
@@ -506,17 +502,5 @@ class PayOrderType {
             return isset($status[$st])?$status[$st]:'未知';
         }
         return $status;
-    }
-
-    //获取支付跳转url
-    public static function getRedirectUrl($st) {
-        $urls = Array(
-            PayOrderType::DATE_TA => '/',
-            PayOrderType::BUY_TAOCAN => ''
-        );
-        if($st) {
-            return isset($urls[$st])?$urls[$st]:null;
-        }
-        return null;
     }
 }

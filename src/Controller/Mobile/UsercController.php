@@ -8,6 +8,7 @@ use Cake\Auth\DefaultPasswordHasher;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 use PackType;
+use PayOrderType;
 use ServiceType;
 
 /**
@@ -791,15 +792,20 @@ class UsercController extends AppController {
     }
 
     /**
+     * 购买套餐
      * 生成  支付订单
      */
     public function createPayorder($packid){
         $this->handCheckLogin();
         if($this->request->is('POST')) {
+            $redurl = $this->request->query('redurl');
             $packTb = TableRegistry::get('Package');
             $pack = $packTb->get($packid);
 
             $title = '';
+            $price = 0;
+            $fee = 0;
+            $type = PayOrderType::BUY_TAOCAN;
             if(!$pack) {
                 return $this->Util->ajaxReturn([
                     'status'=>false,
@@ -808,8 +814,12 @@ class UsercController extends AppController {
             }
             if(PackType::VIP == $pack->type) {
                 $title = 'VIP套餐购买';
+                $price = $pack->price;
+                $fee = $pack->price;
             } else if(PackType::RECHARGE == $pack->type) {
                 $title = '充值套餐购买';
+                $price = $pack->vir_money;
+                $fee = $pack->price;
             } else {
                 return $this->Util->ajaxReturn([
                     'status'=>false,
@@ -819,16 +829,18 @@ class UsercController extends AppController {
             $PayorderTable = TableRegistry::get('Payorder');
             $payorder = $PayorderTable->newEntity([
                 'user_id'=>  $this->user->id,
-                'type' => PayOrderType::BUY_TAOCAN,   //购买套餐
+                'relate_id' => $pack->id,
+                'type' => $type,   //购买套餐
                 'title'=>$title,
                 'order_no'=>time() . $this->user->id . createRandomCode(4, 1),
-                'price'=>  $pack->price,
+                'price'=>  $price,
+                'fee'=>  $fee,
                 'remark'=>  $title,
             ]);
             if($PayorderTable->save($payorder)){
                 return $this->Util->ajaxReturn([
                         'status'=>true,
-                        'redirect_url'=>'/wx/pay/'.$payorder->id.'/'.$pack->title
+                        'redirect_url'=>'/wx/pay/'.$payorder->id.'/'.$pack->title.'?redurl='.$redurl,
                     ]);
             }else{
                 return $this->Util->ajaxReturn([
@@ -840,146 +852,6 @@ class UsercController extends AppController {
     }
 
 
-    /**
-     * 套餐支付
-     * @param $packid
-     */
-    public function packpay($packid)
-    {
-        $packTb = TableRegistry::get('Package');
-        $pack = $packTb->get($packid);
-        $this->set([
-            'pack' => $pack,
-            'user' => $this->user,
-            'pageTitle'=>'支付',
-        ]);
-    }
-
-
-    /**
-     * 购买套餐支付接口
-     */
-    public function lmpay($packid, $paytype)
-    {
-        $this->handCheckLogin();
-        if($this->request->is("POST")) {
-            $packTb = TableRegistry::get('Package');
-            $pack = $packTb->get($packid);
-            //支付
-
-            //查询当前用户账户下套餐的最长有效期
-            $addDays = $pack->vali_time+1;
-            $deadline = new Time("+$addDays day");
-            $deadline->hour = 0;
-            $deadline->second = 0;
-            $deadline->minute = 0;
-            $userPackTb = TableRegistry::get('UserPackage');
-            $query = $userPackTb
-                ->find()
-                ->select(['longestdl' => 'max(deadline)'])
-                ->where([
-                    'user_id' => $this->user->id,
-                    'deadline >' => new Time()
-                ]);
-            $ownPach = $query->first();
-            //计算出最长有效期
-            //是否需要更新UserPackage表和UsedPackage表该用户的截止日期标志
-            $udFlag = false;
-            if($ownPach->longestdl) {
-                $longestdl = new Time($ownPach->longestdl);
-                if($deadline > $longestdl) {
-                    //购买的套餐以最长截止日期为准
-                    $udFlag = true;
-                }
-            }
-
-            //生成购买记录
-            $userPack = $userPackTb->newEntity([
-                'title' => $pack->title,
-                'user_id' => $this->user->id,
-                'package_id' => $pack->id,
-                'chat_num' => $pack->chat_num,
-                'rest_chat' => $pack->chat_num,
-                'browse_num' => $pack->browse_num,
-                'rest_browse' => $pack->browse_num,
-                'type' => $pack->type,
-                'cost' => $pack->price,
-                'vir_money' => $pack->vir_money,
-                'deadline' => $deadline,
-            ]);
-
-            $user = $this->user;
-            $transRes = $userPackTb
-                ->connection()
-                ->transactional(
-                    function() use ($paytype, $user, $pack, $userPack, $userPackTb, $udFlag, $deadline){
-                        $updateUsedres = true;
-                        $updateUseres = true;
-                        //更新UserPackage表和UsedPackage表该用户的截止日期
-                        //如果用户买了新的套餐，该套餐截止日期比现有的长，则更新所有未过期的已购买套餐
-                        if($udFlag) {
-                            $usedPackTb = TableRegistry::get('UsedPackage');
-                            $updateUsedres = $usedPackTb
-                                ->query()
-                                ->update()
-                                ->set(['deadline' => $deadline])
-                                ->where(['user_id' => $user->id, 'deadline >=' => new Time()])
-                                ->execute();
-
-                            $updateUseres = $userPackTb
-                                ->query()
-                                ->update()
-                                ->set(['deadline' => $deadline])
-                                ->where(['user_id' => $user->id, 'deadline >=' => new Time()])
-                                ->execute();
-                        }
-
-                        //检查是否需要添加用户美币并生成流水
-                        $pre_amount = $user->money;
-                        $type_msg = '购买VIP套餐';
-                        $income = 2;
-                        $type = 16;
-                        if($pack->vir_money > 0) {
-                            //扣除 报名费用
-                            $user->money = $user->money + $pack->vir_money;
-                            $type_msg = '购买充值套餐';
-                            $income = 1;
-                            $type = 15;
-                        }
-                        $after_amount = $user->money;
-                        //生成流水
-                        $FlowTable = TableRegistry::get('Flow');
-                        $flow = $FlowTable->newEntity([
-                            'user_id'=>$user->id,
-                            'buyer_id'=>0,
-                            'type'=>$type,
-                            'type_msg'=>$type_msg,
-                            'income'=>$income,
-                            'amount'=>$pack->vir_money,
-                            'price'=>$pack->vir_money,
-                            'pre_amount'=>$pre_amount,
-                            'after_amount'=>$after_amount,
-                            'paytype'=>$paytype,   //余额支付
-                            'remark'=> '略'
-                        ]);
-                        $flowres = $FlowTable->save($flow);
-                        $useres = TableRegistry::get('User')->save($user);
-
-                        return
-                            $flowres
-                            &&$useres
-                            &&$userPackTb->save($userPack)
-                            &&$updateUsedres
-                            &&$updateUseres;
-                    });
-
-            if($transRes) {
-                return $this->Util->ajaxReturn(true, '支付成功');
-            }
-            return $this->Util->ajaxReturn(false, '支付失败');
-        }
-    }
-    
     /**
      * 设置
      */
