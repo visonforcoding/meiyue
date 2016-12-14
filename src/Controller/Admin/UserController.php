@@ -175,7 +175,7 @@ class UserController extends AppController {
         $query->formatResults(function($items) {
             return $items->map(function($item) {
                 $item['myno'] = 'my'.  str_pad($item['id'],8, 0,STR_PAD_LEFT);
-                $item['age'] = getAge($item['birthday']);
+                $item['age'] = (isset($item['birthday']))?getAge($item['birthday']):'';
                 $item['status'] = UserStatus::getStatus($item['status']);
                 $item['fancount'] = count($item['fans']);
                 $item['followcount'] = count($item['follows']);
