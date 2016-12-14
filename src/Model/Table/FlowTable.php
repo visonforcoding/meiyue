@@ -129,7 +129,6 @@ class FlowTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules) {
-        $rules->add($rules->existsIn(['user_id'], 'User'));
         $rules->add($rules->existsIn(['buyer_id'], 'User'));
 //        $rules->add($rules->existsIn(['relate_id'], 'Relates'));
 

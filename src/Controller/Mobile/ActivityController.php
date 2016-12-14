@@ -398,11 +398,6 @@ class ActivityController extends AppController
             if($transRes){
                 return $this->Util->ajaxReturn(true,'参加成功');
             }else{
-                debug($flow->errors());
-                debug($actregistration->errors());
-                debug($activity->errors());
-                debug($user->errors());
-                exit();
                 return $this->Util->ajaxReturn(false,'参加失败');
             }
         }
