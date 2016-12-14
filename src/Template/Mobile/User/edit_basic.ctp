@@ -211,7 +211,7 @@
                         <div class="home_list_l_info"><span class="itemsname">喜欢的电影：</span></div>
                         <div class="home_list_r_info  plaintext">
                             <!-- <input name="movie" type="text" placeholder="请输入电影" value="<?= $user->movie; ?>"/> -->
-                              <div class="plaintext-con" contenteditable="true">请输入电影</div>
+                              <textarea  class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'">请输入电影</textarea>
                         </div>
                     </div>
                 </li>
@@ -220,7 +220,8 @@
                         <div class="home_list_l_info"><span class="itemsname">喜欢的运动<br>/娱乐：</span></div>
                         <div class="home_list_r_info   plaintext">
                             <!-- <input name="sport" type="text" placeholder="运动/娱乐" value="<?= $user->sport; ?>"/> -->
-                             <div class="plaintext-con" contenteditable="true">请输入喜欢的运动/娱乐</div>
+                             <!-- <div class="plaintext-con" contenteditable="true">请输入喜欢的运动/娱乐</div> -->
+                             <textarea  class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'">请输入内容</textarea>
                         </div>
                     </div>
                 </li>
