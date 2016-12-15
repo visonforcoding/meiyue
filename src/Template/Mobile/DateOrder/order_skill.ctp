@@ -12,7 +12,7 @@
     {{#places}}
     <li>
         <div class="items-block flex flex_justify">
-            <div class="l_left flex  maxwid70" data-type='0'>
+            <div class="l_left flex  maxwid68" data-type='0'>
                 <span class="radio-btn iconfont">&#xe635;</span>
                 <h3 class="place-choose-text">
                     <div class="place_name">{{name}}</div>
