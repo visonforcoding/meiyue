@@ -150,7 +150,6 @@
     <?= $this->cell('Date::tagsView'); ?>
     <!--日期时间选择器-->
     <?= $this->element('checkdate'); ?>
-    <?= $this->element('sitespicker'); ?>
 </div>
 
 <!-- 地址列表 -->
