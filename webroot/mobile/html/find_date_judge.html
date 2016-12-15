@@ -68,10 +68,9 @@
 		judge('ontime');
 		judge('attitude');
 		judge('similar');
-		function judge(parent){
+		function judge(parent,num){
 			var parentNode = $('#'+parent);
 			var liList = parentNode.find('i');
-			var num = 5;
 			liList.each(function(index){
 				$(this).on('tap',function(){
 					for(var j=0;j<=index;j++){
