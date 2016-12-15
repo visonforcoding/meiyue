@@ -78,10 +78,9 @@
     <div class="home_items_list mt40">
         <ul>
             <li>
-                <a href='/userc/vip-center'  class="home_items">
+                <a href="<?= ($pack)?'/userc/vip-center':'/userc/vip_buy'?>"  class="home_items">
                     <div class="home_list_l_info  flex"><i class="iconfont">&#xe658;</i><span class="itemsname">会员中心</span></div>
                     <div class="home_list_r_info">
-
                         <i class="iconfont">&#xe605;</i>
                     </div>
                 </a>
