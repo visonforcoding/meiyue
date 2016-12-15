@@ -38,7 +38,7 @@ $.util = {
             if (hR && hR instanceof Function) {
                 hR();
             }
-        $('.alert7-confirm').remove();
+            $('.alert7-confirm').remove();
         })
     },
     showPreloader: function (str) {
@@ -119,7 +119,7 @@ $.util = {
             obj['type'] = 'post';
         }
         obj.success = function (json) {
-            if (json.code != 403||json.code !=500) {
+            if (json.code != 403 || json.code != 500) {
                 tmp(json);
             }
             if (json.code == 403) {
@@ -130,12 +130,12 @@ $.util = {
                     } else {
                         LEMON.event.login(function (res) {
 //                          res = JSON.parse(res);
-                            $.util.setCookie('token_uin', res.token_uin, 99999999);
-                            LEMON.db.set('token_uin', res.token_uin);
-                            LEMON.db.set('gender',res.user.gender);
-                            LEMON.db.set('im_accid',res.user.imaccid);
-                            LEMON.db.set('im_token',res.user.imtoken);
-                            LEMON.db.set('avatar',res.user.avatar);
+//                            $.util.setCookie('token_uin', res.token_uin, 99999999);
+//                            LEMON.db.set('token_uin', res.token_uin);
+//                            LEMON.db.set('gender',res.user.gender);
+//                            LEMON.db.set('im_accid',res.user.imaccid);
+//                            LEMON.db.set('im_token',res.user.imtoken);
+//                            LEMON.db.set('avatar',res.user.avatar);
                             //window.location.reload();
                         });
                     }
@@ -643,7 +643,7 @@ $.util = {
 
         setTimeout(function () {
             console.log("ERROR:" + h);
-                    //alert("JS ERROR:" + h);
+            //alert("JS ERROR:" + h);
             (new Image).src = '/wx/jslog?content=' + encodeURIComponent(h);
             //var a = encodeURIComponent(h), b = new Image;
             //b.src = "//wq.jd.com/webmonitor/collect/badjs.json?Content=" + a + "&t=" + Math.random();
@@ -665,6 +665,13 @@ $.util = {
                 //window.location.reload();
             });
         }
+    },
+    openTalk: function (res) {
+        var param = {};
+        param['accid'] = res.dater.accid;
+        param['nick'] = res.dater.nick;
+        param['avatar'] = res.dater.avatar;
+        LEMON.event.imTalk(param);
     }
 };
 
