@@ -115,18 +115,20 @@
             </a>
         </li>
         <?php endif; ?>
-        <li>
+        <!--<li>
             <a class="items flex flex_justify">
                 <span class="seach_name">Ta的约会/派对</span>
                 <span class="golook"><i class="iconfont r_icon">&#xe605;</i></span>
             </a>
-        </li>
+        </li>-->
+        <?php if($user->charm > 0): ?>
         <li>
             <a class="items flex flex_justify" href="/user/voted/<?=$user->id?>">
                 <span class="seach_name">Ta的评选</span>
                 <span class="golook"><i class="iconfont r_icon">&#xe605;</i></span>
             </a>
         </li>
+        <?php endif; ?>
     </ul>
     <!--其它资料-->
     <ul class="home_seach_otherinfo outerblock mt40">
@@ -437,7 +439,7 @@
     LEMON.event.unrefresh();
     LEMON.sys.setTopRight('分享')
     window.onTopRight = function () {
-        $.util.alert('点击了分享');
+        //$.util.alert('点击了分享');
     }
 </script>
 <?php $this->end('script'); ?>

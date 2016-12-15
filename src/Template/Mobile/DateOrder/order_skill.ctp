@@ -157,15 +157,15 @@
                 <div class="con"><i>5000</i>美币</div>
                 <div class="pay-footer">
                     <div class="pay-content">
-                        <input type="tel" maxlength="6" class="pwd-input" id="pwd-input" unselectable="on" /> 
-                        <div class="pwd-box flex flex_justify">  
-                            <input type="password" readonly="readonly"/>  
-                            <input type="password" readonly="readonly"/>  
-                            <input type="password" readonly="readonly"/>  
-                            <input type="password" readonly="readonly"/>  
-                            <input type="password" readonly="readonly"/>  
-                            <input type="password" readonly="readonly"/>  
-                        </div> 
+                        <input type="tel" maxlength="6" class="pwd-input" id="pwd-input" unselectable="on" />
+                        <div class="pwd-box flex flex_justify">
+                            <input type="password" readonly="readonly"/>
+                            <input type="password" readonly="readonly"/>
+                            <input type="password" readonly="readonly"/>
+                            <input type="password" readonly="readonly"/>
+                            <input type="password" readonly="readonly"/>
+                            <input type="password" readonly="readonly"/>
+                        </div>
                     </div>
                 </div>
             </div>
