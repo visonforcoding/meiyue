@@ -248,7 +248,7 @@ class DateOrderController extends AppController
             $price = $date->price;
             $amount = $price*$lasth;
             if($this->user->money<$amount){
-                return $this->Util->ajaxReturn(false,'余额不足');
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '余额不足,正在跳转到支付页...', 'errorStatus' => 1]);
             }
             //生成约单
             $DateorderTable = TableRegistry::get('Dateorder');

@@ -5,7 +5,7 @@
 <div class="wraper page-current" id="page-Date">
     <header>
         <div class="header">
-            <span class="l_btn" id="cancel-btn">取消</span>
+            <span class="l_btn" id="cancel-btn" onclick="history.back();">取消</span>
             <span class="r_btn" id="release-btn">发布</span>
         </div>
     </header>
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <li onclick="location.hash='#choosePlace'">
                     <div class="edit_date_items flex">
                         <h3 class="edit_l_con">约会地点</h3>
                         <div class="edit_r_con">
@@ -82,7 +82,6 @@
                                 type="text"
                                 readonly="true"
                                 placeholder="选择约会地点"
-                                onclick="window.location.href='#choosePlace'"
                                 value=""/>
                             <input
                                 id="site_lat"
@@ -143,6 +142,7 @@
             <input id="status" type="text" name="status" value="2" hidden>
         </form>
     </div>
+
     <!--弹出层-->
     <!--技能选择框-->
     <?= $this->cell('Date::skillsView', ['user_id' => $user->id]); ?>
@@ -156,10 +156,15 @@
 
 <!-- 地址列表 -->
 <div class="wraper page" id="page-choosePlace" hidden>
-    <div class="search_bar inner">
-        <div class="search">
-            <input type="text" placeholder="搜索" />
-        </div>
+    <div class="search_place_header inner">
+        <form action="">
+            <div class="search-box flex flex_justify">
+                <div class="search-btn">
+                    <i class="iconfont ico">&#xe689;</i><input type="search" placeholder="请输入约会地点" results="5" />
+                </div>
+                <span class="color_y">搜索</span>
+            </div>
+        </form>
     </div>
     <div class="place_filter_tab">
         <div class="filter_tab_header flex">
@@ -179,8 +184,9 @@
             </ul>
         </div>
     </div>
-    <div class="find_place_list">
+    <div class="find_place_list" id="choosePlace">
         <ul id="place-list" class="outerblock">
+
         </ul>
     </div>
 </div>
@@ -195,30 +201,23 @@
 <script id="place-list-tpl" type="text/html">
     {{#places}}
     <li>
-        <div class="items flex flex_justify inner">
-            <div class="con_left">
-                <span class="place_img"><img src="/mobile/images/date_place.jpg"/></span>
-                <h3 class="place_info">
-                    <span class="place_name">{{name}}</span>
-                    <span class="color_gray place_address">{{address}}</span>
-                    <!--<div class="con_mark">
-                        <a href="#this" class="mark_name">安静</a>
-                        <a href="#this" class="mark_name">美味</a>
-                        <a href="#this" class="mark_name">高端</a>
-                    </div>-->
+        <div class="items-block flex flex_justify">
+            <div class="l_left flex  maxwid70" data-type='0'>
+                <span class="radio-btn iconfont">&#xe635;</span>
+                <h3 class="place-choose-text">
+                    <div class="place_name">{{name}}</div>
+                    <div class="color_gray place_address">{{address}}</div>
+                    <div class="commend">
+                        <i class="color_y iconfont">&#xe62a;</i><i class="color_y iconfont">&#xe62a;</i><i
+                            class="color_y iconfont">&#xe62a;</i><i class="color_y iconfont">&#xe62a;</i><i
+                            class="color_gray iconfont">&#xe62a;</i>
+                    </div>
                 </h3>
             </div>
-            <div class="con_right">
-                <span class="button btn_dark con_detail">
-                <a
-                    data-name="{{name}}"
-                    data-coordlng="{{location.lng}}"
-                    data-coordlat="{{location.lat}}"
-                    data-uid="{{uid}}" class="place_link" >查看详情</a>
-                </span>
-                <span
-                    class="con_price color_y">￥ <i class="lagernum">{{detail_info.price}}</i> /人
-                </span>
+            <div class="l_right">
+                <span class="con_price color_y">￥ <i class="lagernum">{{detail_info.price}}</i> /人</span>
+                <a data-name="{{name}}" data-coordlng="{{location.lng}}" data-coordlat="{{location.lat}}"
+                   data-uid="{{uid}}" class="button btn_dark con_detail place_link">查看详情</a>
             </div>
         </div>
     </li>
@@ -227,17 +226,14 @@
 
 <script src="/mobile/js/mustache.min.js"></script>
 <script>
-
-    $("#cancel-btn").on('click', function () {
-        history.back();
-    });
-
+    var skill_id = '';
     //约会主题选择回调函数
     function chooseSkillCallBack(userSkill) {
         $("#skill-id-input").val(userSkill['id']);
         $("#show-skill-name").val(userSkill['skill_name']);
         $('#cost-btn').val(userSkill['cost'] + " 美币/小时");
         $('#cost-input').val(userSkill['cost']);
+        skill_id = userSkill['skill_id'];
     }
 
     $("#show-skill-name").on('click', function () {
@@ -245,7 +241,7 @@
     });
 
 
-    //标签选择回调函数
+    //标签选择回调函数----------------------------------------------------------------
     function chooseTagsCallBack(tagsData) {
         var html = "";
         for(key in tagsData) {
@@ -266,7 +262,7 @@
     });
 
 
-    //日期选择回调函数
+    //日期选择回调函数--------------------------------------------------------------
     var dPicker = new mydateTimePicker();
     function choosedateCallBack(start_datetime, end_datetime) {
         var start_datetime = start_datetime.replace(/\//g, '-');
@@ -334,42 +330,33 @@
     $(window).on('hashchange', function () {
         //页面切换
         if (location.hash == '#choosePlace') {
+            if(!skill_id) {
+                $.util.alert('请先选择约会主题');
+                return;
+            }
             curpage = 1;
+            var gurl = '/date-order/find-place/' + skill_id + "/";
             loadHashPage();
-            $.util.asyLoadData({
-                gurl: '/date-order/find-place/',
-                page: curpage,
-                tpl: '#place-list-tpl',
-                id: '#place-list',
-                key: 'places'
-            });
+            $.util.asyLoadData({gurl: gurl, page: curpage, tpl: '#place-list-tpl', id: '#place-list', key: 'places'});
             setTimeout(function () {
                 $(window).on("scroll", function () {
                     $.util.listScroll('place-list', function () {
                         //window.holdLoad = false;  //打开加载锁  可以开始再次加载
-                        $.util.asyLoadData({
-                            gurl: '/date-order/find-place/',
-                            page: curpage,
-                            tpl: '#place-list-tpl',
-                            id: '#place-list',
-                            more: true,
-                            key: 'places'
-                        });
+                        $.util.asyLoadData({gurl: gurl, page: curpage,
+                            tpl: '#place-list-tpl', id: '#place-list', more: true, key: 'places'});
                     })
                 });
             }, 2000)
         } else {
-            if(location.hash == '#placeDetail'){
-                setTimeout(function(){
+            if (location.hash == '#placeDetail') {
+                setTimeout(function () {
                     loadHashPage();
-                },1000);
-            }else{
+                }, 1000);
+            } else {
                 loadHashPage();
             }
         }
     });
-
-
     function loadHashPage() {
         var hash = location.hash;
         var page = '#page-' + hash.substr(1);
@@ -381,9 +368,7 @@
             $('.page-current').show();
         }
     }
-
-
-    $('#go-here').on('tap',function(){
+    $('#go-here').on('tap', function () {
         //选择好地址
         place_name = $(this).data('name');
         coord_lng = $(this).data('coordlng');
@@ -391,6 +376,7 @@
         $('#thePlace').val(place_name);
         $('#site_lat').val(coord_lat);
         $('#site_lng').val(coord_lng);
+        location.hash = '';
     });
 
     LEMON.event.unrefresh();

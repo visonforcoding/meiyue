@@ -2,7 +2,7 @@
 <div class="wraper page-current" id="page-Date">
     <header>
         <div class="header">
-            <span class="l_btn cancel-btn">取消</span>
+            <span class="l_btn cancel-btn" onclick="history.back();">取消</span>
             <span class="r_btn release-btn" date-id="<?= $date['id']?>">重新发布</span>
         </div>
     </header>
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <li onclick="location.hash='#choosePlace'">
                     <div class="edit_date_items flex">
                         <h3 class="edit_l_con">约会地点</h3>
                         <div class="edit_r_con">
@@ -72,7 +72,6 @@
                                 type="text"
                                 readonly="true"
                                 placeholder="选择约会地点"
-                                onclick="window.location.href='#choosePlace'"
                                 value="<?= $date['site']; ?>"/>
                             <input
                                 id="site_lat"
@@ -94,14 +93,18 @@
                         <h3 class="edit_l_con">约会价格</h3>
                         <div class="edit_r_con">
                             <input
+                                id="cost-btn"
                                 type="text"
-                                value="<?= $date['user_skill']['cost']['money']?> 美币/小时"
-                                readonly/>
+                                readonly="true"
+                                placeholder="无需手动填写"
+                                value="<?= $date['price']; ?>美币/小时"/>
                             <input
-                                type="number"
+                                id="cost-input"
                                 name="price"
-                                value="<?= $date['user_skill']['cost']['money']?>"
-                                readonly/>
+                                type="number"
+                                readonly="true"
+                                value="<?= $date['price']; ?>"
+                                hidden/>
                         </div>
                     </div>
                 </li>
@@ -138,7 +141,6 @@
     <div class="inner">
         <a class="btn btn_cancely mt60 mb60 delete-btn">删除</a>
     </div>
-
     <!--弹出层-->
     <!--技能选择框-->
     <?= $this->cell('Date::skillsView', ['user_id' => $user->id]); ?>
@@ -148,14 +150,20 @@
     <?= $this->cell('Date::tagsView'); ?>
     <!--日期时间选择器-->
     <?= $this->element('checkdate'); ?>
+    <?= $this->element('sitespicker'); ?>
 </div>
 
 <!-- 地址列表 -->
 <div class="wraper page" id="page-choosePlace" hidden>
-    <div class="search_bar inner">
-        <div class="search">
-            <input type="text" placeholder="搜索" />
-        </div>
+    <div class="search_place_header inner">
+        <form action="">
+            <div class="search-box flex flex_justify">
+                <div class="search-btn">
+                    <i class="iconfont ico">&#xe689;</i><input type="search" placeholder="请输入约会地点" results="5" />
+                </div>
+                <span class="color_y">搜索</span>
+            </div>
+        </form>
     </div>
     <div class="place_filter_tab">
         <div class="filter_tab_header flex">
@@ -175,8 +183,9 @@
             </ul>
         </div>
     </div>
-    <div class="find_place_list">
+    <div class="find_place_list" id="choosePlace">
         <ul id="place-list" class="outerblock">
+
         </ul>
     </div>
 </div>
@@ -191,45 +200,31 @@
 <script id="place-list-tpl" type="text/html">
     {{#places}}
     <li>
-        <div class="items flex flex_justify inner">
-            <div class="con_left">
-                <span class="place_img"><img src="/mobile/images/date_place.jpg"/></span>
-                <h3 class="place_info">
-                    <span class="place_name">{{name}}</span>
-                    <span class="color_gray place_address">{{address}}</span>
-                    <div class="con_mark">
-                        <a href="#this" class="mark_name">安静</a>
-                        <a href="#this" class="mark_name">美味</a>
-                        <a href="#this" class="mark_name">高端</a>
+        <div class="items-block flex flex_justify">
+            <div class="l_left flex  maxwid70" data-type='0'>
+                <span class="radio-btn iconfont">&#xe635;</span>
+                <h3 class="place-choose-text">
+                    <div class="place_name">{{name}}</div>
+                    <div class="color_gray place_address">{{address}}</div>
+                    <div class="commend">
+                        <i class="color_y iconfont">&#xe62a;</i><i class="color_y iconfont">&#xe62a;</i><i
+                            class="color_y iconfont">&#xe62a;</i><i class="color_y iconfont">&#xe62a;</i><i
+                            class="color_gray iconfont">&#xe62a;</i>
                     </div>
                 </h3>
             </div>
-            <div class="con_right">
-                <span class="button btn_dark con_detail">
-                <a
-                    data-name="{{name}}"
-                    data-coordlng="{{location.lng}}"
-                    data-coordlat="{{location.lat}}"
-                    data-uid="{{uid}}" class="place_link" >查看详情</a>
-                </span>
-                <span
-                    class="con_price color_y">￥ <i class="lagernum">{{detail_info.price}}</i> /人
-                </span>
+            <div class="l_right">
+                <span class="con_price color_y">￥ <i class="lagernum">{{detail_info.price}}</i> /人</span>
+                <a data-name="{{name}}" data-coordlng="{{location.lng}}" data-coordlat="{{location.lat}}"
+                   data-uid="{{uid}}" class="button btn_dark con_detail place_link">查看详情</a>
             </div>
         </div>
     </li>
     {{/places}}
 </script>
-
 <script src="/mobile/js/mustache.min.js"></script>
 <script>
-
-    $(".cancel-btn").on('click', function () {
-
-        history.back();
-
-    });
-
+    var skill_id = '';
     //约会主题选择回调函数
     function chooseSkillCallBack(userSkill) {
 
@@ -338,7 +333,8 @@
             });
         }
 
-    })
+    });
+
 
     var place_name,coord_lng,coord_lat;
     $(document).on('tap','.place_link',function(){
@@ -363,42 +359,33 @@
     $(window).on('hashchange', function () {
         //页面切换
         if (location.hash == '#choosePlace') {
+            if(!skill_id) {
+                $.util.alert('请先选择约会主题');
+                return;
+            }
             curpage = 1;
+            var gurl = '/date-order/find-place/' + skill_id + "/";
             loadHashPage();
-            $.util.asyLoadData({
-                gurl: '/date-order/find-place/',
-                page: curpage,
-                tpl: '#place-list-tpl',
-                id: '#place-list',
-                key: 'places'
-            });
+            $.util.asyLoadData({gurl: gurl, page: curpage, tpl: '#place-list-tpl', id: '#place-list', key: 'places'});
             setTimeout(function () {
                 $(window).on("scroll", function () {
                     $.util.listScroll('place-list', function () {
                         //window.holdLoad = false;  //打开加载锁  可以开始再次加载
-                        $.util.asyLoadData({
-                            gurl: '/date-order/find-place/',
-                            page: curpage,
-                            tpl: '#place-list-tpl',
-                            id: '#place-list',
-                            more: true,
-                            key: 'places'
-                        });
+                        $.util.asyLoadData({gurl: gurl, page: curpage,
+                            tpl: '#place-list-tpl', id: '#place-list', more: true, key: 'places'});
                     })
                 });
             }, 2000)
         } else {
-            if(location.hash == '#placeDetail'){
-                setTimeout(function(){
+            if (location.hash == '#placeDetail') {
+                setTimeout(function () {
                     loadHashPage();
-                },1000);
-            }else{
+                }, 1000);
+            } else {
                 loadHashPage();
             }
         }
     });
-
-
     function loadHashPage() {
         var hash = location.hash;
         var page = '#page-' + hash.substr(1);
@@ -410,9 +397,7 @@
             $('.page-current').show();
         }
     }
-
-
-    $('#go-here').on('tap',function(){
+    $('#go-here').on('tap', function () {
         //选择好地址
         place_name = $(this).data('name');
         coord_lng = $(this).data('coordlng');
@@ -420,6 +405,7 @@
         $('#thePlace').val(place_name);
         $('#site_lat').val(coord_lat);
         $('#site_lng').val(coord_lng);
+        location.hash = '';
     });
 
     LEMON.event.unrefresh();

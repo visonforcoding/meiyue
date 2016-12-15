@@ -15,6 +15,7 @@
                             <li class="skill-item"
                                 user-skill-id="<?= $sitem['id']?>"
                                 skill-name="<?= $sitem['skill']['name'] ?>"
+                                skill-id="<?= $sitem['skill']['id'] ?>"
                                 cost="<?= $sitem['cost']['money'] ?>">
                                 <div class="choose_marks">
                                     <span class="iconfont">&#xe624;</span>
@@ -55,14 +56,13 @@
     $('.skill-item').on('click', function () {
 
         if (_func) {
-
             var userSkill = {};
             userSkill['id'] = $(this).attr('user-skill-id');
             userSkill['skill_name'] = $(this).attr('skill-name');
             userSkill['cost'] = $(this).attr('cost');
+            userSkill['skill_id'] = $(this).attr('skill-id');
             _func(userSkill);
             $(".skills-container").hide();
-
         }
 
     });

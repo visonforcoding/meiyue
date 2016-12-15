@@ -101,10 +101,17 @@
         $.util.ajax({
             url: '/date-order/order-date/<?= $date->id; ?>',
             func:function(res){
+                $.util.alert(res.msg);
                 if(res.status){
                     window.location.href = res.redirect_url;
                 }else{
-                    dom.removeClass('disabled');
+                    if(res.errorStatus == 1) {
+                        setTimeout(function() {
+                            window.location.href='/purse/recharge?redurl=/date-order/join/<?= $date->id; ?>';
+                        }, 1000);
+                    } else {
+                        dom.removeClass('disabled');
+                    }
                 }
             }
         });
