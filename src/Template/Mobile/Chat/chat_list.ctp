@@ -48,14 +48,25 @@
                 <div class="tips-box"><span class="tips"></span><i class="iconfont rcon">&#xe605;</i></div>
             </a>
         </li>
-        <li>
-            <a href="http://blog.rc5j.cn/chat/index" class="a-height flex flex_justify">
-                <div class="l-info-name">demo chat</div>
-                <div class="tips-box"><span class="tips"></span><i class="iconfont rcon">&#xe605;</i></div>
-            </a>
-        </li>
     </ul>
     <ul id="chat-list" class="chatBox mt40">
+        <?php foreach ($users as $user): ?>
+            <li>
+                <a data-accid="<?= $user->imaccid ?>" data-avatar="<?= $user->avatar ?>" data-nick="<?= $user->nick ?>"  
+                   class="ablock flex flex_justify user">
+                    <div class="chat-left-info flex">
+                        <div class="avatar">
+                            <img src="<?= $user->avatar ?>"/>
+                        </div>
+                        <div class="chat-text">
+                            <h3 class="name"><?= $user->nick ?></h3>
+                            <span class="last-info line1">晚上不见不散</span>
+                        </div>
+                    </div>
+                    <time class="smalldes">16/06/03 18:00</time>
+                </a>
+            </li>
+        <?php endforeach; ?>
     </ul>
 </div>
 <div style="height:1.4rem"></div>
@@ -63,11 +74,6 @@
 <?= $this->element('footer', ['active' => 'chat']) ?>
 <?php $this->start('script'); ?>
 <script type="text/javascript">
-    if(window.WebSocket){
-        alert('支持');
-    }else{
-        alert('不支持');
-    }
     var data = {};
     var nim = NIM.getInstance({
         debug: true,
@@ -82,7 +88,7 @@
         onupdatesession: onUpdateSession
     });
     function onConnect() {
-        alert('连接成功');
+        //alert('连接成功');
         console.log('连接成功');
     }
     function onWillReconnect(obj) {
@@ -132,7 +138,7 @@
                 var template = $('#chat-list-tpl').html();
                 Mustache.parse(template);
                 var rendered = Mustache.render(template, data);
-                $('#chat-list').html(rendered);
+                //$('#chat-list').html(rendered);
                 
             }
         })
