@@ -233,11 +233,6 @@ class ActivityController extends AppController
                                 $saveAct = $activityTable->save($activity);
                                 return $FlowTable->save($flow)&&$saveActr&&$saveAct&&$UserTable->save($user);
                             });
-                        debug($flow);
-                        debug($actre);
-                        debug($activity);
-                        debug($user);
-                        exit();
                         if($transRes) {
                             return $this->Util->ajaxReturn(true, '取消成功');
                         }
