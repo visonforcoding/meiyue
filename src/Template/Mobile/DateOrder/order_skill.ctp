@@ -22,7 +22,7 @@
                     </div>
                 </h3>
             </div>
-            <div class="l_right">
+            <div class="l_right aligncenter">
                 <span class="con_price color_y">￥ <i class="lagernum">{{detail_info.price}}</i> /人</span>
                 <a data-name="{{name}}" data-coordlng="{{location.lng}}" data-coordlat="{{location.lat}}" data-uid="{{uid}}" class="button btn_dark con_detail place_link">查看详情</a>
             </div>
@@ -58,7 +58,7 @@
                 </li>
                 <li class="flex">
                     <h3 class="commontitle">我的标签</h3>
-                    <div class="con con_mark flex">
+                    <div class="con con_mark flex maxwid80">
                         <?php foreach ($data->tags as $tag): ?>
                             <a href="#this"><?= $tag->name ?></a>
                         <?php endforeach; ?>
@@ -75,9 +75,10 @@
                             <div id="datetime">
 <!--                                <span>09-28 21:00~22:00</span>
                                 <i class="iconfont r_con">&#xe605;</i>-->
-                                <input id="time" type="text" readonly="true"  value="" placeholder="请选择约会时间" class='alignright color_y' />
+                                <input id="time" type="text" readonly="true"  value="" placeholder="请选择约会时间" class='alignright' />
                                 <input id="start-time" name="start_time" type="text" readonly="true" hidden value=""/>
                                 <input id="end-time" name="end_time" type="text" readonly="true" hidden value=""/>
+                                 <i class="iconfont r_con">&#xe605;</i>
                             </div>
                         </div>
                     </li>
@@ -87,7 +88,7 @@
                             <div>
                                 <a id="showChoosePlace">
                                     <span id="thePlace" class="color_gray">请选择</span>
-                                    <i class="iconfont r_con" style='margin-right:-.05rem;'>&#xe605;</i>
+                                    <i class="iconfont r_con">&#xe605;</i>
                                 </a>
                             </div>
                         </div>
