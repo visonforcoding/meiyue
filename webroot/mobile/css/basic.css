@@ -227,6 +227,8 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder  { /* WebKi
 .box_bottom{-webkit-box-align: end;}
 .flex_center{-webkit-box-pack:center;}
 .maxwid70{max-width:70%;}
+.maxwid68{max-width:68%;}
+.maxwid80{max-width:80%;}
 .max-num{/*display:table-cell;安卓不支持*/max-width:.8rem;overflow: hidden;}
 .r_con{color:#d2d2d2;}
 /*color*/
