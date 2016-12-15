@@ -86,14 +86,26 @@
 
     LEMON.sys.setTopRight('提交')
     window.onTopRight = function () {
+        $.util.showPreloader();
         if ($('#demoImg').data('max') === '0')
             LEMON.event.uploadPics({key: 'demoImg', user_id: user_id, param: 'id:123,uid:456'});
         if ($('#up_video').data('choosed'))
             LEMON.event.uploadVideo({key: 'up_video', user_id: user_id});
         //$.util.alert('完成注册');
-        setTimeout(function () {
-            location.href = '/user/reg-basic-info-4';
-        }, 1000);
+        $.util.ajax({
+            url: '/user/w-reg-login/' + user_id,
+            func: function (res) {
+                if (res.status) {
+                    $.util.setCookie('token_uin', res.user.user_token);
+                    LEMON.db.set('gender', res.user.gender);
+                    LEMON.db.set('token_uin', res.user.user_token);
+                    LEMON.db.set('im_accid', res.user.imaccid);
+                    LEMON.db.set('im_token', res.user.imtoken);
+                    LEMON.db.set('avatar', res.user.avatar);
+                    document.location.href = '/user/reg-basic-info-4';
+                }
+            }
+        });
     }
 
 

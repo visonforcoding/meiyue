@@ -245,4 +245,23 @@ class TestController extends AppController {
         debug($res);
         exit();
     }
+    
+    public function testImByOrder($id){
+       $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+       $dateorder = $DateorderTable->get($id,[
+           'contain'=>[
+               'Dater'=>function($q){
+                    return $q->select(['id','phone','nick','imaccid','avatar']);
+               },
+               'Buyer'=>function($q){
+                    return $q->select(['id','phone','nick','imaccid','avatar']);
+               },
+               'UserSkill.Skill'        
+           ]
+       ]);
+       $this->loadComponent('Netim');
+       $res = $this->Netim->prepayMsg($dateorder);
+       debug($res);
+       exit();
+    }
 }

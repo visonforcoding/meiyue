@@ -413,7 +413,7 @@ class ApiController extends AppController {
             $this->jsonResponse(false, '缺少必要的参数');
         }
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $user = $UserTable->find()->select(['imaccid', 'user_token', 'gender', 'pwd','imtoken','avatar'])
+        $user = $UserTable->find()->select(['imaccid', 'user_token', 'gender', 'pwd','imtoken','avatar','reg_step','id'])
                 ->where(['phone' => $u, 'enabled' => 1, 'is_del' => 0])
                 ->first();
         $pwd = $this->request->data('pwd');
@@ -423,6 +423,11 @@ class ApiController extends AppController {
         if (!(new \Cake\Auth\DefaultPasswordHasher)->check($p, $user->pwd)) {
             $this->jsonResponse(false, '密码不正确');
         } else {
+             if($user->reg_step!=9){
+                //注册未完成
+                $this->jsonResponse(['status'=>false,'msg'=>'注册未完成,请继续注册步骤',
+                    'code'=>201,'redirect_url'=>'/user/reg-basic-info-'.$user->reg_step.'/'.$user->id]);
+            }
             $user_token = $user->user_token;
             $data['login_time'] = date('Y-m-d H:i:s');
             if ($lng && $lat) {

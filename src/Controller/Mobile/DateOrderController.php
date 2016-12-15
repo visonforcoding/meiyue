@@ -11,6 +11,7 @@ use Cake\I18n\Time;
  * @property \App\Model\Table\DateOrderTable $DateOrder
  * @property \App\Controller\Component\BdmapComponent $Bdmap
  * @property \App\Controller\Component\SmsComponent $Sms
+ * @property \App\Controller\Component\NetimComponent $Netim
  */
 class DateOrderController extends AppController
 {
@@ -149,7 +150,10 @@ class DateOrderController extends AppController
            $dateorder = $DateorderTable->get($order_id,[
                'contain'=>[
                    'Dater'=>function($q){
-                        return $q->select(['id','phone','nick']);
+                        return $q->select(['id','phone','nick','imaccid','avatar']);
+                   },
+                   'Buyer'=>function($q){
+                        return $q->select(['id','phone','nick','imaccid','avatar']);
                    },
                    'UserSkill.Skill'        
                ]
@@ -194,10 +198,16 @@ class DateOrderController extends AppController
            });
            if($transRes){
                $this->Sms->sendByQf106($dateorder->dater->phone,
-                       '用户'.  $this->user->nick.'已支付了您的'.$dateorder->user_skill->skill->name.'技能预约费,请尽快前往平台确认');
+                       '用户'.  $this->user->nick.'已支付了您的'.
+                       $dateorder->user_skill->skill->name.'技能预约费,请尽快前往平台确认');
+               //发送im 消息
+               $this->loadComponent('Netim');
+               $this->Netim->prepayMsg($dateorder);
                return $this->Util->ajaxReturn([
                    'status'=>true,
-                   'redirect_url'=>'/date-order/order-success/'.$dateorder->id
+                   'redirect_url'=>'/date-order/order-success/'.$dateorder->id,
+                   'code'=>202,    //唤起聊天 
+                   'dater'=>$dateorder->dater
                        ]);
            }else{
                errorMsg($flow, '失败');

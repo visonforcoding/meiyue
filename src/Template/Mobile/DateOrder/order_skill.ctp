@@ -347,15 +347,15 @@ $('#order_create').on('tap', function () {
                     $.util.ajax({
                         url: '/date-order/order-pay/' + order_id,
                         func: function (resp) {
+                            $.util.alert(resp.msg);
                             if (resp.status) {
                                 //聊天框
-                                //LEMON.event.imTalk();
+                                $.util.openTalk(resp);
                             } else {
                                 if (resp.code == '201') {
                                     //余额不足
-                                    $.util.alert(res.msg);
                                     setTimeout(function () {
-                                        window.location.href = res.redirect_url;
+                                        window.location.href = resp.redirect_url;
                                     }, 300);
                                 }
                             }

@@ -145,6 +145,7 @@ class Netim {
         if($res->isOk()){
             $resp = json_decode($res->body());
             if($resp->code==200){
+                \Cake\Log\Log::info('Netim sendMsg'.$res->body(),'devlog');
                 return true;
             }else{
                 \Cake\Log\Log::error('Netim sendMsg'.$res->body(),'devlog');

@@ -74,6 +74,11 @@ class UserController extends AppController {
                 if (!(new \Cake\Auth\DefaultPasswordHasher)->check($pwd, $user->pwd)) {
                     return $this->Util->ajaxReturn(false, '密码不正确');
                 } else {
+                    if($user->reg_step!=9){
+                        //注册未完成
+                        return $this->Util->ajaxReturn(['status'=>false,'msg'=>'注册未完成,请继续注册步骤',
+                            'code'=>201,'redirect_url'=>'/user/reg-basic-info-'.$user->reg_step]);
+                    }
                     $this->request->session()->write('User.mobile', $user);
                     $user_token = false;
                     $bind_wx = false;
@@ -116,6 +121,7 @@ class UserController extends AppController {
             $data['gender'] = $this->request->query('gender') ? $this->request->query('gender') : 1;
             $SmsTable = \Cake\ORM\TableRegistry::get('Smsmsg');
             $sms = $SmsTable->find()->where(['phone'])->orderDesc('create_time')->first();
+            //验证码验证
             if (!$sms) {
                 return $this->Util->ajaxReturn(false, '验证码错误');
             } else {
@@ -160,23 +166,41 @@ class UserController extends AppController {
             //登录时间
             $user->login_time = date('Y-m-d H:i:s');
             $user = $this->User->patchEntity($user, $data);
+            if($this->request->query('gender')==1){
+                //男性则直接登录
+                $user->reg_step = 9;  //注册完毕
+            }else{
+                $user->reg_step = 1;
+            }
             if ($this->User->save($user)) {
                 $jumpUrl = '/user/m-reg-basic-info';
                 if ($user->gender == 2) {
-                    $jumpUrl = '/user/reg-basic-info-1';
+                    $jumpUrl = '/user/reg-basic-info-1/'.$user->id;
                 }
                 $msg = '注册成功';
-                $this->request->session()->write('User.mobile', $user);
                 $this->user = $user;
                 $user_token = false;
-                if ($this->request->is('lemon')) {
-                    $this->request->session()->write('Login.login_token', $user->user_token);
-                    $user_token = $user->user_token;
+                if($this->request->query('gender')==1){
+                    //男性则直接登录
+                    $this->request->session()->write('User.mobile', $user);
+                    $is_login = true;
+                    if ($this->request->is('lemon')) {
+                        $this->request->session()->write('Login.login_token', $user->user_token);
+                        $user_token = $user->user_token;
+                    }
+                    unset($user->pwd);
+                    $user->avatar = $this->Util->getServerDomain().$user->avatar;
+                }else{
+                    $is_login = false;
+                    $user = false;
                 }
-                unset($user->pwd);
-                //redis push 记录
-                $user->avatar = $this->Util->getServerDomain().$user->avatar;
-                return $this->Util->ajaxReturn(['status' => true, 'msg' => $msg, 'url' => $jumpUrl,'user'=>$user]);
+                return $this->Util->ajaxReturn([
+                          'status' => true, 
+                          'msg' => $msg, 
+                          'url' => $jumpUrl,
+                          'user'=>$user,
+                          'is_login'=>$is_login
+                    ]);
             } else {
                 \Cake\Log\Log::error($user->errors());
                 return $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($user->errors())]);
@@ -208,14 +232,14 @@ class UserController extends AppController {
     /**
      * 女性注册第一步
      */
-    public function regBasicInfo1() {
-        $this->handCheckLogin();
-        $user = $this->user;
+    public function regBasicInfo1($id) {
+        $user = $this->User->get($id);
         if ($this->request->is('post')) {
             $user = $this->User->get($user['id']);
             $data = $this->request->data();
             $data['bwh'] =  $data['b'].'/'.$data['w'].'/'.$data['h'];
             $user = $this->User->patchEntity($user, $data);
+            $user->reg_step = 2;
             if ($this->User->save($user)) {
                 return $this->Util->ajaxReturn(true, '保存成功');
             } else {
@@ -223,6 +247,7 @@ class UserController extends AppController {
             }
         }
         $this->set([
+            'user'=>$user,
             'pageTitle' => '美约-基本信息填写'
         ]);
     }
@@ -230,30 +255,43 @@ class UserController extends AppController {
     /**
      * 女性注册第二步
      */
-    public function regBasicInfo2() {
-        $user = $this->user;
+    public function regBasicInfo2($id) {
+        $user = $this->User->get($id);
         if ($this->request->is('post')) {
             $user = $this->User->get($user->id);
             $user = $this->User->patchEntity($user, $this->request->data());
+            $user->reg_step = 3;
             if ($this->User->save($user)) {
                 return $this->Util->ajaxReturn(true, '保存成功');
             }
             return $this->Util->ajaxReturn(false, '保存失败');
         }
         $this->set([
+            'user'=>$user,
             'pageTitle' => '美约-身份认证'
         ]);
     }
 
+    
+    
     /**
      * 女性注册第三步
      */
-    public function regBasicInfo3() {
-        $user = $this->user;
+    public function regBasicInfo3($id) {
+        $user = $this->User->get($id);
         $this->set([
             'user'=>$user,
             'pageTitle' => '美约-基本图片上传'
         ]);
+    }
+    
+    public function wRegLogin($id){
+        $user = $this->User->get($id);
+        $user->reg_step = 9;
+        if($this->User->save($user)){
+            return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'保存成功','user'=>$user]);
+        }
+        return $this->Util->ajaxReturn(false, '保存失败');
     }
 
     /**
