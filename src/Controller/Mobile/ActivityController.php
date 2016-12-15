@@ -195,6 +195,7 @@ class ActivityController extends AppController
                         //扣除 报名费用
                         $pre_amount = $this->user->money;
                         $this->user->money = $this->user->money + $return_count;
+                        $this->user -= $return_count;
                         $user = $this->user;
                         $after_amount = $this->user->money;
                         //生成流水
@@ -341,6 +342,7 @@ class ActivityController extends AppController
             //扣除 报名费用
             $pre_amount = $this->user->money;
             $this->user->money = $this->user->money - $price * $num;
+            $this->user->consumed .= $price * $num;
             $user = $this->user;
             $after_amount = $this->user->money;
             //生成流水
