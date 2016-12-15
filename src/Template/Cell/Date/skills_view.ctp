@@ -18,7 +18,7 @@
                                 skill-id="<?= $sitem['skill']['id'] ?>"
                                 cost="<?= $sitem['cost']['money'] ?>">
                                 <div class="choose_marks">
-                                    <span class="iconfont">&#xe624;</span>
+                                    <span class="iconfont"><?= $sitem['skill']['class'];?></span>
                                     <i><?= $sitem['skill']['name'] ?></i>
                                 </div>
                             </li>

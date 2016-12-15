@@ -4,10 +4,11 @@
     </div>
     <div class="panel-body" style="height:500px;overflow-x:hidden;overflow-y:scroll">
         <ul class="tree treeview">
-            <li><a  href="/skill/add/0" class="add tree-plus" data-id="0"><i class="icon icon-plus-sign"></i></a></li>
+            <li><a href="/skill/add/0" class="add tree-plus" data-id="0"><i class="icon icon-plus-sign"></i></a></li>
             <?php foreach ($skills as $item): ?>
                 <li>
-                    <?= $item->name ?><a href="/skill/add/<?= $item['id']?>" class="add tree-plus" data-id="<?= $item->id ?>"><i
+                    <?= $item->name ?><a href="/skill/add/<?= $item['id'] ?>" class="add tree-plus"
+                                         data-id="<?= $item->id ?>"><i
                             class="icon icon-plus-sign"></i></a>
                     <?php if (count($item->children) == 0): ?>
                         <a class="del" data-id="<?= $item->id ?>"><i
@@ -55,6 +56,7 @@
             }, function () {
             });
         });
+    });
 
 </script>
 <?php $this->end('script'); ?>
