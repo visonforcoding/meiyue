@@ -502,7 +502,8 @@ $activity_action = '/activity/index/';  //定义派对请求地址
         window.location.href='/activity/view/' + actid;
     }
 
-    $(document).on('tap', '.join-act', function() {
+    $(document).on('click', '.join-act', function(event) {
+        event.stopPropagation();
         $actid = $(this).data('id');
         window.location.href = '/activity/pay-view/' + $actid;
     });
