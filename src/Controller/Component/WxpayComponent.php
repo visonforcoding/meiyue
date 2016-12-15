@@ -70,14 +70,17 @@ class WxpayComponent extends Component {
                     <body>%s</body>
                     <mch_id>%s</mch_id>
                     <nonce_str>%s</nonce_str>
-                    <notify_url>%s</notify_url>
-                    <openid>%s</openid>
-                    <out_trade_no>%s</out_trade_no>
+                    <notify_url>%s</notify_url>';
+        if($isApp){
+            $xmlText .= '<openid>%s</openid>';
+        }
+        $xmlText .= '<out_trade_no>%s</out_trade_no>
                     <spbill_create_ip>%s</spbill_create_ip>
                     <total_fee>%d</total_fee>
                     <trade_type>%s</trade_type>
                     <sign>%s</sign>
                     </xml>';
+        
         $ip = $this->request->clientIp();
         $nonce_str = createRandomCode(16);
         $notify_url = empty($notify_url) ? $this->notify_url : $notify_url;
