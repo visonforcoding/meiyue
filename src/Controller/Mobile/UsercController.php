@@ -768,6 +768,7 @@ class UsercController extends AppController {
             'counter' => $counter,
             'pageTitle'=>'会员中心',
         ]);
+
     }
 
 

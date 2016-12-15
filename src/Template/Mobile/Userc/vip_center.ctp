@@ -127,9 +127,8 @@
 
 </div>
 <div style="height:62px;"></div>
-<a href="/userc/vip-buy" class="identify_footer_potion">继续购买</a>
+<a href="/userc/vip-buy" class="identify_footer_potion">购买套餐</a>
 
 <script>
     LEMON.sys.back('/user/index');
-    LEMON.event.unrefresh();
 </script>
