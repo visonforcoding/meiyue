@@ -5,6 +5,7 @@ use App\Model\Entity\Payorder;
 use Cake\Controller\Component;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use PackType;
 use PayOrderType;
 use SerRight;
 use ServiceType;
@@ -305,6 +306,8 @@ class BusinessComponent extends Component
      */
     public function handPackPay(Payorder $order, $realFee, $payType, $out_trade_no)
     {
+        $packTb = TableRegistry::get('Package');
+        $pack = $packTb->get($order->relate_id);
         //更新支付单信息
         $order->fee = $realFee;  //实际支付金额
         $order->paytype = $payType;  //实际支付方式
@@ -312,7 +315,10 @@ class BusinessComponent extends Component
         $order->out_trade_no = $out_trade_no;  //第三方订单号
         $order->status = 1;
         $pre_amount = $order->user->money;
-        $order->user->money += $order->price;    //专家余额+
+        $order->user->money += $pack->vir_money;    //专家余额+
+        if($pack->type == PackType::VIP) {
+            $order->user->recharge .= $realFee;
+        }
         $order->user->recharge += $realFee;
         $order->dirty('user', true);  //这里的seller 一定得是关联属性 不是关联模型名称 可以理解为实体
         $OrderTable = TableRegistry::get('Payorder');
@@ -335,8 +341,6 @@ class BusinessComponent extends Component
         ]);
 
         //生成套餐购买记录
-        $packTb = TableRegistry::get('Package');
-        $pack = $packTb->get($order->relate_id);
         //查询当前用户账户下套餐的最长有效期
         $addDays = $pack->vali_time + 1;
         $deadline = new Time("+$addDays day");
