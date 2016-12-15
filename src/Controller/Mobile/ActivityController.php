@@ -204,13 +204,13 @@ class ActivityController extends AppController
                             'buyer_id'=>  $this->user->id,
                             'type'=>13,
                             'type_msg'=>'取消派对返还',
-                            'income'=>2,
+                            'income'=>1,
                             'amount'=>$return_count, //支付金额
                             'price'=>$actre['cost'],  //订单金额
                             'pre_amount'=>$pre_amount,
                             'after_amount'=>$after_amount,
                             'paytype'=>1,   //余额支付
-                            'remark'=> "扣除报名费"
+                            'remark'=> "派对取消返还金额:"
                                     .$actre['punish_percent']."%（即".$actre['punish'].")",
                         ]);
                         $activityTable = $this->Activity;
@@ -222,7 +222,7 @@ class ActivityController extends AppController
                         }
                         $transRes = $actreTable
                             ->connection()
-                            ->transactional(function()use($flow,$FlowTable,&$actre,$actreTable,$activity,$activityTable,$user){
+                            ->transactional(function()use(&$flow,$FlowTable,&$actre,$actreTable,&$activity,$activityTable,&$user){
                                 $UserTable = TableRegistry::get('User');
                                 //标记报名表项取消时间
                                 $actre['cancel_time'] = new Time();
@@ -233,6 +233,11 @@ class ActivityController extends AppController
                                 $saveAct = $activityTable->save($activity);
                                 return $FlowTable->save($flow)&&$saveActr&&$saveAct&&$UserTable->save($user);
                             });
+                        debug($flow);
+                        debug($actre);
+                        debug($activity);
+                        debug($user);
+                        exit();
                         if($transRes) {
                             return $this->Util->ajaxReturn(true, '取消成功');
                         }
