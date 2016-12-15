@@ -148,11 +148,13 @@
         //if(confirm("输入付款密码")) {
         $(this).removeAttr('id');
         var obj = $(this);
+        $.util.showPreloader();
         $.util.ajax({
             url: '/activity/mpay/<?= $activity['id']; ?>/' + num,
             type: "POST",
             dataType: "json",
             func: function (res) {
+                $.util.hidePreloader();
                 $.util.alert(res.msg);
                 if(res.status) {
                     setTimeout(function() {
