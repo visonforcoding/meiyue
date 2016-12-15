@@ -243,8 +243,7 @@
                 func: function (resp) {
                     if (resp.status) {
                         //聊天框
-                        $.util.alert(resp.msg);
-                        //LEMON.event.imTalk();
+                        $.util.openTalk(resp);
                     } else {
                         if (resp.code == '201') {
                             //余额不足

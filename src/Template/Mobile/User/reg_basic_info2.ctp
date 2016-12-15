@@ -100,6 +100,7 @@
 </div>
 <?= $this->start('script'); ?>
 <script>
+    var user_id = <?=$user->id?>;
     $('.Idcard img').on('tap', function () {
         //alert('点击了图片上传');
         $obj = $(this);
@@ -138,7 +139,7 @@
             data: {idfront: idfront, idback: idback, idperson: idperson},
             func: function (res) {
                 if (res.status) {
-                    document.location.href = '/user/reg-basic-info-3';
+                    document.location.href = '/user/reg-basic-info-3/'+user_id;
                 } else {
                     $.util.alert(res.msg);
                 }

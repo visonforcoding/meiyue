@@ -188,6 +188,7 @@
 
 <?= $this->start('script'); ?>
 <script>
+    var user_id = <?=$user->id?>;
       if ($.util.isAPP) {
         //app定位
         if (!$.util.getCookie('coord')) {
@@ -334,7 +335,7 @@
             data: form.serialize(),
             func: function (res) {
                 if (res.status) {
-                    window.location.href = '/user/reg-basic-info-2';
+                    window.location.href = '/user/reg-basic-info-2/'+user_id;
                 } else {
                     console.log(res);
                 }

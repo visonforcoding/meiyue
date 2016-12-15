@@ -26,8 +26,10 @@
                             <span class="itemsname">喜欢的美食：</span>
                         </div>
                         <div class="home_list_r_info   plaintext">
+
                             <!-- <input name="food" type="text" placeholder="请输入" /> -->
                             <textarea name="food" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的美食"></textarea>
+
                         </div>
                     </div>
                 </li>
@@ -38,8 +40,10 @@
                            
                         </div>
                          <div class="home_list_r_info   plaintext">
+
                             <!-- <input name="music" type="text" placeholder="请输入" /> -->
                              <textarea name="music" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的音乐"></textarea>
+
                         </div>
                     </div>
                 </li>
@@ -50,8 +54,10 @@
                           
                         </div>
                           <div class="home_list_r_info   plaintext">
+
                             <!-- <input name="movie" type="text" placeholder="请输入" /> -->
                             <textarea name="movie" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的电影"></textarea>
+
                         </div>
                     </div>
                 </li>
@@ -62,8 +68,10 @@
                            
                         </div>
                          <div class="home_list_r_info   plaintext">
+
                             <!-- <input name="sport" type="text" placeholder="请输入" /> -->
                              <textarea name="sport" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的运动/娱乐"></textarea>
+
                         </div>
                     </div>
                 </li>
@@ -73,6 +81,7 @@
                             <span class="itemsname">个性签名：</span>
                         </div>
                           <div class="home_list_r_info   plaintext">
+
                             <!-- <input name="sign" type="text" placeholder="请输入" /> -->
                               <textarea name="sign" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入个性签名"></textarea>
                          </div>

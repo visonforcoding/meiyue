@@ -29,10 +29,10 @@
         if (obj.hasClass('disabled')) {
             return false;
         }
+        obj.addClass('disabled'); //加锁防止多次点击
         var phone = $('#phone').val();
         $.post('/user/sendVCode/1', {phone: phone}, function (res) {
             if (res.status === true) {
-                obj.addClass('disabled');
                 var text = '<span id="timer">' + 30 + '</span>秒后重新发送';
                 obj.html(text);
                 t1 = setInterval(function () {
@@ -97,12 +97,14 @@
                 //$.util.alert(res.msg);
                 if (res.status) {
                     obj.addClass('disabled');
-                    $.util.setCookie('token_uin',res.user.user_token);
-                    LEMON.db.set('gender',res.user.gender);
-                    LEMON.db.set('token_uin',res.user.user_token);
-                    LEMON.db.set('im_accid',res.user.imaccid);
-                    LEMON.db.set('im_token',res.user.imtoken);
-                    LEMON.db.set('avatar',res.user.avatar);
+                    if(res.is_login){
+                        $.util.setCookie('token_uin',res.user.user_token);
+                        LEMON.db.set('gender',res.user.gender);
+                        LEMON.db.set('token_uin',res.user.user_token);
+                        LEMON.db.set('im_accid',res.user.imaccid);
+                        LEMON.db.set('im_token',res.user.imtoken);
+                        LEMON.db.set('avatar',res.user.avatar);
+                    }
                     setTimeout(function () {
                         window.location.href = res.url;
                     }, 1000);

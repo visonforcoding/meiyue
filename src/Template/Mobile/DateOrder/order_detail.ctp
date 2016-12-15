@@ -171,7 +171,7 @@
                     <div class="mark-container">
                         <?php foreach ($order->dater->tags as $tag): ?>
                             <a href="#this" class='mark'><?= $tag->name ?></a>
-                         <?php endforeach; ?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </li>
@@ -218,7 +218,7 @@
     <?php if ($order->status == 3): ?>
         <div class="bottomblock">
             <div class="flex flex_end">
-                <span  id="refuse_status_3" class="footerbtn gopay">取消订单</span>
+                <span  id="refuse_status_3" class="identify_dark_potion">取消订单</span>
             </div>
         </div>
     <?php endif; ?>
@@ -338,6 +338,17 @@
         });
     });
     var refuse_msg = '<?= $refuse_msg ?>';
+    $(document).on('tap', '#refuse_status_3', function () {
+        //状态3时的拒绝接单 和 取消订单
+        $.util.ajax({
+            url: '/date-order/cancel-date-order-3',
+            data: {order_id: orderid},
+            func: function (res) {
+                $.util.alert(res.msg);
+
+            }
+        })
+    });
     $(document).on('tap', '#refuse_status_10', function () {
         //状态10时 取消订单
         $.util.confirm('确定要取消订单吗?', refuse_msg, function () {
@@ -356,10 +367,11 @@
             $.util.ajax({
                 url: '/date-order/order-pay/' + orderid,
                 func: function (resp) {
+                    alert(resp);
+                    $.util.alert(resp.msg);
                     if (resp.status) {
                         //聊天框
-                        $.util.alert(resp.msg);
-                        //LEMON.event.imTalk();
+                        $.util.openTalk(resp);
                     } else {
                         if (resp.code == '201') {
                             //余额不足

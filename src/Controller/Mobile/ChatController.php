@@ -48,4 +48,25 @@ class ChatController extends AppController {
         ]);
     }
     
+    
+    /**
+     * 返回
+     * @return type
+     */
+    public function getSesList(){
+        $accids = $this->request->data('accids');
+        $UserTable = TableRegistry::get('User');
+        $users = $UserTable->find()->select(['id','nick','avatar','imaccid'])
+                           ->where(['imaccid in'=>$accids])
+                           ->formatResults(function($items) {
+                                return $items->map(function($item) {
+                                            $item['avatar'] = $this->Util->getServerDomain() . createImg($item['avatar']) .
+                                                    '?w=184';
+                                            return $item;
+                                        });
+                            })
+                           ->toArray();
+        return $this->Util->ajaxReturn(['users'=>$users]);
+    }
+    
 }
