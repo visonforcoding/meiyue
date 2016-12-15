@@ -131,5 +131,5 @@
         );
         <?php endif; ?>
     }
-    LEMON.sys.back('/user/index');
+    //LEMON.sys.back('/user/index');
 </script>
