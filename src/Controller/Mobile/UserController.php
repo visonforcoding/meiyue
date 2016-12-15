@@ -41,7 +41,7 @@ class UserController extends AppController {
         $fans = $fanTb->find()->where(['following_id' => $this->user->id])->count();
         $followers = $fanTb->find()->where(['user_id' => $this->user->id])->count();
         $packTb = TableRegistry::get('UserPackage');
-        $pack = $packTb->find()->where(['user_id' => $this->user->id])->orderDesc('create_time')->limit(1);
+        $pack = $packTb->find()->where(['user_id' => $this->user->id])->orderDesc('create_time')->first();
         $this->set([
             'facount' => $fans,
             'focount' => $followers,
