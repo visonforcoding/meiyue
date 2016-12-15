@@ -120,7 +120,9 @@
                     func: function (res) {
                         $.util.alert(res.msg);
                         if(res.status) {
-                            window.location.href = '/userc/my-activitys';
+                            setTimeout(function() {
+                                window.location.href = '/userc/my-activitys';
+                            }, 1000)
                         }
                     }
                 })
