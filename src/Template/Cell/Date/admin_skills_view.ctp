@@ -13,7 +13,7 @@
                         <?php foreach ($skill['children'] as $item): ?>
                             <li class="skill-item" skill-id="<?= $item['id']?>" skill-name="<?= $item['name'] ?>" >
                                 <div class="choose_marks">
-                                    <span class="iconfont">&#xe624;</span>
+                                    <span class="iconfont"><?= $item['class']; ?></span>
                                     <i><?= $item['name'] ?></i>
                                 </div>
                             </li>

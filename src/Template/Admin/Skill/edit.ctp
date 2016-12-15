@@ -1,7 +1,24 @@
+<style type="text/css">
+
+    @font-face {
+        font-family: "iconfont" ;
+        src: url('/mobile/font/iconfont.eot'); /* IE9*/
+        src: url('/mobile/font/iconfont.eot#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('/mobile/font/iconfont.woff') format('woff'), /* chrome, firefox */ url('/mobile/font/iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/ url('/mobile/font/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+    }
+
+    .iconfont {
+        font-family: "iconfont" !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+    }
+</style>
 <form>
     <label>技能名称：<input type="text" name="name" value="<?= $skill['name'];?>"></label>
     <p>
-        <label>技能图标：<input type="text" name="class" class="" value="<?= $skill['class'];?>"></label>
+        <label>技能图标：<i id="iconpreview" class="icon iconfont"><?= $skill['class'];?></i><input id="iconvalue" type="text" name="class" class="" value="<?= $skill['class'];?>" hidden></label>
     <p>
         <label>地址关键字（选填）：<input type="text" name="q_key" value="<?= $skill['q_key'];?>">
             <br>
@@ -60,5 +77,21 @@
         });
 
     })
+
+    $('#iconvalue').on('click', function() {
+        iconView();
+    });
+
+    function iconView() {
+        url = '/mobile/font/skill_icons.html';
+        layer.open({
+            type: 2,
+            title: '选择图标',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['90%', '70%'],
+            content: url//iframe的url
+        });
+    }
 
 </script>

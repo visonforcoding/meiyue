@@ -28,6 +28,10 @@ class SkillController extends AppController
         ]);
     }
 
+    public function iconView() {
+        $this->viewBuilder()->autoLayout(false);
+    }
+
     /**
      * View method
      *
