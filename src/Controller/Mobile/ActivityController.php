@@ -114,7 +114,6 @@ class ActivityController extends AppController
      */
     public function view($id = null, $action = 0)
     {
-        $this->handCheckLogin();
         $activity = $this->Activity->get($id, ['contain' => ['Actregistrations'=> function($q){
             return $q
                 ->contain([
