@@ -19,7 +19,7 @@ use PayOrderType;
  * @property \App\Controller\Component\BusinessComponent $Business
  */
 class IndexController extends AppController {
-
+    const WX_VIEW_COST = 100;
     /**
      * Index method
      * 发现首页
@@ -237,24 +237,41 @@ class IndexController extends AppController {
     }
 
 
+    protected function checkWxIsView($id)
+    {
+        $wxorderTb = TableRegistry::get('Wxorder');
+        $wxorder = $wxorderTb->find()
+            ->contain(['Wxer' => function($q) {
+                return $q->select(['wxid', 'nick']);
+            }])
+            ->where(['user_id' => $this->user->id, 'wxer_id' => $id])
+            ->first();
+        if($wxorder) {
+            return [
+                'status' => true,
+                'wxorder' => $wxorder
+            ];
+        }else {
+            return [
+                'status' => false,
+                'moneycheck' => ($this->user->money > IndexController::WX_VIEW_COST)
+            ];
+        }
+    }
+
+
     /**
      * 检查查看微信权限
      */
-    public function checkWxRig($wxerid = null) {
+    public function checkWxRig($wxerid) {
         $this->handCheckLogin();
         if($this->request->is('POST') && $wxerid) {
-            $wxorderTb = TableRegistry::get('Wxorder');
-            $wxorder = $wxorderTb->find()
-                ->contain(['Wxer' => function($q) {
-                    return $q->select(['wxid', 'nick']);
-                }])
-                ->where(['user_id' => $this->user->id, 'wxer_id' => $wxerid])
-                ->first();
-            if($wxorder) {
+            $res = $this->checkWxIsView($wxerid);
+            if($res['status']) {
                 return $this->Util->ajaxReturn([
                     'status' => true,
                     'msg' => '已经支付',
-                    'userwx' => $wxorder
+                    'userwx' => $res['wxorder']
                 ]);
             }else {
                 return $this->Util->ajaxReturn(false, '尚未支付');
@@ -266,32 +283,39 @@ class IndexController extends AppController {
     /**
      * 查看微信支付
      */
-    /*public function pay4wx($wxerid = null) {
+    public function pay4wx($wxerid = null) {
+        $wxfee = IndexController::WX_VIEW_COST;
         $this->handCheckLogin();
         if(!$wxerid) {
             return $this->Util->ajaxReturn(false, '非法操作');
         }
-
-        if(!$wxerid) {
-            return $this->Util->ajaxReturn(false, '非法操作');
+        if($this->user->money < $wxfee) {
+            return $this->Util->ajaxReturn(false, '余额不足');
         }
-        //扣除 预约金
-        $pre_amount = $this->user->money;
-        $this->user->money = $this->user->money - 100;
-        $user = $this->user;
-        $after_amount = $this->user->money;
+        //修改支付方费用
+        $userTb = TableRegistry::get('User');
+        $out_user = $this->user;
+        $out_user->money = $out_user->money - $wxfee;
+        $out_user->charm = $out_user->recharge + $wxfee;
+        //修改收款方费用
+        $in_user = $userTb->get($wxerid);
+        if(!$in_user) {
+            return $this->Util->ajaxReturn(false, '用户不存在');
+        }
+        $in_user->money = $in_user->money + $wxfee;
+        $in_user->charm = $in_user->charm + $wxfee;
         //生成流水
         $FlowTable = TableRegistry::get('Flow');
         $flow = $FlowTable->newEntity([
-            'user_id'=>0,
-            'buyer_id'=>  $this->user->id,
+            'user_id'=> $wxerid,
+            'buyer_id'=> $this->user->id,
             'type'=>18,
             'type_msg'=>getFlowType('18'),
             'income'=>2,
-            'amount'=>100,
-            'price'=>100,
-            'pre_amount'=>$pre_amount,
-            'after_amount'=>$after_amount,
+            'amount'=>$wxfee,
+            'price'=>$wxfee,
+            'pre_amount'=>0,
+            'after_amount'=>0,
             'paytype'=>1,   //余额支付
             'remark'=> getFlowType('18')
         ]);
@@ -303,16 +327,15 @@ class IndexController extends AppController {
             'wxer_id' => $wxerid,
             'anhao' => $anhao
         ]);
-        $transRes = $FlowTable->connection()->transactional(function() use ($flow, $FlowTable, $user, $wxorderTb, $wxorder){
-            $UserTable = TableRegistry::get('User');
-            return $FlowTable->save($flow)&&$wxorderTb->save($wxorder)&&$UserTable->save($user);
+        $transRes = $FlowTable->connection()->transactional(function() use ($flow, $FlowTable, $userTb, $in_user, $out_user, $wxorderTb, $wxorder){
+            return $FlowTable->save($flow)&&$wxorderTb->save($wxorder)&&$userTb->saveMany($userTb->newEntities([$in_user, $out_user]));
         });
         if($transRes) {
             return $this->Util->ajaxReturn(true, '支付成功');
         } else {
             return $this->Util->ajaxReturn(false, '支付失败');
         }
-    }*/
+    }
 
 
     /**
@@ -322,6 +345,10 @@ class IndexController extends AppController {
     public function createPayorder($wxerid){
         $this->handCheckLogin();
         if($this->request->is('POST')) {
+            $res = checkWxIsView($wxerid);
+            if($res['status']) {
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '无需再支付']);
+            }
             $PayorderTable = TableRegistry::get('Payorder');
             $payorder = $PayorderTable->newEntity([
                 'user_id'=>  $this->user->id,

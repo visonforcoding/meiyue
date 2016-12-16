@@ -109,7 +109,7 @@
     <ul class="home_seach_info outerblock mt40">
         <?php if($user->wx_ishow && $user->wxid): ?>
         <li>
-            <a id="showWx" class="items flex flex_justify" >
+            <a id="showWx" name="showWx" class="items flex flex_justify" >
                 <span class="seach_name">查看Ta的微信</span>
                 <span class="golook">点击查看</span>
             </a>
@@ -239,7 +239,7 @@
     <!--约Ta弹出层-->
     <div class="popup showxpay" hidden>
         <div class="popup_con">
-            <h3 class="aligncenter">需支付100元才能看到她的微信</h3>
+            <h3 class="aligncenter">需支付100美币才能看到她的微信</h3>
         </div>
         <div class="popup_footer flex flex_justify">
             <span class="footerbtn cancel">取消</span>
@@ -362,7 +362,25 @@
                 if(res.status) {
                     showx();
                 } else {
-                    showxpay();
+                    $('.raper').removeClass('hide');
+                    $('.raper .showxpay').show();
+                    $('.raper .cancel').on('click', function() {
+                        $('.raper').addClass('hide');
+                        $('.raper .showxpay').hide();
+                        $('.raper .cancel').off('click');
+                    });
+                    $('.raper .gopay').on('click', function() {
+                        $('.raper').addClass('hide');
+                        $('.raper .showxpay').hide();
+                        if(res.moneycheck) {
+                            showmbpay();
+                        } else {
+                            $.util.confirm('美币不足','您的美币余额不足，前往充值美币？', function() {
+                                showxpay();
+                            }, null);
+                        }
+                        $('.raper .gopay').off('click');
+                    });
                 }
 
             }
@@ -370,37 +388,38 @@
     });
 
 
+    function showmbpay() {
+        $.util.showPreloader();
+        $.util.ajax({
+            url:'/index/pay4wx/<?=$user->id?>',
+            method: 'POST',
+            func:function(res){
+                $.util.hidePreloader();
+                $.util.alert(res.msg);
+                if(res.status) {
+                    showx();
+                }
+            }
+        })
+    }
+
     /**
      * 显示微信查看微信支付提示
      */
     function showxpay() {
-        $('.raper').removeClass('hide');
-        $('.raper .showxpay').show();
-        $('.raper .cancel').on('click', function() {
-            $('.raper').addClass('hide');
-            $('.raper .showxpay').hide();
-        });
-        $('.raper .gopay').on('click', function() {
-            $.util.alert('正在生成支付单...');
-            $.util.showPreloader();
-            $.util.ajax({
-                url:'/index/create-payorder/<?=$user->id?>',
-                method: 'POST',
-                func:function(res){
-                    $.util.hidePreloader();
-                    $.util.alert(res.msg);
-                    if(res.status) {
-                        $('.raper').addClass('hide');
-                        $('.raper .showxpay').hide();
-                        window.location.href= '/wx/pay/' + res.orderid + '/查看美女微信支付金?redurl=/index/homepage/<?=$user->id?>';
-                        //showx();
-                    } else {
-                        $('.raper').addClass('hide');
-                        $('.raper .showxpay').hide();
-                    }
+        $.util.alert('正在生成支付单...');
+        $.util.showPreloader();
+        $.util.ajax({
+            url:'/index/create-payorder/<?=$user->id?>',
+            method: 'POST',
+            func:function(res){
+                $.util.hidePreloader();
+                $.util.alert(res.msg);
+                if(res.status) {
+                    window.location.href= '/wx/pay/' + res.orderid + '/查看美女微信支付金?redurl=/index/homepage/<?=$user->id?>#showWx';
                 }
-            })
-        });
+            }
+        })
     }
 
 

@@ -59,53 +59,38 @@ class GiftController extends AppController
             ));
 
             //修改支付方费用
-            $out_pre_amount = $this->user->money;
             $this->user->money = $this->user->money - $gift->price;
+            $this->user->recharge = $this->user->recharge + $gift->price;
             $out_user = $this->user;
-            $out_after_amount = $this->user->money;
             //修改收款方费用
             $userTb = TableRegistry::get('User');
             $in_user = $userTb->get($uid);
             if(!$in_user) {
                 return $this->Util->ajaxReturn(false, '用户不存在');
             }
-            $in_pre_amount = $in_user->money;
             $in_user->money = $in_user->money + $gift->price;
-            $in_after_amount = $in_user->money;
+            $in_user->charm = $in_user->charm + $gift->price;
             //生成流水
             $FlowTable = TableRegistry::get('Flow');
-            $out_flow = [
-                'user_id'=> 0,
+            $flow = [
+                'user_id'=> $uid,
                 'buyer_id'=>  $this->user->id,
                 'type'=>14,
-                'type_msg'=>'送礼物',
+                'type_msg'=>'赠送礼物',
                 'income'=>2,
                 'amount'=>$gift->price,
                 'price'=>$gift->price,
-                'pre_amount'=>$out_pre_amount,
-                'after_amount'=>$out_after_amount,
-                'paytype'=>1,   //余额支付
-                'remark'=> '礼物名称['.$gift->name.']|礼物价格['.$gift->price.']'
-            ];
-            $in_flow = [
-                'user_id'=> $uid,
-                'buyer_id'=>  0,
-                'type'=>14,
-                'type_msg'=>'收礼物',
-                'income'=>1,
-                'amount'=>$gift->price,
-                'price'=>$gift->price,
-                'pre_amount'=>$in_pre_amount,
-                'after_amount'=>$in_after_amount,
+                'pre_amount'=>0,
+                'after_amount'=>0,
                 'paytype'=>1,   //余额支付
                 'remark'=> '礼物名称['.$gift->name.']|礼物价格['.$gift->price.']'
             ];
 
             $transRes = $supportTb->connection()->transactional(
-                function() use ($supportTb, $support, $FlowTable, $out_flow, $in_flow, $userTb, $in_user, $out_user){
-                    $mulflows = $FlowTable->newEntities([$out_flow, $in_flow]);
+                function() use ($supportTb, $support, $FlowTable, $flow, $userTb, $in_user, $out_user){
+                    $flow = $FlowTable->newEntity($flow);
                     $supres = $supportTb->save($support);
-                    $flores = $FlowTable->saveMany($mulflows);
+                    $flores = $FlowTable->save($flow);
                     $inures = $userTb->save($in_user);
                     $ouures = $userTb->save($out_user);
                     return $supres&&$flores&&$inures&&$ouures;
