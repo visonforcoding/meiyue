@@ -200,7 +200,7 @@ class DateController extends AppController
         $datas->formatResults(function(ResultSetInterface $results) {
             return $results->map(function($row) {
                 $row->time = getFormateDT($row->start_time, $row->end_time);
-                $row->user->age = isset($row['user']['birthday'])?getAge($row['user']['birthday']):'';
+                $row->user->age = isset($row['user']['birthday'])?getAge($row['user']['birthday']):'xx';
                 $row->total_price = ($row->end_time->hour - $row->start_time->hour) * $row->price;
                 return $row;
             });
