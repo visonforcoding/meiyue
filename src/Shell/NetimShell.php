@@ -109,7 +109,7 @@ class NetimShell extends Shell {
     }
     
     public function test(){
-        $this->addIm(1);
+        $this->addIm(20);
     }
 
 }

@@ -3,7 +3,7 @@
 <script src="/mobile/js/mustache.min.js"></script>
 <script id="chat-list-tpl" type="text/html">
     {{#sessions}}
-    <li>
+    <li id="chat-{{to}}">
         <a data-accid="{{to}}" data-avatar="{{avatar}}" data-nick="{{nick}}"  
            class="ablock flex flex_justify user">
             <div class="chat-left-info flex">
@@ -15,7 +15,7 @@
                     <span class="last-info line1">{{lastMsg.text}}</span>
                 </div>
             </div>
-            <time class="smalldes">{{updateTime}}</time>
+            <time class="smalldes">{{datetime}}</time>
         </a>
     </li>
     {{/sessions}}
@@ -57,101 +57,130 @@
 <?= $this->element('footer', ['active' => 'chat']) ?>
 <?php $this->start('script'); ?>
 <script type="text/javascript">
-    var data = {};
-    var nim = NIM.getInstance({
-        debug: true,
-        appKey: '9e0e349ffbcf4345fdd777a65584fb68',
-        account: 'meiyue_88',
-        token: 'e659ccb75a0da8cbb047b2fdbc82b977',
-        onconnect: onConnect,
-        onwillreconnect: onWillReconnect,
-        ondisconnect: onDisconnect,
-        onerror: onError,
-        onsessions: onSessions,
-        onupdatesession: onUpdateSession
-    });
-    function onConnect() {
-        alert('连接成功');
-        console.log('连接成功');
-    }
-    function onWillReconnect(obj) {
-        // 此时说明 SDK 已经断开连接, 请开发者在界面上提示用户连接已断开, 而且正在重新建立连接
-        console.log('即将重连');
-        console.log(obj.retryCount);
-        console.log(obj.duration);
-    }
-    function onDisconnect(error) {
-        // 此时说明 SDK 处于断开状态, 开发者此时应该根据错误码提示相应的错误信息, 并且跳转到登录页面
-        console.log('丢失连接');
-        console.log(error);
-        if (error) {
-            switch (error.code) {
-                // 账号或者密码错误, 请跳转到登录页面并提示错误
-                case 302:
-                    break;
-                    // 被踢, 请提示错误后跳转到登录页面
-                case 'kicked':
-                    break;
-                default:
-                    break;
-            }
+var data = {};
+var accids = [];   //列表accid
+var account = LEMON.db.get('im_accid');
+var token = LEMON.db.get('im_token');
+var nim = NIM.getInstance({
+    debug: true,
+    appKey: '9e0e349ffbcf4345fdd777a65584fb68',
+    account: account,
+    token: token,
+    onconnect: onConnect,
+    onwillreconnect: onWillReconnect,
+    ondisconnect: onDisconnect,
+    onerror: onError,
+    onsessions: onSessions,
+    onupdatesession: onUpdateSession
+});
+function onConnect() {
+    console.log('连接成功');
+}
+function onWillReconnect(obj) {
+    // 此时说明 SDK 已经断开连接, 请开发者在界面上提示用户连接已断开, 而且正在重新建立连接
+    console.log('即将重连');
+    console.log(obj.retryCount);
+    console.log(obj.duration);
+}
+function onDisconnect(error) {
+    // 此时说明 SDK 处于断开状态, 开发者此时应该根据错误码提示相应的错误信息, 并且跳转到登录页面
+    console.log('丢失连接');
+    console.log(error);
+    if (error) {
+        switch (error.code) {
+            // 账号或者密码错误, 请跳转到登录页面并提示错误
+            case 302:
+                break;
+                // 被踢, 请提示错误后跳转到登录页面
+            case 'kicked':
+                break;
+            default:
+                break;
         }
     }
-    function onSessions(sessions) {
-        var accids = [];
-        $.each(sessions, function (i, n) {
-            accids.push(n.to);
-        });
+}
+function onSessions(sessions) {
+    $.each(sessions, function (i, n) {
+        accids.push(n.to);
+    });
+    $.util.ajax({
+        url: '/chat/getSesList',
+        data: {accids: accids},
+        func: function (res) {
+            $('#chat-list').html(getRender(sessions, res));
+        }
+    })
+    console.log('收到会话列表', sessions);
+    data.sessions = nim.mergeSessions(data.sessions, sessions);
+    updateSessionsUI();
+}
+function onUpdateSession(session) {
+    console.log('会话更新了', session);
+    data.sessions = nim.mergeSessions(data.sessions, session);
+    var newSess = session.to;
+    if ($.inArray(newSess, accids) == -1) {
+        //新会话
         $.util.ajax({
             url: '/chat/getSesList',
-            data: {accids: accids},
+            data: {accids: [newSess]},
             func: function (res) {
-                $.each(sessions, function (i, n) {
-                    sessions[i]['nick'] = '';
-                    sessions[i]['avatar'] = '';
-                    $.each(res.users, function (k, v) {
-                        if (n.to == v.imaccid) {
-                            sessions[i]['nick'] = v.nick;
-                            sessions[i]['avatar'] = v.avatar;
-                        }
-                    })
-                })
-                var data = {};
-                data['sessions'] = sessions;
-                var template = $('#chat-list-tpl').html();
-                Mustache.parse(template);
-                var rendered = Mustache.render(template, data);
-                $('#chat-list').html(rendered);
-                
+                //新聊天
+                accids.push(newSess);
+                $('#chat-list').prepend(getRender([session],res));
             }
         })
-        console.log('收到会话列表', sessions);
-        data.sessions = nim.mergeSessions(data.sessions, sessions);
-        updateSessionsUI();
+    }else{
+        //旧会话 新消息
+        $obj = $('#chat-'+newSess);
+        var index = $obj.index();
+        if(index !==0){
+            //排到最前面
+            $obj.remove();
+            $obj.find('span.last-info').html(session.lastMsg.text)
+            $('#chat-list').prepend($obj);
+        }else{
+            $obj.find('span.last-info').html(session.lastMsg.text)
+        }
     }
-    function onUpdateSession(session) {
-        console.log('会话更新了', session);
-        data.sessions = nim.mergeSessions(data.sessions, session);
-        updateSessionsUI();
-    }
-    function updateSessionsUI() {
-        // 刷新界面
-    }
-    function onError(error) {
-        console.log(error);
-    }
-    $('.user').on('click', function () {
-        var param = {};
-        var accid = $(this).data('accid');
-        var nick = $(this).data('nick');
-        var avatar = $(this).data('avatar');
-        param['accid'] = accid;
-        param['nick'] = nick;
-        param['avatar'] = avatar;
-        param['msgtype'] = 'finsh_prepay';
-        //param = JSON.stringify(param);
-        alert(param);
-        LEMON.event.imTalk(param);
+    updateSessionsUI();
+}
+function updateSessionsUI() {
+    // 刷新界面
+}
+function onError(error) {
+    console.log(error);
+}
+$(document).on('click','.user',function(){
+    //聊天
+    var param = {};
+    var accid = $(this).data('accid');
+    var nick = $(this).data('nick');
+    var avatar = $(this).data('avatar');
+    param['accid'] = accid;
+    param['nick'] = nick;
+    param['avatar'] = avatar;
+    param['msgtype'] = 'finsh_prepay';
+    LEMON.event.imTalk(param);
+})
+function getRender(sessions, res) {
+    $.each(sessions, function (i, n) {
+        sessions[i]['nick'] = '';
+        sessions[i]['avatar'] = '';
+        $.each(res.users, function (k, v) {
+            if (n.to == v.imaccid) {
+                sessions[i]['nick'] = v.nick;
+                sessions[i]['avatar'] = v.avatar;
+                sessions[i]['datetime'] = $.util.getFormatTime(new Date(n.updateTime));
+            }
+        })
     })
+    var mus_data = {};
+    mus_data['sessions'] = sessions;
+    var template = $('#chat-list-tpl').html();
+    Mustache.parse(template);
+    var rendered = Mustache.render(template, mus_data);
+    return rendered;
+}
+
 </script>
 <?php $this->end('script'); ?>

@@ -190,5 +190,16 @@ class Netim {
             'msg_prefix'=>$prefix
         ];
     }
+    
+    /**
+     *  文本消息
+     * @param string $body
+     * @return type
+     */
+    public function generateTextMsgBody($body){
+        return [
+          'msg'=>$body  
+        ];
+    }
 
 }
