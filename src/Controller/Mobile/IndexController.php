@@ -174,7 +174,7 @@ class IndexController extends AppController {
 
         $isFollow = false;  //是否关注
         if ($this->user) {
-            $UserFansTable = \Cake\ORM\TableRegistry::get('UserFans');
+            $UserFansTable = TableRegistry::get('UserFans');
             $follow = $UserFansTable->find()->where(['user_id' => $this->user->id, 'following_id' => $id])->count();
             if ($follow) {
                 $isFollow = true;
@@ -274,7 +274,10 @@ class IndexController extends AppController {
                     'userwx' => $res['wxorder']
                 ]);
             }else {
-                return $this->Util->ajaxReturn(false, '尚未支付');
+                return $this->Util->ajaxReturn([
+                    'status' => false,
+                    'moneycheck' => ($res['moneycheck'])
+                ]);
             }
         }
     }

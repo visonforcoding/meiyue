@@ -39,7 +39,7 @@ class UsercController extends AppController {
                     ->formatResults(function($items) {
                 return $items->map(function($item) {
                             $item['user']['avatar'] = createImg($item['user']['avatar']) . '?w=44&h=44&fit=stretch';
-                            $item['user']['age'] = (Time::now()->year) - $item['user']['birthday']->year;
+                            $item['user']['age'] = isset($item['user']['birthday'])?getAge($item['user']['birthday']):'xx';
                             return $item;
                         });
             })->toArray();
@@ -57,7 +57,11 @@ class UsercController extends AppController {
      * 我的关注
      */
     public function likes(){
-        $this->set(['pageTitle'=>'我的关注']);
+        if($this->user->gender == 1) {
+            $this->set(['pageTitle'=>'我的关注']);
+        } else {
+            $this->set(['pageTitle'=>'我喜欢的']);
+        }
     }
 
 
@@ -85,7 +89,7 @@ class UsercController extends AppController {
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
                         $item['follower']['avatar'] = createImg($item['follower']['avatar']) . '?w=90&h=90&fit=stretch';
-                        $item['follower']['age'] = (Time::now()->year) - $item['follower']['birthday']->year;
+                        $item['follower']['age'] = isset($item['follower']['birthday'])?getAge($item['follower']['birthday']):'xx';
                         return $item;
                     });
                 })
@@ -223,7 +227,6 @@ class UsercController extends AppController {
             'add' => '美约-添加技能',
             'edit' => '美约-编辑技能',
         );
-
         $userSkillTable = \Cake\ORM\TableRegistry::get('UserSkill');;
         $userskill = null;
         if('edit' == $action) {
@@ -234,7 +237,6 @@ class UsercController extends AppController {
         }
         $this->set(['userskill' => $userskill, 'user' => $this->user, 'pageTitle' => $page_titles[$action]]);
         $this->render('user_skills_view');
-
     }
 
 
