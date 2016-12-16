@@ -640,15 +640,23 @@ class UsercController extends AppController {
 
         $userTb = TableRegistry::get("User");
         $user = $userTb->get($this->user->id, ['contain' => ['Tags']]);
+        if($user->gender == 2) {
+            $bwh = explode('/', $user->bwh);
+            $user->bwh_b = $bwh[0];
+            $user->bwh_w = $bwh[1];
+            $user->bwh_h = $bwh[2];
+        }
         if($this->request->is('POST')) {
-
             $userTb = TableRegistry::get('User');
+            $datas = $this->request->data();
+            $bwh_b = $datas['bwh_b'];
+            $bwh_w = $datas['bwh_w'];
+            $bwh_h = $datas['bwh_h'];
+            $bwh = $bwh_b.'/'.$bwh_w.'/'.$bwh_h;
+            $datas['bwh'] = $bwh;
             $user = $userTb->patchEntity($user, $this->request->data());
-
             if($userTb->save($user)) {
-
                 return $this->Util->ajaxReturn(true, '修改成功');
-
             }
             return $this->Util->ajaxReturn(false, '修改失败');
         }
