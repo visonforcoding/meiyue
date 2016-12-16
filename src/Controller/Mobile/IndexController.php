@@ -345,7 +345,7 @@ class IndexController extends AppController {
     public function createPayorder($wxerid){
         $this->handCheckLogin();
         if($this->request->is('POST')) {
-            $res = checkWxIsView($wxerid);
+            $res = $this->checkWxIsView($wxerid);
             if($res['status']) {
                 return $this->Util->ajaxReturn(['status' => false, 'msg' => '无需再支付']);
             }
