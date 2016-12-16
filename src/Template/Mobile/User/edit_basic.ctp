@@ -67,17 +67,19 @@
                         </div>
                     </div>
                 </li>
-                <li class='bwh'>
-                    <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">三</span><span class="itemsname">围：</span>
+                <?php if($user->gender == 2): ?>
+                    <li class='bwh'>
+                        <div class="home_items">
+                            <div class="home_list_l_info"><span class="itemsname">三</span><span class="itemsname">围：</span>
+                            </div>
+                            <div class="home_list_r_info">
+                                <input name="bwh_b" type="tel" placeholder="胸围" style="width:30px;" value="<?= $user->bwh_b; ?>"/> |
+                                <input name="bwh_w" type="tel" placeholder="腰围" style="width:30px;" value="<?= $user->bwh_w; ?> /> |
+                                <input name="bwh_h" type="tel" placeholder="臀围" style="width:30px;" value="<?= $user->bwh_h; ?> />
+                            </div>
                         </div>
-                        <div class="home_list_r_info">
-                            <input type="tel" placeholder="胸围" style="width:30px;" /> | 
-                            <input type="tel" placeholder="腰围" style="width:30px;" /> | 
-                            <input type="tel" placeholder="臀围" style="width:30px;" />
-                        </div>
-                    </div>
-                </li>
+                    </li>
+                <?php endif; ?>
                  <li class="start_sign  right-ico">
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">星</span><span class="itemsname">座：</span>
@@ -101,11 +103,12 @@
                         </div>
                     </div>
                 </li>
-                <li class="start_sign  right-ico">
-                    <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">罩</span><span class="itemsname">杯：</span>
-                        </div>
-                        <div class="home_list_r_info">
+                <?php if($user->gender == 2): ?>
+                    <li class="start_sign  right-ico">
+                        <div class="home_items">
+                            <div class="home_list_l_info"><span class="itemsname">罩</span><span class="itemsname">杯：</span>
+                            </div>
+                            <div class="home_list_r_info">
                                 <select name="cup">
                                     <option value="A" <?= ($user->cup == 'A')?'selected':''; ?>>A</option>
                                     <option value="B" <?= ($user->cup == 'B')?'selected':''; ?>>B</option>
@@ -115,9 +118,10 @@
                                     <option value="F" <?= ($user->cup == 'F')?'selected':''; ?>>F</option>
                                     <option value="G" <?= ($user->cup == 'G')?'selected':''; ?>>G</option>
                                 </select>
-                          </div>
-                    </div>
-                </li>
+                            </div>
+                        </div>
+                    </li>
+                <?php endif; ?>
                  <li class="emontion  right-ico">
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">情</span><span

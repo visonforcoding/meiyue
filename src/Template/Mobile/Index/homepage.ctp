@@ -439,11 +439,11 @@
                     $('.raper').removeClass('hide');
                     $('.raper .showx').show();
                     $('.raper .copywxid').on('click', function() {
-                        window.clipboardData.setData("Text", $('.raper .wxidtxt i').text());
+                        LEMON.sys.toClipper($('.raper .wxidtxt i').text());
                         $.util.alert('复制成功');
                     });
                     $('.raper .copyanhao').on('click', function() {
-                        window.clipboardData.setData("Text", $('.raper .anhaotxt i').text());
+                        LEMON.sys.toClipper($('.raper .anhaotxt i').text());
                         $.util.alert('复制成功');
                     });
                     $('.raper .closed').on('click', function() {
