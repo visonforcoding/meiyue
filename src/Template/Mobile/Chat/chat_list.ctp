@@ -59,10 +59,10 @@
 <script type="text/javascript">
 var data = {};
 var accids = [];   //列表accid
-//var account = LEMON.db.get('im_accid');
-var account = 'meiyue_110';
-var token = '89e66f7fc9ac977d0d7298d397e05820';
-//var token = LEMON.db.get('im_token');
+var account = LEMON.db.get('im_accid');
+//var account = 'meiyue_110';
+//var token = '89e66f7fc9ac977d0d7298d397e05820';
+var token = LEMON.db.get('im_token');
 var nim = NIM.getInstance({
     debug: true,
     appKey: '9e0e349ffbcf4345fdd777a65584fb68',
@@ -154,7 +154,6 @@ function onError(error) {
 }
 $(document).on('click', '.user', function () {
     //聊天
-    alert('我点了');
     var param = {};
     var accid = $(this).data('accid');
     var nick = $(this).data('nick');

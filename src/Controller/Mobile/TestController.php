@@ -276,7 +276,9 @@ class TestController extends AppController {
         $gift = 1;
         $this->loadComponent('Netim');
         $this->Netim->giftMsg($from, $to, $gift);
+        exit();
     }
+    
 
 
     public function testRe(){
