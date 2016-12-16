@@ -60,6 +60,8 @@
 var data = {};
 var accids = [];   //列表accid
 var account = LEMON.db.get('im_accid');
+//var account = 'meiyue_110';
+//var token = '89e66f7fc9ac977d0d7298d397e05820';
 var token = LEMON.db.get('im_token');
 var nim = NIM.getInstance({
     debug: true,
@@ -150,8 +152,9 @@ function updateSessionsUI() {
 function onError(error) {
     console.log(error);
 }
-$(document).on('click','.user',function(){
+$(document).on('tap','.user',function(){
     //聊天
+    alert('我点了');
     var param = {};
     var accid = $(this).data('accid');
     var nick = $(this).data('nick');
@@ -159,7 +162,6 @@ $(document).on('click','.user',function(){
     param['accid'] = accid;
     param['nick'] = nick;
     param['avatar'] = avatar;
-    param['msgtype'] = 'finsh_prepay';
     LEMON.event.imTalk(param);
 })
 function getRender(sessions, res) {
