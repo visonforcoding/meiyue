@@ -94,6 +94,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         "sys.toClipper",  //复制到剪切板
         "sys.logout",    //退出
         "sys.device", //获取唯一设备id
+        "sys.endReg",    //完成注册
         "sys.loginSuccess", //js 端成功执行登录操作
         "show.shareIco", //隐藏分享图标
         "share.banner", //调出分享的层
@@ -177,6 +178,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                     break;
                     //无参数   无回调
                 case "event.back":
+                case "sys.endReg":
                     registerAPI(null, api, function () {
                         if (!isAPP) {
                             history.back();
