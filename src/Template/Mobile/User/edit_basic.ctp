@@ -235,20 +235,22 @@
             </ul>
         </div>
         <!--个性标签-->
-        <div class="home_fill_basic_info home_fill_hobby">
-            <div class="items_title">
-                <h3>我的标签</h3>
-            </div>
-            <ul>
-                <li class="home-basic-mark right-ico">
-                    <div id="tag-container" class="home_items home-mark-box">
-                          <?php foreach($user->tags as $tag): ?>
-                            <a class='mark'><?= $tag['name']; ?><input type='text' name='tags[_ids][]' value='<?= $tag['id']; ?>' tag-name='<?= $tag['name']; ?>' hidden></a>
+        <?php if($user->gender == 2): ?>
+            <div class="home_fill_basic_info home_fill_hobby">
+                <div class="items_title">
+                    <h3>我的标签</h3>
+                </div>
+                <ul>
+                    <li class="home-basic-mark right-ico">
+                        <div id="tag-container" class="home_items home-mark-box">
+                            <?php foreach($user->tags as $tag): ?>
+                                <a class='mark'><?= $tag['name']; ?><input type='text' name='tags[_ids][]' value='<?= $tag['id']; ?>' tag-name='<?= $tag['name']; ?>' hidden></a>
                             <?php endforeach; ?>
-                    </div>
-                </li>
-            </ul>
-        </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        <?php endif; ?>
         <!--微信号-->
         <?php if($user->gender == 2): ?>
             <div class="home_fill_basic_info ">
