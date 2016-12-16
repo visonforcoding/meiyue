@@ -5,6 +5,7 @@ namespace App\Controller\Mobile;
 use App\Controller\Mobile\AppController;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use PayOrderType;
 
 /**
  * Index Controller
