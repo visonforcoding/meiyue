@@ -446,4 +446,26 @@ class BusinessComponent extends Component
             'token'=>$token
         ];
     }
+    
+     /**
+     * 生成  支付订单
+     */
+    public function createPayorder($user,$param,$type=1){
+        $PayorderTable = TableRegistry::get('Payorder');
+        if($type==1){
+            $payorder = $PayorderTable->newEntity([
+                'user_id'=> $user->id,
+                'title'=>'美约美币充值',
+                'order_no'=>time() . $user->id . createRandomCode(4, 1),
+                'price'=>  $param['mb'],
+                'remark'=>  '充值美币'.$param['mb'].'个',
+            ]);
+        }
+        $res = $PayorderTable->save($payorder);
+        if($res){
+            return $res;
+        }else{
+            return false;
+        }
+    }
 }

@@ -24,13 +24,13 @@ return [
         'appsecret' => '293c2fb5bcf96db8eea854365471d48b',
         'token'=>'cwptest',
         'mchid'=>'1296107201',
-        'App_mchid'=>'1350978901',
-        'key'=>'33DB349F8DB955DC78FC5F84F8E5D3F8',
+        'App_mchid'=>'1420153502',
+        'key'=>'33DB349F8DB955DC78FC5F84F8E5D3F8',  //设置的商户key
         'sslcert_path'=> dirname(__FILE__).'/wxcert/apiclient_cert.pem',
         'sslkey_path'=> dirname(__FILE__).'/wxcert/apiclient_key.pem',
         'notify_url'=>'/wx/wx-notify',
-        'AppID'=>'wxb450720adce7295f',     //APP端的 开放平台appid
-        'AppSecret'=>'1c721c93e80578c2b707358993dcd371',
+        'AppID'=>'wx77a25160df0c8641',     //APP端的 开放平台appid
+        'AppSecret'=>'9835541c22d191e3a227235e561d502b',
         'master_model'=>false,   //中控模式
         'master_ip'=>'112.74.88.156' ,   //中控服务器ip
         'master_domain'=>'m.chinamatop.com'    //中控服务器域名

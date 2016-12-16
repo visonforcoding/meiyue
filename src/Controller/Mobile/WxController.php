@@ -14,6 +14,7 @@ use PayOrderType;
  * @property \App\Controller\Component\WxComponent $Wx
  * @property \App\Controller\Component\WxpayComponent $Wxpay
  * @property \App\Controller\Component\AlipayComponent $Alipay
+ * @property \App\Controller\Component\BusinessComponent $Business
  */
 class WxController extends AppController {
 
@@ -173,12 +174,67 @@ class WxController extends AppController {
      * 预约支付页  此页面URL 需在微信公众号的微信支付那里配置 支付域
      * @param int $id  订单id
      */
+    public function Mpay($id = null, $title = '充值') {
+        $this->handCheckLogin();
+        $mb = $this->request->query('mb');
+        if($mb){
+            $title = '充值';
+            $price = $mb;
+        }
+        if($this->request->is('post')){
+            if($mb){
+                $this->loadComponent('Business');
+                $r = $this->Business->createPayorder($this->user,['mb'=>$mb]);
+                if($r){
+                    $id = $r->id;
+                    $PayorderTable = \Cake\ORM\TableRegistry::get('Payorder');
+                    $payorder = $PayorderTable->get($id);
+                    $out_trade_no = $payorder->order_no;
+            //        $fee = $order->price;  //支付金额
+                    $fee = 0.01;  //支付金额
+                    $this->loadComponent('Wxpay');
+                    $isApp = false;
+                    $aliPayParameters = '';
+                    $jsApiParameters = '';
+                    $openid = '1';
+                    if ($this->request->is('lemon')) {
+                        $isApp = true;
+                        $this->loadComponent('Alipay');
+                        $title = $payorder->title;
+                        $body = $payorder->remark;
+                        $aliPayParameters = $this->Alipay->setPayParameter($out_trade_no, $title, $fee, $body);
+                    }
+                    $body = $payorder->title;
+                    $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
+                    \Cake\Log\Log::debug($jsApiParameters,'devlog');
+                    return $this->Util->ajaxReturn([
+                        'status'=>true,
+                        'msg'=>'支付订单已生成',
+                        'wxPay'=> json_encode($jsApiParameters),
+                        'aliPay'=>$aliPayParameters
+                        ]);
+                }else{
+                    return $this->Util->ajaxReturn(false,'服务器开小差');
+                }
+            }
+        }
+        $this->set([
+            'title' => $title,
+            'price'=>$price,
+            'pageTitle' => '美币充值'
+        ]);
+    }
+
+    
+    
+    /**
+     * 预约支付页  此页面URL 需在微信公众号的微信支付那里配置 支付域
+     * @param int $id  订单id
+     */
     public function pay($id = null, $title = '充值') {
         $redurl = $this->request->query('redurl');
         $PayorderTable = \Cake\ORM\TableRegistry::get('Payorder');
         $payorder = $PayorderTable->get($id);
-        $order = $PayorderTable->get($id, [
-        ]);
         $out_trade_no = $payorder->order_no;
 //        $fee = $order->price;  //支付金额
         $fee = 0.01;  //支付金额
@@ -186,19 +242,16 @@ class WxController extends AppController {
         $isApp = false;
         $aliPayParameters = '';
         $jsApiParameters = '';
+        $openid = '';
         if ($this->request->is('lemon')) {
             $isApp = true;
-            $openid = $this->user->app_wx_openid;
             $this->loadComponent('Alipay');
             $title = $payorder->title;
             $body = $payorder->remark;
             $aliPayParameters = $this->Alipay->setPayParameter($out_trade_no, $title, $fee, $body);
         }
-        $openid = $this->user->wx_openid;
-        if ($openid) {
-            $body = $payorder->title;
-            $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
-        }
+        $body = $payorder->title;
+        $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
         $this->set(array(
             'jsApiParameters' => $jsApiParameters,
             'isWx' => $this->request->is('weixin') ? true : false,

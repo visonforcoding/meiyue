@@ -12,7 +12,7 @@
             <h1 class="color_y">1元 = 1美币</h1>
         </div>
         <div class="con inner flex flex_end">
-            <input id="mb" type="number" placeholder="点击输入" />
+            <input id="mb" type="tel" placeholder="点击输入" />
         </div>
     </div>
     <div class="charge_container_con  mt20">
@@ -62,7 +62,7 @@
 </script>
 <?php $this->start('script'); ?>
 <script type="text/javascript">
-     $('#topay').on('tap',function(res){
+     $('#topay').on('tap',function(){
          var mb = $('#mb').val();
          $.util.ajax({
             url:'/purse/create-payorder<?= isset($redurl)?"?redurl=".$redurl:""; ?>',

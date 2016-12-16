@@ -264,4 +264,15 @@ class TestController extends AppController {
        debug($res);
        exit();
     }
+    
+    public function testRe(){
+        return $this->redirect('/test/b');
+        echo 'test';
+        exit();
+    }
+    
+    public function b(){
+        echo 'fff';
+        exit();
+    }
 }
