@@ -464,7 +464,7 @@ class BusinessComponent extends Component
         $anhao = '美约'.mt_rand(10000, 99999);
         $wxorderTb = TableRegistry::get('Wxorder');
         $wxorder = $wxorderTb->newEntity([
-            'user_id' => $this->user->id,
+            'user_id' => $order->user->id,
             'wxer_id' => $order->relate_id,
             'anhao' => $anhao
         ]);
