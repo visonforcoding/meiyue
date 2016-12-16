@@ -65,7 +65,7 @@ class BusinessComponent extends Component
                 return $row;
             });
         $mytop = $query->first();
-        $mytop->user->age = getAge($mytop->user->birthday);
+        $mytop->user->age = isset($mytop->user->birthday)?getAge($mytop->user->birthday):'xx';
         $mytop->ishead = true;
         if(!$mytop->total) {
             //如果魅力值为0则不参与排名
