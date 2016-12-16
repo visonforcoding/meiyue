@@ -654,7 +654,7 @@ class UsercController extends AppController {
             $bwh_h = $datas['bwh_h'];
             $bwh = $bwh_b.'/'.$bwh_w.'/'.$bwh_h;
             $datas['bwh'] = $bwh;
-            $user = $userTb->patchEntity($user, $this->request->data());
+            $user = $userTb->patchEntity($user, $datas);
             if($userTb->save($user)) {
                 return $this->Util->ajaxReturn(true, '修改成功');
             }
