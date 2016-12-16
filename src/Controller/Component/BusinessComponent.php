@@ -58,7 +58,7 @@ class BusinessComponent extends Component
                 ->where(['User.id' => $userid]);
         }])
             ->select(['total' => 'sum(amount)'])
-            ->where(['income' => 1])
+            ->where(['user_id' => $userid])
             ->map(function($row) {
                 $row['user']['age'] = getAge($row['user']['birthday']);
                 $row['ishead'] = false;
@@ -74,7 +74,6 @@ class BusinessComponent extends Component
 
         //获取我的排名对象
         $where = Array(
-            'income' => 1
         );
         if('week' == $type) {
             $where['Flow.create_time >='] = new Time('last sunday');
@@ -252,6 +251,9 @@ class BusinessComponent extends Component
         } elseif ($order->type == PayOrderType::BUY_TAOCAN) {
             //购买套餐成功
             return $this->handPackPay($order,$realFee,$payType,$out_trade_no);
+        } elseif ($order->type == PayOrderType::VIEW_WEIXIN) {
+            //支付微信查看金成功
+            return $this->handViewWxPay($order,$realFee,$payType,$out_trade_no);
         }
     }
     
@@ -424,6 +426,54 @@ class BusinessComponent extends Component
             \Cake\Log\Log::debug($order->errors(),'devlog');
             \Cake\Log\Log::debug($flow->errors(),'devlog');
             dblog('recharge','套餐回调业务处理失败',$order->id);
+            return false;
+        }
+    }
+
+
+    /**
+     * 支付微信查看金成功处理接口
+     */
+    public function handViewWxPay(Payorder $order, $realFee, $payType, $out_trade_no)
+    {
+        //更新订单状态消息及用户信息
+        $order->fee = $realFee;  //实际支付金额
+        $order->paytype = $payType;  //实际支付方式
+        $flowPayType = $payType==1?'3':'4';
+        $order->out_trade_no = $out_trade_no;  //第三方订单号
+        $order->status = 1;
+        $order->user->recharge += $realFee;
+        $order->dirty('user', true);  //这里的seller 一定得是关联属性 不是关联模型名称 可以理解为实体
+        $OrderTable = TableRegistry::get('Payorder');
+        //生成流水
+        $FlowTable = TableRegistry::get('Flow');
+        $flow = $FlowTable->newEntity([
+            'user_id'=>0,
+            'buyer_id'=>$order->user->id,
+            'type'=>18,
+            'type_msg'=>getFlowType('18'),
+            'income'=>2,
+            'amount'=>100,
+            'price'=>100,
+            'pre_amount'=>0,
+            'after_amount'=>0,
+            'paytype'=> $flowPayType,   //余额支付
+            'remark'=> getFlowType('18')
+        ]);
+        //生成查看记录
+        $anhao = '美约'.mt_rand(10000, 99999);
+        $wxorderTb = TableRegistry::get('Wxorder');
+        $wxorder = $wxorderTb->newEntity([
+            'user_id' => $this->user->id,
+            'wxer_id' => $order->relate_id,
+            'anhao' => $anhao
+        ]);
+        $transRes = $FlowTable->connection()->transactional(function() use ($OrderTable, $order, $flow, $FlowTable, $wxorderTb, $wxorder){
+            return $OrderTable->save($order)&&$FlowTable->save($flow)&&$wxorderTb->save($wxorder);
+        });
+        if($transRes) {
+            return true;
+        } else {
             return false;
         }
     }

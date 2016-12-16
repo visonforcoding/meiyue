@@ -265,8 +265,12 @@ class IndexController extends AppController {
     /**
      * 查看微信支付
      */
-    public function pay4wx($wxerid = null) {
+    /*public function pay4wx($wxerid = null) {
         $this->handCheckLogin();
+        if(!$wxerid) {
+            return $this->Util->ajaxReturn(false, '非法操作');
+        }
+
         if(!$wxerid) {
             return $this->Util->ajaxReturn(false, '非法操作');
         }
@@ -306,6 +310,32 @@ class IndexController extends AppController {
             return $this->Util->ajaxReturn(true, '支付成功');
         } else {
             return $this->Util->ajaxReturn(false, '支付失败');
+        }
+    }*/
+
+
+    /**
+     * 查看微信支付
+     * 生成  支付订单
+     */
+    public function createPayorder($wxerid){
+        $this->handCheckLogin();
+        if($this->request->is('POST')) {
+            $PayorderTable = TableRegistry::get('Payorder');
+            $payorder = $PayorderTable->newEntity([
+                'user_id'=>  $this->user->id,
+                'relate_id' => $wxerid,
+                'type' => PayOrderType::VIEW_WEIXIN,   //查看美女微信
+                'title'=>'查看美女微信',
+                'order_no'=>time() . $this->user->id . createRandomCode(4, 1),
+                'price'=> 100,
+                'remark'=> '查看美女微信',
+            ]);
+            if($PayorderTable->save($payorder)){
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '支付单生成成功', 'orderid' => $payorder->id]);
+            }else{
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '支付单生成失败']);
+            }
         }
     }
 

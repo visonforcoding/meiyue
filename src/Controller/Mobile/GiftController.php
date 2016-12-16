@@ -75,7 +75,7 @@ class GiftController extends AppController
             //生成流水
             $FlowTable = TableRegistry::get('Flow');
             $out_flow = [
-                'user_id'=> $uid,
+                'user_id'=> 0,
                 'buyer_id'=>  $this->user->id,
                 'type'=>14,
                 'type_msg'=>'送礼物',
@@ -89,7 +89,7 @@ class GiftController extends AppController
             ];
             $in_flow = [
                 'user_id'=> $uid,
-                'buyer_id'=>  $this->user->id,
+                'buyer_id'=>  0,
                 'type'=>14,
                 'type_msg'=>'收礼物',
                 'income'=>1,

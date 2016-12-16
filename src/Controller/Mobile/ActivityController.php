@@ -125,41 +125,43 @@ class ActivityController extends AppController
 
         //底部按钮显示状态：0#我要报名 1#人数已满 2#我要取消 3#报名成功（此时是不可以取消的）
         $botBtSts = 0;
-        //检查报名人数是否已满
-        if($this->user->gender == 1) {
-            if($activity['male_rest'] == 0) {
-                $botBtSts = 1;
-            }
-        } else {
-            if($activity['female_rest'] == 0) {
-                $botBtSts = 1;
-            }
-        }
-
-        //检查是否已经参与
         $regist_item = null;
-        $actregistrations = $activity['actregistrations'];
-        foreach ($actregistrations as $actregistration) {
-            if($this->user->id == $actregistration['user']['id']
-                && $actregistration['cancel_time'] == null) {
-                $botBtSts = 2;
-                $regist_item = $actregistration;
-                break;
+        //检查报名人数是否已满
+        if($this->user) {
+            if($this->user->gender == 1) {
+                if($activity['male_rest'] == 0) {
+                    $botBtSts = 1;
+                }
+            } else {
+                if($activity['female_rest'] == 0) {
+                    $botBtSts = 1;
+                }
             }
-        }
 
-        $current_time = new Time();
-        //检查是否在规定可取消时间
-        if($current_time->diffInDays($activity['start_time'], false) > $activity['cancelday'] && ($botBtSts == 2)) {
-            $botBtSts = 3;
-        }
+            //检查是否已经参与
+            $actregistrations = $activity['actregistrations'];
+            foreach ($actregistrations as $actregistration) {
+                if($this->user->id == $actregistration['user']['id']
+                    && $actregistration['cancel_time'] == null) {
+                    $botBtSts = 2;
+                    $regist_item = $actregistration;
+                    break;
+                }
+            }
 
-        //检查是否过期
-        $curtime = new Time();
-        if($activity->start_time < $curtime && $activity->end_time > $curtime) {
-            $botBtSts = 4;  //活动已开始
-        } else if($activity->end_time < $curtime) {
-            $botBtSts = 5;  //活动已结束
+            $current_time = new Time();
+            //检查是否在规定可取消时间
+            if($current_time->diffInDays($activity['start_time'], false) > $activity['cancelday'] && ($botBtSts == 2)) {
+                $botBtSts = 3;
+            }
+
+            //检查是否过期
+            $curtime = new Time();
+            if($activity->start_time < $curtime && $activity->end_time > $curtime) {
+                $botBtSts = 4;  //活动已开始
+            } else if($activity->end_time < $curtime) {
+                $botBtSts = 5;  //活动已结束
+            }
         }
 
         $this->set([
@@ -200,8 +202,8 @@ class ActivityController extends AppController
                         //生成流水
                         $FlowTable = TableRegistry::get('Flow');
                         $flow = $FlowTable->newEntity([
-                            'user_id'=>0,
-                            'buyer_id'=>  $this->user->id,
+                            'user_id'=> $this->user->id,
+                            'buyer_id'=> 0,
                             'type'=>13,
                             'type_msg'=>'取消派对返还',
                             'income'=>1,
@@ -250,19 +252,14 @@ class ActivityController extends AppController
         if($id) {
             $this->handCheckLogin();
             $activity = $this->Activity->get($id);
-
             $price = 0;
             $lim = 0;
             if($this->user->gender == 1) {
-
                 $price = $activity['male_price'];
                 $lim = $activity['male_lim'];
-
             } else {
-
                 $price = $activity['female_price'];
                 $lim = $activity['female_lim'];
-
             }
             $this->set([
                 'user' => $this->user,
@@ -444,7 +441,6 @@ class ActivityController extends AppController
             }
             $limit = 10;
             $where = Array(
-                'income' => 1,
             );
 
             if('week' == $type) {
