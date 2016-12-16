@@ -269,6 +269,16 @@ class TestController extends AppController {
        exit();
     }
     
+    /**
+     * 
+     */
+    public function testGift($from,$to){
+        $gift = 1;
+        $this->loadComponent('Netim');
+        $this->Netim->giftMsg($from, $to, $gift);
+    }
+
+
     public function testRe(){
         return $this->redirect('/test/b');
         echo 'test';
