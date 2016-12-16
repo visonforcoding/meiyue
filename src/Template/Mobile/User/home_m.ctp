@@ -35,7 +35,7 @@
                     <li class="follow flex flex_justify">
                         <div><a href="/userc/fans">赞赏我 <i><?= $facount ?></i></a></div>
                         <div><a href="/userc/likes"> 关注 <i><?= $focount ?></i></a></div>
-                        <div><a href="/userc/likes">访客 <i>122</i></a></div>
+                        <div><a href="#this">访客 <i>122</i></a></div>
                     </li>
                 </ul>
             </div>
