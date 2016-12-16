@@ -83,7 +83,7 @@ class NetimComponent extends Component {
         $to_link_text = '查看详情';
         $to_msg = $this->Netim->generateCustomMsgBody($to_body, $to_link, $to_link_text, $to_prefix);
         $msg = $this->Netim->generateCustomMsg(5, $from_msg, $to_msg);
-        $res = $this->Netim->sendMsg($from, $to, $msg,['gift_type'=>$gift]);
+        $res = $this->Netim->sendMsg($from, $to, $msg, Netim::CUSTOM_MSG,['gift_type'=>$gift]);
         if (!$res) {
             dblog('prepayMsg', 'server发送im消息失败', $res);
         }
