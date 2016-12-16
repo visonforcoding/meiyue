@@ -274,16 +274,16 @@
 <?= $this->cell('Date::tagsView', ['tags-select-view']); ?>
 <?= $this->start('script'); ?>
 <script>
-    $('#submit').on('tap', function () {
+    $('#submit').on('click', function () {
         var form = $('form');
         $.util.ajax({
             data: form.serialize(),
             func: function (res) {
-                console.log(res.datas);
+                $.util.alert(res.msg);
                 if (res.status) {
-                    window.location.href = '/userc/edit-info';
-                } else {
-                    console.log(res);
+                    setTimeout(function() {
+                        window.location.href = '/userc/edit-info';
+                    }, 1000);
                 }
             }
         });
