@@ -392,7 +392,7 @@
                     if(res.status) {
                         $('.raper').addClass('hide');
                         $('.raper .showxpay').hide();
-                        window.location.href= '/wx/pay/'.res.orderid.'/查看美女微信支付金?redurl=/index/homepage/<?=$user->id?>';
+                        window.location.href= '/wx/pay/' + res.orderid + '/查看美女微信支付金?redurl=/index/homepage/<?=$user->id?>';
                         //showx();
                     } else {
                         $('.raper').addClass('hide');
