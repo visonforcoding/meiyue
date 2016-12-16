@@ -246,25 +246,27 @@
             </ul>
         </div>
         <!--微信号-->
-        <div class="home_fill_basic_info ">
-            <div class="items_title">
-                <h3>我的微信 <i>（用户查看你的微信你会有收入哦）</i></h3>
-            </div>
-            <ul>
-                <li class='home_fill_hobby'>
-                    <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">微信号：</span></div>
-                        <div class="home_list_r_info">
-                            <input name="wxid" type="text" placeholder="请输入" value="<?= $user->wxid; ?>"/>
+        <?php if($user->gender == 2): ?>
+            <div class="home_fill_basic_info ">
+                <div class="items_title">
+                    <h3>我的微信 <i>（用户查看你的微信你会有收入哦）</i></h3>
+                </div>
+                <ul>
+                    <li class='home_fill_hobby'>
+                        <div class="home_items">
+                            <div class="home_list_l_info"><span class="itemsname">微信号：</span></div>
+                            <div class="home_list_r_info">
+                                <input name="wxid" type="text" placeholder="请输入" value="<?= $user->wxid; ?>"/>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
-            <div class="isDisplay">
-                <input id="show-wx" name="wx_ishow" value="1" hidden>
-                <span class="displaybtn <?= ($user->wx_ishow == 1)?'choose':''; ?>"><i class="iconfont">&#xe64c;</i>展示赚钱</span>
+                    </li>
+                </ul>
+                <div class="isDisplay">
+                    <input id="show-wx" name="wx_ishow" value="1" hidden>
+                    <span class="displaybtn <?= ($user->wx_ishow == 1)?'choose':''; ?>"><i class="iconfont">&#xe64c;</i>展示赚钱</span>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
     </form>
 </div>
 

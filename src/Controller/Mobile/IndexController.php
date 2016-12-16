@@ -328,7 +328,13 @@ class IndexController extends AppController {
             'anhao' => $anhao
         ]);
         $transRes = $FlowTable->connection()->transactional(function() use ($flow, $FlowTable, $userTb, $in_user, $out_user, $wxorderTb, $wxorder){
-            return $FlowTable->save($flow)&&$wxorderTb->save($wxorder)&&$userTb->saveMany($userTb->newEntities([$in_user, $out_user]));
+            $wxores = $wxorderTb->save($wxorder);
+            if($wxores) {
+                $flow->relate_id = $wxores->id;
+            }
+            $flores = $FlowTable->save($flow);
+            $useres = $userTb->saveMany($userTb->newEntities([$in_user, $out_user]));
+            return $flores&&$wxores&&$useres;
         });
         if($transRes) {
             return $this->Util->ajaxReturn(true, '支付成功');
