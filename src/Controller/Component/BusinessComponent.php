@@ -445,10 +445,19 @@ class BusinessComponent extends Component
         $order->user->recharge += $realFee;
         $order->dirty('user', true);  //这里的seller 一定得是关联属性 不是关联模型名称 可以理解为实体
         $OrderTable = TableRegistry::get('Payorder');
+
+        //修改收款方费用
+        $userTb = TableRegistry::get('User');
+        $in_user = $userTb->get($order->relate_id);
+        if(!$in_user) {
+            return $this->Util->ajaxReturn(false, '用户不存在');
+        }
+        $in_user->money = $in_user->money + $realFee;
+        $in_user->charm = $in_user->charm + $realFee;
         //生成流水
         $FlowTable = TableRegistry::get('Flow');
         $flow = $FlowTable->newEntity([
-            'user_id'=>0,
+            'user_id'=>$order->relate_id,
             'buyer_id'=>$order->user->id,
             'type'=>18,
             'type_msg'=>getFlowType('18'),
@@ -468,8 +477,8 @@ class BusinessComponent extends Component
             'wxer_id' => $order->relate_id,
             'anhao' => $anhao
         ]);
-        $transRes = $FlowTable->connection()->transactional(function() use ($OrderTable, $order, $flow, $FlowTable, $wxorderTb, $wxorder){
-            return $OrderTable->save($order)&&$FlowTable->save($flow)&&$wxorderTb->save($wxorder);
+        $transRes = $FlowTable->connection()->transactional(function() use ($OrderTable, $order, $flow, $FlowTable, $wxorderTb, $wxorder, $in_user, $userTb){
+            return $OrderTable->save($order)&&$FlowTable->save($flow)&&$wxorderTb->save($wxorder)&&$userTb->save($in_user);
         });
         if($transRes) {
             return true;
