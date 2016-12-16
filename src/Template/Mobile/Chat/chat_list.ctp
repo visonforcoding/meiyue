@@ -5,7 +5,7 @@
     {{#sessions}}
     <li id="chat-{{to}}">
         <a data-accid="{{to}}" data-avatar="{{avatar}}" data-nick="{{nick}}"  
-           class="ablock flex flex_justify user">
+           class="ablock flex flex_justify user clickable">
             <div class="chat-left-info flex">
                 <div class="avatar">
                     <img src="{{avatar}}"/>
@@ -152,7 +152,7 @@ function updateSessionsUI() {
 function onError(error) {
     console.log(error);
 }
-$(document).on('tap','.user',function(){
+$(document).on('click','.user',function(){
     //聊天
     alert('我点了');
     var param = {};
