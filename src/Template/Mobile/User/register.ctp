@@ -91,7 +91,6 @@
         var phone = $('#phone').val();
         var vcode = $('#vcode').val();
         var pwd = $('#pwd').val();
-        console.log('11');
         if (phone && vcode && pwd) {
             $.post('', {phone: phone, vcode: vcode, pwd: pwd}, function (res) {
                 //$.util.alert(res.msg);
@@ -104,6 +103,7 @@
                         LEMON.db.set('im_accid',res.user.imaccid);
                         LEMON.db.set('im_token',res.user.imtoken);
                         LEMON.db.set('avatar',res.user.avatar);
+                        LEMON.sys.endReg();
                     }
                     setTimeout(function () {
                         window.location.href = res.url;

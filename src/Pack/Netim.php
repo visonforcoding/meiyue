@@ -159,18 +159,22 @@ class Netim {
     
     /**
      * 生成自定义消息
-     * @param type $type  消息类型
+     * @param type $type  消息类型  5自定义普通消息   6礼物消息
      * @param type $from  发送者消息
      * @param type $to    接收者消息
+     * @param array $param 额外
      * @return array Description
      */
-    public function generateCustomMsg($type,$from,$to){
+    public function generateCustomMsg($type,$from,$to,$param = []){
        $data = [];
        $data['type'] = $type;
        $data['data'] = [
          'from'=>$from,
          'to'=>$to,
        ];
+       if($type == '6'){
+           $data['gift_type'] =  $param['gift_type'];
+       }
        return $data;
     }
     

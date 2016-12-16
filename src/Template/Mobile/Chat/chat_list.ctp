@@ -59,10 +59,10 @@
 <script type="text/javascript">
 var data = {};
 var accids = [];   //列表accid
-var account = LEMON.db.get('im_accid');
-//var account = 'meiyue_110';
-//var token = '89e66f7fc9ac977d0d7298d397e05820';
-var token = LEMON.db.get('im_token');
+//var account = LEMON.db.get('im_accid');
+var account = 'meiyue_110';
+var token = '89e66f7fc9ac977d0d7298d397e05820';
+//var token = LEMON.db.get('im_token');
 var nim = NIM.getInstance({
     debug: true,
     appKey: '9e0e349ffbcf4345fdd777a65584fb68',
@@ -128,19 +128,19 @@ function onUpdateSession(session) {
             func: function (res) {
                 //新聊天
                 accids.push(newSess);
-                $('#chat-list').prepend(getRender([session],res));
+                $('#chat-list').prepend(getRender([session], res));
             }
         })
-    }else{
+    } else {
         //旧会话 新消息
-        $obj = $('#chat-'+newSess);
+        $obj = $('#chat-' + newSess);
         var index = $obj.index();
-        if(index !==0){
+        if (index !== 0) {
             //排到最前面
             $obj.remove();
             $obj.find('span.last-info').html(session.lastMsg.text)
             $('#chat-list').prepend($obj);
-        }else{
+        } else {
             $obj.find('span.last-info').html(session.lastMsg.text)
         }
     }
@@ -152,7 +152,7 @@ function updateSessionsUI() {
 function onError(error) {
     console.log(error);
 }
-$(document).on('click','.user',function(){
+$(document).on('click', '.user', function () {
     //聊天
     alert('我点了');
     var param = {};
@@ -164,6 +164,19 @@ $(document).on('click','.user',function(){
     param['avatar'] = avatar;
     LEMON.event.imTalk(param);
 })
+
+function delImSess(account) {
+    var id =  account;
+    nim.deleteSession({
+        scene: 'p2p',
+        to: id,
+        done: function (error, obj) {
+            console.log(error);
+            console.log(obj);
+            console.log('删除会话' + (!error ? '成功' : '失败'));
+        }
+    });
+}
 function getRender(sessions, res) {
     $.each(sessions, function (i, n) {
         sessions[i]['nick'] = '';
@@ -172,7 +185,7 @@ function getRender(sessions, res) {
             if (n.to == v.imaccid) {
                 sessions[i]['nick'] = v.nick;
                 sessions[i]['avatar'] = v.avatar;
-                sessions[i]['datetime'] = $.util.getFormatTime(new Date(n.updateTime));
+                sessions[i]['datetime'] = $.util.getImShowTime(new Date(n.updateTime));
             }
         })
     })

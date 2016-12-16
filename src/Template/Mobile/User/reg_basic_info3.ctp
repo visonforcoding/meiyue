@@ -102,6 +102,7 @@
                     LEMON.db.set('im_accid', res.user.imaccid);
                     LEMON.db.set('im_token', res.user.imtoken);
                     LEMON.db.set('avatar', res.user.avatar);
+                    LEMON.sys.endReg();
                     document.location.href = '/user/reg-basic-info-4';
                 }
             }
