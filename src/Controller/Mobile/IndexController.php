@@ -340,4 +340,14 @@ class IndexController extends AppController {
         }
     }
 
+
+    /*public function test1() {
+        $this->loadComponent('Business');
+        $payOrderTb = TableRegistry::get('Payorder');
+        $payorder = $payOrderTb->get(45, ['contain' => ['User']]);
+        $res = $this->Business->handViewWxPay($payorder, 100, 2, 'No1247184781748917');
+        debug($res);
+        exit();
+    }*/
+
 }
