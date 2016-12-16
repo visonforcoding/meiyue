@@ -224,24 +224,28 @@ class TestController extends AppController {
 //        debug($area);exit();
     }
     
-    public function testIm($from,$to){
+    public function testIm($from,$to,$type=5){
         $Netim = new \App\Pack\Netim();
-        
-        $from_body = '美女XX已接受了你的请求,请及时赴约';
-        $from_prefix = '';
-        $from_link = $this->Util->getServerDomain().'/order/detail/1';
-        $from_body = '美女XX已接受了你的请求,请及时赴约';
-        $from_link_text = '查看详情';
-        $from_msg = $Netim->generateCustomMsgBody($from_body, $from_link, $from_link_text, $from_prefix);
-        
-        $to_prefix = '[约吃饭]';
-        $to_link = $this->Util->getServerDomain().'/order/detail/1';
-        $to_body = '我希望你在拉格朗日傅里叶变换餐厅等我，我已付完钱开好了。。';
-        $to_link_text = '查看详情';
-        $to_msg = $Netim->generateCustomMsgBody($to_body, $to_link, $to_link_text, $to_prefix);
-        $msg = $Netim->generateCustomMsg(5, $from_msg, $to_msg);
+        if($type==0){
+            $msg = $Netim->generateTextMsgBody(createRandomCode(2).'测试消息'.date('Y-m-d H:i:s'));
+        }
+        if($type==5){
+            $from_body = '美女XX已接受了你的请求,请及时赴约';
+            $from_prefix = '';
+            $from_link = $this->Util->getServerDomain().'/order/detail/1';
+            $from_body = '美女XX已接受了你的请求,请及时赴约';
+            $from_link_text = '查看详情';
+            $from_msg = $Netim->generateCustomMsgBody($from_body, $from_link, $from_link_text, $from_prefix);
+
+            $to_prefix = '[约吃饭]';
+            $to_link = $this->Util->getServerDomain().'/order/detail/1';
+            $to_body = '我希望你在拉格朗日傅里叶变换餐厅等我，我已付完钱开好了。。';
+            $to_link_text = '查看详情';
+            $to_msg = $Netim->generateCustomMsgBody($to_body, $to_link, $to_link_text, $to_prefix);
+            $msg = $Netim->generateCustomMsg(5, $from_msg, $to_msg);
+        }
         debug($msg);
-        $res = $Netim->sendMsg($from, $to, $msg);
+        $res = $Netim->sendMsg($from, $to, $msg,  \App\Pack\Netim::TEXT_MSG);
         debug($res);
         exit();
     }
