@@ -74,8 +74,8 @@
                             </div>
                             <div class="home_list_r_info">
                                 <input name="bwh_b" type="tel" placeholder="胸围" style="width:30px;" value="<?= $user->bwh_b; ?>"/> |
-                                <input name="bwh_w" type="tel" placeholder="腰围" style="width:30px;" value="<?= $user->bwh_w; ?> /> |
-                                <input name="bwh_h" type="tel" placeholder="臀围" style="width:30px;" value="<?= $user->bwh_h; ?> />
+                                <input name="bwh_w" type="tel" placeholder="腰围" style="width:30px;" value="<?= $user->bwh_w; ?>" /> |
+                                <input name="bwh_h" type="tel" placeholder="臀围" style="width:30px;" value="<?= $user->bwh_h; ?>" />
                             </div>
                         </div>
                     </li>
