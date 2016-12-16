@@ -30,7 +30,7 @@
         <ul id="selectSkil" class="inner flex flex_justify">
             <li  class="current"><a data-id="0" href="#this">精选</a></li>
             <?php foreach ($skills as $skill): ?>
-                <li ><a data-id="<?= $skill->id ?>">约<?= $skill->name ?></a></li>
+                <li ><a data-id="<?= $skill->id ?>"><?= $skill->name ?></a></li>
             <?php endforeach; ?>
         </ul>
     </div>
