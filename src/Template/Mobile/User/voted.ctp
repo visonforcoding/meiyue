@@ -10,6 +10,7 @@
         <a href="#this" class="btn btn_t_border">邀请好友支持我</a>
         <?php endif; ?>
         <ul class="voted_list voted-line">
+            <?php if($wektop): ?>
             <li>
                 <a href="/activity/index/top" class="title ablock flex flex_justify">
                     <span class="rank color_y">
@@ -47,6 +48,8 @@
                     <?php endif;?>
                 </div>
             </li>
+            <?php endif; ?>
+            <?php if($montop): ?>
             <li>
                 <a href="/activity/index" class="title ablock flex flex_justify">
                     <span class="rank color_y">
@@ -84,6 +87,7 @@
                     <?php endif;?>
                 </div>
             </li>
+            <?php endif; ?>
         </ul>
     </div>
 </div>
