@@ -171,6 +171,7 @@ class UserController extends AppController {
                 $user->reg_step = 9;  //注册完毕
             }else{
                 $user->reg_step = 1;
+                $user->status = 1;
             }
             if ($this->User->save($user)) {
                 $jumpUrl = '/user/m-reg-basic-info';

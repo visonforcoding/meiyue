@@ -50,7 +50,7 @@
         </li>
     </ul>
     <ul id="chat-list" class="chatBox mt40">
-        <?php foreach ($users as $user): ?>
+            <?php foreach ($users as $user): ?>
             <li>
                 <a data-accid="<?= $user->imaccid ?>" data-avatar="<?= $user->avatar ?>" data-nick="<?= $user->nick ?>"  
                    class="ablock flex flex_justify user">
@@ -88,7 +88,7 @@
         onupdatesession: onUpdateSession
     });
     function onConnect() {
-        //alert('连接成功');
+        alert('连接成功');
         console.log('连接成功');
     }
     function onWillReconnect(obj) {
@@ -138,7 +138,7 @@
                 var template = $('#chat-list-tpl').html();
                 Mustache.parse(template);
                 var rendered = Mustache.render(template, data);
-                //$('#chat-list').html(rendered);
+//                $('#chat-list').html(rendered);
                 
             }
         })

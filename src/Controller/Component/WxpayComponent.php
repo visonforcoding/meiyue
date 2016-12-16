@@ -64,46 +64,79 @@ class WxpayComponent extends Component {
      * @return type
      */
     public function unifiedorder($body, $openid, $out_trade_no, $fee, $notify_url = null, $isApp = false) {
+        \Cake\Log\Log::debug('openid:' . $openid, 'devlog');
         $apiurl = self::WEIXIN_PAY_API_URL . '/pay/unifiedorder';
-        $xmlText = '<xml>
+        if ($isApp) {
+            $xmlText = '<xml>
                     <appid>%s</appid>
                     <body>%s</body>
                     <mch_id>%s</mch_id>
                     <nonce_str>%s</nonce_str>
-                    <notify_url>%s</notify_url>';
-        if($isApp){
-            $xmlText .= '<openid>%s</openid>';
-        }
-        $xmlText .= '<out_trade_no>%s</out_trade_no>
+                    <notify_url>%s</notify_url>
+                    <out_trade_no>%s</out_trade_no>
                     <spbill_create_ip>%s</spbill_create_ip>
                     <total_fee>%d</total_fee>
                     <trade_type>%s</trade_type>
                     <sign>%s</sign>
                     </xml>';
-        
+        } else {
+            $xmlText = '<xml>
+                    <appid>%s</appid>
+                    <body>%s</body>
+                    <mch_id>%s</mch_id>
+                    <nonce_str>%s</nonce_str>
+                    <notify_url>%s</notify_url>
+                    <openid>%s</openid>
+                    <out_trade_no>%s</out_trade_no>
+                    <spbill_create_ip>%s</spbill_create_ip>
+                    <total_fee>%d</total_fee>
+                    <trade_type>%s</trade_type>
+                    <sign>%s</sign>
+                    </xml>';
+        }
+
+
         $ip = $this->request->clientIp();
         $nonce_str = createRandomCode(16);
         $notify_url = empty($notify_url) ? $this->notify_url : $notify_url;
         $trade_type = $isApp ? 'APP' : 'JSAPI';
         $appid = $isApp ? $this->App_id : $this->app_id;
         $mchid = $isApp ? $this->App_mchid : $this->mchid;
-        $params = [
-            'appid' => $appid,
-            'body' => $body,
-            'mch_id' => $mchid,
-            'nonce_str' => $nonce_str,
-            'notify_url' => $notify_url,
-            'openid' => $openid,
-            'out_trade_no' => $out_trade_no,
-            'spbill_create_ip' => $ip,
-            'total_fee' => $fee,
-            'trade_type' => $trade_type
-        ];
-        $sign = $this->setSign($params);
-        $xmlString = sprintf($xmlText, $appid, $body, $mchid, $nonce_str, $notify_url, $openid, $out_trade_no, $ip, $fee, $trade_type, $sign);
+        if($isApp){
+            $params = [
+                'appid' => $appid,
+                'body' => $body,
+                'mch_id' => $mchid,
+                'nonce_str' => $nonce_str,
+                'notify_url' => $notify_url,
+                'out_trade_no' => $out_trade_no,
+                'spbill_create_ip' => $ip,
+                'total_fee' => $fee,
+                'trade_type' => $trade_type
+            ];
+            $sign = $this->setSign($params);
+            $xmlString = sprintf($xmlText, $appid, $body, $mchid, $nonce_str, $notify_url,
+                    $out_trade_no, $ip, $fee, $trade_type, $sign);
+        }else{
+            $params = [
+                'appid' => $appid,
+                'body' => $body,
+                'mch_id' => $mchid,
+                'nonce_str' => $nonce_str,
+                'notify_url' => $notify_url,
+                'openid'=>$openid,
+                'out_trade_no' => $out_trade_no,
+                'spbill_create_ip' => $ip,
+                'total_fee' => $fee,
+                'trade_type' => $trade_type
+            ];
+            $sign = $this->setSign($params);
+            $xmlString = sprintf($xmlText, $appid, $body, $mchid, $nonce_str, $notify_url,$openid, $out_trade_no, $ip, $fee, $trade_type, $sign);
+        }
         $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
         $res = $httpClient->post($apiurl, $xmlString);
         if (!$res->isOk()) {
+            \Cake\Log\Log::error(__FILE__ . __LINE__, 'devlog');
             \Cake\Log\Log::error($res, 'devlog');
             return false;
         }
@@ -207,7 +240,7 @@ class WxpayComponent extends Component {
         }
         $order_no = $data->out_trade_no;
         $out_trade_no = $data->transaction_id;
-        $realFee = $data->total_fee/100;
+        $realFee = $data->total_fee / 100;
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
         $order = $OrderTable->find()->contain(['Sellers', 'Users'])->where(['Lmorder.status' => 0, 'order_no' => $order_no])->first();
         $resXml = $this->arr2xml([
@@ -221,7 +254,7 @@ class WxpayComponent extends Component {
                     'return_code' => 'SUCCESS',
                     'return_msg' => 'OK'
                 ]);
-            }else{
+            } else {
                 $this->Util->dblog('order', $msg, $data);
             }
         } else {
