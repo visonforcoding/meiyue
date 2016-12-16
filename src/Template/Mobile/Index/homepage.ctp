@@ -39,7 +39,7 @@
                 <?php endforeach; ?>
                 <li id="see-movements">
                     <a class='ablock' >
-                        <img src="/mobile/images/avatar.jpg"/>
+                        <img src="<?= unserialize($user->images)[3]; ?>"/>
                         <span>更多私房</span>
                     </a>
                 </li>
