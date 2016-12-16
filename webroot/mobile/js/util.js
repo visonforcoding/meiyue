@@ -582,7 +582,7 @@ $.util = {
      * 获取当前时间
      * @returns {String}
      */
-    getFormatTime: function (date) {
+    getFormatTime: function (date, reType) {
         if (!date)
             date = new Date();
         var y = date.getFullYear();
@@ -595,7 +595,18 @@ $.util = {
         minute = minute < 10 ? ('0' + minute) : minute;
         var second = date.getSeconds();
         second = second < 10 ? ('0' + second) : second;
-        return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+        return reType == 'json' ? {y:y,m:m,d:d,h:h,minute:minute,second:second} : y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+    },
+    /**
+     * 获取当前时间
+     * @returns {String}
+     */
+    getImShowTime: function (date) {
+        var imTime = $.util.getFormatTime(date, 'json'),
+            cTime = $.util.getFormatTime('', 'json'),
+            tmp = imTime.d + ':' +imTime.minute;
+
+        return (imTime.m != cTime.m || imTime.d != cTime.d ? imTime.m + '-' +imTime.d + ' ' : '') + tmp;
     },
     /**
      * 处理js错误
