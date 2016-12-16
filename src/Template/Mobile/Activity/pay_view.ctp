@@ -145,7 +145,6 @@
             }, 1000);
             return;
         }
-        //if(confirm("输入付款密码")) {
         $(this).removeAttr('id');
         var obj = $(this);
         $.util.showPreloader();
@@ -165,8 +164,6 @@
                 }
             }
         })
-        //}
-
     })
 
 </script>

@@ -489,11 +489,13 @@ class UserState {
 class PayOrderType {
     const CHONGZHI = 1;  //充值美币
     const BUY_TAOCAN = 2;    //购买套餐
+    const VIEW_WEIXIN = 10;  //查看美女微信
     const GETJSON = -1; //获取json数据
     public static function getType($st = null) {
         $status = Array(
             PayOrderType::CHONGZHI => '充值美币',
             PayOrderType::BUY_TAOCAN => '购买套餐',
+            PayOrderType::VIEW_WEIXIN => '查看美女微信',
         );
         if(PayOrderType::GETJSON == $st) {
             return json_encode($status);

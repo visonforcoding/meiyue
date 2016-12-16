@@ -239,7 +239,7 @@
     <!--约Ta弹出层-->
     <div class="popup showxpay" hidden>
         <div class="popup_con">
-            <h3 class="aligncenter">需支付100美币才能看到她的微信</h3>
+            <h3 class="aligncenter">需支付100元才能看到她的微信</h3>
         </div>
         <div class="popup_footer flex flex_justify">
             <span class="footerbtn cancel">取消</span>
@@ -359,7 +359,6 @@
             url:'/index/check-wx-rig/<?=$user->id?>',
             method: 'POST',
             func:function(res){
-                console.log(res);
                 if(res.status) {
                     showx();
                 } else {
@@ -382,16 +381,20 @@
             $('.raper .showxpay').hide();
         });
         $('.raper .gopay').on('click', function() {
+            $.util.alert('正在生成支付单...');
+            $.util.showPreloader();
             $.util.ajax({
-                url:'/index/pay4wx/<?= $user->id;?>',
+                url:'/index/create-payorder/<?=$user->id?>',
                 method: 'POST',
                 func:function(res){
+                    $.util.hidePreloader();
+                    $.util.alert(res.msg);
                     if(res.status) {
                         $('.raper').addClass('hide');
                         $('.raper .showxpay').hide();
-                        showx();
+                        window.location.href= '/wx/pay/'.res.orderid.'/查看美女微信支付金?redurl=/index/homepage/<?=$user->id?>';
+                        //showx();
                     } else {
-                        $.util.alert('支付失败');
                         $('.raper').addClass('hide');
                         $('.raper .showxpay').hide();
                     }
