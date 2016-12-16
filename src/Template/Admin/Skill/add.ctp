@@ -56,8 +56,6 @@
 <script>
 
     $("#submit").on('click', function(){
-        console.log($('#iconvalue').val());
-        return;
         var options = $('form').serialize();
         $.ajax({
             type: 'POST',

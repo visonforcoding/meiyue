@@ -90,6 +90,9 @@ class GiftController extends AppController
                 function() use ($supportTb, $support, $FlowTable, $flow, $userTb, $in_user, $out_user){
                     $flow = $FlowTable->newEntity($flow);
                     $supres = $supportTb->save($support);
+                    if($supres) {
+                        $flow->relate_id = $supres->id;
+                    }
                     $flores = $FlowTable->save($flow);
                     $inures = $userTb->save($in_user);
                     $ouures = $userTb->save($out_user);
