@@ -82,7 +82,7 @@
             <a class="identify_footer_potion">报名成功</a>
         <?php elseif ($botBtSts == 3 && $cancancle): ?>
             <div class="flex">
-                <span class="entroll-btn cancelbtn">报名数量：<?= $regist_item->num; ?></span>
+                <span class="entroll-btn cancelbtn">购买数量：<?= $regist_item->num; ?></span>
                 <span onclick="cancel();" class="entroll-btn surebtn">我要取消</span>
             </div>
         <?php elseif ($botBtSts == 3 && !$cancancle): ?>

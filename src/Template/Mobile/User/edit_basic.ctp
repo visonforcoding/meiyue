@@ -16,7 +16,7 @@
                     <div class="home_items">
                         <div class="home_list_l_info required">
                             <span class="itemsname">昵</span><span class="itemsname">称：</span>
-                            <i class="iconfont ico"></i>
+                            <?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
                             <input name="nick" type="text" placeholder="请输入昵称" value="<?= $user->nick; ?>"/>
@@ -27,7 +27,7 @@
                     <div class="home_items">
                         <div class="home_list_l_info required"><span class="itemsname">真</span><span
                                 class="itemsname">实</span><span class="itemsname">姓</span><span
-                                class="itemsname">名：</span><i class="iconfont ico"></i></div>
+                                class="itemsname">名：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
                             <input name="truename" type="text" placeholder="请输真实姓名" value="<?= $user->truename; ?>"/>
                         </div>
@@ -35,11 +35,12 @@
                 </li>
                 <li class="birthdate">
                     <div class="home_items">
-                        <div class="home_list_l_info">
+                        <div class="home_list_l_info required">
                             <span class="itemsname">出</span>
                             <span class="itemsname">生</span>
                             <span class="itemsname">日</span>
                             <span class="itemsname">期：</span>
+                            <?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
                             <div class="checkdate">
@@ -51,7 +52,8 @@
                
                 <li>
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">体</span><span class="itemsname">重：</span>
+                        <div class="home_list_l_info required"><span class="itemsname">体</span><span class="itemsname">重：</span>
+                            <?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
                             <input name="weight" type="text" placeholder="您的体重" value="<?= $user->weight; ?>"/>&nbsp;KG
@@ -61,7 +63,7 @@
                 <li>
                     <div class="home_items">
                         <div class="home_list_l_info required"><span class="itemsname short_name">身</span><span
-                                class="itemsname">高：</span><i class="iconfont ico"></i></div>
+                                class="itemsname">高：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
                             <input name="height" type="text" placeholder="您的身高" value="<?= $user->height; ?>"/>&nbsp;CM
                         </div>
@@ -70,7 +72,8 @@
                 <?php if($user->gender == 2): ?>
                     <li class='bwh'>
                         <div class="home_items">
-                            <div class="home_list_l_info"><span class="itemsname">三</span><span class="itemsname">围：</span>
+                            <div class="home_list_l_info required"><span class="itemsname">三</span><span class="itemsname">围：</span>
+                                <i class="iconfont ico"></i>
                             </div>
                             <div class="home_list_r_info">
                                 <input name="bwh_b" type="tel" placeholder="胸围" style="width:30px;" value="<?= $user->bwh_b; ?>"/> |
@@ -82,7 +85,8 @@
                 <?php endif; ?>
                  <li class="start_sign  right-ico">
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">星</span><span class="itemsname">座：</span>
+                        <div class="home_list_l_info required"><span class="itemsname">星</span><span class="itemsname">座：</span>
+                            <?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
                             <select name="zodiac">
@@ -124,9 +128,9 @@
                 <?php endif; ?>
                  <li class="emontion  right-ico">
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">情</span><span
+                        <div class="home_list_l_info required"><span class="itemsname">情</span><span
                                 class="itemsname">感</span><span class="itemsname">状</span><span
-                                class="itemsname">态：</span></div>
+                                class="itemsname">态：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
                                 <select name="state">
                                     <option value="1" <?= ($user->state == 1)?'selected':'';?>>单身</option>
@@ -139,7 +143,8 @@
                 </li>
                 <li>
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">职</span><span class="itemsname">业：</span>
+                        <div class="home_list_l_info required"><span class="itemsname">职</span><span class="itemsname">业：</span>
+                            <?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
                             <input name="profession" type="text" placeholder="请输入职业" value="<?= $user->profession; ?>"/>
@@ -148,8 +153,8 @@
                 </li>
                 <li>
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname short_name">家</span><span
-                                class="itemsname">乡：</span></div>
+                        <div class="home_list_l_info required"><span class="itemsname short_name">家</span><span
+                                class="itemsname">乡：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
                             <input name="hometown" type="text" placeholder="请输入家乡" value="<?= $user->hometown; ?>"/>
                         </div>
@@ -157,9 +162,9 @@
                 </li>
                 <li>
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">所</span><span
+                        <div class="home_list_l_info required"><span class="itemsname">所</span><span
                                 class="itemsname">在</span><span class="itemsname">地</span><span
-                                class="itemsname">区：</span></div>
+                                class="itemsname">区：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
                             <input name="city" type="text" placeholder="请输入所在地区" value="<?= $user->city; ?>"/>
                         </div>
