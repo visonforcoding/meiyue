@@ -29,6 +29,12 @@
             <li><span class="t_desc"><?= ($birthday)?$birthday:'--' ?></span><span class="b_desc">生日</span></li>
         </ul>
     </div>
+
+    <script>
+        function setWH(img) {
+            img.height < img.width ? $(img).css({'height':'100%'}) : $(img).css({'width': '100%'})
+        }
+    </script>
     <!--图片 && 视频展示-->
     <?php if (@unserialize($user->images) || $user->video): ?>
     <div class="home_pic_info mt40">
@@ -274,10 +280,6 @@
 <?php $this->start('script'); ?>
 <script src="/mobile/js/mustache.min.js"></script>
 <script>
-
-    function setWH(img) {
-        img.height < img.width ? $(img).css({'height':'100%'}) : $(img).css({'width': '100%'})
-    }
     $('#focusIt').on('click', function (event) {
         //加关注
         event.stopPropagation();
