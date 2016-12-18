@@ -76,7 +76,7 @@
                     <li val='05:00:00'>05:00</li>
                     <li val='06:00:00'>06:00</li>
                     <li val='07:00:00'>07:00</li>-->
-                    <li val='08:00:00'>08:00</li>
+                    <li val='08:00:00' class="select">08:00</li>
                     <li val='09:00:00'>09:00</li>
                     <li val='10:00:00'>10:00</li>
                     <li val='11:00:00'>11:00</li>
@@ -109,7 +109,7 @@
                     <li val='08:00:00'>08:00</li>
                     <li val='09:00:00'>09:00</li>
                     <li val='10:00:00'>10:00</li>-->
-                    <li val='11:00:00'>11:00</li>
+                    <li val='11:00:00' class="select">11:00</li>
                     <li val='12:00:00'>12:00</li>
                     <li val='13:00:00'>13:00</li>
                     <li val='14:00:00'>14:00</li>
@@ -178,6 +178,7 @@
             }
             str += '<li></li><li></li>';
             $(".month-date").html(str);
+            $(".month-date li").eq(0).addClass('select');
 
             this.addEvent();
         },

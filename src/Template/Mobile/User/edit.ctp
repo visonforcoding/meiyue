@@ -9,7 +9,7 @@
     <div class="identify_img_ifo mt40">
         <ul class="inner">
             <li class="clearfix">
-                <span class="fl">上传图片</span>
+                <span class="fl">上传图像</span>
                 <div class="iden_r_box fr" id="avatar_img">
                     <div class="iden_r_pic">
                         <img src="<?= $user->avatar; ?>" alt="" />

@@ -35,7 +35,7 @@
         <ul class="inner flex">
             <?php if (@unserialize($user->images)): ?>
                 <?php foreach(array_slice(unserialize($user->images), 0, 3) as $img): ?>
-                    <li><img src="<?= createImg($img) ?>"/></li>
+                    <li><img src="<?= createImg($img) ?>?w=160"/></li>
                 <?php endforeach; ?>
                 <li id="see-movements">
                     <a class='ablock' >
