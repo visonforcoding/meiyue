@@ -9,7 +9,7 @@
         <div class="password">
             <i class="iconfont">&#xe606;</i>
             <input type="password" id="pwd" placeholder="密码" class="user"  />
-            <a href="/userc/forget-pwd1" class="fogetpwd">忘记密码?</a>
+            <a href="/user/forget-pwd1" class="fogetpwd">忘记密码?</a>
         </div>
     </div>
     <div class="login_box_btn">
