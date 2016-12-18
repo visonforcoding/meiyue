@@ -3,12 +3,13 @@
 <script src="/mobile/js/mustache.min.js"></script>
 <script id="chat-list-tpl" type="text/html">
     {{#sessions}}
-    <li id="chat-{{to}}">
-        <a data-accid="{{to}}" data-avatar="{{avatar}}" data-nick="{{nick}}"  
-           class="ablock flex flex_justify user clickable">
+    <li id="chat-{{to}}" class="active flex">
+        <div data-accid="{{to}}" data-avatar="{{avatar}}" data-nick="{{nick}}"  
+             class="ablock flex flex_justify user clickable">
             <div class="chat-left-info flex">
                 <div class="avatar">
                     <img src="{{avatar}}"/>
+                    <div class="num">{{unread}}</div>
                 </div>
                 <div class="chat-text">
                     <h3 class="name">{{nick}}</h3>
@@ -16,7 +17,11 @@
                 </div>
             </div>
             <time class="smalldes">{{datetime}}</time>
-        </a>
+        </div>
+        <div class="r-btn flex">
+            <div class="focus">关注</div>
+            <div data-accid="{{to}}" class="del">删除</div>
+        </div>
     </li>
     {{/sessions}}
 </script>
@@ -49,7 +54,7 @@
             </a>
         </li>
     </ul>
-    <ul id="chat-list" class="chatBox mt40">
+    <ul id="chat-list" class="chatBox chat-bottom-box mt40">
     </ul>
 </div>
 <div style="height:1.4rem"></div>
@@ -130,7 +135,7 @@ function onUpdateSession(session) {
                 accids.push(newSess);
                 $('#chat-list').prepend(getRender([session], res));
             }
-        })
+        });
     } else {
         //旧会话 新消息
         $obj = $('#chat-' + newSess);
@@ -138,10 +143,12 @@ function onUpdateSession(session) {
         if (index !== 0) {
             //排到最前面
             $obj.remove();
-            $obj.find('span.last-info').html(session.lastMsg.text)
+            $obj.find('.num').html(session.unread);
+            $obj.find('span.last-info').html(session.lastMsg.text);
             $('#chat-list').prepend($obj);
         } else {
-            $obj.find('span.last-info').html(session.lastMsg.text)
+            $obj.find('.num').html(session.unread);
+            $obj.find('span.last-info').html(session.lastMsg.text);
         }
     }
     updateSessionsUI();
@@ -162,14 +169,25 @@ $(document).on('click', '.user', function () {
     param['nick'] = nick;
     param['avatar'] = avatar;
     LEMON.event.imTalk(param);
-})
+});
+
+$(document).on('click','.del',function(){
+   //删除会话 
+   var account = $(this).data('accid');
+   console.log(account);
+   delImSess(account);
+});
 
 function delImSess(account) {
-    var id =  account;
+    //删除会话方法
+    var id = account;
     nim.deleteSession({
         scene: 'p2p',
         to: id,
         done: function (error, obj) {
+            if(!error){
+              $('#chat-' + id).addClass('remove');
+            }
             console.log(error);
             console.log(obj);
             console.log('删除会话' + (!error ? '成功' : '失败'));
