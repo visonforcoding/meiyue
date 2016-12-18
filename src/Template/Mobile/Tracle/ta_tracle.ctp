@@ -21,7 +21,7 @@
                     <time>{{create_time}}</time>
                 </h3>
             </div>
-            <span class="focusbtn likeIt" data-id="<?= $userid; ?>">+ 关注</span>
+            <span class="focusbtn likeIt" data-id="<?= $user->id; ?>">{{#followed}}已关注{{/followed}}{{^followed}}+ 关注{{/followed}}</span>
         </div>
         <div class="con inner">
             <p class="text">{{body}}</p>
@@ -48,7 +48,7 @@
                 <span class="tracle_footer_info">
                     <i class="iconfont">&#xe65c;</i>{{view_nums}}
                 </span>
-                <span class="tracle_footer_info praise-btn" data-id="{{id}}">
+                <span class="tracle_footer_info praise-btn {{#ispraised}}color_y{{/ispraised}}" data-id="{{id}}">
                     <i class="iconfont">&#xe633;</i><span class="praise-num">{{praise_nums}}</span>
                 </span>
             </div>
@@ -75,7 +75,7 @@
     $.util.asyLoadData({
         gurl: '/tracle/get-ta-tracles/',
         page: curpage,
-        query: '/<?= $userid;?>',
+        query: '/<?= $user->id;?>',
         tpl: '#movement-list-tpl',
         id: '#tracle-list',
         key: 'movements',
@@ -87,7 +87,7 @@
                 $.util.asyLoadData({
                     gurl: '/tracle/get-ta-tracles/',
                     page: curpage,
-                    query: '/<?= $userid;?>',
+                    query: '/<?= $user->id;?>',
                     tpl: '#movement-list-tpl',
                     id: '#tracle-list',
                     more: true,
@@ -106,7 +106,11 @@
             data.movements[i]['count'] = count;
             if (n.type === 1) {
                 data.movements[i]['is_pic'] = true;
-            } else {
+            } else if(n.type === 2){
+                data.movements[i]['is_video'] = true;
+            } else if(n.type === 3){
+                data.movements[i]['is_pic'] = true;
+            } else if(n.type === 4){
                 data.movements[i]['is_video'] = true;
             }
         })

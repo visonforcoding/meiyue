@@ -88,7 +88,7 @@ class TracleController extends AppController {
             $uTb = TableRegistry::get('User');
             $user = $uTb->get($uid);
             $this->set([
-                "userid" => $user->id,
+                "user" => $user,
                 'pageTitle' => $user->nick.'的动态'
             ]);
             $this->render();
@@ -105,6 +105,14 @@ class TracleController extends AppController {
         //检查权限和名额剩余
         $res = $this->Business->checkRight($this->user->id, $uid, ServiceType::BROWSE);
         if($res == SerRight::OK_CONSUMED) {
+            //检查是否关注过
+            $uFanTb = TableRegistry::get('UserFans');
+            $ufan = $uFanTb->find()->where(['user_id' => $this->user->id, 'following_id' => $uid])->count();
+            $followed = false;
+            if($ufan) {
+                $followed = true;
+            }
+
             $MovementTable = TableRegistry::get('Movement');
             $movements = $MovementTable->find()
                 ->contain([
@@ -119,8 +127,8 @@ class TracleController extends AppController {
                 ->orderDesc('Movement.create_time')
                 ->limit(10)
                 ->page($page)
-                ->formatResults(function($items) {
-                    return $items->map(function($item) {
+                ->formatResults(function($items) use($followed){
+                    return $items->map(function($item) use($followed){
                         $item['images'] = unserialize($item['images']);
                         //时间语义化转换
                         $item['create_time'] = (new Time($item['create_time']))->timeAgoInWords(
@@ -132,12 +140,14 @@ class TracleController extends AppController {
                                 'hour' => 'hour'
                             ], 'end' => '+10 year']
                         );
+                        $item['followed'] = $followed;
                         $item['view_nums'] ++;
                         if(count($item['mvpraises']) > 0) {
                             $item['praised'] = true;
                         } else {
                             $item['praised'] = false;
                         }
+                        $item['ispraised'] = count($item['mvpraises']) > 0;
                         return $item;
                     });
                 })
@@ -159,6 +169,23 @@ class TracleController extends AppController {
 
 
     /**
+     * 删除动态
+     */
+    public function delete($mvid)
+    {
+        $this->handCheckLogin();
+        if($this->request->is('POST')) {
+            $mvTb = TableRegistry::get('Movement');
+            $entity = $mvTb->get($mvid);
+            if($mvTb->delete($entity)) {
+                return $this->Util->ajaxReturn(true, '删除成功');
+            };
+            return $this->Util->ajaxReturn(false, '删除失败');
+        }
+    }
+
+
+    /**
      * 点赞
      */
     public function praise($mvid) {
@@ -169,26 +196,39 @@ class TracleController extends AppController {
                 return $this->Util->ajaxReturn(false, '女性不可以给女性点赞哦');
             }
             //是否点赞过
-            $praiseTb = TableRegistry::get('Mvpraises');
+            $praiseTb = TableRegistry::get('Mvpraise');
             $praise = $praiseTb
                 ->find()
                 ->where(['movement_id' => $mvid, 'user_id' => $this->user->id])
                 ->first();
             if($praise) {
                 //点赞过了则取消点赞
-                if($praiseTb->delete($praise)) {
+                $res = $praiseTb->connection()->transactional(function() use($praiseTb, $praise, $mvid){
+                    $delres = $praiseTb->delete($praise);
+                    $mvTb = TableRegistry::get('Movement');
+                    $upres = $mvTb->connection()->execute('UPDATE lm_movement SET praise_nums = praise_nums - 1 WHERE id = ? and praise_nums > ?', [$mvid, 0]);
+                    return $delres&&$upres;
+                });
+                if($res) {
                     return $this->Util->ajaxReturn([
                         'status'=> true,
                         'msg' => '取消点赞成功',
                         'act' => 2]);
-                };
-                return $this->Util->ajaxReturn(false, '取消点赞失败');
+                }else {
+                    return $this->Util->ajaxReturn(false, '取消点赞失败');
+                }
             } else {
                 $praise = $praiseTb->newEntity([
                     'movement_id' => $mvid,
                     'user_id' => $this->user->id,
                 ]);
-                if($praiseTb->save($praise)) {
+                $res = $praiseTb->connection()->transactional(function() use($praiseTb, $praise, $mvid){
+                    $addres = $praiseTb->save($praise);
+                    $mvTb = TableRegistry::get('Movement');
+                    $upres = $mvTb->connection()->execute('UPDATE lm_movement SET praise_nums = praise_nums + 1 WHERE id = ?', [$mvid]);
+                    return $addres&&$upres;
+                });
+                if($res) {
                     return $this->Util->ajaxReturn([
                         'status'=> true,
                         'msg' => '点赞成功',

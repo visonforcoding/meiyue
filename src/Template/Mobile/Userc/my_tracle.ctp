@@ -11,6 +11,7 @@
                     <time>{{create_time}}</time>
                 </h3>
             </div>
+            <i>{{#status_checking}}正在审核{{/status_checking}}{{#status_notpass}}审核不通过{{/status_notpass}}</i>
         </div>
         <div class="con inner">
             <p class="text">{{body}}</p>
@@ -21,6 +22,13 @@
                 {{/images}}
             </ul>
             {{/is_pic}}
+            {{#is_bpic}}
+            <ul class="piclist_con">
+                {{#images}}
+                <li><img src="{{.}}"/></li>
+                {{/images}}
+            </ul>
+            {{/is_bpic}}
             {{#is_video}}
             <div class="piclist_con videolist">
                 <video id="really-cool-video"  class="video-js vjs-default-skin  vjs-16-9" 
@@ -29,13 +37,22 @@
                 </video>
             </div>
             {{/is_video}}
+            {{#is_bvideo}}
+            <div class="piclist_con videolist">
+                <video id="really-cool-video"  class="video-js vjs-default-skin  vjs-16-9"
+                       preload="auto" width="100%" height="264"  poster="{{video_cover}}" controls>
+                    <source src="{{video}}" type="video/mp4">
+                </video>
+            </div>
+            {{/is_bvideo}}
         </div>
         <div class="tracle_footer flex flex_justify inner">
             <div>
                 <span class="tracle_footer_info"><i class="iconfont">&#xe65c;</i>{{view_nums}}</span>
                 <span class="tracle_footer_info"><i class="iconfont">&#xe633;</i> {{praise_nums}}</span>
             </div>
-            <div class="tracle_footer_info"><i class="iconfont">&#xe650;</i></div>
+            {{#is_pic}}<div id="del-mv-btn" class="tracle_footer_info" data-id="{{id}}"><i class="iconfont">&#xe650;</i></div>{{/is_pic}}
+            {{#is_video}}<div id="del-mv-btn" class="tracle_footer_info" data-id="{{id}}"><i class="iconfont">&#xe650;</i></div>{{/is_video}}
         </div>
     </section>
     {{/movements}}
@@ -112,7 +129,7 @@ $('#submitbtn').on('tap', function () {
 <?php $this->start('script'); ?>
 <script>
     var curpage = 1;
-    $.util.asyLoadData({gurl: '/tracle/get-tracle-list/', page: curpage, tpl: '#movement-list-tpl', id: '#tracle-list',
+    $.util.asyLoadData({gurl: '/userc/get-tracle-list/', page: curpage, tpl: '#movement-list-tpl', id: '#tracle-list',
         key: 'movements', func: calFunc});
     setTimeout(function () {
         //滚动加载
@@ -131,27 +148,37 @@ $('#submitbtn').on('tap', function () {
             data.movements[i]['count'] = count;
             if (n.type === 1) {
                 data.movements[i]['is_pic'] = true;
-            } else {
+            } else if(n.type === 2){
                 data.movements[i]['is_video'] = true;
+            } else if(n.type === 3){
+                data.movements[i]['is_bpic'] = true;
+            } else if(n.type === 4){
+                data.movements[i]['is_bvideo'] = true;
             }
         })
         return data;
     }
-    $(document).on('tap', '.likeIt', function () {
-        var user_id = $(this).data('id');
-        var $obj = $(this);
-        followIt(user_id, $obj);
+
+    $(document).on('tap', '#del-mv-btn', function() {
+        var mvid = $(this).data('id');
+        $.util.confirm(
+            '删除动态',
+            '确定要删除此动态吗？',
+            function() {
+                $.util.ajax({
+                    url: '/tracle/delete/' + mvid,
+                    method: 'POST',
+                    func: function (res) {
+                        $.util.alert(res.msg);
+                        if(res.status) {
+                            location.reload();
+                        }
+                    }
+                })
+            },
+            null
+        );
     });
-    function followIt(id, $obj) {
-        $.util.ajax({
-            url: '/user/follow',
-            data: {id: id},
-            func: function (res) {
-                $obj.find('i').toggleClass('activeico');
-                $.util.alert(res.msg);
-            }
-        })
-    }
 
     LEMON.sys.back('/user/index');
 </script>

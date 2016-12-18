@@ -7,6 +7,7 @@ use App\Model\Entity\User;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use CheckStatus;
 use PackType;
 use PayOrderType;
 use ServiceType;
@@ -691,7 +692,9 @@ class UsercController extends AppController {
      * 我的动态
      */
     public function myTracle(){
+        $this->handCheckLogin();
         $this->set([
+            'user' => $this->user,
             'pageTitle'=>'我的动态'
         ]);   
     }
@@ -701,19 +704,49 @@ class UsercController extends AppController {
      * 获取动态
      */
     public function getTracleList($page){
-        $user_id = $this->user->id;
+        $this->handCheckLogin();
         $MovementTable = TableRegistry::get('Movement');
         $movements = $MovementTable->find()
-                                   ->contain([
-                                       'User'=>function($q){
-                                            return $q->select(['id','avatar','nick']);
-                                       }
-                                   ]) 
-                                   ->where(['user_id'=>$user_id,'status'=>2])
-                                   ->orderDesc('Movement.create_time')
-                                   ->limit(10)
-                                   ->page($page)
-                                   ->toArray();
+            ->contain([
+                'User'=>function($q){
+                    return $q->select(['id','avatar','nick']);
+                },
+            ])
+            ->where(['user_id'=>$this->user->id])
+            ->orderDesc('Movement.create_time')
+            ->limit(10)
+            ->page($page)
+            ->formatResults(function($items) {
+                return $items->map(function($item) {
+                    $item->status_notpass = false;
+                    $item->status_pass = false;
+                    $item->status_checking = false;
+                    switch($item->status) {
+                        case 1:
+                            $item->status_checking = true;
+                            break;
+                        case 2:
+                            $item->status_pass = true;
+                            break;
+                        case 3:
+                            $item->status_notpass = true;
+                            break;
+                    }
+                    $item['images'] = unserialize($item['images']);
+                    //时间语义化转换
+                    $item['create_time'] = (new Time($item['create_time']))->timeAgoInWords(
+                        [ 'accuracy' => [
+                            'year' => 'year',
+                            'month' => 'month',
+                            'week' => 'week',
+                            'day' => 'day',
+                            'hour' => 'hour'
+                        ], 'end' => '+10 year']
+                    );
+                    return $item;
+                });
+            })
+            ->toArray();
         return $this->Util->ajaxReturn(['movements'=>$movements]);
     }
     
