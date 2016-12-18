@@ -172,8 +172,7 @@
                                 class="itemsname">历：</span>
                         </div>
                         <div class="home_list_r_info  plaintext">
-                           <!--  <input name="sign" type="text" placeholder="个性签名" value=""/> -->
-                            <div class="plaintext-con" contenteditable="true"><?= $user->career; ?></div>
+                            <textarea name="career" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入工作经历"><?= $user->career; ?></textarea>
                         </div>
                     </div>
                 </li>
