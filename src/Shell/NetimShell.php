@@ -9,10 +9,9 @@ use App\Pack\Netim;
  * Netim shell command. 云信
  */
 class NetimShell extends Shell {
-    
+
     const REDIS_HASH_KEY = 'meiyue_im_pool_hash';
     const REDIS_SET_KEY = 'meiyue_im_pool';
-
 
     protected $pool_nums = 50;
 
@@ -28,7 +27,7 @@ class NetimShell extends Shell {
 
         return $parser;
     }
-    
+
     public function __construct(\Cake\Console\ConsoleIo $io = null) {
         parent::__construct($io);
     }
@@ -48,9 +47,9 @@ class NetimShell extends Shell {
         $redis = new \Redis();
         $redis->connect($RedisConf['host'], $RedisConf['port']);
         $im_counts = $redis->sSize(self::REDIS_SET_KEY);
-        if($im_counts<$this->pool_nums){
-            $num = $this->pool_nums-$im_counts;
-            \Cake\Log\Log::info('填充im池'.$num.'条','cron');
+        if ($im_counts < $this->pool_nums) {
+            $num = $this->pool_nums - $im_counts;
+            \Cake\Log\Log::info('填充im池' . $num . '条', 'cron');
             $this->addIm($num);
         }
     }
@@ -78,7 +77,7 @@ class NetimShell extends Shell {
                     //
                     \Cake\Log\Log::error('Netim cron 进数据库失败,[accid:]' . $accid . '[token:]' . $token, 'cron');
                 }
-                $redisRs = $redis->hSet(self::REDIS_HASH_KEY, $accid, $token)&&$redis->sAdd(self::REDIS_SET_KEY,$accid);
+                $redisRs = $redis->hSet(self::REDIS_HASH_KEY, $accid, $token) && $redis->sAdd(self::REDIS_SET_KEY, $accid);
                 \Cake\Log\Log::info('Netim cron 进redis池结果为:' . $redisRs . ',[accid:]' . $accid . '[token:]' . $token, 'cron');
                 if ($redisRs === false) {
                     dblog('netim', '存储redis失败' . ',[accid:]' . $accid . '[token:]' . $token);
@@ -89,7 +88,6 @@ class NetimShell extends Shell {
         }
     }
 
-    
     /**
      * 初始化填充池
      */
@@ -97,19 +95,44 @@ class NetimShell extends Shell {
         set_time_limit(0);
         $this->addIm($this->pool_nums);
     }
-    
-    public function getIm(){
+
+    public function getIm() {
         $RedisConf = \Cake\Core\Configure::read('Redis.default');
         $redis = new \Redis();
         $redis->connect($RedisConf['host'], $RedisConf['port']);
         $accid = $redis->sPop(self::REDIS_SET_KEY);
-        $token = $redis->hGet(self::REDIS_HASH_KEY,$accid);
+        $token = $redis->hGet(self::REDIS_HASH_KEY, $accid);
+        if($accid===false){
+            return false;
+        }
         debug($accid);
         debug($token);
+        return [
+            'accid'=>$accid,
+            'token'=>$token
+        ];
     }
-    
-    public function test(){
+
+    public function test() {
         $this->addIm(20);
+    }
+
+    /**
+     * 更新用户的im 信息
+     */
+    public function updateUserIm() {
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $users = $UserTable->find()->select(['imaccid','imtoken','id'])->toArray();
+        foreach ($users as $user) {
+            $im = $this->getIm();
+            if ($im) {
+                $user->imaccid = $im['accid'];
+                $user->imtoken = $im['token'];
+            }
+            if($UserTable->save($user)){
+               \Cake\Log\Log::info('更新user im信息成功', 'cron'); 
+            }
+        }
     }
 
 }
