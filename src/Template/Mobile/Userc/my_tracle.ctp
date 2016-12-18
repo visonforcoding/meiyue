@@ -18,14 +18,14 @@
             {{#is_pic}}
             <ul class="piclist_con">
                 {{#images}}
-                <li><img src="{{.}}"/></li>
+                <li class="img-item" data-index="{{id}}"><img src="{{.}}"/></li>
                 {{/images}}
             </ul>
             {{/is_pic}}
             {{#is_bpic}}
             <ul class="piclist_con">
                 {{#images}}
-                <li><img src="{{.}}"/></li>
+                <li class="img-item" data-index="{{id}}"><img src="{{.}}"/></li>
                 {{/images}}
             </ul>
             {{/is_bpic}}
@@ -126,8 +126,8 @@ $('#submitbtn').on('tap', function () {
     }
 })
 </script>
-<?php $this->start('script'); ?>
 <script>
+    var allMovements = [];
     var curpage = 1;
     $.util.asyLoadData({gurl: '/userc/get-tracle-list/', page: curpage, tpl: '#movement-list-tpl', id: '#tracle-list',
         key: 'movements', func: calFunc});
@@ -143,6 +143,7 @@ $('#submitbtn').on('tap', function () {
     var count = 0;
     function calFunc(data) {
         //返回格式化回调
+        allMovements = allMovements.concat(data.movements);
         $.each(data.movements, function (i, n) {
             count++;
             data.movements[i]['count'] = count;
@@ -180,6 +181,17 @@ $('#submitbtn').on('tap', function () {
         );
     });
 
+    $(document).on('tap', '.img-item', function() {
+        var index = parseInt($(this).data('index'));
+        var curimg = $(this).find('img').first().attr('src');
+        var imgs = [];
+        allMovements.forEach(function(e){
+            if(e.id == index) {
+                imgs = e.images;
+            }
+        })
+        LEMON.event.viewImg(curimg, imgs);
+    });
+
     LEMON.sys.back('/user/index');
 </script>
-<?php $this->end('script'); ?>

@@ -234,6 +234,9 @@ class UserController extends AppController {
                 case UserStatus::PASS:
                     if($mv_pic) {
                         $mv_pic->status = 2;
+                        if($mv_pic->images) {
+                            $mv_pic->images = $user->images;
+                        }
                     } else {
                         $mv_pic = $mvTb->newEntity([
                             'user_id' => $uid,
@@ -247,6 +250,10 @@ class UserController extends AppController {
                     }
                     if($mv_vid) {
                         $mv_vid->status = 2;
+                        if($mv_pic->video_cover&&$mv_pic->video) {
+                            $mv_pic->video_cover = $user->video_cover;
+                            $mv_pic->video = $user->video;
+                        }
                     } else {
                         $mv_vid = $mvTb->newEntity([
                             'user_id' => $uid,

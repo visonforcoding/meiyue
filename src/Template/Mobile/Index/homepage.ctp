@@ -41,11 +41,11 @@
         <ul class="inner flex">
             <?php if (@unserialize($user->images)): ?>
                 <?php foreach(array_slice(unserialize($user->images), 0, 3) as $img): ?>
-                    <li><img src="<?= createImg($img) ?>?w=160" onload="setWH(this);"/></li>
+                    <li class="img-item"><img src="<?= createImg($img) ?>?w=160" onload="setWH(this);"/></li>
                 <?php endforeach; ?>
                 <li id="see-movements">
                     <a class='ablock' >
-                        <img src="<?= unserialize($user->images)[3]; ?>"/>
+                        <img src="<?= unserialize($user->images)[3]; ?>?w=160" onload="setWH(this);"/>
                         <span>更多私房</span>
                     </a>
                 </li>
@@ -462,6 +462,11 @@
             }
         })
     }
+
+    $(document).on('tap', '.img-item', function() {
+        var curimg = $(this).find('img').first().attr('src');
+        LEMON.event.viewImg(curimg, [curimg]);
+    });
 
     LEMON.sys.back('/index/index');
     LEMON.event.unrefresh();

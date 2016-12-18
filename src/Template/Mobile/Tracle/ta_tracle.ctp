@@ -28,7 +28,7 @@
             {{#is_pic}}
             <ul class="piclist_con">
                 {{#images}}
-                <li><img src="{{.}}"/></li>
+                <li class="img-item" data-index="{{id}}"><img src="{{.}}"/></li>
                 {{/images}}
             </ul>
             {{/is_pic}}
@@ -69,8 +69,8 @@
 </style>
 <?php $this->end('css')?>
 
-<?php $this->start('script'); ?>
 <script>
+    var allMovements = [];
     var curpage = 1;
     $.util.asyLoadData({
         gurl: '/tracle/get-ta-tracles/',
@@ -101,6 +101,7 @@
     var count = 0;
     function calFunc(data) {
         //返回格式化回调
+        allMovements = allMovements.concat(data.movements);
         $.each(data.movements, function (i, n) {
             count++;
             data.movements[i]['count'] = count;
@@ -160,9 +161,16 @@
             }
         })
     })
-</script>
-<?php $this->end('script'); ?>
 
-<script type="text/javascript">
-
+    $(document).on('tap', '.img-item', function() {
+        var index = parseInt($(this).data('index'));
+        var curimg = $(this).find('img').first().attr('src');
+        var imgs = [];
+        allMovements.forEach(function(e){
+            if(e.id == index) {
+                imgs = e.images;
+            }
+        })
+        LEMON.event.viewImg(curimg, imgs);
+    });
 </script>

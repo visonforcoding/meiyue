@@ -50,7 +50,21 @@
                         colModel: [
                             {name: 'user.nick', editable: false, align: 'center'},
                             {name: 'type', editable: false, align: 'center', formatter: function (cell, opt, row) {
-                                    return cell == 1 ? '图片动态' : '视频动态';
+                                    switch (cell) {
+                                        case 1:
+                                            cell = '图片动态';
+                                            break;
+                                        case 2:
+                                            cell = '视频动态';
+                                            break;
+                                        case 3:
+                                            cell = '图片动态';
+                                            break;
+                                        case 4:
+                                            cell = '视频动态';
+                                            break;
+                                    }
+                                    return cell;
                                 }},
                             {name: 'body', editable: false, align: 'center'},
                             {name: 'images', editable: false, align: 'center', formatter: function (cell, opt, row) {
