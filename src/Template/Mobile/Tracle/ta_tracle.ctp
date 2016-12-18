@@ -70,6 +70,10 @@
 <?php $this->end('css')?>
 
 <script>
+
+    function setWH(img) {
+        img.height < img.width ? $(img).css({'height':'100%'}) : $(img).css({'width': '100%'})
+    }
     var allMovements = [];
     var curpage = 1;
     $.util.asyLoadData({
