@@ -69,11 +69,14 @@
 </style>
 <?php $this->end('css')?>
 
+<?php $this->start('script'); ?>
 <script>
-
     function setWH(img) {
         img.height < img.width ? $(img).css({'height':'100%'}) : $(img).css({'width': '100%'})
     }
+</script>
+<?php $this->end('script'); ?>
+<script>
     var allMovements = [];
     var curpage = 1;
     $.util.asyLoadData({
