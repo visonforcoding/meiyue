@@ -298,15 +298,12 @@
 
 
     function chooseTagsCallBack(tagsData) {
-
         var html = "";
         for (key in tagsData) {
-
             var item = tagsData[key];
             html += "<a class='mark'>" + item['name'] +
                 "<input type='text' name='tags[_ids][]' value='" + item['id']
                 + "' tag-name='" + item['name'] + "' hidden></a>";
-
         }
         $("#tag-container").html(html);
 
@@ -315,29 +312,20 @@
     $("#tag-container").on('click', function () {
         var currentDatas = [];
         $("#tag-container").find("input").each(function () {
-
             currentDatas.push($(this).val());
-
         })
         new TagsPicker().show(chooseTagsCallBack, currentDatas);
-
     });
 
 
     $('.displaybtn').on('click', function() {
-
         if($(this).hasClass('choose')) {
-
             $(this).removeClass('choose');
             $('#show-wx').val('0');
-
         } else {
-
             $(this).addClass('choose');
             $('#show-wx').val('1');
-
         }
-
     });
 
     LEMON.sys.back('/userc/edit-info');

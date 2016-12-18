@@ -781,5 +781,76 @@ class UserController extends AppController {
         return $this->Util->ajaxReturn(['datas' => $ups->toArray(), 'status' => true]);
     }
 
+    /**
+     * 忘记密码步骤1
+     */
+    public function forgetPwd1()
+    {
+        $data = $this->request->data();
+        if($this->request->is("ajax") && $data['phone']) {
+            //验证验证码
+            $SmsTable = TableRegistry::get('Smsmsg');
+            $sms = $SmsTable->find()->where(['phone' => $data['phone']])->orderDesc('create_time')->first();
+            if (!$sms) {
+                return $this->Util->ajaxReturn(false, '验证码错误');
+            } else {
+                if ($sms->code != $data['vcode']) {
+                    return $this->Util->ajaxReturn(false, '验证码错误');
+                }
+                if ($sms->expire_time < time()) {
+                    return $this->Util->ajaxReturn(false, '验证码已过期');
+                }
+            }
+            $this->request->session()->write('PASS_VCODE_PHONE', $this->user->phone);
+            $jumpUrl = '/userc/forget-pwd2/';
+            return $this->Util->ajaxReturn(['status' => true, 'msg' => '验证成功', 'url' => $jumpUrl]);
+        }
+        $this->set([
+            'user' => $this->user,
+            'pageTitle'=>'忘记密码'
+        ]);
+    }
+
+    /**
+     * 忘记密码步骤2
+     */
+    public function forgetPwd2()
+    {
+        if($this->request->is('ajax') && $this->request->session()->read('PASS_VCODE_PHONE')) {
+            $data = $this->request->data();
+            $pwd1 = $data['newpwd1'];
+            $pwd2 = $data['newpwd2'];
+            if($pwd1 && $pwd2 && ($pwd1 == $pwd2)) {
+                $query = $this->User->query();
+                $res = $query->update()
+                    ->set(['pwd' => (new DefaultPasswordHasher)->hash($pwd1)])
+                    ->where(['id' => $this->user->id])
+                    ->execute();
+                $jumpUrl = '/user/login';
+                if($res) {
+                    return $this->Util->ajaxReturn(['status' => true, 'msg' => '密码重置成功', 'url' => $jumpUrl]);
+                } else {
+                    return $this->Util->ajaxReturn(false, '密码重置失败');
+                }
+            } else {
+                return $this->Util->ajaxReturn(false, '密码有误');
+            }
+        }
+        $this->set([
+            'pageTitle'=>'忘记密码'
+        ]);
+    }
+
+
+    /**
+     * 分享
+     */
+    public function share()
+    {
+        $this->handCheckLogin();
+        $this->set([
+            'pageTitle'=>'邀请注册有奖'
+        ]);
+    }
 }
         
