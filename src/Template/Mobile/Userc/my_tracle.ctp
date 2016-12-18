@@ -127,6 +127,10 @@ $('#submitbtn').on('tap', function () {
 })
 </script>
 <script>
+    function setWH(img) {
+        img.height < img.width ? $(img).css({'height':'100%'}) : $(img).css({'width': '100%'})
+    }
+    
     var allMovements = [];
     var curpage = 1;
     $.util.asyLoadData({gurl: '/userc/get-tracle-list/', page: curpage, tpl: '#movement-list-tpl', id: '#tracle-list',
