@@ -1032,4 +1032,14 @@ class UsercController extends AppController {
         ]);
      }
 
+
+    /*
+     * 兑换美币-支付宝
+     */
+    public function exchangeAli()
+    {
+        $this->set([
+            'pageTitle'=>'兑换美币申请'
+        ]);
+    }
 }

@@ -272,7 +272,7 @@
         </li>
     </ul>
     <h3 class="wx_tips smallarea">添加微信时，注意一定要填写暗号</h3>
-    <p class="wx_care_tips smallarea">若微信号为空假号，点击此处<a href="#this" class="color_ts">举报</a></p>
+    <p class="wx_care_tips smallarea">若微信号为空假号，点击此处<a onclick="tel();" class="color_ts">举报</a></p>
 </div>
 <span class="closed"><i class="iconfont">&#xe644;</i></span>
 </script>
@@ -467,6 +467,19 @@
         var curimg = $(this).find('img').first().attr('src');
         LEMON.event.viewImg(curimg, [curimg]);
     });
+
+    function tel() {
+        $.util.confirm(
+            '联系客服',
+            '拨打客服电话',
+            function() {
+                LEMON.event.tel('13763053901');
+            },
+            null,
+            null,
+            '拨打'
+        )
+    }
 
     LEMON.sys.back('/index/index');
     LEMON.event.unrefresh();

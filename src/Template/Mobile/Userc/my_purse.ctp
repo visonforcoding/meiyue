@@ -20,7 +20,7 @@
             <span onclick="window.location.href='/purse/recharge'" class="btn btn_bg_t"><a>充值</a></span>
                 <p><a href="/activity/index#3" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
             <?php else: ?>
-                <span class="btn btn_bg_t">兑换美币</span>
+                <span class="btn btn_bg_t" onclick="window.location.href='/userc/exchange-ali'">兑换美币</span>
                 <p class="tips">正在申请提现 20,000 美币</p>
             <?php endif; ?>
         </div>
