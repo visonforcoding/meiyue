@@ -100,6 +100,7 @@ class UserController extends AppController {
                         $redirect_url = '/index/find-rich-list';
                     }
                     return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,
+                                'user'=>$user,
                                 'token_uin' => $user_token, 'bind_wx' => $bind_wx, 'msg' => '登入成功']);
                 }
             } else {

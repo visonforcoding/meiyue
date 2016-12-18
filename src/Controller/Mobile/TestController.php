@@ -226,7 +226,7 @@ class TestController extends AppController {
     
     public function testIm($from,$to,$type=5){
         $Netim = new \App\Pack\Netim();
-        if($type==0){
+        if($type==1){
             $msg = $Netim->generateTextMsgBody(createRandomCode(2).'测试消息'.date('Y-m-d H:i:s'));
         }
         if($type==5){
@@ -272,8 +272,7 @@ class TestController extends AppController {
     /**
      * 
      */
-    public function testGift($from,$to){
-        $gift = 1;
+    public function testGift($from,$to,$gift=1){
         $this->loadComponent('Netim');
         $res = $this->Netim->giftMsg($from, $to, $gift);
         debug($res);

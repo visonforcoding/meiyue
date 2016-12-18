@@ -46,6 +46,12 @@
             $.post('', {phone: phone, pwd: pwd}, function (res) {
                 if (res.status) {
                     $.util.showPreloader();
+                    $.util.setCookie('token_uin',res.user.user_token);
+                    LEMON.db.set('gender',res.user.gender);
+                    LEMON.db.set('token_uin',res.user.user_token);
+                    LEMON.db.set('im_accid',res.user.imaccid);
+                    LEMON.db.set('im_token',res.user.imtoken);
+                    LEMON.db.set('avatar',res.user.avatar);
                     setTimeout(function () {
                         window.location.href = res.redirect_url;
                     }, 1000);
