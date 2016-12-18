@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use Cake\ORM\TableRegistry;
 use UserStatus;
 use Wpadmin\Controller\AppController;
 
@@ -207,11 +208,70 @@ class UserController extends AppController {
 
     
     public function check($uid) {
-        
         if($this->request->is('POST')) {
             $user = $this->User->get($uid);
             $user = $this->User->patchEntity($user, $this->request->data);
-            if ($this->User->save($user)) {
+            $mvTb = TableRegistry::get('Movement');
+            $mv_pic = $mvTb->find()->where(['user_id' => $uid, 'type' => 3])->first();
+            $mv_vid = $mvTb->find()->where(['user_id' => $uid, 'type' => 4])->first();
+            switch($user->status) {
+                case UserStatus::CHECKING:
+                    if($mv_pic) {
+                        $mv_pic->status = 1;
+                    }
+                    if($mv_vid) {
+                        $mv_vid->status = 1;
+                    }
+                    break;
+                case UserStatus::NOPASS:
+                    if($mv_pic) {
+                        $mv_pic->status = 3;
+                    }
+                    if($mv_vid) {
+                        $mv_vid->status = 3;
+                    }
+                    break;
+                case UserStatus::PASS:
+                    if($mv_pic) {
+                        $mv_pic->status = 2;
+                    } else {
+                        $mv_pic = $mvTb->newEntity([
+                            'user_id' => $uid,
+                            'type' => 3,
+                            'body' => '',
+                            'images' => $user->images,
+                            'view_nums' => 0,
+                            'praise_nums' => 0,
+                            'status' => 2,
+                        ]);
+                    }
+                    if($mv_vid) {
+                        $mv_vid->status = 2;
+                    } else {
+                        $mv_vid = $mvTb->newEntity([
+                            'user_id' => $uid,
+                            'type' => 4,
+                            'body' => '',
+                            'video' => $user->video,
+                            'video_cover' => $user->video_cover,
+                            'view_nums' => 0,
+                            'praise_nums' => 0,
+                            'status' => 2,
+                        ]);
+                    }
+                    break;
+            }
+            $res = $this->User->connection()->transactional(function() use(&$user, $mvTb, &$mv_pic, &$mv_vid) {
+                $mvres1 = true;
+                $mvres2 = true;
+                if($mv_pic&&$mv_vid) {
+                    $mvres1 = $mvTb->save($mv_pic);
+                    $mvres2 = $mvTb->save($mv_vid);
+                }
+                $ures = $this->User->save($user);
+                return $mvres1&&$mvres2&&$ures;
+            });
+            if ($res) {
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
                 $this->Util->ajaxReturn(false, '修改失败');

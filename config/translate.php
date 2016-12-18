@@ -50,9 +50,9 @@ class UserStatus {
     public static function getStatus($st = null) {
         $status = Array(
             UserStatus::NONEED => '无需审核',
-            UserStatus::CHECKING => '待审核',
-            UserStatus::NOPASS => '不通过',
-            UserStatus::PASS => '已通过'
+            UserStatus::CHECKING => '正在审核',
+            UserStatus::NOPASS => '审核不通过',
+            UserStatus::PASS => '审核通过'
         );
         if(CheckStatus::GETJSON == $st) {
             return json_encode($status);
