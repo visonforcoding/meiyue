@@ -97,6 +97,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         "sys.endReg",    //完成注册
         "sys.loginSuccess", //js 端成功执行登录操作
         "show.shareIco", //隐藏分享图标
+        "show.shareBanner",  //显示分享banner
         "share.banner", //调出分享的层
         "share.QQ",
         "share.QQfriend",
@@ -207,6 +208,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                 case "sys.closeLOC":
                 case "share.banner":
                 case "show.shareIco":
+                case "show.shareBanner":
                 case "sys.showKeyboard":
                 case "sys.hideKeyboard":
                 case "sys.QRcode":
