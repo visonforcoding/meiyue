@@ -243,10 +243,13 @@ class TestController extends AppController {
             $to_link_text = '查看详情';
             $to_msg = $Netim->generateCustomMsgBody($to_body, $to_link, $to_link_text, $to_prefix);
             $msg = $Netim->generateCustomMsg(5, $from_msg, $to_msg);
+            $res = $Netim->sendMsg($from, $to, $msg);
+            debug($msg);
+            $res = $Netim->sendMsg($from, $to, $msg);
+            debug($res);
+            exit();
+            return;
         }
-        debug($msg);
-        $res = $Netim->sendMsg($from, $to, $msg,  \App\Pack\Netim::TEXT_MSG);
-        debug($res);
         exit();
     }
     

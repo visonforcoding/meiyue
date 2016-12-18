@@ -186,7 +186,7 @@ function delImSess(account) {
         to: id,
         done: function (error, obj) {
             if(!error){
-              $('#chat-' + id).addClass('remove');
+              $('#chat-' + id).addClass('remove')
             }
             console.log(error);
             console.log(obj);
