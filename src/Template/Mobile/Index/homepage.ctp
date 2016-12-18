@@ -35,7 +35,7 @@
         <ul class="inner flex">
             <?php if (@unserialize($user->images)): ?>
                 <?php foreach(array_slice(unserialize($user->images), 0, 3) as $img): ?>
-                    <li><img src="<?= createImg($img) ?>?w=160"/></li>
+                    <li><img src="<?= createImg($img) ?>?w=160" onload="setWH(this);"/></li>
                 <?php endforeach; ?>
                 <li id="see-movements">
                     <a class='ablock' >
@@ -274,6 +274,10 @@
 <?php $this->start('script'); ?>
 <script src="/mobile/js/mustache.min.js"></script>
 <script>
+
+    function setWH(img) {
+        img.height < img.width ? $(img).css({'height':'100%'}) : $(img).css({'width': '100%'})
+    }
     $('#focusIt').on('click', function (event) {
         //加关注
         event.stopPropagation();
