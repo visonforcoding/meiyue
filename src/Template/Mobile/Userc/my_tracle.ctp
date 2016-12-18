@@ -18,14 +18,14 @@
             {{#is_pic}}
             <ul class="piclist_con">
                 {{#images}}
-                <li class="img-item" data-index="{{id}}"><img src="{{.}}?w=160" onload="setWH(this);"/></li>
+                <li class="img-item" data-index="{{id}}"><img src="{{.}}"/></li>
                 {{/images}}
             </ul>
             {{/is_pic}}
             {{#is_bpic}}
             <ul class="piclist_con">
                 {{#images}}
-                <li class="img-item" data-index="{{id}}"><img src="{{.}}?w=160" onload="setWH(this);"/></li>
+                <li class="img-item" data-index="{{id}}"><img src="{{.}}"/></li>
                 {{/images}}
             </ul>
             {{/is_bpic}}
@@ -127,13 +127,6 @@ $('#submitbtn').on('tap', function () {
 })
 </script>
 
-<?php $this->start('script'); ?>
-<script>
-    function setWH(img) {
-        img.height < img.width ? $(img).css({'height':'100%'}) : $(img).css({'width': '100%'})
-    }
-</script>
-<?php $this->end('script'); ?>
 <script>
     var allMovements = [];
     var curpage = 1;
