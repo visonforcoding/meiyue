@@ -436,7 +436,7 @@ color:#444;position:relative;padding:0 .15rem;margin-right:.1rem;font-size: 13px
 }
 /*订单列表*/
 .header .menu{font-size:18px;}
-.navbar{height:1.35rem;width:100%;background: #1a1713;font-size:13px; /*padding-top:.1rem;*/position: fixed;z-index: 99;top:1rem;}
+.navbar{height:1.35rem;width:100%;background: #1a1713;font-size:13px; /*padding-top:.1rem;*/position: fixed;z-index: 3;top:1rem;}
 .navbar ul{height:1.35rem;}
 .navbar a{color:#eab96a;display: block;width:1.2rem;height:28px;line-height: 28px;background: #221f1d;text-align: center;border-radius: 2px;opacity: .8;}
 .navbar .current a{background:#eab96a; color:#fff;}
