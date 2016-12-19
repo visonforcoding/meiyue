@@ -974,8 +974,10 @@ class UsercController extends AppController {
      */
     public function exchangeAli()
     {
+        $this->handCheckLogin();
         $this->set([
-            'pageTitle'=>'兑换美币申请'
+            'pageTitle'=>'兑换美币申请',
+            'user' => $this->user
         ]);
     }
 
