@@ -226,11 +226,11 @@
                 start = new Date(start_datetime).getTime();
                 end = new Date(end_datetime).getTime();
                 if(current >= start) {
-                    $.util.alert("约会时间不能小于当前时间!");
+                    $.util.alert("您选的约会时间已经过点了!");
                     return;
                 }
                 if(((end - start) / (1000 * 60 * 60)) < 3) {
-                    $.util.alert("约会时长最少3个小时!");
+                    $.util.alert("约会时间最少3个小时!");
                     return;
                 }
                 obj.calfun(start_datetime, end_datetime);
