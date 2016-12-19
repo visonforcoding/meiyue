@@ -267,3 +267,8 @@ function dblog($flag, $msg, $data = null) {
 function generateImgUrl($url,$domain,$glide=false){
     $url =  preg_replace('/upload/', 'imgs', $url);
 }
+
+
+function getHost($proto = 'http') {
+    return $proto.'://'.$_SERVER['HTTP_HOST'];
+}

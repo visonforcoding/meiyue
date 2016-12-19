@@ -70,7 +70,6 @@
 <?php $this->end('css')?>
 
 <script>
-    var allMovements = [];
     var curpage = 1;
     $.util.asyLoadData({
         gurl: '/tracle/get-ta-tracles/',
@@ -101,7 +100,7 @@
     var count = 0;
     function calFunc(data) {
         //返回格式化回调
-        allMovements = allMovements.concat(data.movements);
+        storeImgs(data.movements);
         $.each(data.movements, function (i, n) {
             count++;
             data.movements[i]['count'] = count;
@@ -162,15 +161,30 @@
         })
     })
 
+
+    allMovements = {};
+    function storeImgs(objs) {
+        if(objs.length > 0) {
+            objs.forEach(function(e) {
+                if((e.images).length > 0) {
+                    handImgs = [];
+                    unHandImgs = e.images
+                    unHandImgs.forEach(function(img) {
+                        handImgs.push('<?= getHost(); ?>' + img);
+                    });
+                    allMovements[e.id] = handImgs;
+                }
+            })
+        }
+    }
+
+
     $(document).on('tap', '.img-item', function() {
-        var index = parseInt($(this).data('index'));
-        var curimg = $(this).find('img').first().attr('src');
-        var imgs = [];
-        allMovements.forEach(function(e){
-            if(e.id == index) {
-                imgs = e.images;
-            }
-        })
-        LEMON.event.viewImg(curimg, imgs);
+        var index = $(this).data('index');
+        console.log(allMovements[index]);
+        var curimg = '<?= getHost(); ?>' + $(this).find('img').first().attr('src');
+        alert(curimg);
+        LEMON.event.viewImg(curimg, allMovements[index]);
     });
+
 </script>
