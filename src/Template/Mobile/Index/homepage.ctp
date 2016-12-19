@@ -280,12 +280,11 @@
     window.onTopRight = function () {
         LEMON.share.banner();
     }
-    window.shareConfig = {
-        imgUrl: '<?= getHost().$user->avatar.'?w=80'; ?>',
-        link: '<?= getHost().'/index/homepage/'.$user->id.'?sharer='; ?>',
-        title: '美约-<?= $user->nick; ?>',
-        desc: '美女邀请你来看看'
-    };
+
+    window.shareConfig.imgUrl = '<?= getHost().$user->avatar.'?w=80'; ?>';
+    window.shareConfig.link= '<?= getHost().'/index/homepage/'.$user->id.'?sharer='; ?>';
+    window.shareConfig.title= '美约-<?= $user->nick; ?>';
+    window.shareConfig.desc= '美女邀请你来看看';
 </script>
 <script>
     $('#focusIt').on('click', function (event) {
