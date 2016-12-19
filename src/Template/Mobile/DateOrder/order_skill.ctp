@@ -87,7 +87,7 @@
                             <span>地点</span>
                             <div>
                                 <a id="showChoosePlace">
-                                    <input id="thePlace" class="color_gray alignright" placeholder='请选择' />
+                                    <input id="thePlace" class="color_gray alignright" placeholder='请选择' readonly />
                                     <i class="iconfont r_con">&#xe605;</i>
                                 </a>
                             </div>
@@ -140,11 +140,11 @@
     <div id="choosePlaceBox" class="raper" hidden>
         <div class="choose-date-place">
             <ul>
-                <li><a href="#choosePlace">选择地点</a></li>
-                <li><a href="#this">自定义地点</a></li>
+                <li><a href="#choosePlace" class='ablock'>选择地点</a></li>
+                <li><a href="#this" class='ablock'>自定义地点</a></li>
             </ul>
             <ul class="mt20">
-                <li class="cancel"><a href="#this">取消</a></li>
+                <li class="cancel"><a href="#this" class='ablock'>取消</a></li>
             </ul>
         </div>
     </div>
