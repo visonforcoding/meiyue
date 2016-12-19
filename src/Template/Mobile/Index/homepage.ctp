@@ -280,16 +280,19 @@
 <?php $this->start('script'); ?>
 <script src="/mobile/js/mustache.min.js"></script>
 <script>
+
+    window.onTopRight = function () {
+        alert(1);
+        LEMON.share.banner();
+    }
+</script>
+<script>
     window.shareConfig = {
         imgUrl: '<?= getHost().$user->avatar.'?w=80'; ?>',
         link: '<?= getHost().'/index/homepage/'.$user->id.'?sharer='; ?>',
         title: '美约-<?= $user->nick; ?>',
         desc: '美女邀请你来看看'
     };
-    window.onTopRight = function () {
-        alert(1);
-        LEMON.share.banner();
-    }
 </script>
 <script>
     $('#focusIt').on('click', function (event) {
