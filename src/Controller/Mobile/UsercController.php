@@ -366,6 +366,7 @@ class UsercController extends AppController {
                   ->page($page)
                   ->map(function($row) {
                       $row->time = getFormateDT($row->start_time, $row->end_time);
+                      $row->dater->avatar = createImg($row->dater->avatar).'?w=160';
                       return $row;
                   })
                   ->toArray();
