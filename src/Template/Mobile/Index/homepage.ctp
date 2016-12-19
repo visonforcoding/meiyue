@@ -360,7 +360,7 @@
                             '查看美女动态',
                             '需要成为会员才能查看人家的动态哦~',
                             function() {
-                                window.location.href = '/userc/vip-buy';
+                                window.location.href = '/userc/vip-buy?reurl=/index/homepage/<?= $user->id; ?>';
                             },
                             null,
                             null,
@@ -521,7 +521,7 @@
                             '私聊',
                             '将会消耗一个聊天名额',
                             function() {
-                                window.location.href = '/user/consume-chat/<?=$user->id?>';
+                                consumeChat();
                             },
                             null
                         );
@@ -531,7 +531,7 @@
                             '私聊美女',
                             '需要成为会员才能私聊美女哦~',
                             function() {
-                                window.location.href = '/userc/vip-buy';
+                                window.location.href = '/userc/vip-buy?reurl=/index/homepage/<?= $user->id; ?>';
                             },
                             null,
                             null,
@@ -560,7 +560,6 @@
         })
     }
 
-
     /**
      * 聊天
      * @param accid
@@ -576,5 +575,10 @@
         LEMON.event.imTalk(param);
     }
 
+    LEMON.sys.back('/index/index');
+    LEMON.sys.setTopRight('分享')
+    window.onTopRight = function () {
+        //$.util.alert('点击了分享');
+    }
 </script>
 <?php $this->end('script'); ?>

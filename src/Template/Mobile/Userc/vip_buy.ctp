@@ -141,7 +141,7 @@
     {
         $.ajax({
             type: 'POST',
-            url: '/userc/create-payorder/' + $packid,
+            url: '/userc/create-payorder/' + $packid + '<?= isset($reurl)?"?redurl=".$reurl:""; ?>',
             dataType: 'json',
             success: function (res) {
                 if (typeof res === 'object') {
