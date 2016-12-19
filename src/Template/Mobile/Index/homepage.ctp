@@ -287,6 +287,7 @@
         desc: '美女邀请你来看看'
     };
     window.onTopRight = function () {
+        alert(1);
         LEMON.share.banner();
     }
 </script>
