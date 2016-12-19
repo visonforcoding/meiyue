@@ -26,9 +26,9 @@
         <div class="con inner">
             <p class="text">{{body}}</p>
             {{#is_pic}}
-            <ul class="piclist_con">
+            <ul class="piclist_con" id="imgcontainer_{{id}}" data-index="{{id}}">
                 {{#images}}
-                <li class="img-item" data-index="{{id}}"><img src="{{.}}"/></li>
+                <li><img src="{{.}}"/></li>
                 {{/images}}
             </ul>
             {{/is_pic}}
@@ -179,12 +179,15 @@
     }
 
 
-    $(document).on('tap', '.img-item', function() {
-        var index = $(this).data('index');
-        console.log(allMovements[index]);
-        var curimg = '<?= getHost(); ?>' + $(this).find('img').first().attr('src');
-        alert(curimg);
-        LEMON.event.viewImg(curimg, allMovements[index]);
+
+    $.util.onbody(function(em, target){
+        if(em.id.indexOf('imgcontainer_') != -1){
+            if(target.nodeName == 'IMG') target = target.parentNode;
+            var index = $(em).data('index');
+            var curimg = '<?= getHost(); ?>' + $(target).find('img').attr('src');
+            LEMON.event.viewImg(curimg, allMovements[index]);
+        }
+
     });
 
 </script>

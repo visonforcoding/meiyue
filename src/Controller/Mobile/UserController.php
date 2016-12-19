@@ -852,5 +852,44 @@ class UserController extends AppController {
             'pageTitle'=>'邀请注册有奖'
         ]);
     }
+
+
+    /**
+     * 检查私聊权限
+     * @param $uid
+     * @return \Cake\Network\Response|null
+     */
+    public function checkChat($uid)
+    {
+        $this->handCheckLogin();
+        if($this->request->is('POST')) {
+            $this->loadComponent('Business');
+            //检查权限和名额剩余
+            $res = $this->Business->checkRight($this->user->id, $uid, ServiceType::CHAT);
+            $accid = '';
+            if($res = \SerRight::OK_CONSUMED) {
+                $user = $this->User->get($uid);
+                $accid = $user->imaccid;
+            }
+            return $this->Util->ajaxReturn(['right' => $res, 'accid' => $accid]);
+        }
+    }
+
+    /**
+     * 私聊
+     */
+    public function consumeChat($uid)
+    {
+        $this->handCheckLogin();
+        $this->loadComponent('Business');
+        //检查权限和名额剩余
+        $res = $this->Business->consumeRight($this->user->id, $uid, \ServiceType::CHAT);
+        if($res) {
+            $user = $this->User->get($uid);
+            $accid = $user->imaccid;
+            return $this->Util->ajaxReturn(['status' => $res, 'msg' => '操作成功', 'accid' => $accid]);
+        }
+        return $this->Util->ajaxReturn(['status' => $res, 'msg' => '操作失败']);
+    }
 }
         

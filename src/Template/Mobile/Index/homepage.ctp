@@ -484,7 +484,6 @@
 
     $.util.tap($('#chat-btn'), function(event) {
         var param = {};
-        //var accid = 'meiyue_<?= $user->id; ?>';
         var accid = '<?= $user->imaccid; ?>';
         var nick = '<?= $user->nick; ?>';
         var avatar = '<?= getHost().$user->avatar; ?>';
@@ -494,7 +493,72 @@
         LEMON.event.imTalk(param);
     });
 
+    function checkim() {
+        $.util.ajax({
+            url:'/user/check-chat/<?=$user->id?>',
+            method: 'POST',
+            func:function(res){
+                switch(res.right) {
+                    case <?= SerRight::OK_CONSUMED; ?>:
+                        var param = {};
+                        var accid = res.accid;
+                        var nick = '<?= $user->nick; ?>';
+                        var avatar = '<?= getHost().$user->avatar; ?>';
+                        param['accid'] = accid;
+                        param['nick'] = nick;
+                        param['avatar'] = avatar;
+                        LEMON.event.imTalk(param);
+                        break;
+                    case <?= SerRight::NO_HAVENUM; ?>:
+                        $.util.confirm(
+                            '私聊',
+                            '将会消耗一个聊天名额',
+                            function() {
+                                window.location.href = '/tracle/ta-tracle/<?=$user->id?>';
+                            },
+                            null
+                        );
+                        break;
+                    case <?= SerRight::NO_HAVENONUM; ?>:
+                        $.util.confirm(
+                            '查看美女动态',
+                            '需要成为会员才能查看人家的动态哦~',
+                            function() {
+                                window.location.href = '/userc/vip-buy';
+                            },
+                            null,
+                            null,
+                            '购买会员'
+                        );
+                        break;
+                }
+            }
+        })
+    }
 
+
+    function consumeChat() {
+        $.util.showPreloader();
+        $.util.ajax({
+            url:'/user/check-chat/<?=$user->id?>',
+            method: 'POST',
+            func:function(res){
+                $.util.hidePreloader();
+                if(res.status) {
+                    var param = {};
+                    var accid = res.accid;
+                    var nick = '<?= $user->nick; ?>';
+                    var avatar = '<?= getHost().$user->avatar; ?>';
+                    param['accid'] = accid;
+                    param['nick'] = nick;
+                    param['avatar'] = avatar;
+                    LEMON.event.imTalk(param);
+                } else {
+                    $.util.alert(res.msg);
+                }
+            }
+        })
+    }
 
     LEMON.sys.back('/index/index');
     LEMON.event.unrefresh();
