@@ -67,6 +67,18 @@
                     <?php endif; ?>
                 </div>
                 {{/refuse_status_5}}
+                {{#w_timeout_receive}}
+                <h3 class="pay_desc color_y">订单关闭</h3>
+                <div class="groupbtn">
+                    <?php if ($user->gender == 2): ?>
+                        <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
+                        <span data-orderid="{{id}}"  class="refuse">惩罚成功</span>
+                    <?php else: ?>
+                        <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
+                        <span data-orderid="{{id}}"  class="refuse">退款成功</span>
+                    <?php endif; ?>
+                </div>
+                {{/w_timeout_receive}}
                 {{#finish_receive}}
                 <h3 class="pay_desc color_y">待付尾款</h3>
                 <div class="groupbtn">
@@ -444,6 +456,9 @@
                         break;
                     case 5:
                         data.orders[i]['refuse_status_5'] = true;  //5状态  女性拒绝接单
+                        break;
+                    case 6:
+                        data.orders[i]['w_timeout_receive'] = true;  //6状态  女性超时未接受
                         break;
                     case 7:
                         data.orders[i]['finish_receive'] = true;  //女方确认接单 等待支付尾款
