@@ -187,10 +187,11 @@
 
 
     $.util.onbody(function(em, target){
+        console.log(allMovements);
         if(em.id.indexOf('imgcontainer_') != -1){
             if(target.nodeName == 'IMG') target = target.parentNode;
             var index = $(em).data('index');
-            var curimg = '<?= getHost(); ?>' + $(target).find('img').attr('src');
+            var curimg = '<?= getHost(); ?>' + ($(target).find('img').attr('src')).replace(/imgs/, 'upload');
             LEMON.event.viewImg(curimg.replace(/\?.*/, ''), allMovements[index]);
         }
     });
