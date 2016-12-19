@@ -64,7 +64,7 @@
             <span class="choose-type-close closed">取消</span>
         </div>
         <ul class="inner outerblock">
-            <li class="pay-type-choose choosed" onclick="toAlipage();">
+            <li class="pay-type-choose" onclick="toAlipage();">
                 <div class="paytype">
                     <i class="iconfont payico alipay">&#xe625;</i>
                     <h3 class="paydes">
@@ -72,7 +72,7 @@
                         <em class="small">推荐使用</em>
                     </h3>
                 </div>
-                <span class="iconfont choose color_y">&#xe635;</span>
+                <span class="pay-type-choose-span iconfont choose">&#xe615;</span>
             </li>
             <li class="pay-type-choose" onclick="toYinlianpage();">
                 <div class="paytype">
@@ -82,7 +82,7 @@
                         <em class="small">银联账户使用</em>
                     </h3>
                 </div>
-                <span class="iconfont choose">&#xe615;</span>
+                <span class="pay-type-choose-span iconfont choose">&#xe615;</span>
             </li>
         </ul>
     </div>
@@ -103,8 +103,14 @@
         $('.choose-type').toggleClass('hide');
     });
 
-    $.util.tap($('.choose-type-close'), function() {
-        $('.choose-type').toggleClass('hide');
+    $('.pay-type-choose').on('tap', function(event) {
+        event.stopPropagation();
+        $('.pay-type-choose').removeClass('choosed');
+        $('.pay-type-choose .pay-type-choose-span').html("&#xe615;");
+        $('.pay-type-choose .pay-type-choose-span').removeClass('color_y');
+        $(this).addClass('choosed');
+        $(this).find('.pay-type-choose-span').first().html('&#xe635;');
+        $(this).find('.pay-type-choose-span').first().addClass('color_y');
     });
 
     function toAlipage() {

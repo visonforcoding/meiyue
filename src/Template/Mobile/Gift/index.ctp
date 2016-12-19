@@ -15,74 +15,48 @@
 <div class="allgift">
     <ul class="" id="allgift">
         <li>
-            <div class="items active">
-                <div class="gift_pic">
-                    <img src="../images/gift01.png"/>
+            <?php foreach($gifts as $gift): ?>
+                <div class="items" data-id="<?= $gift->id; ?>" data-name="<?= $gift->name; ?>">
+                    <div class="gift_pic">
+                        <img src="<?= $gift->pic; ?>"/>
+                    </div>
+                    <div class="bottomtext"><i><?= $gift->price; ?></i> <span class="ico"><img src="/mobile/images/cash01.png" alt=""/></span></div>
+                    <span class="iconfont choose">&#xe64c;</span>
                 </div>
-                <div class="bottomtext"><i>5</i> <span class="ico"><img src="../images/cash01.png" alt=""/></span></div>
-                <span class="iconfont choose">&#xe64c;</span>
-            </div>
-            <div class="items">
-                <div class="gift_pic">
-                    <img src="../images/gift04.png" style="width:100%"/>
-                </div>
-                <div class="bottomtext"><i>20</i> <span class="ico"><img src="../images/cash01.png" alt=""/></span>
-                </div>
-                <span class="iconfont choose">&#xe64c;</span>
-            </div>
-            <div class="items">
-                <div class="gift_pic">
-                    <img src="../images/gift05.png"/>
-                </div>
-                <div class="bottomtext"><i>52</i> <span class="ico"><img src="../images/cash01.png" alt=""/></span>
-                </div>
-                <span class="iconfont choose">&#xe64c;</span>
-            </div>
-            <div class="items">
-                <div class="gift_pic">
-                    <img src="../images/gift03.png"/>
-                </div>
-                <div class="bottomtext"><i>131.4</i> <span class="ico"><img src="../images/cash01.png" alt=""/></span>
-                </div>
-                <span class="iconfont choose">&#xe64c;</span>
-            </div>
-            <div class="items">
-                <div class="gift_pic">
-                    <img src="../images/gift02.png"/>
-                </div>
-                <div class="bottomtext"><i>210</i> <span class="ico"><img src="../images/cash01.png" alt=""/></span>
-                </div>
-                <span class="iconfont choose">&#xe64c;</span>
-            </div>
-            <div class="items">
-                <div class="gift_pic">
-                    <img src="../images/gift04.png" style="width:100%;"/>
-                </div>
-                <div class="bottomtext"><i>520</i> <span class="ico"><img src="../images/cash01.png" alt=""/></span>
-                </div>
-                <span class="iconfont choose">&#xe64c;</span>
-            </div>
-            <div class="items">
-                <div class="gift_pic">
-                    <img src="../images/gift02.png"/>
-                </div>
-                <div class="bottomtext"><i>999</i> <span class="ico"><img src="../images/cash01.png" alt=""/></span>
-                </div>
-            </div>
-            <div class="items">
-                <div class="gift_pic">
-                    <img src="../images/gift03.png"/>
-                </div>
-                <div class="bottomtext"><i>5000</i> <span class="ico"><img src="../images/cash01.png" alt=""/></span>
-                </div>
-                <span class="iconfont choose">&#xe64c;</span>
-            </div>
+            <?php endforeach; ?>
         </li>
     </ul>
 </div>
-<a href="login_identify_jump.html" class="identify_footer_potion"><i class="iconfont">&#xe614;</i> 立即赠送</a>
+<a id="sendto" class="identify_footer_potion"><i class="iconfont">&#xe614;</i> 立即赠送</a>
 <script type="text/javascript">
+    var gid = null;
+    var gname = '';
     $('#allgift .items').on('tap', function () {
         $(this).addClass('active').siblings().removeClass('active');
+        gid = $(this).data('id');
+        gname = $(this).data('name');
     })
+
+    $('#sendto').on('tap', function() {
+        if(!gid) {
+            $.util.alert('请选择要送的礼物');
+            return;
+        }
+
+        $.util.confirm(
+            '- 赠送礼物 -',
+            '赠送一件【' + gname + '】给 <?= $user->nick;?>',
+            function() {
+                $.ajax({
+                    url: '/gift/send/<?= $user->id; ?>/' + gid,
+                    type: "POST",
+                    dataType: "json",
+                    success: function (res) {
+                        $.util.alert(res.msg);
+                    }
+                })
+            },
+            null
+        );
+    });
 </script>
