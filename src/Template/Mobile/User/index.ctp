@@ -1,5 +1,5 @@
 <div>
-    <div class="homepage">
+    <div class="homepage flex">
         <!--  <div class="header">
              <h1>我的</h1>
              <i class="iconfont install">&#xe661;</i>

@@ -4,7 +4,7 @@
                     <h1>我的</h1>
                     <i class="iconfont install">&#xe661;</i>
                 </div>-->
-        <div class="home_cover_info">
+        <div class="home_cover_info flex">
             <span class="avatar">
                 <img src="<?= createImg($user->avatar) . '?w=150' ?>"  class="avatar-pic"/>
             </span>
