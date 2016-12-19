@@ -208,7 +208,8 @@ class DateOrderController extends AppController
                    'status'=>true,
                    'redirect_url'=>'/date-order/order-success/'.$dateorder->id,
                    'code'=>202,    //唤起聊天 
-                   'dater'=>$dateorder->dater
+                   'dater'=>$dateorder->dater,
+                   'msg'=>'支付成功',    
                        ]);
            }else{
                errorMsg($flow, '失败');
