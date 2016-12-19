@@ -141,7 +141,7 @@
         </ul>
     </div>
 </div>
-<div style="height:1.4rem"></div>
+<div style="height:53px"></div>
 <!--底部-->
 <?= $this->element('footer', ['active' => 'me']) ?>
 <?php $this->start('script'); ?>
