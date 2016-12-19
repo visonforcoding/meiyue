@@ -19,12 +19,10 @@
         <?= $this->fetch('static') ?>
         <script id="hideHeaderTpl" type="text/html">
             <style>
-                header{
-                    display: none;
-                }
-                .footer{
-                    display: none;
-                }
+                header{ display: none; }
+                .footer{ display: none; }
+                .navbar{ top:0; }
+                .find_list_box{ top:1.4rem; }
             </style>
         </script>
         <script>

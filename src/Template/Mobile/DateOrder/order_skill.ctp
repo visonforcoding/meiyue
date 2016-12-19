@@ -147,11 +147,11 @@
 <div class="wraper page" id="page-choosePlace" hidden>
     <div id="selfPlace" class='aPlace' hidden>
         <div class="place-self">
-             <h3 class="basic_info_integrity">没有合适地点，<a href="javascript:toListplace();" class="color_y">搜索地址</a></h3>
+             <h3 class="basic_info_integrity">没有合适地点，<a href="javascript:toListplace();" class="color_y">回到搜索地址</a></h3>
                 <div class="search_place_header inner">
                         <div class="search-box flex flex_justify">
                             <div class="search-btn">
-                                <input type="text" id="selfInput" placeholder="请输入约会地点" results="5" />
+                                <input type="text" id="selfInput" value="" placeholder="请输入约会地点" results="5" />
                             </div>
                             <span class="cancel-btn color_y" onclick='submitSelfPlace()'>提交</span>
                         </div>
@@ -204,6 +204,7 @@
 </div>
 <?php $this->start('script'); ?>
 <script>
+    location.hash = '';
     //日期选择回调函数
     var skill_id = <?= $data->skill_id ?>;
     var lasth, start_time, end_time;
