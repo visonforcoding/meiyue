@@ -187,7 +187,7 @@ $('#submitbtn').on('tap', function () {
         );
     });
 
-    var allMovements = {};
+    allMovements = {};
     function storeImgs(objs) {
         if(objs.length > 0) {
             objs.forEach(function(e) {
@@ -204,10 +204,13 @@ $('#submitbtn').on('tap', function () {
     }
 
 
-    $(document).on('tap', '.img-item', function() {
-        var index = $(this).data('index');
-        var curimg = '<?= getHost(); ?>' + ($(this).find('img').first().attr('src')).replace(/imgs/, 'upload');
-        LEMON.event.viewImg(curimg.replace(/\?.*/, ''), allMovements.index);
+    $.util.onbody(function(em, target){
+        if(em.id.indexOf('imgcontainer_') != -1){
+            if(target.nodeName == 'IMG') target = target.parentNode;
+            var index = $(em).data('index');
+            var curimg = '<?= getHost(); ?>' + ($(target).find('img').attr('src')).replace(/imgs/, 'upload');
+            LEMON.event.viewImg(curimg.replace(/\?.*/, ''), allMovements[index]);
+        }
     });
 
     LEMON.sys.back('/user/index');

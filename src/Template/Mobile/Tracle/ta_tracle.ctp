@@ -185,9 +185,7 @@
     }
 
 
-
     $.util.onbody(function(em, target){
-        console.log(allMovements);
         if(em.id.indexOf('imgcontainer_') != -1){
             if(target.nodeName == 'IMG') target = target.parentNode;
             var index = $(em).data('index');
