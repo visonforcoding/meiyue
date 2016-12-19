@@ -65,7 +65,7 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">出</span><span class="itemsname">生</span><span class="itemsname">日</span><span class="itemsname">期：</span></div>
                         <div class="home_list_r_info">
-                            <input id="birthday" name="birthday" type="text" placeholder="请输入日期" value="1992-09-24"/>
+                            <input id="birthday" name="birthday" type="date" placeholder="请输入日期" value="1992-09-24"/>
                         </div>
                     </div>
                 </li>
@@ -159,15 +159,15 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname short_name">家</span><span class="itemsname">乡：</span></div>
                         <div class="home_list_r_info">
-                            <input id="hometown" name="hometown" type="text" placeholder="请输入家乡" />
+                            <input id="hometown" name="hometown" type="text" placeholder="请输入家乡"   readonly/>
                         </div>
                     </div>
                 </li>
-                <li>
+                <li  class='right-ico'>
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">所</span><span class="itemsname">在</span><span class="itemsname">地</span><span class="itemsname">区：</span></div>
                         <div class="home_list_r_info">
-                            <input id="city" name="city" type="text" placeholder="请输入所在地区" />
+                            <input id="city" name="city" type="text" placeholder="请输入所在地区" readonly />
                         </div>
                     </div>
                 </li>
