@@ -143,7 +143,7 @@ $('#submitbtn').on('tap', function () {
     var count = 0;
     function calFunc(data) {
         //返回格式化回调
-        allMovements = storeImgs(data.movements);
+        storeImgs(data.movements);
         $.each(data.movements, function (i, n) {
             count++;
             data.movements[i]['count'] = count;
