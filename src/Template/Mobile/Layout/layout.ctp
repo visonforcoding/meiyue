@@ -21,8 +21,9 @@
             <style>
                 header{display: none;}
                 .footer{display: none;}
-                .navbar{top:0;}
+                .navbar,.raper{top:0;}
                 .find_list_box{padding-top:1.4rem;}
+
             </style>
         </script>
         <script>
