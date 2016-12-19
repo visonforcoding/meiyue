@@ -56,12 +56,36 @@ class NetimComponent extends Component {
         $msg = $this->Netim->generateCustomMsg(5, $from_msg, $to_msg);
         $res = $this->Netim->sendMsg($order->buyer->imaccid, $order->dater->imaccid, $msg);
         if (!$res) {
+            \Cake\Log\Log::error($res,'devlog');
+            dblog('prepayMsg', 'server发送im消息失败', $res);
+        }
+        return $res;
+    }
+    
+    
+    public function payallMsg(\App\Model\Entity\Dateorder $order){
+        $from_prefix = '';
+        $from_link = $this->Util->getServerDomain() . '/date-order/order-detail/' . $order->id;
+        $from_body = '我已付完尾款,我们不见不散！';
+        $from_link_text = '查看详情';
+        $from_msg = $this->Netim->generateCustomMsgBody($from_body, $from_link, $from_link_text, $from_prefix);
+
+        $to_prefix = '';
+        $to_link = $from_link;
+        $to_body = '我已付完尾款,我们不见不散！';
+        $to_link_text = '查看详情';
+        $to_msg = $this->Netim->generateCustomMsgBody($to_body, $to_link, $to_link_text, $to_prefix);
+        $msg = $this->Netim->generateCustomMsg(5, $from_msg, $to_msg);
+        $res = $this->Netim->sendMsg($order->buyer->imaccid, $order->dater->imaccid, $msg);
+        if (!$res) {
+            \Cake\Log\Log::error($res,'devlog');
             dblog('prepayMsg', 'server发送im消息失败', $res);
         }
         return $res;
     }
 
-    
+
+
 
     /**
      * 发送礼物消息

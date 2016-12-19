@@ -224,9 +224,9 @@
     <?php endif; ?>
     <?php if (in_array($order->status, [4, 5, 6, 8])): ?>
         <div class="bottomblock">
-            <div class="flex flex_end">
+            <div class="potion_footer flex flex_justify">
                 <span id="remove_order" class="footerbtn cancel">删除订单</span>
-                <span id="godate" class="footerbtn gopay">退款成功</span>
+                <span  class="footerbtn gopay">退款成功</span>
             </div>
         </div>
     <?php endif; ?>
@@ -327,15 +327,19 @@
     var orderid = <?= $order->id ?>;
     $('#payall').on('tap', function () {
         //立即支付尾款
-        console.log('test');
         var id = $(this).data('id');
-        $.util.ajax({
-            url: '/userc/order-payall',
-            data: {order: id},
-            func: function (res) {
-                $.util.alert(res.msg);
-            }
-        });
+        $.util.confirm('确定支付？', '将扣除相应的美币', function () {
+            $.util.ajax({
+                url: '/date-order/order-payall',
+                data: {order: id},
+                func: function (res) {
+                    $.util.alert(res.msg);
+                    if (res.status) {
+                        $.util.openTalk(res);
+                    }
+                }
+            });
+        })
     });
     var refuse_msg = '<?= $refuse_msg ?>';
     $(document).on('tap', '#refuse_status_3', function () {
@@ -406,6 +410,7 @@
             data: {order: orderid},
             func: function (res) {
                 $.util.alert(res.msg);
+                refresh();
             }
         });
     });
@@ -422,11 +427,17 @@
                     if (res.status) {
                         setTimeout(function () {
                             obj.parents('li').remove();
-                        }, 600)
+                        }, 600);
                     }
                 }
             });
-        })
+        });
     });
+
+    function refresh() {
+        setTimeout(function () {
+            document.location.reload();
+        }, 600);
+    }
 </script>
 <?php $this->end('script'); ?>

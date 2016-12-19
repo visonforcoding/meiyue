@@ -178,7 +178,7 @@
         <form action="">
             <div class="search-box flex flex_justify">
                 <div class="search-btn">
-                    <i class="iconfont ico">&#xe689;</i><input type="search" placeholder="请输入约会地点" results="5" />
+                    <i class="iconfont ico">&#xe689;</i><input type="text" placeholder="请输入约会地点" results="5" />
                 </div>
                 <span class="cancel-btn color_y">搜索</span>
             </div>

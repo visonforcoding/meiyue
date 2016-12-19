@@ -88,7 +88,7 @@
               if(res.status){
                   $.util.alert('感谢您的评价');
                   setTimeout(function(){
-                      window.history.go(-1);
+                      document.location.href = '/userc/dateorder';
                   },300);
               }
           }

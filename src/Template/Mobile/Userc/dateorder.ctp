@@ -52,10 +52,21 @@
                         <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
                     <?php else: ?>
                         <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
-                        <span data-orderid="{{id}}"  class="receive_order">退款成功</span>
+                        <span data-orderid="{{id}}"  class="refuse">退款成功</span>
                     <?php endif; ?>
                 </div>
                 {{/cancel_status_4}}
+                {{#refuse_status_5}}
+                <h3 class="pay_desc color_y">订单关闭</h3>
+                <div class="groupbtn">
+                    <?php if ($user->gender == 2): ?>
+                        <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
+                    <?php else: ?>
+                        <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
+                        <span data-orderid="{{id}}"  class="receive_order">退款成功</span>
+                    <?php endif; ?>
+                </div>
+                {{/refuse_status_5}}
                 {{#finish_receive}}
                 <h3 class="pay_desc color_y">待付尾款</h3>
                 <div class="groupbtn">
@@ -282,19 +293,19 @@
         var orderid = $(this).data('orderid');
         $.util.confirm('确定支付？', '将扣除美币支付尾款', function () {
             $.util.ajax({
-                url: '/userc/orderPayall',
+                url: '/date-order/orderPayall',
                 data: {order: orderid},
                 func: function (resp) {
                     if (resp.status) {
                         //聊天框
                         $.util.alert(resp.msg);
-                        //LEMON.event.imTalk();
+                        $.util.openTalk(resp);
                     } else {
                         if (resp.code == '201') {
                             //余额不足
-                            $.util.alert(res.msg);
+                            $.util.alert(resp.msg);
                             setTimeout(function () {
-                                window.location.href = res.redirect_url;
+                                window.location.href = resp.redirect_url;
                             }, 300);
                         }
                     }
@@ -324,7 +335,9 @@
             data: {order_id: orderid},
             func: function (res) {
                 $.util.alert(res.msg);
-
+                setTimeout(function () {
+                    refresh();
+                }, 300);
             }
         })
     });
@@ -429,6 +442,9 @@
                     case 4:
                         data.orders[i]['cancel_status_4'] = true;  //男性取消订单
                         break;
+                    case 5:
+                        data.orders[i]['refuse_status_5'] = true;  //5状态  女性拒绝接单
+                        break;
                     case 7:
                         data.orders[i]['finish_receive'] = true;  //女方确认接单 等待支付尾款
                         break;
@@ -449,7 +465,7 @@
                         data.orders[i]['cancel_status_11'] = true;  //受邀者超时未付尾款
                         break;
                     case 12:
-                         data.orders[i]['cancel_status_12'] = true;  //受邀者超时未付尾款
+                        data.orders[i]['cancel_status_12'] = true;  //受邀者超时未付尾款
                         break;
                     case 13:
                         data.orders[i]['confirm_go'] = true;  //女性用户确认到达
@@ -468,9 +484,10 @@
 
     LEMON.sys.back('/user/index');
     function refresh() {
+        var page = curpage-1;
         $.util.asyLoadData({
             gurl: '/userc/getDateorders/',
-            page: curpage,
+            page: page,
             tpl: '#order-list-tpl',
             id: '#order-list',
             key: 'orders',

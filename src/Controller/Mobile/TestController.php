@@ -294,4 +294,11 @@ class TestController extends AppController {
         echo 'fff';
         exit();
     }
+    
+    public function std($str){
+        fclose(STDOUT);
+        $o = file_get_contents('php://stdout');
+        fopen('app.log','wb');
+        //fwr
+    }
 }

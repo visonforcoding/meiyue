@@ -329,8 +329,10 @@ class UsercController extends AppController {
        $query = $this->request->query('query');
        if($this->user->gender==1){
          $where = ['consumer_id'=>  $this->user->id];
+         $where[] = ['Dateorder.is_del not in'=>[1,3]];
        }else{
-         $where = ['dater_id'=>  $this->user->id];  
+         $where = ['dater_id'=>  $this->user->id];
+         $where[] = ['Dateorder.is_del not in'=>[2,3]];
        }
        
        if($query>1){
@@ -406,71 +408,7 @@ class UsercController extends AppController {
     
    
     
-    /**
-     * 支付约单尾款
-     * 1.订单状态改变
-     * 2.扣除用户余额
-     * 3.生成交易流水
-     * 4.短信通知
-     */
-    public function orderPayall(){
-        $order_id = $this->request->data('order');
-        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
-        $order = $DateorderTable->get($order_id,[
-            'contain'=>[
-                'Buyer'=>function($q){
-                    return $q->select(['phone','id','avatar','nick','birthday','money']);
-                }
-                ,'Dater'=>function($q){
-                    return $q->select(['id','nick','avatar','birthday','phone']);
-                }
-                ,'UserSkill.Skill','Dater.Tags'
-            ]
-        ]);
-        //订单状态改变->10
-        $order->status = 10;        
-        //扣除尾款
-        $payment = $order->amount - $order->pre_pay;
-        //交易流水
-        $pre_amount = $this->user->money;
-        if($this->user->money < $payment){
-            return $this->Util->ajaxReturn(['status'=>false,'code'=>'201','账户美币不足']);
-        }
-        $this->user->money = $this->user->money - $payment;
-        $user = $this->user;
-        $after_amount = $this->user->money;
-        //生成流水
-        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
-        $flow = $FlowTable->newEntity([
-           'user_id'=>0,
-           'buyer_id'=>  $this->user->id,
-           'relate_id'=>$order->id,
-           'type'=>2,
-           'type_msg'=>'约技能支付尾款',
-           'income'=>2,
-           'amount'=>$payment,
-           'price'=>$payment,
-           'pre_amount'=>$pre_amount,
-           'after_amount'=>$after_amount,
-           'paytype'=>1,   //余额支付
-           'remark'=> '约技能支付尾款'
-       ]);
-        $transRes = $DateorderTable->connection()->transactional(function()use(&$flow,$FlowTable,&$order,$DateorderTable,$user){
-               $UserTable = \Cake\ORM\TableRegistry::get('User');
-               return $FlowTable->save($flow)&&$DateorderTable->save($order)&&$UserTable->save($user);
-           });
-        if($transRes){
-            $this->loadComponent('Sms');
-            $this->Sms->sendByQf106($order->dater->phone, $order->buyer->nick.
-                    '已支付您的【'.$order->user_skill->skill->name.'】技能约单尾款，请及时赴约.');
-            return $this->Util->ajaxReturn(true,'成功支付尾款');
-        }else{
-            errorMsg($flow, '失败');
-            errorMsg($dateorder, '失败');
-            return $this->Util->ajaxReturn(false,'支付尾款失败');
-        }
-        
-    }
+    
     
     
     /**
