@@ -210,7 +210,7 @@
 <!--底部-->
 <div class="home_page_footer">
     <ul class="clearfix flex flex_justify
-        <?= (count($user->user_skills) == 0)?'changeli':''; ?>">
+        <?= (count($user->user_skills) == 0)?'changeli':''; ?>" onclick="function(event){event.stopPropagation();};">
         <?php if ($isFollow): ?>
             <li>
                 <a id="focusIt">
