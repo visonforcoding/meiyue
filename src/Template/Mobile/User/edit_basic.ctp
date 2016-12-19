@@ -16,7 +16,9 @@
                     <div class="home_items">
                         <div class="home_list_l_info required">
                             <span class="itemsname">昵</span><span class="itemsname">称：</span>
-                            <?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
+                            <?php use Cake\I18n\Date;
+
+                            if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
                             <input name="nick" type="text" placeholder="请输入昵称" value="<?= $user->nick; ?>"/>
@@ -44,7 +46,7 @@
                         </div>
                         <div class="home_list_r_info">
                             <div class="checkdate">
-                                <input id="birthday" name="birthday" type="date" placeholder="请输入日期" value="<?= $user->birthday; ?>" />
+                                <input id="birthday" name="birthday" type="date" placeholder="请输入日期" value="<?= ($user->birthday)?$user->birthday:new Date('1991-1-1'); ?>" required="required"/>
                             </div>
                         </div>
                     </div>
@@ -289,6 +291,10 @@
 <?= $this->start('script'); ?>
 <script>
     $('#submit').on('click', function () {
+        if(($('#birthday').val()).length == 0) {
+            $.util.alert('请填写正确的出生日期');
+            $('#birthday').val('<?= new Date('1991-1-1'); ?>');
+        }
         var form = $('form');
         $.util.ajax({
             data: form.serialize(),
@@ -332,6 +338,17 @@
         } else {
             $(this).addClass('choose');
             $('#show-wx').val('1');
+        }
+    });
+
+    var lastDate = $('#birthday').val();
+    $('#birthday').on('change', function(){
+        var date = $(this).val();
+        if(date.length == 0) {
+            $(this).val(lastDate);
+        }
+        else{
+            lastDate = date;
         }
     });
 
