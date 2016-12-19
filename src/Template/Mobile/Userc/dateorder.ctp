@@ -181,7 +181,7 @@
                 <?php if ($user->gender == 2): ?>
                     <h3 class="pay_desc color_y">交易成功</h3>
                     <div class="groupbtn">
-                        <a href="/date-order/appraise/{{id}}"><span data-orderid="{{id}}" class="refuse" >查看评价</span></a>
+                        <a href="/date-order/view-appraise/{{id}}"><span data-orderid="{{id}}" class="refuse" >查看评价</span></a>
                         <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
                     </div>
                 <?php else: ?>
@@ -363,9 +363,9 @@
         var stime = $(this).data('stime');
         var text;
         if ((new Date(stime) - new Date()) > 2 * 60 * 60) {
-            text = '平台将只退回约单金额的70%,剩余的30%将打至美女账户';
+            text = '平台将只退回约单金额的70%,剩余的30%将打至美女账户作为补偿，是否继续？';
         } else {
-            text = '平台将只退回约单金额的30%,剩余的70%将打至美女账户';
+            text = '平台将只退回约单金额的30%,剩余的70%将打至美女账户作为补偿，是否继续？';
         }
         $.util.confirm('确定要取消订单吗?', text, function () {
             $.util.ajax({
