@@ -16,16 +16,16 @@
         <div class="con inner">
             <p class="text">{{body}}</p>
             {{#is_pic}}
-            <ul class="piclist_con">
+            <ul class="piclist_con" id="imgcontainer_{{id}}" data-index="{{id}}">
                 {{#images}}
-                <li class="img-item" data-index="{{id}}"><img src="{{.}}?w=160" onload="$.util.setWH(this)"/></li>
+                <li><img src="{{.}}?w=160" onload="$.util.setWH(this)"/></li>
                 {{/images}}
             </ul>
             {{/is_pic}}
             {{#is_bpic}}
-            <ul class="piclist_con">
+            <ul class="piclist_con" id="imgcontainer_{{id}}" data-index="{{id}}">
                 {{#images}}
-                <li class="img-item" data-index="{{id}}"><img src="{{.}}?w=160" onload="$.util.setWH(this)"/></li>
+                <li><img src="{{.}}?w=160" onload="$.util.setWH(this)"/></li>
                 {{/images}}
             </ul>
             {{/is_bpic}}
