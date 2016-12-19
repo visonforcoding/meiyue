@@ -508,7 +508,6 @@
     });
 
     function checkim() {
-        alert();
         $.util.ajax({
             url:'/user/check-chat/<?=$user->id?>',
             method: 'POST',
