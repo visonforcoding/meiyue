@@ -875,6 +875,25 @@ class DateOrderController extends AppController
             'pageTitle'=>'评价'
         ]);
     }
+    /**
+     * 评价页
+     */
+    public function viewAppraise($id){
+        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+        $order = $DateorderTable->get($id,[
+            'contain'=>[
+                 'Dater' => function($q) {
+                            return $q->select(['id', 'nick', 'money','avatar']);
+                    },
+                  'UserSkill.Skill'           
+            ]
+        ]);
+        $this->set([
+            'order'=>$order,
+            'pageTitle'=>'评价'
+        ]);
+    }
+    
     
      /**
      * 预约订单详情

@@ -406,10 +406,6 @@ class UsercController extends AppController {
         return $this->Util->ajaxReturn(false,'服务器开小差');
     }
     
-   
-    
-    
-    
     
     /**
      * 赴约成功
