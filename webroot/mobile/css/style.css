@@ -616,7 +616,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .tracle_list .videolist .playbtn{position: absolute;left:50%;top:50%;margin-left:-20px;margin-top:-20px;color:#fff;font-size: 40px;line-height: normal;}
 .tracle_list .piclist_con li{width:2.22rem;height:2.22rem;overflow: hidden;float:left;border-radius: 5px;margin-right:.1rem;margin-bottom:.1rem;}
 .tracle_list .piclist_con li:nth-of-type(3n){margin-right: 0;}
-.tracle_list .piclist_con li img,.tracle_list .avatar img,.items_left_picinfo img{display: block;width:100%;height:100%;}
+.tracle_list .piclist_con li img,.tracle_list .avatar img,.items_left_picinfo img{display: block;}
 .tracle_footer{height:35px;border-top:1px #efefef solid;color:#808080;}
 .tracle_footer span{display: inline-block;font-size: 13px;margin-right:.4rem;}
 .tracle_footer span i{font-size: 15px;margin-right: .05rem;color:#808080;}
