@@ -139,12 +139,13 @@
 <?php $this->end(); ?>
 
 <script>
-    init();
+    window.onload = init;
     function init() {
-        if(<?= ($user->images) && ($user->video); ?>) {
+        var imgs = '<?= $user->images; ?>';
+        var video = '<?= $user->video; ?>';
+        if(imgs && video) {
             $.util.setCookie('UPLOAD_IMGS_VID', '')
         }
-
         if($.util.getCookie('UPLOAD_IMGS_VID')) {
             $('#status-btn').html('<span class="fl">基本照片与视频上传</span><span class="fr color_gray">处理中</span>');
         }
