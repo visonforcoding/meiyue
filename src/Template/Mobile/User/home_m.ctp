@@ -1,10 +1,10 @@
 <div>
-    <div class="homepage mhomepage">
+    <div class="homepage mhomepage  flex">
         <!--        <div class="header">
                     <h1>我的</h1>
                     <i class="iconfont install">&#xe661;</i>
                 </div>-->
-        <div class="home_cover_info flex">
+        <div class="home_cover_info">
             <span class="avatar">
                 <img src="<?= createImg($user->avatar) . '?w=150' ?>"  class="avatar-pic"/>
             </span>
