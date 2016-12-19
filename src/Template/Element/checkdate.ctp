@@ -11,7 +11,8 @@
         transition: height .2s ease;
         -webkit-box-shadow: 0 0 15px rgba(0,0,0,.2);
         box-shadow: 0 0 15px rgba(0,0,0,.2);
-        z-index:2;
+        z-index:99;
+        -webkit-transform: translateZ(0);
     }
     .hide_date{
         height:0;
