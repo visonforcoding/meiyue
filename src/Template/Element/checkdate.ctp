@@ -23,7 +23,7 @@
         z-index:999;
         width:50%;
         float:left;
-        height:100px;
+        height:150px;
     }
     .r_box_date_1{
         overflow: auto;
@@ -31,7 +31,7 @@
         z-index:999;
         width:25%;
         float:left;
-        height:100px;
+        height:150px;
     }
     .r_box_date_2{
         overflow: auto;
@@ -39,7 +39,7 @@
         z-index:999;
         width:25%;
         float:left;
-        height:100px;
+        height:150px;
     }
     .l_box_date::-webkit-scrollbar,.r_box_date_1::-webkit-scrollbar,.r_box_date_2::-webkit-scrollbar{display: none;}
     .checkdate li{line-height: 40px;height:40px;width:100%;font-size:14px;color:#ccc;}
