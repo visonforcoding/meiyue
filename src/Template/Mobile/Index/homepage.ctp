@@ -477,9 +477,13 @@
     }
 
     $(document).on('tap', '.img-item', function() {
+        var imgs = [];
+        $('.img-item img').each(function() {
+            imgs.push('<?= getHost(); ?>' + this.src.replace(/\?.*/, ''));
+        });
         var curimg = $(this).find('img').first().attr('src');
         var imgpath = '<?= getHost(); ?>' + curimg;
-        LEMON.event.viewImg(imgpath, [imgpath]);
+        LEMON.event.viewImg(imgpath.replace(/\?.*/, ''), imgs);
     });
 
     function tel() {

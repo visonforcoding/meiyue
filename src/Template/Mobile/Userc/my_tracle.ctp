@@ -189,7 +189,7 @@ $('#submitbtn').on('tap', function () {
                     handImgs = [];
                     unHandImgs = e.images
                     unHandImgs.forEach(function(img) {
-                        handImgs.push('<?= getHost(); ?>' + img);
+                        handImgs.push(('<?= getHost(); ?>' + img).replace(/\?.*/, ''));
                     });
                     allMovements[e.id] = handImgs;
                 }
@@ -201,7 +201,7 @@ $('#submitbtn').on('tap', function () {
     $(document).on('tap', '.img-item', function() {
         var index = $(this).data('index');
         var curimg = '<?= getHost(); ?>' + $(this).find('img').first().attr('src');
-        LEMON.event.viewImg(curimg, allMovements.index);
+        LEMON.event.viewImg(curimg.replace(/\?.*/, ''), allMovements.index);
     });
 
     LEMON.sys.back('/user/index');
