@@ -685,6 +685,9 @@ $.util = {
         param['nick'] = res.dater.nick;
         param['avatar'] = res.dater.avatar;
         LEMON.event.imTalk(param);
+    },
+    setWH: function(img) {
+        img.height < img.width ? $(img).css({'height':'100%'}) : $(img).css({'width': '100%'})
     }
 };
 

@@ -30,22 +30,17 @@
         </ul>
     </div>
 
-    <script>
-        function setWH(img) {
-            img.height < img.width ? $(img).css({'height':'100%'}) : $(img).css({'width': '100%'})
-        }
-    </script>
     <!--图片 && 视频展示-->
     <?php if (@unserialize($user->images) || $user->video): ?>
     <div class="home_pic_info mt40">
         <ul class="inner flex">
             <?php if (@unserialize($user->images)): ?>
                 <?php foreach(array_slice(unserialize($user->images), 0, 3) as $img): ?>
-                    <li class="img-item"><img src="<?= createImg($img) ?>?w=160" onload="setWH(this);"/></li>
+                    <li class="img-item"><img src="<?= createImg($img) ?>?w=160" onload="$.util.setWH(this);"/></li>
                 <?php endforeach; ?>
                 <li id="see-movements">
                     <a class='ablock' >
-                        <img src="<?= unserialize($user->images)[3]; ?>?w=160" onload="setWH(this);"/>
+                        <img src="<?= unserialize($user->images)[3]; ?>?w=160" onload="$.util.setWH(this);"/>
                         <span>更多私房</span>
                     </a>
                 </li>

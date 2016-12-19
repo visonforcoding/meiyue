@@ -28,7 +28,7 @@
             {{#is_pic}}
             <ul class="piclist_con" id="imgcontainer_{{id}}" data-index="{{id}}">
                 {{#images}}
-                <li><img src="{{.}}"/></li>
+                <li><img src="{{.}}?w=160" onload="$.util.setWH(this)"/></li>
                 {{/images}}
             </ul>
             {{/is_pic}}
