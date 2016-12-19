@@ -174,6 +174,7 @@ class Netim {
        ];
        if($type == '6'){
            $data['gift_type'] =  $param['gift_type'];
+           $data['data']['gift_type'] =  $param['gift_type'];
        }
        return $data;
     }
