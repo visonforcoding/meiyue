@@ -145,10 +145,22 @@
 
 <!-- 地点列表  选择、填写区 -->
 <div class="wraper page" id="page-choosePlace" hidden>
-    <div id="selfPlace" hidden>
-
+    <div id="selfPlace" class='aPlace' hidden>
+        <div class="place-self">
+             <h3 class="basic_info_integrity">没有合适地点，<a href="javascript:toListplace();" class="color_y">搜索地址</a></h3>
+                <div class="search_place_header inner">
+                        <div class="search-box flex flex_justify">
+                            <div class="search-btn">
+                                <input type="text" id="selfInput" placeholder="请输入约会地点" results="5" />
+                            </div>
+                            <span class="cancel-btn color_y" onclick='submitSelfPlace()'>提交</span>
+                        </div>
+                   
+                </div>
+            </div>
     </div>
-    <div id="listPlace">
+    <div id="listPlace" class='aPlace'>
+        <h3 class="basic_info_integrity">没有合适地点，<a href="javascript:toSelfplace();" class="color_y">手动输入地址</a></h3>
         <div class="search_place_header inner">
             <form action="">
                 <div class="search-box flex flex_justify">
@@ -229,6 +241,23 @@
             $('#thePlace').val(place_name);
             location.hash = '';
         },300);
+    }
+    
+ function toListplace(){
+        $('#listPlace').show();
+        $('#selfPlace').hide();
+    }
+    function submitSelfPlace() {
+        if($('#selfInput').val() == ''){
+            $.util.alert('请输入地址');
+            return;
+        }
+        $('#thePlace').val($('#selfInput').val());
+        location.hash = '';
+    }
+    function toSelfplace(){
+        $('#selfPlace').show();
+        $('#listPlace').hide();
     }
 
     var dPicker = new mydateTimePicker();
