@@ -61,7 +61,7 @@
     <div class="choose_account">
         <div class="title">
             <h1>选择账户</h1>
-            <span class="closed">取消</span>
+            <span class="choose-type-close closed">取消</span>
         </div>
         <ul class="inner outerblock">
             <li class="choosed">
@@ -99,5 +99,16 @@
         $('.choose-type').toggleClass('hide');
     }
 
+    $.util.tap($('.choose-type-close'), function() {
+        $('.choose-type').toggleClass('hide');
+    });
+
+    function toAlipage() {
+        window.location.href = '/userc/exchange-ali';
+    }
+
+    function toYinlianpage() {
+        window.location.href = '/userc/exchange-yinlian';
+    }
     LEMON.sys.back('/user/index');
 </script>
