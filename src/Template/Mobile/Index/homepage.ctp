@@ -204,8 +204,8 @@
 <div style="height:1.6rem"></div>
 <!--底部-->
 <div class="home_page_footer">
-    <ul class="clearfix flex flex_justify
-        <?= (count($user->user_skills) == 0)?'changeli':''; ?>" onclick="function(event){event.stopPropagation();};">
+    <ul id="dibu-touch" class="clearfix flex flex_justify
+        <?= (count($user->user_skills) == 0)?'changeli':''; ?>">
         <?php if ($isFollow): ?>
             <li>
                 <a id="focusIt">
@@ -559,6 +559,12 @@
             }
         })
     }
+
+
+    $('#dibu-touch').on('click', function(event) {
+        event.stopPropagation();
+    });
+
 
     /**
      * 聊天

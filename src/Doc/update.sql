@@ -682,3 +682,7 @@ ALTER TABLE `lm_user`
 ALTER TABLE `lm_dateorder`
  ADD COLUMN `is_del` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '0未删除1男性2女性删除3双方删除' AFTER `is_read`;
  
+#提现表添加字段
+ALTER TABLE `lm_withdraw`
+	ADD COLUMN `type` TINYINT NOT NULL COMMENT '类型：1#支付宝2#银联' AFTER `cardno`;
+
