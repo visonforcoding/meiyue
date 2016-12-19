@@ -287,7 +287,6 @@
     window.shareConfig.desc= '美女邀请你来看看';
 </script>
 <script>
-    alert(LEMON.sys.version());
     $('#focusIt').on('click', function (event) {
         //加关注
         event.stopPropagation();
