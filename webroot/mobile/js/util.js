@@ -681,7 +681,7 @@ $.util = {
     },
     openTalk: function (res) {
         var param = {};
-        param['accid'] = res.dater.accid;
+        param['accid'] = res.dater.imaccid;
         param['nick'] = res.dater.nick;
         param['avatar'] = res.dater.avatar;
         LEMON.event.imTalk(param);
