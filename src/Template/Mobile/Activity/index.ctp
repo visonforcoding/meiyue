@@ -387,7 +387,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                     } else {
                         if((data.datas).length == 0) {
                             obj.tabLoadEnd[curtab] = true;
-                            $.util.alert('没有更多数据了');
+                            $(obj.listId[curtab]).append('<p class="smallarea aligncenter mt20">没有更多数据了</p>');
                             return;
                         }
                         $(obj.listId[curtab]).append(rendered);
