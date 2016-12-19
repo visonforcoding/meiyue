@@ -479,10 +479,11 @@
     $(document).on('tap', '.img-item', function() {
         var imgs = [];
         $('.img-item img').each(function() {
-            imgs.push('<?= getHost(); ?>' + this.src.replace(/\?.*/, ''));
+            imgs.push((this.src).replace(/\?.*/, ''));
         });
         var curimg = $(this).find('img').first().attr('src');
         var imgpath = '<?= getHost(); ?>' + curimg;
+        console.log(imgs);
         LEMON.event.viewImg(imgpath.replace(/\?.*/, ''), imgs);
     });
 
