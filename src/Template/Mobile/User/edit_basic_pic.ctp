@@ -123,14 +123,16 @@
             LEMON.event.uploadPics({
                 key:'demoImg',
                 user_id:user_id,
+                action:'update_basic_pic'
             });
         if($('#up_video').data('choosed'))
             LEMON.event.uploadVideo({
                 key:'up_video',
-                user_id:user_id
+                user_id:user_id,
+                action: 'update_basic_video'
             });
         $.util.showPreloader();
-        $.util.setCookie('UPLOAD_IMGS_VID', true, 30);
+        $.util.setCookie('UPLOAD_IV', true, 30);
         $(this).removeAttr('id');
         $(this).addClass('disabled');
         setTimeout(function(){

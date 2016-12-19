@@ -282,14 +282,25 @@ class ApiController extends AppController {
                             dblog('movement', '动态保存失败', $movement->errors());
                         }
                     }
+                    if($param->action == 'update_basic_pic') {
+                        $user->images = serialize($images);
+                        if ($UserTable->save($user)) {
+                            $this->jsonResponse(true, '保存成功');
+                        } else {
+                            dblog('user', '基本图片保存失败', $user->errors());
+                            $this->jsonResponse(false, $user->errors());
+                        }
+                    }
                 }
+
+
             } else {
                 $user->images = serialize($images);
                 if ($UserTable->save($user)) {
                     $this->jsonResponse(true, '保存成功');
                 } else {
                     dblog('user', '基本图片保存失败', $user->errors());
-                    $this->jsonResponse(true, $user->errors());
+                    $this->jsonResponse(false, $user->errors());
                 }
             }
             $this->jsonResponse(false, '成功调取接口');
@@ -341,6 +352,15 @@ class ApiController extends AppController {
                         } else {
                             $this->jsonResponse(true, $movement->errors());
                             dblog('movement', '动态保存失败', $movement->errors());
+                        }
+                    }
+                    if($param->action == 'update_basic_video') {
+                        $user->video = $data['video'];
+                        $user->video_cover = $data['video_cover'];
+                        if ($UserTable->save($user)) {
+                            $this->jsonResponse(true, '保存成功');
+                        } else {
+                            $this->jsonResponse(true, $user->errors());
                         }
                     }
                 }
