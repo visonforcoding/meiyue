@@ -483,7 +483,7 @@
         });
         var curimg = $(this).find('img').first().attr('src');
         var imgpath = '<?= getHost(); ?>' + curimg;
-        console.log(imgs);
+        console.log(imgpath.replace(/\?.*/, ''));
         LEMON.event.viewImg(imgpath.replace(/\?.*/, ''), imgs);
     });
 
