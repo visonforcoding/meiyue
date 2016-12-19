@@ -87,7 +87,7 @@
                             <span>地点</span>
                             <div>
                                 <a id="showChoosePlace">
-                                    <input id="thePlace" class="color_gray" placeholder='请选择' />
+                                    <input id="thePlace" class="color_gray alignright" placeholder='请选择' />
                                     <i class="iconfont r_con">&#xe605;</i>
                                 </a>
                             </div>
