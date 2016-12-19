@@ -495,7 +495,7 @@
         )
     }
 
-    $.util.tap($('#chat-btn'), function(event) {
+    $.util.tap($('#chat-btn'), function() {
         /*var param = {};
         var accid = '<?= $user->imaccid; ?>';
         var nick = '<?= $user->nick; ?>';
@@ -508,6 +508,7 @@
     });
 
     function checkim() {
+        alert();
         $.util.ajax({
             url:'/user/check-chat/<?=$user->id?>',
             method: 'POST',
