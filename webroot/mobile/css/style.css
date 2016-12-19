@@ -1235,3 +1235,15 @@ line-height: 14px;color:#fff;font-size:11px;text-align: center;}
 .empty_container .empty-btn{margin-top:.5rem;}
 .empty-text .empty-tips{color:#666;line-height: 25px;}
 .empty-text{padding:.6rem 0;}
+*{   
+    -webkit-touch-callout:none;  /*系统默认菜单被禁用*/   
+    -webkit-user-select:none; /*webkit浏览器*/   
+    -khtml-user-select:none; /*早期浏览器*/   
+    -moz-user-select:none;/*火狐*/   
+    -ms-user-select:none; /*IE10*/   
+    user-select:none;   
+}  
+
+input {      
+     -webkit-user-select:auto; /*webkit浏览器*/     
+}  

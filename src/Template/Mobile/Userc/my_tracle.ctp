@@ -206,7 +206,7 @@ $('#submitbtn').on('tap', function () {
 
     $(document).on('tap', '.img-item', function() {
         var index = $(this).data('index');
-        var curimg = '<?= getHost(); ?>' + $(this).find('img').first().attr('src');
+        var curimg = '<?= getHost(); ?>' + ($(this).find('img').first().attr('src')).replace(/imgs/, 'upload');
         LEMON.event.viewImg(curimg.replace(/\?.*/, ''), allMovements.index);
     });
 
