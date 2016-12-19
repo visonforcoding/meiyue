@@ -109,6 +109,7 @@ class IndexController extends AppController {
             "getDistance($userCoord_lng,$userCoord_lat,login_coord_lng,login_coord_lat)", 'birthday',
             'profession', 'login_time', 'avatar', 'login_coord_lng', 'login_coord_lat']);
         $query->hydrate(false);
+        $query->distinct(['User.id']);
         if ($skill) {
             $query->matching('UserSkills.Skill', function($q)use($skill) {
                 return $q->where(['parent_id' => $skill]);

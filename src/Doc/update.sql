@@ -677,3 +677,8 @@ ALTER TABLE `lm_dateorder`
 ALTER TABLE `lm_user`
 	CHANGE COLUMN `status` `status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '审核状态1待审核2审核不通过3审核通过0不审核(男)' AFTER `money`,
 	ADD COLUMN `id_status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '身份认证状态：1#待审核 2#审核不通过 3#审核通过' AFTER `status`;
+
+#订单删除
+ALTER TABLE `lm_dateorder`
+ ADD COLUMN `is_del` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '0未删除1男性2女性删除3双方删除' AFTER `is_read`;
+ 
