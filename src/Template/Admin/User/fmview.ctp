@@ -51,7 +51,7 @@
                 <th>赞赏数</th>
                 <th>粉丝数</th>
                 <th>最后登录时间</th>
-                <th class="avatar" rowspan="4"><img src="/mobile/images/avatar.jpg"></th>
+                <th class="avatar" rowspan="4"><img src="<?= h($user->avatar); ?>"></th>
             </tr>
             <tr>
                 <td><?= h($user->id); ?></td>
