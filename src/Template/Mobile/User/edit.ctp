@@ -143,11 +143,11 @@
     function init() {
         var imgs = '<?= $user->images; ?>';
         var video = '<?= $user->video; ?>';
-        if(imgs && video) {
-            $.util.setCookie('UPLOAD_IMGS_VID', '')
+        if(imgs || video) {
+            $.util.setCookie('UPLOAD_IV', '')
         }
-        if($.util.getCookie('UPLOAD_IMGS_VID')) {
-            $('#status-btn').html('<span class="fl">基本照片与视频上传</span><span class="fr color_gray">处理中</span>');
+        if($.util.getCookie('UPLOAD_IV')) {
+            $('#status-btn').html('<span class="fl">基本照片与视频上传</span><span class="fr"><i class="color_gray fr-des">上传中</i></span>');
         }
     }
 </script>
