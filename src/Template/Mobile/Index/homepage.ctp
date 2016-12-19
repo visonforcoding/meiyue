@@ -280,6 +280,14 @@
 <?php $this->start('script'); ?>
 <script src="/mobile/js/mustache.min.js"></script>
 <script>
+    window.shareConfig = {
+        imgUrl: '<?= getHost().$user->avatar.'?w=80'; ?>',
+        link: '<?= getHost().'/index/homepage/'.$user->id.'?sharer='; ?>',
+        title: '美约-<?= $user->nick; ?>',
+        desc: '美女邀请你来看看'
+    };
+</script>
+<script>
     $('#focusIt').on('click', function (event) {
         //加关注
         event.stopPropagation();
@@ -483,14 +491,15 @@
     }
 
     $.util.tap($('#chat-btn'), function(event) {
-        var param = {};
+        /*var param = {};
         var accid = '<?= $user->imaccid; ?>';
         var nick = '<?= $user->nick; ?>';
         var avatar = '<?= getHost().$user->avatar; ?>';
         param['accid'] = accid;
         param['nick'] = nick;
         param['avatar'] = avatar;
-        LEMON.event.imTalk(param);
+        LEMON.event.imTalk(param);*/
+        checkim();
     });
 
     function checkim() {
@@ -500,29 +509,22 @@
             func:function(res){
                 switch(res.right) {
                     case <?= SerRight::OK_CONSUMED; ?>:
-                        var param = {};
-                        var accid = res.accid;
-                        var nick = '<?= $user->nick; ?>';
-                        var avatar = '<?= getHost().$user->avatar; ?>';
-                        param['accid'] = accid;
-                        param['nick'] = nick;
-                        param['avatar'] = avatar;
-                        LEMON.event.imTalk(param);
+                        chat(res.accid);
                         break;
                     case <?= SerRight::NO_HAVENUM; ?>:
                         $.util.confirm(
                             '私聊',
                             '将会消耗一个聊天名额',
                             function() {
-                                window.location.href = '/tracle/ta-tracle/<?=$user->id?>';
+                                window.location.href = '/user/consume-chat/<?=$user->id?>';
                             },
                             null
                         );
                         break;
                     case <?= SerRight::NO_HAVENONUM; ?>:
                         $.util.confirm(
-                            '查看美女动态',
-                            '需要成为会员才能查看人家的动态哦~',
+                            '私聊美女',
+                            '需要成为会员才能私聊美女哦~',
                             function() {
                                 window.location.href = '/userc/vip-buy';
                             },
@@ -545,19 +547,28 @@
             func:function(res){
                 $.util.hidePreloader();
                 if(res.status) {
-                    var param = {};
-                    var accid = res.accid;
-                    var nick = '<?= $user->nick; ?>';
-                    var avatar = '<?= getHost().$user->avatar; ?>';
-                    param['accid'] = accid;
-                    param['nick'] = nick;
-                    param['avatar'] = avatar;
-                    LEMON.event.imTalk(param);
+                    chat(res.accid);
                 } else {
                     $.util.alert(res.msg);
                 }
             }
         })
+    }
+
+
+    /**
+     * 聊天
+     * @param accid
+     */
+    function chat(accid) {
+        var param = {};
+        var accid = accid;
+        var nick = '<?= $user->nick; ?>';
+        var avatar = '<?= getHost().$user->avatar; ?>';
+        param['accid'] = accid;
+        param['nick'] = nick;
+        param['avatar'] = avatar;
+        LEMON.event.imTalk(param);
     }
 
     LEMON.sys.back('/index/index');
