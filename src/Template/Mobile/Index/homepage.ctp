@@ -575,10 +575,5 @@
         LEMON.event.imTalk(param);
     }
 
-    LEMON.sys.back('/index/index');
-    LEMON.sys.setTopRight('分享')
-    window.onTopRight = function () {
-        //$.util.alert('点击了分享');
-    }
 </script>
 <?php $this->end('script'); ?>
