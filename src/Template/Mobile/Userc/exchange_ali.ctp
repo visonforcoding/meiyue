@@ -46,16 +46,25 @@
 </div>
 <div class="bottomblock">
     <div class="flex flex_end">
-        <span class="total">所兑换人民币：<i class="color_y">￥</i> <i class="color_y numbers" id="show-true-amount">0.80元</i></span>
-        <a href="javascript:void(0);" class="nowpay">立即支付</a>
+        <span class="total">所兑换人民币：<i class="color_y">￥</i> <i class="color_y numbers" id="show-true-amount">0.8元</i></span>
+        <a href="javascript:void(0);" class="nowpay">立即申请</a>
     </div>
 </div>
 
 <script>
     $("#amount-input").keyup(function(){
-        var curamount = parseFloat($(this).val());
+        var curamountstr = $(this).val();
+        var curamount = 0;
+        if(!curamountstr) {
+            curamountstr = '0';
+        }
+        curamount = parseFloat(curamountstr);
+
+        if(curamount > <?= $user->money; ?>) {
+            $(this).val(<?= $user->money; ?>);
+            curamount = <?= $user->money; ?>;
+        }
         var trueamount = curamount * 0.8;
-        console.log(trueamount);
         $('#show-true-amount').text(trueamount);
     });
     LEMON.sys.back('/userc/my-purse');

@@ -1,6 +1,6 @@
 <header>
     <div class="header">
-        <i class="iconfont toback">&#xe602;</i>
+        <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>礼物</h1>
     </div>
 </header>
@@ -59,4 +59,5 @@
             null
         );
     });
+
 </script>
