@@ -263,7 +263,6 @@ $(document).on('tap', '.place_link', function () {
 var dPicker = new mydateTimePicker();
 dPicker.init(choosedateCallBack);
 $("#time").on('tap', function () {
-    alert(1)
     dPicker.show();
 });
 

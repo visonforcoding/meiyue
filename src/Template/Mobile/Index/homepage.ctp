@@ -286,6 +286,9 @@
         title: '美约-<?= $user->nick; ?>',
         desc: '美女邀请你来看看'
     };
+    window.onTopRight = function () {
+        LEMON.share.banner();
+    }
 </script>
 <script>
     $('#focusIt').on('click', function (event) {
