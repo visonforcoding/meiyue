@@ -151,6 +151,7 @@ class BusinessComponent extends Component
                 ->select(['rest' => $key])
                 ->where(
                     [
+                        'user_id' => $userid,
                         'deadline >' => new Time(),
                     ])
                 ->first();
