@@ -123,8 +123,6 @@
             LEMON.event.uploadPics({
                 key:'demoImg',
                 user_id:user_id,
-            }, function() {
-
             });
         if($('#up_video').data('choosed'))
             LEMON.event.uploadVideo({
@@ -137,10 +135,10 @@
         $(this).addClass('disabled');
         setTimeout(function(){
             $.util.hidePreloader();
-            $.util.alert('处理中');
             location.href = '/userc/edit-info';
         },3000);
     })
+
 </script>
 <?= $this->end('script'); ?>
 
