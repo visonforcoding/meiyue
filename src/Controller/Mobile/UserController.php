@@ -6,6 +6,8 @@ use App\Controller\Mobile\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\Controller\Controller;
 use PackType;
+use SerRight;
+use ServiceType;
 use UserStatus;
 
 /**
@@ -867,7 +869,7 @@ class UserController extends AppController {
             //检查权限和名额剩余
             $res = $this->Business->checkRight($this->user->id, $uid, ServiceType::CHAT);
             $accid = '';
-            if($res = \SerRight::OK_CONSUMED) {
+            if($res == SerRight::OK_CONSUMED) {
                 $user = $this->User->get($uid);
                 $accid = $user->imaccid;
             }
@@ -883,7 +885,7 @@ class UserController extends AppController {
         $this->handCheckLogin();
         $this->loadComponent('Business');
         //检查权限和名额剩余
-        $res = $this->Business->consumeRight($this->user->id, $uid, \ServiceType::CHAT);
+        $res = $this->Business->consumeRight($this->user->id, $uid, ServiceType::CHAT);
         if($res) {
             $user = $this->User->get($uid);
             $accid = $user->imaccid;
