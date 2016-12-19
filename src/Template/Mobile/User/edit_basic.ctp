@@ -44,7 +44,7 @@
                         </div>
                         <div class="home_list_r_info">
                             <div class="checkdate">
-                                <input id="birthday" name="birthday" type="text" placeholder="请输入日期" value="<?= $user->birthday; ?>" />
+                                <input id="birthday" name="birthday" type="date" placeholder="请输入日期" value="<?= $user->birthday; ?>" />
                             </div>
                         </div>
                     </div>
