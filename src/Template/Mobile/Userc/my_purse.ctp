@@ -64,7 +64,7 @@
             <span class="choose-type-close closed">取消</span>
         </div>
         <ul class="inner outerblock">
-            <li class="choosed">
+            <li class="pay-type-choose choosed" onclick="toAlipage();">
                 <div class="paytype">
                     <i class="iconfont payico alipay">&#xe625;</i>
                     <h3 class="paydes">
@@ -74,7 +74,7 @@
                 </div>
                 <span class="iconfont choose color_y">&#xe635;</span>
             </li>
-            <li>
+            <li class="pay-type-choose" onclick="toYinlianpage();">
                 <div class="paytype">
                     <i class="iconfont payico cardpay">&#xe621;</i>
                     <h3 class="paydes">
@@ -103,6 +103,10 @@
         $('.choose-type').toggleClass('hide');
     });
 
+    $.util.tap($('.choose-type-close'), function() {
+        $('.choose-type').toggleClass('hide');
+    });
+
     function toAlipage() {
         window.location.href = '/userc/exchange-ali';
     }
@@ -110,5 +114,6 @@
     function toYinlianpage() {
         window.location.href = '/userc/exchange-yinlian';
     }
+
     LEMON.sys.back('/user/index');
 </script>

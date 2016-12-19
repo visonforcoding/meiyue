@@ -978,4 +978,15 @@ class UsercController extends AppController {
             'pageTitle'=>'兑换美币申请'
         ]);
     }
+
+
+    /*
+     * 兑换美币-银联
+     */
+    public function exchangeYinlian()
+    {
+        $this->set([
+            'pageTitle'=>'兑换美币申请'
+        ]);
+    }
 }
