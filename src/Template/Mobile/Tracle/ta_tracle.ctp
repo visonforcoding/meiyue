@@ -187,7 +187,6 @@
             var curimg = '<?= getHost(); ?>' + $(target).find('img').attr('src');
             LEMON.event.viewImg(curimg, allMovements[index]);
         }
-
     });
 
 </script>
