@@ -121,7 +121,7 @@
             <span class="place silver">{{index}}</span>
             <div class="place_info">
             <span class="avatar">
-                <img src="{{avatar}}">
+                <img src="{{user.avatar}}">
             </span>
                 <h3>
                 <span class="place_name"><i class="name">{{user.nick}}</i> <i class="vip">VIP 5</i><i
