@@ -547,7 +547,7 @@
     function consumeChat() {
         $.util.showPreloader();
         $.util.ajax({
-            url:'/user/check-chat/<?=$user->id?>',
+            url:'/user/consume-chat/<?=$user->id?>',
             method: 'POST',
             func:function(res){
                 $.util.hidePreloader();
