@@ -20,7 +20,7 @@
             <span onclick="window.location.href='/purse/recharge'" class="btn btn_bg_t">充值</span>
                 <p><a href="/activity/index#3" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
             <?php else: ?>
-                <span class="btn btn_bg_t" onclick="window.location.href='/userc/exchange-ali'">兑换美币</span>
+                <span class="btn btn_bg_t" onclick="duihuan();">兑换美币</span>
                 <p class="tips">正在申请提现 20,000 美币</p>
             <?php endif; ?>
         </div>
@@ -57,7 +57,7 @@
     <?php endif; ?>
 </div>
 <!--支付弹出层-->
-<div class="raper hide">
+<div class="choose-type raper hide">
     <div class="choose_account">
         <div class="title">
             <h1>选择账户</h1>
@@ -90,8 +90,14 @@
 
 <script>
 
-    $('.loader-more').on('tap', function() {
+    /*$('.loader-more').on('tap', function() {
         window.location.href='/userc/purse-detail';
-    });
+    });*/
+
+
+    function duihuan() {
+        $('.choose-type').toggleClass('hide');
+    }
+
     LEMON.sys.back('/user/index');
 </script>
