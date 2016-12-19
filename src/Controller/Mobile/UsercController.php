@@ -821,6 +821,7 @@ class UsercController extends AppController {
     public function vipBuy()
     {
         $packTb = TableRegistry::get('Package');
+        $reurl = $this->request->query('reurl');
         $packs = $packTb
             ->find()
             ->where(['is_used' => 1])
@@ -829,6 +830,7 @@ class UsercController extends AppController {
         $this->set([
             'packs' => $packs,
             'pageTitle'=>'购买套餐',
+            'reurl' => $reurl
         ]);
     }
 
