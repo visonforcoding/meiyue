@@ -156,6 +156,12 @@ $('#submitbtn').on('tap', function () {
             } else if(n.type === 4){
                 data.movements[i]['is_bvideo'] = true;
             }
+            var movement = data.movements[i];
+            if(movement['images']) {
+                $.each(movement['images'], function(j, m) {
+                    movement['images'][j] = (movement['images'][j]).replace(/upload/, 'imgs');
+                });
+            }
         })
         return data;
     }
