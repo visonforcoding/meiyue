@@ -156,6 +156,5 @@
             })
         });
     }, 2000)
-    LEMON.event.unrefresh();
 </script>
 <?php $this->end('script'); ?>
