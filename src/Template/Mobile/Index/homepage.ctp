@@ -276,9 +276,9 @@
 <script src="/mobile/js/mustache.min.js"></script>
 <script>
     LEMON.sys.back('/index/index');
-    LEMON.sys.setTopRight('分享')
+    //LEMON.sys.setTopRight('分享')
     window.onTopRight = function () {
-        LEMON.share.banner();
+    //    LEMON.share.banner();
     }
 
     window.shareConfig.imgUrl = '<?= getHost().$user->avatar.'?w=80'; ?>';
@@ -287,6 +287,7 @@
     window.shareConfig.desc= '美女邀请你来看看';
 </script>
 <script>
+    alert(LEMON.sys.version());
     $('#focusIt').on('click', function (event) {
         //加关注
         event.stopPropagation();
