@@ -758,6 +758,9 @@ class DateOrderController extends AppController
        if($transRes){
             return $this->Util->ajaxReturn(true,'取消成功');
            }else{
+               errorMsg($w_flow,'1');
+               errorMsg($m_flow,'1');
+               errorMsg($dateorder,'1');
             return $this->Util->ajaxReturn(false,'取消失败');
         }
         
