@@ -231,8 +231,8 @@
             </a>
         </li>   |    
         <?php endif; ?>
-        <li>
-            <a href="#this">
+        <li id="chat-btn">
+            <a>
                 <i class="iconfont">&#xe603;</i>私聊
             </a>
         </li>
@@ -465,7 +465,8 @@
 
     $(document).on('tap', '.img-item', function() {
         var curimg = $(this).find('img').first().attr('src');
-        LEMON.event.viewImg(curimg, [curimg]);
+        var imgpath = '<?= getHost(); ?>' + curimg;
+        LEMON.event.viewImg(imgpath, [imgpath]);
     });
 
     function tel() {
@@ -480,6 +481,20 @@
             '拨打'
         )
     }
+
+    $.util.tap($('#chat-btn'), function(event) {
+        var param = {};
+        //var accid = 'meiyue_<?= $user->id; ?>';
+        var accid = '<?= $user->imaccid; ?>';
+        var nick = '<?= $user->nick; ?>';
+        var avatar = '<?= getHost().$user->avatar; ?>';
+        param['accid'] = accid;
+        param['nick'] = nick;
+        param['avatar'] = avatar;
+        LEMON.event.imTalk(param);
+    });
+
+
 
     LEMON.sys.back('/index/index');
     LEMON.event.unrefresh();

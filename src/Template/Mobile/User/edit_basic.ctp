@@ -110,7 +110,8 @@
                 <?php if($user->gender == 2): ?>
                     <li class="start_sign  right-ico">
                         <div class="home_items">
-                            <div class="home_list_l_info"><span class="itemsname">罩</span><span class="itemsname">杯：</span>
+                            <div class="home_list_l_info required"><span class="itemsname">罩</span><span class="itemsname">杯：</span>
+                                <i class="iconfont ico"></i>
                             </div>
                             <div class="home_list_r_info">
                                 <select name="cup">
@@ -175,6 +176,7 @@
                        <div class="home_list_l_info"><span class="itemsname">工</span><span
                                 class="itemsname">作</span><span class="itemsname">经</span><span
                                 class="itemsname">历：</span>
+                           </span>
                         </div>
                         <div class="home_list_r_info  plaintext">
                             <textarea name="career" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入工作经历"><?= $user->career; ?></textarea>
