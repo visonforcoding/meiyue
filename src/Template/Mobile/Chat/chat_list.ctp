@@ -20,7 +20,7 @@
         </div>
         <div class="r-btn flex">
             <div class="focus">关注</div>
-            <div data-accid="{{to}}" class="del">删除</div>
+            <div data-accid="{{to}}" class="del clickable">删除</div>
         </div>
     </li>
     {{/sessions}}
