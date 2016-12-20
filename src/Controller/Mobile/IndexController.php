@@ -343,11 +343,6 @@ class IndexController extends AppController {
             $useres = $userTb->saveMany($userTb->newEntities([$in_user, $out_user]));
             return $flores&&$wxores&&$useres;
         });
-        debug($flow->errors());
-        debug($in_user->errors());
-        debug($out_user->errors());
-        debug($wxorder->errors());
-        exit();
         if($transRes) {
             return $this->Util->ajaxReturn(true, '支付成功');
         } else {
