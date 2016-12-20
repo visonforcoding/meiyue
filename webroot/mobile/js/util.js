@@ -681,9 +681,9 @@ $.util = {
     },
     openTalk: function (res) {
         var param = {};
-        param['accid'] = res.dater.imaccid;
-        param['nick'] = res.dater.nick;
-        param['avatar'] = res.dater.avatar;
+        param['accid'] = res.obj.imaccid;
+        param['nick'] = res.obj.nick;
+        param['avatar'] = res.obj.avatar;
         LEMON.event.imTalk(param);
     },
     setWH: function(img) {
