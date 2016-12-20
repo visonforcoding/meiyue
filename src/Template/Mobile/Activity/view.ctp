@@ -70,11 +70,13 @@
     </div>
 </div>
 <div style="height:63px;"></div>
-<div class="bottomblock">
+
         <?php if ($botBtSts == 0): ?>
+        <div class="bottomblock">
             <div class="flex flex_end">
                 <span class="total"><span class="color_y"><?= ($user['gender'] == 1)?$activity['male_price']:$activity['female_price']; ?> </i>美币/人</span></span>
                 <a class="nowpay">我要报名</a>
+            </div>
             </div>
         <?php elseif ($botBtSts == 1): ?>
             <a class="identify_footer_potion">人数已满</a>
@@ -94,7 +96,7 @@
         <?php else: ?>
             <a class="identify_footer_potion">异常状态</a>
         <?php endif; ?>
-</div>
+
 
 <script>
 

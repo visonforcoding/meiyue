@@ -178,7 +178,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 <div class="voted_place_info">
                     <span class="avatar"><img src="{{avatar}}"/></span>
                     <h3>
-                        <span class="voted_name">{{nick}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip" >vip 普通</span></span>
+                        <span class="voted_name"><i class='nick'>{{nick}}</i><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip" >VIP 普通</span></span>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
                 </div>
@@ -204,7 +204,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                         <img src="{{avatar}}"/>
                     </span>
                     <h3>
-                        <span class="voted_name">{{nick}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip">vip普通</span></span>
+                        <span class="voted_name"><i class='nick'>{{nick}}</i><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip">VIP 普通</span></span>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
                 </div>
