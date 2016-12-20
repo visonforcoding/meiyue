@@ -54,7 +54,7 @@
                 if (res.status) {
                     $.util.alert(res.msg);
                     if($.util.isAPP) {
-                        LEMON.event.login();
+                        LEMON.event.login('/index/index');
                     } else {
                         window.location.href = res.url;
                     }
