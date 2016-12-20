@@ -180,6 +180,9 @@ class IndexController extends AppController {
             if ($follow) {
                 $isFollow = true;
             }
+            if($this->user->gender == 1) {
+
+            }
         }
         //若登录
         $this->set([
@@ -331,7 +334,7 @@ class IndexController extends AppController {
             'wxer_id' => $wxerid,
             'anhao' => $anhao
         ]);
-        $transRes = $FlowTable->connection()->transactional(function() use ($flow, $FlowTable, $userTb, $in_user, $out_user, $wxorderTb, $wxorder){
+        $transRes = $FlowTable->connection()->transactional(function() use (&$flow, $FlowTable, $userTb, &$in_user, &$out_user, $wxorderTb, &$wxorder){
             $wxores = $wxorderTb->save($wxorder);
             if($wxores) {
                 $flow->relate_id = $wxores->id;
@@ -340,6 +343,11 @@ class IndexController extends AppController {
             $useres = $userTb->saveMany($userTb->newEntities([$in_user, $out_user]));
             return $flores&&$wxores&&$useres;
         });
+        debug($flow->errors());
+        debug($in_user->errors());
+        debug($out_user->errors());
+        debug($wxorder->errors());
+        exit();
         if($transRes) {
             return $this->Util->ajaxReturn(true, '支付成功');
         } else {
