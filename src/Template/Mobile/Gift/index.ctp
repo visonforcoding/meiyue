@@ -42,7 +42,6 @@
             $.util.alert('请选择要送的礼物');
             return;
         }
-
         $.util.confirm(
             '- 赠送礼物 -',
             '赠送一件【' + gname + '】给 <?= $user->nick;?>',
@@ -53,6 +52,8 @@
                     dataType: "json",
                     success: function (res) {
                         $.util.alert(res.msg);
+                        gid = null;
+                        $('#allgift .items').removeClass('active');
                     }
                 })
             },
