@@ -8,7 +8,7 @@
     <div class="center__container">
         <ul class="outerblock">
             <li class="flex flex_justify inner">
-                <div class="l_info">
+                <div class="l_info aligncenter">
                     <div class="linear">
                         <i class="iconfont ft32">&#xe627;</i>
                     </div>
@@ -54,7 +54,7 @@
                 </div>
             </li>
             <li class="flex flex_justify inner">
-                <div class="l_info">
+                <div class="l_info aligncenter">
                     <div class="linear">
                         <i class="iconfont">&#xe655;</i>
                     </div>
