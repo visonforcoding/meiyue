@@ -44,7 +44,7 @@
         if ($('#add_tracle').data('max') === '0') {
             LEMON.event.uploadPics({key: 'add_tracle', user_id: user_id, param: param},function(res){
                 if(res){
-                    $.util.alert('动态已发送,等待平台审核');
+                    $.util.alert('资料上传中，请等待上传结果……');
                     setTimeout(function() {
                         window.location.href='/userc/my-tracle';
                     }, 1000)

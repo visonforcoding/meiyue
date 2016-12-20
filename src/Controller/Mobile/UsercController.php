@@ -375,37 +375,7 @@ class UsercController extends AppController {
     }
     
     
-    /***
-     * 美女接受订单
-     * 1.订单状态更改->7
-     * 2.短信通知男方
-     */
-    public function receiveOrder(){
-        $orderid = $this->request->data('orderid');
-        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
-        $dateorder = $DateorderTable->get($orderid,[
-            'contain'=>[
-                'Buyer'=>function($q){
-                    return $q->select(['phone','id']);
-                }
-                ,'Dater'=>function($q){
-                    return $q->select(['id','nick']);
-                }
-                ,'UserSkill.Skill'
-            ]
-        ]);
-        if($dateorder){
-            $dateorder->status = 7;
-            $dateorder->receive_time = date('Y-m-d H:i:s');
-            if($DateorderTable->save($dateorder)){
-                $this->loadComponent('Sms');
-                $this->Sms->sendByQf106($dateorder->buyer->phone, $dateorder->dater->nick.
-                        '已接受你发出的【'.$dateorder->user_skill->skill->name.'】邀请，请您尽快支付尾款.');
-                return $this->Util->ajaxReturn(true,'成功接受');
-            }
-        }
-        return $this->Util->ajaxReturn(false,'服务器开小差');
-    }
+    
     
     
     /**

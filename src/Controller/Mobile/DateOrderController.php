@@ -208,7 +208,7 @@ class DateOrderController extends AppController
                    'status'=>true,
                    'redirect_url'=>'/date-order/order-success/'.$dateorder->id,
                    'code'=>202,    //唤起聊天 
-                   'dater'=>$dateorder->dater,
+                   'obj'=>$dateorder->dater,
                    'msg'=>'支付成功',    
                        ]);
            }else{
@@ -423,6 +423,46 @@ class DateOrderController extends AppController
     }
     
     
+    
+    /***
+     * 美女接受订单
+     * 1.订单状态更改->7
+     * 2.短信通知男方
+     */
+    public function receiveOrder(){
+        $orderid = $this->request->data('orderid');
+        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+        $dateorder = $DateorderTable->get($orderid,[
+            'contain'=>[
+                'Buyer'=>function($q){
+                    return $q->select(['phone','id','nick','imaccid','avatar']);
+                }
+                ,'Dater'=>function($q){
+                    return $q->select(['id','nick','nick','imaccid','avatar']);
+                }
+                ,'UserSkill.Skill'
+            ]
+        ]);
+        if($dateorder){
+            $dateorder->status = 7;
+            $dateorder->receive_time = date('Y-m-d H:i:s');
+            if($DateorderTable->save($dateorder)){
+                $this->loadComponent('Sms');
+                $this->Sms->sendByQf106($dateorder->buyer->phone, $dateorder->dater->nick.
+                        '已接受你发出的【'.$dateorder->user_skill->skill->name.'】邀请，请您尽快支付尾款.');
+                
+                $this->loadComponent('Netim');
+                $this->Netim->receiveMsg($dateorder);
+                return $this->Util->ajaxReturn([
+                   'status'=>true,
+                   'code'=>202,    //唤起聊天 
+                   'obj'=>$dateorder->buyer,
+                   'msg'=>'接受成功',]);
+            }
+        }
+        return $this->Util->ajaxReturn(false,'服务器开小差');
+    }
+    
     /**
      * 支付约单尾款
      * 1.订单状态改变
@@ -490,7 +530,7 @@ class DateOrderController extends AppController
                    'redirect_url'=>'/date-order/order-success/'.$order->id,
                    'code'=>202,    //唤起聊天 
                    'msg'=>'尾款支付成功',
-                   'dater'=>$order->dater
+                   'obj'=>$order->dater
                        ]);
         }else{
             errorMsg($flow, '失败');

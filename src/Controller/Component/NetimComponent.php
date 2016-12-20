@@ -35,7 +35,7 @@ class NetimComponent extends Component {
 
     
     /**
-     * 
+     * 支付完预约金
      * @param \App\Model\Entity\Dateorder $order
      * @return type
      */
@@ -62,7 +62,38 @@ class NetimComponent extends Component {
         return $res;
     }
     
-    
+    /**
+     * 美女接受订单
+     * @param \App\Model\Entity\Dateorder $order
+     * @return type
+     */
+    public function receiveMsg(\App\Model\Entity\Dateorder $order){
+        $from_prefix = '';
+        $from_link = $this->Util->getServerDomain() . '/date-order/order-detail/' . $order->id;
+        $from_body = '我已同意你的邀请，期待与你相约。';
+        $from_link_text = '查看详情';
+        $from_msg = $this->Netim->generateCustomMsgBody($from_body, $from_link, $from_link_text, $from_prefix);
+
+        $to_prefix = '';
+        $to_link = $from_link;
+        $to_body = '我已同意你的邀请，期待与你相约。';
+        $to_link_text = '去付尾款';
+        $to_msg = $this->Netim->generateCustomMsgBody($to_body, $to_link, $to_link_text, $to_prefix);
+        $msg = $this->Netim->generateCustomMsg(5, $from_msg, $to_msg);
+        $res = $this->Netim->sendMsg($order->dater->imaccid, $order->buyer->imaccid, $msg);
+        if (!$res) {
+            \Cake\Log\Log::error($res,'devlog');
+            dblog('prepayMsg', 'server发送im消息失败', $res);
+        }
+        return $res;
+    }
+
+
+    /**
+     * 支付完尾款
+     * @param \App\Model\Entity\Dateorder $order
+     * @return type
+     */
     public function payallMsg(\App\Model\Entity\Dateorder $order){
         $from_prefix = '';
         $from_link = $this->Util->getServerDomain() . '/date-order/order-detail/' . $order->id;
