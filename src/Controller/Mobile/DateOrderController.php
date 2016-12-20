@@ -204,6 +204,7 @@ class DateOrderController extends AppController
                //发送im 消息
                $this->loadComponent('Netim');
                $this->Netim->prepayMsg($dateorder);
+               $dateorder->dater->avatar = $this->Util->getServerDomain().$dateorder->dater->avatar;
                return $this->Util->ajaxReturn([
                    'status'=>true,
                    'redirect_url'=>'/date-order/order-success/'.$dateorder->id,
@@ -453,6 +454,7 @@ class DateOrderController extends AppController
                 
                 $this->loadComponent('Netim');
                 $this->Netim->receiveMsg($dateorder);
+                $dateorder->buyer->avatar = $this->Util->getServerDomain().$dateorder->buyer->avatar;
                 return $this->Util->ajaxReturn([
                    'status'=>true,
                    'code'=>202,    //唤起聊天 
@@ -525,6 +527,7 @@ class DateOrderController extends AppController
                     '已支付您的【'.$order->user_skill->skill->name.'】技能约单尾款，请及时赴约.');
             $this->loadComponent('Netim');
             $this->Netim->payallMsg($order);
+            $order->dater->avatar = $this->Util->getServerDomain().$order->dater->avatar;
             return $this->Util->ajaxReturn([
                    'status'=>true,
                    'redirect_url'=>'/date-order/order-success/'.$order->id,

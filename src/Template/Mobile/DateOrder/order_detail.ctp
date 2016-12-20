@@ -158,7 +158,7 @@
                     <h3 class="time"><i>时间 </i><?= getFormateDT($order->start_time, $order->end_time) ?></h3>
                     <h3 class="address"><i>地点 </i><?= $order->site ?></h3>
                 </div>
-                <span>共2小时</span>
+                <span>共<?= $lasth ?>小时</span>
             </li>
             <li class="flex date-desc">
                 <div class="date_info">
@@ -243,9 +243,9 @@
     <?php endif; ?>
     <?php if ($order->status == 10): ?>
         <div class="potion_footer flex flex_justify">
-            <span id="refuse_status_10" class="identify_dark_potion">取消约单</span>
-            <?php if ($order->start_time > date('Y-m-d H:i:s')): ?>
-                <span id="godate" class="identify_footer_potion">赴约成功</span>
+            <?php if ($order->start_time < date('Y-m-d H:i:s')): ?>
+                <span id="refuse_status_10" class="footerbtn cancel">取消约单</span>
+                <span id="godate" class="footerbtn gopay">赴约成功</span>
             <?php endif; ?>
         </div>
     <?php endif; ?>
@@ -426,7 +426,7 @@
                     $.util.alert(res.msg);
                     if (res.status) {
                         setTimeout(function () {
-                           document.location.href = '/userc/dateorder';
+                            document.location.href = '/userc/dateorder';
                         }, 600);
                     }
                 }
