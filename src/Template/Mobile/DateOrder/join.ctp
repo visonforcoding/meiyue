@@ -40,13 +40,13 @@
         <div class="date_des change-date-detail  mt20">
              <ul class="outerblock bgff">
                 <li>
-                    <h3 class="commontitle pt10">约会说明</h3>
+                    <h3 class="commontitle pd10">约会说明</h3>
                     <div class="con date_keyword">
                         <p><?= $date['description'] ?></p>
                     </div>
                 </li>
                 <li class="flex">
-                     <?php if(count($date['tags']) > 0): ?><h3 class="commontitle">我的标签</h3>
+                     <?php if(count($date['tags']) > 0): ?><h3 class="">我的标签</h3>
                         <div class="con con_mark flex">
                             <?php foreach ($date['tags'] as $item): ?>
                                  <a class="mark"><?= $item['name'] ?></a>
