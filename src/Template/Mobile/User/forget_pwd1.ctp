@@ -90,12 +90,12 @@
             $.util.showPreloader();
             $.post('', {phone: phone, vcode: vcode}, function (res) {
                 $.util.hidePreloader();
+                $.util.alert(res.msg);
                 if (res.status) {
                     setTimeout(function () {
                         window.location.href = res.url;
                     }, 1000);
                 } else {
-                    $.util.alert(res.msg);
                     obj.removeClass('disabled');
                 }
             }, 'json');

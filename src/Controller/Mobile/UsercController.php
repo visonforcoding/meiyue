@@ -936,4 +936,16 @@ class UsercController extends AppController {
             'pageTitle'=>'兑换美币申请'
         ]);
     }
+
+
+    /**
+     * 兑换申请
+     */
+    public function exchangeApply()
+    {
+        $this->handCheckLogin();
+        if() {
+
+        }
+    }
 }
