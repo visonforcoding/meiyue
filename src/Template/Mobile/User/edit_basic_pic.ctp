@@ -27,7 +27,7 @@
             </div>
         <?php elseif ($user->status == UserStatus::NOPASS): ?>
             <div class="identity_audit_pass">
-                <i class='iconfont color_error'>&#xe61a;</i>
+                <i class='iconfont color_error'>&#xe681;</i>
                 <h3 class="jump_tipscon">审核不通过!</h3>
                 <p class="audit_des">手持身份证的照片不够清晰，请重新拍照然后上传。集奥思路打法骄傲的解放路卡斯加发撒的金风科技。</p>
             </div>

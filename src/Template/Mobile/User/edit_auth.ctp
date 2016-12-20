@@ -25,7 +25,7 @@
             </div>
         <?php elseif($user->id_status == UserStatus::CHECKING): ?>
             <div class="identity_audit_pass">
-                <i class='iconfont color_y' style="font-size:2rem">&#xe604;</i>
+                <i class='iconfont color_y' style="font-size:2rem">&#xe681;</i>
                 <h3 class="jump_tipscon">审核中!</h3>
             </div>
         <?php endif; ?>
