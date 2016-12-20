@@ -48,7 +48,7 @@
                 <span class="height_left color_y">身高 <i class="">(cm)</i></span>
                 <div class="scale">
                     <div class="line flex flex_justify">
-                        <h1>160</h1><h1>165</h1><h1>170</h1><h1>175</h1><h1>175</h1>
+                        <h1>160</h1><h1>165</h1><h1>170</h1><h1>175</h1><h1>180+</h1>
                     </div>
                     <div id='height' class="block range">
                         <div class='meaBox'></div>
@@ -129,8 +129,8 @@
     window.onTopRight = function(){
         $('#selectMenu_box').toggle();
         if(!window.search_height){
-            window.search_height = new ranger({dom:$('#height'), range:[160, 175]});
-            window.search_age = new ranger({dom:$('#age'), range:[12, 40]});
+            window.search_height = new ranger({dom:$('#height'), range:[160, 180]});
+            window.search_age = new ranger({dom:$('#age'), range:[18, 40]});
         }
     }
     $('#search').on('click',function(){
