@@ -71,15 +71,6 @@ class UsercController extends AppController {
         }
     }
 
-
-    /**
-     * 我的粉丝
-     */
-    public function follows() {
-        $this->handCheckLogin();
-        $this->set(['pageTitle'=>'我的粉丝']);
-        $this->set(['user'=>$this->user]);
-    }
     
     /**
      * 获取关注列表
@@ -103,32 +94,6 @@ class UsercController extends AppController {
                     });
                 })
                 ->toArray();
-        return $this->Util->ajaxReturn(['likes'=>$likes]);
-    }
-
-
-    /**
-     * 获取粉丝列表
-     */
-    public function getFollowsList($page=null){
-        $limit = 10;
-        $UserFansTable = \Cake\ORM\TableRegistry::get('UserFans');
-        $likes = $UserFansTable->find()
-            ->hydrate(false)
-            ->contain(['User' => function($q) {
-                return $q->select(['id', 'birthday', 'avatar', 'nick', 'recharge']);
-            }])
-            ->where(['following_id' => $this->user->id])
-            ->limit(intval($limit))
-            ->page(intval($page))
-            ->formatResults(function($items) {
-                return $items->map(function($item) {
-                    $item['user']['avatar'] = createImg($item['user']['avatar']) . '?w=90&h=90&fit=stretch';
-                    $item['user']['age'] = (Time::now()->year) - $item['user']['birthday']->year;
-                    return $item;
-                });
-            })
-            ->toArray();
         return $this->Util->ajaxReturn(['likes'=>$likes]);
     }
 
