@@ -731,6 +731,31 @@ class UserController extends AppController {
                 return $row;
             })
             ->first();
+
+        //访客数统计
+        if($this->user->gender == 2) {
+            $visitorTb = TableRegistry::get("Visitor");
+            $visitor = $visitorTb->find()->where(['visitor_id' => $this->user->id, 'visited_id' => $uid])->first();
+            $userdirty = false; //更新用户信息标志
+            if(!$visitor) {
+                $visitor = $visitorTb->newEntity([
+                    'visitor_id' => $this->user->id,
+                    'visited_id' => $uid,
+                ]);
+                $user->visitnum ++;
+                $userdirty = true;
+            }
+            $UserTable = $this->User;
+            $res = $visitorTb->connection()->transactional(function() use ($userdirty, $visitorTb, $visitor, $UserTable, $user){
+                $vres = $visitorTb->save($visitor);
+                $ures = true;
+                if($userdirty) {
+                    $ures = $UserTable->save($user);
+                }
+                return $vres&&$ures;
+            });
+        }
+
         $this->set([
             'user' => $user,
             'pageTitle' => '个人主页'
