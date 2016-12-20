@@ -352,7 +352,6 @@
         }
     });
 
-    LEMON.sys.back('/userc/edit-info');
     LEMON.sys.setTopRight('保存')
     window.onTopRight = function () {
         $("#submit").trigger('click');
