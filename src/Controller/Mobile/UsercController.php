@@ -944,8 +944,10 @@ class UsercController extends AppController {
     public function exchangeApply()
     {
         $this->handCheckLogin();
-        if() {
-
+        if($this->request->is("POST")) {
+            $withdrawTb = TableRegistry::get("Withdraw");
+            //检查提现情况
+            $withdraw = $withdrawTb->find()->where(['user_id' => $this->user->id])->count();
         }
     }
 }
