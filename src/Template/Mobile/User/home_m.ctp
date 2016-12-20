@@ -4,7 +4,7 @@
                     <h1>我的</h1>
                     <i class="iconfont install">&#xe661;</i>
                 </div>-->
-        <div class="home_cover_info">
+        <div class="home_cover_info flex">
             <span class="avatar">
                 <img src="<?= createImg($user->avatar) . '?w=150' ?>"  class="avatar-pic"/>
             </span>
@@ -32,7 +32,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="follow flex flex_justify">
+                    <li class="follow flex">
                         <div><a href="/userc/fans">赞赏我 <i><?= $facount ?></i></a></div>
                         <div><a href="/userc/likes"> 关注 <i><?= $focount ?></i></a></div>
                         <div><a href="#this">访客 <i>122</i></a></div>
