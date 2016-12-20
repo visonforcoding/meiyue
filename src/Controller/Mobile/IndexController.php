@@ -343,7 +343,7 @@ class IndexController extends AppController {
             $useres = $userTb->saveMany($userTb->newEntities([$in_user, $out_user]));
             return $flores&&$wxores&&$useres;
         });
-        debug($flow));
+        debug($flow);
         debug($in_user);
         debug($out_user);
         debug($wxorder);
