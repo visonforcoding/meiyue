@@ -3,6 +3,7 @@
 namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
+use Cake\Auth\DefaultPasswordHasher;
 use Cake\ORM\TableRegistry;
 use Cake\Controller\Controller;
 use PackType;
@@ -783,6 +784,7 @@ class UserController extends AppController {
         return $this->Util->ajaxReturn(['datas' => $ups->toArray(), 'status' => true]);
     }
 
+
     /**
      * 忘记密码步骤1
      */
@@ -810,7 +812,7 @@ class UserController extends AppController {
                 }
             }
             $this->request->session()->write('PASS_VCODE_PHONE', $data['phone']);
-            $jumpUrl = '/userc/forget-pwd2/';
+            $jumpUrl = '/user/forget-pwd2/';
             return $this->Util->ajaxReturn(['status' => true, 'msg' => '验证成功', 'url' => $jumpUrl]);
         }
         $this->set([

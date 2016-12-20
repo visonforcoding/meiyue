@@ -65,6 +65,7 @@
         }
     });
 
+
     $('#phone,#vcode').on('keyup', function () {
         var phone = $('#phone').val();
         var vcode = $('#vcode').val();
