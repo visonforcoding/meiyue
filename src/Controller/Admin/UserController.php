@@ -212,74 +212,73 @@ class UserController extends AppController {
             $user = $this->User->get($uid);
             $user = $this->User->patchEntity($user, $this->request->data);
             $mvTb = TableRegistry::get('Movement');
-            $mv_pic = $mvTb->find()->where(['user_id' => $uid, 'type' => 3])->first();
-            $mv_vid = $mvTb->find()->where(['user_id' => $uid, 'type' => 4])->first();
-            switch($user->status) {
-                case UserStatus::CHECKING:
-                    if($mv_pic) {
-                        $mv_pic->status = 1;
-                    }
-                    if($mv_vid) {
-                        $mv_vid->status = 1;
-                    }
-                    break;
-                case UserStatus::NOPASS:
-                    if($mv_pic) {
-                        $mv_pic->status = 3;
-                    }
-                    if($mv_vid) {
-                        $mv_vid->status = 3;
-                    }
-                    break;
-                case UserStatus::PASS:
-                    if($mv_pic) {
-                        $mv_pic->status = 2;
-                        if($mv_pic->images) {
-                            $mv_pic->images = $user->images;
+            $delres = $mvTb->query()->delete()->where([['user_id' => $uid, 'type IN' => [3, 4]]])->execute();
+            /*$mv_pic = $mvTb->find()->where(['user_id' => $uid, 'type' => 3])->first();
+            $mv_vid = $mvTb->find()->where(['user_id' => $uid, 'type' => 4])->first();*/
+            if($delres) {
+                $mv_vid = null;
+                $mv_pic = null;
+                if($user->video) {
+                    $mv_vid = $mvTb->newEntity([
+                        'user_id' => $uid,
+                        'type' => 4,
+                        'body' => '',
+                        'video' => $user->video,
+                        'video_cover' => $user->video_cover,
+                        'view_nums' => 0,
+                        'praise_nums' => 0,
+                        'status' => 2,
+                    ]);
+                }
+                if($user->images) {
+                    $mv_pic = $mvTb->newEntity([
+                        'user_id' => $uid,
+                        'type' => 3,
+                        'body' => '',
+                        'images' => $user->images,
+                        'view_nums' => 0,
+                        'praise_nums' => 0,
+                        'status' => 2,
+                    ]);
+                }
+
+                switch($user->status) {
+                    case UserStatus::CHECKING:
+                        if($mv_pic) {
+                            $mv_pic->status = 1;
                         }
-                    } else {
-                        $mv_pic = $mvTb->newEntity([
-                            'user_id' => $uid,
-                            'type' => 3,
-                            'body' => '',
-                            'images' => $user->images,
-                            'view_nums' => 0,
-                            'praise_nums' => 0,
-                            'status' => 2,
-                        ]);
-                    }
-                    if($mv_vid) {
-                        $mv_vid->status = 2;
-                        if($mv_pic->video_cover&&$mv_pic->video) {
-                            $mv_pic->video_cover = $user->video_cover;
-                            $mv_pic->video = $user->video;
+                        if($mv_vid) {
+                            $mv_vid->status = 1;
                         }
-                    } else {
-                        $mv_vid = $mvTb->newEntity([
-                            'user_id' => $uid,
-                            'type' => 4,
-                            'body' => '',
-                            'video' => $user->video,
-                            'video_cover' => $user->video_cover,
-                            'view_nums' => 0,
-                            'praise_nums' => 0,
-                            'status' => 2,
-                        ]);
-                    }
-                    break;
-            }
-            $res = $this->User->connection()->transactional(function() use(&$user, $mvTb, &$mv_pic, &$mv_vid) {
-                $mvres1 = true;
-                $mvres2 = true;
-                if($mv_pic&&$mv_vid) {
+                        break;
+                    case UserStatus::NOPASS:
+                        if($mv_pic) {
+                            $mv_pic->status = 3;
+                        }
+                        if($mv_vid) {
+                            $mv_vid->status = 3;
+                        }
+                        break;
+                    case UserStatus::PASS:
+                        if($mv_pic) {
+                            $mv_pic->status = 2;
+                        }
+                        if($mv_vid) {
+                            $mv_vid->status = 2;
+                        }
+                        break;
+                }
+                $res = $this->User->connection()->transactional(function() use(&$user, $mvTb, &$mv_pic, &$mv_vid) {
                     $mvres1 = $mvTb->save($mv_pic);
                     $mvres2 = $mvTb->save($mv_vid);
+                    $ures = $this->User->save($user);
+                    return $mvres1&&$mvres2&&$ures;
+                });
+                if ($res) {
+                    $this->Util->ajaxReturn(true, '修改成功');
+                } else {
+                    $this->Util->ajaxReturn(false, '修改失败');
                 }
-                $ures = $this->User->save($user);
-                return $mvres1&&$mvres2&&$ures;
-            });
-            if ($res) {
-                $this->Util->ajaxReturn(true, '修改成功');
             } else {
                 $this->Util->ajaxReturn(false, '修改失败');
             }
