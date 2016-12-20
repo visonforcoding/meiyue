@@ -418,7 +418,6 @@
     });
     $(document).on('tap', '#remove_order', function () {
         //删除订单
-        var orderid = $(this).data('orderid');
         $.util.confirm('提示', '确定删除订单么', function () {
             $.util.ajax({
                 url: '/date-order/remove-order',
