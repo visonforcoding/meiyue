@@ -147,7 +147,6 @@
                 //LEMON.db.set('im_token', res.user.imtoken);
                 //LEMON.db.set('im_accid', 'meiyue_'+res.user.id);
                 window.location.reload();
-                
             });
         }
     })

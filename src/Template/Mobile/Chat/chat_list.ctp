@@ -70,7 +70,7 @@ var account = LEMON.db.get('im_accid');
 var token = LEMON.db.get('im_token');
 var nim = NIM.getInstance({
     debug: true,
-    appKey: '9e0e349ffbcf4345fdd777a65584fb68',
+    appKey: '<?=$imkey?>',
     account: account,
     token: token,
     onconnect: onConnect,

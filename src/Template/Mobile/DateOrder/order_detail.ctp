@@ -253,7 +253,7 @@
     <?php endif; ?>
     <?php if (in_array($order->status, [11, 9])): ?>
         <div class="potion_footer flex flex_justify">
-            <span id="refuse_status_10" class="footerbtn cancel">删除订单</span>
+            <span id="remove_order" class="footerbtn cancel">删除订单</span>
             <span  class="footerbtn gopay">惩罚成功</span>
         </div>
     <?php endif; ?>
@@ -277,8 +277,8 @@
     <?php endif; ?>
     <?php if ($order->status == 16): ?>
         <div class="potion_footer flex flex_justify">
-            <a href="/date-order/show-appraise/<?= $order->id ?>" class="footerbtn cancel">查看评价</a>
-            <span  id="remove_order" class="footerbtn gopay">删除订单</span>
+            <a href="/date-order/show-appraise/<?= $order->id ?>" class="footerbtn gopay">查看评价</a>
+            <span  id="remove_order" class="footerbtn cancel">删除订单</span>
         </div>
     <?php endif; ?>
 <?php else: ?>
@@ -366,6 +366,9 @@
                 data: {order_id: orderid},
                 func: function (res) {
                     $.util.alert(res.msg);
+                    if(res.status){
+                        refresh();
+                    }
                 }
             })
         })
