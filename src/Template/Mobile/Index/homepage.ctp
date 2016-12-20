@@ -110,9 +110,9 @@
     <ul class="home_seach_info outerblock mt40">
         <?php if($user->wx_ishow && $user->wxid): ?>
         <li>
-            <a id="showWx" name="showWx" class="items flex flex_justify" >
+            <a name="showWx" class="items flex flex_justify" >
                 <span class="seach_name">查看Ta的微信</span>
-                <span class="golook">点击查看</span>
+                <span id="showWx" class="golook">点击查看</span>
             </a>
         </li>
         <?php endif; ?>

@@ -8,9 +8,9 @@
     <h3 class="basic_info_integrity">当前资料完整度<?= $percent;?>%</h3>
     <div class="identify_img_ifo mt40">
         <ul class="inner">
-            <li class="clearfix">
+            <li class="clearfix" id="avatar_img">
                 <span class="fl">上传图像</span>
-                <div class="iden_r_box fr" id="avatar_img">
+                <div class="iden_r_box fr">
                     <div class="iden_r_pic">
                         <img src="<?= $user->avatar; ?>" alt="" />
                         <input type="hidden" name="avatar" />
