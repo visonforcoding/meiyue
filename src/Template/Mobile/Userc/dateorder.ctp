@@ -329,12 +329,13 @@
         //美女接收订单
         var orderid = $(this).data('orderid');
         $.util.ajax({
-            url: '/userc/receive-order',
+            url: '/date-order/receive-order',
             data: {orderid: orderid},
             func: function (res) {
                 $.util.alert(res.msg);
                 setTimeout(function () {
-                    refresh();
+                    $.util.openTalk(res);
+                    //refresh();
                 }, 300);
             }
         })
