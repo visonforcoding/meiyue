@@ -29,6 +29,7 @@ class UsercController extends AppController {
      * 美女粉丝  男赞赏我的
      */
     public function fans($page=null) {
+        $this->handCheckLogin();
         if($this->request->is('json')){
             $limit = 10;
             $UserFansTable = \Cake\ORM\TableRegistry::get('UserFans');
@@ -51,6 +52,7 @@ class UsercController extends AppController {
             $pageTitle = '我的粉丝';
         }
         $this->set(['pageTitle'=>$pageTitle]);
+        $this->set(['user'=>$this->user]);
     }
     
     
@@ -58,6 +60,10 @@ class UsercController extends AppController {
      * 我的关注
      */
     public function likes(){
+        $this->handCheckLogin();
+        $this->set([
+            'user' => $this->user
+        ]);
         if($this->user->gender == 1) {
             $this->set(['pageTitle'=>'我的关注']);
         } else {
@@ -70,7 +76,9 @@ class UsercController extends AppController {
      * 我的粉丝
      */
     public function follows() {
+        $this->handCheckLogin();
         $this->set(['pageTitle'=>'我的粉丝']);
+        $this->set(['user'=>$this->user]);
     }
     
     /**
@@ -123,6 +131,7 @@ class UsercController extends AppController {
             ->toArray();
         return $this->Util->ajaxReturn(['likes'=>$likes]);
     }
+
 
     /**
      * 我的-我的派对

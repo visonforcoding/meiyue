@@ -31,7 +31,7 @@
                     </li>
                     <li class="follow">
                         <a class="like" onclick="window.location.href='/userc/likes'">喜欢 <i><?= $focount; ?></i></a>
-                        <a class="like" onclick="window.location.href='/userc/follows'">粉丝 <i><?= $facount; ?></i></a>
+                        <a class="like" onclick="window.location.href='/userc/fans'">粉丝 <i><?= $facount; ?></i></a>
                     </li>
                 </ul>
             </div>
