@@ -428,6 +428,7 @@ class UsercController extends AppController {
      * 我的钱包
      */
     public function myPurse(){
+        $this->handCheckLogin();
         $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
         $top5flows = $FlowTable->find()
                 ->where(['user_id'=>  $this->user->id])
@@ -435,10 +436,12 @@ class UsercController extends AppController {
                 ->orderDesc('create_time')
                 ->limit(10)
                 ->toArray();
+        $withdraw = TableRegistry::get('Withdraw')->find()->where(['user_id' => $this->user->id, 'status' => 1])->first();
         $this->set([
             'pageTitle'=>'我的钱包',
             'user'=>  $this->user,
-            'top5flows'=>$top5flows    
+            'top5flows'=>$top5flows,
+            'withdraw' => $withdraw
         ]);
     }
 
@@ -963,8 +966,8 @@ class UsercController extends AppController {
             $withdraw = $withdrawTb->newEntity();
             $withdraw = $withdrawTb->patchEntity($withdraw, $data);
             $withdraw->user_id = $this->user->id;
-            $withdraw->amount = ($withdraw->amount) * 0.8;
             $withdraw->viramount = $withdraw->amount;
+            $withdraw->amount = ($withdraw->amount) * 0.8;
             $withdraw->status = 1;
             if($withdrawTb->save($withdraw)) {
                 return $this->Util->ajaxReturn(['status' => true, 'msg' => '提交成功']);

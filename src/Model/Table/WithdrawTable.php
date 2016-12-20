@@ -39,12 +39,13 @@ class WithdrawTable extends Table
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'joinType' => 'INNER',
+            'className' => 'User'
         ]);
-        $this->belongsTo('Admins', [
-            'foreignKey' => 'admin_id'
-        ]);
-
+        /*$this->belongsTo('Admins', [
+            'foreignKey' => 'admin_id',
+            'className' => 'Admin'
+        ]);*/
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
@@ -98,8 +99,7 @@ class WithdrawTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['admin_id'], 'Admins'));
-
+        //$rules->add($rules->existsIn(['admin_id'], 'Admins'));
         return $rules;
     }
 }

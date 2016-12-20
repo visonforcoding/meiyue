@@ -21,7 +21,7 @@
                 <p><a href="/activity/index#3" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
             <?php else: ?>
                 <span class="btn btn_bg_t" onclick="duihuan();">兑换美币</span>
-                <p class="tips">正在申请提现 20,000 美币</p>
+                <p class="tips">正在申请提现 <?= isset($withdraw->viramount)?$withdraw->viramount:0; ?> 美币</p>
             <?php endif; ?>
         </div>
     </div>
@@ -74,7 +74,7 @@
                 </div>
                 <span class="pay-type-choose-span iconfont choose">&#xe615;</span>
             </li>
-            <li class="pay-type-choose" onclick="toYinlianpage();">
+            <!--<li class="pay-type-choose" onclick="toYinlianpage();">
                 <div class="paytype">
                     <i class="iconfont payico cardpay">&#xe621;</i>
                     <h3 class="paydes">
@@ -83,7 +83,7 @@
                     </h3>
                 </div>
                 <span class="pay-type-choose-span iconfont choose">&#xe615;</span>
-            </li>
+            </li>-->
         </ul>
     </div>
 </div>
