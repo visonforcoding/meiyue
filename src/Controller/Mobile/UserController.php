@@ -791,10 +791,10 @@ class UserController extends AppController {
         $data = $this->request->data();
         if($this->request->is("ajax") && $data['phone']) {
             //验证是否注册
-            $user = $this->User->find()->where(['id' => $data['phone']])->count();
+            $user = $this->User->find()->where(['phone' => $data['phone']])->count();
             if(!$user) {
                 $jumpUrl = '/user/login';
-                return $this->Util->ajaxReturn(['status' => true, 'msg' => '用户不存在', 'url' => $jumpUrl]);
+                return $this->Util->ajaxReturn(['status' => true , 'msg' => '用户不存在', 'url' => $jumpUrl]);
             }
             //验证验证码
             $SmsTable = TableRegistry::get('Smsmsg');
