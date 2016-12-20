@@ -60,6 +60,17 @@ function followIt(id, $obj) {
         }
     })
 }
+
+$(document).on('tap', '.click-like-item', function() {
+    var uid = $(this).data('id');
+    var gender = <?= $user->gender; ?>;
+    if(gender == 2) {
+        location.href='/user/male-homepage/' + uid;
+    } else {
+        location.href='/index/homepage/' + uid;
+    }
+});
+
 LEMON.sys.back('/user/index');
 </script>
 <?php $this->end('script'); ?>

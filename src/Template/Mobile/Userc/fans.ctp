@@ -3,7 +3,7 @@
 <script id="fans-list-tpl" type="text/html">
     {{#fans}}
     <li>
-        <a href="#this" class="praised_block">
+        <a class="praised_block click-fan-item" data-id="{{user.id}}">
             <div class="praised_list_left">
                 <span class="avatar"><img src="{{user.avatar}}" alt="" /></span>
                 <h3>
@@ -21,7 +21,7 @@
 <?php $this->end('static') ?>
 <header>
     <div class="header">
-        <i class="iconfont toback">&#xe602;</i>
+        <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1><?=$pageTitle?></h1>
     </div>
 </header>
@@ -66,6 +66,16 @@ setTimeout(function () {
     });
 }, 2000)
 
-LEMON.sys.back('/user/index');
+
+$(document).on('tap', '.click-fan-item', function() {
+    var uid = $(this).data('id');
+    var gender = <?= $user->gender; ?>;
+    if(gender == 2) {
+        location.href='/user/male-homepage/' + uid;
+    } else {
+        location.href='/index/homepage/' + uid;
+    }
+});
+
 </script>
 <?php $this->end('script'); ?>
