@@ -242,12 +242,14 @@
         </div>
     <?php endif; ?>
     <?php if ($order->status == 10): ?>
-        <div class="potion_footer flex flex_justify">
-            <?php if ($order->start_time < date('Y-m-d H:i:s')): ?>
+        <?php if ($order->start_time < date('Y-m-d H:i:s')): ?>
+            <div class="potion_footer flex flex_justify">
                 <span id="refuse_status_10" class="footerbtn cancel">取消约单</span>
                 <span id="godate" class="footerbtn gopay">赴约成功</span>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php else: ?>
+            <span  id="refuse_status_10" class="identify_dark_potion">取消订单</span>
+        <?php endif; ?>
     <?php endif; ?>
     <?php if (in_array($order->status, [11, 9])): ?>
         <div class="potion_footer flex flex_justify">
