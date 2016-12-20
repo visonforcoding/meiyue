@@ -213,6 +213,9 @@ function getHIS($startTime, $endTime) {
 //根据出生日期计算年龄
 function getAge($birthday) {
     $currentday = new Date();
+    if(!($birthday instanceof Date)){
+        return '--';
+    }
     return ($currentday->year - $birthday->year);
 }
 
