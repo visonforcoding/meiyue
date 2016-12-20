@@ -947,7 +947,30 @@ class UsercController extends AppController {
         if($this->request->is("POST")) {
             $withdrawTb = TableRegistry::get("Withdraw");
             //检查提现情况
-            $withdraw = $withdrawTb->find()->where(['user_id' => $this->user->id])->count();
+            $withdraw = $withdrawTb->find()->where(['user_id' => $this->user->id, 'status' => 1])->count();
+            if($withdraw) {
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '不能重复提交']);
+            }
+            $data = $this->request->data;
+            $pwd = $data['passwd'];
+            if(!$pwd) {
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '密码不能为空']);
+            } else {
+                if(!(new \Cake\Auth\DefaultPasswordHasher)->check($pwd, $this->user->pwd)) {
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '密码错误']);
+                }
+            }
+            $withdraw = $withdrawTb->newEntity();
+            $withdraw = $withdrawTb->patchEntity($withdraw, $data);
+            $withdraw->user_id = $this->user->id;
+            $withdraw->amount = ($withdraw->amount) * 0.8;
+            $withdraw->viramount = $withdraw->amount;
+            $withdraw->status = 1;
+            if($withdrawTb->save($withdraw)) {
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '提交成功']);
+            }
+            exit();
+            return $this->Util->ajaxReturn(['status' => false, 'msg' => '提交失败']);
         }
     }
 

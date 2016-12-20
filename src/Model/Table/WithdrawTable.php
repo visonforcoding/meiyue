@@ -44,6 +44,15 @@ class WithdrawTable extends Table
         $this->belongsTo('Admins', [
             'foreignKey' => 'admin_id'
         ]);
+
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'create_time' => 'new',
+                    'update_time' => 'always'
+                ]
+            ]
+        ]);
     }
 
     /**
@@ -68,36 +77,13 @@ class WithdrawTable extends Table
             ->notEmpty('cardno');
 
         $validator
-            ->requirePresence('bank', 'create')
-            ->notEmpty('bank');
-
-        $validator
             ->requirePresence('truename', 'create')
             ->notEmpty('truename');
-
-        $validator
-            ->numeric('fee')
-            ->requirePresence('fee', 'create')
-            ->notEmpty('fee');
-
-        $validator
-            ->requirePresence('remark', 'create')
-            ->notEmpty('remark');
 
         $validator
             ->integer('status')
             ->requirePresence('status', 'create')
             ->notEmpty('status');
-
-        $validator
-            ->dateTime('create_time')
-            ->requirePresence('create_time', 'create')
-            ->notEmpty('create_time');
-
-        $validator
-            ->dateTime('update_time')
-            ->requirePresence('update_time', 'create')
-            ->notEmpty('update_time');
 
         return $validator;
     }
