@@ -4,7 +4,7 @@
         <h1><?= $pageTitle;?></h1>
     </div>
 </header>
-<div class="wraper fullpage bgff">
+<div class="wraper fullwraper bgff">
     <div class="nav-banner iphone-banner"></div>
     <div class="foget-pwd-box">
         <div class="items">
