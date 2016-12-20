@@ -340,14 +340,10 @@ class IndexController extends AppController {
                 $flow->relate_id = $wxores->id;
             }
             $flores = $FlowTable->save($flow);
-            $useres = $userTb->saveMany($userTb->newEntities([$in_user, $out_user]));
-            return $flores&&$wxores&&$useres;
+            $use1res = $userTb->save($in_user);
+            $use2res = $userTb->save($out_user);
+            return $flores&&$wxores&&$use1res&&$use2res;
         });
-        debug($flow);
-        debug($in_user);
-        debug($out_user);
-        debug($wxorder);
-        exit();
         if($transRes) {
             return $this->Util->ajaxReturn(true, '支付成功');
         } else {
