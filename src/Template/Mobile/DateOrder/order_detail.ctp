@@ -302,8 +302,10 @@
         <a id="refuse_status_7" class="identify_dark_potion">取消约单</a>
     <?php endif; ?>
     <?php if (in_array($order->status, [11, 9])): ?>
-        <span id="remove_order" class="footerbtn cancel">删除订单</span>
-        <span class="footerbtn gopay">补偿成功</span>
+        <div class="potion_footer flex flex_justify">
+            <span id="remove_order" class="footerbtn cancel">删除订单</span>
+            <span class="footerbtn gopay">补偿成功</span>
+        </div>
     <?php endif; ?>
     <?php if ($order->status == 10): ?>
         <div class="potion_footer flex flex_justify">
