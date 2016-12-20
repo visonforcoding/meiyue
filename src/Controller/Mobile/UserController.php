@@ -790,17 +790,23 @@ class UserController extends AppController {
     {
         $data = $this->request->data();
         if($this->request->is("ajax") && $data['phone']) {
+            //验证是否注册
+            $user = $this->User->find()->where(['id' => $data['phone']])->count();
+            if(!$user) {
+                $jumpUrl = '/user/login';
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '用户不存在', 'url' => $jumpUrl]);
+            }
             //验证验证码
             $SmsTable = TableRegistry::get('Smsmsg');
             $sms = $SmsTable->find()->where(['phone' => $data['phone']])->orderDesc('create_time')->first();
             if (!$sms) {
-                return $this->Util->ajaxReturn(false, '验证码错误');
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '验证码错误']);
             } else {
                 if ($sms->code != $data['vcode']) {
-                    return $this->Util->ajaxReturn(false, '验证码错误');
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '验证码错误']);
                 }
                 if ($sms->expire_time < time()) {
-                    return $this->Util->ajaxReturn(false, '验证码已过期');
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '验证码已过期']);
                 }
             }
             $this->request->session()->write('PASS_VCODE_PHONE', $this->user->phone);

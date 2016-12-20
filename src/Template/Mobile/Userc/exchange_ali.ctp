@@ -47,7 +47,7 @@
 <div class="bottomblock">
     <div class="flex flex_end">
         <span class="total">所兑换人民币：<i class="color_y">￥</i> <i class="color_y numbers" id="show-true-amount">0.8元</i></span>
-        <a href="javascript:void(0);" class="nowpay">立即申请</a>
+        <a class="nowpay">立即申请</a>
     </div>
 </div>
 
@@ -67,5 +67,8 @@
         var trueamount = curamount * 0.8;
         $('#show-true-amount').text(trueamount);
     });
-    LEMON.sys.back('/userc/my-purse');
+
+    $('.nowpay').on('tap', function() {
+
+    });
 </script>
