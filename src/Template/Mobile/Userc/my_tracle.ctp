@@ -5,7 +5,7 @@
     <section>
         <div class="title inner flex">
             <div class="tracle_title_left">
-                <span class="avatar"><img src="{{user.avatar}}"/></span>
+                <span class="avatar"><img src="{{user.avatar}}?w=100" onload="$.util.setWH(this)"/></span>
                 <h3 class="user_info">
                     <span>{{user.nick}}</span>
                     <time>{{create_time}}</time>
@@ -162,6 +162,7 @@ $('#submitbtn').on('tap', function () {
                     movement['images'][j] = (movement['images'][j]).replace(/upload/, 'imgs');
                 });
             }
+            movement['user']['avatar'] = (movement['user']['avatar']).replace(/upload/, 'imgs');
         })
         return data;
     }
