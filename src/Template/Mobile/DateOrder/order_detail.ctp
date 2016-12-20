@@ -185,6 +185,9 @@
                 <div>合计</div><div><?= $order->amount ?>美币</div>
             </li>
             <li class="flex flex_justify">
+                <?php if (in_array($order->status, ['3'])): ?>
+                    <div>已支付预约金</div><div><?= $order->pre_pay ?>美币</div>
+                <?php endif; ?>
                 <?php if (in_array($order->status, ['13', '10'])): ?>
                     <div>已支付</div><div><?= $order->amount ?>美币</div>
                 <?php endif; ?>
@@ -280,7 +283,7 @@
     <!--女性-->
     <?php if ($order->status == 3): ?>
         <div class="bottomblock">
-            <div class="flex flex_end">
+            <div class="potion_footer flex flex_justify">
                 <span id="refuse_status_3" class="footerbtn cancel">拒绝</span>
                 <span  id="receive_order" class="footerbtn gopay">接单</span>
             </div>
