@@ -35,7 +35,7 @@
                     <li class="follow flex">
                         <div><a href="/userc/fans">赞赏我 <i><?= $facount ?></i></a></div>
                         <div><a href="/userc/likes"> 关注 <i><?= $focount ?></i></a></div>
-                        <div><a href="#this">访客 <i>122</i></a></div>
+                        <div><a href="/userc/visitors">访客 <i><?= $user->visitnum; ?></i></a></div>
                     </li>
                 </ul>
             </div>
@@ -148,7 +148,7 @@
             '联系客服',
             '拨打客服电话',
             function() {
-                LEMON.event.tel('13763053901');
+                LEMON.event.tel('0755-33580266');
             },
             null,
             null,

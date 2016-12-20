@@ -950,4 +950,40 @@ class UsercController extends AppController {
             $withdraw = $withdrawTb->find()->where(['user_id' => $this->user->id])->count();
         }
     }
+
+
+    /**
+     * 我的访客
+     */
+    public function visitors($page=null)
+    {
+        $this->handCheckLogin();
+        if($this->request->is('json')) {
+            $limit = 10;
+            $visitorTb = TableRegistry::get('Visitor');
+            $visitors = $visitorTb->find()->hydrate(false)->contain([
+                'Visiter'=>function($q){
+                    return $q->select(['id','birthday','avatar','nick', 'recharge', 'consumed', 'charm', 'gender']);
+                },
+                'Visiter.Follows' => function($q) {
+                    return $q->select(['user_id'])->where(['following_id' => $this->user->id]);
+                }
+            ])->where(['visited_id' => $this->user->id])
+                ->limit(intval($limit))
+                ->page(intval($page))
+                ->formatResults(function($items) {
+                    return $items->map(function($item) {
+                        $item['visiter']['avatar'] = createImg($item['visiter']['avatar']) . '?w=44&h=44&fit=stretch';
+                        $item['visiter']['age'] = isset($item['visiter']['birthday'])?getAge($item['visiter']['birthday']):'xx';
+                        $item['visiter']['isfan'] = (count($item['visiter']['follows']));
+                        return $item;
+                    });
+                })->toArray();
+            return $this->Util->ajaxReturn(['visitors'=>$visitors]);
+        }
+        $this->set([
+            'user' => $this->user,
+            'pageTitle'=>'我的访客'
+        ]);
+    }
 }

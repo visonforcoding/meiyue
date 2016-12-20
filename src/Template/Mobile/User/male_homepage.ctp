@@ -21,7 +21,7 @@
                     <li class="follow flex flex_justify">
                         <div>赞赏我 <i><?= $user->facount; ?></i></div>
                         <div>关注 <i><?= $user->focount; ?></i></div>
-                        <div>访客 <i>122</i></div>
+                        <div>访客 <i><?= $user->visitnum; ?></i></div>
                     </li>
                 </ul>
             </div>

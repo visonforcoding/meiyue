@@ -30,8 +30,9 @@
                         </a>
                     </li>
                     <li class="follow">
-                        <a class="like" onclick="window.location.href='/userc/likes'">喜欢 <i><?= $focount; ?></i></a>
-                        <a class="like" onclick="window.location.href='/userc/fans'">粉丝 <i><?= $facount; ?></i></a>
+                        <a class="like" href="/userc/likes">喜欢 <i><?= $focount; ?></i></a>
+                        <a class="like" href="/userc/fans">粉丝 <i><?= $facount; ?></i></a>
+                        <a class="like" href="/userc/visitors">访客 <i><?= $user->visitnum; ?></i></a>
                     </li>
                 </ul>
             </div>
@@ -164,7 +165,7 @@
             '联系客服',
             '拨打客服电话',
             function() {
-                LEMON.event.tel('13763053901');
+                LEMON.event.tel('0755-33580266');
             },
             null,
             null,
