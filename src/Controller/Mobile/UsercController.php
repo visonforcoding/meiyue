@@ -531,9 +531,9 @@ class UsercController extends AppController {
         if($this->request->is('POST')) {
             $userTb = TableRegistry::get('User');
             $datas = $this->request->data();
-            $bwh_b = $datas['bwh_b'];
-            $bwh_w = $datas['bwh_w'];
-            $bwh_h = $datas['bwh_h'];
+            $bwh_b = isset($datas['bwh_b'])?$datas['bwh_b']:0;
+            $bwh_w = isset($datas['bwh_w'])?$datas['bwh_b']:0;
+            $bwh_h = isset($datas['bwh_h'])?$datas['bwh_b']:0;
             $bwh = $bwh_b.'/'.$bwh_w.'/'.$bwh_h;
             $datas['bwh'] = $bwh;
             $user = $userTb->patchEntity($user, $datas);
