@@ -809,7 +809,7 @@ class UserController extends AppController {
                     return $this->Util->ajaxReturn(['status' => false, 'msg' => '验证码已过期']);
                 }
             }
-            $this->request->session()->write('PASS_VCODE_PHONE', $this->user->phone);
+            $this->request->session()->write('PASS_VCODE_PHONE', $data['phone']);
             $jumpUrl = '/userc/forget-pwd2/';
             return $this->Util->ajaxReturn(['status' => true, 'msg' => '验证成功', 'url' => $jumpUrl]);
         }
