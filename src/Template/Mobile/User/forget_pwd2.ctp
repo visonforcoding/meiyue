@@ -53,9 +53,11 @@
                 $.util.hidePreloader();
                 if (res.status) {
                     $.util.alert(res.msg);
-                    setTimeout(function () {
+                    if($.util.isAPP) {
+                        LEMON.event.login();
+                    } else {
                         window.location.href = res.url;
-                    }, 1000);
+                    }
                 } else {
                     $.util.alert(res.msg);
                     obj.removeClass('disabled');
