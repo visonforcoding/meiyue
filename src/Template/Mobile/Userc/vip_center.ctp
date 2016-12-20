@@ -100,29 +100,32 @@
     </div>
     <div class="center_detail_list mt60">
         <h3 class="inner commontitle">购买记录</h3>
-        <ul class="outerblock bdbottom btop inner">
-            <?php foreach($userPacks as $item): ?>
-                <li class="flex flex_justify">
-                    <div class="l_info">
-                        <h3><?= $item->title; ?></h3>
-                        <time class="smalldes">
-                            <?= getYMD($item->create_time) ?>
-                        </time>
-                    </div>
-                    <div class="r_info smalldes">
-                        <span>
-                            查看
-                            <?= ($item->chat_num)?>
-                        </span>
-                        |
-                        <span>
-                            聊天
-                            <?= ($item->browse_num) ?>
-                        </span>
-                    </div>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <div class='buy-record'>
+             <ul class="outerblock bdbottom btop inner">
+                <?php foreach($userPacks as $item): ?>
+                    <li class="flex flex_justify">
+                        <div class="l_info">
+                            <h3><?= $item->title; ?></h3>
+                            <time class="smalldes">
+                                <?= getYMD($item->create_time) ?>
+                            </time>
+                        </div>
+                        <div class="r_info smalldes">
+                            <span>
+                                查看
+                                <?= ($item->chat_num)?>
+                            </span>
+                            |
+                            <span>
+                                聊天
+                                <?= ($item->browse_num) ?>
+                            </span>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+       
     </div>
 
 </div>
