@@ -16,7 +16,7 @@
                 <div class="fact_identify" id="add_tracle">
                     <dl class="Idcard">
                         <dt>
-                        <img src="/mobile/images/upimg.jpg" alt="" />
+                        <img src="/mobile/images/upimg.png" alt="" />
                         </dt>
                     </dl>
                 </div>
@@ -24,7 +24,7 @@
         </div>
     </div>
     <p class="commonarea inner mt20">注意要发布个人性感、具有诱惑力的视频。</p>
-    <div class="inner mt100">
+    <div class="inner mt5">
         <a class="commontitle aligncenter color_y ablock" href='#this'>没有性感视频?</a>
         <div class="inner">
             <a href="/tracle/tracle_order" class="btn btn_dark_t mt20">免费约拍</a>
