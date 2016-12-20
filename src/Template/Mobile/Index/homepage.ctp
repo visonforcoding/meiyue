@@ -16,7 +16,7 @@
             <span class="vip"><img src="/mobile/images/my-hot.png" class="responseimg"/></span>
         </h3>
         <div class="home_name_info aligncenter">
-            <i class="iconfont color_y"><?= ($user->gender)?'&#xe61d;':'&#xe61c;'; ?></i> <?= $age ?> <i class="job"><?= $user->profession ?></i> <i class="address"><?= $user->city ?> <i class="iconfont">&#xe623;</i> <?= $distance ?></i>
+            <i class="iconfont color_y"><?= ($user->gender)?'&#xe61d;':'&#xe61c;'; ?></i> <?= $age ?> <i class="job"><?= $user->profession ?></i> <i class="address"><?= $user->city ?> <i class="iconfont">&#xe623;</i><i class='distance'><?= $distance ?></i></i>
         </div>
         <!--<div class="commend aligncenter">
             <i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont color_light">&#xe62a;</i>
