@@ -824,7 +824,7 @@ class UserController extends AppController {
      */
     public function forgetPwd2()
     {
-        if($this->request->is('ajax') && $this->request->session()->read('PASS_VCODE_PHONE')) {
+        if($this->request->is('POST') && $this->request->session()->read('PASS_VCODE_PHONE')) {
             $data = $this->request->data();
             $pwd1 = $data['newpwd1'];
             $pwd2 = $data['newpwd2'];
