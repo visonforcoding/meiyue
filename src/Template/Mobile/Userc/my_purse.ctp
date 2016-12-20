@@ -38,7 +38,7 @@
                             <time><?= $flow->create_time->format('Y-m-d') ?></time>
                         </div>
                     <span class="puse_bills_right">
-                        <?php if ($flow->income == 1): ?>
+                        <?php if ($flow->user_id == $user->id): ?>
                         +
                         <?php else: ?>
                         -

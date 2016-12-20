@@ -3,7 +3,7 @@
 <script id="like-list-tpl" type="text/html">
     {{#likes}}
     <li>
-        <a href="#this" class="praised_block">
+        <a class="praised_block click-like-item" data-id="{{follower.id}}">
             <div class="praised_list_left">
                 <span class="avatar"><img src="{{follower.avatar}}" alt="" /></span>
                 <h3>
