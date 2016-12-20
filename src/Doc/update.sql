@@ -699,3 +699,11 @@ COMMENT='访客统计'
 ENGINE=InnoDB
 ;
 
+#用户表添加访客数统计
+ALTER TABLE `lm_user`
+	ADD COLUMN `visitnum` INT NOT NULL DEFAULT '0' COMMENT '访客数' AFTER `charm`;
+
+#提现表添加美币记录
+ALTER TABLE `lm_withdraw`
+	ADD COLUMN `viramount` FLOAT NOT NULL DEFAULT '0' COMMENT '兑换美币' AFTER `amount`;
+

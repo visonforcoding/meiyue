@@ -3,7 +3,7 @@
 <script id="movement-list-tpl" type="text/html">
     {{#movements}}
     <section>
-        <div class="title inner flex">
+        <div class="title inner flex flex_justify">
             <div class="tracle_title_left">
                 <span class="avatar"><img src="{{user.avatar}}?w=100" onload="$.util.setWH(this)"/></span>
                 <h3 class="user_info">
@@ -11,7 +11,7 @@
                     <time>{{create_time}}</time>
                 </h3>
             </div>
-            <i>{{#status_checking}}正在审核{{/status_checking}}{{#status_notpass}}审核不通过{{/status_notpass}}</i>
+           <div class="color_error"> <i>{{#status_checking}}正在审核{{/status_checking}}{{#status_notpass}}审核不通过{{/status_notpass}}</i></div>
         </div>
         <div class="con inner">
             <p class="text">{{body}}</p>
