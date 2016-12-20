@@ -826,7 +826,8 @@ class UserController extends AppController {
      */
     public function forgetPwd2()
     {
-        if($this->request->is('POST') && $this->request->session()->read('PASS_VCODE_PHONE')) {
+        $phone = $this->request->session()->read('PASS_VCODE_PHONE');
+        if($this->request->is('POST') && $phone) {
             $data = $this->request->data();
             $pwd1 = $data['newpwd1'];
             $pwd2 = $data['newpwd2'];
@@ -834,7 +835,7 @@ class UserController extends AppController {
                 $query = $this->User->query();
                 $res = $query->update()
                     ->set(['pwd' => (new DefaultPasswordHasher)->hash($pwd1)])
-                    ->where(['id' => $this->user->id])
+                    ->where(['phone' => $phone])
                     ->execute();
                 $jumpUrl = '/user/login';
                 if($res) {

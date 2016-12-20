@@ -686,3 +686,16 @@ ALTER TABLE `lm_dateorder`
 ALTER TABLE `lm_withdraw`
 	ADD COLUMN `type` TINYINT NOT NULL COMMENT '类型：1#支付宝2#银联' AFTER `cardno`;
 
+#访客统计表
+CREATE TABLE `lm_visitor` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`visitor_id` INT(11) NOT NULL DEFAULT '0' COMMENT '访客id',
+	`visited_id` INT(11) NOT NULL DEFAULT '0' COMMENT '被访问者id',
+	`create_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '最近访问时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='访客统计'
+ENGINE=InnoDB
+;
+
