@@ -1012,7 +1012,7 @@ color:#999;padding:.1rem;}
 }
 /*发布动态*/
 .submit_box_textarea{background: #fff;padding-top:.2rem;}
-.submit_box_textarea textarea{width:100%;height:1.2rem;color:#999;padding:.05rem 0;border:none;}
+.submit_box_textarea textarea{width:100%;height:1.2rem;padding:.05rem 0;border:none;}
 /*约拍*/
 .booking_box_list .con ul{overflow: hidden;padding:.4rem 0 .2rem;}
 .booking_box_list .con li{height:45px;width:100%;border:1px #d2d2d2 solid;border-radius: 5px;padding:0 .3rem;margin-bottom:.2rem;}
