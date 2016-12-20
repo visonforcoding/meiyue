@@ -7,7 +7,7 @@
 <div class="wraper">
     <div class="inner mt40">
         <?php if($isme && $user->gender == 2): ?>
-        <a href="#this" class="btn btn_t_border">邀请好友支持我</a>
+        <a href="/user/share" class="btn btn_t_border">邀请好友支持我</a>
         <?php endif; ?>
         <ul class="voted_list voted-line">
             <?php if($wektop): ?>
