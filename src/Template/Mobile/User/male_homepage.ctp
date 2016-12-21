@@ -1,12 +1,12 @@
 <div>
-    <div class="homepage mhomepage">
-        <div class="home_cover_info">
+    <div class="homepage mhomepage flex">
+        <div class="home_cover_info flex">
 					<span class="avatar">
 						<img src="<?= $user->avatar; ?>" class="avatar-pic"/>
 					</span>
             <div class="cover_left_info">
                 <ul class="opci">
-                    <li class="userinfo">
+                    <li class="userinfo blight">
                         <a href="#this" class="cover_block">
                             <h3>
                                 <span><?= $user->nick; ?><?php if($user->recharge): ?><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="diamonds"><img src="/mobile/images/zs.png" class="responseimg"/></span><?php endif; ?><?php if(isset($user->upakname)): ?><span class="highter-vip"><img src="/mobile/images/v.png" class="responseimg"/></span><?php endif; ?></span>
