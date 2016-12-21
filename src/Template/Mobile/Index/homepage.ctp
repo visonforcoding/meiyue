@@ -285,7 +285,8 @@
     window.shareConfig.desc= '美女邀请你来看看';
 </script>
 <script>
-    $.util.tap($('#send-gift'), function() {
+    $('#send-gift').on('click', function(event) {
+        event.stopPropagation();
         if(!$.util.isLogin) {
             $.util.alert('请先登录');
             setTimeout(function() {
@@ -293,7 +294,7 @@
             }, 1000)
             return;
         }
-        window.location.href='/gift/index/<?= $user->id; ?>';
+        location.href='/gift/index/<?= $user->id; ?>';
     });
 
     $('#focusIt').on('click', function (event) {
