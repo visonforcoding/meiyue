@@ -188,8 +188,8 @@
             cur_tab: 1,  //记录当前显示的tab
             tabInitLoad: [0, 1, 1], //第一次加载
             tabPage: [1, 1, 1], //当前第几页
-            tabLoadEnd: [0, 0, 0], //页码加载结束
-            tabLoadHold: [0, 0, 0], //页码加载结束
+            tabLoadEnd: [0, 0, 0, 0], //页码加载结束
+            tabLoadHold: [0, 0, 0, 0], //页码加载结束
             tabDataTpl: [
                 '',
                 '#activity-list-tpl',
@@ -273,15 +273,14 @@
                 if (obj.tabInitLoad[obj.cur_tab]) return;
                 var st = document.body.scrollTop;
                 var cbodyH = $(obj.listId[obj.cur_tab]).height() - 600;
-
-                if (st >= cbodyH && obj.cur_tab != 3) {
+                if (st >= cbodyH && obj.cur_tab != 3 && !obj.tabLoadHold[obj.cur_tab] && !obj.tabLoadEnd[obj.cur_tab]) {
                     obj.asyLoadData(obj.cur_tab);
                 }
             });
         },
 
         asyLoadData: function (curtab) {
-            if (this.tabLoadEnd[curtab]) return;
+            this.tabLoadHold[curtab] = 1;   //防止连刷
             $.util.showPreloader();
             var template = $(this.tabDataTpl[curtab]).html();
             var nodataTmpl = $('#nodata-tpl').html();
@@ -331,13 +330,14 @@
                         obj.tabInitLoad[curtab] = 0;
                     } else {
                         if((data.datas).length == 0) {
-                            obj.tabLoadEnd[curtab] = true;
+                            obj.tabLoadEnd[curtab] = 1;
                             $(obj.listId[curtab]).append('<p class="smallarea aligncenter mt20">没有更多数据了</p>');
                             return;
                         }
                         $(obj.listId[curtab]).append(rendered);
                     }
                 }
+                obj.tabLoadHold[curtab] = 0;
             });
         },
     });

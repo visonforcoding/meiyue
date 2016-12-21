@@ -329,14 +329,14 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 var st = document.body.scrollTop;
                 var cbodyH = $(obj.listId[obj.cur_tab]).height() - 600;
 
-                if (st >= cbodyH && obj.cur_tab != 3) {
+                if (st >= cbodyH && obj.cur_tab != 3 && !obj.tabLoadHold[obj.cur_tab] && !obj.tabLoadEnd[obj.cur_tab]) {
                     obj.asyLoadData(obj.cur_tab);
                 }
             });
         },
 
         asyLoadData: function (curtab) {
-            if (this.tabLoadEnd[curtab]) return;
+            this.tabLoadHold[curtab] = 1;  //防止连刷
             $.util.showPreloader();
             var template = $(this.tabDataTpl[curtab]).html();
             var nodataTmpl = $('#nodata-tpl').html();
@@ -350,7 +350,6 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                     var rendered = Mustache.render(template, data);
                     var nodataRend = '';
                     obj.tabPage[curtab]++;
-
                     switch (curtab) {
                         case obj.tab_date:
                             if (obj.tabInitLoad[curtab]) {
@@ -386,13 +385,14 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                         obj.tabInitLoad[curtab] = 0;
                     } else {
                         if((data.datas).length == 0) {
-                            obj.tabLoadEnd[curtab] = true;
+                            obj.tabLoadEnd[curtab] = 1;
                             $(obj.listId[curtab]).append('<p class="smallarea aligncenter mt20">没有更多数据了</p>');
                             return;
                         }
                         $(obj.listId[curtab]).append(rendered);
                     }
                 }
+                obj.tabLoadHold[curtab] = 0;
             });
         },
     });
