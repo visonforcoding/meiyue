@@ -158,7 +158,7 @@
                     <img  alt="请上传宽为690，高小于388的封面图" src="<?= $activity->big_img; ?>"/>
                 </div>
                 <!--<div style="color:red">请上传宽为690，高小于388的封面图</div>-->
-                <input name="big_img"  type="hidden"/>
+                <input name="big_img" value="<?= $activity->big_img; ?>" type="hidden"/>
                 <div id="big_img" w="690" h="388" class="jqupload">上传</div>
                 <span class="notice">支持格式jpg,png,jpeg</span>
             </div>
