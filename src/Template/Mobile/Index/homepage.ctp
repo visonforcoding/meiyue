@@ -47,10 +47,8 @@
             <?php endif; ?>
         </ul>
         <?php if($user->video): ?>
-        <div class="inner home_video mt20" id="see-basic-mv">
-           <video width="100%" height="165px" controls="controls" preload="preload" poster="<?= $user->video_cover ?>">
-               <!--<source src="<?/*= $user->video */?>" type="video/mp4">-->
-            </video>
+        <div id="see-basic-mv" class="inner home_video mt20">
+            <img src="<?= $user->video_cover ?>" width="100%" height="165px" />
         </div>
         <?php endif;?>
     </div>
@@ -333,7 +331,7 @@
     })
 
 
-    $('#see-movements').on('click', function() {
+    function checkBrownR(action) {
         $.util.ajax({
             url:'/tracle/browse/<?=$user->id?>',
             method: 'POST',
@@ -347,7 +345,13 @@
                             '查看美女动态',
                             '将会消耗一个查看名额',
                             function() {
-                                window.location.href = '/tracle/ta-tracle/<?=$user->id?>';
+                                switch(action) {
+                                    case 1:
+                                        location.href = '/tracle/ta-tracle/<?=$user->id?>';
+                                        break;
+                                    case 2:
+                                        break;
+                                }
                             },
                             null
                         );
@@ -367,8 +371,11 @@
                 }
             }
         })
-    });
+    }
 
+    $('#see-movements').on('click', function() {
+        checkBrownR(1);
+    });
 
     $('#showWx').on('tap', function() {
         $.util.ajax({
@@ -566,16 +573,6 @@
     $('#dibu-touch').on('click', function(event) {
         event.stopPropagation();
     });
-
-    /**
-     * 播放基本视频
-     */
-     $('#see-basic-mv').on('tap', function() {
-         alert(11);
-         $('#see-basic-mv video').html('<source src="<?= $user->video ?>" type="video/mp4">');
-         //$('#see-basic-mv video').attr('autoplay', 'autoplay');
-     })
-
 
     /**
      * 聊天
