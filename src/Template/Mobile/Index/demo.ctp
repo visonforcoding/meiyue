@@ -121,6 +121,13 @@
 
     <div class="up_identify_box bgff mt40">
         <div class="inner">
+            <div class="title" onclick="(LEMON.show.shareBanner())">
+                <h3 class="color_black">分享图标LEMON.show.shareBanner()</h3>
+            </div>
+        </div>
+    </div>
+    <div class="up_identify_box bgff mt40">
+        <div class="inner">
             <div class="title" onclick="(LEMON.event.imList())">
                 <h3 class="color_black">打开聊天记录LEMON.event.imList()</h3>
             </div>
