@@ -287,7 +287,7 @@
 <script>
     $('#send-gift').on('click', function(event) {
         event.stopPropagation();
-        if(!$.util.isLogin) {
+        if(!$.util.isLogin()) {
             $.util.alert('请先登录');
             setTimeout(function() {
                 LEMON.event.login();
@@ -343,7 +343,7 @@
 
 
     function checkBrownR(action) {
-        if(!$.util.isLogin) {
+        if(!$.util.isLogin()) {
             $.util.alert('请先登录');
             setTimeout(function() {
                 LEMON.event.login();
@@ -492,7 +492,7 @@
      * 显示微信框
      */
     function showx() {
-        if(!$.util.isLogin) {
+        if(!$.util.isLogin()) {
             $.util.alert('请先登录');
             setTimeout(function() {
                 LEMON.event.login();
