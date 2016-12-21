@@ -137,7 +137,7 @@ class IndexController extends AppController {
             return $items->map(function($item)use($userCoord) {
                         $item['distance'] = $item['distance'] >= 1000 ?
                                 round($item['distance'] / 1000, 1) . 'km' : round($item['distance']) . 'm';
-                        $item['avatar'] = createImg($item['avatar']) . '?w=434';
+                        $item['avatar'] = createImg($item['avatar']) . '?w=240';
                         $item['age'] = (Time::now()->year) - ((new Time($item['birthday']))->year);
                         //时间语义化转换
                         $item['login_time'] = (new Time($item['login_time']))->timeAgoInWords(
