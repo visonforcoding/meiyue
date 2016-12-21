@@ -60,6 +60,9 @@ Router::scope('/', function (RouteBuilder $routes) {
         if($subdomain=='admin-my'){
             $subdomain = 'admin';
         }
+        if($subdomain=='m'){
+            $subdomain = 'mobile';
+        }
         $routes->connect('/:controller/:action/*', ['prefix' => $subdomain]);
     }
     if ($subdomain == 'admin') {
