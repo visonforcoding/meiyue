@@ -143,7 +143,7 @@
     function init() {
         var imgs = '<?= $user->images; ?>';
         var video = '<?= $user->video; ?>';
-        if(imgs || video) {
+        if(imgs && video) {
             $.util.setCookie('UPLOAD_IV', '')
         }
         if($.util.getCookie('UPLOAD_IV')) {
