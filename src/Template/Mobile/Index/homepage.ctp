@@ -275,9 +275,9 @@
 <script src="/mobile/js/mustache.min.js"></script>
 <script>
     LEMON.sys.back('/index/index');
-    LEMON.sys.setTopRight('分享')
+    //LEMON.sys.setTopRight('分享')
     window.onTopRight = function () {
-        LEMON.share.banner();
+    //    LEMON.share.banner();
     }
 
     window.shareConfig.imgUrl = '<?= getHost().$user->avatar.'?w=80'; ?>';
@@ -350,6 +350,7 @@
                                         location.href = '/tracle/ta-tracle/<?=$user->id?>';
                                         break;
                                     case 2:
+                                        initVideo();
                                         break;
                                 }
                             },
@@ -373,9 +374,32 @@
         })
     }
 
-    $('#see-movements').on('click', function() {
+
+    function initVideo() {
+        $.util.ajax({
+            url:'/tracle/see-bvideo/<?=$user->id?>',
+            method: 'POST',
+            func:function(res){
+                $.util.alert(res.msg);
+                if(res.status) {
+                    $('#see-basic-mv').html('<video id="see-basic-mv" width="100%" height="165px" controls="controls" preload="preload" poster="'+ res.video +'" autoplay="autoplay"><source src="'+ res.video_cover +'" type="video/mp4"></video>');
+                }
+            }
+        })
+    }
+
+
+    $('#see-movements').on('tap', function() {
         checkBrownR(1);
     });
+
+
+    /**
+     * 播放基本视频
+     */
+    $('#see-basic-mv').on('tap', function() {
+        checkBrownR(2);
+    })
 
     $('#showWx').on('tap', function() {
         $.util.ajax({
@@ -573,6 +597,7 @@
     $('#dibu-touch').on('click', function(event) {
         event.stopPropagation();
     });
+
 
     /**
      * 聊天

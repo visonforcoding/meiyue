@@ -97,6 +97,24 @@ class TracleController extends AppController {
 
 
     /**
+     * 查看基本视频
+     */
+    public function seeBvideo($uid)
+    {
+        $this->handCheckLogin();
+        $this->autoRender = false;
+        $this->loadComponent('Business');
+        //检查权限和名额剩余
+        $res = $this->Business->consumeRight($this->user->id, $uid, ServiceType::BROWSE);
+        if($res) {
+            $uTb = TableRegistry::get('User');
+            $user = $uTb->get($uid);
+            return $this->Util->ajaxReturn(['video'=>$user->video, 'video_cover' => $user->video_cover]);
+        }
+    }
+
+
+    /**
      * 获取她的动态
      */
     public function getTaTracles($page, $uid) {
