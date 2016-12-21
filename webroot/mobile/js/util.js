@@ -300,7 +300,10 @@ $.util = {
         });
     },
     isLogin: function () {
-        return !!$.util.getCookie('login_status');
+        if(!$.util.isAPP){
+            return true;
+        }
+        return !!$.util.getCookie('token_uin');
     },
     staticLogin: function () {
         //if($.util.isAPP){
