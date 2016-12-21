@@ -421,7 +421,7 @@ color:#444;position:relative;padding:0 .15rem;margin-right:.1rem;font-size: 13px
 .choose_mark__items .choosed span{border:1px #e8b967 solid;border-radius: 3px;}
 .choose_mark__items .choose_marks i{font-size:11px;color:#666666;word-break: break-all;display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden;-webkit-line-clamp: 2;margin-top:4px;}
 /*订单管理*/
-.order_header div{width:30.6%;}
+.order_header div{width:30%;}
 .order_header .headertab{position:relative;}
 .order_header .cur .headertab .tips_ico{position: absolute;width:8px;height:8px;background: red;border-radius: 50%;top:50%;right:0;margin-top:-8px;
 ;-webkit-border-radius: 50%;}
