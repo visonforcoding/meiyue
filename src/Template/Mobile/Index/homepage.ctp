@@ -4,8 +4,8 @@
             <img src="<?= $user->avatar; ?>" class="responseimg"/>
             <!--<span class="l_btn iconfont">&#xe602;</span>
             <span class="r_btn iconfont">&#xe62d;</span>-->
-            <span class="identify-info  id-btn">视频已认证</span>
-            <span class="identify-info video-btn">身份已认证</span>
+            <?php if($user->status == 3): ?><span class="identify-info  id-btn">视频已认证</span><?php endif; ?>
+            <?php if($user->id_status == 3): ?><span class="identify-info video-btn">身份已认证</span><?php endif; ?>
         </div>
      </div>
     <!--基本信息-->
@@ -47,8 +47,9 @@
             <?php endif; ?>
         </ul>
         <?php if($user->video): ?>
-        <div class="inner home_video mt20">
-           <video width="100%" height="165px" controls="controls" preload="preload" src="<?= $user->video ?>" poster="<?= $user->video_cover ?>">
+        <div class="inner home_video mt20" id="see-basic-mv">
+           <video width="100%" height="165px" controls="controls" preload="preload" poster="<?= $user->video_cover ?>">
+               <!--<source src="<?/*= $user->video */?>" type="video/mp4">-->
             </video>
         </div>
         <?php endif;?>
@@ -565,6 +566,14 @@
     $('#dibu-touch').on('click', function(event) {
         event.stopPropagation();
     });
+
+    /**
+     * 播放基本视频
+     */
+     $('#see-basic-mv').on('tap', function() {
+         $('#see-basic-mv video').html('<source src="<?= $user->video ?>" type="video/mp4">');
+         $('#see-basic-mv video').attr('autoplay', 'autoplay');
+     })
 
 
     /**
