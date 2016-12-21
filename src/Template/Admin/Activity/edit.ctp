@@ -154,9 +154,13 @@
         <div class="form-group">
             <label class="col-md-2 control-label">封面图</label>
             <div class="col-md-8">
-                <?php
-                echo $this->Form->input('big_img', ['label' => false, 'class' => 'form-control']);
-                ?>
+                <div  class="img-thumbnail input-img"  single>
+                    <img  alt="请上传宽为690，高小于388的封面图" src="<?= $activity->big_img; ?>"/>
+                </div>
+                <!--<div style="color:red">请上传宽为690，高小于388的封面图</div>-->
+                <input name="big_img"  type="hidden"/>
+                <div id="big_img" w="690" h="388" class="jqupload">上传</div>
+                <span class="notice">支持格式jpg,png,jpeg</span>
             </div>
         </div>
         <div class="form-group">
@@ -186,7 +190,8 @@
     <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>
     <script>
         $(function () {
-            // initJqupload('cover', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
+            initJqupload('big_img', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
+
             var ue = UE.getEditor('detail'); //初始化富文本编辑器
             $('form').validationEngine({
                 focusFirstField: true,

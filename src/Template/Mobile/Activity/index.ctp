@@ -23,9 +23,9 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             <!--派对-->
             <section>
                 <!--轮播图-->
-                <div id="party-coverimg" class="abanner">
+                <!--<div id="party-coverimg" class="abanner">
                     &nbsp;
-                </div>
+                </div>-->
                 <div id="party_list" class="party_content">
                     <!-- 派对列表 -->
                     &nbsp;
@@ -98,7 +98,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
     {{#datas}}
     <div class="items act-item" data-id="{{id}}" onclick="geView({{id}});">
         <div class="items_pic">
-            <img src="/mobile/css/icon/party1.jpg"/>
+            <img src="{{big_img}}"/>
         </div>
         <div class="items_con">
             <h3 class="items_title">{{title}}</h3>
@@ -366,10 +366,10 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                                     nodataTmpl,
                                     {'text':'选美即将上线，敬请期待哟~', 'icon':'xe645;', 'top':'80'}
                                 );
-                                if(data.carousel) {
+                                /*if(data.carousel) {
                                     $('#party-coverimg')
                                         .html("<a href='"+data.carousel.to_url+"'><img src='"+data.carousel.url+"'/></a>");
-                                }
+                                }*/
                             }
                             break;
                         case obj.tab_top:
