@@ -322,7 +322,7 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .date_list_header{width:100%;background: #fff;height:45px;line-height:45px;color:#efefef;/*font-size:22px;*/}
 .date_list_header .headertab{display: inline-block;margin:0 auto;text-align: center;padding:0 .2rem;height:45px;}
 .date_list_header div.cur .headertab{border-bottom:2px #eab96a solid;}
-.date_list_header div{color:#303030;font-size:15px;text-align: center;width:48%;display: inline-block;}
+.date_list_header div{color:#303030;font-size:15px;text-align: center;width:46%;display: inline-block;}
 .date_list_header div.cur{color:#eab96a;}
 .date_list_con{}
 .date_item_des .price{color:#666;}
