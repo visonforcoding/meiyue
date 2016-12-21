@@ -332,6 +332,13 @@
 
 
     function checkBrownR(action) {
+        if(!$.util.isLogin) {
+            $.util.alert('请先登录');
+            setTimeout(function() {
+                LEMON.event.login();
+            }, 1000)
+            return;
+        }
         $.util.ajax({
             url:'/tracle/browse/<?=$user->id?>',
             method: 'POST',
@@ -474,6 +481,13 @@
      * 显示微信框
      */
     function showx() {
+        if(!$.util.isLogin) {
+            $.util.alert('请先登录');
+            setTimeout(function() {
+                LEMON.event.login();
+            }, 1000)
+            return;
+        }
         $.util.ajax({
             url:'/index/check-wx-rig/<?=$user->id?>',
             method: 'POST',
