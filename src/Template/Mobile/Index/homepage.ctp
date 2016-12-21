@@ -571,8 +571,9 @@
      * 播放基本视频
      */
      $('#see-basic-mv').on('tap', function() {
+         alert(11);
          $('#see-basic-mv video').html('<source src="<?= $user->video ?>" type="video/mp4">');
-         $('#see-basic-mv video').attr('autoplay', 'autoplay');
+         //$('#see-basic-mv video').attr('autoplay', 'autoplay');
      })
 
 
