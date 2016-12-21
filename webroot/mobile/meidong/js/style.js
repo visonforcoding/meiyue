@@ -17,12 +17,10 @@
 			iNow++;
 			iNow%=liList.length;
 			fnFade();
-			console.log(iNow);
 		},3000)
 	}
 	function fnFade(){
 		liList.each(function(i){
-			console.log(i);
 			if( i != iNow){
 				liList.eq(i).fadeOut().css('zIndex', 1);
 				imgTab.eq(i).removeClass('active');
@@ -32,5 +30,4 @@
 			}
 		})
 	}
-	
 })();
