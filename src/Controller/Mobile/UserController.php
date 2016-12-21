@@ -630,6 +630,7 @@ class UserController extends AppController {
      * 评选
      */
     public function voted($id = null) {
+        $this->handCheckLogin();
         $this->loadComponent('Business');
         $title = '我的评选';
         $isme = true;
