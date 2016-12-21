@@ -59,5 +59,12 @@ class ChatController extends AppController {
                            ->toArray();
         return $this->Util->ajaxReturn(['users'=>$users]);
     }
-    
+
+
+    public function meiyueMessage()
+    {
+        $this->set([
+            'pageTitle'=>'平台消息',
+        ]);
+    }
 }
