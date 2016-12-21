@@ -196,8 +196,7 @@
         <?php endif; ?>
     </ul>
 </div>
-<div class="togift flex flex_center"
-     onclick="window.location.href='/gift/index/<?= $user->id; ?>';event.stopPropagation(); ">
+<div id="send-gift" class="togift flex flex_center">
     <i class="iconfont">&#xe614;</i>
 </div>
 <div style="height:1.6rem"></div>
@@ -286,6 +285,17 @@
     window.shareConfig.desc= '美女邀请你来看看';
 </script>
 <script>
+    $.util.tap($('#send-gift'), function() {
+        if(!$.util.isLogin) {
+            $.util.alert('请先登录');
+            setTimeout(function() {
+                LEMON.event.login();
+            }, 1000)
+            return;
+        }
+        window.location.href='/gift/index/<?= $user->id; ?>';
+    });
+
     $('#focusIt').on('click', function (event) {
         //加关注
         event.stopPropagation();
