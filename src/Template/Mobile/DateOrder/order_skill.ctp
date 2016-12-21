@@ -47,7 +47,7 @@
             <span class="place"><img src="<?= createImg($data->user->avatar) . '?w=88' ?>"/></span>
             <h3 class="date_top_con_right">
                 <span class="date_ability">[<?= $data->skill->name ?>]</span>
-                <span class="date_guest"><?= $data->user->nick ?> <i class="iconfont color_y">&#xe61d;</i><i class="age color_y"><?= isset($data->user->birthday)?getAge($data->user->birthday):'xx' ?></i></span>
+                <span class="date_guest"><?= $data->user->nick ?> <i class="iconfont color_y">&#xe61d;</i><i class="age color_y"><?= isset($data->user->birthday) ? getAge($data->user->birthday) : 'xx' ?></i></span>
                 <span class="date_much"><i><?= $data->cost->money ?></i> 美币/小时</span>
             </h3>
         </div>
@@ -63,7 +63,7 @@
                     <h3 class="commontitle">我的标签</h3>
                     <div class="con con_mark flex maxwid80">
                         <?php foreach ($data->tags as $tag): ?>
-                        <a href="#this"><?= $tag->name ?></a>
+                            <a href="#this"><?= $tag->name ?></a>
                         <?php endforeach; ?>
                     </div>
                 </li>
@@ -147,17 +147,17 @@
 <div class="wraper page" id="page-choosePlace" hidden>
     <div id="selfPlace" class='aPlace' hidden>
         <div class="place-self">
-             <h3 class="basic_info_integrity">没有合适地点，<a href="javascript:toListplace();" class="color_y">回到搜索地址</a></h3>
-                <div class="search_place_header inner">
-                        <div class="search-box flex flex_justify">
-                            <div class="search-btn">
-                                <input type="text" id="selfInput" value="" placeholder="请输入约会地点" results="5" />
-                            </div>
-                            <span class="cancel-btn color_y" onclick='submitSelfPlace()'>提交</span>
-                        </div>
-                   
+            <h3 class="basic_info_integrity">没有合适地点，<a href="javascript:toListplace();" class="color_y">回到搜索地址</a></h3>
+            <div class="search_place_header inner">
+                <div class="search-box flex flex_justify">
+                    <div class="search-btn">
+                        <input type="text" id="selfInput" value="" placeholder="请输入约会地点" results="5" />
+                    </div>
+                    <span class="cancel-btn color_y" onclick='submitSelfPlace()'>提交</span>
                 </div>
+
             </div>
+        </div>
     </div>
     <div id="listPlace" class='aPlace'>
         <h3 class="basic_info_integrity">没有合适地点，<a href="javascript:toSelfplace();" class="color_y">手动输入地址</a></h3>
@@ -229,34 +229,35 @@
 
     }
 
-    function placeInfo (em) {
+    function placeInfo(em) {
         //点击查看详情页
         place_uid = $(em).data('uid');
         place_name = $(em).data('name');
         coord_lng = $(em).data('coordlng');
         coord_lat = $(em).data('coordlat');
-    };
+    }
+    
     function choosePlace(em) {
         $(em).addClass('choose');
         setTimeout(function () {
             $('#thePlace').val(place_name);
             location.hash = '';
-        },300);
+        }, 300);
     }
-    
- function toListplace(){
+
+    function toListplace() {
         $('#listPlace').show();
         $('#selfPlace').hide();
     }
     function submitSelfPlace() {
-        if($('#selfInput').val() == ''){
+        if ($('#selfInput').val() == '') {
             $.util.alert('请输入地址');
             return;
         }
         $('#thePlace').val($('#selfInput').val());
         location.hash = '';
     }
-    function toSelfplace(){
+    function toSelfplace() {
         $('#selfPlace').show();
         $('#listPlace').hide();
     }
@@ -298,7 +299,7 @@
                 loadHashPage();
             }, 1000);
         }
-        else{
+        else {
             loadHashPage();
         }
     });
