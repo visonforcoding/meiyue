@@ -7,7 +7,7 @@
 </header>
 <div class="wraper">
     <div class="activity_detail_box">
-        <img src="/mobile/images/party_detail.jpg" alt="" />
+        <img src="<?= $activity['big_img']; ?>" alt="" />
         <div class="tips"><?= $activity['title'] ?></div>
     </div>
     <div class="activity_detail_bottomdes">
