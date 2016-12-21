@@ -81,10 +81,10 @@
 <div class="footer_submit_btn">
     <div class="submit_ico_group">
         <a href="/userc/tracle-pic" class="submit_ico2 submit_ico" id="picbtn">
-            <span class="iconfont">&#xe767;</span>
+            <span class="iconfont">&#xe6b9;</span>
         </a>
         <a href="/userc/tracle-video" class="submit_ico3 submit_ico" id="videobtn">
-            <span class="iconfont">&#xe652;</span>
+            <span class="iconfont">&#xe6b8;</span>
         </a>
         <div class="submit_ico1 submit_ico" id="submitbtn" data-type='0'>
             <span>发布<br />动态</span>
