@@ -139,7 +139,7 @@ $.util = {
                             //window.location.reload();
                         });
                     }
-                }, 500);
+                }, 1000);
             }
             if (json.code == 500) {
                 var msg = Bollean(json['message']) ? json['message'] : json.msg;
