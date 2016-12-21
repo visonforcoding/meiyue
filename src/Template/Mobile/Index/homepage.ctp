@@ -307,12 +307,14 @@
             url: '/user/follow',
             data: {id: id},
             func: function (res) {
-                if(obj.hasClass('active')){
-                    obj.find('.status-txt').first().text('已关注');
-                }else{
-                    obj.find('.status-txt').first().text('关注');
+                if(res.status){
+                    if(obj.hasClass('active')){
+                        obj.find('.status-txt').first().text('已关注');
+                    }else{
+                        obj.find('.status-txt').first().text('关注');
+                    }
+                    obj.toggleClass('active');
                 }
-                obj.toggleClass('active');
                 $.util.alert(res.msg);
             }
         })
