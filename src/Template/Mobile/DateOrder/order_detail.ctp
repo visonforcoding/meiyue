@@ -382,11 +382,11 @@
     $('#tel-complain').on('click',function(){
        //拨电话
        LEMON.event.tel('0755-33580266');
-       $('#complain').addClass('hide');
+       $('#complain-box').addClass('hide');
     });
     $('#cancel-complain').on('click',function(){
         //取消
-       $('#complain').addClass('hide');
+       $('#complain-box').addClass('hide');
     });
     $(document).on('tap', '#refuse_status_10', function () {
         //状态10时 取消订单
@@ -451,6 +451,7 @@
             }
         });
     });
+    
     $(document).on('tap', '#remove_order', function () {
         //删除订单
         $.util.confirm('提示', '确定删除订单么', function () {

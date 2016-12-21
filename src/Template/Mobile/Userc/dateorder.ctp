@@ -241,6 +241,19 @@
         </div>
     </div>
 </div>
+<div id="complain-box" class="raper hide flex flex_center">
+    <!--约Ta弹出层-->
+    <div class="popup" style="display: block;">
+        <div class="popup_con">
+            <p class="aligncenter">投诉电话</p>
+            <h3 class="aligncenter lagernum">0755-33580266</h3>
+        </div>
+        <div class="popup_footer flex flex_justify">
+            <span id="tel-complain" class="footerbtn color_y">呼叫</span>
+            <span id="cancel-complain" class="footerbtn gopay">取消</span>
+        </div>
+    </div>
+</div>
 <?php $this->start('script'); ?>
 <script>
     var curpage = 1;
@@ -280,6 +293,21 @@
             });
         })
     });
+
+    $(document).on('tap', '.complain', function () {
+        //投诉 
+        $('#complain-box').removeClass('hide');
+    });
+    $('#tel-complain').on('click', function () {
+        //拨电话
+        LEMON.event.tel('0755-33580266');
+        $('#complain-box').addClass('hide');
+    });
+    $('#cancel-complain').on('click', function () {
+        //取消
+        $('#complain-box').addClass('hide');
+    });
+
     $(document).on('tap', '.remove_order', function () {
         //删除订单
         var orderid = $(this).data('orderid');
@@ -500,7 +528,7 @@
 
     LEMON.sys.back('/user/index');
     function refresh() {
-        var page = curpage-1;
+        var page = curpage - 1;
         $.util.asyLoadData({
             gurl: '/userc/getDateorders/',
             page: page,

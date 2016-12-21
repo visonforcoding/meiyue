@@ -50,7 +50,8 @@ class ChatController extends AppController {
                            ->where(['imaccid in'=>$accids])
                            ->formatResults(function($items) {
                                 return $items->map(function($item) {
-                                            $item['avatar'] = $this->Util->getServerDomain() . createImg($item['avatar']) .
+                                            $item['avatar'] = $this->Util->getServerDomain() . 
+                                                    createImg($item['avatar']) .
                                                     '?w=184';
                                             return $item;
                                         });
