@@ -47,8 +47,9 @@
             <?php endif; ?>
         </ul>
         <?php if($user->video): ?>
-        <div id="see-basic-mv" class="inner home_video mt20">
+        <div id="see-basic-mv" class="inner home_video mt20 relpotion">
             <img src="<?= $user->video_cover ?>" width="100%" height="165px" />
+            <div class='play-icon'><i class='iconfont'>&#xe6b8;</i></div>
         </div>
         <?php endif;?>
     </div>
