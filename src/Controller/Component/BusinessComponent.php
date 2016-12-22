@@ -528,4 +528,24 @@ class BusinessComponent extends Component
             return false;
         }
     }
+
+
+    /**
+     * 生成用户邀请码
+     * @param $uid
+     */
+    public function createInviteCode($uid)
+    {
+        $before = $uid + 111111;
+        $after = dechex($before);
+        return $after;
+    }
+
+    /**
+     * 根据邀请码产生邀请关系
+     */
+    public function create2Invit($incode)
+    {
+
+    }
 }

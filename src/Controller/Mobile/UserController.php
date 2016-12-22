@@ -884,8 +884,11 @@ class UserController extends AppController {
      */
     public function share()
     {
-        $this->handCheckLogin();
+        if($this->user) {
+
+        }
         $this->set([
+            'user' => $this->user,
             'pageTitle'=>'邀请注册有奖'
         ]);
     }

@@ -707,3 +707,6 @@ ALTER TABLE `lm_user`
 ALTER TABLE `lm_withdraw`
 	ADD COLUMN `viramount` FLOAT NOT NULL DEFAULT '0' COMMENT '兑换美币' AFTER `amount`;
 
+#用户表添加邀请码
+ALTER TABLE `lm_user`
+	ADD COLUMN `invit_code` INT NULL COMMENT '邀请码' AFTER `imaccid`;
