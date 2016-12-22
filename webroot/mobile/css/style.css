@@ -323,7 +323,7 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .date_list_header{width:100%;background: #fff;height:45px;line-height:45px;color:#efefef;/*font-size:22px;*/}
 .date_list_header .headertab{display: inline-block;margin:0 auto;text-align: center;padding:0 .2rem;height:45px;}
 .date_list_header div.cur .headertab{border-bottom:2px #eab96a solid;}
-.date_list_header div{color:#303030;font-size:15px;text-align: center;width:46%;display: inline-block;}
+.date_list_header div{color:#303030;font-size:15px;text-align: center;width:47.8%;display: inline-block;}
 .date_list_header div.cur{color:#eab96a;}
 .date_list_con{}
 .date_item_des .price{color:#666;}
@@ -422,7 +422,7 @@ color:#444;position:relative;padding:0 .15rem;margin-right:.1rem;font-size: 13px
 .choose_mark__items .choosed span{border:1px #e8b967 solid;border-radius: 3px;}
 .choose_mark__items .choose_marks i{font-size:11px;color:#666666;word-break: break-all;display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden;-webkit-line-clamp: 2;margin-top:4px;}
 /*订单管理*/
-.order_header div{width:30%;}
+.order_header div{width:30.8%;}
 .order_header .headertab{position:relative;}
 .order_header .cur .headertab .tips_ico{position: absolute;width:8px;height:8px;background: red;border-radius: 50%;top:50%;right:0;margin-top:-8px;
 ;-webkit-border-radius: 50%;}
@@ -878,7 +878,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .buybox .disabled{color:#ccc;}
 .activity_pay_type .con{height:45px;line-height: 45px;background: #fff;}
 /*头牌*/
-.cover_image{width:100%;height:5.2rem;position: relative;overflow: hidden;}
+.cover_image{width:100%;max-height:5.2rem;position: relative;overflow: hidden;}
 .cover_image img,.cover_image .more img,.cover_bottom_header img{width:100%;height:auto;display: block;}
 .cover_image .more{position: absolute;width:1.6rem;height:.56rem;bottom:.45rem;left:50%;margin-left:-.8rem;}
 .cover_bottom_header{width:100%;height:2.6rem;overflow: hidden;}
@@ -1110,6 +1110,7 @@ position: relative;}
 .allgift .yd{width:100%;display: -webkit-box;display:box;-webkit-box-align: center;-webkit-box-pack: center;height:60px;}
 .allgift .yd span{width:8px;height:8px;border-radius: 50%;background: #efefef;display: block;margin-right:.1rem;}
 .allgift .yd span.cur{background: #9ba3ac;}
+.exchange_dollar .outerblock{padding-left:0;}
 /*滑块*/
 .range {position: relative;width: 5.4rem;height: 5px;font-size: 0;line-height: 0;border-radius: 10px;background: #383024;}
 .meaBox {position: absolute;left:0;right:0;height: 5px;background: #EAB96A;top:0;bottom:0;margin:auto;}
