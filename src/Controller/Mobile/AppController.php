@@ -129,7 +129,7 @@ class AppController extends Controller {
         $request_aim = [$controller, $action];
         if (!in_array($request_aim, [['user', 'login'], ['user', 'register']])) {
             //静默登陆
-            $this->wxBaseLogin();
+           // $this->wxBaseLogin();
             $this->baseLogin();
         }
         if (in_array($request_aim, $this->firewall) ||
