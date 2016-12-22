@@ -155,7 +155,7 @@
             <label class="col-md-2 control-label">封面图</label>
             <div class="col-md-8">
                 <div  class="img-thumbnail input-img"  single>
-                    <img  alt="请上传宽为690，高小于388的封面图" src="<?= $activity->big_img; ?>"/>
+                    <img src="<?= $activity->big_img; ?>"/>
                 </div>
                 <!--<div style="color:red">请上传宽为690，高小于388的封面图</div>-->
                 <input name="big_img" value="<?= $activity->big_img; ?>" type="hidden"/>

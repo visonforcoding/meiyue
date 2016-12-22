@@ -4,6 +4,7 @@ namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
 use Cake\I18n\Time;
+use Cake\ORM\TableRegistry;
 use MongoDB\BSON\Timestamp;
 
 /**
@@ -27,9 +28,10 @@ class TestController extends AppController {
         //var_dump(round('42.99687156342637',1));
        // debug($this->Util->getServerDomain());
         //$timestamp = time();
-        $this->Business->create2Invit('1b20a', 28);
+        $userTb = TableRegistry::get('User');
+        $user = $userTb->get(28);
+        echo $this->Business->shareIncome(1000, $user);
         //debug(\Cake\Core\Configure::read('Redis.default'));
-        exit();
     }
 
     function dec2s4($dec) {

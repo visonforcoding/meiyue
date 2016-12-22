@@ -20,13 +20,15 @@
             </section>
             <!--头牌-->
             <section>
-                <div class="cover_image">
-                    <img src="/mobile/images/cover.jpg" alt=""/>
-                    <a href="#this" class="more"><img src="/mobile/images/more.png"/></a>
-                </div>
+                <?php if(isset($carousel)): ?>
+                    <div class="cover_image">
+                        <img src="<?= createImg($carousel->url.'?w=768'); ?>" alt=""/>
+                        <a href="<?= $carousel->tourl; ?>" class="more"><img src="/mobile/images/more.png"/></a>
+                    </div>
+                <?php endif; ?>
                 <?php if(isset($user) && $user->gender == 2): ?>
                     <div class="invite">
-                        <a href="#this" class="btn btn_t_border">邀请好友支持我</a>
+                        <a href="/user/share" class="btn btn_t_border">邀请好友支持我</a>
                     </div>
                 <?php else: ?>
                     <div class="cover_bottom_header mt20">
