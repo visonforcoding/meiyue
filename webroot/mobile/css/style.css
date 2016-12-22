@@ -20,6 +20,7 @@
 .loginbox,.check_sex_type{padding:0 .74rem;margin-top:1.2rem;}
 .login_box_btn{padding:0 .74rem;}
 .loginbox .user{width:59%;}
+.loginbox .numbox{width:80%;}
 .loginbox .valicode{width:49%;/*display:block*/}
 .login_box_btn .login_group{display:box;display: -webkit-box;-webkit-box-pack: justify;}
 .login_box_btn .login_group .btn{width:48%;}
