@@ -409,9 +409,10 @@
             url:'/tracle/see-bvideo/<?=$user->id?>',
             method: 'POST',
             func:function(res){
-                $.util.alert(res.msg);
                 if(res.status) {
                     $('#see-basic-mv').html('<video id="see-basic-mv" width="100%" height="165px" controls="controls" preload="preload" poster="'+ res.video +'" autoplay="autoplay"><source src="'+ res.video_cover +'" type="video/mp4"></video>');
+                } else {
+                    $.util.alert(res.msg);
                 }
             }
         })

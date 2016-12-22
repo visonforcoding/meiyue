@@ -885,7 +885,9 @@ class UserController extends AppController {
     public function share()
     {
         if($this->user) {
+            if(!$this->user->invit_code) {
 
+            }
         }
         $this->set([
             'user' => $this->user,
