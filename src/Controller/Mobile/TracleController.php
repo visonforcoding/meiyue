@@ -109,8 +109,9 @@ class TracleController extends AppController {
         if($res) {
             $uTb = TableRegistry::get('User');
             $user = $uTb->get($uid);
-            return $this->Util->ajaxReturn(['video'=>$user->video, 'video_cover' => $user->video_cover]);
+            return $this->Util->ajaxReturn(['status' => true, 'video'=>$user->video, 'video_cover' => $user->video_cover]);
         }
+        return $this->Util->ajaxReturn(['status' => false, 'msg' => '无法查看']);
     }
 
 
