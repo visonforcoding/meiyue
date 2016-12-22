@@ -95,9 +95,9 @@
 					</div>
 					<div class="con-content newsimgbox">
 						<ul class="list-line clearfix">
-							<li><a href="#this"><img src="../image/news01.jpg"/></a></li>
-							<li><a href="#this"><img src="../image/news02.jpg"/></a></li>
-							<li><a href="#this"><img src="../image/news03.jpg"/></a></li>
+							<li><a href="activity-detail01.html"><img src="../image/news01.jpg"/></a></li>
+							<li><a href="activity-detail02.html"><img src="../image/news02.jpg"/></a></li>
+							<li><a href="activity-detail03.html"><img src="../image/news03.jpg"/></a></li>
 						</ul>
 					</div>
 				</div>
@@ -146,18 +146,32 @@
 							<p>全部信息 美动控股 版权所有 | 粤ICP备16105107号</p>
 						</div>
 					</div>
-					<div class="right-footer fr">
+					<div class="right-footer fr  pos-relative">
 						<ul class="list-line link-footer">
 							<li><a href="#this"><img src="../image/andrio.png"/></a></li>
 							<li><a href="#this"><img src="../image/apple.png"/></a></li>
 							<li><a href="#this"><img src="../image/sina.png"/></a></li>
-							<li><a href="#this"><img src="../image/wx.png"/></a></li>
+							<li id="focus"><a href="javascript:void(0);"><img src="../image/wx.png"/></a></li>
 						</ul>
+						<div class="focus-wx" id="imgWX">
+								<img src="../image/focus-wx.png"/>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script>
+		<script type="text/javascript">
+			$('#focus').on('click',function(e){
+				e.stopPropagation();
+				$('.focus-wx').toggleClass('show');
+			})
+			$('html,body').on('click',function(){
+				if($('.focus-wx').hasClass('show')){
+					$('.focus-wx').removeClass('show');
+				}
+			})
+		</script>
+		<script type="text/javascript">
 		window.onload = function(){
 			var speed=20;
 			var tab=document.getElementById("scrollBox");
@@ -165,13 +179,12 @@
 			var tab2=document.getElementById("sScroll");
 			var timer = null;
 			tab2.innerHTML=tab1.innerHTML;
-			console.log(tab.scrollLeft);
 			function Marquee(){
 				if(tab.scrollLeft>=tab2.offsetWidth){
 					tab.scrollLeft=0;
 				}
 				else{
-					tab.scrollLeft++;
+					tab.scrollLeft+=3;
 				}
 			}
 			timer=setInterval(Marquee,speed);
