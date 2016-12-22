@@ -13,7 +13,11 @@
         </div>
         <div class="password">
             <i class="iconfont">&#xe606;</i>
-            <input tabindex="3" type="password" id="pwd" placeholder="6-16位的密码" class="user" id="password" />
+            <input tabindex="3" type="password" id="pwd" placeholder="6-16位的密码" id="password" />
+        </div>
+        <div class="password">
+            <i class="iconfont">&#xe69a;</i>
+            <input type="text" placeholder="请输入6位邀请码(选填)" id="" />
         </div>
         <a id="submit"  class="btn btn_bg_y mt160 disabled">注册</a>
         <h4 class="getlogin"><a href="/user/login">已有账号，直接登录</a></h4>
