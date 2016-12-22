@@ -26,6 +26,7 @@
 </div>
 <?= $this->start('script'); ?>
 <script>
+
     wx.config(<?= json_encode($wxConfig) ?>);
     $('#phone,#pwd').on('keyup', function () {
         var phone = $('#phone').val();
@@ -61,5 +62,14 @@
             }, 'json');
         }
     });
+
+    init();
+    function init() {
+        if(!$.util.getCookie('IVCOD')) {
+            <?php if(isset($invite_code)):?>
+                $.util.setCookie('IVCOD', '<?= $invite_code;?>', 15);
+            <?php endif; ?>
+        }
+    }
 </script>
 <?= $this->end('script'); ?>

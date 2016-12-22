@@ -17,7 +17,7 @@
         </div>
         <div class="password">
             <i class="iconfont">&#xe69a;</i>
-            <input type="text" placeholder="请输入6位邀请码(选填)" id="" />
+            <input type="text" placeholder="请输入6位邀请码(选填)" id="incode" />
         </div>
         <a id="submit"  class="btn btn_bg_y mt160 disabled">注册</a>
         <h4 class="getlogin"><a href="/user/login">已有账号，直接登录</a></h4>
@@ -73,6 +73,8 @@
             }
         }
     });
+
+
     $('#phone,#pwd,#vcode').on('keyup', function () {
         var phone = $('#phone').val();
         var vcode = $('#vcode').val();
@@ -88,6 +90,10 @@
     });
     $('#submit').on('tap', function () {
         var obj = $(this);
+        var incode = $.util.getCookie();
+        if(!$('#incode').val()) {
+            incode = $('#incode').val();
+        }
         console.log(obj);
         if (obj.hasClass('disabled')) {
             return false;
@@ -96,7 +102,7 @@
         var vcode = $('#vcode').val();
         var pwd = $('#pwd').val();
         if (phone && vcode && pwd) {
-            $.post('', {phone: phone, vcode: vcode, pwd: pwd}, function (res) {
+            $.post('', {phone: phone, vcode: vcode, pwd: pwd, incode: incode}, function (res) {
                 //$.util.alert(res.msg);
                 if (res.status) {
                     obj.addClass('disabled');

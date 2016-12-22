@@ -538,14 +538,44 @@ class BusinessComponent extends Component
     {
         $before = $uid + 111111;
         $after = dechex($before);
-        return $after;
+        return ''.$after;
     }
 
     /**
      * 根据邀请码产生邀请关系
+     * 邀请码 incode
+     * 注册人id  uid
      */
-    public function create2Invit($incode)
+    public function create2Invit($incode, $uid)
     {
+        $inviterTb = TableRegistry::get('User');
+        $inviter = $inviterTb->find()->select(['id'])->where(['invit_code' => $incode])->first();
+        if($inviter) {
+            $invTb = TableRegistry::get('Inviter');
+            $inv = $invTb->find()->where(['inviter_id' => $inviter->id, 'invited_id' => $uid])->first();
+            if(!$inv) {
+                $inv = $invTb->newEntity([
+                    'inviter_id' => $inviter->id,
+                    'invited_id' => $uid,
+                    'status' => 1,
+                ]);
+                $invTb->save($inv);
+            }
+        }
+    }
+
+
+    /**
+     * 创建分成收入
+     * @param $amount 收入/充值
+     * @param $inviter_id
+     */
+    public function shareIncome($amount)
+    {
+        $cz_percent = 0.15;  //男性充值上家获得分成比例
+        $sr_percent = 0.10;  //女性收入上家获得分成比例
+
+
 
     }
 }

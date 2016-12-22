@@ -1,16 +1,16 @@
 <header>
     <div class="header">
-        <i class="iconfont toback">&#xe602;</i>
+        <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>邀请注册有奖</h1>
     </div>
 </header>
 <div class="wraper">
-    <?php if(isset($user)): ?>
+    <?php if(isset($user) && $user->has_invs): ?>
         <div class="share_sucess_tips">
             <a href="#this" class="ablock">已成功邀请的人<i class="iconfont fr">&#xe605;</i></a>
         </div>
     <?php endif; ?>
-    <div class="share_items_list mt20">
+    <div class="share_items_list <?php if(isset($user) && $user->has_invs): ?>mt20<?php endif; ?>">
         <div class="inner">
             <h3 class="title">方式一：分享链接得提成</h3>
             <p class="desc">好友点击你的链接并在30分钟内注册成功后，你将获得该好友赚取金额10%(女性好友）或充值金额15%（男性好友）的提成。</p>
@@ -49,11 +49,10 @@
 
 <script>
     function shareBanner() {
-        window.shareConfig.link = 'http://baidu.com';
+        window.shareConfig.link = '<?= getHost().'/user/login'; ?><?= isset($user)?'?ivc='.$user->invit_code:'';?>';
         window.shareConfig.title = '标题';
         var share_desc = '这个是分享描述';
         share_desc && (window.shareConfig.desc = share_desc);
         LEMON.show.shareBanner();
     }
-
 </script>

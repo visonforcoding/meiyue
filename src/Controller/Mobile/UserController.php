@@ -110,8 +110,10 @@ class UserController extends AppController {
                 return $this->Util->ajaxReturn(['status' => false, 'msg' => '请输入手机号']);
             }
         }
+
         $this->set([
-            'pageTitle' => '美约-登录'
+            'pageTitle' => '美约-登录',
+            'invite_code' => $this->request->query('ivc')
         ]);
     }
 
@@ -178,6 +180,10 @@ class UserController extends AppController {
                 $user->status = 1;
             }
             if ($this->User->save($user)) {
+                if($data['incode']) {
+                    $this->Business->create2Invit($data['incode'], $user->id);
+                }
+
                 $jumpUrl = '/user/m-reg-basic-info';
                 if ($user->gender == 2) {
                     $jumpUrl = '/user/reg-basic-info-1/'.$user->id;
@@ -886,7 +892,17 @@ class UserController extends AppController {
     {
         if($this->user) {
             if(!$this->user->invit_code) {
+                $this->loadComponent('Business');
+                $this->user->invit_code = $this->Business->createInviteCode($this->user->id);
+                $this->User->save($this->user);
+            }
 
+            $invsTb = TableRegistry::get('Inviter');
+            $invs = $invsTb->find()->where(['inviter_id' => $this->user->id, 'status' => 1])->count();
+            if($invs) {
+                $this->user->has_invs = true;
+            } else {
+                $this->user->has_invs = false;
             }
         }
         $this->set([
