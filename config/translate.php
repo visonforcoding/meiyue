@@ -376,11 +376,13 @@ function getWeekStr($week = null) {
  */
 class CarouselPosition {
     const ACTIVITY = 1;  //活动轮播图显示位
+    const TOP_BIGIMG = 2;  //活动-头牌大图
 
     const GETJSON = -1;
     public static function getStr($st = null) {
         $positions = Array(
             CarouselPosition::ACTIVITY => '活动轮播图显示位',
+            CarouselPosition::TOP_BIGIMG => '头牌顶部大图显示位',
         );
         if(CarouselPosition::GETJSON == $st) {
             return json_encode($positions);

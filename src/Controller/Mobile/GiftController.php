@@ -59,7 +59,9 @@ class GiftController extends AppController
             ));
 
             //修改支付方费用
+            $outpre_money = $this->user->money;
             $this->user->money = $this->user->money - $gift->price;
+            $outafter_money = $this->user->money;
             $this->user->recharge = $this->user->recharge + $gift->price;
             $out_user = $this->user;
             //修改收款方费用
@@ -68,35 +70,52 @@ class GiftController extends AppController
             if(!$in_user) {
                 return $this->Util->ajaxReturn(false, '用户不存在');
             }
+            $inpre_money = $in_user->money;
             $in_user->money = $in_user->money + $gift->price;
+            $inafter_money = $in_user->money;
             $in_user->charm = $in_user->charm + $gift->price;
             //生成流水
             $FlowTable = TableRegistry::get('Flow');
-            $flow = [
+            $inflow = [
                 'user_id'=> $uid,
+                'buyer_id'=>  0,
+                'type'=>14,
+                'type_msg'=>'收到礼物',
+                'income'=>1,
+                'amount'=>$gift->price,
+                'price'=>$gift->price,
+                'pre_amount'=>$inpre_money,
+                'after_amount'=>$inafter_money,
+                'paytype'=>1,   //余额支付
+                'remark'=> '礼物名称['.$gift->name.']|礼物价格['.$gift->price.']'
+            ];
+            $outflow = [
+                'user_id'=> 0,
                 'buyer_id'=>  $this->user->id,
                 'type'=>14,
                 'type_msg'=>'赠送礼物',
                 'income'=>2,
                 'amount'=>$gift->price,
                 'price'=>$gift->price,
-                'pre_amount'=>0,
-                'after_amount'=>0,
+                'pre_amount'=>$outpre_money,
+                'after_amount'=>$outafter_money,
                 'paytype'=>1,   //余额支付
                 'remark'=> '礼物名称['.$gift->name.']|礼物价格['.$gift->price.']'
             ];
-
             $transRes = $supportTb->connection()->transactional(
-                function() use ($supportTb, $support, $FlowTable, $flow, $userTb, $in_user, $out_user){
-                    $flow = $FlowTable->newEntity($flow);
+                function() use ($supportTb, $support, $FlowTable, $inflow, $outflow, $userTb, $in_user, $out_user){
+                    $inflow = $FlowTable->newEntity($inflow);
+                    $outflow = $FlowTable->newEntity($outflow);
                     $supres = $supportTb->save($support);
                     if($supres) {
-                        $flow->relate_id = $supres->id;
+                        $inflow->relate_id = $supres->id;
+                        $outflow->relate_id = $supres->id;
                     }
-                    $flores = $FlowTable->save($flow);
+                    $inflores = $FlowTable->save($inflow);
+                    $outflores = $FlowTable->save($outflow);
                     $inures = $userTb->save($in_user);
                     $ouures = $userTb->save($out_user);
-                    return $supres&&$flores&&$inures&&$ouures;
+                    return $supres&&$inflores&&$outflores&&$inures&&$ouures;
                 });
 
             if($transRes) {

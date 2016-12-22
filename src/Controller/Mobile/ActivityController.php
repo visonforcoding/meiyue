@@ -26,9 +26,12 @@ class ActivityController extends AppController
                 $this->render('findex');
             }
         }
+        $carouselTb = TableRegistry::get('Carousel');
+        $carousel = $carouselTb->find()->where(['position' => CarouselPosition::TOP_BIGIMG, 'status' => 1])->first();
         $this->set([
             'curtab' => $curtab,
             "user" => $this->user,
+            "carousel" => $carousel,
             'pageTitle' => '美约-活动'
         ]);
     }
@@ -41,9 +44,12 @@ class ActivityController extends AppController
                 $this->render('index');
             }
         }
+        $carouselTb = TableRegistry::get('Carousel');
+        $carousel = $carouselTb->find()->where(['position' => CarouselPosition::TOP_BIGIMG, 'status' => 1])->first();
         $this->set([
             'curtab' => $curtab,
             "user" => $this->user,
+            "carousel" => $carousel,
             'pageTitle' => '美约-活动'
         ]);
     }

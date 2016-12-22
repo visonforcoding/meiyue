@@ -552,7 +552,7 @@ class BusinessComponent extends Component
         $inviter = $inviterTb->find()->select(['id'])->where(['invit_code' => $incode])->first();
         if($inviter) {
             $invTb = TableRegistry::get('Inviter');
-            $inv = $invTb->find()->where(['inviter_id' => $inviter->id, 'invited_id' => $uid])->first();
+            $inv = $invTb->find()->where(['invited_id' => $uid])->first();
             if(!$inv) {
                 $inv = $invTb->newEntity([
                     'inviter_id' => $inviter->id,
@@ -568,14 +568,53 @@ class BusinessComponent extends Component
     /**
      * 创建分成收入
      * @param $amount 收入/充值
-     * @param $inviter_id
+     * @param $invited 被邀请者
      */
-    public function shareIncome($amount)
+    public function shareIncome($amount, $invited)
     {
         $cz_percent = 0.15;  //男性充值上家获得分成比例
         $sr_percent = 0.10;  //女性收入上家获得分成比例
+        $invtb = TableRegistry::get('Inviter');
+        $inv = $invtb->find()->contain(['Invitor'])->where(['invited_id' => $invited->id])->first();
+        if($inv) {
+            $invitor = $inv->invitor;
+            $admoney = 0;
+            if($invited->gender == 1) {
+                $admoney = $amount * $cz_percent;
+                $type = 19;  //好友充值美币
+            } else {
+                $admoney = $amount * $sr_percent;
+                $type = 20;  //好友获得收入
+            }
+            $preAmount = $invitor->money;
+            $invitor->money += $admoney;
+            $afterAmount = $invitor->money;
+            //生成流水
+            $FlowTable = TableRegistry::get('Flow');
+            $flow = $FlowTable->newEntity([
+                'user_id'=> $invitor->id,
+                'buyer_id'=> 0,
+                'type'=> $type,
+                'type_msg'=> getFlowType($type),
+                'income'=> 1,
+                'amount'=> $admoney,
+                'price'=> $admoney,
+                'pre_amount'=> $preAmount,
+                'after_amount'=> $afterAmount,
+                'paytype'=>1,   //余额支付
+                'remark'=> getFlowType($type)
+            ]);
 
-
-
+            $userTb = TableRegistry::get('User');
+            $transRes = $FlowTable->connection()->transactional(
+                function() use ($FlowTable, &$flow, $userTb, &$invitor){
+                    $flores = $FlowTable->save($flow);
+                    $ures = $userTb->save($invitor);
+                    return $flores&&$ures;
+                }
+            );
+            return $transRes;
+        }
+        return false;
     }
 }
