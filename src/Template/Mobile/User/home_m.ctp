@@ -33,9 +33,9 @@
                         </a>
                     </li>
                     <li class="follow flex">
-                        <div><a href="/userc/fans">赞赏我 <i><?= $facount ?></i></a></div>
-                        <div><a href="/userc/likes"> 关注 <i><?= $focount ?></i></a></div>
-                        <div><a href="/userc/visitors">访客 <i><?= $user->visitnum; ?></i></a></div>
+                        <div><a href="/userc/fans">赞赏我 <i><?= $facount ?></i>&nbsp;</a></div>
+                        <div><a href="/userc/likes"> 关注 <i><?= $focount ?></i>&nbsp;</a></div>
+                        <div><a href="/userc/visitors">访客 <i><?= $user->visitnum; ?>&nbsp;</i></a></div>
                     </li>
                 </ul>
             </div>
@@ -126,9 +126,17 @@
                     </div>
                 </a>
             </li>
+           <li>
+                <a href="#this"  class="home_items">
+                    <div class="home_list_l_info flex"><i class="iconfont ico">&#xe69b;</i><span class="itemsname">我要成为经纪人</span></div>
+                    <div class="home_list_r_info">
+                        <i class="iconfont">&#xe605;</i>
+                    </div>
+                </a>
+            </li>
             <li>
                 <a href="/userc/install"  class="home_items">
-                    <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe612;</i><span class="itemsname">设置</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe73f;</i><span class="itemsname">设置</span></div>
                     <div class="home_list_r_info">
 
                         <i class="iconfont">&#xe605;</i>
