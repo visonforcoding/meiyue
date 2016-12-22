@@ -23,7 +23,7 @@ class ActivityController extends AppController
     {
         if($this->user) {
             if($this->user->gender == 2) {
-                $this->autoRender = false;
+                $this->render('findex');
             }
         }
         $this->set([
@@ -36,6 +36,11 @@ class ActivityController extends AppController
 
     public function findex($curtab = 'date')
     {
+        if($this->user) {
+            if($this->user->gender == 1) {
+                $this->render('index');
+            }
+        }
         $this->set([
             'curtab' => $curtab,
             "user" => $this->user,

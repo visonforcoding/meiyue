@@ -19,10 +19,10 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
 }
 (function () {
     var defaultConfig = {
-        imgUrl: 'http://m.chinamatop.com/mobile/images/bgq_logo.png',
+        imgUrl: 'http://m.beauty-engine.com/upload/ico/meiyue.png',
         link: 'http://m.chinamatop.com/',
-        title: '并购帮',
-        desc: '专注并购人的生活方式',
+        title: '美约',
+        desc: '专注高端社交圈',
         success: function () {
         },
         cancel: function () {

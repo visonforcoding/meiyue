@@ -21,7 +21,7 @@
         <div class="inner">
             <h3 class="title">方式二：扫描我的二维码得提成</h3>
             <p class="desc">好友扫描你的二维码后在注册时，输入你的邀请码，你将获得该好友赚取金额10%（女性好友）或者充值金额15%（男性好友）的提成。</p>
-            <span class="share_desc">您的邀请码<br /><strong>AB12</strong></span>
+            <span class="share_desc">您的邀请码<br /><strong><?= isset($user)?$user->invit_code:'--'; ?></strong></span>
             <!--<a href="javascript:void(0);" class="btn btn_t_border mt20">生成我的海报</a>-->
         </div>
     </div>
