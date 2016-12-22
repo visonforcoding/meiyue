@@ -1243,6 +1243,8 @@ line-height: 14px;color:#fff;font-size:11px;text-align: center;}
 .empty-ico{color:#cdcdcd;font-size:36px;}
 .empty_container .empty-btn{margin-top:.5rem;}
 .empty-text .empty-tips{color:#666;line-height: 25px;}
+.play-icon{position: absolute;font-size: .6rem;height:.6rem;width:.6rem;color:rgba(0,0,0,.3);top:50%;left:50%;margin-top:-.3rem;margin-left:-.3rem;}
+.play-icon i{font-size: .6rem;position: static;}
 .empty-text{padding:.6rem 0;}
 *{   
     -webkit-touch-callout:none;  /*系统默认菜单被禁用*/   
