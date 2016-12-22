@@ -122,7 +122,7 @@
                 </a>
             </li>
             <li>
-                <a href="#this"  class="home_items">
+                <a href='/user/share'  class="home_items">
                     <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe612;</i><span class="itemsname">邀请注册</span></div>
                     <div class="home_list_r_info">
 

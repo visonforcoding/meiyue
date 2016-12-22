@@ -4,6 +4,7 @@ namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
 use Cake\I18n\Time;
+use MongoDB\BSON\Timestamp;
 
 /**
  * Index Controller
@@ -21,14 +22,29 @@ class TestController extends AppController {
 
 
     public function test() {
+        $this->loadComponent('Business');
         //var_dump(round1214 / 1000);
         //var_dump(round('42.99687156342637',1));
        // debug($this->Util->getServerDomain());
-       debug(\Cake\Core\Configure::read('Redis.default'));
+        //$timestamp = time();
+        $id = 999;
+        $code = $this->Business->createInviteCode($id);
+
+        echo $code;
+        //debug(\Cake\Core\Configure::read('Redis.default'));
         exit();
     }
-    
-    
+
+    function dec2s4($dec) {
+        $base = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $result = '';
+        do {
+            $result = $base[$dec % 16] . $result;
+            $dec = intval($dec / 16);
+        } while ($dec != 0);
+        return $result;
+    }
+
     /**
      * 订单的自动检测
      */
@@ -299,6 +315,5 @@ class TestController extends AppController {
         fclose(STDOUT);
         $o = file_get_contents('php://stdout');
         fopen('app.log','wb');
-        //fwr
     }
 }
