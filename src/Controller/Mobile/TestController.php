@@ -27,10 +27,7 @@ class TestController extends AppController {
         //var_dump(round('42.99687156342637',1));
        // debug($this->Util->getServerDomain());
         //$timestamp = time();
-        $id = 999;
-        $code = $this->Business->createInviteCode($id);
-
-        echo $code;
+        $this->Business->create2Invit('1b20a', 28);
         //debug(\Cake\Core\Configure::read('Redis.default'));
         exit();
     }

@@ -213,8 +213,6 @@ class UserController extends AppController {
             $user = $this->User->patchEntity($user, $this->request->data);
             $mvTb = TableRegistry::get('Movement');
             $delres = $mvTb->query()->delete()->where([['user_id' => $uid, 'type IN' => [3, 4]]])->execute();
-            /*$mv_pic = $mvTb->find()->where(['user_id' => $uid, 'type' => 3])->first();
-            $mv_vid = $mvTb->find()->where(['user_id' => $uid, 'type' => 4])->first();*/
             if($delres) {
                 $mv_vid = null;
                 $mv_pic = null;
@@ -268,9 +266,15 @@ class UserController extends AppController {
                         }
                         break;
                 }
-                $res = $this->User->connection()->transactional(function() use(&$user, $mvTb, &$mv_pic, &$mv_vid) {
-                    $mvres1 = $mvTb->save($mv_pic);
-                    $mvres2 = $mvTb->save($mv_vid);
+                $res = $this->User->connection()->transactional(function() use($user, $mvTb, $mv_pic, $mv_vid) {
+                    $mvres1 = true;
+                    $mvres2 = true;
+                    if($mv_pic) {
+                        $mvres1 = $mvTb->save($mv_pic);
+                    }
+                    if($mv_vid) {
+                        $mvres2 = $mvTb->save($mv_vid);
+                    }
                     $ures = $this->User->save($user);
                     return $mvres1&&$mvres2&&$ures;
                 });
