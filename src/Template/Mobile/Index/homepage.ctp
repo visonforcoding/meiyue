@@ -123,7 +123,7 @@
         </li>-->
         <?php if($user->charm > 0): ?>
         <li>
-            <a class="items flex flex_justify" href="/user/voted/<?=$user->id?>">
+            <a class="items flex flex_justify" href="javascript:toVoted();">
                 <span class="seach_name">Ta的评选</span>
                 <span class="golook"><i class="iconfont r_icon">&#xe605;</i></span>
             </a>
@@ -285,6 +285,17 @@
     window.shareConfig.desc= '美女邀请你来看看';
 </script>
 <script>
+    function toVoted() {
+        if(!$.util.isLogin()) {
+            $.util.alert('请先登录');
+            setTimeout(function() {
+                LEMON.event.login();
+            }, 1000)
+            return;
+        }
+        location.href='/user/voted/<?=$user->id?>';
+    }
+
     $('#send-gift').on('click', function(event) {
         event.stopPropagation();
         if(!$.util.isLogin()) {
