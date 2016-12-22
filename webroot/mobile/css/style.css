@@ -1103,9 +1103,9 @@ position: relative;}
 .allgift .gift_pic{width:100%;height:1.6rem;border-radius: 8px;overflow: hidden;display: flex;justify-content: center;align-items: center;}
 
 .allgift .gift_pic img,.bottomtext .ico img{width:100%;height:auto;display: block;}
-.allgift .gift_pic img{width:70%;}
+.allgift .gift_pic img{width:60%;}
 .allgift .bottomtext{color:#666666;text-align: center;width:100%;}
-.allgift .bottomtext i{color:#EAB96A;}
+.allgift .bottomtext i{color:#EAB96A;vertical-align: middle;
 .allgift .bottomtext .ico{display: inline-block;width:.3rem;height:.3rem;overflow: hidden;}
 .allgift .yd{width:100%;display: -webkit-box;display:box;-webkit-box-align: center;-webkit-box-pack: center;height:60px;}
 .allgift .yd span{width:8px;height:8px;border-radius: 50%;background: #efefef;display: block;margin-right:.1rem;}
