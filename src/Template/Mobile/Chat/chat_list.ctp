@@ -9,7 +9,7 @@
             <div class="chat-left-info flex">
                 <div class="avatar">
                     <img src="{{avatar}}"/>
-                    <!--<div class="num">{{unread}}</div>-->
+                    <div class="num" {{unreadst}}>{{unread}}</div>
                 </div>
                 <div class="chat-text">
                     <h3 class="name">{{nick}}</h3>
@@ -143,13 +143,10 @@ function onUpdateSession(session) {
         if (index !== 0) {
             //排到最前面
             $obj.remove();
-            $obj.find('.num').html(session.unread);
-            $obj.find('span.last-info').html(session.lastMsg.text);
             $('#chat-list').prepend($obj);
-        } else {
-            $obj.find('.num').html(session.unread);
-            $obj.find('span.last-info').html(session.lastMsg.text);
         }
+        session.unread && $obj.find('.num').html(session.unread).show();
+        $obj.find('span.last-info').html(session.lastMsg.text);
     }
     updateSessionsUI();
 }
@@ -203,6 +200,7 @@ function getRender(sessions, res) {
                 sessions[i]['nick'] = v.nick;
                 sessions[i]['avatar'] = v.avatar;
                 sessions[i]['datetime'] = $.util.getImShowTime(new Date(n.updateTime));
+                sessions[i]['unreadst'] = n.unread ? '' : 'hidden';
             }
         })
     })
