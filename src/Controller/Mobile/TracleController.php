@@ -273,10 +273,10 @@ class TracleController extends AppController {
             ->map(function($row) {
                 $actTime = new Time($row->act_time);
                 $row->act_date = $actTime->i18nFormat('MM月dd日');
-                $row->act_week = getWeekStr($actTime->format('w'));
+                $row->act_week = getWeekStr($actTime->format('w') + 1);
                 return $row;
             });
-        $this->set(['datas' => $yuepais, 'pageTitle' => '免费约拍报名']);
+        $this->set(['datas' => $yuepais->toArray(), 'pageTitle' => '免费约拍报名']);
     }
 
     /**

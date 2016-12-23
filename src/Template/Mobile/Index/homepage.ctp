@@ -89,7 +89,7 @@
                             </span>
                             <div>
                                 <span class="price"><i><?= $user_skill->cost->money ?></i>美币/h</span>
-                                <a href="/date-order/order-skill/<?= $user_skill->id; ?>" class="date">约TA</a>
+                                <a class="date data-ta" data-id="<?= $user_skill->id; ?>">约TA</a>
                             </div>
                         </div>
                     </li>
@@ -286,6 +286,8 @@
     window.shareConfig.desc= '美女邀请你来看看';
 </script>
 <script>
+    $('.date')
+
     function toVoted() {
         if(!$.util.isLogin()) {
             $.util.alert('请先登录');
