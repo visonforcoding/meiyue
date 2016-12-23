@@ -28,7 +28,7 @@
                    <span class="fr"><i class="iconfont right_ico ">&#xe605;</i></span>
                
             </li>
-            <li class="clearfix" <?= (!($user->id_status == UserStatus::PASS))?'onclick="window.location.href=\'/userc/edit-auth\';"':''?>>
+            <li class="clearfix" <?= (!($user->idfront) || !($user->idback) || !($user->idperson) || ($user->id_status == UserStatus::NOPASS))?'onclick="window.location.href=\'/userc/edit-auth\';"':''?>>
               
                    <span class="fl">身份认证</span>
                    <?php if(!($user->idfront) || !($user->idback) || !($user->idperson)): ?>

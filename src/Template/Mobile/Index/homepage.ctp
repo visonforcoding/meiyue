@@ -524,11 +524,13 @@
                     $('.raper').removeClass('hide');
                     $('.raper .showx').show();
                     $('.raper .copywxid').on('click', function() {
-                        LEMON.sys.toClipper($('.raper .wxidtxt i').text());
+                        //alert($('.raper .wxidtxt i').text());
+                        LEMON.sys.copy2Clipper($('.raper .wxidtxt i').text());
                         $.util.alert('复制成功');
                     });
                     $('.raper .copyanhao').on('click', function() {
-                        LEMON.sys.toClipper($('.raper .anhaotxt i').text());
+                        //alert($('.raper .anhaotxt i').text());
+                        LEMON.sys.copy2Clipper($('.raper .anhaotxt i').text());
                         $.util.alert('复制成功');
                     });
                     $('.raper .closed').on('click', function() {
@@ -651,6 +653,5 @@
         param['avatar'] = avatar;
         LEMON.event.imTalk(param);
     }
-
 </script>
 <?php $this->end('script'); ?>
