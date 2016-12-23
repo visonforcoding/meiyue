@@ -158,7 +158,7 @@ function onUpdateSession(session) {
             $('#chat-list').prepend($obj);
         }
         session.unread = getUnread(session.to, session.unread);
-        $obj.find('.num').html(session.unread).show();
+        session.unread > 0 && $obj.find('.num').html(session.unread).show();
         $obj.find('span.last-info').html(session.lastMsg.text);
         $obj.find('time').html($.util.getImShowTime(new Date(session.updateTime)));
     }
