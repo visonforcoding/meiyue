@@ -532,7 +532,7 @@ class ActivityController extends AppController
             $i = 1;
             $richs = $userTb->find()
                 ->select(['recharge', 'consumed', 'nick', 'id', 'avatar'])
-                ->where(['recharge >' => 0])
+                ->where(['recharge >' => 0, 'gender' => 1])
                 ->orderDesc('recharge')
                 ->limit(10)
                 ->map(function($row) use(&$i, $followlist, $user) {
