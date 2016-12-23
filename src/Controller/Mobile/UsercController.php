@@ -491,7 +491,6 @@ class UsercController extends AppController {
      */
     public function editInfo()
     {
-
         $inlist = Array('phone', 'nick', 'truename', 'profession', 'email',
             'gender', 'birthday', 'zodiac', 'weight', 'height', 'bwh', 'cup',
             'hometown', 'city', 'avatar', 'state', 'career', 'place', 'food',
@@ -501,13 +500,9 @@ class UsercController extends AppController {
         $percent = 0;
         $user = $this->user;
         foreach($inlist as $item) {
-
             if($user->$item) {
-
                 $percent ++;
-
             }
-
         }
         $percent = round($percent / count($inlist) * 100);
 
