@@ -176,9 +176,12 @@ class UserController extends AppController {
             if($this->request->query('gender')==1){
                 //男性则直接登录
                 $user->reg_step = 9;  //注册完毕
+                $user->status = 0;
+                $user->is_agent = 2;  //默认不是经纪人
             }else{
                 $user->reg_step = 1;
                 $user->status = 1;
+                $user->is_agent = 1; //默认是经纪人
             }
             if ($this->User->save($user)) {
                 if($data['incode']) {

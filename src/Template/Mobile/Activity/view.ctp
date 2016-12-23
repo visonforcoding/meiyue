@@ -2,7 +2,7 @@
     <div class="header">
         <span class="iconfont toback" onclick="history.back();">&#xe602;</span>
         <h1>活动详情</h1>
-        <span class="iconfont r_btn ico">&#xe62d;</span>
+        <!--<span class="iconfont r_btn ico">&#xe62d;</span>-->
     </div>
 </header>
 <div class="wraper">

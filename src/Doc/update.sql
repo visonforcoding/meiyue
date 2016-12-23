@@ -710,3 +710,7 @@ ALTER TABLE `lm_withdraw`
 #用户表添加邀请码
 ALTER TABLE `lm_user`
 	ADD COLUMN `invit_code` INT NULL COMMENT '邀请码' AFTER `imaccid`;
+
+#用户表添加是否经纪人
+ALTER TABLE `lm_user`
+	ADD COLUMN `is_agent` TINYINT NOT NULL DEFAULT '1' COMMENT '是否是经纪人：1是2否' AFTER `invit_code`;
