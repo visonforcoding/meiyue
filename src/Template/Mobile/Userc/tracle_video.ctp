@@ -37,6 +37,7 @@
     $.util.chooseVideo('add_tracle');
     LEMON.sys.setTopRight('发送')
     window.onTopRight = function () {
+        $.util.showPreloader('正在处理视频...');
         var tracle_body = $('#body').val();
         var param = {};
         param['action'] = 'add_tracle_video';

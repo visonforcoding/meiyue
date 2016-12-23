@@ -961,9 +961,10 @@ class DateOrderController extends AppController
         $lasth = ((new Time($order->end_time))->hour-(new Time($order->start_time))->hour);        
         if($this->user->gender==1){
              if((strtotime($order->start_time)-time())>= 2*60*60){
-                $refuse_msg = '您将收到70%的约单消费退回';
+                 //2小时开外
+                $refuse_msg = '平台将只退回约单金额的70%,剩余的30%将打至美女账户作为补偿，是否继续？';
              }else{
-                $refuse_msg = '您将收到30%的约单消费退回';
+                $refuse_msg = '平台将只退回约单金额的30%,剩余的20%将打至美女账户作为补偿，是否继续？';
              }
         }else{
             $refuse_msg = '将会扣除约单20%的美币作为惩罚';
