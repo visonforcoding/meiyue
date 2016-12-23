@@ -9,7 +9,9 @@
             <div class="chat-left-info flex">
                 <div class="avatar">
                     <img src="{{avatar}}"/>
-                    <div class="num" {{unreadst}}>{{unread}}</div>
+                    {{#unread}}
+                    <div class="num">{{unread}}</div>
+                    {{/unread}}
                 </div>
                 <div class="chat-text">
                     <h3 class="name">{{nick}}</h3>
@@ -42,15 +44,15 @@
             </a>
         </li>
         <li>
-            <a href="/userc/visitors" class="a-height flex flex_justify">
+            <a href="#this" class="a-height flex flex_justify">
                 <div class="l-info-name">我的访客</div>
                 <i class="iconfont rcon">&#xe605;</i>
             </a>
         </li>
         <li>
-            <a href="/chat/meiyue-message" class="a-height flex flex_justify">
+            <a href="#this" class="a-height flex flex_justify">
                 <div class="l-info-name">平台消息</div>
-                <div class="tips-box"><!--<span class="tips"></span>--><i class="iconfont rcon">&#xe605;</i></div>
+                <div class="tips-box"><span class="tips"></span><i class="iconfont rcon">&#xe605;</i></div>
             </a>
         </li>
     </ul>
@@ -139,14 +141,28 @@ function onUpdateSession(session) {
     } else {
         //旧会话 新消息
         $obj = $('#chat-' + newSess);
+        if(!session.lastMsg.text){
+            var content = JSON.parse(session.lastMsg.content);
+            switch(content.type){
+                case 5:
+                    session.lastMsg.text = '[约单]';
+                    break;
+                case 6:
+                    session.lastMsg.text = '[礼物]';
+                    break;
+            }
+        }
         var index = $obj.index();
         if (index !== 0) {
             //排到最前面
             $obj.remove();
+            $obj.find('.num').html(session.unread);
+            $obj.find('span.last-info').html(session.lastMsg.text);
             $('#chat-list').prepend($obj);
+        } else {
+            $obj.find('.num').html(session.unread);
+            $obj.find('span.last-info').html(session.lastMsg.text);
         }
-        session.unread && $obj.find('.num').html(session.unread).show();
-        $obj.find('span.last-info').html(session.lastMsg.text);
     }
     updateSessionsUI();
 }
@@ -200,7 +216,6 @@ function getRender(sessions, res) {
                 sessions[i]['nick'] = v.nick;
                 sessions[i]['avatar'] = v.avatar;
                 sessions[i]['datetime'] = $.util.getImShowTime(new Date(n.updateTime));
-                sessions[i]['unreadst'] = n.unread ? '' : 'hidden';
             }
         })
     })

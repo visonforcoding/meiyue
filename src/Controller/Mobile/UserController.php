@@ -484,7 +484,7 @@ class UserController extends AppController {
         $vcode = $codeTable->find()->where("`phone` = '$mobile'")->orderDesc('create_time')->first();
         if (empty($vcode) || (time() - strtotime($vcode['time'])) > 30) {
             //30s 的间隔时间
-            $ckSms = $this->Sms->sendByQf106($mobile, $content, $code);
+            $ckSms = $this->Sms->send($mobile, $content, $code);
             if ($ckSms) {
                 return $this->Util->ajaxReturn(true, '发送成功');
             }

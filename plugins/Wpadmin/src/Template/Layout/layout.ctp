@@ -62,7 +62,7 @@
                 <ul class="breadcrumb">
                     <a id="switch-left-bar" style=" margin-right: 10px; cursor:pointer;"><i class="icon-bars"></i></a>
                     <li>
-                        <a href="<?=PROJ_PREFIX?>/index/index"><i class="icon icon-home"></i> 主页</a>
+                        <a href="<?= PROJ_PREFIX ?>/index/index"><i class="icon icon-home"></i> 主页</a>
                     </li>
                     <li>
                         <a  href="#"><?= $bread['first']['name'] ?></a>
@@ -92,6 +92,7 @@
         <!-- ZUI Javascript组件 -->
         <script src="/wpadmin/lib/zui/js/zui.min.plus.js"></script>
         <script src="/wpadmin/lib/datetimepicker/jquery.datetimepicker.js"></script>
+        <script src="/wpadmin/lib/zui/js/affix.js"></script>
         <script src="/wpadmin/lib/layer/layer.js"></script>
         <script src="/wpadmin/lib/layer/extend/layer.ext.js"></script>
         <script src="/wpadmin/js/global.js"></script>

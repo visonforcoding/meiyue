@@ -197,7 +197,7 @@ class DateOrderController extends AppController
                return $FlowTable->save($flow)&&$saveDate&&$UserTable->save($user);
            });
            if($transRes){
-               $this->Sms->sendByQf106($dateorder->dater->phone,
+               $this->Sms->send($dateorder->dater->phone,
                        '用户'.  $this->user->nick.'已支付了您的'.
                        $dateorder->user_skill->skill->name.'技能预约费,请尽快前往平台确认');
                
@@ -301,7 +301,7 @@ class DateOrderController extends AppController
                         return $FlowTable->save($flow)&&$saveDateorder&&$saveDate&&$UserTable->save($user);
                 });
             if($transRes){
-                $this->Sms->sendByQf106($date->user->phone,
+                $this->Sms->send($date->user->phone,
                     '用户【'
                     .$user->nick
                     .'】已支付了您的约会【'
@@ -449,7 +449,7 @@ class DateOrderController extends AppController
             $dateorder->receive_time = date('Y-m-d H:i:s');
             if($DateorderTable->save($dateorder)){
                 $this->loadComponent('Sms');
-                $this->Sms->sendByQf106($dateorder->buyer->phone, $dateorder->dater->nick.
+                $this->Sms->send($dateorder->buyer->phone, $dateorder->dater->nick.
                         '已接受你发出的【'.$dateorder->user_skill->skill->name.'】邀请，请您尽快支付尾款.');
                 
                 $this->loadComponent('Netim');
@@ -523,7 +523,7 @@ class DateOrderController extends AppController
            });
         if($transRes){
             $this->loadComponent('Sms');
-            $this->Sms->sendByQf106($order->dater->phone, $order->buyer->nick.
+            $this->Sms->send($order->dater->phone, $order->buyer->nick.
                     '已支付您的【'.$order->user_skill->skill->name.'】技能约单尾款，请及时赴约.');
             $this->loadComponent('Netim');
             $this->Netim->payallMsg($order);
@@ -851,7 +851,7 @@ class DateOrderController extends AppController
             $order->status = 13;
             if($DateorderTable->save($order)){
                 $this->loadComponent('Sms');
-                $this->Sms->sendByQf106($order->buyer->phone, $order->dater->nick.
+                $this->Sms->send($order->buyer->phone, $order->dater->nick.
                         '已到达约会目的地，请及时到场赴约.');
                 return $this->Util->ajaxReturn(true,'成功接受');
             }

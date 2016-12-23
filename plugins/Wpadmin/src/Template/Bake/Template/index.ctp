@@ -48,6 +48,7 @@ return $field === 'lft' || $field === 'rght';
             </div>
             <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索</a>
             <!--<a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>-->
+            <a onclick="saveEdit();" class="btn btn-info"><i class="icon icon-save"></i> 保存</a>
         </div>
     </form>
     <table id="list"><tr><td></td></tr></table> 
@@ -57,6 +58,7 @@ return $field === 'lft' || $field === 'rght';
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script>
+       var lastsel;
     $(function () {
          $('#main-content').bind('resize', function () {
             $("#list").setGridWidth($('#main-content').width() - 40);
@@ -69,6 +71,7 @@ return $field === 'lft' || $field === 'rght';
         $.zui.store.pageClear(); //刷新页面缓存清除
         $("#list").jqGrid({
             url: "<%=PROJ_PREFIX%>/<%= strtolower($modelClass) %>/getDataList",
+            editurl: "<%=PROJ_PREFIX%>/<%= strtolower($modelClass) %>/rowEdit",
             datatype: "json",
             mtype: "POST",
             colNames:   
@@ -83,7 +86,7 @@ return $field === 'lft' || $field === 'rght';
                      $fieldData =$schema->column($field);
                      $colName = $fieldData['comment']?$fieldData['comment']:$field;
                      $colNamesArr[] = "'".$colName."'"; 
-                     $colModelArr[] = "\r\n{name:'".$field."',editable:true,align:'center'}";
+                     $colModelArr[] = "\r\n{name:'".$field."',editable:false,align:'center'}";
             }
     }
         $colModelArr[] ="\r\n{name:'actionBtn',align:'center',viewable:false,sortable:false,frozen:true,formatter:actionFormatter}";
@@ -111,7 +114,32 @@ return $field === 'lft' || $field === 'rght';
                 repeatitems: false,
                 id: "id"
             },
-        }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
+            ondblClickRow: function (id) {
+                    if (id && id !== lastsel) {
+                        $("#list").jqGrid('restoreRow', lastsel);
+                        $("#list").jqGrid('editRow', id, true);
+                        lastsel = id;
+                    }
+                },
+        }).navGrid('#pager', {edit: false, add: false, del: false, view: true})
+          .jqGrid('navButtonAdd', '#pager', {
+                                    caption: "",
+                                    buttonicon: "ui-icon-save",
+                                    onClickButton: function () {
+                                        $('#list').jqGrid('saveRow', lastsel, {
+                                            successfunc: function (res) {
+                                                res = JSON.parse(res.responseText);
+                                                $('#list').trigger('reloadGrid');
+                                                if (res.status) {
+                                                    layer.msg(res.msg);
+                                                    return true;
+                                                }
+                                            }
+                                        });
+                                    },
+                                    position: "last",
+                                    title: "",
+                                    cursor: "pointer"});;
         $('#list').jqGrid('setFrozenColumns');
     });
 
@@ -165,7 +193,18 @@ return $field === 'lft' || $field === 'rght';
                     var searchQueryStr  = $.param(searchData);
                     $("body").append("<iframe src='<%=PROJ_PREFIX%>/<%= strtolower($modelClass) %>/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
-                
+                function saveEdit() {
+                    $('#list').jqGrid('saveRow', lastsel, {
+                        successfunc: function (res) {
+                            res = JSON.parse(res.responseText);
+                            $('#list').trigger('reloadGrid');
+                            if (res.status) {
+                                layer.msg(res.msg);
+                                return true;
+                            }
+                        }
+                    });
+                }
              function doView(id) {
                 //查看明细
                 url = '<%=PROJ_PREFIX%>/<%=strtolower($modelClass)%>/view/'+id;
