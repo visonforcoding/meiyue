@@ -1105,7 +1105,7 @@ position: relative;}
 .allgift .gift_pic img,.bottomtext .ico img{width:100%;height:auto;display: block;}
 .allgift .gift_pic img{width:60%;}
 .allgift .bottomtext{color:#666666;text-align: center;width:100%;}
-.allgift .bottomtext i{color:#EAB96A;vertical-align: middle;
+.allgift .bottomtext i{color:#EAB96A;vertical-align: middle;}
 .allgift .bottomtext .ico{display: inline-block;width:.3rem;height:.3rem;overflow: hidden;}
 .allgift .yd{width:100%;display: -webkit-box;display:box;-webkit-box-align: center;-webkit-box-pack: center;height:60px;}
 .allgift .yd span{width:8px;height:8px;border-radius: 50%;background: #efefef;display: block;margin-right:.1rem;}
@@ -1222,9 +1222,9 @@ line-height: 14px;color:#fff;font-size:11px;text-align: center;}
 .search-link{background: #fff;}
 .search-link ul .iconfont{color:#999;margin-right:.1rem;font-size: 14px;}
 .home_fill_basic_info ul li.plaintext-box{padding-top:.2rem;padding-bottom:.2rem;}
- .home_fill_basic_info .plaintext-box .home_items{height:auto;min-height: 25px;}
-  .home_fill_basic_info .plaintext-box  .home_list_r_info{height:25px;/*width:5rem;*/}
- .home_fill_basic_info ul .plaintext-box .plaintext{height:auto;}
+.home_fill_basic_info .plaintext-box .home_items{height:auto;min-height: 25px;}
+.home_fill_basic_info .plaintext-box  .home_list_r_info{height:25px;/*width:5rem;*/}
+.home_fill_basic_info ul .plaintext-box .plaintext{height:auto;}
 .plaintext-box .plaintext-con{width:100%;outline:none;text-align: justify;word-break:break-all;user-modify: read-write-plaintext-only;border:none;text-align: right;height:20px;margin-top:2px;}
 /*未登录*/
 .shadow{background: rgba(0,0,0,.7);z-index:11;overflow: hidden;}
