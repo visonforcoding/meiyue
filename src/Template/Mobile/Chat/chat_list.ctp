@@ -156,8 +156,10 @@ function onUpdateSession(session) {
             $obj.remove();
             $('#chat-list').prepend($obj);
         }
+        session.unread = getUnread(session.to, session.unread);
         $obj.find('.num').html(session.unread).show();
         $obj.find('span.last-info').html(session.lastMsg.text);
+        $obj.find('time').html($.util.getImShowTime(new Date(session.updateTime)));
     }
     updateSessionsUI();
 }
@@ -208,6 +210,7 @@ function getRender(sessions, res) {
         sessions[i]['avatar'] = '';
         $.each(res.users, function (k, v) {
             if (n.to == v.imaccid) {
+                n.unread = getUnread(n.to, n.unread);
                 sessions[i]['nick'] = v.nick;
                 sessions[i]['avatar'] = v.avatar;
                 sessions[i]['datetime'] = $.util.getImShowTime(new Date(n.updateTime));
@@ -224,7 +227,13 @@ function getRender(sessions, res) {
 }
 
 function getUnread (id, num){
-    var base = LEMON.db.get('');
+    var total=0, old = LEMON.db.get('num'+id);
+    old = parseInt(old) ? parseInt(old) : 0;
+    if(num){
+        total = num + old;
+        LEMON.db.set('num'+id, total);
+    }
+    return total;
 }
 
 </script>
