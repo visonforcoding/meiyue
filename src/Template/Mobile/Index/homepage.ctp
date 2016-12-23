@@ -293,7 +293,17 @@
     window.shareConfig.desc= '美女邀请你来看看';
 </script>
 <script>
-    $('.date')
+    $('.data-ta').on('tap', function() {
+        if(!$.util.isLogin()) {
+            $.util.alert('请先登录');
+            setTimeout(function() {
+                LEMON.event.login();
+            }, 1000)
+            return;
+        }
+        var dateid = $(this).data('id');
+        location.href='/date-order/order-skill/' + dateid;
+    })
 
     function toVoted() {
         if(!$.util.isLogin()) {

@@ -34,7 +34,7 @@
 <?php $this->end('static') ?>
 <header>
     <div class="header">
-        <span class="iconfont toback">&#xe602;</span>
+        <span class="iconfont toback" onclick="history.back();">&#xe602;</span>
         <h1>约会详情</h1>
         <!--<span class="r_btn">编辑</span>-->
     </div>
