@@ -687,6 +687,7 @@ $.util = {
         param['accid'] = res.obj.imaccid;
         param['nick'] = res.obj.nick;
         param['avatar'] = res.obj.avatar;
+        param['id'] = res.obj.id;
         LEMON.event.imTalk(param);
     },
     setWH: function(img) {
