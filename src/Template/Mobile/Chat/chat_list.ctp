@@ -62,6 +62,7 @@
 <?= $this->element('footer', ['active' => 'chat']) ?>
 <?php $this->start('script'); ?>
 <script type="text/javascript">
+var backUnread = {};
 var data = {};
 var accids = [];   //列表accid
 var account = LEMON.db.get('im_accid');
@@ -227,9 +228,10 @@ function getRender(sessions, res) {
 }
 
 function getUnread (id, num){
-    var total=0, old = LEMON.db.get('num'+id);
+    var total=0, old = backUnread.hasOwnProperty(id) ? backUnread[id] : LEMON.db.get('num'+id);
     old = parseInt(old) ? parseInt(old) : 0;
-    if(num){
+    if(!backUnread.hasOwnProperty(id)) backUnread[id] = old;
+    if(num || old){
         total = num + old;
         LEMON.db.set('num'+id, total);
     }
