@@ -180,18 +180,13 @@ $(document).on('click', '.user', function () {
     param['nick'] = nick;
     param['avatar'] = avatar;
     LEMON.event.imTalk(param);
+    setRead(accid);
 });
 
 $(document).on('click','.del',function(){
-   //删除会话 
-   var account = $(this).data('accid');
-   console.log(account);
-   delImSess(account);
-});
-
-function delImSess(account) {
-    //删除会话方法
-    var id = account;
+    //删除会话
+    var id = $(this).data('accid');
+    setRead(id);
     nim.deleteSession({
         scene: 'p2p',
         to: id,
@@ -204,7 +199,8 @@ function delImSess(account) {
             console.log('删除会话' + (!error ? '成功' : '失败'));
         }
     });
-}
+})
+
 function getRender(sessions, res) {
     $.each(sessions, function (i, n) {
         sessions[i]['nick'] = '';
@@ -236,6 +232,10 @@ function getUnread (id, num){
         LEMON.db.set('num'+id, total);
     }
     return total;
+}
+function setRead (id){
+    backUnread[id] = 0;
+    LEMON.db.set('num'+id, 0);
 }
 
 </script>
