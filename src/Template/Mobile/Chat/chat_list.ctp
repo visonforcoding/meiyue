@@ -211,7 +211,7 @@ function getRender(sessions, res) {
                 sessions[i]['nick'] = v.nick;
                 sessions[i]['avatar'] = v.avatar;
                 sessions[i]['datetime'] = $.util.getImShowTime(new Date(n.updateTime));
-                sessions[i]['unreadst'] = n.unread ? '' : 'hidden';
+                sessions[i]['unreadst'] = n.unread > 0 ? '' : 'hidden';
             }
         })
     })
