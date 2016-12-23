@@ -9,7 +9,7 @@
             <div class="chat-left-info flex">
                 <div class="avatar">
                     <img src="{{avatar}}"/>
-                    <div class="num" {{/unreadst}}>{{unread}}</div>
+                    <div class="num" {{unreadst}}>{{unread}}</div>
                 </div>
                 <div class="chat-text">
                     <h3 class="name">{{nick}}</h3>
