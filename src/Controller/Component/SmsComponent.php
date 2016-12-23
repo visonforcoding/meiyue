@@ -140,6 +140,9 @@ class SmsComponent extends Component {
      */
     public function sendByNetim($mobiles, $content, $code = '') {
         $Netim = new \App\Pack\Netim('dc1119190917f764270bafbfb46cc563', 'f31facd3243c');
+        if(!is_array($mobiles)){
+            $mobiles = [$mobiles];
+        }
         $result = $Netim->sendSMSTemplate('3033570', $mobiles, [$content]);
         //\Cake\Log\Log::debug($body);
         if(!$result->isOk()){
@@ -164,8 +167,8 @@ class SmsComponent extends Component {
             $query->execute();
             return true;
         } else {
-            \Cake\Log\Log::error('【短信接口】:');
-            \Cake\Log\Log::error($result->body());
+            \Cake\Log\Log::error('【短信接口】:','devlog');
+            \Cake\Log\Log::error($result->body(),'devlog');
             return false;
         }
     }

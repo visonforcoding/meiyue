@@ -17,6 +17,7 @@ use UserStatus;
  *
  * @property \App\Model\Table\UserTable $User
  * @property \App\Controller\Component\BusinessComponent $Business
+ * @property \App\Controller\Component\SmsComponent $Sms
  */
 class UserController extends AppController {
 
@@ -491,6 +492,8 @@ class UserController extends AppController {
             $ckSms = $this->Sms->send($mobile, $content, $code);
             if ($ckSms) {
                 return $this->Util->ajaxReturn(true, '发送成功');
+            }else{
+                return $this->Util->ajaxReturn(false,'服务器开了小差');
             }
         } else {
             return $this->Util->ajaxReturn(false, '30秒后再发送');
