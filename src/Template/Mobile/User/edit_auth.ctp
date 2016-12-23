@@ -32,7 +32,7 @@
     </div>
 
     <div class="up_identify_box bgff mt40">
-        <?php if($user->id_status == UserStatus::CHECKING): ?>
+        <?php if(($user->id_status == UserStatus::CHECKING) && ($user->idfront) && ($user->idback) && ($user->idperson)): ?>
         <div class="inner">
             <div class="title">
                     <h3 class="color_black">我的身份认证照片</h3>

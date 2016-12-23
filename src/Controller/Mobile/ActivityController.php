@@ -21,29 +21,24 @@ class ActivityController extends AppController
      */
     public function index($curtab = 'date')
     {
+        $carouselTb = TableRegistry::get('Carousel');
+        $carousel = $carouselTb->find()->where(['position' => CarouselPosition::TOP_BIGIMG, 'status' => 1])->first();
+        $this->set([
+            'curtab' => $curtab,
+            "user" => $this->user,
+            "carousel" => $carousel,
+            'pageTitle' => '美约-活动'
+        ]);
         if($this->user) {
             if($this->user->gender == 2) {
                 $this->render('findex');
             }
         }
-        $carouselTb = TableRegistry::get('Carousel');
-        $carousel = $carouselTb->find()->where(['position' => CarouselPosition::TOP_BIGIMG, 'status' => 1])->first();
-        $this->set([
-            'curtab' => $curtab,
-            "user" => $this->user,
-            "carousel" => $carousel,
-            'pageTitle' => '美约-活动'
-        ]);
     }
 
 
     public function findex($curtab = 'date')
     {
-        if($this->user) {
-            if($this->user->gender == 1) {
-                $this->render('index');
-            }
-        }
         $carouselTb = TableRegistry::get('Carousel');
         $carousel = $carouselTb->find()->where(['position' => CarouselPosition::TOP_BIGIMG, 'status' => 1])->first();
         $this->set([
@@ -52,6 +47,11 @@ class ActivityController extends AppController
             "carousel" => $carousel,
             'pageTitle' => '美约-活动'
         ]);
+        if($this->user) {
+            if($this->user->gender == 1) {
+                $this->render('index');
+            }
+        }
     }
 
 

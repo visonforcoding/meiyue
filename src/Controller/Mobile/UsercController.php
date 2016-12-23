@@ -726,6 +726,14 @@ class UsercController extends AppController {
             $price = 0;
             $fee = 0;
             $type = PayOrderType::BUY_TAOCAN;
+            switch($pack->type) {
+                case PackType::RECHARGE:
+                    $type = PayOrderType::BUY_CHONGZHI_TAOCAN;
+                    break;
+                case PackType::VIP:
+                    $type = PayOrderType::BUY_TAOCAN;
+                    break;
+            }
             if(!$pack) {
                 return $this->Util->ajaxReturn([
                     'status'=>false,
