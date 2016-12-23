@@ -113,6 +113,7 @@ class SmsComponent extends Component {
                 $value = [
                     'code' => $code,
                     'content' => $content,
+                    'expire_time' => time() + 60 * 10,
                     'create_time' => date('Y-m-d H:i:s')
                 ];
                 foreach ($mobile_arr as $k => $v) {
