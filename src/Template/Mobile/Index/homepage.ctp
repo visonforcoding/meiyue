@@ -1,3 +1,10 @@
+<header>
+    <div class="header">
+        <span class="iconfont toback" onclick="history.back();">&#xe602;</span>
+        <h1><?= $user->nick; ?></h1>
+        <span class="iconfont r_btn ico" onclick="location.href='/user/share'">&#xe62d;</span>
+    </div>
+</header>
 <div class="wraper">
     <div class="home_page">
         <div class="header" style="overflow:hidden">
@@ -654,6 +661,11 @@
         param['nick'] = nick;
         param['avatar'] = avatar;
         LEMON.event.imTalk(param);
+    }
+
+    LEMON.sys.setTopRight('分享');
+    window.onTopRight = function () {
+        location.href='/user/share';
     }
 </script>
 <?php $this->end('script'); ?>

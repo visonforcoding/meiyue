@@ -553,7 +553,7 @@ class BusinessComponent extends Component
     {
         $inviterTb = TableRegistry::get('User');
         $inviter = $inviterTb->find()->select(['id'])->where(['invit_code' => $incode])->first();
-        if($inviter) {
+        if($inviter && ($inviter->is_agent == 1)) {
             $invTb = TableRegistry::get('Inviter');
             $inv = $invTb->find()->where(['invited_id' => $uid])->first();
             if(!$inv) {
@@ -581,6 +581,9 @@ class BusinessComponent extends Component
         $inv = $invtb->find()->contain(['Invitor'])->where(['invited_id' => $invited->id])->first();
         if($inv) {
             $invitor = $inv->invitor;
+            if($invitor->is_agent == 2) {
+                return false;
+            }
             $admoney = 0;
             if($invited->gender == 1) {
                 $admoney = $amount * $cz_percent;
