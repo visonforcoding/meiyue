@@ -8,7 +8,7 @@
     <ul class="praised_list mt20 bgff">
         <?php if($supports): ?>
         <?php foreach($supports as $item): ?>
-            <li>
+            <li onclick="location.href='/user/male-homepage/<?= $flows[$item['supporter_id']]['buyer']['id'];?>'">
                 <div class="praised_block">
                     <div class="praised_list_left support">
                         <span class="avatar">

@@ -247,7 +247,6 @@ class BusinessComponent extends Component
      */
     public function handOrder(\App\Model\Entity\Payorder $order,$realFee,$payType,$out_trade_no) {
         if ($order->type == PayOrderType::CHONGZHI) {
-            //处理预约
             return $this->handType1Order($order,$realFee,$payType,$out_trade_no);
         } elseif ($order->type == PayOrderType::BUY_TAOCAN) {
             //购买套餐成功
@@ -294,6 +293,7 @@ class BusinessComponent extends Component
         if ($transRes) {
             //向专家和买家发送一条短信
             //资金流水记录
+            $this->shareIncome($realFee, $order->user);
             return true;
         }else{
             \Cake\Log\Log::debug($order->errors(),'devlog');
@@ -422,6 +422,9 @@ class BusinessComponent extends Component
         if ($transRes) {
             //向专家和买家发送一条短信
             //资金流水记录
+            if($order->type == PackType::RECHARGE) {
+                $this->shareIncome($realFee, $order->user);
+            }
             return true;
         }else{
             \Cake\Log\Log::debug($order->errors(),'devlog');

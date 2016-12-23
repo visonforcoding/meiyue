@@ -4,6 +4,7 @@ namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
 use Cake\Auth\DefaultPasswordHasher;
+use Cake\Database\Type\FloatType;
 use Cake\ORM\TableRegistry;
 use Cake\Controller\Controller;
 use PackType;
@@ -685,20 +686,20 @@ class UserController extends AppController {
                         'Buyer' => function($q) {
                             return $q->select(['id', 'avatar', 'nick', 'phone', 'gender', 'birthday']);
                         }])
-                            ->select(['total' => 'sum(amount)'])
-                            ->where(['buyer_id IN' => $supporterids, 'type' => 4])
-                            ->group('buyer_id')
-                            ->toArray();
-                    foreach ($flows as $item) {
-                        $sortFlows[$item->buyer->id] = $item;
-                    }
-                }
-                $this->set([
-                    'supports' => $supports,
-                    'flows' => $sortFlows,
-                    'pageTitle' => '支持我的人'
-                ]);
+                    ->select(['total' => 'sum(amount)'])
+                    ->where(['buyer_id IN' => $supporterids, 'type' => 14])
+                    ->group('buyer_id')
+                    ->toArray();
+            foreach ($flows as $item) {
+                $sortFlows[$item->buyer->id] = $item;
             }
+        }
+        $this->set([
+            'supports' => $supports,
+            'flows' => $sortFlows,
+            'pageTitle' => '支持我的人'
+        ]);
+    }
 
     /**
      * ajax 检测登陆
