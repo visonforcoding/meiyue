@@ -381,7 +381,7 @@ class ApiController extends AppController {
     /**
      * 获取地图上的用户
      */
-    public function getMapUsers() {
+    public function getMapUsersF() {
         $lng = $this->request->data('lng');
         $lat = $this->request->data('lat');
         $UserTable = \Cake\ORM\TableRegistry::get('User');
@@ -399,21 +399,25 @@ class ApiController extends AppController {
                 ->toArray();
         $this->jsonResponse(['result' => $users]);
     }
+    
+    
+    
 
-    public function getMapUsersD() {
+    public function getMapUsers() {
         $lng = $this->request->data('lng');
         $lat = $this->request->data('lat');
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $users = $UserTable->find()->select(['id', 'avatar', 'login_coord_lng', 'login_coord_lat'])
-//                ->where(["getDistance($lng,$lat,login_coord_lng,login_coord_lat) <=" => 1000])
+        $users = $UserTable->find()->select(['id', 'avatar', 'login_coord_lng', 'login_coord_lat',
+            'distance' =>"getDistance($lng,$lat,login_coord_lng,login_coord_lat)",])
                 ->where(['gender' => 2])
+                ->orderDesc('distance')
                 ->limit(10)->formatResults(function($items)use($lng, $lat) {
                     return $items->map(function($item)use($lng, $lat) {
                                 $item['id'] = mt_rand(1, 100);
                                 $item['avatar'] = 'http://m-my.smartlemon.cn' . createImg($item['avatar']) .
                                         '?w=184&h=184&fit=stretch';
-                                $item['login_coord_lng'] = $lng + randomFloat() * 0.1;
-                                $item['login_coord_lat'] = $lat + randomFloat() * 0.1;
+                                $item['login_coord_lng'] = $item['login_coord_lng'] + 2;
+                                $item['login_coord_lat'] = $item['login_coord_lat'] + 10;
                                 return $item;
                             });
                 })

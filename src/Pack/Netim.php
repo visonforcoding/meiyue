@@ -18,10 +18,15 @@ class Netim {
      */
     const CUSTOM_MSG = 100;
 
-    public function __construct() {
-        $conf = \Cake\Core\Configure::read('netim');
-        $this->appkey = $conf['app_key'];
-        $this->appSecret = $conf['app_secret'];
+    public function __construct($app_key=null,$app_secret=null) {
+        if($app_key&&$app_secret){
+            $this->appkey = $app_key;
+            $this->appSecret = $app_secret;
+        }else{
+            $conf = \Cake\Core\Configure::read('netim');
+            $this->appkey = $conf['app_key'];
+            $this->appSecret = $conf['app_secret'];
+        }
     }
 
     /**
@@ -206,5 +211,25 @@ class Netim {
           'msg'=>$body  
         ];
     }
+    
+    
+    /**
+     * 发送模板短信
+     * @param  $templateid       [模板编号(由客服配置之后告知开发者)]
+     * @param  $mobiles          [验证码]
+     * @param  $params          [短信参数列表，用于依次填充模板，JSONArray格式，如["xxx","yyy"];对于不包含变量的模板，不填此参数表示模板即短信全文内容]
+     * @return \Cake\Http\Client\Response $result      [返回array数组对象]
+     */
+    public function sendSMSTemplate($templateid,$mobiles=array(),$params=array()){
+        $url = 'https://api.netease.im/sms/sendtemplate.action';
+        $data= array(
+            'templateid' => $templateid,
+            'mobiles' => json_encode($mobiles),
+            'params' => json_encode($params)
+        );
+        $result = $this->httpPost($url, $data);
+        return $result;
+    }
+
 
 }

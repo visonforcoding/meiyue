@@ -39,6 +39,7 @@ if (PHP_SAPI === 'cli') {
                 'delete',
                 'getDataList',
                 'exportExcel',
+                'rowEdit'
             ];
         }
     });

@@ -315,4 +315,13 @@ class TestController extends AppController {
         $o = file_get_contents('php://stdout');
         fopen('app.log','wb');
     }
+    
+    public function testSms(){
+        $mobiles  = ['13763053901'];
+        $content = '程序猿何必为难程序猿';
+        $this->loadComponent('Sms');
+        $res = $this->Sms->send($mobiles, $content);
+        debug($res);
+        exit();
+    }
 }

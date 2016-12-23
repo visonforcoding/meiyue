@@ -381,7 +381,7 @@ class UsercController extends AppController {
             $order->status = 13;
             if($DateorderTable->save($order)){
                 $this->loadComponent('Sms');
-                $this->Sms->sendByQf106($order->buyer->phone, $order->dater->nick.
+                $this->Sms->send($order->buyer->phone, $order->dater->nick.
                         '已到达约会目的地，请及时到场赴约.');
                 return $this->Util->ajaxReturn(true,'成功接受');
             }
