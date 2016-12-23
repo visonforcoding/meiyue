@@ -458,10 +458,12 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                     $.util.hidePreloader();
                     if (res.status) {
                         if('rich_list' == tab) {
-                            if(res.mydata.paiming) {
-                                var mytmpl = $('#myrich-tpl').html();
-                                var myrend = Mustache.render(mytmpl, res);
-                                $('#my-top').html(myrend);
+                            if(res.mydata) {
+                                if(res.mydata.paiming) {
+                                    var mytmpl = $('#myrich-tpl').html();
+                                    var myrend = Mustache.render(mytmpl, res);
+                                    $('#my-top').html(myrend);
+                                }
                             }
                             var rendered = Mustache.render(template, res);
                             $(obj.container_id).html(rendered);

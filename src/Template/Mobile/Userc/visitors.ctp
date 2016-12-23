@@ -54,7 +54,7 @@
         var curpage = 1;
         loadUser(curpage);
 
-        function loadUser(page, more = false, query = false) {
+        function loadUser(page, more, query) {
             $.util.showPreloader();
             var template = '';
             if(<?= $user->gender; ?> == 1) {

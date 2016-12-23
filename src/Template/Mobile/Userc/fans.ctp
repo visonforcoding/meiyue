@@ -34,7 +34,8 @@
 <script type="text/javascript">
 var curpage = 1;
 loadUser(curpage);
-function loadUser(page, more = false, query = false) {
+
+function loadUser(page, more, query) {
     $.util.showPreloader();
     var template = $('#fans-list-tpl').html();
     Mustache.parse(template);   // optional, speeds up future uses
