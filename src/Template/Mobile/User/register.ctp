@@ -61,6 +61,7 @@
             }
         }, 'json');
     });
+
     $('#phone').on('keyup', function () {
         var obj = $(this);
         var phone = obj.val();
@@ -73,7 +74,6 @@
             }
         }
     });
-
 
     $('#phone,#pwd,#vcode').on('keyup', function () {
         var phone = $('#phone').val();
@@ -90,8 +90,8 @@
     });
     $('#submit').on('tap', function () {
         var obj = $(this);
-        var incode = $.util.getCookie('IVCOD');
-        if(!$('#incode').val()) {
+        var incode = $.util.getShareCode();
+        if($('#incode').val()) {
             incode = $('#incode').val();
         }
         console.log(obj);

@@ -171,7 +171,5 @@
             }
         });
     });
-
-    LEMON.sys.back('/userc/edit-info');
 </script>
 <?= $this->end('script'); ?>

@@ -38,11 +38,11 @@
                    <i class="color_gray fr-des">审核通过</i>
                    </span>
                    <?php elseif($user->id_status == UserStatus::CHECKING): ?>
-                   <span class="fr">
+                   <span class="fr" onclick="window.location.href='/userc/edit-auth';">
                      <i class="color_gray fr-des">审核中</i><i class="iconfont right_ico">&#xe605;</i>
                    </span>
                    <?php elseif($user->id_status == UserStatus::NOPASS): ?>
-                   <span class="fr">
+                   <span class="fr" onclick="window.location.href='/userc/edit-auth';">
                    <i class="color_error fr-des">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
                    </span>
                    <?php endif; ?>
@@ -68,7 +68,6 @@
                             <span class="fr" onclick="window.location.href='/userc/edit-basic-pic';">
                             <i class="color_gray fr-des">审核中</i><i class="iconfont right_ico">&#xe605;</i>
                             </span>
-
                         <?php elseif($user->status == UserStatus::NOPASS): ?>
                             <span class="fr color_gray" onclick="window.location.href='/userc/edit-basic-pic';">
                                <i class="color_error fr-des">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
@@ -133,8 +132,6 @@
             }
         });
     }
-
-    LEMON.sys.back('/user/index');
 </script>
 <?php $this->end(); ?>
 

@@ -1,6 +1,6 @@
 <header>
     <div class="header">
-        <span class="iconfont toback" onclick="history.back();">&#xe602;</span>
+        <span class="iconfont toback" onclick="location.href='/index/index'">&#xe602;</span>
         <h1><?= $user->nick; ?></h1>
         <span class="iconfont r_btn ico" onclick="location.href='/user/share'">&#xe62d;</span>
     </div>
@@ -282,15 +282,20 @@
 <script src="/mobile/js/mustache.min.js"></script>
 <script>
     LEMON.sys.back('/index/index');
-    //LEMON.sys.setTopRight('分享')
+    LEMON.sys.setTopRight('分享')
     window.onTopRight = function () {
-    //    LEMON.share.banner();
+        shareBanner();
     }
 
-    window.shareConfig.imgUrl = '<?= getHost().$user->avatar.'?w=80'; ?>';
-    window.shareConfig.link= '<?= getHost().'/index/homepage/'.$user->id.'?sharer='; ?>';
-    window.shareConfig.title= '美约-<?= $user->nick; ?>';
-    window.shareConfig.desc= '美女邀请你来看看';
+    function shareBanner() {
+        window.shareConfig.link = '<?= getHost().'/index/homepage/'.$user->id; ?><?= isset($loginer)?'?ivc='.$loginer->invit_code:'';?>';
+        window.shareConfig.title = '标题';
+        window.shareConfig.imgUrl = '<?= getHost().(isset($user)?$user->avatar:'/upload/ico/meiyue.png');?>';
+        var share_desc = '美女主页分享';
+        share_desc && (window.shareConfig.desc = share_desc);
+        LEMON.show.shareBanner();
+    }
+    $.util.checkShare();
 </script>
 <script>
     $('.data-ta').on('tap', function() {
@@ -680,11 +685,6 @@
         param['nick'] = nick;
         param['avatar'] = avatar;
         LEMON.event.imTalk(param);
-    }
-
-    LEMON.sys.setTopRight('分享');
-    window.onTopRight = function () {
-        location.href='/user/share';
     }
 </script>
 <?php $this->end('script'); ?>
