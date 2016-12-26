@@ -4,11 +4,11 @@
     {{#richs}}
     <li>
         <div class="voted_con flex flex_justify">
-            <div class="flex" onclick="location.href='/user/male-homepage/{{id}}'">
+            <div class="flex">
                 <span class="voted_place">{{count}}</span>
                 <div class="voted_place_info">
                     <span class="avatar"><img src="{{avatar}}"/></span>
-                    <h3>
+                    <h3 onclick="location.href='/user/male-homepage/{{id}}'">
                         <span class="voted_name">{{nick}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip">vip普通</span></span>
                         <span class="voted_number color_gray">已消费：{{recharge}}美币</span>
                     </h3>
@@ -33,10 +33,10 @@
     <h3 class="rich_header"></h3>
     <!--土豪第一名-->
     <?php if ($top3): ?>
-        <div class="rich_list_first inner flex" onclick="location.href='/user/male-homepage/<?= $top3[0]->id; ?>'">
+        <div class="rich_list_first inner flex">
             <div class="rich_first_left">
                 <div class="first_info">
-                    <div class="first_info_img">
+                    <div class="first_info_img" onclick="location.href='/user/male-homepage/<?= $top3[0]->id; ?>'">
                         <img src="<?= $top3[0]->avatar ?>" class="richman"/>
                     </div>
                     <div class="first_info_bg"></div>
@@ -63,12 +63,12 @@
                     <?php endif; ?>
                     <?php $count++; ?>
                     <li>
-                        <div class="voted_con flex flex_justify" onclick="location.href='/user/male-homepage/<?= $top->id; ?>'">
+                        <div class="voted_con flex flex_justify">
                             <div class="flex">
                                 <span class="voted_place silver"><?= $count ?></span>
                                 <div class="voted_place_info">
                                     <span class="avatar"><img src="<?= $top->avatar ?>"/></span>
-                                    <h3>
+                                    <h3  onclick="location.href='/user/male-homepage/<?= $top->id; ?>'">
                                         <span class="voted_name"><?= $top->nick ?></span>
                                         <span class="voted_number color_gray">已消费：<?= $top->total ?>美币</span>
                                     </h3>

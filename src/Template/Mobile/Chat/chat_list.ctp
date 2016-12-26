@@ -42,7 +42,7 @@
             </a>
         </li>
         <li>
-            <a href="#this" class="a-height flex flex_justify">
+            <a href="/userc/visitors" class="a-height flex flex_justify">
                 <div class="l-info-name">我的访客</div>
                 <i class="iconfont rcon">&#xe605;</i>
             </a>
