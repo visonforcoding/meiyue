@@ -32,14 +32,8 @@
             </ul>
             {{/is_pic}}
             {{#is_video}}
-            <div class="piclist_con videolist relpotion">
-                <img src="{{video_cover}}" width="100%" height="auto"/>
-                <div class='play-icon'><i class='iconfont'>&#xe6b8;</i></div>
-                <!--<video class="video-js vjs-default-skin  vjs-16-9"
-                       preload="auto" width="100%" height="160px"
-                       poster="{{video_cover}}">
-                    <source src="{{video}}" type="video/mp4">
-                </video>-->
+            <div class="piclist_con videolist {{#status_pass}}video-count{{/status_pass}} relpotion">
+                <video id="really-cool-video"  class="video-js vjs-default-skin  vjs-16-9" width="100%" height="165px"  poster="{{video_cover}}" controls><source src="{{video}}" type="video/mp4"></video>
             </div>
             {{/is_video}}
         </div>
