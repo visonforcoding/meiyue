@@ -4,7 +4,7 @@
     {{#richs}}
     <li>
         <div class="voted_con flex flex_justify">
-            <div class="flex">
+            <div class="flex" onclick="location.href='/user/male-homepage/{{id}}'">
                 <span class="voted_place">{{count}}</span>
                 <div class="voted_place_info">
                     <span class="avatar"><img src="{{avatar}}"/></span>
@@ -33,7 +33,7 @@
     <h3 class="rich_header"></h3>
     <!--土豪第一名-->
     <?php if ($top3): ?>
-        <div class="rich_list_first inner flex">
+        <div class="rich_list_first inner flex" onclick="location.href='/user/male-homepage/<?= $top3[0]->id; ?>'">
             <div class="rich_first_left">
                 <div class="first_info">
                     <div class="first_info_img">
@@ -63,7 +63,7 @@
                     <?php endif; ?>
                     <?php $count++; ?>
                     <li>
-                        <div class="voted_con flex flex_justify">
+                        <div class="voted_con flex flex_justify" onclick="location.href='/user/male-homepage/<?= $top->id; ?>'">
                             <div class="flex">
                                 <span class="voted_place silver"><?= $count ?></span>
                                 <div class="voted_place_info">

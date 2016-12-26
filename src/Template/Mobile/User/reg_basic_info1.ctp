@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </li>
-               
+
                 <li>
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">体</span><span class="itemsname">重：</span></div>
@@ -90,18 +90,18 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">三</span><span class="itemsname">围：</span></div>
                         <div class="home_list_r_info">
-                            <input name="b" type="number" placeholder="腰围" style="width:30px;" /> | 
-                            <input name="w" type="number" placeholder="胸围" style="width:30px;" /> | 
-                            <input name="h" type="number" placeholder="臀围" style="width:30px;" />
+                            <input id='bwh_b' name="b" type="number" placeholder="胸围" style="width:30px;" /> |
+                            <input id='bwh_w' name="w" type="number" placeholder="腰围" style="width:30px;" /> |
+                            <input id='bwh_h' name="h" type="number" placeholder="臀围" style="width:30px;" />
                         </div>
                     </div>
                 </li>
-                 
+
                 <li class="emontion  right-ico">
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">罩</span><span class="itemsname">杯：</span></div>
                         <div class="home_list_r_info">
-                            <select name="cup">
+                            <select id="cup" name="cup">
                                 <option value="A">A</option>
                                 <option value="B">B</option>
                                 <option value="C" selected="selected">C</option>
@@ -171,21 +171,21 @@
                         </div>
                     </div>
                 </li>
-               
-                <li  class="plaintext-box">
+
+                <!--<li  class="plaintext-box">
                     <div class="home_items plaintexts">
                         <div class="home_list_l_info"><span class="itemsname">工</span><span class="itemsname">作</span><span class="itemsname">经</span><span class="itemsname">历：</span></div>
                         <div class="home_list_r_info">
-                           <textarea id="sport" name="sport" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的运动/娱乐"></textarea>
+                           <textarea id="sport" name="sport" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入工作经历"></textarea>
                         </div>
                     </div>
-                </li>
+                </li>-->
         </div>
     </form>
 </div>
 <!--标签选择框-->
+<?php use Cake\I18n\Date; ?>
 <?= $this->cell('Select::place'); ?>
-
 <?= $this->start('script'); ?>
 <script>
     var user_id = <?=$user->id?>;
@@ -233,28 +233,37 @@
             $.util.alert('请在微信或APP上传图片');
         }
     });
-    $('#nick').keyup(function () {
+    $('#nick, #truename').keyup(function () {
         var v = $(this).val();
-        if (v.length > 6) {
-            $.util.alert('昵称不要超过6个字符');
+        if (v.length > 5) {
+            $(this).val(v.substr(0, 5));
         }
     });
     $('#height,#weight').keyup(function () {
         var v = $(this).val();
         if (v.length > 3) {
-            $.util.alert('体重或身高输入不正确');
+            $(this).val(v.substr(0, 3));
         }
     });
-    $('#food').keyup(function () {
-        var v = $(this).val();
-        if (v.length > 12) {
-            $.util.alert('喜欢的美食输入过长');
+    $('#bwh_b, #bwh_h, #bwh_w').keyup(function () {
+        var v = parseInt($(this).val());
+        if (v > 99) {
+            $(this).val(($(this).val()).substr(0, 2))
+        }
+        if(v < 0) {
+            $(this).val(0);
         }
     });
-    $('#sport').keyup(function () {
+    $('#profession').keyup(function () {
+        var v = $(this).val();
+        if (v.length > 6) {
+            $(this).val(v.substring(0, 6));
+        }
+    });
+    $('#place, #food, #movie, #music, #sport, #sign').keyup(function () {
         var v = $(this).val();
         if (v.length > 12) {
-            $.util.alert('喜欢的运动输入过长');
+            $(this).val(v.substring(0, 12));
         }
     });
     $.picker(function () {
@@ -272,15 +281,15 @@
         window.selecter = 'hometown';
         $('.picker-modal').removeClass('modal-hide');
     });
-    LEMON.sys.setTopRight('下一步');
-    window.onTopRight = function () {
-        if ($('#nick').length > 6) {
-            $.util.alert('昵称不要超过6个字符');
-            return false;
-        }
+
+    $('#next').on('click', function () {
         if (!$('#avatar').val()) {
             $.util.alert('未选择头像');
             return false;
+        }
+        if(($('#birthday').val()).length == 0) {
+            $.util.alert('请填写正确的出生日期');
+            $('#birthday').val('<?= new Date('1991-1-1'); ?>');
         }
         if (!$('#nick').val()) {
             $.util.alert('未填写昵称');
@@ -298,36 +307,32 @@
             $.util.alert('体重必填');
             return false;
         }
+        if((!$('#bwh_b').val())||(!$('#bwh_w').val())||(!$('#bwh_h').val())) {
+            $.util.alert('三围必填');
+            return false;
+        }
+        if (!$("#cup").val()) {
+            $.util.alert('罩杯必填');
+            return false;
+        }
+        if (!$("#state").val()) {
+            $.util.alert('情感状态必填');
+            return false;
+        }
         if (!$("#zodiac").val()) {
             $.util.alert('未选择星座');
-            return false;
-        }
-        if (!$("#hometown").val()) {
-            $.util.alert('未选择星座');
-            return false;
-        }
-        if (!$("#city").val()) {
-            $.util.alert('所在地必填');
             return false;
         }
         if (!$("#profession").val()) {
             $.util.alert('职业未填写');
             return false;
         }
-        if ($('#height').length > 3) {
-            $.util.alert('身高输入不正确');
+        if (!$("#hometown").val()) {
+            $.util.alert('家乡必填');
             return false;
         }
-        if ($('#wight').length > 3) {
-            $.util.alert('体重输入不正确');
-            return false;
-        }
-        if ($('#food').length > 12) {
-            $.util.alert('喜欢的美食输入过长');
-            return false;
-        }
-        if ($('#sport').length > 12) {
-            $.util.alert('喜欢的美食输入过长');
+        if (!$("#city").val()) {
+            $.util.alert('所在地区必填');
             return false;
         }
         var form = $('form');
@@ -341,6 +346,11 @@
                 }
             }
         });
+    });
+
+    LEMON.sys.setTopRight('下一步');
+    window.onTopRight = function () {
+        $("#next").trigger('click');
     }
 </script>
 <?= $this->end('script'); ?>
