@@ -64,7 +64,6 @@ class WxpayComponent extends Component {
      * @return type
      */
     public function unifiedorder($body, $openid, $out_trade_no, $fee, $notify_url = null, $isApp = false) {
-        \Cake\Log\Log::debug('openid:' . $openid, 'devlog');
         $apiurl = self::WEIXIN_PAY_API_URL . '/pay/unifiedorder';
         if ($isApp) {
             $xmlText = '<xml>
@@ -142,6 +141,7 @@ class WxpayComponent extends Component {
         }
         $body = (array) simplexml_load_string($res->body(), 'SimpleXMLElement', LIBXML_NOCDATA);
         if ($body['return_code'] == 'SUCCESS' && $body['result_code'] == 'SUCCESS') {
+            \Cake\Log\Log::debug($body, 'devlog');
             return $body;
         } else {
             \Cake\Log\Log::error('微信支付统一下单:', 'devlog');
