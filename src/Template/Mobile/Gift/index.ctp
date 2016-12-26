@@ -54,6 +54,9 @@
                         $.util.alert(res.msg);
                         gid = null;
                         $('#allgift .items').removeClass('active');
+                        setTimeout(function(){
+                            $.util.openTalk(res);
+                        },500);
                     }
                 })
             },

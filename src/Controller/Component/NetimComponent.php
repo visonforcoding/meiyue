@@ -5,7 +5,6 @@ namespace App\Controller\Component;
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
 use App\Pack\Netim;
-
 /**
  * Netim component  云信消息
  */
@@ -125,21 +124,21 @@ class NetimComponent extends Component {
      * @param type $gift
      * @return type
      */
-    public function giftMsg($from,$to,$gift) {
+    public function giftMsg(\App\Model\Entity\User $from,  \App\Model\Entity\User $to,  \App\Model\Entity\Gift $gift) {
+        $gift_name = $gift->name;
         $from_prefix = '';
-        $from_link = $this->Util->getServerDomain() . '/date-order/order-detail/';
-        $from_body = '送你一辆布加迪！';
+        $from_link = $this->Util->getServerDomain() . '/userc/my-purse';
+        $from_body = '送你一个'.$gift_name;
         $from_link_text = '查看详情';
         $from_msg = $this->Netim->generateCustomMsgBody($from_body, $from_link, $from_link_text, $from_prefix);
 
-        $to_prefix = '[布加迪]';
+        $to_prefix = '['.$gift_name.']';
         $to_link = $from_link;
-        $to_body = '对方送了你一辆布加迪';
+        $to_body = '对方送你一个'.$gift_name;
         $to_link_text = '查看详情';
         $to_msg = $this->Netim->generateCustomMsgBody($to_body, $to_link, $to_link_text, $to_prefix);
-        $msg = $this->Netim->generateCustomMsg(6, $from_msg, $to_msg,['gift_type'=>  intval($gift)]);
-        debug($msg);
-        $res = $this->Netim->sendMsg($from, $to, $msg, Netim::CUSTOM_MSG,0);
+        $msg = $this->Netim->generateCustomMsg(6, $from_msg, $to_msg,['gift_type'=>  intval($gift->no)]);
+        $res = $this->Netim->sendMsg($from->imaccid, $to->imaccid, $msg, Netim::CUSTOM_MSG,0);
         if (!$res) {
             dblog('prepayMsg', 'server发送im消息失败', $res);
         }
