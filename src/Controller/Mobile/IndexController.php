@@ -181,6 +181,13 @@ class IndexController extends AppController {
                 $isFollow = true;
             }
 
+            //生成邀请码
+            if(!$this->user->invit_code) {
+                $this->loadComponent('Business');
+                $this->user->invit_code = $this->Business->createInviteCode($this->user->id);
+                $UserTable->save($this->user);
+            }
+
             //访客数统计
             if(isset($this->user)) {
                 if($this->user->gender == 1) {
@@ -211,6 +218,7 @@ class IndexController extends AppController {
         $this->set([
             'pageTitle' => '发现-主页',
             'user' => $user,
+            'loginer' => $this->user,
             'age' => $age,
             'distance' => $distance,
             'birthday' => $birthday,

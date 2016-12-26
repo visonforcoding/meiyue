@@ -62,12 +62,6 @@
             }, 'json');
         }
     });
-
-    init();
-    function init() {
-        <?php if(isset($invite_code)):?>
-            $.util.setCookie('IVCOD', '<?= $invite_code;?>', 15);
-        <?php endif; ?>
-    }
+    $.util.checkShare();
 </script>
 <?= $this->end('script'); ?>
