@@ -38,7 +38,7 @@
     </div>
 
     <!--图片 && 视频展示-->
-    <?php if (@unserialize($user->images) || $user->video): ?>
+    <?php if (($user->status == 3) && (@unserialize($user->images) || $user->video)): ?>
     <div class="home_pic_info mt40">
         <ul class="inner flex">
             <?php if (@unserialize($user->images)): ?>

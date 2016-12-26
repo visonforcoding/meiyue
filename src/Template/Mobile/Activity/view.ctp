@@ -74,8 +74,8 @@
         <?php if ($botBtSts == 0): ?>
         <div class="bottomblock">
             <div class="flex flex_end">
-                <span class="total"><span class="color_y"><?= ($user['gender'] == 1)?$activity['male_price']:$activity['female_price']; ?> </i>美币/人</span></span>
-                <a class="nowpay">我要报名</a>
+                <span class="total"><span class="color_y"><i><?= ($user['gender'] == 1)?$activity['male_price']:$activity['female_price']; ?> </i>美币/人</span></span>
+                <a onclick="topay();" class="nowpay">我要报名</a>
             </div>
             </div>
         <?php elseif ($botBtSts == 1): ?>
@@ -83,9 +83,11 @@
         <?php elseif ($botBtSts == 2): ?>
             <a class="identify_footer_potion">报名成功</a>
         <?php elseif ($botBtSts == 3 && $cancancle): ?>
-            <div class="flex">
-                <span class="entroll-btn cancelbtn">购买数量：<?= $regist_item->num; ?></span>
-                <span onclick="cancel();" class="entroll-btn surebtn">我要取消</span>
+            <div class="bottomblock">
+                <div class="flex flex_end">
+                    <span class="total"><span class="color_y">购买数量：<i><?= $regist_item->num; ?></i></span></span>
+                    <a onclick="cancel();" class="nowpay">我要取消</a>
+                </div>
             </div>
         <?php elseif ($botBtSts == 3 && !$cancancle): ?>
             <a class="identify_footer_potion">报名成功</a>
@@ -100,14 +102,9 @@
 
 <script>
 
-    $('.nowpay').on('click', function(){
+    function topay() {
         window.location.href = '/activity/pay-view/<?= $activity['id']; ?>';
-    })
-
-    $('.cancel-btn').on('click', function(){
-        cancel();
-    });
-
+    };
 
     function cancel() {
         <?php if($regist_item): ?>
