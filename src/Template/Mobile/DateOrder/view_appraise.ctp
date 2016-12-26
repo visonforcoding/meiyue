@@ -11,15 +11,15 @@
         </div>
         <h3 class="date_title">[<?= $order->user_skill->skill->name ?>] <?= $order->dater->nick ?></h3>
         <ul class="jude_list" id="judeBox">
-            <li data-score="<?=$order->appraise_time?>" id="ontime">
+            <li data-score="<?= $order->appraise_time ?>" id="ontime">
                 <span>准时赴约</span>
                 <i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont color_y">&#xe62a;</i>
             </li>
-            <li data-score="<?=$order->appraise_match?>" id="similar">
+            <li data-score="<?= $order->appraise_match ?>" id="similar">
                 <span>相符程度</span>
                 <i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont color_y">&#xe62a;</i>
             </li>
-            <li data-score="<?=$order->appraise_service?>" id="attitude">
+            <li data-score="<?= $order->appraise_service ?>" id="attitude">
                 <span>服务态度</span>
                 <i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont">&#xe62a;</i><i class="iconfont color_y">&#xe62a;</i>
             </li>
@@ -33,21 +33,15 @@
     function judge(parent) {
         var parentNode = $('#' + parent);
         var liList = parentNode.children('i');
-        var num = 5;
+        var num = parentNode.data('score');
         liList.each(function (index) {
-            $(this).on('tap', function () {
-                for (var j = 0; j <= index; j++) {
-                    liList[j].style.color = '#eab96a';
-                }
-                for (var j = index + 1; j < liList.length; j++) {
-                    liList[j].style.color = '#999';
-                }
-                num = index + 1;
-                parentNode.data('score',num);
-                console.log("您得了" + (num) + "颗星");
-            })
-
-        })
+            for (var j = 0; j <= num-1; j++) {
+                liList[j].style.color = '#eab96a';
+            }
+            for (var j = index + 1; j < liList.length; j++) {
+                liList[j].style.color = '#999';
+            }
+        });
     }
 </script>
 
