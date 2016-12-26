@@ -84,11 +84,13 @@
 
     //支付
     function payView($packid) {
+        $.util.showPreloader();
         $.ajax({
             type: 'POST',
             url: '/userc/create-payorder/' + $packid + '<?= isset($redurl) ? "?redurl=" . $redurl : ""; ?>',
             dataType: 'json',
             success: function (res) {
+                $.util.hidePreloader();
                 if (typeof res === 'object') {
                     if (res.status) {
                         document.location.href = res.redirect_url;

@@ -72,7 +72,11 @@
                         if (res == '0') {
                             $.util.alert('支付成功');
                             setTimeout(function () {
+                                <?php if($redurl): ?>
+                                window.location.href = '<?= $redurl; ?>';
+                                <?php else: ?>
                                 window.location.href = '/wx/pay-success/<?= $payorder->id ?>';
+                                <?php endif; ?>
                             }, 1000);
                         } else {
                             $.util.alert('支付未成功');
