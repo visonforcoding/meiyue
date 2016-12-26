@@ -154,7 +154,7 @@ class SmsComponent extends Component {
         $body = json_decode($result->body());
         if ($body->code=='200') {
             $smsTable = \Cake\ORM\TableRegistry::get('smsmsg');
-            $query = $smsTable->query()->insert(['phone', 'code', 'content', 'create_time']);
+            $query = $smsTable->query()->insert(['phone', 'code', 'content','expire_time', 'create_time']);
             $value = [
                 'code' => $code,
                 'content' => $content,
