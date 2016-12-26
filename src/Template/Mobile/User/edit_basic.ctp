@@ -21,7 +21,7 @@
                             if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
-                            <input name="nick" type="text" placeholder="请输入昵称" value="<?= $user->nick; ?>"/>
+                            <input id="nick" name="nick" type="text" placeholder="请输入昵称" value="<?= $user->nick; ?>"/>
                         </div>
                     </div>
                 </li>
@@ -31,7 +31,7 @@
                                 class="itemsname">实</span><span class="itemsname">姓</span><span
                                 class="itemsname">名：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
-                            <input name="truename" type="text" placeholder="请输真实姓名" value="<?= $user->truename; ?>"/>
+                            <input id="truename" name="truename" type="text" placeholder="请输真实姓名" value="<?= $user->truename; ?>"/>
                         </div>
                     </div>
                 </li>
@@ -58,7 +58,7 @@
                             <?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
-                            <input name="weight" type="text" placeholder="您的体重" value="<?= $user->weight; ?>"/>&nbsp;KG
+                            <input id="weight" name="weight" type="text" placeholder="您的体重" value="<?= $user->weight; ?>"/>&nbsp;KG
                         </div>
                     </div>
                 </li>
@@ -67,7 +67,7 @@
                         <div class="home_list_l_info required"><span class="itemsname short_name">身</span><span
                                 class="itemsname">高：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
-                            <input name="height" type="text" placeholder="您的身高" value="<?= $user->height; ?>"/>&nbsp;CM
+                            <input id="height" name="height" type="text" placeholder="您的身高" value="<?= $user->height; ?>"/>&nbsp;CM
                         </div>
                     </div>
                 </li>
@@ -78,9 +78,9 @@
                                 <i class="iconfont ico"></i>
                             </div>
                             <div class="home_list_r_info">
-                                <input name="bwh_b" type="tel" placeholder="胸围" style="width:30px;" value="<?= $user->bwh_b; ?>"/> |
-                                <input name="bwh_w" type="tel" placeholder="腰围" style="width:30px;" value="<?= $user->bwh_w; ?>" /> |
-                                <input name="bwh_h" type="tel" placeholder="臀围" style="width:30px;" value="<?= $user->bwh_h; ?>" />
+                                <input id="bwh_b" name="bwh_b" type="tel" placeholder="胸围" style="width:30px;" value="<?= $user->bwh_b; ?>"/> |
+                                <input id="bwh_w" name="bwh_w" type="tel" placeholder="腰围" style="width:30px;" value="<?= $user->bwh_w; ?>" /> |
+                                <input id="bwh_h" name="bwh_h" type="tel" placeholder="臀围" style="width:30px;" value="<?= $user->bwh_h; ?>" />
                             </div>
                         </div>
                     </li>
@@ -91,7 +91,7 @@
                             <?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
-                            <select name="zodiac">
+                            <select id="zodiac" name="zodiac">
                                     <option value="0">选星座</option>
                                     <option value="1" <?= ($user->zodiac == 1)?'selected':''; ?>>白羊座</option>
                                     <option value="2" <?= ($user->zodiac ==2)?'selected':''; ?>>金牛座</option>
@@ -116,7 +116,7 @@
                                 <i class="iconfont ico"></i>
                             </div>
                             <div class="home_list_r_info">
-                                <select name="cup">
+                                <select id="cup" name="cup">
                                     <option value="A" <?= ($user->cup == 'A')?'selected':''; ?>>A</option>
                                     <option value="B" <?= ($user->cup == 'B')?'selected':''; ?>>B</option>
                                     <option value="C" <?= ($user->cup == 'C')?'selected':''; ?>>C</option>
@@ -135,7 +135,7 @@
                                 class="itemsname">感</span><span class="itemsname">状</span><span
                                 class="itemsname">态：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
-                                <select name="state">
+                                <select id="state" name="state">
                                     <option value="1" <?= ($user->state == 1)?'selected':'';?>>单身</option>
                                     <option value="2" <?= ($user->state == 2)?'selected':'';?>>恋爱</option>
                                     <option value="3" <?= ($user->state == 3)?'selected':'';?>>已婚</option>
@@ -150,7 +150,7 @@
                             <?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
-                            <input name="profession" type="text" placeholder="请输入职业" value="<?= $user->profession; ?>"/>
+                            <input id="profession" name="profession" type="text" placeholder="请输入职业" value="<?= $user->profession; ?>"/>
                         </div>
                     </div>
                 </li>
@@ -159,7 +159,7 @@
                         <div class="home_list_l_info required"><span class="itemsname short_name">家</span><span
                                 class="itemsname">乡：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
-                            <input name="hometown" type="text" placeholder="请输入家乡" value="<?= $user->hometown; ?>"/>
+                            <input id="hometown" name="hometown" type="text" placeholder="请输入家乡" value="<?= $user->hometown; ?>"/>
                         </div>
                     </div>
                 </li>
@@ -169,7 +169,7 @@
                                 class="itemsname">在</span><span class="itemsname">地</span><span
                                 class="itemsname">区：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
-                            <input name="city" type="text" placeholder="请输入所在地区" value="<?= $user->city; ?>"/>
+                            <input id="city" name="city" type="text" placeholder="请输入所在地区" value="<?= $user->city; ?>"/>
                         </div>
                     </div>
                 </li>
@@ -196,7 +196,7 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">常出没地点：</span></div>
                         <div class="home_list_r_info">
-                            <input name="place" type="text" placeholder="请输入地点" value="<?= $user->place; ?>"/>
+                            <input id="place" name="place" type="text" placeholder="请输入地点" value="<?= $user->place; ?>"/>
                         </div>
                     </div>
                 </li>
@@ -204,7 +204,7 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">喜欢的美食：</span></div>
                         <div class="home_list_r_info  plaintext">
-                            <textarea  name="food" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入美食"><?= $user->food; ?></textarea>
+                            <textarea  id="food" name="food" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入美食"><?= $user->food; ?></textarea>
                         </div>
                     </div>
                 </li>
@@ -212,7 +212,7 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">喜欢的音乐：</span></div>
                         <div class="home_list_r_info  plaintext">
-                            <textarea  name="music" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入音乐"><?= $user->music; ?></textarea>
+                            <textarea  id="music" name="music" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入音乐"><?= $user->music; ?></textarea>
                         </div>
                     </div>
                 </li>
@@ -220,7 +220,7 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">喜欢的电影：</span></div>
                         <div class="home_list_r_info  plaintext">
-                              <textarea  name="movie" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入电影"><?= $user->movie; ?></textarea>
+                              <textarea id="movie" name="movie" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入电影"><?= $user->movie; ?></textarea>
                         </div>
                     </div>
                 </li>
@@ -228,7 +228,7 @@
                     <div class="home_items sport_items">
                         <div class="home_list_l_info"><span class="itemsname">喜欢的运动<br>/娱乐：</span></div>
                         <div class="home_list_r_info   plaintext">
-                             <textarea  name="sport" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的运动/娱乐"><?= $user->sport; ?></textarea>
+                             <textarea id="sport" name="sport" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的运动/娱乐"><?= $user->sport; ?></textarea>
                         </div>
                     </div>
                 </li>
@@ -236,7 +236,7 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">个性签名：</span></div>
                         <div class="home_list_r_info  plaintext">
-                            <textarea  name="sign" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="个性签名"><?= $user->sign; ?></textarea>
+                            <textarea id="sign" name="sign" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="个性签名"><?= $user->sign; ?></textarea>
                         </div>
                     </div>
                 </li>
@@ -290,11 +290,94 @@
 <?= $this->cell('Date::tagsView', ['tags-select-view']); ?>
 <?= $this->start('script'); ?>
 <script>
+    var originNick = '<?= $user->nick; ?>';
+    $('#nick').keyup(function () {
+        var v = $(this).val();
+        if (v.length > 5) {
+            $(this).val(v.substr(0, 5));
+        }
+        if(v.length == 0) {
+            $(this).val(originNick);
+        }
+    });
+    $('#height,#weight').keyup(function () {
+        var v = $(this).val();
+        if (v.length > 3) {
+            $(this).val(v.substr(0, 3));
+        }
+    });
+    $('#bwh_b, #bwh_h, #bwh_w').keyup(function () {
+        var v = parseInt($(this).val());
+        if (v > 99) {
+            $(this).val(($(this).val()).substr(0, 2))
+        }
+        if(v < 0) {
+            $(this).val(0);
+        }
+    });
+    $('#profession').keyup(function () {
+        var v = $(this).val();
+        if (v.length > 6) {
+            $(this).val(v.substring(0, 6));
+        }
+    });
+    $('#place, #food, #movie, #music, #sport, #sign').keyup(function () {
+        var v = $(this).val();
+        if (v.length > 12) {
+            $(this).val(v.substring(0, 12));
+        }
+    });
     $('#submit').on('click', function () {
+        <?php if($user->gender == 2): ?>
         if(($('#birthday').val()).length == 0) {
             $.util.alert('请填写正确的出生日期');
             $('#birthday').val('<?= new Date('1991-1-1'); ?>');
         }
+        if (!$('#nick').val()) {
+            $.util.alert('未填写昵称');
+            return false;
+        }
+        if (!$('#truename').val()) {
+            $.util.alert('真实姓名必填');
+            return false;
+        }
+        if (!$('#height').val()) {
+            $.util.alert('身高必填');
+            return false;
+        }
+        if (!$('#weight').val()) {
+            $.util.alert('体重必填');
+            return false;
+        }
+        if((!$('#bwh_b').val())&&(!$('#bwh_w').val())&&(!$('#bwh_h').val())) {
+            $.util.alert('三围必填');
+            return false;
+        }
+        if (!$("#cup").val()) {
+            $.util.alert('罩杯必填');
+            return false;
+        }
+        if (!$("#state").val()) {
+            $.util.alert('情感状态必填');
+            return false;
+        }
+        if (!$("#zodiac").val()) {
+            $.util.alert('未选择星座');
+            return false;
+        }
+        if (!$("#hometown").val()) {
+            $.util.alert('家乡必填');
+            return false;
+        }
+        if (!$("#city").val()) {
+            $.util.alert('所在地区必填');
+            return false;
+        }
+        if (!$("#profession").val()) {
+            $.util.alert('职业未填写');
+            return false;
+        }
+        <?php endif; ?>
         var form = $('form');
         $.util.ajax({
             data: form.serialize(),

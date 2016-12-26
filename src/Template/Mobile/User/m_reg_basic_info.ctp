@@ -142,14 +142,14 @@
     });
     $('#nick').keyup(function () {
         var v = $(this).val();
-        if (v.length > 6) {
-            $.util.alert('昵称不要超过6个字符');
+        if (v.length > 5) {
+            $(this).val(v.substr(0, 5));
         }
     });
     $('#height,#weight').keyup(function () {
         var v = $(this).val();
         if (v.length > 3) {
-            $.util.alert('体重或身高输入不正确');
+            $(this).val(v.substr(0, 3));
         }
     });
     $.picker(function () {
@@ -159,31 +159,17 @@
             $('#hometown').val(_city);
         }
     });
-    $('#city').on('click', function () {
-        window.selecter = 'city';
-        $('.picker-modal').removeClass('modal-hide');
-    });
-    $('#hometown').on('click', function () {
-        window.selecter = 'hometown';
-        $('.picker-modal').removeClass('modal-hide');
+    $('#profession').keyup(function () {
+        var v = $(this).val();
+        if (v.length > 6) {
+            $(this).val(v.substring(0, 6));
+        }
     });
     LEMON.sys.setTopRight('跳过');
     window.onTopRight = function () {
         window.location.href = '/index/find-list';
     }
     $('#submit').on('tap', function () {
-        if ($('#nick').val().length > 6&&$('#nick').val()) {
-            $.util.alert('昵称不要超过6个字符');
-            return false;
-        }
-        if ($('#height').val().length > 3&&$('#height').val()) {
-            $.util.alert('身高输入不正确');
-            return false;
-        }
-        if ($('#weight').length > 3&&$('#weight').val()) {
-            $.util.alert('体重输入不正确');
-            return false;
-        }
         var form = $('form');
         $.util.ajax({
             data: form.serialize(),

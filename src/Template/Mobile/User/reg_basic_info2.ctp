@@ -118,7 +118,7 @@
             return false;
         }
     });
-    LEMON.sys.setTopRight('提交')
+    LEMON.sys.setTopRight('下一步')
     window.onTopRight = function () {
         var idfront = $('#idfront').val();
         var idback = $('#idback').val();
