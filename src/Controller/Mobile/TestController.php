@@ -30,7 +30,8 @@ class TestController extends AppController {
         //$timestamp = time();
         $userTb = TableRegistry::get('User');
         $user = $userTb->get(28);
-        echo $this->Business->shareIncome(1000, $user);
+        echo $this->Business->shareIncome(0.01, $user);
+        exit();
         //debug(\Cake\Core\Configure::read('Redis.default'));
     }
 

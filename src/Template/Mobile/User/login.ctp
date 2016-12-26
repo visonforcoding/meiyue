@@ -65,11 +65,9 @@
 
     init();
     function init() {
-        if(!$.util.getCookie('IVCOD')) {
-            <?php if(isset($invite_code)):?>
-                $.util.setCookie('IVCOD', '<?= $invite_code;?>', 15);
-            <?php endif; ?>
-        }
+        <?php if(isset($invite_code)):?>
+            $.util.setCookie('IVCOD', '<?= $invite_code;?>', 15);
+        <?php endif; ?>
     }
 </script>
 <?= $this->end('script'); ?>

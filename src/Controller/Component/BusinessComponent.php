@@ -291,8 +291,6 @@ class BusinessComponent extends Component
             return $OrderTable->save($order) &&  $FlowTable->save($flow);
         });
         if ($transRes) {
-            //向专家和买家发送一条短信
-            //资金流水记录
             $this->shareIncome($realFee, $order->user);
             return true;
         }else{
@@ -574,7 +572,7 @@ class BusinessComponent extends Component
      * @param App\Model\Entity\User $invited 被邀请者
      * @param int $relate_id 关联id
      */
-    public function shareIncome($amount, \App\Model\Entity\User $invited,$relate_id = 0)
+    public function shareIncome($amount, \App\Model\Entity\User $invited, $relate_id = 0)
     {
         $cz_percent = 0.15;  //男性充值上家获得分成比例
         $sr_percent = 0.10;  //女性收入上家获得分成比例

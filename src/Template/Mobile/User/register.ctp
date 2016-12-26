@@ -90,7 +90,7 @@
     });
     $('#submit').on('tap', function () {
         var obj = $(this);
-        var incode = $.util.getCookie();
+        var incode = $.util.getCookie('IVCOD');
         if(!$('#incode').val()) {
             incode = $('#incode').val();
         }
