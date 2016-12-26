@@ -141,6 +141,7 @@ class WxpayComponent extends Component {
         }
         $body = (array) simplexml_load_string($res->body(), 'SimpleXMLElement', LIBXML_NOCDATA);
         if ($body['return_code'] == 'SUCCESS' && $body['result_code'] == 'SUCCESS') {
+            \Cake\Log\Log::debug($xmlString, 'devlog');
             \Cake\Log\Log::debug($body, 'devlog');
             return $body;
         } else {
