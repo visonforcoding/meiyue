@@ -344,9 +344,6 @@
                         if (resp.code == '201') {
                             //余额不足
                             $.util.alert(resp.msg);
-                            setTimeout(function () {
-                                window.location.href = resp.redirect_url;
-                            }, 300);
                         }
                     }
                 }
