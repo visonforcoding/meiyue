@@ -242,8 +242,9 @@ class WxpayComponent extends Component {
         $order_no = $data->out_trade_no;
         $out_trade_no = $data->transaction_id;
         $realFee = $data->total_fee / 100;
-        $OrderTable = \Cake\ORM\TableRegistry::get('Order');
-        $order = $OrderTable->find()->contain(['Sellers', 'Users'])->where(['Lmorder.status' => 0, 'order_no' => $order_no])->first();
+        $OrderTable = \Cake\ORM\TableRegistry::get('Payorder');
+        $order = $OrderTable->find()->contain(['User'])
+                    ->where(['Payorder.status' => 0, 'order_no' => $order_no])->first();
         $resXml = $this->arr2xml([
             'return_code' => 'FAIL',
             'return_msg' => 'error'

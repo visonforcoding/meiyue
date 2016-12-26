@@ -294,7 +294,7 @@
     <?php if (in_array($order->status, [4, 5, 6])): ?>
         <div class="bottomblock">
             <div class="flex flex_end">
-                <span  id="remove_order" class="identify_footer_potion">删除订单</span>
+                <span  id="remove_order" class="identify_dark_potion">删除订单</span>
             </div>
         </div>
     <?php endif; ?>
