@@ -22,37 +22,21 @@
                 {{/images}}
             </ul>
             {{/is_pic}}
-            {{#is_bpic}}
-            <ul class="piclist_con" id="imgcontainer_{{id}}" data-index="{{id}}">
-                {{#images}}
-                <li><img src="{{.}}?w=240" onload="$.util.setWH(this)"/></li>
-                {{/images}}
-            </ul>
-            {{/is_bpic}}
             {{#is_video}}
             <div class="piclist_con videolist">
                 <video id="really-cool-video"  class="video-js vjs-default-skin  vjs-16-9" 
-                       preload="auto" width="100%" height="264"  poster="{{video_cover}}" controls>
+                       preload="auto" width="100%" height="165px"  poster="{{video_cover}}" controls>
                     <source src="{{video}}" type="video/mp4">
                 </video>
             </div>
             {{/is_video}}
-            {{#is_bvideo}}
-            <div class="piclist_con videolist">
-                <video id="really-cool-video"  class="video-js vjs-default-skin  vjs-16-9"
-                       preload="auto" width="100%" height="264"  poster="{{video_cover}}" controls>
-                    <source src="{{video}}" type="video/mp4">
-                </video>
-            </div>
-            {{/is_bvideo}}
         </div>
         <div class="tracle_footer flex flex_justify inner">
             <div>
                 <span class="tracle_footer_info"><i class="iconfont">&#xe65c;</i>{{view_nums}}</span>
                 <span class="tracle_footer_info"><i class="iconfont">&#xe633;</i> {{praise_nums}}</span>
             </div>
-            {{#is_pic}}<div id="del-mv-btn" class="tracle_footer_info" data-id="{{id}}"><i class="iconfont">&#xe650;</i></div>{{/is_pic}}
-            {{#is_video}}<div id="del-mv-btn" class="tracle_footer_info" data-id="{{id}}"><i class="iconfont">&#xe650;</i></div>{{/is_video}}
+            <div id="del-mv-btn" class="tracle_footer_info {{#status_pass}}count-rest{{/status_pass}}" data-id="{{id}}"><i class="iconfont">&#xe650;</i></div>
         </div>
     </section>
     {{/movements}}
@@ -147,14 +131,10 @@ $('#submitbtn').on('tap', function () {
         $.each(data.movements, function (i, n) {
             count++;
             data.movements[i]['count'] = count;
-            if (n.type === 1) {
+            if (n.type === 1 || n.type === 3) {
                 data.movements[i]['is_pic'] = true;
-            } else if(n.type === 2){
+            } else if(n.type === 2 || n.type === 4){
                 data.movements[i]['is_video'] = true;
-            } else if(n.type === 3){
-                data.movements[i]['is_bpic'] = true;
-            } else if(n.type === 4){
-                data.movements[i]['is_bvideo'] = true;
             }
             var movement = data.movements[i];
             if(movement['images']) {
@@ -168,6 +148,11 @@ $('#submitbtn').on('tap', function () {
     }
 
     $(document).on('tap', '#del-mv-btn', function() {
+        var count_rest = parseInt($('.count-rest').length);
+        if(count_rest <= 1) {
+            $.util.alert('至少需要保留一条动态');
+            return;
+        }
         var mvid = $(this).data('id');
         $.util.confirm(
             '删除动态',
