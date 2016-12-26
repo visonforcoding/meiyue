@@ -68,13 +68,17 @@
 </script>
 <?php $this->start('script'); ?>
 <script type="text/javascript">
-    $('#topay').on('tap', function () {
-        var mb = $('#mb').val();
-        $.util.ajax({
-            url: '/purse/create-payorder<?= isset($redurl) ? "?redurl=" . $redurl : ""; ?>',
-            data: {mb: mb},
-            func: function (res) {
-                if (res.status) {
+     $('#topay').on('tap',function(){
+         var mb = $('#mb').val();
+         if(mb > 100000){
+             $.util.alert('单笔充值不可超过10万');
+             return false;
+         }
+         $.util.ajax({
+            url:'/purse/create-payorder<?= isset($redurl)?"?redurl=".$redurl:""; ?>',
+            data:{mb:mb},
+            func:function(res){
+                if(res.status){
                     document.location.href = res.redirect_url;
                 }
             }

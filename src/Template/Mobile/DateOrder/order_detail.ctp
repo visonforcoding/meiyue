@@ -51,6 +51,10 @@
                         等待对方确认中
                         <h3 class="color_y tips">已支付预约金</h3>
                     <?php endif; ?>
+                    <?php if ($order->status == 4): ?>
+                        订单关闭
+                        <h3 class="color_y tips">你取消了订单</h3>
+                    <?php endif; ?>
                     <?php if ($order->status == 5): ?>
                         订单关闭
                         <h3 class="color_y tips">对方已拒绝</h3>
@@ -98,6 +102,10 @@
                     <?php if ($order->status == 3): ?>
                         等待确认中
                         <h3 class="color_y tips">对方已支付预约金</h3>
+                    <?php endif; ?>
+                    <?php if ($order->status == 4): ?>
+                        订单关闭
+                        <h3 class="color_y tips">对方取消订单</h3>
                     <?php endif; ?>
                     <?php if ($order->status == 5): ?>
                         订单关闭
