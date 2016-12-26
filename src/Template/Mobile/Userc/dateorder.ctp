@@ -72,7 +72,6 @@
                 <div class="groupbtn">
                     <?php if ($user->gender == 2): ?>
                         <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
-                        <span data-orderid="{{id}}"  class="refuse">惩罚成功</span>
                     <?php else: ?>
                         <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
                         <span data-orderid="{{id}}"  class="refuse">退款成功</span>
