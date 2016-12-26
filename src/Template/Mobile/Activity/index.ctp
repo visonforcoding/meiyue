@@ -186,7 +186,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 </div>
             </div>
             <div>
-                <div data-id="{{buyer.id}}" class="likeIt alignright"><i class='iconfont commico {{#followed}}activeico{{/followed}}'></i></div>
+                <!--<div data-id="{{buyer.id}}" class="likeIt alignright"><i class='iconfont commico {{#followed}}activeico{{/followed}}'></i></div>-->
                 <div class="alignright"><i class='lagernum color_active'>{{recharge}}</i></div>
             </div>
         </div>

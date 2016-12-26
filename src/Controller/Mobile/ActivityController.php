@@ -449,7 +449,7 @@ class ActivityController extends AppController
             if($this->user) {
                 $user = $this->user;
             }
-            $limit = 10;
+            $limit = 99;
             $where = Array(
             );
 
@@ -533,7 +533,7 @@ class ActivityController extends AppController
                 ->select(['recharge', 'consumed', 'nick', 'id', 'avatar'])
                 ->where(['recharge >' => 0, 'gender' => 1])
                 ->orderDesc('recharge')
-                ->limit(10)
+                ->limit(99)
                 ->map(function($row) use(&$i, $followlist, $user) {
                     //检查是否关注
                     $row['followed'] = false;
