@@ -12,6 +12,7 @@ use Cake\I18n\Time;
  * @property \App\Controller\Component\BdmapComponent $Bdmap
  * @property \App\Controller\Component\SmsComponent $Sms
  * @property \App\Controller\Component\NetimComponent $Netim
+ * @property \App\Controller\Component\BusinessComponent $Business
  */
 class DateOrderController extends AppController
 {
@@ -640,7 +641,7 @@ class DateOrderController extends AppController
     
     
       /**
-     * 取消约单 不同的节点不同的处理 处于状态10时
+     * 取消约单 不同的节点不同的处理 处于状态10(男性已支付尾款)时
      * 在约会之前双方才可取消
      * 开始前2个小时 前与后 规则不同
      * 男士退单 ： 
@@ -663,7 +664,6 @@ class DateOrderController extends AppController
          if(strtotime($dateorder->start_time)<time()){
              //已到约会时间
              return $this->Util->ajaxReturn(false,'已到约会时间不可取消约单');
-             
          }       
          //订单状态更改
          if($dateorder->status!=10){
@@ -689,7 +689,7 @@ class DateOrderController extends AppController
                 $w_amount = $breach_amount;
                 $dateorder->dater->money = $dateorder->dater->money-$breach_amount;
                 $w_after_amount = $dateorder->dater->money;
-                $w_income = 2;
+                $w_income = 2;    //支出
                 
                    //生成流水
                 $m_flow = $FlowTable->newEntity([
@@ -775,7 +775,7 @@ class DateOrderController extends AppController
                    'remark'=> $m_remark
                 ]);
 
-                //女方的资金流水
+                //女方的资金流水（收入）
                 $w_flow = $FlowTable->newEntity([
                    'user_id'=> $dateorder->dater->id,
                    'buyer_id'=>  0,
@@ -799,6 +799,11 @@ class DateOrderController extends AppController
                return $FlowTable->save($m_flow)&&$DateorderTable->save($dateorder)&&$FlowTable->save($w_flow);      
         });
        if($transRes){
+           if($this->user->gender==1){
+               //男性取消  女性有收入 邀请人获得提成
+               $this->loadComponent('Business');
+               $this->Business->shareIncome($w_amount,$dateorder->dater,$dateorder->id);
+           }
             return $this->Util->ajaxReturn(true,'取消成功');
            }else{
                errorMsg($w_flow,'1');
@@ -856,6 +861,7 @@ class DateOrderController extends AppController
                 return $this->Util->ajaxReturn(true,'成功接受');
             }
         }else{
+            //男
             $order->status = 15; //订单完成
             //女方收款
             $pre_amount = $order->dater->money;
@@ -883,6 +889,12 @@ class DateOrderController extends AppController
                return $FlowTable->save($flow)&&$DateorderTable->save($order);
            });
             if($transRes){
+                if($this->user->gender==1){
+                    //男性取消  女性有收入 邀请人获得提成
+                    \Cake\Log\Log::debug('进行提成处理','devlog');
+                    $this->loadComponent('Business');
+                    $this->Business->shareIncome($order->amount,$order->dater,$order->id);
+                }
                 return $this->Util->ajaxReturn(true,'订单完成');
             }else{
                 errorMsg($flow, '失败');

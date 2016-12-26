@@ -3,6 +3,7 @@
 namespace App\Shell;
 
 use Cake\Console\Shell;
+use Cake\ORM\TableRegistry;
 
 /**
  * Dateorder shell command.
@@ -164,6 +165,7 @@ class DateorderShell extends Shell {
                 return $FlowTable->save($w_flow)&&$DateorderTable->save($order);      
             });
             if($transRes){
+                $this->shareIncome($w_amount, $order->dater,$order->id);
                 dblog('dateorder','1条约单被执行状态7操作','dateorder_id:'.$order->id);
             }else{
                 dblog('dateorder','1条订单执行状态7操作失败','dateorder_id:'.$order->id);
@@ -188,7 +190,7 @@ class DateorderShell extends Shell {
             $w_after_amount = $order->dater->money;
             $w_income = 1;
             
-            //生成流水
+            //生成流水  女性 收入 约单金额
             $w_flow = $FlowTable->newEntity([
                'user_id'=> $order->dater->id,
                'buyer_id'=>  0,
@@ -210,11 +212,69 @@ class DateorderShell extends Shell {
                 return $FlowTable->save($w_flow)&&$DateorderTable->save($order);      
             });
             if($transRes){
+                $this->shareIncome($w_amount, $order->dater,$order->id);
                 dblog('dateorder','1条约单被执行状态10操作','dateorder_id:'.$order->id);
             }else{
                 dblog('dateorder','1条订单执行状态10操作失败','dateorder_id:'.$order->id);
             }
         }
     }
+    
+    
+    /**
+     * 创建分成收入
+     * @param $amount 收入/充值
+     * @param $invited 被邀请者
+     */
+    protected function shareIncome($amount, $invited,$relate_id = 0)
+    {
+        $cz_percent = 0.15;  //男性充值上家获得分成比例
+        $sr_percent = 0.10;  //女性收入上家获得分成比例
+        $invtb = TableRegistry::get('Inviter');
+        $inv = $invtb->find()->contain(['Invitor'])->where(['invited_id' => $invited->id])->first();
+        if($inv) {
+            $invitor = $inv->invitor;
+            if($invitor->is_agent == 2) {
+                return false;
+            }
+            $admoney = 0;
+            if($invited->gender == 1) {
+                $admoney = $amount * $cz_percent;
+                $type = 19;  //好友充值美币
+            } else {
+                $admoney = $amount * $sr_percent;
+                $type = 20;  //好友获得收入
+            }
+            $preAmount = $invitor->money;
+            $invitor->money += $admoney;
+            $afterAmount = $invitor->money;
+            //生成流水
+            $FlowTable = TableRegistry::get('Flow');
+            $flow = $FlowTable->newEntity([
+                'user_id'=> $invitor->id,
+                'buyer_id'=> 0,
+                'type'=> $type,
+                'type_msg'=> getFlowType($type),
+                'relate_id'=>$relate_id,
+                'income'=> 1,
+                'amount'=> $admoney,
+                'price'=> $admoney,
+                'pre_amount'=> $preAmount,
+                'after_amount'=> $afterAmount,
+                'paytype'=>1,   //余额支付
+                'remark'=> getFlowType($type)
+            ]);
 
+            $userTb = TableRegistry::get('User');
+            $transRes = $FlowTable->connection()->transactional(
+                function() use ($FlowTable, &$flow, $userTb, &$invitor){
+                    $flores = $FlowTable->save($flow);
+                    $ures = $userTb->save($invitor);
+                    return $flores&&$ures;
+                }
+            );
+            return $transRes;
+        }
+        return false;
+    }
 }

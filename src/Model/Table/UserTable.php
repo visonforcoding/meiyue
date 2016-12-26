@@ -38,21 +38,21 @@ class UserTable extends Table {
             'className' => 'UserSkill',
             'foreignKey' => 'user_id'
         ]);
-        $this->belongsToMany('Tags',[
-            'className'=>'Tag',
-            'joinTable'=>'lm_user_tag',
-            'foreignKey'=>'user_id',
-            'targetForeignKey'=>'tag_id'
+        $this->belongsToMany('Tags', [
+            'className' => 'Tag',
+            'joinTable' => 'lm_user_tag',
+            'foreignKey' => 'user_id',
+            'targetForeignKey' => 'tag_id'
         ]);
         $this->hasMany('Fans', [
             'className' => 'UserFans',
             'foreignKey' => 'following_id'
         ]);
         $this->belongsToMany('Skills', [
-            'className'=>'Skill',
-            'joinTable'=>'lm_user_skill',
-            'foreignKey'=>'user_id',
-            'targetForeignKey'=>'skill_id'
+            'className' => 'Skill',
+            'joinTable' => 'lm_user_skill',
+            'foreignKey' => 'user_id',
+            'targetForeignKey' => 'skill_id'
         ]);
         $this->hasMany('Follows', [
             'className' => 'UserFans',
@@ -65,6 +65,11 @@ class UserTable extends Table {
         $this->hasMany('Upacks', [
             'className' => 'UserPackage',
             'foreignKey' => 'user_id'
+        ]);
+        //邀请者
+        $this->hasOne('Inviter', [
+            'className' => 'Inviter',
+            'foreignKey' => 'invited_id'
         ]);
         $this->addBehavior('Timestamp', [
             'events' => [
