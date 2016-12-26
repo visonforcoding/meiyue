@@ -16,18 +16,15 @@
         <div class="con inner">
             <p class="text">{{body}}</p>
             {{#is_pic}}
-            <ul class="piclist_con" id="imgcontainer_{{id}}" data-index="{{id}}">
+            <ul class="piclist_con {{#status_pass}}pic-count{{/status_pass}}" id="imgcontainer_{{id}}" data-index="{{id}}">
                 {{#images}}
                 <li><img src="{{.}}?w=240" onload="$.util.setWH(this)"/></li>
                 {{/images}}
             </ul>
             {{/is_pic}}
             {{#is_video}}
-            <div class="piclist_con videolist">
-                <video id="really-cool-video"  class="video-js vjs-default-skin  vjs-16-9" 
-                       preload="auto" width="100%" height="165px"  poster="{{video_cover}}" controls>
-                    <source src="{{video}}" type="video/mp4">
-                </video>
+            <div class="piclist_con videolist {{#status_pass}}video-count{{/status_pass}} relpotion">
+                <video id="really-cool-video"  class="video-js vjs-default-skin  vjs-16-9" width="100%" height="165px"  poster="{{video_cover}}" controls><source src="{{video}}" type="video/mp4"></video>
             </div>
             {{/is_video}}
         </div>
@@ -36,7 +33,8 @@
                 <span class="tracle_footer_info"><i class="iconfont">&#xe65c;</i>{{view_nums}}</span>
                 <span class="tracle_footer_info"><i class="iconfont">&#xe633;</i> {{praise_nums}}</span>
             </div>
-            <div id="del-mv-btn" class="tracle_footer_info {{#status_pass}}count-rest{{/status_pass}}" data-id="{{id}}"><i class="iconfont">&#xe650;</i></div>
+            <div id="del-mv-btn" class="{{^status_pass}}cdel{{/status_pass}} tracle_footer_info" data-id="{{id}}"><i class="iconfont">&#xe650;</i>
+            </div>
         </div>
     </section>
     {{/movements}}
@@ -58,7 +56,6 @@
 </header>
 <div class="wraper">
     <div class="tracle_list" id="tracle-list">
-
     </div>
 </div>
 <!--发布约会-->
@@ -148,10 +145,14 @@ $('#submitbtn').on('tap', function () {
     }
 
     $(document).on('tap', '#del-mv-btn', function() {
-        var count_rest = parseInt($('.count-rest').length);
-        if(count_rest <= 1) {
-            $.util.alert('至少需要保留一条动态');
-            return;
+        var flag = $(this).hasClass('cdel');
+        if(!flag) {
+            var video_count = parseInt($('.video-count').length);
+            var pic_count = parseInt($('.pic-count').length);
+            if(pic_count <= 1 || video_count <= 1) {
+                $.util.alert('至少要保留一条视频动态和一条图片动态');
+                return;
+            }
         }
         var mvid = $(this).data('id');
         $.util.confirm(
@@ -188,7 +189,6 @@ $('#submitbtn').on('tap', function () {
             })
         }
     }
-
 
     $.util.onbody(function(em, target){
         if(em.id.indexOf('imgcontainer_') != -1){

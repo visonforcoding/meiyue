@@ -387,7 +387,14 @@
             func:function(res){
                 switch(res.right) {
                     case <?= SerRight::OK_CONSUMED; ?>:
-                        window.location.href = '/tracle/ta-tracle/<?=$user->id?>';
+                        switch(action) {
+                            case 1:
+                                location.href = '/tracle/ta-tracle/<?=$user->id?>';
+                                break;
+                            case 2:
+                                initVideo();
+                                break;
+                        }
                         break;
                     case <?= SerRight::NO_HAVENUM; ?>:
                         $.util.confirm(
@@ -429,8 +436,9 @@
             url:'/tracle/see-bvideo/<?=$user->id?>',
             method: 'POST',
             func:function(res){
+                console.log(res);
                 if(res.status) {
-                    $('#see-basic-mv').html('<video id="see-basic-mv" width="100%" height="165px" controls="controls" preload="preload" poster="'+ res.video +'" autoplay="autoplay"><source src="'+ res.video_cover +'" type="video/mp4"></video>');
+                    $('#see-basic-mv').html('<video id="see-basic-mv" width="100%" height="165px" controls="controls" preload="preload" poster="'+ res.video_cover +'" autoplay="autoplay"><source src="'+ res.video +'" type="video/mp4"></video>');
                 } else {
                     $.util.alert(res.msg);
                 }
@@ -447,7 +455,8 @@
     /**
      * 播放基本视频
      */
-    $('#see-basic-mv').on('tap', function() {
+    $('#see-basic-mv').on('click', function(event) {
+        event.stopPropagation();
         checkBrownR(2);
     })
 
