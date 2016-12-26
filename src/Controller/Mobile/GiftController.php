@@ -9,7 +9,7 @@ use Cake\ORM\TableRegistry;
  * Gift Controller
  * 送礼物
  * @property \App\Model\Table\GiftTable $Gift
- *
+ * @property \App\Controller\Component\NetimComponent $Netim
  */
 class GiftController extends AppController
 {
@@ -119,7 +119,14 @@ class GiftController extends AppController
                 });
 
             if($transRes) {
-                return $this->Util->ajaxReturn(true, '感谢您的支持');
+                $this->loadComponent('Netim');
+                $this->Netim->giftMsg($out_user, $in_user, $gift);
+                 return $this->Util->ajaxReturn([
+                   'status'=>true,
+                   'code'=>202,    //唤起聊天 
+                   'obj'=>$in_user,
+                   'msg'=>'感谢您的支持',    
+                       ]);
             }
             return $this->Util->ajaxReturn(false, '操作失败');
 
