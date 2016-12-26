@@ -682,6 +682,14 @@ $.util = {
             });
         }
     },
+    checkShare:function(){
+        if($.util.getParam('ivc')){
+            $.util.setCookie('IVCOD', $.util.getParam('ivc'), 15);
+        }
+    },
+    getShareCode: function() {
+        return $.util.getCookie('IVCOD');
+    },
     openTalk: function (res) {
         var param = {};
         param['accid'] = res.obj.imaccid;
