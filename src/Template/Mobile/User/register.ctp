@@ -94,7 +94,6 @@
         if($('#incode').val()) {
             incode = $('#incode').val();
         }
-        console.log(obj);
         if (obj.hasClass('disabled')) {
             return false;
         }

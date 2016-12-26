@@ -165,12 +165,12 @@ class UserController extends AppController {
                 $user->login_coord_lat = $coord[1];
             }
             //从im 池中获取im 账号绑定
-            $this->loadComponent('Business');
+            /*$this->loadComponent('Business');
             $im = $this->Business->getNetim();
             if ($im) {
                 $user->imaccid = $im['accid'];
                 $user->imtoken = $im['token'];
-            }
+            }*/
             //登录时间
             $user->login_time = date('Y-m-d H:i:s');
             $user = $this->User->patchEntity($user, $data);
@@ -186,9 +186,9 @@ class UserController extends AppController {
             }
             if ($this->User->save($user)) {
                 if($data['incode']) {
+                    $this->loadComponent('Business');
                     $this->Business->create2Invit($data['incode'], $user->id);
                 }
-
                 $jumpUrl = '/user/m-reg-basic-info';
                 if ($user->gender == 2) {
                     $jumpUrl = '/user/reg-basic-info-1/'.$user->id;

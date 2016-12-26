@@ -550,7 +550,7 @@ class BusinessComponent extends Component
     public function create2Invit($incode, $uid)
     {
         $inviterTb = TableRegistry::get('User');
-        $inviter = $inviterTb->find()->select(['id'])->where(['invit_code' => $incode])->first();
+        $inviter = $inviterTb->find()->select(['id', 'is_agent'])->where(['invit_code' => $incode])->first();
         if($inviter && ($inviter->is_agent == 1)) {
             $invTb = TableRegistry::get('Inviter');
             $inv = $invTb->find()->where(['invited_id' => $uid])->first();
