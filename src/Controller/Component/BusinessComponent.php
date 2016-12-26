@@ -571,9 +571,10 @@ class BusinessComponent extends Component
     /**
      * 创建分成收入
      * @param $amount 收入/充值
-     * @param $invited 被邀请者
+     * @param App\Model\Entity\User $invited 被邀请者
+     * @param int $relate_id 关联id
      */
-    public function shareIncome($amount, $invited)
+    public function shareIncome($amount, \App\Model\Entity\User $invited,$relate_id = 0)
     {
         $cz_percent = 0.15;  //男性充值上家获得分成比例
         $sr_percent = 0.10;  //女性收入上家获得分成比例
@@ -603,6 +604,7 @@ class BusinessComponent extends Component
                 'type'=> $type,
                 'type_msg'=> getFlowType($type),
                 'income'=> 1,
+                'relate_id'=> $relate_id,
                 'amount'=> $admoney,
                 'price'=> $admoney,
                 'pre_amount'=> $preAmount,
