@@ -176,7 +176,7 @@ $(document).on('click', '.user', function () {
     var accid = $(this).data('accid');
     var nick = $(this).data('nick');
     var avatar = $(this).data('avatar');
-    var user_id = $(this).data('user_id');
+    var user_id = $(this).data('id');
     param['accid'] = accid;
     param['nick'] = nick;
     param['avatar'] = avatar;
