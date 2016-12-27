@@ -399,6 +399,7 @@ class WxController extends AppController {
                         $st['msg2'] = '充值金额：'.$order->price.'美币';
                         break;
                     case PayOrderType::BUY_TAOCAN:
+                    case PayOrderType::BUY_CHONGZHI_TAOCAN:
                         $pack = TableRegistry::get('Package')->get($order->relate_id);
                         if($pack->type == PackType::VIP) {
                             $st['pageTitle'] = '购买成功';
