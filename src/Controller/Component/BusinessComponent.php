@@ -248,7 +248,7 @@ class BusinessComponent extends Component
     public function handOrder(\App\Model\Entity\Payorder $order,$realFee,$payType,$out_trade_no) {
         if ($order->type == PayOrderType::CHONGZHI) {
             return $this->handType1Order($order,$realFee,$payType,$out_trade_no);
-        } elseif ($order->type == PayOrderType::BUY_TAOCAN) {
+        } elseif ($order->type == PayOrderType::BUY_TAOCAN || $order->type == PayOrderType::BUY_CHONGZHI_TAOCAN) {
             //购买套餐成功
             return $this->handPackPay($order,$realFee,$payType,$out_trade_no);
         } elseif ($order->type == PayOrderType::VIEW_WEIXIN) {
