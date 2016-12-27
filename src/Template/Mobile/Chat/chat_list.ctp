@@ -237,7 +237,9 @@ function setRead (id){
     backUnread[id] = 0;
     LEMON.db.set('num'+id, 0);
     $('#chat-' + id).find('.num').html(0).hide();
+    nim.onupdatesession(id);
     nim.resetSessionUnread(id);
+
 }
 
 </script>
