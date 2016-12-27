@@ -252,14 +252,7 @@
                         </div>
                     </div>
                 </li>
-                <li>
-                    <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">职</span><span class="itemsname">业</span></div>
-                        <div class="home_list_r_info">
-                            <input id="profession" name="profession" type="text" placeholder="请输入职业" />
-                        </div>
-                    </div>
-                </li>
+               
 
                 <li class='right-ico'>
                     <div class="home_items">
@@ -276,6 +269,14 @@
                         <div class="home_list_r_info">
                             <input  id="city" name="city" type="text" placeholder="请输入所在地区" />
                             <input id="vcity" type="hidden" />
+                        </div>
+                    </div>
+                </li>
+                 <li>
+                    <div class="home_items">
+                        <div class="home_list_l_info"><span class="itemsname">职</span><span class="itemsname">业</span></div>
+                        <div class="home_list_r_info">
+                            <input id="profession" name="profession" type="text" placeholder="请输入职业" />
                         </div>
                     </div>
                 </li>

@@ -25,7 +25,7 @@
             <li>
                 <div class="home_items">
                     <div class="home_list_l_info ">
-                        <span class="itemsname">昵</span><span class="itemsname">称：</span>
+                        <span class="itemsname">昵</span><span class="itemsname">称</span>
                        
                     </div>
                     <div class="home_list_r_info">
@@ -34,52 +34,108 @@
                     </div>
                 </div>
             </li>
-            <li class="birthdate">
+            <li class="birthdate  right-ico">
                 <div class="home_items">
-                    <div class="home_list_l_info"><span class="itemsname">出</span><span class="itemsname">生</span><span class="itemsname">日</span><span class="itemsname">期：</span></div>
+                    <div class="home_list_l_info"><span class="itemsname">出</span><span class="itemsname">生</span><span class="itemsname">日</span><span class="itemsname">期</span></div>
                     <div class="home_list_r_info">
-                        <input id="birthday" name="birthday" type="date" placeholder="请输入日期" value="1989-09-24"/>
-                       
+                        <div class="home-basic-option">
+                            <input type="text" placeholder="出生日期" readonly="readonly" />
+                            <input type="date"  onchange='inputChange(this)' />
+                        </div>
                     </div>
                 </div>
             </li>
-            <li>
+            <li class="right-ico">
                 <div class="home_items">
                     <div class="home_list_l_info"><span class="itemsname">体</span><span class="itemsname">重：</span></div>
                     <div class="home_list_r_info">
-                        <input id="weight" name="weight" type="number" placeholder="您的体重" />&nbsp;KG
+                        <div class="home-basic-option">
+                                <input type="text" id="weight" name="weight" placeholder="你的体重" readonly="readonly"/>
+                                <select name="" onchange='tochange(this)'>
+                                    <option value="55-">55-KG</option>
+                                    <option value="56">56KG</option>
+                                    <option value="57">57KG</option>
+                                    <option value="58">58KG</option>
+                                    <option value="59">59KG</option>
+                                    <option value="60">60KG</option>
+                                    <option value="61">61KG</option>
+                                    <option value="62">62KG</option>
+                                    <option value="63">63KG</option>
+                                    <option value="64">64KG</option>
+                                    <option value="65">65KG</option>
+                                    <option value="66">66KG</option>
+                                    <option value="67">67KG</option>
+                                    <option value="68">68KG</option>
+                                    <option value="69">69KG</option>
+                                    <option value="70">70KG</option>
+                                    <option value="71">71KG</option>
+                                    <option value="72">72KG</option>
+                                    <option value="73">73KG</option>
+                                    <option value="74">74KG</option>
+                                    <option value="75+">75+KG</option>
+                                </select>
+                           </div>
                     </div>
                 </div>
             </li>
-            <li>
+            <li class="right-ico">
                 <div class="home_items">
                     <div class="home_list_l_info "><span class="itemsname short_name">身</span><span class="itemsname">高：</span><i class="iconfont ico"></i></div>
                     <div class="home_list_r_info">
-                        <input id="height" name="height" type="number" placeholder="您的身高" />&nbsp;cm
+                        <div class="home-basic-option">
+                                <input type="text" id="height" name="height" placeholder="你的身高" readonly="readonly"/>
+                                <select name="" onchange='tochange(this)'>
+                                    <option value="160-">160-CM</option>
+                                    <option value="161">161CM</option>
+                                    <option value="162">162CM</option>
+                                    <option value="163">163CM</option>
+                                    <option value="164">164CM</option>
+                                    <option value="165">165CM</option>
+                                    <option value="166">166CM</option>
+                                    <option value="166">167CM</option>
+                                    <option value="166">168CM</option>
+                                    <option value="166">169CM</option>
+                                    <option value="170">170CM</option>
+                                    <option value="171">171CM</option>
+                                    <option value="172">172CM</option>
+                                    <option value="173">173CM</option>
+                                    <option value="174">174CM</option>
+                                    <option value="175">175CM</option>
+                                    <option value="176">176CM</option>
+                                    <option value="177">177CM</option>
+                                    <option value="178">178CM</option>
+                                    <option value="179">179CM</option>
+                                    <option value="180">180+CM</option>
+                                </select>
+                            </div>
                     </div>
                 </div>
             </li>
-            <li>
-                <div class="home_items">
-                    <div class="home_list_l_info"><span class="itemsname">职</span><span class="itemsname">业：</span></div>
-                    <div class="home_list_r_info">
-                        <input id="profession" name="profession" type="text" placeholder="请输入职业" />
-                    </div>
-                </div>
-            </li>
-            <li>
+           
+            <li class="right-ico">
                 <div class="home_items">
                     <div class="home_list_l_info"><span class="itemsname short_name">家</span><span class="itemsname">乡：</span></div>
                     <div class="home_list_r_info">
-                        <input id="hometown" name="hometown" type="text" placeholder="请输入家乡" />
+                         <input id="hometown" name="hometown" type="text" readonly="readonly" placeholder="请输入您的家乡" />
+                         <input id="vtown" type="hidden" />
                     </div>
                 </div>
             </li>
-            <li>
+            <li class="right-ico">
                 <div class="home_items">
                     <div class="home_list_l_info"><span class="itemsname">所</span><span class="itemsname">在</span><span class="itemsname">地</span><span class="itemsname">区：</span></div>
                     <div class="home_list_r_info">
                         <input id="city" name="city" type="text" placeholder="请输入所在地区" />
+                         <input  id="city" name="city" type="text" placeholder="请输入所在地区" />
+                         <input id="vcity" type="hidden" />
+                    </div>
+                </div>
+            </li>
+             <li>
+                <div class="home_items">
+                    <div class="home_list_l_info"><span class="itemsname">职</span><span class="itemsname">业：</span></div>
+                    <div class="home_list_r_info">
+                          <input id="profession" name="profession" type="text" placeholder="请输入职业" />
                     </div>
                 </div>
             </li>
@@ -95,7 +151,41 @@
 <?= $this->cell('Select::place'); ?>
 
 <?= $this->start('script'); ?>
+<script src="/mobile/js/LArea.js" type="text/javascript" ></script>
+<script src="/mobile/js/LAreaData1.js" type="text/javascript"></script>
+<script type="text/javascript">
+//家乡
+     var area1 = new LArea();
+     area1.init({
+        'trigger': '#hometown',
+        'valueTo': '#vtown', 
+        'keys': {
+            id: 'id',
+            name: 'name'
+        }, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
+        'type': 1, //数据源类型
+        'data': LAreaData //数据源
+    });
+     //城市
+  var area2 = new LArea();
+ area2.init({
+    'trigger': '#city',
+    'valueTo': '#vcity',
+    'keys': {
+        id: 'id',
+        name: 'name'
+    },
+    'type': 1,
+    'data': LAreaData
+});
+</script>
 <script>
+function tochange(that){
+         $(that).siblings().val(that.options[that.selectedIndex].text);
+   }
+   function inputChange(that){
+         $(that).siblings().val($(that).val());
+   }
     if ($.util.isAPP) {
         //app定位
         if (!$.util.getCookie('coord')) {
