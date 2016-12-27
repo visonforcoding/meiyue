@@ -1,3 +1,4 @@
+
 <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
@@ -5,6 +6,7 @@
         <h1>基本信息</h1>
     </div>
 </header>
+<link rel="stylesheet" type="text/css" href="/mobile/css/LArea.css"/>
 <div class="wraper">
     <form method="post">
         <div class="home_fill_basic_info">
@@ -15,7 +17,7 @@
                 <li>
                     <div class="home_items">
                         <div class="home_list_l_info required">
-                            <span class="itemsname">昵</span><span class="itemsname">称：</span>
+                            <span class="itemsname">昵</span><span class="itemsname">称</span>
                             <?php use Cake\I18n\Date;
 
                             if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
@@ -29,102 +31,206 @@
                     <div class="home_items">
                         <div class="home_list_l_info required"><span class="itemsname">真</span><span
                                 class="itemsname">实</span><span class="itemsname">姓</span><span
-                                class="itemsname">名：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
+                                class="itemsname">名</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
                             <input id="truename" name="truename" type="text" placeholder="请输真实姓名" value="<?= $user->truename; ?>"/>
                         </div>
                     </div>
                 </li>
-                <li class="birthdate">
+                <li class="birthdate right-ico" >
                     <div class="home_items">
                         <div class="home_list_l_info required">
-                            <span class="itemsname">出</span>
-                            <span class="itemsname">生</span>
-                            <span class="itemsname">日</span>
-                            <span class="itemsname">期：</span>
+                            <span class="itemsname">出</span><span class="itemsname">生</span><span class="itemsname">日</span><span class="itemsname">期</span>
                             <?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
-                            <div class="checkdate">
-                                <input id="birthday" name="birthday" type="date" placeholder="请输入日期" value="<?= ($user->birthday)?$user->birthday:new Date('1991-1-1'); ?>" required="required"/>
+                            <div class="home-basic-option">
+                                    <input type="text" placeholder="出生日期" readonly="readonly" value="<?= ($user->birthday)?$user->birthday:new Date('1991-1-1'); ?>" required='required' />
+                                    <input type="date"  onchange='inputChange(this)' />
                             </div>
                         </div>
                     </div>
                 </li>
                
-                <li>
+                <li  class="right-ico">
                     <div class="home_items">
-                        <div class="home_list_l_info required"><span class="itemsname">体</span><span class="itemsname">重：</span>
+                        <div class="home_list_l_info required"><span class="itemsname">体</span><span class="itemsname">重</span>
                             <?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
-                            <input id="weight" name="weight" type="text" placeholder="您的体重" value="<?= $user->weight; ?>"/>&nbsp;KG
+                            <!-- <input id="weight" name="weight" type="text" placeholder="您的体重" value="<?= $user->weight; ?>"/>&nbsp;KG -->
+                            <div class="home-basic-option">
+                                <input type="text" id="weight" name="weight" placeholder="你的体重" readonly="readonly" value="<?= $user->weight; ?>"/>
+                                <select name="" onchange='tochange(this)'>
+                                    <option value="40-">40-KG</option>
+                                    <option value="40">40KG</option>
+                                    <option value="41">41KG</option>
+                                    <option value="42">42KG</option>
+                                    <option value="43">43KG</option>
+                                    <option value="44">44KG</option>
+                                    <option value="45">45KG</option>
+                                    <option value="46">46KG</option>
+                                    <option value="47">47KG</option>
+                                    <option value="48">48KG</option>
+                                    <option value="49">49KG</option>
+                                    <option value="50">50KG</option>
+                                    <option value="51">51KG</option>
+                                    <option value="52">52KG</option>
+                                    <option value="53">53KG</option>
+                                    <option value="54">54KG</option>
+                                    <option value="55">55KG</option>
+                                    <option value="55+">55+KG</option>
+                                </select>
+                           </div>
                         </div>
                     </div>
                 </li>
-                <li>
+                <li  class="right-ico">
                     <div class="home_items">
                         <div class="home_list_l_info required"><span class="itemsname short_name">身</span><span
-                                class="itemsname">高：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
+                                class="itemsname">高</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
-                            <input id="height" name="height" type="text" placeholder="您的身高" value="<?= $user->height; ?>"/>&nbsp;CM
+                            <!-- <input id="height" name="height" type="text" placeholder="您的身高" value="<?= $user->height; ?>"/>&nbsp;CM -->
+                            <div class="home-basic-option">
+                                <input type="text" id="height" name="height" placeholder="你的身高" value="<?= $user->height; ?>" readonly="readonly"/>
+                                <select name="" onchange='tochange(this)'>
+                                    <option value="160-">160-CM</option>
+                                    <option value="161">161CM</option>
+                                    <option value="162">162CM</option>
+                                    <option value="163">163CM</option>
+                                    <option value="164">164CM</option>
+                                    <option value="165">165CM</option>
+                                    <option value="166">166CM</option>
+                                    <option value="166">167CM</option>
+                                    <option value="166">168CM</option>
+                                    <option value="166">169CM</option>
+                                    <option value="170">170CM</option>
+                                    <option value="171">171CM</option>
+                                    <option value="172">172CM</option>
+                                    <option value="173">173CM</option>
+                                    <option value="174">174CM</option>
+                                    <option value="175">175CM</option>
+                                    <option value="176">176CM</option>
+                                    <option value="177">177CM</option>
+                                    <option value="178">178CM</option>
+                                    <option value="179">179CM</option>
+                                    <option value="180">180+CM</option>
+                                </select>
+                                </div>
                         </div>
                     </div>
                 </li>
                 <?php if($user->gender == 2): ?>
-                    <li class='bwh'>
+                    <li class='bwh right-ico'>
                         <div class="home_items">
-                            <div class="home_list_l_info required"><span class="itemsname">三</span><span class="itemsname">围：</span>
+                            <div class="home_list_l_info required"><span class="itemsname">三</span><span class="itemsname">围</span>
                                 <i class="iconfont ico"></i>
                             </div>
-                            <div class="home_list_r_info">
+                          <!--   <div class="home_list_r_info">
                                 <input id="bwh_b" name="bwh_b" type="tel" placeholder="胸围" style="width:30px;" value="<?= $user->bwh_b; ?>"/> |
                                 <input id="bwh_w" name="bwh_w" type="tel" placeholder="腰围" style="width:30px;" value="<?= $user->bwh_w; ?>" /> |
                                 <input id="bwh_h" name="bwh_h" type="tel" placeholder="臀围" style="width:30px;" value="<?= $user->bwh_h; ?>" />
+                            </div> -->
+                            <div class="home_list_r_info flex flex_end">
+                                <div class="home-basic-option">
+                                <input  id="bwh_b" name="bwh_b" type="text" placeholder="胸围" readonly="readonly" value="<?= $user->bwh_b; ?>"/>
+                                <select name="" onchange='tochange(this)'>
+                                     <option value="0">胸围</option>
+                                    <option value="80">80</option>
+                                    <option value="81">81</option>
+                                    <option value="82">82</option>
+                                    <option value="83">83</option>
+                                    <option value="84">84</option>
+                                    <option value="85">85</option>
+                                    <option value="86">86</option>
+                                    <option value="87">87</option>
+                                    <option value="88">88</option>
+                                    <option value="89">89</option>
+                                    <option value="90+">90+</option>
+                                </select>
+                                </div>|<div class="home-basic-option">
+                                <input id="bwh_w" name="bwh_w" type="text" placeholder="腰围" value="<?= $user->bwh_w; ?>"  readonly="readonly"/>
+                                <select name="" onchange='tochange(this)'>
+                                    <option value="0">腰围</option>
+                                    <option value="60">60</option>
+                                    <option value="61">61</option>
+                                    <option value="62">62</option>
+                                    <option value="63">63</option>
+                                    <option value="64">64</option>
+                                    <option value="65">65</option>
+                                    <option value="66">66</option>
+                                    <option value="67">67</option>
+                                    <option value="68">68</option>
+                                    <option value="69">69</option>
+                                    <option value="70+">70+</option>
+                                </select>
+                                </div>|<div class="home-basic-option">
+                                <input id="bwh_h" name="bwh_h" type="text" placeholder="臀围" value="<?= $user->bwh_h; ?>" readonly="readonly"/>
+                                <select name="" onchange='tochange(this)'>
+                                    <option value="0">臀围</option>
+                                    <option value="80">80</option>
+                                    <option value="81">81</option>
+                                    <option value="82">82</option>
+                                    <option value="83">83</option>
+                                    <option value="84">84</option>
+                                    <option value="85">85</option>
+                                    <option value="86">86</option>
+                                    <option value="87">87</option>
+                                    <option value="88">88</option>
+                                    <option value="89">89</option>
+                                    <option value="90+">90+</option>
+                                </select>
+                                </div>
                             </div>
                         </div>
                     </li>
                 <?php endif; ?>
                  <li class="start_sign  right-ico">
                     <div class="home_items">
-                        <div class="home_list_l_info required"><span class="itemsname">星</span><span class="itemsname">座：</span>
+                        <div class="home_list_l_info required"><span class="itemsname">星</span><span class="itemsname">座</span>
                             <?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
-                            <select id="zodiac" name="zodiac">
-                                    <option value="0">选星座</option>
-                                    <option value="1" <?= ($user->zodiac == 1)?'selected':''; ?>>白羊座</option>
-                                    <option value="2" <?= ($user->zodiac ==2)?'selected':''; ?>>金牛座</option>
-                                    <option value="3" <?= ($user->zodiac ==3)?'selected':''; ?>>双子座</option>
-                                    <option value="4" <?= ($user->zodiac == 4)?'selected':''; ?>>巨蟹座</option>
-                                    <option value="5" <?= ($user->zodiac == 5)?'selected':''; ?>>狮子座</option>
-                                    <option value="6" <?= ($user->zodiac == 6)?'selected':''; ?>>处女座</option>
-                                    <option value="7" <?= ($user->zodiac == 7)?'selected':''; ?>>天秤座</option>
-                                    <option value="8" <?= ($user->zodiac == 8)?'selected':''; ?>>天蝎座</option>
-                                    <option value="9" <?= ($user->zodiac == 9)?'selected':''; ?>>射手座</option>
-                                    <option value="10" <?= ($user->zodiac == 10)?'selected':''; ?>>摩羯座</option>
-                                    <option value="11" <?= ($user->zodiac == 11)?'selected':''; ?>>水瓶座</option>
-                                    <option value="12" <?= ($user->zodiac == 12)?'selected':''; ?>>双鱼座</option>
+                            <div class="home-basic-option">
+                                <input type="text" placeholder="你的星座" readonly="readonly"/>
+                                <select id="zodiac" name="zodiac"   onchange='tochange(this)'>
+                                        <option value="1" <?= ($user->zodiac == 1)?'selected':''; ?>>白羊座</option>
+                                        <option value="2" <?= ($user->zodiac ==2)?'selected':''; ?>>金牛座</option>
+                                        <option value="3" <?= ($user->zodiac ==3)?'selected':''; ?>>双子座</option>
+                                        <option value="4" <?= ($user->zodiac == 4)?'selected':''; ?>>巨蟹座</option>
+                                        <option value="5" <?= ($user->zodiac == 5)?'selected':''; ?>>狮子座</option>
+                                        <option value="6" <?= ($user->zodiac == 6)?'selected':''; ?>>处女座</option>
+                                        <option value="7" <?= ($user->zodiac == 7)?'selected':''; ?>>天秤座</option>
+                                        <option value="8" <?= ($user->zodiac == 8)?'selected':''; ?>>天蝎座</option>
+                                        <option value="9" <?= ($user->zodiac == 9)?'selected':''; ?>>射手座</option>
+                                        <option value="10" <?= ($user->zodiac == 10)?'selected':''; ?>>摩羯座</option>
+                                        <option value="11" <?= ($user->zodiac == 11)?'selected':''; ?>>水瓶座</option>
+                                        <option value="12" <?= ($user->zodiac == 12)?'selected':''; ?>>双鱼座</option>
                                 </select>
+                            </div>
                         </div>
                     </div>
                 </li>
                 <?php if($user->gender == 2): ?>
                     <li class="start_sign  right-ico">
                         <div class="home_items">
-                            <div class="home_list_l_info required"><span class="itemsname">罩</span><span class="itemsname">杯：</span>
+                            <div class="home_list_l_info required"><span class="itemsname">罩</span><span class="itemsname">杯</span>
                                 <i class="iconfont ico"></i>
                             </div>
                             <div class="home_list_r_info">
-                                <select id="cup" name="cup">
-                                    <option value="A" <?= ($user->cup == 'A')?'selected':''; ?>>A</option>
-                                    <option value="B" <?= ($user->cup == 'B')?'selected':''; ?>>B</option>
-                                    <option value="C" <?= ($user->cup == 'C')?'selected':''; ?>>C</option>
-                                    <option value="D" <?= ($user->cup == 'D')?'selected':''; ?>>D</option>
-                                    <option value="E" <?= ($user->cup == 'E')?'selected':''; ?>>E</option>
-                                    <option value="F" <?= ($user->cup == 'F')?'selected':''; ?>>F</option>
-                                    <option value="G" <?= ($user->cup == 'G')?'selected':''; ?>>G</option>
-                                </select>
+                                 <div class="home-basic-option">
+                                    <input type="text" placeholder="你的罩杯" readonly="readonly"/>
+                                    <select id="cup" name="cup"  onchange='tochange(this)'>
+                                         <option value="0">选罩杯</option>
+                                        <option value="A" <?= ($user->cup == 'A')?'selected':''; ?>>A</option>
+                                        <option value="B" <?= ($user->cup == 'B')?'selected':''; ?>>B</option>
+                                        <option value="C" <?= ($user->cup == 'C')?'selected':''; ?>>C</option>
+                                        <option value="D" <?= ($user->cup == 'D')?'selected':''; ?>>D</option>
+                                        <option value="E" <?= ($user->cup == 'E')?'selected':''; ?>>E</option>
+                                        <option value="F" <?= ($user->cup == 'F')?'selected':''; ?>>F</option>
+                                        <option value="G" <?= ($user->cup == 'G')?'selected':''; ?>>G</option>
+                                    </select>
+                                   </div>
                             </div>
                         </div>
                     </li>
@@ -133,20 +239,43 @@
                     <div class="home_items">
                         <div class="home_list_l_info required"><span class="itemsname">情</span><span
                                 class="itemsname">感</span><span class="itemsname">状</span><span
-                                class="itemsname">态：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
+                                class="itemsname">态</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
-                                <select id="state" name="state">
-                                    <option value="1" <?= ($user->state == 1)?'selected':'';?>>单身</option>
-                                    <option value="2" <?= ($user->state == 2)?'selected':'';?>>恋爱</option>
-                                    <option value="3" <?= ($user->state == 3)?'selected':'';?>>已婚</option>
-                                    <option value="4" <?= ($user->state == 4)?'selected':'';?>>离异</option>
-                                </select>
+                             <div class="home-basic-option">
+                                    <input type="text" placeholder="你的情感状态" readonly="readonly"/>
+                                    <select id="state" name="state" onchange='tochange(this)'>
+                                        <option value="1" <?= ($user->state == 1)?'selected':'';?>>单身</option>
+                                        <option value="2" <?= ($user->state == 2)?'selected':'';?>>私密</option>
+                                    </select>
+                            </div>
                         </div>
                     </div>
                 </li>
-                <li>
+               
+                <li class="right-ico">
                     <div class="home_items">
-                        <div class="home_list_l_info required"><span class="itemsname">职</span><span class="itemsname">业：</span>
+                        <div class="home_list_l_info required"><span class="itemsname short_name">家</span><span
+                                class="itemsname">乡</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
+                        <div class="home_list_r_info">
+                            <input id="hometown" name="hometown" type="text" readonly="readonly" placeholder="请输入您的家乡"  value="<?= $user->hometown; ?>"/>
+                            <input id="vtown" type="hidden" />
+                        </div>
+                    </div>
+                </li>
+                <li  class="right-ico">
+                    <div class="home_items">
+                        <div class="home_list_l_info required"><span class="itemsname">所</span><span
+                                class="itemsname">在</span><span class="itemsname">地</span><span
+                                class="itemsname">区</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
+                        <div class="home_list_r_info">
+                            <input  id="city" name="city" type="text" placeholder="请输入所在地区" value="<?= $user->city; ?>" readonly="readonly"/>
+                            <input id="vcity" type="hidden" />
+                        </div>
+                    </div>
+                </li>
+                 <li>
+                    <div class="home_items">
+                        <div class="home_list_l_info required"><span class="itemsname">职</span><span class="itemsname">业</span>
                             <?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
@@ -154,30 +283,11 @@
                         </div>
                     </div>
                 </li>
-                <li>
-                    <div class="home_items">
-                        <div class="home_list_l_info required"><span class="itemsname short_name">家</span><span
-                                class="itemsname">乡：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
-                        <div class="home_list_r_info">
-                            <input id="hometown" name="hometown" type="text" placeholder="请输入家乡" value="<?= $user->hometown; ?>"/>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="home_items">
-                        <div class="home_list_l_info required"><span class="itemsname">所</span><span
-                                class="itemsname">在</span><span class="itemsname">地</span><span
-                                class="itemsname">区：</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
-                        <div class="home_list_r_info">
-                            <input id="city" name="city" type="text" placeholder="请输入所在地区" value="<?= $user->city; ?>"/>
-                        </div>
-                    </div>
-                </li>
                  <li class='plaintext-box'>
                     <div class="home_items">
                        <div class="home_list_l_info"><span class="itemsname">工</span><span
                                 class="itemsname">作</span><span class="itemsname">经</span><span
-                                class="itemsname">历：</span>
+                                class="itemsname">历</span>
                            </span>
                         </div>
                         <div class="home_list_r_info  plaintext">
@@ -194,7 +304,7 @@
             <ul>
                 <li>
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">常出没地点：</span></div>
+                        <div class="home_list_l_info"><span class="itemsname">常出没地点</span></div>
                         <div class="home_list_r_info">
                             <input id="place" name="place" type="text" placeholder="请输入地点" value="<?= $user->place; ?>"/>
                         </div>
@@ -202,7 +312,7 @@
                 </li>
                 <li  class='plaintext-box'>
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">喜欢的美食：</span></div>
+                        <div class="home_list_l_info"><span class="itemsname">喜欢的美食</span></div>
                         <div class="home_list_r_info  plaintext">
                             <textarea  id="food" name="food" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入美食"><?= $user->food; ?></textarea>
                         </div>
@@ -210,7 +320,7 @@
                 </li>
                 <li class='plaintext-box'>
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">喜欢的音乐：</span></div>
+                        <div class="home_list_l_info"><span class="itemsname">喜欢的音乐</span></div>
                         <div class="home_list_r_info  plaintext">
                             <textarea  id="music" name="music" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入音乐"><?= $user->music; ?></textarea>
                         </div>
@@ -218,7 +328,7 @@
                 </li>
                 <li class='plaintext-box'>
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">喜欢的电影：</span></div>
+                        <div class="home_list_l_info"><span class="itemsname">喜欢的电影</span></div>
                         <div class="home_list_r_info  plaintext">
                               <textarea id="movie" name="movie" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入电影"><?= $user->movie; ?></textarea>
                         </div>
@@ -226,7 +336,7 @@
                 </li>
                 <li  class='plaintext-box'>
                     <div class="home_items sport_items">
-                        <div class="home_list_l_info"><span class="itemsname">喜欢的运动<br>/娱乐：</span></div>
+                        <div class="home_list_l_info"><span class="itemsname">喜欢的运动<br>/娱乐</span></div>
                         <div class="home_list_r_info   plaintext">
                              <textarea id="sport" name="sport" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的运动/娱乐"><?= $user->sport; ?></textarea>
                         </div>
@@ -234,7 +344,7 @@
                 </li>
                 <li class='plaintext-box'>
                     <div class="home_items">
-                        <div class="home_list_l_info"><span class="itemsname">个性签名：</span></div>
+                        <div class="home_list_l_info"><span class="itemsname">个性签名</span></div>
                         <div class="home_list_r_info  plaintext">
                             <textarea id="sign" name="sign" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="个性签名"><?= $user->sign; ?></textarea>
                         </div>
@@ -284,12 +394,46 @@
     </form>
 </div>
 
-<div style="height:62px;"></div>
+<script src="/mobile/js/LArea.js" type="text/javascript" ></script>
+<script src="/mobile/js/LAreaData1.js" type="text/javascript"></script>
 <!--<a id="submit" class="identify_footer_potion">提交</a>-->
 <!--标签选择框-->
 <?= $this->cell('Date::tagsView', ['tags-select-view']); ?>
 <?= $this->start('script'); ?>
+<script type="text/javascript">
+//家乡
+     var area1 = new LArea();
+     area1.init({
+        'trigger': '#hometown',
+        'valueTo': '#vtown', 
+        'keys': {
+            id: 'id',
+            name: 'name'
+        }, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
+        'type': 1, //数据源类型
+        'data': LAreaData //数据源
+    });
+     //城市
+  var area2 = new LArea();
+ area2.init({
+    'trigger': '#city',
+    'valueTo': '#vcity',
+    'keys': {
+        id: 'id',
+        name: 'name'
+    },
+    'type': 1,
+    'data': LAreaData
+});
+</script>
 <script>
+
+    function tochange(that){
+         $(that).siblings().val(that.options[that.selectedIndex].text);
+   }
+   function inputChange(that){
+         $(that).siblings().val($(that).val());
+   }
     var originNick = '<?= $user->nick; ?>';
     $('#nick').keyup(function () {
         var v = $(this).val();
