@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="/mobile/css/LArea.css"/>
 <div class="wraper bgff">
     <div class="info-header-tips">
         <!--        <div class="closed">
