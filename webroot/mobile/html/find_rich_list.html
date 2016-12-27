@@ -11,6 +11,22 @@
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
 		<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/view.js" type="text/javascript" charset="utf-8"></script>
+		<!--<style>
+			@-webkit-keyframes scale{
+				0%{transform: scale(1);-webkit-transform: scale(1);}
+				50%{transform: scale(0);-webkit-transform: scale(0);}
+				90%{transform: scale(.9);-webkit-transform: scale(.9);}
+				95%{transform: scale(.8);-webkit-transform: scale(.8);}
+				100%{transform: scale(1);-webkit-transform: scale(1);}
+			}
+			@keyframes scale{
+				0%{transform: scale(1);-webkit-transform: scale(1);}
+				50%{transform: scale(0);-webkit-transform: scale(0);}
+				90%{transform: scale(.9);-webkit-transform: scale(.9);}
+				95%{transform: scale(.8);-webkit-transform: scale(.8);}
+				100%{transform: scale(1);-webkit-transform: scale(1);}
+			}
+		</style>-->
 	</head>
 	<body>
 		<header>
@@ -32,7 +48,7 @@
 						<span class="coast color_friends">已消费：37778</span>
 				</div>
 				<div class="rich_first_right">
-					<div class="first_r_info beauty">魅力值 <i class='iconfont commico'></i></div>
+					<div class="first_r_info beauty" id="beauty">魅力值 <i class='iconfont commico'></i></div>
 					<span class="color_active lagernum">37779999</span>
 				</div>
 			</div>
@@ -64,7 +80,7 @@
 								<div class="voted_place_info">
 									<span class="avatar"><img src="../images/avatar.jpg"/></span>
 									<h3>
-										<span class="voted_name">范冰冰<span class="hot"><img src="../images/hot.png" class="responseimg"/></span><span class="highter-vip"><img src="../images/v.png" class="responseimg"/></span></span>
+										<span class="voted_name">范冰冰<span class="hot"><img src="../images/hot.png" class="responseimg"/></span><span class="highter-vip">VIP 普通</span></span>
 										<span class="voted_number color_gray">已消费：304857美币</span>
 									</h3>
 								</div>
@@ -168,5 +184,10 @@
 				</li>
 			</ul>
 		</div>
+		<script type="text/javascript">
+			$('#beauty').on('tap',function(){
+				$(this).find('.iconfont').toggleClass('activeico');
+			})
+		</script>
 	</body>
 </html>
