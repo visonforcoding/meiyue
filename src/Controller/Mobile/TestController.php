@@ -28,9 +28,13 @@ class TestController extends AppController {
         //var_dump(round('42.99687156342637',1));
        // debug($this->Util->getServerDomain());
         //$timestamp = time();
-        $userTb = TableRegistry::get('User');
+        /*$userTb = TableRegistry::get('User');
         $user = $userTb->get(28);
         echo $this->Business->shareIncome(0.01, $user);
+        exit();*/
+        $payOrderTb = TableRegistry::get("Payorder");
+        $payOrder = $payOrderTb->find()->contain('User')->where(['Payorder.id' => 43])->first();
+        echo $this->Business->handPackPay($payOrder, 100, 1, '1827382738772837HSKJ');
         exit();
         //debug(\Cake\Core\Configure::read('Redis.default'));
     }

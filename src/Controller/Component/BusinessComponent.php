@@ -316,9 +316,13 @@ class BusinessComponent extends Component
         $order->out_trade_no = $out_trade_no;  //第三方订单号
         $order->status = 1;
         $pre_amount = $order->user->money;
-        $order->user->money += $pack->vir_money;    //专家余额+
+        $order->user->money += $pack->vir_money;
+        $packTypeStr = PackType::getPackageType(PackType::RECHARGE);
+        $flowType = 15;  //购买vip套餐
         if($pack->type == PackType::VIP) {
+            $flowType = 16;  //购买充值套餐
             $order->user->recharge .= $realFee;
+            $packTypeStr = PackType::getPackageType(PackType::VIP);
         }
         $order->user->recharge += $realFee;
         $order->dirty('user', true);  //这里的seller 一定得是关联属性 不是关联模型名称 可以理解为实体
@@ -328,17 +332,17 @@ class BusinessComponent extends Component
         $FlowTable = TableRegistry::get('Flow');
         $flow = $FlowTable->newEntity([
             'user_id' => $order->user_id,
-            'type' => 15,  //购买套餐
+            'type' => $flowType,  //购买套餐
             'relate_id'=>$order->id,   //关联的订单id
-            'type_msg' => '套餐购买',
+            'type_msg' => '购买'.$packTypeStr,
             'income' => 1,
             'amount' => $realFee,
-            'price'=>$order->price,
+            'price'=> $order->price,
             'pre_amount' => $pre_amount,
             'after_amount' => $order->user->money,
             'paytype'=>$flowPayType,
             'status' => 1,
-            'remark' => '套餐购买'
+            'remark' => '购买'.$packTypeStr
         ]);
 
         //生成套餐购买记录
