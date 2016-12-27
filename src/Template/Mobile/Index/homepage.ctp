@@ -299,38 +299,17 @@
 </script>
 <script>
     $('.data-ta').on('tap', function() {
-        if(!$.util.isLogin()) {
-            $.util.alert('请先登录');
-            setTimeout(function() {
-                LEMON.event.login();
-            }, 1000)
-            return;
-        }
         var dateid = $(this).data('id');
-        location.href='/date-order/order-skill/' + dateid;
+        $.util.checkLogin('/date-order/order-skill/' + dateid);
     })
 
     function toVoted() {
-        if(!$.util.isLogin()) {
-            $.util.alert('请先登录');
-            setTimeout(function() {
-                LEMON.event.login();
-            }, 1000)
-            return;
-        }
-        location.href='/user/voted/<?=$user->id?>';
+        $.util.checkLogin('/user/voted/<?=$user->id?>');
     }
 
     $('#send-gift').on('click', function(event) {
         event.stopPropagation();
-        if(!$.util.isLogin()) {
-            $.util.alert('请先登录');
-            setTimeout(function() {
-                LEMON.event.login();
-            }, 1000)
-            return;
-        }
-        location.href='/gift/index/<?= $user->id; ?>';
+        $.util.checkLogin('/gift/index/<?= $user->id; ?>');
     });
 
     $('#focusIt').on('click', function (event) {
@@ -379,11 +358,7 @@
 
 
     function checkBrownR(action) {
-        if(!$.util.isLogin()) {
-            $.util.alert('请先登录');
-            setTimeout(function() {
-                LEMON.event.login();
-            }, 1000)
+        if(!$.util.checkLogin()) {
             return;
         }
         $.util.ajax({

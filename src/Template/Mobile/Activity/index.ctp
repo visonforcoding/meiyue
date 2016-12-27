@@ -114,8 +114,8 @@ $activity_action = '/activity/index/';  //定义派对请求地址
         </div>
         <div class="items_adress flex flex_justify">
             <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
-            <div class="{{#notjoin}}join-act{{/notjoin}} button btn_dark" data-id="{{id}}">
-                {{#joined}}您已报名{{/joined}}{{#notjoin}}我要报名{{/notjoin}}{{#norest}}人数已满{{/norest}}
+            <div class="{{^isend}}join-act{{/isend}} button btn_dark" data-id="{{id}}">
+                {{^isend}}我要报名{{/isend}}{{#isend}}报名结束{{/isend}}
             </div>
         </div>
     </div>

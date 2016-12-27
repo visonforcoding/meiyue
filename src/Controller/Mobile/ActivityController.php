@@ -62,47 +62,27 @@ class ActivityController extends AppController
     public function getAllDatasInPage($page) {
         $limit = 10;
         //添加用户参与活动状态
-        $acts = [];
-        if($this->user) {
-            $actTb = TableRegistry::get('Actregistration');
-            $acts = $actTb->find()
-                ->select(['activity_id'])
-                ->where(['user_id' => $this->user->id, 'status' => 1])
-                ->toArray();
-        }
-
         $datas = $this->Activity
             ->find("all")
             ->where([
                 'status' => 1,
-                'Activity.start_time >' => new Time()
             ]);
         $datas->limit($limit);
+        $datas->orderDesc('Activity.start_time');
         $datas->page($page);
-        $datas->formatResults(function(ResultSetInterface $results) use($acts) {
-            return $results->map(function($row) use($acts) {
+        $datas->formatResults(function(ResultSetInterface $results) {
+            return $results->map(function($row) {
                 $row->time = getFormateDT($row->start_time, $row->end_time);
-                $row->joined = false; //参与标志
-                $row->notjoin = true; //没参与标志
-                $row->norest = false; //人数已满标志
-                if(!$row->male_rest || !$row->female_rest) {
-                    $row->joined = false; //参与标志
-                    $row->notjoin = false; //没参与标志
-                    $row->norest = true; //人数已满标志
-                }
-                foreach($acts as $act) {
-                    if($row->id == $act->activity_id) {
-                        $row->joined = true;
-                        $row->notjoin = false;
-                        $row->norest = false;
-                        break;
-                    }
+                $row->isend = false;
+                $startTime = new Time($row->start_time);
+                $curTime = new Time();
+                if((($row->male_rest == 0) && ($row->female_rest == 0)) || ($startTime <= $curTime)) {
+                    $row->isend = true;
                 }
                 return $row;
             });
 
         });
-
         $carousel = null;
         if($page = 1) {
             $carouselTb = TableRegistry::get('Carousel');
@@ -119,67 +99,52 @@ class ActivityController extends AppController
 
     /**
      * @param string|null $id Activity id.
-     * @param int|0 $action 是否可取消0不可取消，1可取消.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null, $action = 0)
+    public function view($id = null)
     {
-        $activity = $this->Activity->get($id, ['contain' => ['Actregistrations'=> function($q){
-            return $q
-                ->contain([
-                    'User' => function($q) {
-                        return $q->select(['User.id', 'User.gender']);}
-                ])
-                ->where(['Actregistrations.status' => 1]);
-        }]]);
-
-        //底部按钮显示状态：0#我要报名 1#人数已满 2#我要取消 3#报名成功（此时是不可以取消的）
-        $botBtSts = 0;
-        $regist_item = null;
-        //检查报名人数是否已满
-        if($this->user) {
-            if($this->user->gender == 1) {
-                if($activity['male_rest'] == 0) {
-                    $botBtSts = 1;
+        $activity = $this->Activity->get($id);
+        //状态：0#未登录 1#我要报名(男) 2#我要报名(女) 3报名结束(男女) 4#您已报名,审核中(女) 5#您已报名,审核不通过(女) 6#报名成功(女)
+        $actstatus = 1;
+        $actTime = new Time($activity->start_time);
+        $curTime = new Time();
+        if(($actTime < $curTime)) {
+            $actstatus = 3;
+        } else if($this->user) {
+            if(($this->user->gender == 1)) {
+                if($activity->male_rest == 0) {
+                    $actstatus = 3;
                 }
-            } else {
-                if($activity['female_rest'] == 0) {
-                    $botBtSts = 1;
+            } else if($this->user->gender == 2) {
+                $myActTb = TableRegistry::get('Actregistration');
+                $myAct = $myActTb->find()->where(['user_id' => $this->user->id])->orderDesc('id')->first();
+                if($myAct) {
+                    switch($myAct->status) {
+                        case 1:  //正常（审核通过）
+                            $actstatus = 6;
+                            break;
+                        case 2:  //取消
+                            $actstatus = 2;
+                            break;
+                        case 3:  //审核中
+                            $actstatus = 4;
+                            break;
+                        case 4:  //审核不通过
+                            $actstatus = 5;
+                            break;
+                    }
+                }else if($activity->female_rest == 0) {
+                    $actstatus = 3;
                 }
             }
-
-            //检查是否已经参与
-            $actregistrations = $activity['actregistrations'];
-            foreach ($actregistrations as $actregistration) {
-                if($this->user->id == $actregistration['user']['id']
-                    && $actregistration['cancel_time'] == null) {
-                    $botBtSts = 2;
-                    $regist_item = $actregistration;
-                    break;
-                }
-            }
-
-            $current_time = new Time();
-            //检查是否在规定可取消时间
-            if($current_time->diffInDays($activity['start_time'], false) > $activity['cancelday'] && ($botBtSts == 2)) {
-                $botBtSts = 3;
-            }
-
-            //检查是否过期
-            $curtime = new Time();
-            if($activity->start_time < $curtime && $activity->end_time > $curtime) {
-                $botBtSts = 4;  //活动已开始
-            } else if($activity->end_time < $curtime) {
-                $botBtSts = 5;  //活动已结束
-            }
+        } else {
+            $actstatus = 0;
         }
 
         $this->set([
-            'regist_item' => $regist_item,
-            'botBtSts' => $botBtSts,
-            'cancancle' => $action,
             'user' => $this->user,
+            'actstatus' => $actstatus,
             'activity' => $activity,
             'pageTitle' => '美约-活动详情'
         ]);
@@ -258,26 +223,101 @@ class ActivityController extends AppController
     }
 
 
-    public function payView($id = null) {
-        if($id) {
-            $this->handCheckLogin();
-            $activity = $this->Activity->get($id);
-            $price = 0;
-            $lim = 0;
-            if($this->user->gender == 1) {
-                $price = $activity['male_price'];
-                $lim = $activity['male_lim'];
-            } else {
-                $price = $activity['female_price'];
-                $lim = $activity['female_lim'];
+    public function payView($id) {
+        $this->handCheckLogin();
+        $activity = $this->Activity->get($id);
+        $lim = 1;
+        if($this->user->gender == 1) {
+            $lim = $activity->male_rest;
+        } else {
+            $lim = $activity->female_rest;
+        }
+        //状态：0#未登录 1#我要报名(男) 2#我要报名(女) 3报名结束(男女) 4#您已报名,审核中(女) 5#您已报名,审核不通过(女) 6#报名成功(女)
+        $actstatus = 1;
+        $actTime = new Time($activity->start_time);
+        $curTime = new Time();
+        if(($actTime < $curTime)) {
+            $actstatus = 3;
+        } else if($this->user) {
+            if(($this->user->gender == 1)) {
+                if($activity->male_rest == 0) {
+                    $actstatus = 3;
+                }
+            } else if($this->user->gender == 2) {
+                $myActTb = TableRegistry::get('Actregistration');
+                $myAct = $myActTb->find()->where(['user_id' => $this->user->id])->orderDesc('id')->first();
+                if($myAct) {
+                    switch($myAct->status) {
+                        case 1:  //正常（审核通过）
+                            $actstatus = 6;
+                            break;
+                        case 2:  //取消
+                            $actstatus = 2;
+                            break;
+                        case 3:  //审核中
+                            $actstatus = 4;
+                            break;
+                        case 4:  //审核不通过
+                            $actstatus = 5;
+                            break;
+                    }
+                }else if($activity->female_rest == 0) {
+                    $actstatus = 3;
+                }
             }
-            $this->set([
-                'user' => $this->user,
-                'lim' => $lim,
-                'price' => $price,
-                'activity' => $activity,
-                'pageTitle' => '美约-活动支付'
+        } else {
+            $actstatus = 0;
+        }
+        $this->set([
+            'user' => $this->user,
+            'activity' => $activity,
+            'lim' => $lim,
+            'actstatus' => $actstatus,
+            'pageTitle' => '美约-活动支付'
+        ]);
+    }
+
+
+    /**
+     * 美女报名派对
+     * 限每人一名额
+     */
+    public function join($actid)
+    {
+        if($this->request->is("POST")) {
+            $this->handCheckLogin();
+            //检查是否参与过
+            $actregistrationTable = TableRegistry::get('Actregistration');
+            $actregistration = $actregistrationTable
+                ->find()
+                ->where([
+                    'user_id' => $this->user->id,
+                    'activity_id' => $actid,
+                ])
+                ->orderDesc('id')
+                ->first();
+            if(!($actregistration->status == 2)) {
+                return $this->Util->ajaxReturn(false, '报名失败');
+            }
+            //生成报名表
+            $activity = null;
+            try {
+                $activity = $this->Activity->get($actid);
+            } catch(Exception $e) {
+                return $this->Util->ajaxReturn(false, '报名失败');
+            }
+            $actregistration = $actregistrationTable->newEntity([
+                'user_id' => $this->user->id,
+                'activity_id' => $actid,
+                'status' => 1,
+                'cost' => 0,
+                'punish' => 0,
+                'punish_percent' => $activity['punish_percent'],
+                'num' => 1
             ]);
+            if($actregistrationTable->save($actregistration)) {
+                return $this->Util->ajaxReturn(true, '报名成功');
+            }
         }
     }
 
@@ -292,29 +332,14 @@ class ActivityController extends AppController
      * @return \Cake\Network\Response|null
      */
     public function mpay($id, $num = 1) {
-
         //参加活动
         if($this->request->is("POST")) {
-
             $this->handCheckLogin();
             $activity = $this->Activity->get($id, ['contain' => ['Actregistrations'=> function($q){
                 return $q->contain(['User' => function($q) { return $q->select(['User.id', 'User.gender']);}])
                     ->where(['Actregistrations.status' => 1]);
             }]]);
-            //检查是否参与过
             $actregistrationTable = TableRegistry::get('Actregistration');
-            $count = $actregistrationTable
-                ->find()
-                ->where([
-                    'user_id' => $this->user->id,
-                    'activity_id' => $id,
-                    'cancel_time' => null
-                ])
-                ->count();
-            if($count > 0) {
-                return $this->Util->ajaxReturn(false, '您已经参与过了！');
-            }
-
             //获取需要费用
             //检查报名人数是否已满
             $price = 0;
@@ -332,6 +357,19 @@ class ActivityController extends AppController
             //判断余额是否充足
             if($this->user->money < $price * $num && $price) {
                 return $this->Util->ajaxReturn(false, '美币余额不足！');
+            }
+
+            //修改活动表项
+            if($this->user->gender == 1) {
+                if($activity->male_rest < $num) {
+                    return $this->Util->ajaxReturn(false,'报名名额不足！');
+                }
+                $activity->male_rest -= $num;
+            } else {
+                if($activity->female_rest < $num) {
+                    return $this->Util->ajaxReturn(false,'报名名额不足！');
+                }
+                $activity->female_rest -= $num;
             }
 
             //生成报名表
@@ -367,19 +405,6 @@ class ActivityController extends AppController
                 'remark'=> '数量*'.$num
             ]);
 
-            //修改活动表项
-            if($user->gender == 1) {
-                if($activity->male_rest < $num) {
-                    return $this->Util->ajaxReturn(false,'报名名额不足！');
-                }
-                $activity->male_rest -= $num;
-            } else {
-                if($activity->female_rest < $num) {
-                    return $this->Util->ajaxReturn(false,'报名名额不足！');
-                }
-                $activity->female_rest -= $num;
-            }
-
             $activityTable = $this->Activity;
             $transRes = $actregistrationTable
                 ->connection()
@@ -409,7 +434,6 @@ class ActivityController extends AppController
                 return $this->Util->ajaxReturn(false,'参加失败');
             }
         }
-
     }
 
 
@@ -418,9 +442,7 @@ class ActivityController extends AppController
      * @param $activity_id
      */
     public function memIndex($activity_id) {
-
         if($activity_id) {
-
             $actreTable = TableRegistry::get('Actregistration');
             $actres = $actreTable->find('all',
                 [
@@ -433,7 +455,6 @@ class ActivityController extends AppController
 
         }
         $this->set(['pageTitle' => '美约-派对已报名', 'actres' => $actres]);
-
     }
 
 

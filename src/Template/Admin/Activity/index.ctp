@@ -162,15 +162,8 @@
 
         function doView(id) {
             //查看明细
-            url = '/activity/view/' + id;
-            layer.open({
-                type: 2,
-                title: '查看详情',
-                shadeClose: true,
-                shade: 0.8,
-                area: ['45%', '70%'],
-                content: url//iframe的url
-            });
+            url = '/activity/join-index/' + id;
+            location.href=url;
         }
     </script>
 <?php

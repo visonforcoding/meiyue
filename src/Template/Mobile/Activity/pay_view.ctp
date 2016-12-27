@@ -1,7 +1,7 @@
 <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
-        <h1>活动支付中</h1>
+        <h1>活动报名</h1>
     </div>
 </header>
 <div class="wraper">
@@ -15,8 +15,22 @@
             <div class="address color_gray"><i class="iconfont">&#xe623;</i><?= isset($activity)?$activity['site']:'' ?></div>
         </div>
     </div>
-    <div class="activity_pay_num">
+    <div class="activity_pay_num <?php if($user->gender == 1): ?>mt20<?php endif; ?>">
         <ul class="outerblock">
+            <li class="flex flex_justify">
+                <span>剩余名额</span>
+                <div class="r_info">
+                    <div class="r_info_pic flex">
+                        <span class="sex">男：<i
+                                class="color_friends"><?= $activity['male_rest'] ?></i>/<?= $activity['male_lim'] ?>
+                            位</span>
+                        <span class="sex">女：<i
+                                class="color_friends"><?= $activity['female_rest'] ?></i>/<?= $activity['female_lim'] ?>
+                            位</span>
+                    </div>
+                </div>
+            </li>
+            <?php if($user->gender == 1): ?>
             <li class="flex flex_justify">
                 <div>购买数量</div>
                 <div class="buybox flex">
@@ -25,27 +39,62 @@
                     <span id="add-num" class="iconfont add color_y">&#xe65a;</span>
                 </div>
             </li>
+            <?php endif; ?>
         </ul>
     </div>
+    <?php if($user->gender == 1): ?>
     <div class="activity_pay_type mt20">
-        <h3 class="commontitle inner ">支付方式</h3>
         <div class="con flex flex_justify inner">
             <div>我的钱包</div>
             <div class="color_y"><i class="lagernum"><?= isset($user)?$user->money:''; ?></i> 美币</div>
         </div>
     </div>
+    <?php endif; ?>
 </div>
 <div style="height:1.4rem;"></div>
 <div class="bottomblock">
     <div class="flex flex_end">
-        <span class="total"><span class="color_y">共计：<i class="color_y lagernum" id="count"><?= isset($price)?$price:0; ?> </i>美币</span></span>
-        <a id="<?= isset($activity)?'pay':''; ?>" href="javascript:void(0);" class="nowpay">立即支付</a>
+        <?php if ($actstatus == 3): ?>
+            <a class="identify_footer_potion">报名结束</a>
+        <?php elseif ($actstatus == 1): ?>
+            <span class="total"><span class="color_y">共计：<i class="color_y lagernum" id="count"><?= isset($price)?$price:0; ?> </i>美币</span></span>
+            <a id="pay" href="javascript:void(0);" class="nowpay">立即支付</a>
+        <?php elseif ($actstatus == 4): ?>
+            <a class="identify_footer_potion">您已报名,审核中</a>
+        <?php elseif ($actstatus == 5): ?>
+            <a class="identify_footer_potion">您已报名,审核不通过</a>
+        <?php else: ?>
+            <a id="join" class="identify_footer_potion">我要报名</a>
+        <?php endif; ?>
     </div>
 </div>
 
 <script>
-
-
+    <?php if($user->gender == 2): ?>
+    $('#join').on('click', function() {
+        $(this).removeAttr('id');
+        var obj = $(this);
+        if($.util.checkLogin(null)) {
+            $.util.showPreloader();
+            $.util.ajax({
+                url: '/activity/join/<?= $activity['id']; ?>',
+                type: "POST",
+                dataType: "json",
+                func: function (res) {
+                    $.util.hidePreloader();
+                    $.util.alert(res.msg);
+                    if(res.status) {
+                        setTimeout(function() {
+                            window.location.href = '/userc/my-activitys';
+                        }, 1000)
+                    } else {
+                        obj.attr('id', 'join');
+                    }
+                }
+            })
+        }
+    });
+    <?php else: ?>
     $('#reduce-num').on('click', function(){
         var lim = <?= isset($lim)?$lim:0; ?>;
         var curNum = parseInt($('#num').val());
@@ -74,7 +123,6 @@
         }
         changeCount();
     });
-
     $('#add-num').on('click', function() {
         var lim = <?= isset($lim)?$lim:0; ?>;
         var curNum = parseInt($('#num').val());
@@ -102,37 +150,22 @@
             $('#reduce-num').addClass('disabled');
         }
         changeCount();
-
     });
-
-
     function changeCount() {
-
         var curNum = parseInt($('#num').val());
         $('#count').text(curNum * <?= isset($price)?$price:0; ?>);
-
     }
-
-
     $('#num').bind('input propertychange', function() {
-
         var lim = <?= isset($lim)?$lim:0; ?>;
         var curNum = parseInt($(this).val());
-
         if(curNum > lim) {
-
             $(this).val(lim);
             $.util.alert("不能超过报名名额！");
-
         } else if(curNum < 1) {
-
             $(this).val(1);
             $.util.alert("数量不能少于一！");
-
         }
     });
-
-
     $(document).on('tap', '#pay', function() {
         console.log('paying');
         var num = parseInt($('#num').val());
@@ -165,5 +198,6 @@
             }
         })
     })
+    <?php endif; ?>
 
 </script>

@@ -61,6 +61,7 @@
     $(".toback").on('click', function(){
         history.back();
     });
+    LEMON.sys.back('/user/index');
 
     $("#publish-date-info").on('click', function(){
         location.href = "/date/add";
