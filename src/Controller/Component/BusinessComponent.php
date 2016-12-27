@@ -291,7 +291,7 @@ class BusinessComponent extends Component
             return $OrderTable->save($order) &&  $FlowTable->save($flow);
         });
         if ($transRes) {
-            $this->shareIncome($realFee, $order->user);
+            $this->shareIncome($realFee, $order->user,$order->id);
             return true;
         }else{
             \Cake\Log\Log::debug($order->errors(),'devlog');
