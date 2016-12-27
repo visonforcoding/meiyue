@@ -78,7 +78,7 @@
             <?php endif; ?>
         </ul>
     </div>
-    <div class="complete_basic_info mt100">完善个人资料有奖，<a href="#this">点击查看详情</a></div>
+    <!--<div class="complete_basic_info mt100">完善个人资料有奖，<a href="#this">点击查看详情</a></div>-->
 </div>
 
 <?php $this->start('script'); ?>

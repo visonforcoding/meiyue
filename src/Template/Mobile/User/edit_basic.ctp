@@ -334,31 +334,31 @@
             $('#birthday').val('<?= new Date('1991-1-1'); ?>');
         }
         if (!$('#nick').val()) {
-            $.util.alert('未填写昵称');
+            $.util.alert('昵称没有填写');
             return false;
         }
         if (!$('#truename').val()) {
-            $.util.alert('真实姓名必填');
+            $.util.alert('真实姓名没有填写');
             return false;
         }
         if (!$('#height').val()) {
-            $.util.alert('身高必填');
+            $.util.alert('身高没有填写');
             return false;
         }
         if (!$('#weight').val()) {
-            $.util.alert('体重必填');
+            $.util.alert('体重没有填写');
             return false;
         }
         if((!$('#bwh_b').val())&&(!$('#bwh_w').val())&&(!$('#bwh_h').val())) {
-            $.util.alert('三围必填');
+            $.util.alert('三围没有填写');
             return false;
         }
         if (!$("#cup").val()) {
-            $.util.alert('罩杯必填');
+            $.util.alert('罩杯没有填写');
             return false;
         }
         if (!$("#state").val()) {
-            $.util.alert('情感状态必填');
+            $.util.alert('情感状态没有填写');
             return false;
         }
         if (!$("#zodiac").val()) {
@@ -366,15 +366,15 @@
             return false;
         }
         if (!$("#hometown").val()) {
-            $.util.alert('家乡必填');
+            $.util.alert('家乡没有填写');
             return false;
         }
         if (!$("#city").val()) {
-            $.util.alert('所在地区必填');
+            $.util.alert('所在地区没有填写');
             return false;
         }
         if (!$("#profession").val()) {
-            $.util.alert('职业未填写');
+            $.util.alert('职业没有填写');
             return false;
         }
         <?php endif; ?>
