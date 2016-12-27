@@ -58,11 +58,6 @@
                     }, 1000);
                 } else {
                     $.util.alert(res.msg);
-                    if(res.redirect_url) {
-                        setTimeout(function () {
-                            window.location.href = res.redirect_url;
-                        }, 1000);
-                    }
                 }
             }, 'json');
         }
