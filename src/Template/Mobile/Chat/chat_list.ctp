@@ -196,9 +196,6 @@ $(document).on('click','.del',function(){
             if(!error){
               $('#chat-' + id).addClass('remove')
             }
-            console.log(error);
-            console.log(obj);
-            console.log('删除会话' + (!error ? '成功' : '失败'));
         }
     });
 })
@@ -240,6 +237,7 @@ function setRead (id){
     backUnread[id] = 0;
     LEMON.db.set('num'+id, 0);
     $('#chat-' + id).find('.num').html(0).hide();
+    nim.resetSessionUnread(id);
 }
 
 </script>
