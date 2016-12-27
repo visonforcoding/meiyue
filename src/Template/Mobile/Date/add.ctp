@@ -257,7 +257,6 @@ use Cake\I18n\Time;
         new skillsPicker().show(chooseSkillCallBack);
     });
 
-
     //标签选择回调函数----------------------------------------------------------------
     function chooseTagsCallBack(tagsData) {
         var html = "";

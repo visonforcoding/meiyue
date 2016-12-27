@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Admin;
 
+use Cake\ORM\TableRegistry;
 use Wpadmin\Controller\AppController;
 
 /**
@@ -11,22 +12,22 @@ use Wpadmin\Controller\AppController;
 class ActivityController extends AppController
 {
 
-/**
-* Index method
-*
-* @return void
-*/
-public function index()
-{
-    $this->set([
-        'activity' => $this->Activity,
-        'pageTitle' => '派对管理',
-        'bread' => [
-            'first' => ['name' => 'xxx'],
-            'second' => ['name' => '派对管理'],
-        ],
-    ]);
-}
+    /**
+     * Index method
+     *
+     * @return void
+     */
+    public function index()
+    {
+        $this->set([
+            'activity' => $this->Activity,
+            'pageTitle' => '派对管理',
+            'bread' => [
+                'first' => ['name' => 'xxx'],
+                'second' => ['name' => '派对管理'],
+            ],
+        ]);
+    }
 
     /**
      * View method
@@ -65,10 +66,10 @@ public function index()
             $activity->male_rest = $activity->male_lim;
             $activity->female_rest = $activity->female_lim;
             if ($this->Activity->save($activity)) {
-                 $this->Util->ajaxReturn(true,'添加成功');
+                $this->Util->ajaxReturn(true, '添加成功');
             } else {
-                 $errors = $activity->errors();
-                 $this->Util->ajaxReturn(['status'=>false, 'msg'=>getMessage($errors),'errors'=>$errors]);
+                $errors = $activity->errors();
+                $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
         $this->set(compact('activity'));
@@ -90,16 +91,16 @@ public function index()
      */
     public function edit($id = null)
     {
-         $activity = $this->Activity->get($id,[
+        $activity = $this->Activity->get($id, [
             'contain' => []
         ]);
-        if ($this->request->is(['post','put'])) {
+        if ($this->request->is(['post', 'put'])) {
             $activity = $this->Activity->patchEntity($activity, $this->request->data);
             if ($this->Activity->save($activity)) {
-                  $this->Util->ajaxReturn(true,'修改成功');
+                $this->Util->ajaxReturn(true, '修改成功');
             } else {
-                 $errors = $activity->errors();
-               $this->Util->ajaxReturn(false,getMessage($errors));
+                $errors = $activity->errors();
+                $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
         $this->set(compact('activity'));
@@ -122,29 +123,29 @@ public function index()
     public function delete($id = null)
     {
         $this->request->allowMethod('post');
-         $id = $this->request->data('id');
-                if ($this->request->is('post')) {
-                $activity = $this->Activity->get($id);
-                 if ($this->Activity->delete($activity)) {
-                     $this->Util->ajaxReturn(true,'删除成功');
-                } else {
-                    $errors = $activity->errors();
-                    $this->Util->ajaxReturn(true,getMessage($errors));
-                }
-          }
+        $id = $this->request->data('id');
+        if ($this->request->is('post')) {
+            $activity = $this->Activity->get($id);
+            if ($this->Activity->delete($activity)) {
+                $this->Util->ajaxReturn(true, '删除成功');
+            } else {
+                $errors = $activity->errors();
+                $this->Util->ajaxReturn(true, getMessage($errors));
+            }
+        }
     }
 
-/**
-* get jqgrid data 
-*
-* @return json
-*/
-public function getDataList()
-{
+    /**
+     * get jqgrid data
+     *
+     * @return json
+     */
+    public function getDataList()
+    {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'Activity.'.$this->request->data('sidx');
+        $sort = 'Activity.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
@@ -158,21 +159,70 @@ public function getDataList()
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-                $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order,$where);
-                $this->autoRender = false;
+        $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order, $where);
+        $this->autoRender = false;
         $this->response->type('json');
         $this->response->body(json_encode($data));
         $this->response->send();
         $this->response->stop();
-}
+    }
 
-/**
-* export csv
-*
-* @return csv 
-*/
-public function exportExcel()
-{
+
+    /**
+     * joinIndex method
+     *
+     * @return void
+     */
+    public function joinIndex($actid = null)
+    {
+        $this->set([
+            'pageTitle' => '派对报名管理',
+            'actid' => $actid,
+            'bread' => [
+                'first' => ['name' => '派对管理'],
+                'second' => ['name' => '派对报名管理'],
+            ],
+        ]);
+    }
+
+
+    /**
+     * get jqgrid data
+     *
+     * @return json
+     */
+    public function getJoinList()
+    {
+        $this->request->allowMethod('ajax');
+        $page = $this->request->data('page');
+        $rows = $this->request->data('rows');
+        $actid = $this->request->query['actid'];
+        $sort = 'Actregistration.' . $this->request->data('sidx');
+        $order = $this->request->data('sord');
+        $keywords = $this->request->data('keywords');
+        $where = ['Actregistration.activity_id' => $actid];
+        $contain = ['User' => function($q) {
+            return $q->select(['nick', 'gender']);
+        }];
+        if (!empty($keywords)) {
+            $where[' User.name like'] = "%$keywords%";
+        }
+        $data = $this->getJsonForJqrid($page, $rows, 'Actregistration', $sort, $order, $where, $contain);
+        $this->autoRender = false;
+        $this->response->type('json');
+        $this->response->body(json_encode($data));
+        $this->response->send();
+        $this->response->stop();
+    }
+
+
+    /**
+     * export csv
+     *
+     * @return csv
+     */
+    public function exportExcel()
+    {
         $sort = $this->request->query('sidx');
         $order = $this->request->query('sort');
         $keywords = $this->request->query('keywords');
@@ -187,12 +237,12 @@ public function exportExcel()
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $Table =  $this->Activity;
-        $column = ['大图url','标题','男性价格','女性价格','描述','开始时间','结束时间','活动地址','地址纬度','地址经度','活动男性名额','活动女性名额','男性剩余名额','女性剩余名额','图文详情','活动须知','活动状态：1#正常进行 2#下架处理','备注'];
+        $Table = $this->Activity;
+        $column = ['大图url', '标题', '男性价格', '女性价格', '描述', '开始时间', '结束时间', '活动地址', '地址纬度', '地址经度', '活动男性名额', '活动女性名额', '男性剩余名额', '女性剩余名额', '图文详情', '活动须知', '活动状态：1#正常进行 2#下架处理', '备注'];
         $query = $Table->find();
         $query->hydrate(false);
-        $query->select(['big_img','title','male_price','female_price','description','start_time','end_time','site','site_lat','site_lng','male_lim','female_lim','male_rest','female_rest','detail','notice','status','remark']);
-         if (!empty($where)) {
+        $query->select(['big_img', 'title', 'male_price', 'female_price', 'description', 'start_time', 'end_time', 'site', 'site_lat', 'site_lng', 'male_lim', 'female_lim', 'male_rest', 'female_rest', 'detail', 'notice', 'status', 'remark']);
+        if (!empty($where)) {
             $query->where($where);
         }
         if (!empty($sort) && !empty($order)) {
@@ -200,8 +250,8 @@ public function exportExcel()
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'Activity_'.date('Y-m-d').'.csv';
-        \Wpadmin\Utils\Export::exportCsv($column,$res,$filename);
+        $filename = 'Activity_' . date('Y-m-d') . '.csv';
+        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
 
-}
+    }
 }

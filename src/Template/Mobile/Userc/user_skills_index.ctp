@@ -51,41 +51,28 @@
 <script>
 
     $('.toback').on('click', function(){
-
         history.back();
-
     })
-
+    LEMON.sys.back('/user/index');
 
     $('.skill-item').on('click', function(){
-
         window.location.href = '/userc/user-skills-view/edit/' + $(this).attr('item-id');
-
     })
 
 
     $('.switch-btn').on('click', function (e) {
-
         e.stopPropagation();
         //判断此时开关显示状态
         var url = '/userc/update-used-status';
         var selector = $(this);
         if ($(this).hasClass('on')) {
-
             url += '/' + 0;
-
         } else {
-
             url += '/' + 1;
-
         }
-
         if(!$(this).hasClass('switch-all')) {
-
             url += "/" + $(this).attr('item-id')
-
         }
-
         $.ajax({
             type: 'POST',
             url: url,
@@ -93,18 +80,13 @@
             success: function (res) {
                 if (typeof res === 'object') {
                     if (res.status) {
-
                         changeSwitchShow(selector);
-
                     } else {
-
                         alert(res.msg);
-
                     }
                 }
             }
         });
-
     })
 
 
@@ -115,14 +97,14 @@
 
             if ($selector.hasClass('on')) {
 
-                $('.switch').each(function(){
+                $('.switch-btn').each(function(){
                     $(this).removeClass('on');
                     $(this).addClass('off');
                 })
 
             } else {
 
-                $('.switch').each(function(){
+                $('.switch-btn').each(function(){
                     $(this).removeClass('off');
                     $(this).addClass('on');
                 })
@@ -146,14 +128,14 @@
 
                 if ($('.switch-all').hasClass('on')) {
 
-                    $('.switch').each(function(){
+                    $('.switch-btn').each(function(){
                         $(this).removeClass('on');
                         $(this).addClass('off');
                     })
 
                 } else {
 
-                    $('.switch').each(function(){
+                    $('.switch-btn').each(function(){
                         $(this).removeClass('off');
                         $(this).addClass('on');
                     })

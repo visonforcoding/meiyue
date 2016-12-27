@@ -423,12 +423,23 @@ $.util = {
      */
     checkLogin: function (url) {
         if ($.util.isLogin()) {
+            if(!url) {
+                return true;
+            }
             location.href = url;
         } else {
             $.util.alert('请登录后再操作', 1000);
-            setTimeout(function () {
-                location.href = '/user/login?redirect_url=' + encodeURI(document.URL);
-            }, 1000);
+            if(!url) {
+                return false;
+            }
+            if($.util.isAPP) {
+                LEMON.event.login();
+            } else {
+                setTimeout(function () {
+                    location.href = '/user/login?redirect_url=' + encodeURI(document.URL);
+                }, 1000);
+            }
+
         }
     },
     /**

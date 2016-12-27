@@ -78,8 +78,8 @@
         </div>
         <div class="items_adress flex flex_justify">
             <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
-            <div class="button btn_dark {{#notjoin}}join-act{{/notjoin}}" data-id="{{id}}">
-                {{#joined}}您已报名{{/joined}}{{#notjoin}}我要报名{{/notjoin}}{{#norest}}人数已满{{/norest}}
+            <div class="button btn_dark {{^isend}}join-act{{/isend}}" data-id="{{id}}">
+                {{^isend}}我要报名{{/isend}}{{#isend}}报名结束{{/isend}}
             </div>
         </div>
     </div>
