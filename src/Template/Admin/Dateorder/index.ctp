@@ -47,7 +47,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['男方', '女方', '对应约会', '用户技能', '订单状态', '总金额', '是否被投诉', '预约金', '预约金占比', '开始时间', '结束时间', '约会总时间', '支付预约金时间点', '美女接单时间点', '生成时间', '操作'],
+                                ['男方', '女方', '对应约会', '用户技能', '订单状态', '总金额', '预约金', '开始时间', '结束时间', '约会总时间', '支付预约金时间点', '美女接单时间点', '生成时间', '操作'],
                         colModel: [
                             {name: 'buyer.nick', editable: false, align: 'center'},
                             {name: 'dater.nick', editable: false, align: 'center'},
@@ -55,9 +55,7 @@
                             {name: 'user_skill.skill.name', editable: false, align: 'center'},
                             {name: 'status', editable: false, align: 'center', formatter: actionStatus},
                             {name: 'amount', editable: false, align: 'center'},
-                            {name: 'is_complain', editable: false, align: 'center'},
                             {name: 'pre_pay', editable: false, align: 'center'},
-                            {name: 'pre_precent', editable: false, align: 'center'},
                             {name: 'start_time', editable: false, align: 'center'},
                             {name: 'end_time', editable: false, align: 'center'},
                             {name: 'date_time', editable: false, align: 'center'},
@@ -194,7 +192,7 @@
                 function actionStatus(cell, opt, obj) {
                     switch (cell) {
                         case 1:
-                            return '男未支付预约金';
+                            return '下单成功(男未支付预约金)';
                             break;
                         case 2:
                             return '男超时未支付预约金';

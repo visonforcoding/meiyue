@@ -51,12 +51,15 @@ class DateorderShell extends Shell {
                                 }, 
                                 'UserSkill.Skill'
                             ])
-                            ->where(['Dateorder.status in'=>['3','7','10']])
+                            ->where(['Dateorder.status in'=>['1','3','7','10']])
                             ->toArray();
         $counts = count($orders);
         //\Cake\Log\Log::info($counts.'条订单进入时间处理','cron');                        
         foreach ($orders as $key => $order) {
             switch ($order->status) {
+                case 1:
+                    //男方未支付预约金
+                    $this->handStatus1($order);
                 case 3:
                     //男方支付完预约金
                     $this->handStatus3($order);
@@ -73,7 +76,22 @@ class DateorderShell extends Shell {
         }
     }
     
-    /**
+   protected function handStatus1(\App\Model\Entity\Dateorder $order){
+        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+        if ((time()-strtotime($order->create_time)) >= 30 * 60 ) {
+                    //超过30分钟未支付  订单自动关闭
+            \Cake\Log\Log::info('约单:'.$order->id.'超过30分钟未支付预约金,正在被自动处理','cron');
+            $order->status = 2;
+            $res = $DateorderTable->save($order);
+            if($res){
+                dblog('dateorder','1条约单被执行状态1操作','dateorder_id:'.$order->id);
+            }else{
+                dblog('dateorder','1条订单执行状态1操作失败','dateorder_id:'.$order->id);
+            }
+        }
+   }
+
+        /**
      * 处理状态3  预约金退回给用户账户中
      */
     protected function handStatus3(\App\Model\Entity\Dateorder $order){

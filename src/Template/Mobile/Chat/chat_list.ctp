@@ -4,7 +4,7 @@
 <script id="chat-list-tpl" type="text/html">
     {{#sessions}}
     <li id="chat-{{to}}" class="active flex">
-        <div data-accid="{{to}}" data-avatar="{{avatar}}" data-nick="{{nick}}"  
+        <div data-accid="{{to}}" data-id="{{user_id}}" data-avatar="{{avatar}}" data-nick="{{nick}}"  
              class="ablock flex flex_justify user clickable">
             <div class="chat-left-info flex">
                 <div class="avatar">
@@ -176,9 +176,11 @@ $(document).on('click', '.user', function () {
     var accid = $(this).data('accid');
     var nick = $(this).data('nick');
     var avatar = $(this).data('avatar');
+    var user_id = $(this).data('user_id');
     param['accid'] = accid;
     param['nick'] = nick;
     param['avatar'] = avatar;
+    param['id'] = user_id;
     LEMON.event.imTalk(param);
     setRead(accid);
 });
@@ -212,6 +214,7 @@ function getRender(sessions, res) {
                 sessions[i]['avatar'] = v.avatar;
                 sessions[i]['datetime'] = $.util.getImShowTime(new Date(n.updateTime));
                 sessions[i]['unreadst'] = n.unread > 0 ? '' : 'hidden';
+                sessions[i]['user_id'] = v.id;
             }
         })
     })
