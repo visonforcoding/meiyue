@@ -354,6 +354,18 @@ class ApiController extends AppController {
                             dblog('movement', '动态保存失败', $movement->errors());
                         }
                     }
+                    
+                    if ($param->action == 'up_auth_video') {
+                        //处理上传认证视频
+                        $user->auth_video = $data['video'];
+                        $user->auth_video_cover = $data['video_cover'];
+                        if ($UserTable->save($user)) {
+                            $this->jsonResponse(true, '保存成功');
+                        } else {
+                            $this->jsonResponse(true, $user->errors());
+                        }
+                    }
+                    
                     if($param->action == 'update_basic_video') {
                         $user->video = $data['video'];
                         $user->video_cover = $data['video_cover'];

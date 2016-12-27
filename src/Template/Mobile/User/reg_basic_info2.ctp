@@ -2,7 +2,7 @@
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <h1>基本信息</h1>
-        <span id="next" class="r_btn">下一步</span>
+        <span class="r_btn">提交</span>
     </div>
 </header>
 <div class="wraper">
@@ -29,122 +29,61 @@
         <div class="inner">
             <ul>
                 <li>
-                    <h3><i class="iconfont color_y">&#xe604;</i>为什么要身份认证？</h3>
+                    <h3><i class="iconfont color_y">&#xe604;</i>为什么要真人视频认证？</h3>
                     <div class="con">
-                        <p>美约作为一个真实的高端红人工作交友平台，希望给大家提供一个真诚的工作交友环境。请放心您上传的身份证照片仅供审核，仅自己可见，其他无法看到。</p>
+                        <p>美约作为一个真实的高端红人工作交友平台，希望给大家提供一个真诚的工作交友环境。请放心您上传的真人视频仅供审核用，仅自己可见，其他人无法看到。</p>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
-    <!--示例-->
-    <div class="up_identify_box">
+    <div class="identify_info_des">
         <div class="inner">
-            <div class="title">
-                <h3>示例<i>（请务必按照示例上传清晰的照片）</i></h3>
-            </div>
-            <div class="example_identify">
-                <dl class="Idcard">
-                    <dt>
-                    <img src="/mobile/images/face.jpg" alt="" />
-                    <span class="tips">参考图例</span>
-                    </dt>
-                    <dd>身份证正面照</dd>
-                </dl>
-                <dl class="Idcard">
-                    <dt>
-                    <img src="/mobile/images/reverse.jpg" alt="" />
-                    <span class="tips">参考图例</span>
-                    </dt>
-                    <dd>身份证背面照</dd>
-                </dl>
-                <dl class="Idcard personimg">
-                    <dt>
-                    <img src="/mobile/images/person.jpg" alt="" />
-                    <span class="tips">参考图例</span>
-                    </dt>
-                    <dd>手持身份证正面照</dd>
-                </dl>
-            </div>
-        </div>
-    </div>
-    <!--上传-->
-    <div class="up_identify_box bgff mt40">
-        <div class="inner">
-            <div class="title">
-                <h3 class="color_black">如上图所示请上传认证照片</h3>
-            </div>
-            <div class="fact_identify">
-                <dl class="Idcard">
-                    <dt>
-                    <img id="front_img" src="/mobile/images/upimg.png" alt="" />
-                    <input id="idfront" name="idfront" type="hidden" />
-                    </dt>
-
-                </dl>
-                <dl class="Idcard">
-                    <dt>
-                    <img id="back_img" src="/mobile/images/upimg.png" alt="" />
-                    <input id="idback" name="idback" type="hidden" />
-                    </dt>
-                </dl>
-                <dl class="Idcard personimg">
-                    <dt>
-                    <img id="person_img" src="/mobile/images/upimg.png" alt="" />
-                    <input id="idperson" name="idperson" type="hidden" />
-                    </dt>
-                </dl>
-            </div>
+            <ul>
+                <li>
+                    <h3><i class="iconfont color_y">&#xe604;</i>我的认证视频</h3>
+                    <div class="con">
+                        <div class="up_identify_box">
+                            <p class="smallarea">注意依次做以下动作：点头，露齿笑，往左转头，举右手</p>
+                            <div id="auth_video" class="btn btn_dark_t mt40">点击录制</div>
+                            <div class="fact_identify mt40"   style="display: none;">
+                                <dl  class="Idcard personimg">
+                                    <dt>
+                                    <img src="/mobile/images/upimg.png" alt="" />
+                                    </dt>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <!--上传-->
         </div>
     </div>
 </div>
 <?= $this->start('script'); ?>
 <script>
-    var user_id = <?=$user->id?>;
-    $('.Idcard img').on('tap', function () {
-        //alert('点击了图片上传');
-        $obj = $(this);
-        if ($.util.isAPP) {
-            //alert('我要调app的东西了');
-            LEMON.event.uploadPic('{"dir":"user/idcard"}', function (data) {
-                var data = JSON.parse(data);
-                if (data.status === true) {
-                    $obj.next('input').val(data.path);
-                    $obj.attr('src', data.urlpath);
-                } else {
-                    $.util.alert('app上传失败');
-                }
-            });
-            return false;
-        }
-    });
-    LEMON.sys.setTopRight('下一步')
+    var user_id = <?= $user->id ?>;
+    $.util.chooseAuthVideo('auth_video', '注意依次做以下动作：点头，露齿笑，往左转头，举右手');
+    LEMON.sys.setTopRight('提交');
     window.onTopRight = function () {
-        var idfront = $('#idfront').val();
-        var idback = $('#idback').val();
-        var idperson = $('#idperson').val();
-        if (!idfront) {
-            $.util.alert('请上传正面照');
-            return false;
-        }
-        if (!idback) {
-            $.util.alert('请上传背面照');
-            return false;
-        }
-        if (!idperson) {
-            $.util.alert('请上传背面照');
-            return false;
-        }
-        $.util.ajax({
-            data: {idfront: idfront, idback: idback, idperson: idperson},
-            func: function (res) {
-                if (res.status) {
-                    document.location.href = '/user/reg-basic-info-3/'+user_id;
-                } else {
-                    $.util.alert(res.msg);
-                }
+        $.util.showPreloader();
+        if ($('#auth_video').data('choosed'))
+            var param = {};
+        param['action'] = 'up_auth_video';
+        param = JSON.stringify(param);
+        LEMON.event.uploadVideo({key: 'auth_video', user_id: user_id, param: param}, function (res) {
+            if (res) {
+                $.util.alert('视频已提交');
+                setTimeout(function () {
+                    document.location.href = '/user/reg-basic-info-3/' + user_id;
+                }, 1000);
             }
         });
-    }
+        //$.util.alert('完成注册
+
+    };
+
+
 </script>
 <?= $this->end('script'); ?>
