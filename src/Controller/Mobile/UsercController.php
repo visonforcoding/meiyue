@@ -726,6 +726,12 @@ class UsercController extends AppController {
             $price = 0;
             $fee = 0;
             $type = PayOrderType::BUY_TAOCAN;
+            if(!$pack) {
+                return $this->Util->ajaxReturn([
+                    'status'=>false,
+                    'msg' => '套餐不存在'
+                ]);
+            }
             switch($pack->type) {
                 case PackType::RECHARGE:
                     $type = PayOrderType::BUY_CHONGZHI_TAOCAN;
@@ -734,20 +740,12 @@ class UsercController extends AppController {
                     $type = PayOrderType::BUY_TAOCAN;
                     break;
             }
-            if(!$pack) {
-                return $this->Util->ajaxReturn([
-                    'status'=>false,
-                    'msg' => '套餐不存在'
-                ]);
-            }
+            $price = $pack->price;
+            $fee = $pack->price;
             if(PackType::VIP == $pack->type) {
                 $title = 'VIP套餐购买';
-                $price = $pack->price;
-                $fee = $pack->price;
             } else if(PackType::RECHARGE == $pack->type) {
                 $title = '充值套餐购买';
-                $price = $pack->vir_money;
-                $fee = $pack->price;
             } else {
                 return $this->Util->ajaxReturn([
                     'status'=>false,
