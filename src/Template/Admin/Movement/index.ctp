@@ -1,6 +1,12 @@
 <?php $this->start('static') ?>   
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
+<style>
+    video{
+        width:100%;
+        height:100%;
+    }
+</style>
 <?php $this->end() ?> 
 <div  class="col-xs-12">
     <div id="list-bar" data-spy="affix" data-offset-top="200">
@@ -33,6 +39,8 @@
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script>
                     var lastsel;
+                    var selVideo;
+                    var videoCover;
                     $(function () {
                         $('#main-content').bind('resize', function () {
                             $("#list").setGridWidth($('#main-content').width() - 40);
@@ -49,7 +57,7 @@
                             datatype: "json",
                             mtype: "POST",
                             colNames:
-                                    ['用户id', '动态类型', '动态内容', '动态图', '视频', '视频封面', '查看数', '点赞数', '审核状态', '创建时间', '更新时间', '操作'],
+                                    ['用户id', '动态类型', '动态内容', '动态图', '视频', '查看数', '点赞数', '审核状态', '创建时间', '更新时间', '操作'],
                             colModel: [
                                 {name: 'user.nick', editable: false, align: 'center'},
                                 {name: 'type', editable: false, align: 'center', formatter: function (cell, opt, row) {
@@ -60,21 +68,23 @@
                                             case 2:
                                                 cell = '视频动态';
                                                 break;
-                                            case 3:
-                                                cell = '图片动态';
-                                                break;
-                                            case 4:
-                                                cell = '视频动态';
-                                                break;
                                         }
                                         return cell;
                                     }},
                                 {name: 'body', editable: false, align: 'center'},
                                 {name: 'images', editable: false, align: 'center', formatter: function (cell, opt, row) {
+                                        if (row.type == '2') {
+                                            return '无';
+                                        }
                                         return '<a data-id="' + row.id + '" onclick="showImgs(this)"><i class="icon icon-picture"></i></a>';
                                     }},
-                                {name: 'video', editable: false, align: 'center'},
-                                {name: 'video_cover', editable: false, align: 'center'},
+                                {name: 'video', editable: false, align: 'center', formatter: function (cell, opt, row) {
+                                        if (row.type == '1') {
+                                            return '无';
+                                        }
+                                        selVideo = cell;
+                                        return '<a data-id="' + row.id + '" onclick="showVideo(this)"><i class="icon icon-play-circle"></i></a>';
+                                    }},
                                 {name: 'view_nums', editable: false, align: 'center'},
                                 {name: 'praise_nums', editable: false, align: 'center'},
                                 {name: 'status', editable: true, align: 'center', formatter: function (cell, opt, row) {
@@ -158,6 +168,17 @@
                                 photos: res.imgs //格式见API文档手册页
                                 , shift: 0 //0-6的选择，指定弹出图片动画类型，默认随机
                             });
+                        });
+                    }
+
+                    function showVideo(t) {
+                        layer.open({
+                            type: 1,
+                            skin: 'layui-layer-lan', //加上边框
+                            area: ['30%', '40%'],
+                            content: '<video  poster="' + videoCover + '" width="320" height="240" controls>' +
+                                    '<source src="' + selVideo + '" type="video/mp4">' +
+                                    '</video>'
                         });
                     }
 
