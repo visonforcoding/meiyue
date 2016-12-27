@@ -224,23 +224,33 @@ function getRender(sessions, res) {
 }
 
 function getUnread (id, num){
-    var total=0, old = backUnread.hasOwnProperty(id) ? backUnread[id] : LEMON.db.get('num'+id);
-    old = parseInt(old) ? parseInt(old) : 0;
-    if(!backUnread.hasOwnProperty(id)) backUnread[id] = old;
-    if(num || old){
-        total = num + old;
-        LEMON.db.set('num'+id, total);
-    }
+    var total= LEMON.db.get('num'+id) || 0;
+    if(num) total++;
+    LEMON.db.set('num'+id, total);
     return total;
 }
 function setRead (id){
     backUnread[id] = 0;
     LEMON.db.set('num'+id, 0);
     $('#chat-' + id).find('.num').html(0).hide();
-    nim.onupdatesession(id);
-    nim.resetSessionUnread(id);
-
 }
 
+
+//function getUnread (id, num){
+//    var total=0, old = backUnread.hasOwnProperty(id) ? backUnread[id] : LEMON.db.get('num'+id);
+//    old = parseInt(old) ? parseInt(old) : 0;
+//    if(!backUnread.hasOwnProperty(id)) backUnread[id] = old;
+//    if(num || old){
+//        //total = num + old;
+//        if(num) total++;
+//        LEMON.db.set('num'+id, total);
+//    }
+//    return total;
+//}
+//function setRead (id){
+//    backUnread[id] = 0;
+//    LEMON.db.set('num'+id, 0);
+//    $('#chat-' + id).find('.num').html(0).hide();
+//}
 </script>
 <?php $this->end('script'); ?>
