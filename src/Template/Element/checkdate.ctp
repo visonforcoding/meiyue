@@ -101,30 +101,17 @@
             </div>
             <div class="r_box_date_2">
                 <ul class="end-time">
-                    <!--<li val='00:00:00'>00:00</li>
-                    <li val='01:00:00'>01:00</li>
-                    <li val='02:00:00'>02:00</li>
-                    <li val='03:00:00'>03:00</li>
-                    <li val='04:00:00'>04:00</li>
-                    <li val='05:00:00'>05:00</li>
-                    <li val='06:00:00'>06:00</li>
-                    <li val='07:00:00'>07:00</li>
-                    <li val='08:00:00'>08:00</li>
-                    <li val='09:00:00'>09:00</li>
-                    <li val='10:00:00'>10:00</li>-->
-                    <li val='11:00:00' class="select">11:00</li>
-                    <li val='12:00:00'>12:00</li>
-                    <li val='13:00:00'>13:00</li>
-                    <li val='14:00:00'>14:00</li>
-                    <li val='15:00:00'>15:00</li>
-                    <li val='16:00:00'>16:00</li>
-                    <li val='17:00:00'>17:00</li>
-                    <li val='18:00:00'>18:00</li>
-                    <li val='19:00:00'>19:00</li>
-                    <li val='20:00:00'>20:00</li>
-                    <li val='21:00:00'>21:00</li>
-                    <li val='22:00:00'>22:00</li>
-                    <li val='23:00:00'>23:00</li>
+                    <li val='2'>2小时</li>
+                    <li val='3'>3小时</li>
+                    <li val='4'>4小时</li>
+                    <li val='5'>5小时</li>
+                    <li val='6'>6小时</li>
+                    <li val='7'>7小时</li>
+                    <li val='8'>8小时</li>
+                    <li val='9'>9小时</li>
+                    <li val='10'>10小时</li>
+                    <li val='11'>11小时</li>
+                    <li val='12'>12小时</li>
                     <li ></li>
                     <li ></li>
                     <li ></li>
@@ -139,7 +126,7 @@
             calfun: null,  //回调函数
             _year_month_date: null,
             _start_time: '08:00:00',
-            _end_time: '11:00:00'
+            _len: '2'
         }
         $.extend(this, this.opt, o);
     };
@@ -150,30 +137,16 @@
             LEMON.sys.hideKeyboard();
 
             var currentDate = new Date();
-            this._year_month_date = currentDate.getFullYear()
-                + "/"
-                + (currentDate.getMonth() + 1)
-                + "/"
-                + currentDate.getDate();
+            this._year_month_date = $.util.dataformat('yyyy/mm/dd', currentDate);
             this._start_time = '08:00:00';
-            this._end_time = '11:00:00';
+            this._len = '2';
 
             //获取当前时间
             var date = new Date();
             var tem = date.getTime();
             var getMonthDateHtml = function(hs) {
                 var d = new Date(hs);
-                return "<li val='"
-                    + d.getFullYear()
-                    + "/"
-                    + (d.getMonth() + 1)
-                    +"/"
-                    + d.getDate()
-                    + "'>"
-                    + (d.getMonth() + 1)
-                    + "月"
-                    + d.getDate()
-                    + "日</li>";
+                return "<li val='" + $.util.dataformat('yyyy/mm/dd',d) + "'>" + $.util.dataformat('mm月dd日',d) + "</li>";
             };
             //初始化时间选择器
             var str = "";
@@ -200,7 +173,7 @@
 
             // 结束时间
             $('.r_box_date_2').on('scroll', function () {
-                obj._end_time = obj.scrollEvent(this, $('.r_box_date_2 li'));
+                obj._len = obj.scrollEvent(this, $('.r_box_date_2 li'));
             });
 
             $('#date-cancel-btn').on('click', function() {
@@ -228,26 +201,20 @@
                 $.util.alert("请选择开始时间!");
                 return;
             }
-            if(!obj._end_time){
-                $.util.alert("请选择结束时间!");
+            if(!obj._len){
+                $.util.alert("请选择约会时长!");
                 return;
             }
             if(obj.calfun){
-                var start_datetime = obj._year_month_date + " " + obj._start_time;
-                var end_datetime = obj._year_month_date + " " + obj._end_time;
-
-                current = new Date().getTime();
-                start = new Date(start_datetime).getTime();
-                end = new Date(end_datetime).getTime();
+                var start_datetime = obj._year_month_date + " " + obj._start_time,
+                current = new Date().getTime(),
+                start = new Date(start_datetime).getTime(),
+                end_datetime = start + obj._len * 3600 * 1000;
                 if(current >= start) {
-                    $.util.alert("您选的约会时间已经过点了!");
+                    $.util.alert("您选的开始时间已经过点了!");
                     return;
                 }
-                if(((end - start) / (1000 * 60 * 60)) < 3) {
-                    $.util.alert("约会时间最少3个小时!");
-                    return;
-                }
-                obj.calfun(start_datetime, end_datetime);
+                obj.calfun(start_datetime, $.util.dataformat('yyyy/mm/dd hh:ii:ss', new Date(end_datetime)));
             }
             obj.hide();
         },
