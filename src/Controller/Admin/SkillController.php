@@ -7,6 +7,7 @@ use Wpadmin\Controller\AppController;
  * Skill Controller
  *
  * @property \App\Model\Table\SkillTable $Skill
+ * @property \App\Controller\Component\BdmapComponent $Bdmap
  */
 class SkillController extends AppController
 {
@@ -206,5 +207,13 @@ class SkillController extends AppController
         $filename = 'Skill_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
 
+    }
+    
+    public function checkPlace(){
+        $q_key = $this->request->data('q_key');
+        $this->loadComponent('Bdmap');
+        $res = $this->Bdmap->placeSearchNearBy($q_key, '114.044555,22.6453');
+        $this->Util->ajaxReturn(['places'=>$res]);
+                
     }
 }

@@ -51,6 +51,10 @@
     <p>
         <input id="submit" type="button" value="确定">
 </form>
+<div class=""  id="show-test-box">
+    <ul id="show-test">
+    </ul>
+</div>
 
 <script src="/wpadmin/js/jquery.js" ></script>
 <script src="/wpadmin/lib/layer/layer.js" ></script>
@@ -96,5 +100,21 @@
             content: url//iframe的url
         });
     }
+    $('#test').on('click',function(){
+        var query = $('input[name="q_key"]').val();
+        $.ajax({
+            type: 'POST',
+            url:'/skill/checkPlace',
+            data:{q_key:query},
+            dataType:'json',
+            success:function(res){
+                $('#show-test').children().remove();
+                $.each(res.places,function(i,n){
+                     var item = '<li>'+n.name+'</li>';
+                     $('#show-test').append(item);
+                });
+            }
+        })
+    });
 
 </script>
