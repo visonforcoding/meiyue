@@ -239,6 +239,7 @@
                 loopScroll: false,
                 autoTime: 0,
                 lockScrY: true,
+                min: $(window).width(), //响应滑动的最小移动距离
                 //imgInitLazy: 1000,
                 index: obj.cur_tab,
                 viewDom: $('.activity_list'),
