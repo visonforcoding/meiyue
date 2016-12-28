@@ -23,7 +23,7 @@
         overflow: auto;
         -webkit-overflow-scrolling: touch;
         z-index:999;
-        width:50%;
+        width:34%;
         float:left;
         height:150px;
     }
@@ -31,7 +31,7 @@
         overflow: auto;
         -webkit-overflow-scrolling: touch;
         z-index:999;
-        width:25%;
+        width:33%;
         float:left;
         height:150px;
     }
@@ -39,7 +39,7 @@
         overflow: auto;
         -webkit-overflow-scrolling: touch;
         z-index:999;
-        width:25%;
+        width:33%;
         float:left;
         height:150px;
     }
