@@ -275,3 +275,7 @@ function generateImgUrl($url,$domain,$glide=false){
 function getHost($proto = 'http') {
     return $proto.'://'.$_SERVER['HTTP_HOST'];
 }
+
+function getCity($str){
+    return preg_replace('/北京,|天津,|重庆,|上海,/','', $str);   
+}
