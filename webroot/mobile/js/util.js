@@ -728,7 +728,8 @@ $.util = {
         img.height < img.width ? $(img).css({'height':'100%'}) : $(img).css({'width': '100%'})
     },
     addZero:function(p,len){
-        return ('0000000000000000000'+p).substring(-len);
+        str = '0000000000000000000'+p;
+        return str.substr(str.length-len, len);
     },
     dataformat: function (formatStr, date) {
         var arrWeek = ['日', '一', '二', '三', '四', '五', '六'],
