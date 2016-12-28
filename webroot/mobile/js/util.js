@@ -595,6 +595,21 @@ $.util = {
         })
     },
     /**
+     * 判断是否上传过  用属性  data('choosed')
+     * @param id
+     */
+    chooseAuthVideo: function (id,str) {
+        var dom = $('#' + id);
+        dom.on('tap', function () {
+            LEMON.event.chooseAuthVideo({'key': id,'str':str}, function (res) {
+                res = JSON.parse(res);
+                dom.next('div').find('img').eq(0).attr('src', 'http://video.com/' + (new Date()).getTime() + '/' + res.key);
+                dom.data('choosed', 'ok');
+                dom.next('div').show();
+            });
+        })
+    },
+    /**
      * 获取当前时间
      * @returns {String}
      */

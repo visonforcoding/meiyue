@@ -126,6 +126,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         "event.uploadAvatar",  //上传头像 有正方形选择框
         "event.choosePic",  //选择多个图片 返回base64 小图
         "event.chooseVideo",  //选择视频
+        "event.chooseAuthVideo",  //选择认证视频
         "event.changePic",  //替换某张图片
         ];
 
@@ -265,6 +266,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                 case "event.changePic":
                 case "event.choosePic":
                 case "event.chooseVideo":
+                case "event.chooseAuthVideo":
                 case "event.addBtn":
                 case 'event.login':
                     registerAPI(null, api, function () {
