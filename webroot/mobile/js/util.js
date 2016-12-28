@@ -272,7 +272,8 @@ $.util = {
 
         //console.log([$(document).height(), $(window).height(),$(document).height()-$(window).height()-200,st].join('-'));
 //        if (loadFunc && st >= (($(document).height() - $(window).height()) - 300)) {
-        if (loadFunc && st >= (($(document).height() - 150))) {
+//        if (loadFunc && st >= (($(document).height() ))) {
+        if (loadFunc && st >= (($(document).height() - $(window).height()) - 300)) {
             loadFunc();
             $.util.initLoadImg(listId);
         }
