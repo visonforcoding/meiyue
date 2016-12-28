@@ -286,7 +286,7 @@ class UserController extends AppController {
         }
         $this->set([
             'user'=>$user,
-            'pageTitle' => '美约-身份认证'
+            'pageTitle' => '真人视频认证'
         ]);
     }
 
