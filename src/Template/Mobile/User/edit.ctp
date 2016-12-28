@@ -5,7 +5,7 @@
     </div>
 </header>
 <div class="wraper">
-    <h3 class="basic_info_integrity">当前资料完整度<?= $percent;?>%</h3>
+    <h3 class="basic_info_integrity">当前资料完整度<?= $percent; ?>%</h3>
     <div class="identify_img_ifo mt40">
         <ul class="inner">
             <li class="clearfix" id="avatar_img">
@@ -22,58 +22,76 @@
     </div>
     <div class="identify_basic_info mt40">
         <ul class="inner">
-            <li class="clearfix" onclick="window.location.href='/userc/edit-basic';">
-               
-                    <span class="fl">基本信息</span>
-                   <span class="fr"><i class="iconfont right_ico ">&#xe605;</i></span>
-               
+            <li class="clearfix" onclick="window.location.href = '/userc/edit-basic';">
+
+                <span class="fl">基本信息</span>
+                <span class="fr"><i class="iconfont right_ico ">&#xe605;</i></span>
+
             </li>
-            <li class="clearfix" <?= (!($user->idfront) || !($user->idback) || !($user->idperson) || ($user->id_status == UserStatus::NOPASS))?'onclick="window.location.href=\'/userc/edit-auth\';"':''?>>
-              
-                   <span class="fl">身份认证</span>
-                   <?php if(!($user->idfront) || !($user->idback) || !($user->idperson)): ?>
-                       <i class="iconfont right_ico fr">&#xe605;</i>
-                   <?php elseif($user->id_status == UserStatus::PASS): ?>
-                   <span class="fr">
-                   <i class="color_gray fr-des">审核通过</i>
-                   </span>
-                   <?php elseif($user->id_status == UserStatus::CHECKING): ?>
-                   <span class="fr" onclick="window.location.href='/userc/edit-auth';">
-                     <i class="color_gray fr-des">审核中</i><i class="iconfont right_ico">&#xe605;</i>
-                   </span>
-                   <?php elseif($user->id_status == UserStatus::NOPASS): ?>
-                   <span class="fr" onclick="window.location.href='/userc/edit-auth';">
-                   <i class="color_error fr-des">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
-                   </span>
-                   <?php endif; ?>
-                
-            </li>
-           <!--  <li class="clearfix" onclick="window.location.href='/userc/edit-auth';">
-                <a href="#this">
+            <?php if ($user->gender == 2): ?>
+                <li class="clearfix" <?= !($user->auth_status == UserStatus::NOPASS) ? 'onclick="window.location.href=\'/userc/edit-true\';"' : '' ?>>
                     <span class="fl">真人视频认证</span>
+                    <?php if (!$user->auth_status == UserStatus::PASS): ?>
+                        <i class="iconfont right_ico fr">&#xe605;</i>
+                        <span class="fr">
+                            <i class="color_gray fr-des">审核通过</i>
+                        </span>
+                    <?php elseif ($user->auth_status == UserStatus::CHECKING): ?>
+                        <span class="fr" onclick="window.location.href = '/userc/edit-true';">
+                            <i class="color_gray fr-des">审核中</i><i class="iconfont right_ico">&#xe605;</i>
+                        </span>
+                    <?php elseif ($user->auth_status == UserStatus::NOPASS): ?>
+                        <span class="fr" onclick="window.location.href = '/userc/edit-true';">
+                            <i class="color_error fr-des">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
+                        </span>
+                    <?php endif; ?>
+                </li>
+            <?php endif; ?>
+            <li class="clearfix" <?= (!($user->idfront) || !($user->idback) || !($user->idperson) || ($user->id_status == UserStatus::NOPASS)) ? 'onclick="window.location.href=\'/userc/edit-auth\';"' : '' ?>>
+
+                <span class="fl">身份认证</span>
+                <?php if (!($user->idfront) || !($user->idback) || !($user->idperson)): ?>
                     <i class="iconfont right_ico fr">&#xe605;</i>
-                </a>
-            </li> -->
-            <?php if($user->gender == 2): ?>
+                <?php elseif ($user->id_status == UserStatus::PASS): ?>
+                    <span class="fr">
+                        <i class="color_gray fr-des">审核通过</i>
+                    </span>
+                <?php elseif ($user->id_status == UserStatus::CHECKING): ?>
+                    <span class="fr" onclick="window.location.href = '/userc/edit-auth';">
+                        <i class="color_gray fr-des">审核中</i><i class="iconfont right_ico">&#xe605;</i>
+                    </span>
+                <?php elseif ($user->id_status == UserStatus::NOPASS): ?>
+                    <span class="fr" onclick="window.location.href = '/userc/edit-auth';">
+                        <i class="color_error fr-des">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
+                    </span>
+                <?php endif; ?>
+
+            </li>
+            <!--  <li class="clearfix" onclick="window.location.href='/userc/edit-auth';">
+                 <a href="#this">
+                     <span class="fl">真人视频认证</span>
+                     <i class="iconfont right_ico fr">&#xe605;</i>
+                 </a>
+             </li> -->
+            <?php if ($user->gender == 2): ?>
                 <li class="clearfix">
                     <a id="status-btn">
                         <span class="fl">基本照片与视频上传</span>
-                        <?php if(!($user->images) || !($user->video)): ?>
-                            <i class="iconfont right_ico fr" onclick="window.location.href='/userc/edit-basic-pic';">&#xe605;</i>
-                        <?php elseif($user->status == UserStatus::PASS): ?>
+                        <?php if (!($user->images) || !($user->video)): ?>
+                            <i class="iconfont right_ico fr" onclick="window.location.href = '/userc/edit-basic-pic';">&#xe605;</i>
+                        <?php elseif ($user->status == UserStatus::PASS): ?>
                             <span class="fr">
-                               <i class="color_gray fr-des">审核通过</i>
+                                <i class="color_gray fr-des">审核通过</i>
                             </span>
-                        <?php elseif($user->status == UserStatus::CHECKING): ?>
-                            <span class="fr" onclick="window.location.href='/userc/edit-basic-pic';">
-                            <i class="color_gray fr-des">审核中</i><i class="iconfont right_ico">&#xe605;</i>
+                        <?php elseif ($user->status == UserStatus::CHECKING): ?>
+                            <span class="fr" onclick="window.location.href = '/userc/edit-basic-pic';">
+                                <i class="color_gray fr-des">审核中</i><i class="iconfont right_ico">&#xe605;</i>
                             </span>
-                        <?php elseif($user->status == UserStatus::NOPASS): ?>
-                            <span class="fr color_gray" onclick="window.location.href='/userc/edit-basic-pic';">
-                               <i class="color_error fr-des">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
-                           </span>
+                        <?php elseif ($user->status == UserStatus::NOPASS): ?>
+                            <span class="fr color_gray" onclick="window.location.href = '/userc/edit-basic-pic';">
+                                <i class="color_error fr-des">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
+                            </span>
                         <?php endif; ?>
-                    
                 </li>
             <?php endif; ?>
         </ul>
@@ -125,8 +143,8 @@
             method: 'POST',
             data: {avatar: path},
             func: function (res) {
-                if(res.status) {
-                    LEMON.db.set('avatar',  res.realUrl);
+                if (res.status) {
+                    LEMON.db.set('avatar', res.realUrl);
                 }
                 $.util.alert(res.msg);
             }
@@ -140,10 +158,10 @@
     function init() {
         var imgs = '<?= $user->images; ?>';
         var video = '<?= $user->video; ?>';
-        if(imgs && video) {
+        if (imgs && video) {
             $.util.setCookie('UPLOAD_IV', '')
         }
-        if($.util.getCookie('UPLOAD_IV')) {
+        if ($.util.getCookie('UPLOAD_IV')) {
             $('#status-btn').html('<span class="fl">基本照片与视频上传</span><span class="fr"><i class="color_gray fr-des">上传中</i></span>');
         }
     }
