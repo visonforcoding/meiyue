@@ -359,6 +359,7 @@ class ApiController extends AppController {
                         //处理上传认证视频
                         $user->auth_video = $data['video'];
                         $user->auth_video_cover = $data['video_cover'];
+                        $user->auth_status = 1;   //待审核
                         if ($UserTable->save($user)) {
                             $this->jsonResponse(true, '保存成功');
                         } else {

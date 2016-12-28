@@ -659,6 +659,14 @@ class UsercController extends AppController {
     }
     
     /**
+     * 真人认证编辑
+     */
+    public function editTrue(){
+         $this->set(['user' => $this->user, 'pageTitle' => '真人视频认证']);
+    }
+
+
+    /**
      * 我的动态
      */
     public function myTracle(){

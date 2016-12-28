@@ -65,8 +65,9 @@
 <script>
     var user_id = <?= $user->id ?>;
     $.util.chooseAuthVideo('auth_video', '注意依次做以下动作：点头，露齿笑，往左转头，举右手');
-    LEMON.sys.setTopRight('提交');
+    LEMON.sys.setTopRight('下一步');
     window.onTopRight = function () {
+        alert('下一步');
         $.util.showPreloader();
         if ($('#auth_video').data('choosed'))
             var param = {};

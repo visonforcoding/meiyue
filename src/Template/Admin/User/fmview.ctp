@@ -163,6 +163,24 @@
             <?php endif; ?>
 
     </table>
+    <table border="1px" align="center"width="90%">  
+        <caption><h1>真人视频认证</h1></caption>  
+
+
+            <?php if($user->auth_video): ?>
+                <tr>
+                    <td colspan="2">
+                        <video class="basevd" controls="controls" preload="preload" 
+                               src="<?= $user->auth_video ?>" poster="<?= $user->auth_video_cover ?>">
+                    </td>
+                </tr>
+            <?php else: ?>
+                <tr>
+                    <td colspan="2">暂无上传视频！</td>
+                </tr>
+            <?php endif; ?>
+
+    </table>
     <br>
     <table border="1px" align="center"width="90%">  
         <caption><h1>身份证信息</h1></caption>  
@@ -183,6 +201,7 @@
             <tr>
                 <th>审核状态</th>
                 <th>身份认证</th>
+                <th>真人视频认证</th>
                 <th>账号状态</th>
                 <th>操作</th>
             </tr>
@@ -202,6 +221,14 @@
                     <input type="radio" <?= ($user->id_status == UserStatus::PASS)?'checked="checked"':''?> name="id_status" value="<?= UserStatus::PASS;?>" />
                     审核不通过
                     <input type="radio" <?= ($user->id_status == UserStatus::NOPASS)?'checked="checked"':''?> name="id_status" value="<?= UserStatus::NOPASS;?>" />
+                </td>
+                <td class="horizone-title">
+                    待审核
+                    <input type="radio" <?= ($user->auth_status == UserStatus::CHECKING)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::CHECKING;?>" />
+                    审核通过
+                    <input type="radio" <?= ($user->auth_status == UserStatus::PASS)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::PASS;?>" />
+                    审核不通过
+                    <input type="radio" <?= ($user->auth_status == UserStatus::NOPASS)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::NOPASS;?>" />
                 </td>
                 <td class="horizone-title">
                     正常
@@ -227,7 +254,7 @@
             url: '/user/check/<?= $user->id; ?>',
             data: $('form').serialize(),
             success: function (res) {
-                alert(res.msg);
+                layer.alert(res.msg);
             }
         });
     }
