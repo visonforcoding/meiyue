@@ -726,6 +726,21 @@ $.util = {
     },
     setWH: function(img) {
         img.height < img.width ? $(img).css({'height':'100%'}) : $(img).css({'width': '100%'})
+    },
+    addZero:function(p,len){
+        return ('0000000000000000000'+p).substring(-len);
+    },
+    dataformat: function (date, formatStr) {
+        var arrWeek = ['日', '一', '二', '三', '四', '五', '六'],
+            str = formatStr
+                .replace(/yyyy|YYYY/, date.getFullYear()).replace(/yy|YY/, $.util.addZero(date.getFullYear() % 100, 2))
+                .replace(/mm|MM/, $.util.addZero(date.getMonth() + 1, 2)).replace(/m|M/g, date.getMonth() + 1)
+                .replace(/dd|DD/, $.util.addZero(date.getDate(), 2)).replace(/d|D/g, date.getDate())
+                .replace(/hh|HH/, $.util.addZero(date.getHours(), 2)).replace(/h|H/g, date.getHours())
+                .replace(/ii|II/, $.util.addZero(date.getMinutes(), 2)).replace(/i|I/g, date.getMinutes())
+                .replace(/ss|SS/, $.util.addZero(date.getSeconds(), 2)).replace(/s|S/g, date.getSeconds())
+                .replace(/w/g, date.getDay()).replace(/W/g, arrWeek[date.getDay()]);
+        return str;
     }
 };
 
