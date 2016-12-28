@@ -9,7 +9,7 @@
         <?php if(isset($actres)): ?>
             <?php foreach ($actres as $item): ?>
                 <li>
-                    <a href="/index/homepage/<?= $item['user']['id']; ?>" class="praised_block">
+                    <a <?= (!isset($user) || ($item['user_id'] != $user->id))?'href="/index/homepage/'.$item['user']['id']:''; ?>" class="praised_block">
                         <div class="praised_list_left">
                             <span class="avatar"><img src="<?= $item['user']['avatar']; ?>" alt="" /></span>
                             <h3>

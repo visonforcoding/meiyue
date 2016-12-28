@@ -5,6 +5,7 @@ namespace App\Controller\Mobile;
 use App\Controller\Mobile\AppController;
 use App\Model\Entity\User;
 use Cake\Auth\DefaultPasswordHasher;
+use Cake\Core\Exception\Exception;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 use CheckStatus;
@@ -111,17 +112,21 @@ class UsercController extends AppController {
      * 我的-我的派对-分页获取我的派对列表
      */
     public function getActsInPage($page) {
-
         $actRTable = TableRegistry::get('Actregistration');
         $limit = 10;
-        $where = ['user_id' => $this->user->id, 'Actregistration.status' => 1];
+        $where = ['user_id' => $this->user->id];
         $query = $this->request->query('query');
         switch ($query) {
-            case 1:
-                $where = array_merge($where, ['Activity.end_time >=' => new Time()]);
+            case 1:  //进行中, 前置条件，结束时间大于等于当前时间，审核通过、审核中
+                $where = array_merge($where, ['Activity.end_time >=' => new Time(), 'Actregistration.status IN' => [1, 3]]);
                 break;
-            case 2:
-                $where = array_merge($where, ['Activity.end_time <'=>new Time()]);
+            case 2:  //已结束，前置条件：结束时间小于当前时间/取消状态/审核不通过，状态：正常,审核中
+                $where = array_merge($where, ['OR' =>
+                    [
+                        ['Activity.end_time <' => new Time(), 'Actregistration.status IN' => [1, 3]],
+                        ['Actregistration.status IN' => [2, 4]]
+                    ]
+                ]);
                 break;
             default:
                 break;
@@ -136,19 +141,107 @@ class UsercController extends AppController {
                 $row->date = getMD($row->activity->start_time);
                 $row->time = getHIS($row->activity->start_time, $row->activity->end_time);
                 $curdatetime = new Time();
-                $row->bustr = '';
-                if($row->activity->end_time < $curdatetime) {
-                    $row->bustr = '已经结束';
-                } else if (($row->activity->start_time < $curdatetime) && ($curdatetime < $row->activity->end_time)) {
-                    $row->bustr = '正在进行';
-                } else if ($row->activity->start_time > $curdatetime) {
-                    $row->bustr = '即将开始';
+                $row->bucls = 'btn_dark';
+                switch($row->status) {
+                    case 1:
+                        if($row->activity->end_time < $curdatetime) {
+                            $row->bustr = '已结束';
+                            $row->bucls = 'btn_light';
+                        } else {
+                            $row->bustr = '报名成功';
+                        }
+                        break;
+                    case 3:
+                        if($row->activity->end_time < $curdatetime) {
+                            $row->bustr = '已结束';
+                            $row->bucls = 'btn_light';
+                        } else {
+                            $row->bustr = '审核中';
+                            $row->bucls = 'btn_active';
+                        }
+                        break;
+                    case 2:
+                        $row->bustr = '已取消';
+                        $row->bucls = 'btn_light';
+                        break;
+                    case 4:
+                        $row->bustr = '审核不通过';
+                        $row->bucls = 'btn_light';
+                        break;
                 }
                 return $row;
-            })
-            ->toArray();
+            });
         return $this->Util->ajaxReturn(['datas'=>$datas]);
 
+    }
+
+
+    /**
+     * @param string|null $id Actregistration id.
+     * @return \Cake\Network\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function myActivityView($id = null)
+    {
+        $actrTb = TableRegistry::get('Actregistration');
+        $actregistration = null;
+        try {
+            $actregistration = $actrTb->get($id, ['contain' => ['Activity']]);
+        } catch(Exception $e) {
+            $this->autoRender = false;
+        }
+        //状态：0#异常 1#我要取消(男女) 2#您已取消(女) 3活动结束(男女) 4#您已报名,审核中(女) 5#您已报名,审核不通过(女) 6#报名成功(男女)
+        $actstatus = $this->getMyActStatus($actregistration);
+        $this->set([
+            'user' => $this->user,
+            'actstatus' => $actstatus,
+            'actregistration' => $actregistration,
+            'pageTitle' => '美约-活动详情'
+        ]);
+    }
+
+
+    /**
+     * 获取我的派对状态（与数据库的状态不同）
+     * @param Activity $activity
+     * @return int
+     */
+    private function getMyActStatus($myAct)
+    {
+        $activity = $myAct->activity;
+        $actStartTime = new Time($activity->start_time);
+        $curTime = new Time();
+        $sta2curTime =  ($actStartTime->timestamp - $curTime->timestamp) / (60*60*24);
+        $cancancelTime = $activity->cancelday;
+        //状态：0#异常 1#我要取消(男女) 2#您已取消(女) 3活动结束(男女) 4#您已报名,审核中(女) 5#您已报名,审核不通过(女) 6#报名成功(男女)
+        $actstatus = 0;
+        if(!$activity && !$myAct) {
+            $actstatus = 0;
+        } else {
+            switch ($myAct->status) {
+                case 1:  //正常（审核通过）
+                    if($sta2curTime > 0) {
+                        if($sta2curTime > $cancancelTime) {
+                            $actstatus = 1;
+                        } else {
+                            $actstatus = 6;
+                        }
+                    } else {
+                        $actstatus = 3;
+                    }
+                    break;
+                case 2:  //取消
+                    $actstatus = 2;
+                    break;
+                case 3:  //审核中
+                    $actstatus = 4;
+                    break;
+                case 4:  //审核不通过
+                    $actstatus = 5;
+                    break;
+            }
+        }
+        return $actstatus;
     }
 
 

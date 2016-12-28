@@ -1,4 +1,3 @@
-<?php use Cake\I18n\Time; ?>
 <header>
     <div class="header">
         <span class="iconfont toback" onclick="history.back();">&#xe602;</span>
@@ -7,6 +6,7 @@
 </header>
 <div class="wraper">
     <div class="activity_detail_box">
+        <?php $activity = $actregistration['activity']; ?>
         <img src="<?= $activity['big_img']; ?>" alt=""/>
         <div class="tips"><?= $activity['title'] ?></div>
     </div>
@@ -79,29 +79,68 @@
 </div>
 <div style="height:63px;"></div>
 
-<?php if ($actstatus == 3): ?>
-    <a class="identify_footer_potion">报名结束</a>
+<?php if ($actstatus == 0): ?>
+    <a class="identify_footer_potion">异常状态</a>
 <?php elseif ($actstatus == 1): ?>
-    <div class="bottomblock">
-        <div class="flex flex_end">
-            <span class="total"><span
-                    class="color_y"><i><?= ($user['gender'] == 1) ? $activity['male_price'] : $activity['female_price']; ?> </i>美币/人</span></span>
-            <a onclick="topay();" class="nowpay">我要报名</a>
-        </div>
+    <div class="potion_footer flex flex_justify">
+        <span onclick="toCancel();" class="footerbtn cancel">我要取消</span>
+        <span class="footerbtn gopay"><?= ($user->gender == 2)?'报名成功':'购买数量：'.$actregistration->num;?></span>
     </div>
+<?php elseif ($actstatus == 2): ?>
+    <a class="identify_footer_potion">您已取消</a>
+<?php elseif ($actstatus == 3): ?>
+    <a class="identify_footer_potion">活动结束</a>
 <?php elseif ($actstatus == 4): ?>
     <a class="identify_footer_potion">您已报名,审核中</a>
 <?php elseif ($actstatus == 5): ?>
     <a class="identify_footer_potion">您已报名,审核不通过</a>
-<?php elseif (($actstatus == 6) && ($user->gender == 2)): ?>
-    <a class="identify_footer_potion">您已报名</a>
-<?php else: ?>
-    <a onclick="topay();" class="identify_footer_potion">我要报名</a>
+<?php elseif ($actstatus == 6): ?>
+    <a class="identify_footer_potion">报名成功</a>
 <?php endif; ?>
-
-
 <script>
-    function topay() {
-        $.util.checkLogin('/activity/pay-view/<?= $activity['id']; ?>');
+    function toCancel() {
+        <?php if($user->gender == 1): ?>
+        $.util.confirm(
+            '取消派对',
+            '将扣除报名费<?= $actregistration['punish_percent'] ?>%(即<?= $actregistration['punish'] ?>美币）作为惩罚',
+            function() {
+                $.util.ajax({
+                    url: '/activity/cancel/<?= $actregistration['id']; ?>',
+                    type: "POST",
+                    dataType: "json",
+                    func: function (res) {
+                        $.util.alert(res.msg);
+                        if(res.status) {
+                            setTimeout(function() {
+                                window.location.href = '/userc/my-activitys';
+                            }, 1000)
+                        }
+                    }
+                })
+            },
+            null
+        );
+        <?php else: ?>
+        $.util.confirm(
+            '取消派对',
+            '确定要取消派对报名吗?',
+            function() {
+                $.util.ajax({
+                    url: '/activity/cancel/<?= $actregistration['id']; ?>',
+                    type: "POST",
+                    dataType: "json",
+                    func: function (res) {
+                        $.util.alert(res.msg);
+                        if(res.status) {
+                            setTimeout(function() {
+                                window.location.href = '/userc/my-activitys';
+                            }, 1000)
+                        }
+                    }
+                })
+            },
+            null
+        );
+        <?php endif; ?>
     }
 </script>

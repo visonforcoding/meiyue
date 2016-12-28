@@ -5,9 +5,6 @@
     <div class="col-xs-12">
         <form id="table-bar-form">
             <div class="table-bar form-inline">
-                <a href="/activity/add" class="btn btn-small btn-warning">
-                    <i class="icon icon-plus-sign"></i>添加
-                </a>
                 <div class="form-group">
                     <label for="keywords">关键字</label>
                     <input
@@ -16,22 +13,6 @@
                         class="form-control"
                         id="keywords"
                         placeholder="输入关键字">
-                </div>
-                <div class="form-group">
-                    <label for="keywords">时间</label>
-                    <input
-                        type="text"
-                        name="begin_time"
-                        class="form-control date_timepicker_start"
-                        id="keywords"
-                        placeholder="开始时间">
-                    <label for="keywords">到</label>
-                    <input
-                        type="text"
-                        name="end_time"
-                        class="form-control date_timepicker_end"
-                        id="keywords"
-                        placeholder="结束时间">
                 </div>
                 <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索</a>
                 <!--<a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>-->
@@ -74,7 +55,7 @@
                     '报名时间',
                     '取消时间',
                     '状态',
-                    '操作'
+                    '审核操作'
                 ],
                 colModel: [
                     {name: 'user.nick', editable: true, align: 'center'},
@@ -103,13 +84,10 @@
                                 cellvalue = '取消';
                                 break;
                             case 3:
-                                cellvalue = '女';
+                                cellvalue = '待审核';
                                 break;
                             case 4:
-                                cellvalue = '女';
-                                break;
-                            case 5:
-                                cellvalue = '女';
+                                cellvalue = '审核不通过';
                                 break;
                         }
                         return cellvalue;
@@ -149,30 +127,25 @@
         });
 
         function actionFormatter(cellvalue, options, rowObject) {
-            response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-            response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-            response += '<a title="编辑" href="/activity/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+            response = '<a title="待审核" onClick="check(' + rowObject.id + ', '+ 3 +');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-history"></i> </a>';
+            response += '<a title="审核通过" onClick="check(' + rowObject.id + ', '+ 1 +');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
+            response += '<a title="审核不通过" onClick="check(' + rowObject.id + ', '+ 4 +');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-times"></i> </a>';
             return response;
         }
 
-        function delRecord(id) {
-            layer.confirm('确定删除？', {
-                btn: ['确认', '取消'] //按钮
-            }, function () {
-                $.ajax({
-                    type: 'post',
-                    data: {id: id},
-                    dataType: 'json',
-                    url: '/activity/delete',
-                    success: function (res) {
-                        layer.msg(res.msg);
-                        if (res.status) {
-                            $('#list').trigger('reloadGrid');
-                        }
+        function check(id, cstatus) {
+            $.ajax({
+                type: 'post',
+                data: {id: id, cstatus: cstatus},
+                dataType: 'json',
+                url: '/activity/check',
+                success: function (res) {
+                    layer.msg(res.msg);
+                    if (res.status) {
+                        $('#list').trigger('reloadGrid');
                     }
-                })
-            }, function () {
-            });
+                }
+            })
         }
 
         function doSearch() {
@@ -188,29 +161,6 @@
             }).trigger("reloadGrid");
         }
 
-        function doExport() {
-            //导出excel
-            var sortColumnName = $("#list").jqGrid('getGridParam', 'sortname');
-            var sortOrder = $("#list").jqGrid('getGridParam', 'sortorder');
-            var searchData = $.zui.store.pageGet('searchData') ? $.zui.store.pageGet('searchData') : {};
-            searchData['sidx'] = sortColumnName;
-            searchData['sort'] = sortOrder;
-            var searchQueryStr = $.param(searchData);
-            $("body").append("<iframe src='/activity/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
-        }
-
-        function doView(id) {
-            //查看明细
-            url = '/activity/view/' + id;
-            layer.open({
-                type: 2,
-                title: '查看详情',
-                shadeClose: true,
-                shade: 0.8,
-                area: ['45%', '70%'],
-                content: url//iframe的url
-            });
-        }
     </script>
 <?php
 $this->end();
