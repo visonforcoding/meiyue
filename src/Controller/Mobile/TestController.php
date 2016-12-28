@@ -329,4 +329,9 @@ class TestController extends AppController {
         debug($res);
         exit();
     }
+    
+    public function testCity(){
+        $res = getCity('天津,天津');
+        debug($res);exit();
+    }
 }

@@ -39,8 +39,6 @@
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script>
                     var lastsel;
-                    var selVideo;
-                    var videoCover;
                     $(function () {
                         $('#main-content').bind('resize', function () {
                             $("#list").setGridWidth($('#main-content').width() - 40);
@@ -82,8 +80,7 @@
                                         if (row.type == '1') {
                                             return '无';
                                         }
-                                        selVideo = cell;
-                                        return '<a data-id="' + row.id + '" onclick="showVideo(this)"><i class="icon icon-play-circle"></i></a>';
+                                        return '<a data-cover="'+row.video_cover+'" data-url="' + cell + '" onclick="showVideo(this)"><i class="icon icon-play-circle"></i></a>';
                                     }},
                                 {name: 'view_nums', editable: false, align: 'center'},
                                 {name: 'praise_nums', editable: false, align: 'center'},
@@ -172,12 +169,14 @@
                     }
 
                     function showVideo(t) {
+                        var url = $(t).data('url');
+                        var cover = $(t).data('cover');
                         layer.open({
                             type: 1,
                             skin: 'layui-layer-lan', //加上边框
                             area: ['30%', '40%'],
-                            content: '<video  poster="' + videoCover + '" width="320" height="240" controls>' +
-                                    '<source src="' + selVideo + '" type="video/mp4">' +
+                            content: '<video  poster="' + cover + '" width="320" height="240" controls>' +
+                                    '<source src="' + url + '" type="video/mp4">' +
                                     '</video>'
                         });
                     }
