@@ -137,7 +137,7 @@
                         </div>
                     </div>
                 </li>
-                <li  class="right-ico">
+                <li  class="bwh right-ico">
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">三</span><span class="itemsname">围</span></div>
                          <div class="home_list_r_info flex flex_end">
