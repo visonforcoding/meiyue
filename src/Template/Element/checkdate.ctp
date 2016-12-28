@@ -214,7 +214,7 @@
                     $.util.alert("您选的开始时间已经过点了!");
                     return;
                 }
-                obj.calfun(start_datetime, $.util.dataformat('yyyy/mm/dd hh:ii:ss', new Date(end_datetime)));
+                obj.calfun(start_datetime, $.util.dataformat('yyyy/mm/dd hh:ii:ss', new Date(end_datetime)), obj._len);
             }
             obj.hide();
         },
