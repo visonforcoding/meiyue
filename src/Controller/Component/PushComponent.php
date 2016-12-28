@@ -3,9 +3,7 @@
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
-use Cake\Controller\ComponentRegistry;
 use App\Utils\umeng\Umeng;
-use App\Utils\umeng\Demo;
 
 /**
  * Push component  推送组件
@@ -31,7 +29,7 @@ class PushComponent extends Component {
         $this->ios_key = $ios_conf['AppKey'];
         $this->ios_secret = $ios_conf['AppMasterSecret'];
     }
-    
+
     /**
      * 广播(低于200个app集成为未上线无限制，上线之后每天不超过3次)
      * @param string $title 广播标题
@@ -74,7 +72,7 @@ class PushComponent extends Component {
      * @param string $sound ios声音
      * @return boolean true:发送成功;false:发送失败;
      */
-    public function sendAlias($alias, $title, $content, $ticker, $alias_type = 'BGB', $production_mode = 'true', $extra = '', $after_open = '', $expire_time = '', $badge = '', $sound = ''){
+    public function sendAlias($alias, $title, $content, $ticker, $alias_type = 'MY', $production_mode = 'true', $extra = '', $after_open = '', $expire_time = '', $badge = '', $sound = ''){
         $umngObj = new Umeng($this->android_key, $this->android_secret, $this->ios_key, $this->ios_secret);
         $res = $umngObj->sendAlias($alias, $title, $content, $ticker, $alias_type, $production_mode, $extra, $expire_time, $badge, $after_open, $sound);
         return $res;

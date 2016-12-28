@@ -210,6 +210,9 @@ class UserController extends AppController {
     public function check($uid) {
         if($this->request->is('POST')) {
             $user = $this->User->get($uid);
+            $oldStatus = $user->status;
+            $oldIdStatus = $user->id_status;
+            $oldAuthStatus = $user->auth_status;
             $user = $this->User->patchEntity($user, $this->request->data);
             $mvTb = TableRegistry::get('Movement');
             $delres = $mvTb->query()->delete()->where([['user_id' => $uid, 'type IN' => [3, 4]]])->execute();
@@ -266,7 +269,7 @@ class UserController extends AppController {
                         }
                         break;
                 }
-                $res = $this->User->connection()->transactional(function() use($user, $mvTb, $mv_pic, $mv_vid) {
+                $res = $this->User->connection()->transactional(function() use(&$user, $mvTb, $mv_pic, $mv_vid) {
                     $mvres1 = true;
                     $mvres2 = true;
                     if($mv_pic) {
@@ -279,6 +282,11 @@ class UserController extends AppController {
                     return $mvres1&&$mvres2&&$ures;
                 });
                 if ($res) {
+                    $oldIdStatus = $user->id_status;
+                    $oldAuthStatus = $user->auth_status;
+                    if($user->status != $oldStatus) {
+
+                    }
                     $this->Util->ajaxReturn(true, '修改成功');
                 } else {
                     $this->Util->ajaxReturn(false, '修改失败');

@@ -36,7 +36,7 @@
 <div class="wraper">
     <ul class="chatBox">
         <li>
-            <a href="#this" class="a-height flex flex_justify">
+            <a href="/user/share" class="a-height flex flex_justify">
                 <div class="l-info-name">邀请注册</div>
                 <i class="iconfont rcon">&#xe605;</i>
             </a>
