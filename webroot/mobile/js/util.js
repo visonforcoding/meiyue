@@ -730,7 +730,7 @@ $.util = {
     addZero:function(p,len){
         return ('0000000000000000000'+p).substring(-len);
     },
-    dataformat: function (date, formatStr) {
+    dataformat: function (formatStr, date) {
         var arrWeek = ['日', '一', '二', '三', '四', '五', '六'],
             str = formatStr
                 .replace(/yyyy|YYYY/, date.getFullYear()).replace(/yy|YY/, $.util.addZero(date.getFullYear() % 100, 2))
