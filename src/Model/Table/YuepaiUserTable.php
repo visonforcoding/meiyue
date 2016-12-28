@@ -36,6 +36,10 @@ class YuepaiUserTable extends Table
             'foreignKey' => 'yuepai_id'
         ]);
 
+        $this->belongsTo('User', [
+            'foreignKey' => 'user_id'
+        ]);
+
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

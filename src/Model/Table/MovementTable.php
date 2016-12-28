@@ -40,6 +40,7 @@ class MovementTable extends Table {
             'className'=>'Mvpraise',
             'foreignKey' => 'movement_id',
         ]);
+
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

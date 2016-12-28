@@ -49,8 +49,8 @@ return [
         'UmengMessageSecret' => 'b0ca7c93038671e440142e5263768d8e',
     ],
     'umeng_ios' => [
-        'AppKey' => '57568930e0f55ab0d1002af0',
-        'AppMasterSecret' => 'yfmgulh7mqcyfbbmax5wpmughka4mwv2',
+        'AppKey' => '58637b8307fe654cea001c93',
+        'AppMasterSecret' => 'ri5axfugo74rueuzemybtn1ngjks8jpu',
 //        'UmengMessageSecret' => '795ffe74e61cd9b28cba5efd98f97171',
     ],
     'pvlog'=>[

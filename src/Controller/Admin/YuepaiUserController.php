@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Admin;
 
+use Cake\Core\Exception\Exception;
 use CheckStatus;
 use Wpadmin\Controller\AppController;
 
@@ -32,7 +33,9 @@ class YuepaiUserController extends AppController
 
     public function check($id, $status) {
         if($this->request->is('POST')) {
-            $yuepaiu = $this->YuepaiUser->get($id);
+            $yuepaiu = $this->YuepaiUser->get($id, ['contain' => ['User' => function($q) {
+                return $q->select(['user_token']);
+            }, 'Yuepai']]);
             if(!CheckStatus::getStatus($status)) {
                 $this->Util->ajaxReturn([
                     'status'=>false,
@@ -43,6 +46,36 @@ class YuepaiUserController extends AppController
             }
 
             if($this->YuepaiUser->save($yuepaiu)) {
+                switch($yuepaiu->checked) {
+                    case 1:  //审核通过
+                        try {
+                            $res = $this->Push->sendAlias(
+                                $yuepaiu->user->user_token,
+                                '恭喜，您申请的约拍已审核通过',
+                                '恭喜，您申请的约拍已审核通过，请准时于'.getYMD($yuepaiu->yuepai->act_time).'到深圳南山摄影棚。',
+                                '恭喜，您申请的约拍已审核通过',
+                                'MY',
+                                false
+                            );
+                        } catch(Exception $e) {
+                        }
+                        break;
+                    case 2:  //未审核
+                        break;
+                    case 3:  //审核不通过
+                        try {
+                            $res = $this->Push->sendAlias(
+                                $yuepaiu->user->user_token,
+                                '抱歉，您申请的约拍未审核通过',
+                                '抱歉，您申请的约拍未审核通过，主要原因是：您的综合评分未达到约拍的标准，感谢您的支持！',
+                                '抱歉，您申请的约拍未审核通过',
+                                'MY',
+                                false
+                            );
+                        } catch(Exception $e) {
+                        }
+                        break;
+                }
                 $this->Util->ajaxReturn([
                     'status'=>true,
                     'msg'=>'操作成功',

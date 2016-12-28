@@ -57,6 +57,7 @@ class AppController extends Controller {
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Util');
+        $this->loadComponent('Push');
         //\Cake\Log\Log::debug($this->request->cookie('token_uin'),'devlog');
         //无需登录的
         $this->firewall = array(

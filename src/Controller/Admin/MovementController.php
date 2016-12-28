@@ -79,11 +79,38 @@ class MovementController extends AppController {
      */
     public function edit($id = null) {
         $movement = $this->Movement->get($id, [
-            'contain' => []
+            'contain' => ['User']
         ]);
+        $oldCheck = $movement->status;
         if ($this->request->is(['post', 'put'])) {
             $movement = $this->Movement->patchEntity($movement, $this->request->data);
             if ($this->Movement->save($movement)) {
+                if($oldCheck != $movement->status) {
+                    switch($movement->status) {
+                        case 1:   //待审核
+                            break;
+                        case 2:   //审核通过
+                            $this->Push->sendAlias(
+                                $movement->user->user_token,
+                                '恭喜您，动态审核通过',
+                                '恭喜您，动态审核通过，关注度已大大提升！',
+                                '恭喜您，动态审核通过',
+                                'MY',
+                                false
+                            );
+                            break;
+                        case 3:   //审核不通过
+                            $this->Push->sendAlias(
+                                $movement->user->user_token,
+                                '抱歉，您的动态未审核通过',
+                                '抱歉，您的动态未审核通过，主要原因是：您的动态涉嫌模糊、遮挡等看不清本人；或裸露身体；或使用他人照片。请重新上传清晰的本人照片或视频。',
+                                '抱歉，您的动态未审核通过',
+                                'MY',
+                                false
+                            );
+                            break;
+                    }
+                }
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
                 $errors = $movement->errors();
