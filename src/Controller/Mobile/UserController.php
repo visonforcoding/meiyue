@@ -82,7 +82,7 @@ class UserController extends AppController {
                     if($user->reg_step!=9){
                         //注册未完成
                         return $this->Util->ajaxReturn(['status'=>false,'msg'=>'注册未完成,请继续注册步骤',
-                            'code'=>201,'redirect_url'=>'/user/reg-basic-info-'.$user->reg_step]);
+                            'code'=>201,'redirect_url'=>'/user/reg-basic-info-'.$user->reg_step.'/'.$user->id]);
                     }
                     $this->request->session()->write('User.mobile', $user);
                     $user_token = false;
@@ -253,7 +253,9 @@ class UserController extends AppController {
         if ($this->request->is('post')) {
             $user = $this->User->get($user['id']);
             $data = $this->request->data();
-            $data['bwh'] =  $data['b'].'/'.$data['w'].'/'.$data['h'];
+            $data['bwh'] =  $data['bwh_b'].'/'.$data['bwh_w'].'/'.$data['bwh_h'];
+            $data['hometown'] = getCity($data['hometown']);
+            $data['city'] = getCity($data['city']);
             $user = $this->User->patchEntity($user, $data);
             $user->reg_step = 2;
             if ($this->User->save($user)) {
