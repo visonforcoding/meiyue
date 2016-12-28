@@ -199,7 +199,7 @@ function getYMD($time) {
 
 //获取年月日
 function getMD($time) {
-    $timestr = $time->month . "月" . $time->day;
+    $timestr = $time->month . "月" . $time->day . "日";
     return $timestr;
 }
 

@@ -135,6 +135,31 @@ class ActivityController extends AppController
         }
     }
 
+
+    /**
+     * 派对报名审核
+     */
+    public function check()
+    {
+        $this->request->allowMethod('post');
+        $id = $this->request->data('id');
+        $cstatus = $this->request->data('cstatus');
+        if ($this->request->is('post')) {
+            $actrTb = TableRegistry::get('Actregistration');
+            $actr = $actrTb->get($id);
+            $res = $actrTb->query()
+                ->update()
+                ->set(['status' => $cstatus])
+                ->where(['id' => $id])
+                ->execute();
+            if($res) {
+                $this->Util->ajaxReturn(true, '审核成功');
+            } else {
+                $this->Util->ajaxReturn(false, '审核失败');
+            }
+        }
+    }
+
     /**
      * get jqgrid data
      *

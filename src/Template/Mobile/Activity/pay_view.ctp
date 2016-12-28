@@ -15,7 +15,7 @@
             <div class="address color_gray"><i class="iconfont">&#xe623;</i><?= isset($activity)?$activity['site']:'' ?></div>
         </div>
     </div>
-    <div class="activity_pay_num <?php if($user->gender == 1): ?>mt20<?php endif; ?>">
+    <div class="activity_pay_num mt20">
         <ul class="outerblock">
             <li class="flex flex_justify">
                 <span>剩余名额</span>
@@ -57,12 +57,14 @@
         <?php if ($actstatus == 3): ?>
             <a class="identify_footer_potion">报名结束</a>
         <?php elseif ($actstatus == 1): ?>
-            <span class="total"><span class="color_y">共计：<i class="color_y lagernum" id="count"><?= isset($price)?$price:0; ?> </i>美币</span></span>
+            <span class="total"><span class="color_y">共计：<i class="color_y lagernum" id="count"><?= ($user->gender == 1)?$activity->male_price:$activity->female_price; ?> </i>美币</span></span>
             <a id="pay" href="javascript:void(0);" class="nowpay">立即支付</a>
         <?php elseif ($actstatus == 4): ?>
             <a class="identify_footer_potion">您已报名,审核中</a>
         <?php elseif ($actstatus == 5): ?>
             <a class="identify_footer_potion">您已报名,审核不通过</a>
+        <?php elseif (($actstatus == 6) && ($user->gender == 2)): ?>
+            <a class="identify_footer_potion">您已报名</a>
         <?php else: ?>
             <a id="join" class="identify_footer_potion">我要报名</a>
         <?php endif; ?>
@@ -85,7 +87,7 @@
                     $.util.alert(res.msg);
                     if(res.status) {
                         setTimeout(function() {
-                            window.location.href = '/userc/my-activitys';
+                            location.href = '/userc/my-activitys';
                         }, 1000)
                     } else {
                         obj.attr('id', 'join');
@@ -153,7 +155,7 @@
     });
     function changeCount() {
         var curNum = parseInt($('#num').val());
-        $('#count').text(curNum * <?= isset($price)?$price:0; ?>);
+        $('#count').text(curNum * <?= ($user->gender == 1)?$activity->male_price:$activity->female_price; ?>);
     }
     $('#num').bind('input propertychange', function() {
         var lim = <?= isset($lim)?$lim:0; ?>;
