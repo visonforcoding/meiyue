@@ -180,7 +180,7 @@
             for (var i = 0; i < 30; i ++) {
                 str += getMonthDateHtml(tem + i * 3600 * 24 * 1000);
             }
-            str += '<li></li><li></li>';
+            str += '<li></li><li></li><li></li>';
             $(".month-date").html(str);
             $(".month-date li").eq(0).addClass('select');
 
@@ -220,6 +220,18 @@
         },
         submit: function() {
             var obj = this;
+            if(!obj._year_month_date){
+                $.util.alert("请选择日期!");
+                return;
+            }
+            if(!obj._start_time){
+                $.util.alert("请选择开始时间!");
+                return;
+            }
+            if(!obj._end_time){
+                $.util.alert("请选择结束时间!");
+                return;
+            }
             if(obj.calfun){
                 var start_datetime = obj._year_month_date + " " + obj._start_time;
                 var end_datetime = obj._year_month_date + " " + obj._end_time;
