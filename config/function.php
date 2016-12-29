@@ -227,9 +227,23 @@ function getAge($birthday) {
  * @param float $percent
  * @return float;
  */
-function getCost($start_time, $end_time, $price, $percent = 1.0) {
-    return ($end_time->hour - $start_time->hour) * $price * $percent;
+function getCost(\Cake\I18n\Time $start_time, \Cake\I18n\Time $end_time, $price, $percent = 1.0) {
+    return getLast($start_time, $end_time) * $price * $percent;
 }
+
+
+/**
+ * //根据开始时间，结束时间，单价计算总价和付费百分比计算价格
+ * @param \Cake\I18n\Time $start_time
+ * @param \Cake\I18n\Time $end_time
+ * @param double $price
+ * @param float $percent
+ * @return float;
+ */
+function getLast(\Cake\I18n\Time $start_time, \Cake\I18n\Time $end_time) {
+    return ($end_time->timestamp - $start_time->timestamp) / 3600;
+}
+
 
 /**
  * 生成浮点随机数
