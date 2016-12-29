@@ -28,25 +28,6 @@
                 <span class="fr"><i class="iconfont right_ico ">&#xe605;</i></span>
 
             </li>
-            <?php if ($user->gender == 2): ?>
-                <li class="clearfix" <?= !($user->auth_status == UserStatus::NOPASS) ? 'onclick="window.location.href=\'/userc/edit-true\';"' : '' ?>>
-                    <span class="fl">真人视频认证</span>
-                    <?php if (!$user->auth_status == UserStatus::PASS): ?>
-                        <i class="iconfont right_ico fr">&#xe605;</i>
-                        <span class="fr">
-                            <i class="color_gray fr-des">审核通过</i>
-                        </span>
-                    <?php elseif ($user->auth_status == UserStatus::CHECKING): ?>
-                        <span class="fr" onclick="window.location.href = '/userc/edit-true';">
-                            <i class="color_gray fr-des">审核中</i><i class="iconfont right_ico">&#xe605;</i>
-                        </span>
-                    <?php elseif ($user->auth_status == UserStatus::NOPASS): ?>
-                        <span class="fr" onclick="window.location.href = '/userc/edit-true';">
-                            <i class="color_error fr-des">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
-                        </span>
-                    <?php endif; ?>
-                </li>
-            <?php endif; ?>
             <li class="clearfix" <?= (!($user->idfront) || !($user->idback) || !($user->idperson) || ($user->id_status == UserStatus::NOPASS)) ? 'onclick="window.location.href=\'/userc/edit-auth\';"' : '' ?>>
 
                 <span class="fl">身份认证</span>
@@ -67,6 +48,25 @@
                 <?php endif; ?>
 
             </li>
+            <?php if ($user->gender == 2): ?>
+                <li class="clearfix">
+                    <span class="fl">真人视频认证</span>
+                    <?php if (!$user->auth_status == UserStatus::PASS): ?>
+                        <i class="iconfont right_ico fr">&#xe605;</i>
+                        <span class="fr">
+                            <i class="color_gray fr-des">审核通过</i>
+                        </span>
+                    <?php elseif ($user->auth_status == UserStatus::CHECKING): ?>
+                        <span class="fr" onclick="window.location.href = '/userc/edit-true';">
+                            <i class="color_gray fr-des">审核中</i><i class="iconfont right_ico">&#xe605;</i>
+                        </span>
+                    <?php elseif ($user->auth_status == UserStatus::NOPASS): ?>
+                        <span class="fr" onclick="window.location.href = '/userc/edit-true';">
+                            <i class="color_error fr-des">审核不通过</i><i class="iconfont right_ico">&#xe605;</i>
+                        </span>
+                    <?php endif; ?>
+                </li>
+            <?php endif; ?>
             <!--  <li class="clearfix" onclick="window.location.href='/userc/edit-auth';">
                  <a href="#this">
                      <span class="fl">真人视频认证</span>
