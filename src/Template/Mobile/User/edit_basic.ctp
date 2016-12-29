@@ -58,10 +58,9 @@
                             <?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?>
                         </div>
                         <div class="home_list_r_info">
-                            <!-- <input id="weight" name="weight" type="text" placeholder="您的体重" value="<?= $user->weight; ?>"/>&nbsp;KG -->
                             <div class="home-basic-option">
-                                <input type="text" id="weight" name="weight" placeholder="你的体重" readonly="readonly" value="<?= $user->weight; ?>"/>
-                                <select name="" onchange='tochange(this)'>
+                                <input type="text" placeholder="你的体重" readonly="readonly" value="<?= $user->weight; ?>KG"/>
+                                <select id="weight" name="weight" onchange='tochange(this)'>
                                     <option value="40-">40-KG</option>
                                     <option value="40">40KG</option>
                                     <option value="41">41KG</option>
@@ -90,31 +89,12 @@
                         <div class="home_list_l_info required"><span class="itemsname short_name">身</span><span
                                 class="itemsname">高</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
-                            <!-- <input id="height" name="height" type="text" placeholder="您的身高" value="<?= $user->height; ?>"/>&nbsp;CM -->
                             <div class="home-basic-option">
-                                <input type="text" id="height" name="height" placeholder="你的身高" value="<?= $user->height; ?>" readonly="readonly"/>
-                                <select name="" onchange='tochange(this)'>
-                                    <option value="160-">160-CM</option>
-                                    <option value="161">161CM</option>
-                                    <option value="162">162CM</option>
-                                    <option value="163">163CM</option>
-                                    <option value="164">164CM</option>
-                                    <option value="165">165CM</option>
-                                    <option value="166">166CM</option>
-                                    <option value="166">167CM</option>
-                                    <option value="166">168CM</option>
-                                    <option value="166">169CM</option>
-                                    <option value="170">170CM</option>
-                                    <option value="171">171CM</option>
-                                    <option value="172">172CM</option>
-                                    <option value="173">173CM</option>
-                                    <option value="174">174CM</option>
-                                    <option value="175">175CM</option>
-                                    <option value="176">176CM</option>
-                                    <option value="177">177CM</option>
-                                    <option value="178">178CM</option>
-                                    <option value="179">179CM</option>
-                                    <option value="180">180+CM</option>
+                                <input type="text" placeholder="你的身高" value="<?= $user->height; ?>CM" readonly="readonly"/>
+                                <select id="height" name="height" onchange='tochange(this)'>
+                                    <?php for($i= 155;$i<=200;$i ++): ?>
+                                        <option value="<?= $i; ?>" <?= ($user->height == $i)?'selected':''; ?>><?= $i; ?>CM</option>
+                                    <?php endfor; ?>
                                 </select>
                                 </div>
                         </div>
@@ -126,16 +106,11 @@
                             <div class="home_list_l_info required"><span class="itemsname">三</span><span class="itemsname">围</span>
                                 <i class="iconfont ico"></i>
                             </div>
-                          <!--   <div class="home_list_r_info">
-                                <input id="bwh_b" name="bwh_b" type="tel" placeholder="胸围" style="width:30px;" value="<?= $user->bwh_b; ?>"/> |
-                                <input id="bwh_w" name="bwh_w" type="tel" placeholder="腰围" style="width:30px;" value="<?= $user->bwh_w; ?>" /> |
-                                <input id="bwh_h" name="bwh_h" type="tel" placeholder="臀围" style="width:30px;" value="<?= $user->bwh_h; ?>" />
-                            </div> -->
                             <div class="home_list_r_info flex flex_end">
                                 <div class="home-basic-option">
                                 <input  id="bwh_b" name="bwh_b" type="text" placeholder="胸围" readonly="readonly" value="<?= $user->bwh_b; ?>"/>
-                                <select name="" onchange='tochange(this)'>
-                                     <option value="0">胸围</option>
+                                <select onchange='tochange(this)'>
+                                    <option value="0">胸围</option>
                                     <option value="80">80</option>
                                     <option value="81">81</option>
                                     <option value="82">82</option>
@@ -150,7 +125,7 @@
                                 </select>
                                 </div>|<div class="home-basic-option">
                                 <input id="bwh_w" name="bwh_w" type="text" placeholder="腰围" value="<?= $user->bwh_w; ?>"  readonly="readonly"/>
-                                <select name="" onchange='tochange(this)'>
+                                <select onchange='tochange(this)'>
                                     <option value="0">腰围</option>
                                     <option value="60">60</option>
                                     <option value="61">61</option>
@@ -166,7 +141,7 @@
                                 </select>
                                 </div>|<div class="home-basic-option">
                                 <input id="bwh_h" name="bwh_h" type="text" placeholder="臀围" value="<?= $user->bwh_h; ?>" readonly="readonly"/>
-                                <select name="" onchange='tochange(this)'>
+                                <select onchange='tochange(this)'>
                                     <option value="0">臀围</option>
                                     <option value="80">80</option>
                                     <option value="81">81</option>
@@ -192,8 +167,8 @@
                         </div>
                         <div class="home_list_r_info">
                             <div class="home-basic-option">
-                                <input type="text" placeholder="你的星座" readonly="readonly"/>
-                                <select id="zodiac" name="zodiac"   onchange='tochange(this)'>
+                                <input type="text" placeholder="你的星座" readonly="readonly" value="<?= Zodiac::getStr($user->zodiac); ?>"/>
+                                <select id="zodiac" name="zodiac" onchange='tochange(this)'>
                                         <option value="1" <?= ($user->zodiac == 1)?'selected':''; ?>>白羊座</option>
                                         <option value="2" <?= ($user->zodiac ==2)?'selected':''; ?>>金牛座</option>
                                         <option value="3" <?= ($user->zodiac ==3)?'selected':''; ?>>双子座</option>
@@ -219,9 +194,9 @@
                             </div>
                             <div class="home_list_r_info">
                                  <div class="home-basic-option">
-                                    <input type="text" placeholder="你的罩杯" readonly="readonly"/>
+                                    <input type="text" placeholder="你的罩杯" readonly="readonly" value="<?= $user->cup; ?>"/>
                                     <select id="cup" name="cup"  onchange='tochange(this)'>
-                                         <option value="0">选罩杯</option>
+                                        <option value="0">选罩杯</option>
                                         <option value="A" <?= ($user->cup == 'A')?'selected':''; ?>>A</option>
                                         <option value="B" <?= ($user->cup == 'B')?'selected':''; ?>>B</option>
                                         <option value="C" <?= ($user->cup == 'C')?'selected':''; ?>>C</option>
@@ -229,6 +204,7 @@
                                         <option value="E" <?= ($user->cup == 'E')?'selected':''; ?>>E</option>
                                         <option value="F" <?= ($user->cup == 'F')?'selected':''; ?>>F</option>
                                         <option value="G" <?= ($user->cup == 'G')?'selected':''; ?>>G</option>
+                                        <option value="H" <?= ($user->cup == 'H')?'selected':''; ?>>H</option>
                                     </select>
                                    </div>
                             </div>
@@ -242,7 +218,7 @@
                                 class="itemsname">态</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
                              <div class="home-basic-option">
-                                    <input type="text" placeholder="你的情感状态" readonly="readonly"/>
+                                    <input type="text" placeholder="你的情感状态" readonly="readonly" value="<?= ($user->state == 1)?'单身':'私密'; ?>"/>
                                     <select id="state" name="state" onchange='tochange(this)'>
                                         <option value="1" <?= ($user->state == 1)?'selected':'';?>>单身</option>
                                         <option value="2" <?= ($user->state == 2)?'selected':'';?>>私密</option>
@@ -473,52 +449,52 @@
     });
     $('#submit').on('click', function () {
         <?php if($user->gender == 2): ?>
-        if(($('#birthday').val()).length == 0) {
+        if (($('#birthday').val()).length == 0) {
             $.util.alert('请填写正确的出生日期');
             $('#birthday').val('<?= new Date('1991-1-1'); ?>');
         }
         if (!$('#nick').val()) {
-            $.util.alert('昵称没有填写');
+            $.util.alert('未填写昵称');
             return false;
         }
         if (!$('#truename').val()) {
-            $.util.alert('真实姓名没有填写');
+            $.util.alert('真实姓名必填');
             return false;
         }
-        if (!$('#height').val()) {
-            $.util.alert('身高没有填写');
+        if ($('#height').val() == '0') {
+            $.util.alert('身高必填');
             return false;
         }
-        if (!$('#weight').val()) {
-            $.util.alert('体重没有填写');
+        if ($('#weight').val() == '0') {
+            $.util.alert('体重必填');
             return false;
         }
-        if((!$('#bwh_b').val())&&(!$('#bwh_w').val())&&(!$('#bwh_h').val())) {
-            $.util.alert('三围没有填写');
+        if (($('#bwh_b').val() == '0') || ($('#bwh_w').val() == '0') || ($('#bwh_h').val() == '0')) {
+            $.util.alert('三围必填');
             return false;
         }
-        if (!$("#cup").val()) {
-            $.util.alert('罩杯没有填写');
+        if ($("#cup").val() == '0') {
+            $.util.alert('罩杯必填');
             return false;
         }
-        if (!$("#state").val()) {
-            $.util.alert('情感状态没有填写');
+        if ($("#state").val() == '0') {
+            $.util.alert('情感状态必填');
             return false;
         }
-        if (!$("#zodiac").val()) {
+        if ($("#zodiac").val() == '0') {
             $.util.alert('未选择星座');
             return false;
         }
+        if (!$("#profession").val()) {
+            $.util.alert('职业未填写');
+            return false;
+        }
         if (!$("#hometown").val()) {
-            $.util.alert('家乡没有填写');
+            $.util.alert('家乡必填');
             return false;
         }
         if (!$("#city").val()) {
-            $.util.alert('所在地区没有填写');
-            return false;
-        }
-        if (!$("#profession").val()) {
-            $.util.alert('职业没有填写');
+            $.util.alert('所在地区必填');
             return false;
         }
         <?php endif; ?>

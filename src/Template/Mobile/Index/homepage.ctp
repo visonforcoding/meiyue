@@ -418,7 +418,7 @@
             func:function(res){
                 console.log(res);
                 if(res.status) {
-                    $('#see-basic-mv').html('<video id="see-basic-mv" width="100%" height="165px" controls="controls" preload="preload" poster="'+ res.video_cover +'" autoplay="autoplay"><source src="'+ res.video +'" type="video/mp4"></video>');
+                    $('#see-basic-mv').html('<video id="see-basic-mv" controls="controls" preload="preload" poster="'+ res.video_cover +'" autoplay="autoplay"><source src="'+ res.video +'" type="video/mp4"></video>');
                 } else {
                     $.util.alert(res.msg);
                 }
@@ -547,7 +547,7 @@
         })
     }
 
-    $(document).on('tap', '.img-item', function() {
+    $(document).on('click', '.img-item', function() {
         var imgs = [];
         $('.img-item img').each(function() {
             imgs.push((this.src).replace(/\?.*/, ''));
