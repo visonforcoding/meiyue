@@ -121,7 +121,7 @@
         $(this).parents('li').addClass('current');
         curpage = 1;
         skill = $(this).data('id');
-        loadUser(curpage, false, '?skill=' + skill+'&ageL='+ageL+'&ageR='+ageR+'&heightL='+heightL+'&heighR='+heightR);
+        loadUser(curpage, false, '?skill=' + skill+'&ageL='+ageL+'&ageR='+ageR+'&heightL='+heightL+'&heightR='+heightR);
     });
     $('#selectMenu').on('tap', function () {
         onTopRight();
@@ -142,14 +142,14 @@
         heightR = height[1];
         ageL = age[0];
         ageR = age[1];
-        loadUser(1, false, '?skill=' + skill+'&ageL='+ageL+'&ageR='+ageR+'&heightL='+heightL+'&heighR='+heightR);
+        loadUser(1, false, '?skill=' + skill+'&ageL='+ageL+'&ageR='+ageR+'&heightL='+heightL+'&heightR='+heightR);
     });
     setTimeout(function () {
         $(window).on("scroll", function () {
             $.util.listScroll('user-list', function () {
                 //window.holdLoad = false;  //打开加载锁  可以开始再次加载
                 if (skill) {
-                    loadUser(curpage + 1, true, '?skill=' + skill+'&ageL='+ageL+'&ageR='+ageR+'&heightL='+heightL+'&heighR='+heightR);
+                    loadUser(curpage + 1, true, '?skill=' + skill+'&ageL='+ageL+'&ageR='+ageR+'&heightL='+heightL+'&heightR='+heightR);
                 } else {
                     loadUser(curpage + 1, true);
                 }
