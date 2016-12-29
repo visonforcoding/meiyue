@@ -296,6 +296,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
                 lockScrY: true,
                 //imgInitLazy: 1000,
                 index: obj.cur_tab,
+                min: $(window).width(), //响应滑动的最小移动距离
                 viewDom: $('.activity_list'),
                 fun: function (index) {
                     location.hash = '#'+index;
