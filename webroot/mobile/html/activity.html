@@ -82,16 +82,16 @@
 					<section>
 						<!--轮播图-->
 						<div class="abanner">
-							<ul>
+							<ul class="tou-imglist" id="oBox">
 								<li><a href="#this"><img src="../css/icon/banner1.jpg"/></a></li>
-								<!--<li><a href="#this"><img src="../css/icon/banner1.jpg"/></a></li>
-								<li><a href="#this"><img src="../css/icon/banner1.jpg"/></a></li>-->
+								<li><a href="#this"><img src="../css/icon/banner1.jpg"/></a></li>
+								<li><a href="#this"><img src="../css/icon/banner1.jpg"/></a></li>
 							</ul>
-							<!--<div class="yd">
+							<div class="yd flex flex_center" id="oTab">
 								<span class="cur"></span>
 								<span></span>
 								<span></span>
-							</div>-->
+							</div>
 						</div>
 						<div class="party_content">
 							<div class="items">
@@ -341,13 +341,28 @@
 		            loopScroll: false,
 		            autoTime: 0,
 		            lockScrY: true,
-		             minp : '100px', //翻页的最小移动距离
-		              min : '100px', //响应滑动的最小移动距离
+		            min: $(window).width(), //响应滑动的最小移动距离
 		            //imgInitLazy: 1000,
 		            index: 1,
 		            viewDom: $('.activity_list'),
 		            fun: function (index) {
 		            	
+		            }
+        		});
+        		 $.util.loop({
+		            tp: 'img', //图片img或是文字text
+		            min : 5,
+		            loadImg: true,
+		            moveDom: $('#oBox'), // eg: $('#loopImgUl')
+		            moveChild: $('#oBox li'), //$('#loopImgUl li')
+		            tab: $('#oTab span'), //$('#loopImgBar li')
+		            loopScroll: true,
+		            autoTime: 0,
+		            lockScrY: true,
+		            //imgInitLazy: 1000,
+		            index: 1,
+		            viewDom: $('.abanner'),
+		            fun: function (index) {
 		            	
 		            }
         		});
