@@ -45,7 +45,7 @@
                         <div class="home_list_r_info">
                             <div class="home-basic-option">
                                 <input type="text" id="weight" name="weight" placeholder="你的体重" readonly="readonly"/>
-                                <select name="" onchange='tochange(this)'>
+                                <select onchange='tochange(this)'>
                                     <option value="55-">55-KG</option>
                                     <option value="56">56KG</option>
                                     <option value="57">57KG</option>
@@ -79,7 +79,7 @@
                         <div class="home_list_r_info">
                             <div class="home-basic-option">
                                 <input type="text" id="height" name="height" placeholder="你的身高" readonly="readonly"/>
-                                <select name="" onchange='tochange(this)'>
+                                <select onchange='tochange(this)'>
                                     <option value="160-">160-CM</option>
                                     <option value="161">161CM</option>
                                     <option value="162">162CM</option>
@@ -123,7 +123,6 @@
                                 class="itemsname">在</span><span class="itemsname">地</span><span
                                 class="itemsname">区：</span></div>
                         <div class="home_list_r_info">
-                            <input id="city" name="city" type="text" placeholder="请输入所在地区"/>
                             <input id="city" name="city" type="text" placeholder="请输入所在地区"/>
                             <input id="vcity" type="hidden"/>
                         </div>
