@@ -183,7 +183,7 @@ header{overflow: hidden;}
 .isDisplay i{color:#ccc;font-size:16px;margin-right:10px;}
 .isDisplay span.choose i{color:#eab96a;}
 .home_fill_basic_info .required{position:relative;}
-.home_fill_basic_info .required i{position: absolute;right:-.3rem;font-size: 6px;top:0;}
+.home_fill_basic_info .required i{position: absolute;right:-.2rem;font-size: 6px;top:0;}
 .home_fill_basic_info .required .ico::after{content:'\e617';/*right:-20px;top:-7px;*/color:#fd6a56;/*font-size: 10px;position: absolute;*/width:22px;height:16px;}
 .other-info-jump{text-align: center;width:100%;max-width: 750px;margin-top:.6rem;padding-bottom:1.2rem;}
 .other-info-jump a{display: block;}
