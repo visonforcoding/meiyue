@@ -561,9 +561,9 @@
     function tel() {
         $.util.confirm(
             '联系客服',
-            '拨打客服电话',
+            '0755-33580266',
             function() {
-                LEMON.event.tel('13763053901');
+                LEMON.event.tel('0755-33580266');
             },
             null,
             null,

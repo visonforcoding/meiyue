@@ -13,7 +13,7 @@ $.util = {
         $('body').append('<div class="alert"><span>' + str + '</span></div>');
         setTimeout(function () {
             $('.alert').hide();
-        }, t || 1500);
+        }, t || 2000);
     },
     confirm: function (title, msg, hR, hL, btnL, btnR) {
         $('.alert7-confirm').remove();

@@ -20,12 +20,18 @@
             </section>
             <!--头牌-->
             <section>
-                <?php if(isset($carousel)): ?>
-                    <div class="cover_image">
-                        <img src="<?= createImg($carousel->url.'?w=768'); ?>" alt=""/>
-                        <a href="<?= $carousel->tourl; ?>" class="more"><img src="/mobile/images/more.png"/></a>
+                <div class="abanner">
+                    <ul class="tou-imglist" id="oBox">
+                        <?php foreach($carousels as $carousel): ?>
+                            <li><a href="<?= $carousel->to_url; ?>"><img src="<?= createImg($carousel->url); ?>"/></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <div class="yd flex flex_center" id="oTab">
+                        <?php foreach($carousels as $key => $$carousel): ?>
+                            <span class="<?= ($key == 0)?'cur':'';?>"></span>
+                        <?php endforeach; ?>
                     </div>
-                <?php endif; ?>
+                </div>
                 <?php if(isset($user) && $user->gender == 2): ?>
                     <div class="invite">
                         <a href="/user/share" class="btn btn_t_border">邀请好友支持我</a>
@@ -214,7 +220,7 @@
 
     $.extend(activity.prototype, {
         init: function () {
-            var curtr = '<?= isset($curtab)?$curtab:'date'; ?>';
+            var curtr = "<?= isset($curtab)?$curtab:'date'; ?>";
             if(curtr == 'party') {
                 this.cur_tab = 1;
             } else if(curtr == 'top') {
@@ -314,9 +320,9 @@
                                     {'text':'选美即将上线，敬请期待哟~', 'icon':'xe645;', 'top':'80'}
                                 );
                                 /*if(data.carousel) {
-                                    $('#party-coverimg')
-                                        .html("<a href='"+data.carousel.to_url+"'><img src='"+data.carousel.url+"'/></a>");
-                                }*/
+                                 $('#party-coverimg')
+                                 .html("<a href='"+data.carousel.to_url+"'><img src='"+data.carousel.url+"'/></a>");
+                                 }*/
                             }
                             break;
                         case obj.tab_top:
@@ -448,9 +454,9 @@
     }
 
     /*$(document).on('tap', '.act-item', function() {
-        var actid = $(this).data('id');
+     var actid = $(this).data('id');
 
-    });*/
+     });*/
     function toActView(actid) {
         window.location.href='/activity/view/' + actid;
     }
@@ -459,5 +465,25 @@
         event.stopPropagation();
         $actid = $(this).data('id');
         window.location.href = '/activity/pay-view/' + $actid;
+    });
+
+
+    //头牌轮播图
+    $.util.loop({
+        tp: 'img', //图片img或是文字text
+        min : 5,
+        loadImg: true,
+        moveDom: $('#oBox'), // eg: $('#loopImgUl')
+        moveChild: $('#oBox li'), //$('#loopImgUl li')
+        tab: $('#oTab span'), //$('#loopImgBar li')
+        loopScroll: true,
+        autoTime: 0,
+        lockScrY: true,
+        //imgInitLazy: 1000,
+        index: 1,
+        viewDom: $('.abanner'),
+        fun: function (index) {
+
+        }
     });
 </script>

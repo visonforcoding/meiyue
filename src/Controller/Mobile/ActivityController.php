@@ -25,11 +25,11 @@ class ActivityController extends AppController
     public function index($top_tab = 1)
     {
         $carouselTb = TableRegistry::get('Carousel');
-        $carousel = $carouselTb->find()->where(['position' => CarouselPosition::TOP_BIGIMG, 'status' => 1])->first();
+        $carousels = $carouselTb->find()->where(['position' => CarouselPosition::TOP_BIGIMG, 'status' => 1])->toArray();
         $this->set([
             'top_tab' => $top_tab,
             "user" => $this->user,
-            "carousel" => $carousel,
+            "carousels" => $carousels,
             'pageTitle' => '美约-活动'
         ]);
         if ($this->user) {
@@ -40,14 +40,14 @@ class ActivityController extends AppController
     }
 
 
-    public function findex($curtab = 'date')
+    public function findex($top_tab = 1)
     {
         $carouselTb = TableRegistry::get('Carousel');
-        $carousel = $carouselTb->find()->where(['position' => CarouselPosition::TOP_BIGIMG, 'status' => 1])->first();
+        $carousels = $carouselTb->find()->where(['position' => CarouselPosition::TOP_BIGIMG, 'status' => 1])->toArray();
         $this->set([
-            'curtab' => $curtab,
+            'top_tab' => $top_tab,
             "user" => $this->user,
-            "carousel" => $carousel,
+            "carousels" => $carousels,
             'pageTitle' => '美约-活动'
         ]);
         if ($this->user) {

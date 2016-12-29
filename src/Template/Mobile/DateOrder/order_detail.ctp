@@ -13,7 +13,7 @@
                     <?php if ($user->gender == 1): ?>
                         <a href="/index/homepage/<?= $order->dater->id; ?>"><img src="<?= $order->dater->avatar ?>"/></a>
                     <?php else: ?>
-                        <a href=""><img src="<?= $order->buyer->avatar ?>"/></a>
+                        <a href="/index/homepage/<?= $order->buyer->id; ?>"><img src="<?= $order->buyer->avatar ?>"/></a>
                     <?php endif; ?>
                 </span>
                 <div class="l_con">

@@ -100,34 +100,40 @@
     </div>
     <div class="center_detail_list mt60">
         <h3 class="inner commontitle">购买记录</h3>
-        <div class='buy-record'>
-             <ul class="outerblock bdbottom btop inner">
-                <?php foreach($userPacks as $item): ?>
-                    <li class="flex flex_justify">
-                        <div class="l_info">
-                            <h3><?= $item->title; ?></h3>
-                            <time class="smalldes">
-                                <?= getYMD($item->create_time) ?>
-                            </time>
-                        </div>
-                        <div class="r_info smalldes">
-                            <span>
-                                查看
-                                <?= ($item->chat_num)?>
-                            </span>
-                            |
-                            <span>
-                                聊天
-                                <?= ($item->browse_num) ?>
-                            </span>
-                        </div>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-       
+            <?php if(count($userPacks)): ?>
+            <div class='buy-record'>
+                <ul class="outerblock bdbottom btop inner">
+                 <?php foreach($userPacks as $item): ?>
+                     <li class="flex flex_justify">
+                         <div class="l_info">
+                             <h3><?= $item->title; ?></h3>
+                             <time class="smalldes">
+                                 <?= getYMD($item->create_time) ?>
+                             </time>
+                         </div>
+                         <div class="r_info smalldes">
+                        <span>
+                            查看
+                            <?= ($item->chat_num)?>
+                        </span>
+                             |
+                        <span>
+                            聊天
+                            <?= ($item->browse_num) ?>
+                        </span>
+                         </div>
+                     </li>
+                 <?php endforeach; ?>
+                 </ul>
+            </div>
+            <?php else: ?>
+            <div class="empty_container">
+                 <div class="empty-content mt80">
+                     <p class="empty-tips">你当前没有购买记录</p>
+                 </div>
+            </div>
+            <?php endif; ?>
     </div>
-
 </div>
 <div style="height:62px;"></div>
 <a href="/userc/vip-buy" class="identify_footer_potion">购买套餐</a>
