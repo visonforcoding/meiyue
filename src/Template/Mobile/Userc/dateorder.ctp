@@ -120,7 +120,7 @@
                         <span data-orderid="{{id}}" class="refuse go_order" >确认到达</span>
                     <?php else: ?>
                         <span data-orderid="{{id}}" class="refuse m_refuse_status_10" >取消订单</span>
-                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="button btn_bg_active go_order" >赴约成功</span>
+                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="orders go_order" >赴约成功</span>
                     <?php endif; ?>
                 </div>
                 {{/finsh_payall}}
