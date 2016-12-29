@@ -137,7 +137,7 @@
             LEMON.sys.hideKeyboard();
 
             var currentDate = new Date();
-            this._year_month_date = $.util.dataformat('yyyy/mm/dd', currentDate);
+            this._year_month_date = $.util.dateformat('yyyy/mm/dd', currentDate);
             this._start_time = '08:00:00';
             this._len = '2';
 
@@ -146,7 +146,7 @@
             var tem = date.getTime();
             var getMonthDateHtml = function(hs) {
                 var d = new Date(hs);
-                return "<li val='" + $.util.dataformat('yyyy/mm/dd',d) + "'>" + $.util.dataformat('mm月dd日',d) + "</li>";
+                return "<li val='" + $.util.dateformat('yyyy/mm/dd',d) + "'>" + $.util.dateformat('mm月dd日',d) + "</li>";
             };
             //初始化时间选择器
             var str = "";
@@ -214,7 +214,7 @@
                     $.util.alert("您选的开始时间已经过点了!");
                     return;
                 }
-                obj.calfun(start_datetime, $.util.dataformat('yyyy/mm/dd hh:ii:ss', new Date(end_datetime)), obj._len);
+                obj.calfun(start_datetime, $.util.dateformat('yyyy/mm/dd hh:ii:ss', new Date(end_datetime)), obj._len);
             }
             obj.hide();
         },
