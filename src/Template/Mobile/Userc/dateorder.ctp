@@ -41,7 +41,7 @@
                         <span data-orderid="{{id}}"  class="refuse refuse_status_3">取消约单</span>
                     <?php else: ?>
                         <span data-orderid="{{id}}"  class="refuse refuse_status_3">拒绝</span>
-                        <span data-orderid="{{id}}"  class="button btn_bg_active receive_order">接单</span>
+                        <span data-orderid="{{id}}"  class="orders receive_order">接单</span>
                     <?php endif; ?>
                 </div>
                 {{/finish_prepay}}
@@ -82,7 +82,7 @@
                 <h3 class="pay_desc color_y">待付尾款</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 1): ?>
-                        <span data-orderid="{{id}}" class="button btn_bg_active pay_status_7" >付尾款</span>
+                        <span data-orderid="{{id}}" class="orders pay_status_7" >付尾款</span>
                     <?php else: ?>
                         <span data-orderid="{{id}}"  class="refuse cancel_order refuse_status_7">取消订单</span>
                     <?php endif; ?>
@@ -128,7 +128,7 @@
                 <h3 class="pay_desc color_y">赴约中</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 2): ?>
-                        <span data-orderid="{{id}}" class="button btn_bg_active go_order" >确认到达</span>
+                        <span data-orderid="{{id}}" class="orders go_order" >确认到达</span>
                     <?php else: ?>
                         <span data-orderid="{{id}}" class="refuse complain" >投诉</span>
                         <span data-orderid="{{id}}" data-stime="{{start_time}}" class="refuse go_order" >赴约成功</span>
@@ -169,7 +169,7 @@
                     <h3 class="pay_desc color_y">对方已到达</h3>
                     <div class="groupbtn">
                         <span data-orderid="{{id}}" class="refuse complain" >投诉</span>
-                        <span data-orderid="{{id}}" class="button btn_bg_active go_order" >赴约成功</span>
+                        <span data-orderid="{{id}}" class="orders go_order" >赴约成功</span>
                     </div>
                 <?php endif; ?>
                 {{/confirm_go}}
@@ -183,7 +183,7 @@
                 <?php else: ?>
                     <h3 class="pay_desc color_y">交易成功</h3>
                     <div class="groupbtn">
-                        <a href="/date-order/appraise/{{id}}"><span data-orderid="{{id}}" class="button btn_bg_active appraise" >评价</span></a>
+                        <a href="/date-order/appraise/{{id}}"><span data-orderid="{{id}}" class="orders appraise" >评价</span></a>
                         <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
                     </div>
                 <?php endif; ?>
