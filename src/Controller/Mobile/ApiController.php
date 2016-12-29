@@ -395,13 +395,15 @@ class ApiController extends AppController {
     /**
      * 获取地图上的用户
      */
-    public function getMapUsersF() {
+    public function getMapUsers() {
         $lng = $this->request->data('lng');
         $lat = $this->request->data('lat');
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $users = $UserTable->find()->select(['id', 'avatar', 'login_coord_lng', 'login_coord_lat'])
+        $users = $UserTable->find()->select(['id', 'avatar', 'login_coord_lng', 'login_coord_lat',
+                        'distance' => "getDistance($lng,$lat,login_coord_lng,login_coord_lat)"])
                 ->where(["getDistance($lng,$lat,login_coord_lng,login_coord_lat) <=" => 1000])
                 ->where(['gender' => 2, 'status' => 3])
+                ->orderDesc('distance')
                 ->limit(10)->formatResults(function($items) {
                     return $items->map(function($item) {
                                 $item['avatar'] = $this->Util->getServerDomain() . createImg($item['avatar']) .
@@ -414,7 +416,7 @@ class ApiController extends AppController {
         $this->jsonResponse(['result' => $users]);
     }
 
-    public function getMapUsers() {
+    public function getMapUsersF() {
         $pos_arr = ['114.127843,22.60722'];
         $lng = $this->request->data('lng');
         $lat = $this->request->data('lat');
