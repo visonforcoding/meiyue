@@ -1253,6 +1253,8 @@ line-height: 14px;color:#fff;font-size:11px;text-align: center;}
 .my-download  .download-tips{background: #fff;border-radius: 4px; padding:.2rem;}
 .my-download  .download-tips h3{font-size: 15px;line-height: 30px;}
 .my-download  .download-tips p{margin-top:.4rem;text-align: justify;}
+/**/
+.set-voted-wid{width:.72rem;}
 /*空状态*/
 .visited-box{text-align: center;padding:2rem 0 5rem;}
 .visited-box .visited-ico{font-size: 64px;color:#eab96a;}
