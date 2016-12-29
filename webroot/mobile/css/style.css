@@ -150,7 +150,7 @@ header{overflow: hidden;}
  */
 .home_fill_basic_info ul li .home_items{font-size: 15px;}
 .home_fill_basic_info .home_list_l_info{text-align: justify;width:1.3rem;display:-webkit-box;-webkit-box-align:center;-webkit-box-pack:justify;display: flex;-webkit-justify-content: space-between;justify-content: space-between;}
-.home_fill_hobby .home_list_l_info{width:auto;}
+.home_fill_hobby .home_list_l_info{width:auto;font-size: 15px;}
 .home-other-info  .home_list_l_info{width:3rem;}
 .home_fill_basic_info .home_list_l_info .itemsname{color:#333;display: block;}
 .home_fill_basic_info ul{padding:0 0 0 .3rem;overflow: hidden;}
@@ -1235,8 +1235,8 @@ line-height: 14px;color:#fff;font-size:11px;text-align: center;}
 .home_fill_basic_info ul li.plaintext-box{padding-top:.2rem;padding-bottom:.2rem;}
 .home_fill_basic_info .plaintext-box .home_items{height:auto;min-height: 25px;}
 .home_fill_basic_info .plaintext-box  .home_list_r_info{height:25px;/*width:5rem;*/}
-.home_fill_basic_info ul .plaintext-box .plaintext{height:auto;width:5.1rem;}
-.plaintext-box .plaintext-con{width:100%;outline:none;text-align: justify;word-break:break-all;user-modify: read-write-plaintext-only;border:none;text-align: right;height:20px;padding:0;padding-top:4px;}
+.home_fill_basic_info ul .plaintext-box .plaintext{height:auto;width:5rem;}
+.plaintext-box .plaintext-con{width:100%;outline:none;text-align: justify;word-break:break-all;user-modify: read-write-plaintext-only;border:none;text-align: right;height:20px;padding:0;padding-top:3px;}
 /*礼物*/
 .gift-box{max-width: 2.28rem;padding:0.2rem .4rem;}
 .gift-box img{width:100%;height:auto;}
