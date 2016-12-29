@@ -113,47 +113,9 @@
                                 <input type="hidden" id="height" name="height" placeholder="你的身高" readonly="readonly"/>
                                 <input type="text"  placeholder="你的身高" readonly="readonly"/>
                                 <select name="" onchange='tochange(this)'>
-                                    <option value="160-">160-CM</option>
-                                    <option value="161">161CM</option>
-                                    <option value="162">162CM</option>
-                                    <option value="163">163CM</option>
-                                    <option value="164">164CM</option>
-                                    <option value="165">165CM</option>
-                                    <option value="166">166CM</option>
-                                    <option value="166">167CM</option>
-                                    <option value="166">168CM</option>
-                                    <option value="166">169CM</option>
-                                    <option value="170">170CM</option>
-                                    <option value="171">171CM</option>
-                                    <option value="172">172CM</option>
-                                    <option value="173">173CM</option>
-                                    <option value="174">174CM</option>
-                                    <option value="175">175CM</option>
-                                    <option value="176">176CM</option>
-                                    <option value="177">177CM</option>
-                                    <option value="178">178CM</option>
-                                    <option value="179">179CM</option>
-                                    <option value="180">180CM</option>
-                                    <option value="181">181CM</option>
-                                    <option value="182">182CM</option>
-                                    <option value="183">183CM</option>
-                                    <option value="184">184CM</option>
-                                    <option value="185">185CM</option>
-                                    <option value="186">186CM</option>
-                                    <option value="187">187CM</option>
-                                    <option value="188">188CM</option>
-                                    <option value="189">189CM</option>
-                                    <option value="190">190CM</option>
-                                    <option value="191">191CM</option>
-                                    <option value="192">192CM</option>
-                                    <option value="193">193CM</option>
-                                    <option value="194">194CM</option>
-                                    <option value="195">195CM</option>
-                                    <option value="196">196CM</option>
-                                    <option value="197">197CM</option>
-                                    <option value="198">198CM</option>
-                                    <option value="199">199CM</option>
-                                    <option value="200">200+CM</option>
+                                    <?php for($i= 155;$i<=200;$i ++): ?>
+                                        <option value="<?= $i; ?>" <?= ($user->height == $i)?'selected':''; ?>><?= $i; ?>CM</option>
+                                    <?php endfor; ?>
                                 </select>
                             </div>
                         </div>
