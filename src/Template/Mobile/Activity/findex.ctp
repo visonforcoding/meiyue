@@ -37,9 +37,9 @@
                 <?php endif; ?>
                 <div class="rank_list">
                     <ul class="rank_header">
-                        <li class="top-tab current" act="top_week"><span>周榜</span></li>
-                        <li class="top-tab" act="top_month"><span>月榜</span></li>
-                        <li class="top-tab" act="rich_list"><span>土豪榜</span></li>
+                        <li class="top-tab" act="top_1"><span>周榜</span></li>
+                        <li class="top-tab" act="top_2"><span>月榜</span></li>
+                        <li class="top-tab" act="top_3"><span>土豪榜</span></li>
                     </ul>
                     <div class="rank_con">
                         <ul class="outerblock voted_list bgff" id="my-top">
@@ -348,14 +348,14 @@
 
 
     var topPage = function (o) {
-
         this.opt = {
             week_tab: 1,
             month_tab: 2,
             rich_tab: 3,
-            cur_tab: 1,
+            cur_tab: <?= $top_tab; ?>,
             tabDataTpl: ['', '#top-list-tpl', '#top-list-tpl', '#rich-list-tpl'],
             tab_action: [
+                '',
                 '/activity/get-top-list/week',
                 '/activity/get-top-list/month',
                 '/activity/get-rich-list'
@@ -363,13 +363,18 @@
             container_id: '#top-list',
         };
         $.extend(this, this.opt, o);
-
     };
 
     $.extend(topPage.prototype, {
         init: function () {
+            var obj = this;
+            $('.top-tab').each(function() {
+                if($(this).attr('act') == ('top_'+obj.cur_tab)) {
+                    $(this).addClass('current');
+                }
+            });
             this.addTabEvent();
-            this.loadDataWithoutPage(this.tab_action[0], 'top_week');
+            this.loadDataWithoutPage(this.tab_action[this.cur_tab], 'top_week');
         },
         addTabEvent: function () {
             var obj = this;
@@ -378,13 +383,13 @@
                     $(this).removeClass('current');
                 });
                 $(this).addClass('current');
-                if ($(this).attr('act') == 'top_week') {
+                if ($(this).attr('act') == 'top_1') {
                     obj.cur_tab = obj.week_tab;
                     obj.loadDataWithoutPage(obj.tab_action[0], 'top_week');
-                } else if ($(this).attr('act') == 'top_month') {
+                } else if ($(this).attr('act') == 'top_2') {
                     obj.cur_tab = obj.month_tab;
                     obj.loadDataWithoutPage(obj.tab_action[1], 'top_month');
-                } else if ($(this).attr('act') == 'rich_list') {
+                } else if ($(this).attr('act') == 'top_3') {
                     obj.cur_tab = obj.rich_tab;
                     obj.loadDataWithoutPage(obj.tab_action[2], 'rich_list');
                 }

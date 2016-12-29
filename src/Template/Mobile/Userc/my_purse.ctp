@@ -18,7 +18,7 @@
         <div class="purse_list_bottom">
             <?php if ($user->gender == 1): ?>
             <span onclick="window.location.href='/purse/recharge'" class="btn btn_bg_t">充值</span>
-                <p><a href="/activity/index#3" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
+                <p><a href="/activity/index/3#3" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
             <?php else: ?>
                 <span class="btn btn_bg_t" onclick="duihuan();">兑换美币</span>
                 <p class="tips">正在申请提现 <?= isset($withdraw->viramount)?$withdraw->viramount:0; ?> 美币</p>

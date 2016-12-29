@@ -247,6 +247,5 @@
     window.onTopRight = function () {
         $(".release-btn").trigger('click');
     }
-
     LEMON.event.unrefresh();
 </script>
