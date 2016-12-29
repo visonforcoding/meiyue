@@ -152,6 +152,7 @@ class IndexController extends AppController {
                         return $item;
                     });
         });
+        $users = $query->toArray();
         return $this->Util->ajaxReturn(['users' => $users]);
     }
 
