@@ -65,7 +65,7 @@
                     <li>
                         <div class="voted_con flex flex_justify">
                             <div class="flex">
-                                <span class="voted_place silver"><?= $count ?></span>
+                                <div class='flex flex_center set-voted-wid'><span class="voted_place silver"><?= $count ?></span></div>
                                 <div class="voted_place_info">
                                     <span class="avatar"><img src="<?= $top->avatar ?>"/></span>
                                     <h3  onclick="location.href='/user/male-homepage/<?= $top->id; ?>'">
