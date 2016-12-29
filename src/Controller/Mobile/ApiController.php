@@ -264,6 +264,9 @@ class ApiController extends AppController {
             }
             if ($param) {
                 $param = json_decode($param);
+                if(!$param){
+                    $this->jsonResponse(false, '参数不正确');
+                }
                 if (property_exists($param, 'action')) {
                     if ($param->action == 'add_tracle_pic') {
                         //处理发图片动态
@@ -282,7 +285,7 @@ class ApiController extends AppController {
                             dblog('movement', '动态保存失败', $movement->errors());
                         }
                     }
-                    if($param->action == 'update_basic_pic') {
+                    if ($param->action == 'update_basic_pic'||$param->action=='add_basic_pic') {
                         $user->images = serialize($images);
                         if ($UserTable->save($user)) {
                             $this->jsonResponse(true, '保存成功');
@@ -292,8 +295,6 @@ class ApiController extends AppController {
                         }
                     }
                 }
-
-
             } else {
                 $user->images = serialize($images);
                 if ($UserTable->save($user)) {
@@ -342,8 +343,8 @@ class ApiController extends AppController {
                         $MovementTable = \Cake\ORM\TableRegistry::get('Movement');
                         $movement = $MovementTable->newEntity([
                             'user_id' => $user_id,
-                            'video' =>  $data['video'],
-                            'video_cover' =>  $data['video_cover'],
+                            'video' => $data['video'],
+                            'video_cover' => $data['video_cover'],
                             'body' => $param->tracle_body,
                             'type' => $tracle_type
                         ]);
@@ -354,7 +355,7 @@ class ApiController extends AppController {
                             dblog('movement', '动态保存失败', $movement->errors());
                         }
                     }
-                    
+
                     if ($param->action == 'up_auth_video') {
                         //处理上传认证视频
                         $user->auth_video = $data['video'];
@@ -366,8 +367,8 @@ class ApiController extends AppController {
                             $this->jsonResponse(true, $user->errors());
                         }
                     }
-                    
-                    if($param->action == 'update_basic_video') {
+
+                    if ($param->action == 'update_basic_video') {
                         $user->video = $data['video'];
                         $user->video_cover = $data['video_cover'];
                         if ($UserTable->save($user)) {
@@ -386,7 +387,7 @@ class ApiController extends AppController {
                 }
             }
             $this->jsonResponse(false, '成功调取接口');
-        }else {
+        } else {
             $this->jsonResponse($res);
         }
     }
@@ -400,28 +401,26 @@ class ApiController extends AppController {
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $users = $UserTable->find()->select(['id', 'avatar', 'login_coord_lng', 'login_coord_lat'])
                 ->where(["getDistance($lng,$lat,login_coord_lng,login_coord_lat) <=" => 1000])
-                ->where(['gender' => 2,'status'=>3])
+                ->where(['gender' => 2, 'status' => 3])
                 ->limit(10)->formatResults(function($items) {
                     return $items->map(function($item) {
-                                $item['avatar'] = $this->Util->getServerDomain(). createImg($item['avatar']) .
+                                $item['avatar'] = $this->Util->getServerDomain() . createImg($item['avatar']) .
                                         '?w=184&h=184&fit=stretch';
-                                $item['link'] = '/index/homepage/'.$item['id'];
+                                $item['link'] = '/index/homepage/' . $item['id'];
                                 return $item;
                             });
                 })
                 ->toArray();
         $this->jsonResponse(['result' => $users]);
     }
-    
-    
-    
 
     public function getMapUsers() {
+        $pos_arr = ['114.127843,22.60722'];
         $lng = $this->request->data('lng');
         $lat = $this->request->data('lat');
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $users = $UserTable->find()->select(['id', 'avatar', 'login_coord_lng', 'login_coord_lat',
-            'distance' =>"getDistance($lng,$lat,login_coord_lng,login_coord_lat)",])
+                    'distance' => "getDistance($lng,$lat,login_coord_lng,login_coord_lat)",])
                 ->where(['gender' => 2])
                 ->orderDesc('distance')
                 ->limit(10)->formatResults(function($items)use($lng, $lat) {
@@ -429,13 +428,18 @@ class ApiController extends AppController {
                                 $item['id'] = mt_rand(1, 100);
                                 $item['avatar'] = 'http://m-my.smartlemon.cn' . createImg($item['avatar']) .
                                         '?w=184&h=184&fit=stretch';
-                                $item['login_coord_lng'] = $item['login_coord_lng'] + 2;
-                                $item['login_coord_lat'] = $item['login_coord_lat'] + 10;
                                 return $item;
                             });
                 })
                 ->toArray();
-        $this->jsonResponse(['result' => $users]);
+        $res = [];
+        foreach($pos_arr as $key=>$pos){
+            $c = explode(',', $pos);
+            $users[$key]->login_coord_lng = (float) $c[0];
+            $users[$key]->login_coord_lat = (float) $c[1];
+            $res[] = $users[$key];
+        }
+        $this->jsonResponse(['result' => $res]);
     }
 
     /**
@@ -450,7 +454,7 @@ class ApiController extends AppController {
             $this->jsonResponse(false, '缺少必要的参数');
         }
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $user = $UserTable->find()->select(['imaccid', 'user_token', 'gender', 'pwd','imtoken','avatar','reg_step','id'])
+        $user = $UserTable->find()->select(['imaccid', 'user_token', 'gender', 'pwd', 'imtoken', 'avatar', 'reg_step', 'id'])
                 ->where(['phone' => $u, 'enabled' => 1, 'is_del' => 0])
                 ->first();
         $pwd = $this->request->data('pwd');
@@ -460,10 +464,10 @@ class ApiController extends AppController {
         if (!(new \Cake\Auth\DefaultPasswordHasher)->check($p, $user->pwd)) {
             $this->jsonResponse(false, '密码不正确');
         } else {
-             if($user->reg_step!=9){
+            if ($user->reg_step != 9) {
                 //注册未完成
-                $this->jsonResponse(['status'=>false,'msg'=>'注册未完成,请继续注册步骤',
-                    'code'=>201,'redirect_url'=>'/user/reg-basic-info-'.$user->reg_step.'/'.$user->id]);
+                $this->jsonResponse(['status' => false, 'msg' => '注册未完成,请继续注册步骤',
+                    'code' => 201, 'redirect_url' => '/user/reg-basic-info-' . $user->reg_step . '/' . $user->id]);
             }
             $user_token = $user->user_token;
             $data['login_time'] = date('Y-m-d H:i:s');
@@ -479,9 +483,9 @@ class ApiController extends AppController {
                 $redirect_url = '/index/find-rich-list';
             }
             unset($user->pwd);
-            $user->avatar = $this->Util->getServerDomain().$user->avatar;
+            $user->avatar = $this->Util->getServerDomain() . $user->avatar;
             $this->jsonResponse(['status' => true, 'redirect_url' => $redirect_url,
-                        'token_uin' => $user_token, 'msg' => '登入成功','user'=>$user]);
+                'token_uin' => $user_token, 'msg' => '登入成功', 'user' => $user]);
         }
     }
 
