@@ -37,7 +37,7 @@
     <ul class="chatBox">
         <li>
             <a href="/user/share" class="a-height flex flex_justify">
-                <div class="l-info-name">邀请注册</div>
+                <div class="l-info-name">邀请好友注册</div>
                 <i class="iconfont rcon">&#xe605;</i>
             </a>
         </li>
