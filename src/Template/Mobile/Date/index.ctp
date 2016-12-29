@@ -8,14 +8,10 @@
     <div class="date_list">
         <div class="date_list_header">
             <div class="date-tab alldate cur" tab-action="all">
-                <span class="headertab">
-                    全部
-                </span>
+                <span class="headertab">全部</span>
             </div> |
             <div class="date-tab todate" tab-action="to">
-                <span class="headertab">
-                    待抢单
-                </span>
+                <span class="headertab">待抢单</span>
             </div>
         </div>
         <div class="date_list_con">
