@@ -111,9 +111,9 @@ class UserSkillController extends AppController
                         case 0:   //审核不通过
                             $this->Push->sendAlias(
                                 $userSkill->user->user_token,
-                                '抱歉，您的'.$userSkill->skill->name.'技能审核未通过',
                                 '抱歉，您的'.$userSkill->skill->name.'技能审核未通过，主要原因是：约会说明涉嫌黄色信息；或表达不完整、不清晰。请返回我技能重新编辑发布。',
-                                '抱歉，您的'.$userSkill->skill->name.'技能审核未通过',
+                                ' ',
+                                '抱歉，您的'.$userSkill->skill->name.'技能审核未通过，主要原因是：约会说明涉嫌黄色信息；或表达不完整、不清晰。请返回我技能重新编辑发布。',
                                 'MY',
                                 false
                             );
@@ -121,9 +121,9 @@ class UserSkillController extends AppController
                         case 1:   //审核通过
                             $this->Push->sendAlias(
                                 $userSkill->user->user_token,
-                                '恭喜您，'.$userSkill->skill->name.'技能审核通过',
                                 '恭喜您，'.$userSkill->skill->name.'技能审核通过，关注度已大大提升！可以去发布约会啦~',
-                                '恭喜您，'.$userSkill->skill->name.'技能审核通过',
+                                ' ',
+                                '恭喜您，'.$userSkill->skill->name.'技能审核通过，关注度已大大提升！可以去发布约会啦~',
                                 'MY',
                                 false
                             );
