@@ -87,10 +87,21 @@
     LEMON.sys.setTopRight('提交')
     window.onTopRight = function () {
         $.util.showPreloader();
-        if ($('#demoImg').data('max') === '0')
-            LEMON.event.uploadPics({key: 'demoImg', user_id: user_id, param: 'id:123,uid:456'});
-        if ($('#up_video').data('choosed'))
+        if ($('#demoImg').data('max') === '0') {
+            var param = {};
+            param['action'] = 'add_basic_pic';
+            param = JSON.stringify(param);
+            LEMON.event.uploadPics({key: 'demoImg', user_id: user_id, param: param});
+        }else{
+            $.util.alert('请上传基本图片');
+            return false;
+        }
+        if ($('#up_video').data('choosed')) {
             LEMON.event.uploadVideo({key: 'up_video', user_id: user_id});
+        }else{
+            $.util.alert('请上传基本视频');
+            return false;
+        }
         //$.util.alert('完成注册');
         $.util.ajax({
             url: '/user/w-reg-login/' + user_id,

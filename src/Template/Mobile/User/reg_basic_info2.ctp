@@ -67,20 +67,19 @@
     $.util.chooseAuthVideo('auth_video', '注意依次做以下动作：点头，露齿笑，往左转头，举右手');
     LEMON.sys.setTopRight('下一步');
     window.onTopRight = function () {
-        alert('下一步');
         $.util.showPreloader();
         if ($('#auth_video').data('choosed'))
             var param = {};
-        param['action'] = 'up_auth_video';
-        param = JSON.stringify(param);
-        LEMON.event.uploadVideo({key: 'auth_video', user_id: user_id, param: param}, function (res) {
-            if (res) {
-                $.util.alert('视频已提交');
-                setTimeout(function () {
-                    document.location.href = '/user/reg-basic-info-3/' + user_id;
-                }, 1000);
-            }
-        });
+            param['action'] = 'up_auth_video';
+            param = JSON.stringify(param);
+            LEMON.event.uploadVideo({key: 'auth_video', user_id: user_id, param: param}, function (res) {
+                if (res) {
+                    $.util.alert('视频已提交');
+                    setTimeout(function () {
+                        document.location.href = '/user/reg-basic-info-3/' + user_id;
+                    }, 1000);
+                }
+            });
         //$.util.alert('完成注册
 
     };
