@@ -285,7 +285,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
             var obj = this;
             $.util.loop({
                 tp: 'text', //图片img或是文字text
-                //min : 5,
+                min: $(window).width(), //响应滑动的最小移动距离
                 loadImg: true,
                 isInit: true,
                 moveDom: $('#imgBox'),
