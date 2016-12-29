@@ -85,7 +85,7 @@
         <ul>
             <li>
                 <a href="/userc/user-skills-index"  class="home_items">
-                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60d;</i><span class="itemsname">我的技能</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60d;</i><span class="itemsname">技能管理</span></div>
                     <div class="home_list_r_info">
                         <i class="iconfont">&#xe605;</i>
                     </div>
