@@ -30,7 +30,7 @@
                 <h3 class="pay_desc color_y">待支付预约金</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 1): ?>
-                        <span data-orderid="{{id}}"  class="button pay_status_1 btn_bg_active">付款</span>
+                        <span data-orderid="{{id}}"  class="orders pay_status_1">付款</span>
                     <?php endif; ?>
                 </div>
                 {{/wait_prepay}}
