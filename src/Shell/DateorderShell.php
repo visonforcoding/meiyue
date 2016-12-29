@@ -60,6 +60,7 @@ class DateorderShell extends Shell {
                 case 1:
                     //男方未支付预约金
                     $this->handStatus1($order);
+                    break;
                 case 3:
                     //男方支付完预约金
                     $this->handStatus3($order);
