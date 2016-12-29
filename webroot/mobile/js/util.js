@@ -729,10 +729,13 @@ $.util = {
         img.height < img.width ? $(img).css({'height':'100%'}) : $(img).css({'width': '100%'})
     },
     addZero:function(p,len){
-        str = '0000000000000000000'+p;
+        var str = '0000000000000000000'+p;
         return str.substr(str.length-len, len);
     },
-    dataformat: function (formatStr, date) {
+    /**
+     * eg: $.util.dateformat('yyyy/mm/dd hh:ii:ss', new Date())
+     */
+    dateformat: function (formatStr, date) {
         var arrWeek = ['日', '一', '二', '三', '四', '五', '六'],
             str = formatStr
                 .replace(/yyyy|YYYY/, date.getFullYear()).replace(/yy|YY/, $.util.addZero(date.getFullYear() % 100, 2))
