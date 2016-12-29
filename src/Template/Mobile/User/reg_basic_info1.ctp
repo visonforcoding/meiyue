@@ -204,7 +204,7 @@
                         <div class="home_list_r_info">
                             <div class="home-basic-option">
                                 <input name="cup" id="cup" type="text" placeholder="你的罩杯" readonly="readonly"/>
-                                <select    onchange='tochange(this)'>
+                                <select onchange='tochange(this)'>
                                     <option value="A">A</option>
                                     <option value="B">B</option>
                                     <option value="C" selected="selected">C</option>
@@ -222,8 +222,8 @@
                         <div class="home_list_l_info"><span class="itemsname">星</span><span class="itemsname">座</span></div>
                         <div class="home_list_r_info">
                             <div class="home-basic-option">
-                                <input name="zodiac" id="zodiac" type="hidden" placeholder="请输入你的星座" readonly="readonly"/>
-                                <input   type="text" placeholder="请输入你的星座" readonly="readonly"/>
+                                <input name="zodiac" id="zodiac"  placeholder="请输入你的星座" readonly="readonly"/>
+                                <!--<input  type="text" placeholder="请输入你的星座" readonly="readonly"/>-->
                                 <select   onchange='tochange(this)'>
                                     <option value="0" selected="selected">选星座</option>
                                     <option value="1">白羊座</option>
@@ -248,8 +248,8 @@
                         <div class="home_list_l_info"><span class="itemsname">情</span><span class="itemsname">感</span><span class="itemsname">状</span><span class="itemsname">态</span></div>
                         <div class="home_list_r_info">
                             <div class="home-basic-option">
-                                <input id="state" name="state" type="hidden" placeholder="你的情感状态" readonly="readonly"/>
-                                <input  type="text" placeholder="你的情感状态" readonly="readonly"/>
+                                <input id="state" name="state" placeholder="你的情感状态" readonly="readonly"/>
+                                <!--<input  type="text" placeholder="你的情感状态" readonly="readonly"/>-->
                                 <select   onchange='tochange(this)'>
                                     <option   selected="selected" style="display: none">请选择</option>
                                     <option value="1" >单身</option>

@@ -98,7 +98,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
 
 <script id="activity-list-tpl" type="text/html">
     {{#datas}}
-    <div class="items act-item" data-id="{{id}}" onclick="geView({{id}});">
+    <div class="items" data-id="{{id}}" onclick="toActView({{id}});">
         <div class="items_pic">
             <img src="{{big_img}}"/>
         </div>
@@ -503,7 +503,7 @@ $activity_action = '/activity/index/';  //定义派对请求地址
         window.location.href='/activity/view/' + actid;
     });*/
 
-    function geView(actid) {
+    function toActView(actid) {
         window.location.href='/activity/view/' + actid;
     }
 

@@ -45,7 +45,7 @@
                 <?php foreach(array_slice(unserialize($user->images), 0, 3) as $img): ?>
                     <li class="img-item"><img src="<?= createImg($img) ?>?w=160" onload="$.util.setWH(this);"/></li>
                 <?php endforeach; ?>
-                <li id="see-movements">
+                <li onclick="checkBrownR(1);">
                     <a class='ablock' >
                         <img src="<?= unserialize($user->images)[3]; ?>?w=160" onload="$.util.setWH(this);"/>
                         <span>更多私房</span>
@@ -425,11 +425,6 @@
             }
         })
     }
-
-
-    $('#see-movements').on('tap', function() {
-        checkBrownR(1);
-    });
 
 
     /**

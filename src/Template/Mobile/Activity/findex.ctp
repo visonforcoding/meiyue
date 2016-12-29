@@ -62,7 +62,7 @@
 <script src="/mobile/js/mustache.min.js"></script>
 <script id="activity-list-tpl" type="text/html">
     {{#datas}}
-    <div class="items act-item" data-id="{{id}}">
+    <div class="items" data-id="{{id}}" onclick="toActView({{id}})">
         <div class="items_pic">
             <img src="{{big_img}}"/>
         </div>
@@ -442,10 +442,13 @@
         })
     }
 
-    $(document).on('tap', '.act-item', function() {
+    /*$(document).on('tap', '.act-item', function() {
         var actid = $(this).data('id');
+
+    });*/
+    function toActView(actid) {
         window.location.href='/activity/view/' + actid;
-    });
+    }
 
     $(document).on('click', '.join-act', function(event) {
         event.stopPropagation();
