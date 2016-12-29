@@ -129,7 +129,7 @@
             func: function (res) {
                 if(res.status) {
                     if($('.likeIt').first().text() == '+ 关注') {
-                        $('.likeIt').text('取消关注');
+                        $('.likeIt').text('已关注');
                     } else {
                         $('.likeIt').text('+ 关注');
                     }
@@ -140,12 +140,18 @@
 
     $(document).on('tap', '.praise-btn', function() {
         mid = $(this).data('id');
-        obj = $(this);
+        curpriase = parseInt($(this).find('.praise-num').first().text());
+        if($(this).hasClass('color_y')) {
+            $(this).find('.praise-num').first().text(curpriase - 1);
+        } else {
+            $(this).find('.praise-num').first().text(curpriase + 1);
+        }
+        $(this).toggleClass('color_y');
         $.util.ajax({
             url: '/tracle/praise/' + mid,
             func: function (res) {
                 if(res.status) {
-                    curpriase = parseInt(obj.find('.praise-num').first().text());
+                    /*curpriase = parseInt(obj.find('.praise-num').first().text());
                     if(res.act == 1) {
                         curpriase ++;
                     } else {
@@ -154,7 +160,7 @@
                         }
                     }
                     obj.toggleClass('color_y');
-                    obj.find('.praise-num').first().text(curpriase);
+                    obj.find('.praise-num').first().text(curpriase);*/
                 } else {
                     $.util.alert(res.msg);
                 }

@@ -160,25 +160,40 @@ class IndexController extends AppController {
         //个人信息
         $userCoord = $this->coord;
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $user = $UserTable->get($id, [
-            'contain' => [
+        $user = $UserTable->find()
+            ->contain([
                 'UserSkills' => function($q) {
                     return $q->where(['is_used' => 1, 'is_checked' => 1]);
                 },
                 'UserSkills.Skill',
-                'UserSkills.Cost'
-            ]
-        ]);
+                'UserSkills.Cost',
+                'Fans',
+                'Follows',
+                'Upacks' => function($q) {
+                    return $q->orderDesc('create_time')->limit(1);
+                },
+            ])
+            ->where(['id' => $id])
+            ->map(function($row) {
+                if(count($row['upacks'])) {
+                    $row->upakname = $row['upacks'][0]['title'];
+                }
+                $row->facount = count($row->fans);
+                $row->focount = count($row->follows);
+                return $row;
+            })
+            ->first();
         $distance = getDistance($userCoord, $user->login_coord_lng, $user->login_coord_lat);
         $age = (Time::now()->year) - ((new Time($user->birthday))->year);
         $birthday = date('m-d', strtotime($user->birthday));
-
         $isFollow = false;  //是否关注
         if ($this->user) {
-            $UserFansTable = TableRegistry::get('UserFans');
-            $follow = $UserFansTable->find()->where(['user_id' => $this->user->id, 'following_id' => $id])->count();
-            if ($follow) {
-                $isFollow = true;
+            if($user->gender == 2) {
+                $UserFansTable = TableRegistry::get('UserFans');
+                $follow = $UserFansTable->find()->where(['user_id' => $this->user->id, 'following_id' => $id])->count();
+                if ($follow) {
+                    $isFollow = true;
+                }
             }
 
             //生成邀请码
@@ -190,28 +205,26 @@ class IndexController extends AppController {
 
             //访客数统计
             if(isset($this->user)) {
-                if($this->user->gender == 1) {
-                    $visitorTb = TableRegistry::get("Visitor");
-                    $visitor = $visitorTb->find()->where(['visitor_id' => $this->user->id, 'visited_id' => $id])->first();
-                    $userdirty = false; //更新用户信息标志
-                    if(!$visitor) {
-                        $visitor = $visitorTb->newEntity([
-                            'visitor_id' => $this->user->id,
-                            'visited_id' => $id,
-                        ]);
-                        $user->visitnum ++;
-                        $userdirty = true;
-                    }
-
-                    $res = $visitorTb->connection()->transactional(function() use ($userdirty, $visitorTb, $visitor, $UserTable, $user){
-                        $vres = $visitorTb->save($visitor);
-                        $ures = true;
-                        if($userdirty) {
-                            $ures = $UserTable->save($user);
-                        }
-                        return $vres&&$ures;
-                    });
+                $visitorTb = TableRegistry::get("Visitor");
+                $visitor = $visitorTb->find()->where(['visitor_id' => $this->user->id, 'visited_id' => $id])->first();
+                $userdirty = false; //更新用户信息标志
+                if(!$visitor) {
+                    $visitor = $visitorTb->newEntity([
+                        'visitor_id' => $this->user->id,
+                        'visited_id' => $id,
+                    ]);
+                    $user->visitnum ++;
+                    $userdirty = true;
                 }
+
+                $res = $visitorTb->connection()->transactional(function() use ($userdirty, $visitorTb, $visitor, $UserTable, $user){
+                    $vres = $visitorTb->save($visitor);
+                    $ures = true;
+                    if($userdirty) {
+                        $ures = $UserTable->save($user);
+                    }
+                    return $vres&&$ures;
+                });
             }
         }
         //若登录
@@ -224,6 +237,9 @@ class IndexController extends AppController {
             'birthday' => $birthday,
             'isFollow' => $isFollow,
         ]);
+        if($user->gender == 1) {
+            $this->render('/Mobile/User/male_homepage');
+        }
     }
 
     /**
