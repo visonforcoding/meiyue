@@ -37,8 +37,9 @@ class BdmapComponent extends Component {
         $this->ak = $conf['mapkey'];
     }
 
+    //http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-placeapi
+    //http://api.map.baidu.com/place/v2/search?query=银行&location=39.915,116.404&radius=2000&output=xml&ak={您的密钥}
     public function placeSearchNearBy($query, $location, $page_num = null, $tag = null, $scope = null, $radius = 10000) {
-//        http://api.map.baidu.com/place/v2/search?query=银行&location=39.915,116.404&radius=2000&output=xml&ak={您的密钥}
         $api_url = '/place/v2/search?';
         $location = $this->formatCoord($location);
         $params = [
