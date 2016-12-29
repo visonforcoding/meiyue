@@ -47,7 +47,8 @@
                             <div class="home-basic-option">
                                     <input id="birthday" name="birthday" type="text" placeholder="出生日期" readonly="readonly" value="<?= ($user->birthday)?$user->birthday:new Date('1991-1-1'); ?>" required='required' />
                                     <input type="date"  onchange='inputChange(this)' />
-                            </div>
+                            </div> 
+
                         </div>
                     </div>
                 </li>
@@ -281,7 +282,7 @@
                 <li>
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">常出没地点</span></div>
-                        <div class="home_list_r_info">
+                        <div class="home_list_r_info" style='width:auto;'>
                             <input id="place" name="place" type="text" placeholder="请输入地点" value="<?= $user->place; ?>"/>
                         </div>
                     </div>
