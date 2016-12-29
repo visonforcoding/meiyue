@@ -282,9 +282,55 @@ class UserController extends AppController {
                     return $mvres1&&$mvres2&&$ures;
                 });
                 if ($res) {
-                    $oldIdStatus = $user->id_status;
-                    $oldAuthStatus = $user->auth_status;
                     if($user->status != $oldStatus) {
+                        switch($user->status) {
+                            case 2:  //审核不通过
+                                $this->Push->sendAlias(
+                                    $user->user_token,
+                                    '抱歉，您的注册认证信息审核不通过，请到【我的-个人信息】页中进行修改，重新提交审核。',
+                                    ' ',
+                                    '抱歉，您的注册认证信息审核不通过，请到【我的-个人信息】页中进行修改，重新提交审核。',
+                                    'MY',
+                                    false
+                                );
+                                break;
+                            case 3:  //审核通过
+                                $this->Push->sendAlias(
+                                    $user->user_token,
+                                    '恭喜您，认证信息审核通过，快快来发布技能和发布约会吧~',
+                                    ' ',
+                                    '恭喜您，认证信息审核通过，快快来发布技能和发布约会吧~',
+                                    'MY',
+                                    false
+                                );
+                                break;
+                        }
+                    }
+                    if($user->id_status != $oldIdStatus) {
+                        switch($user->id_status) {
+                            case 2:  //审核不通过
+                                $this->Push->sendAlias(
+                                    $user->user_token,
+                                    '抱歉，您的身份认证审核未通过，主要原因是：您的身份证照片可能模糊、遮挡等看不清；或使用他人照片。请重新上传清晰的本人照片。',
+                                    ' ',
+                                    '抱歉，您的身份认证审核未通过，主要原因是：您的身份证照片可能模糊、遮挡等看不清；或使用他人照片。请重新上传清晰的本人照片。',
+                                    'MY',
+                                    false
+                                );
+                                break;
+                            case 3:  //审核通过
+                                $this->Push->sendAlias(
+                                    $user->user_token,
+                                    '恭喜你，身份认证审核通过！',
+                                    ' ',
+                                    '恭喜你，身份认证审核通过！',
+                                    'MY',
+                                    false
+                                );
+                                break;
+                        }
+                    }
+                    if($user->auth_status != $oldAuthStatus) {
 
                     }
                     $this->Util->ajaxReturn(true, '修改成功');

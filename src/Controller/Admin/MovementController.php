@@ -92,9 +92,9 @@ class MovementController extends AppController {
                         case 2:   //审核通过
                             $this->Push->sendAlias(
                                 $movement->user->user_token,
-                                '恭喜您，动态审核通过',
                                 '恭喜您，动态审核通过，关注度已大大提升！',
-                                '恭喜您，动态审核通过',
+                                ' ',
+                                '恭喜您，动态审核通过，关注度已大大提升！',
                                 'MY',
                                 false
                             );
@@ -102,9 +102,9 @@ class MovementController extends AppController {
                         case 3:   //审核不通过
                             $this->Push->sendAlias(
                                 $movement->user->user_token,
-                                '抱歉，您的动态未审核通过',
                                 '抱歉，您的动态未审核通过，主要原因是：您的动态涉嫌模糊、遮挡等看不清本人；或裸露身体；或使用他人照片。请重新上传清晰的本人照片或视频。',
-                                '抱歉，您的动态未审核通过',
+                                ' ',
+                                '抱歉，您的动态未审核通过，主要原因是：您的动态涉嫌模糊、遮挡等看不清本人；或裸露身体；或使用他人照片。请重新上传清晰的本人照片或视频。',
                                 'MY',
                                 false
                             );

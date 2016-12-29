@@ -51,9 +51,9 @@ class YuepaiUserController extends AppController
                         try {
                             $res = $this->Push->sendAlias(
                                 $yuepaiu->user->user_token,
-                                '恭喜，您申请的约拍已审核通过',
                                 '恭喜，您申请的约拍已审核通过，请准时于'.getYMD($yuepaiu->yuepai->act_time).'到深圳南山摄影棚。',
-                                '恭喜，您申请的约拍已审核通过',
+                                ' ',
+                                '恭喜，您申请的约拍已审核通过，请准时于'.getYMD($yuepaiu->yuepai->act_time).'到深圳南山摄影棚。',
                                 'MY',
                                 false
                             );
@@ -66,9 +66,9 @@ class YuepaiUserController extends AppController
                         try {
                             $res = $this->Push->sendAlias(
                                 $yuepaiu->user->user_token,
-                                '抱歉，您申请的约拍未审核通过',
                                 '抱歉，您申请的约拍未审核通过，主要原因是：您的综合评分未达到约拍的标准，感谢您的支持！',
-                                '抱歉，您申请的约拍未审核通过',
+                                ' ',
+                                '抱歉，您申请的约拍未审核通过，主要原因是：您的综合评分未达到约拍的标准，感谢您的支持！',
                                 'MY',
                                 false
                             );
