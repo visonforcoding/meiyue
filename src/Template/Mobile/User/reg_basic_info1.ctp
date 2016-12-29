@@ -99,7 +99,7 @@
                                     <option value="53">53KG</option>
                                     <option value="54">54KG</option>
                                     <option value="55">55KG</option>
-                                    <option value="55+">55+KG</option>
+                                    <option value="56">55+KG</option>
                                 </select>
                             </div>
                         </div>
@@ -133,7 +133,27 @@
                                     <option value="177">177CM</option>
                                     <option value="178">178CM</option>
                                     <option value="179">179CM</option>
-                                    <option value="180">180+CM</option>
+                                    <option value="180">180CM</option>
+                                    <option value="181">181CM</option>
+                                    <option value="182">182CM</option>
+                                    <option value="183">183CM</option>
+                                    <option value="184">184CM</option>
+                                    <option value="185">185CM</option>
+                                    <option value="186">186CM</option>
+                                    <option value="187">187CM</option>
+                                    <option value="188">188CM</option>
+                                    <option value="189">189CM</option>
+                                    <option value="190">190CM</option>
+                                    <option value="191">191CM</option>
+                                    <option value="192">192CM</option>
+                                    <option value="193">193CM</option>
+                                    <option value="194">194CM</option>
+                                    <option value="195">195CM</option>
+                                    <option value="196">196CM</option>
+                                    <option value="197">197CM</option>
+                                    <option value="198">198CM</option>
+                                    <option value="199">199CM</option>
+                                    <option value="200">200+CM</option>
                                 </select>
                             </div>
                         </div>
@@ -337,6 +357,9 @@ use Cake\I18n\Date; ?>
 </script>
 <script>
     function tochange(that) {
+        if(that.options[that.selectedIndex].value=='0'){
+            return;
+        }
         $(that).prev('input').val(that.options[that.selectedIndex].text);
         $(that).prev('input').prev().val(that.options[that.selectedIndex].value);
     }
