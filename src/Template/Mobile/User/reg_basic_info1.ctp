@@ -6,7 +6,7 @@
     </div>
 </header>
 <link rel="stylesheet" type="text/css" href="/mobile/css/LArea.css"/>
-<div class="wraper">
+<div class="wraper bgff">
     <!--基本信息三步-->
     <div class="basicinfo-header">
         <div class="line-box">
@@ -298,7 +298,9 @@
                 </li>-->
         </div>
     </form>
+    <div style='height:20px'></div>
 </div>
+
 <!--标签选择框-->
 <?php
 
