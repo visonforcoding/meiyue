@@ -401,7 +401,6 @@ class ApiController extends AppController {
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $users = $UserTable->find()->select(['id', 'avatar', 'login_coord_lng', 'login_coord_lat',
                         'distance' => "getDistance($lng,$lat,login_coord_lng,login_coord_lat)"])
-                ->where(["getDistance($lng,$lat,login_coord_lng,login_coord_lat) <=" => 1000])
                 ->where(['gender' => 2, 'status' => 3])
                 ->orderDesc('distance')
                 ->limit(10)->formatResults(function($items) {
