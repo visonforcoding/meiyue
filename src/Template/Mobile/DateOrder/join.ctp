@@ -92,7 +92,6 @@
 
 
     $('#order_pay').on('tap',function(){
-        //预约支付
         var dom = $(this);
         if(dom.hasClass('disabled')){
             return false;
@@ -108,7 +107,7 @@
                     if(res.errorStatus == 1) {
                         setTimeout(function() {
                             window.location.href='/purse/recharge?redurl=/date-order/join/<?= $date->id; ?>';
-                        }, 1000);
+                    }, 1000);
                     } else {
                         dom.removeClass('disabled');
                     }

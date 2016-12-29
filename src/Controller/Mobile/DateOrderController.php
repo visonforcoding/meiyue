@@ -60,10 +60,7 @@ class DateOrderController extends AppController
                'Cost'      
            ]    
        ]);
-       $lasth = ((new Time($request['end_time']))->hour-(new Time($request['start_time']))->hour);
-       if($lasth < 3){
-           return $this->Util->ajaxReturn(false,'约会时长至少要3个小时');
-       }
+       $lasth = getLast((new Time($request['start_time'])), (new Time($request['end_time'])));
        $price = $date->cost->money;
        $amount = $price*$lasth;
        $pre_precent = 0.2;    //预约金比例
@@ -241,7 +238,7 @@ class DateOrderController extends AppController
                     },
                 ]
             ]);
-            $lasth = ($date->end_time->hour-$date->start_time->hour);
+            $lasth = getLast($date->start_time, $date->end_time);
             $price = $date->price;
             $amount = $price*$lasth;
             if($this->user->money<$amount){
@@ -970,7 +967,7 @@ class DateOrderController extends AppController
                 ,'UserSkill.Skill','Dater.Tags','Date'
             ]
         ]);
-        $lasth = ((new Time($order->end_time))->hour-(new Time($order->start_time))->hour);        
+        $lasth = getLast((new Time($order->start_time)), (new Time($order->end_time)));
         if($this->user->gender==1){
              if((strtotime($order->start_time)-time())>= 2*60*60){
                  //2小时开外

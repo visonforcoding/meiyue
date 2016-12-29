@@ -209,10 +209,10 @@
     var skill_id = <?= $data->skill_id ?>;
     var lasth, start_time, end_time;
     var place_name, coord_lng, coord_lat, place_uid;
-    function choosedateCallBack(start_datetime, end_datetime) {
+    function choosedateCallBack(start_datetime, end_datetime, last_time) {
         start_time = start_datetime;
         end_time = end_datetime;
-        lasth = new Date(end_datetime).getHours() - new Date(start_datetime).getHours();
+        lasth = last_time;
         $('#lasth').html(lasth);
         var price = <?= $data->cost->money ?>;
         $('#total_money').html(lasth * price);
