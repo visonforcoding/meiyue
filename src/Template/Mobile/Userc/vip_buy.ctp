@@ -13,7 +13,7 @@
                     <!-- VIP套餐 -->
                     <?php if($item->type == 1): ?>
                     <li>
-                        <div class="items flex flex_justify">
+                        <div class="items flex flex_justify"  onclick="payView(<?= $item->id; ?>)">
                             <h3 class="commontext bright color_friends">
                                 <span class="high-vip">
                                     <img src="/mobile/images/higther-vip.png" class="responseimg"/>
@@ -24,7 +24,7 @@
                                 <i class="iconfont color_y">&#xe62f;</i>
                                 <i class="slide-btn-name">点击展开详情</i>
                             </div>
-                            <div class="color_y" onclick="payView(<?= $item->id; ?>)">
+                            <div class="color_y">
                                 <i class="smalldes">￥</i>
                                 <span class="lagernum"><?= $item->price; ?></span>
                                 <i class="iconfont rco">&#xe605;</i>  
@@ -69,7 +69,7 @@
                     <!-- 充值套餐 -->
                     <?php if($item->type == 2): ?>
                         <li>
-                            <div class="items flex flex_justify">
+                            <div class="items flex flex_justify" onclick="payView(<?= $item->id; ?>)">
                                 <h3 class="commontext bright color_friends">
                                 <span class="lagernum">
                                     <?= $item->title; ?>
@@ -80,7 +80,7 @@
                                     <i class="iconfont color_y">&#xe62f;</i>
                                     <i class="slide-btn-name">点击展开详情</i>
                                 </div>
-                                <div class="color_y" onclick="payView(<?= $item->id; ?>)">
+                                <div class="color_y">
                                     <i class="smalldes">￥</i>
                                     <span class="lagernum"><?= $item->price; ?></span>
                                     <i class="iconfont rco">&#xe605;</i>  
@@ -118,23 +118,26 @@
     </div>
 </div>
 <script type="text/javascript">
-    $('#changed .closed').on('tap',function(){
-        var data = $(this).data('type');
-        var ele = $(this).parent('.items').siblings();
+    $.util.tap($('#changed .closed'), function(e){
+        var target = e.srcElement;
+        if(target.tagName == 'I') target = target.parentNode;
+        var data = $(target).data('type');
+        var ele = $(target).parent('.items').siblings();
         switch(data){
             case '0':
                 ele.removeClass('hidecon').addClass('showcon');
-                $(this).attr('data-type','1');
-                $(this).find('.slide-btn-name').text('点击关闭详情');
+                $(target).attr('data-type','1');
+                $(target).find('.slide-btn-name').text('点击关闭详情');
                 break;
             case '1':
                 ele.removeClass('showcon').addClass('hidecon');
-                $(this).attr('data-type','0');
-                $(this).find('.slide-btn-name').text('点击展开详情');
+                $(target).attr('data-type','0');
+                $(target).find('.slide-btn-name').text('点击展开详情');
                 break;
             default:break;
         }
-    })
+        return false;
+    });
 
     //支付
     function payView($packid)
