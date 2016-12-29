@@ -61,7 +61,7 @@
             </li>
             <li>
                 <a href="#this"  class="home_items">
-                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60c;</i><span class="itemsname">我的评选</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60c;</i><span class="itemsname">评选管理</span></div>
                     <div class="home_list_r_info">
 
                         <i class="iconfont">&#xe605;</i>
