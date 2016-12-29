@@ -65,7 +65,7 @@
     <div class="home_basic_mark mt40">
         <div class="inner">
             <div class="title">
-                <h3>Ta的资料</h3>
+                <h3>TA的资料</h3>
             </div>
             <div class="con">
                 <?php if($user->zodiac): ?><a href="#this"><?= Zodiac::getStr($user->zodiac);?></a><?php endif;?>
@@ -84,7 +84,7 @@
     <div class="home_basic_ability mt40">
         <div class="">
             <div class="title inner">
-                <h3>Ta的技能</h3>
+                <h3>TA的技能</h3>
             </div>
             <ul class="outerblock">
                 <?php foreach (array_slice($user->user_skills, 0, 3) as $user_skill): ?>
@@ -118,7 +118,7 @@
         <?php if($user->wx_ishow && $user->wxid): ?>
         <li>
             <a name="showWx" class="items flex flex_justify" >
-                <span class="seach_name">查看Ta的微信</span>
+                <span class="seach_name">查看TA的微信</span>
                 <span id="showWx" class="golook">点击查看</span>
             </a>
         </li>
@@ -132,7 +132,7 @@
         <?php if($user->charm > 0): ?>
         <li>
             <a class="items flex flex_justify" href="javascript:toVoted();">
-                <span class="seach_name">Ta的评选</span>
+                <span class="seach_name">TA的评选</span>
                 <span class="golook"><i class="iconfont r_icon">&#xe605;</i></span>
             </a>
         </li>
@@ -228,7 +228,7 @@
         <?php if (count($user->user_skills) > 0): ?>
         <li>
             <a id="dateit">
-                <i class="iconfont">&#xe632;</i>约Ta
+                <i class="iconfont">&#xe632;</i>约TA
             </a>
         </li>   |    
         <?php endif; ?>
