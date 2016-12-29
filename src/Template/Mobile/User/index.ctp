@@ -93,7 +93,7 @@
             </li>
             <li id="my-dates-btn">
                 <a href="/date/index"  class="home_items">
-                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60f;</i><span class="itemsname">我发起的约会</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60f;</i><span class="itemsname">约会管理</span></div>
                     <div class="home_list_r_info">
                         <i class="iconfont">&#xe605;</i>
                     </div>
@@ -123,7 +123,7 @@
             </li>
             <li>
                 <a href='/user/share'  class="home_items">
-                    <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe612;</i><span class="itemsname">邀请注册</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe612;</i><span class="itemsname">邀请好友注册</span></div>
                     <div class="home_list_r_info">
 
                         <i class="iconfont">&#xe605;</i>
