@@ -48,7 +48,7 @@
                 <span class="height_left color_y">身高 <i class="">(cm)</i></span>
                 <div class="scale">
                     <div class="line flex flex_justify">
-                        <h1>160</h1><h1>170</h1><h1>180</h1><h1>190</h1><h1>200+</h1>
+                        <h1>155</h1><h1>160</h1><h1>165</h1><h1>170</h1><h1>175</h1><h1>180</h1><h1>185+</h1>
                     </div>
                     <div id='height' class="block range">
                         <div class='meaBox'></div>
@@ -61,7 +61,7 @@
                 <span class="height_left color_y">年龄 <i class="">(岁)</i></span>
                 <div class="scale">
                     <div class="line flex flex_justify">
-                        <h1>18</h1> <h1>24</h1> <h1>30</h1><h1>36</h1><h1>40+</h1>
+                        <h1>18</h1><h1>20</h1><h1>24</h1><h1>26</h1><h1>30</h1><h1>35</h1><h1>40+</h1>
                     </div>
                     <div id='age' class="block range">
                         <div class='meaBox'></div>
@@ -129,7 +129,7 @@
     window.onTopRight = function(){
         $('#selectMenu_box').toggle();
         if(!window.search_height){
-            window.search_height = new ranger({dom:$('#height'), range:[155, 200]});
+            window.search_height = new ranger({dom:$('#height'), range:[155, 185]});
             window.search_age = new ranger({dom:$('#age'), range:[18, 40]});
         }
     }
