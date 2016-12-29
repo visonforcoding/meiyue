@@ -733,7 +733,7 @@ class UserController extends AppController {
             ->contain([
                 'Fans',
                 'Follows',
-                'Upacks' => function($q) use($uid) {
+                'Upacks' => function($q) {
                     return $q->orderDesc('create_time')->limit(1);
                 },
             ])

@@ -30,7 +30,7 @@
             <span class="total">4.2分</span>
         </div>-->
         <ul class="otherinfo flex flex_justify bdbottom">
-            <li><span class="t_desc"><?= ($user->height)?$user->height.'cm':'--' ?></span><span class="b_desc">身高</span></li>
+            <li><span class="t_desc"><?= ($user->height)?$user->height.$user->cup:'--' ?></span><span class="b_desc">身高</span></li>
             <li><span class="t_desc"><?= ($user->weight)?$user->weight.'kg':'--' ?></span><span class="b_desc">体重</span></li>
             <li><span class="t_desc"><?= ($user->bwh)?$user->bwh:'--' ?></span><span class="b_desc">三围</span></li>
             <li><span class="t_desc"><?= ($birthday)?$birthday:'--' ?></span><span class="b_desc">生日</span></li>
