@@ -19,15 +19,15 @@ class ActivityController extends AppController
 
     /**
      * Index method
-     *
+     * @param int $top_tab 头牌页初始显示tab标号
      * @return \Cake\Network\Response|null
      */
-    public function index($curtab = 'date')
+    public function index($top_tab = 1)
     {
         $carouselTb = TableRegistry::get('Carousel');
         $carousel = $carouselTb->find()->where(['position' => CarouselPosition::TOP_BIGIMG, 'status' => 1])->first();
         $this->set([
-            'curtab' => $curtab,
+            'top_tab' => $top_tab,
             "user" => $this->user,
             "carousel" => $carousel,
             'pageTitle' => '美约-活动'

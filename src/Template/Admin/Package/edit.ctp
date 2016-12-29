@@ -28,7 +28,7 @@
                     [
                         'label' => false,
                         'type' => 'select',
-                        "options" => getPackageType(),
+                        "options" => PackType::getPackageType(),
                         'class' => 'form-control'
                     ]
                 );
