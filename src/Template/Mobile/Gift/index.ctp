@@ -55,6 +55,7 @@
                         gid = null;
                         $('#allgift .items').removeClass('active');
                         setTimeout(function(){
+                            LEMON.event.back();
                             $.util.openTalk(res);
                         },500);
                     }
