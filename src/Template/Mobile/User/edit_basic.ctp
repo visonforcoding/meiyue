@@ -45,7 +45,7 @@
                         </div>
                         <div class="home_list_r_info">
                             <div class="home-basic-option">
-                                    <input type="text" placeholder="出生日期" readonly="readonly" value="<?= ($user->birthday)?$user->birthday:new Date('1991-1-1'); ?>" required='required' />
+                                    <input id="birthday" name="birthday" type="text" placeholder="出生日期" readonly="readonly" value="<?= ($user->birthday)?$user->birthday:new Date('1991-1-1'); ?>" required='required' />
                                     <input type="date"  onchange='inputChange(this)' />
                             </div>
                         </div>
@@ -523,9 +523,11 @@
         }
         <?php endif; ?>
         var form = $('form');
+        $.util.showPreloader();
         $.util.ajax({
             data: form.serialize(),
             func: function (res) {
+                $.util.hidePreloader();
                 $.util.alert(res.msg);
                 if (res.status) {
                     setTimeout(function() {
