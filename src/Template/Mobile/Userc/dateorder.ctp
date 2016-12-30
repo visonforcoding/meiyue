@@ -208,12 +208,12 @@
     {{/orders}}
 </script>
 <?php $this->end('static') ?>
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>我的订单</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="date_list">
         <div class="date_list_header order_header">

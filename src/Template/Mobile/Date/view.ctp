@@ -1,4 +1,4 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <?php if($date['status'] != DateState::DATED): ?>
@@ -6,7 +6,7 @@
         <?php endif; ?>
         <h1>约会详情</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="date_detail_place inner">
         <h3 class="title"><i class="itemsname color_y">

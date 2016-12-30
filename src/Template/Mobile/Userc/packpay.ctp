@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>支付</h1>
     </div>
-</header>
+</header> -->
 
 <div class="recharge_pay_container flex flex_justify inner mt20">
     <div class="l_info">

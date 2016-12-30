@@ -48,12 +48,12 @@
     }
 </style>
 <?php $this->end('css')?>
-<header>
+<!-- <header>
     <div class="header">
         <span class="iconfont toback" onclick="history.back();">&#xe602;</span>
         <h1>我的动态</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="tracle_list" id="tracle-list">
     </div>

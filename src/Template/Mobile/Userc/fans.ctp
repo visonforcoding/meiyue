@@ -19,12 +19,12 @@
     {{/fans}}
 </script>
 <?php $this->end('static') ?>
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1><?=$pageTitle?></h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <ul id="fans-list" class="praised_list mt20 bgff">
 

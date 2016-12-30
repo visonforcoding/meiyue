@@ -960,5 +960,23 @@ class UserController extends AppController {
         }
         return $this->Util->ajaxReturn(['status' => $res, 'msg' => '操作失败']);
     }
+
+
+    /**
+     * 清除基本视频与图片字段
+     */
+    public function clearBasicPv()
+    {
+        $this->handCheckLogin();
+        if($this->request->is('POST')) {
+            $res = $this->User->query()->update()->set(['images' => '', 'video' => ''])->where(['id' => $this->user->id])->execute();
+            if($res) {
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '操作成功']);
+            } else {
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '操作失败']);
+            }
+        }
+        return $this->Util->ajaxReturn(['status' => false, 'msg' => '操作失败']);
+    }
 }
         

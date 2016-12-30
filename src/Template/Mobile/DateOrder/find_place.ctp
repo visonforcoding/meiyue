@@ -25,12 +25,12 @@
     {{/places}}
 </script>
 <?php $this->end('static') ?>
-<header>
+<!-- <header>
     <div class="header">
         <span class="iconfont toback">&#xe602;</span>
         <h1>选择约会地点</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper page" id="page-choosePlace" hidden>
     <div class="search_bar inner">
         <div class="search">

@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>账单明细</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="puse_bills">
         <ul id="billcontainer" class="puse_bills_con inner">

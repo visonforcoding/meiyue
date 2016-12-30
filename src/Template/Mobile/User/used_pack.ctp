@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>付费查看记录</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="deadline-box"></div>
     <div class="date_list_header">

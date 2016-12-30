@@ -3,7 +3,7 @@
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>她的技能</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="find_ability">
         <div class="choose_mark_con">

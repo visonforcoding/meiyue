@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>账户充值</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <h3 class="rich_header"></h3>
     <div class="charge_container_list mt20">

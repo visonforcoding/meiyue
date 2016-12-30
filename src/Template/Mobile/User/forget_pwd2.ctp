@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="window.location.href='/user/forget-pwd1'">&#xe602;</i>
         <h1><?= $pageTitle;?></h1>
     </div>
-</header>
+</header> -->
 <div class="wraper fullwraper bgff">
     <div class="nav-banner"></div>
     <div class="foget-pwd-box">

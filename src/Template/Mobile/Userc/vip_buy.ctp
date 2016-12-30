@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>购买套餐</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="package_list mt20">
         <h3 class="commontitle inner">套餐类别</h3>

@@ -172,6 +172,9 @@ class IndexController extends AppController {
                 'Upacks' => function($q) {
                     return $q->orderDesc('create_time')->limit(1);
                 },
+                'Tags' => function($q) {
+                    return $q->select(['name'])->where(['parent_id !=' => 0]);
+                }
             ])
             ->where(['id' => $id])
             ->map(function($row) {

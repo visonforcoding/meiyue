@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>我的钱包</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="purse_list">
         <div class="purse_list_top">
@@ -21,7 +21,9 @@
                 <p><a href="/activity/index/3#3" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
             <?php else: ?>
                 <span class="btn btn_bg_t" onclick="duihuan();">兑换美币</span>
-                <p class="tips">正在申请提现 <?= isset($withdraw->viramount)?$withdraw->viramount:0; ?> 美币</p>
+                <?php if(isset($withdraw->viramount)): ?>
+                <p class="tips">正在申请提现 <?= $withdraw->viramount; ?> 美币</p>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
     </div>
@@ -74,7 +76,7 @@
                 </div>
                 <span class="pay-type-choose-span iconfont choose">&#xe615;</span>
             </li>
-            <!--<li class="pay-type-choose" onclick="toYinlianpage();">
+            <li class="pay-type-choose" onclick="toYinlianpage();">
                 <div class="paytype">
                     <i class="iconfont payico cardpay">&#xe621;</i>
                     <h3 class="paydes">
@@ -83,7 +85,7 @@
                     </h3>
                 </div>
                 <span class="pay-type-choose-span iconfont choose">&#xe615;</span>
-            </li>-->
+            </li>
         </ul>
     </div>
 </div>
@@ -114,11 +116,11 @@
     });
 
     function toAlipage() {
-        window.location.href = '/userc/exchange-ali';
+        window.location.href = '/userc/exchange-view/1';
     }
 
     function toYinlianpage() {
-        window.location.href = '/userc/exchange-yinlian';
+        window.location.href = '/userc/exchange-view/2';
     }
 
     LEMON.sys.back('/user/index');

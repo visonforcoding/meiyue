@@ -5,24 +5,31 @@
     <div class="col-xs-12">
         <form id="table-bar-form">
             <div class="table-bar form-inline">
-                <a href="/cost/add" class="btn btn-small btn-warning">
-                    <i class="icon icon-plus-sign"></i>添加
-                </a>
                 <div class="form-group">
-                    <label for="keywords">关键字</label>
-                    <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
+                    <label for="keywords">用户编号</label>
+                    <input type="text" name="id_kw" class="form-control" id="keywords" placeholder="输入关键字">
                 </div>
                 <div class="form-group">
-                    <label for="keywords">时间</label>
-                    <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
+                    <label for="keywords">用户昵称</label>
+                    <input type="text" name="nick_kw" class="form-control" id="keywords" placeholder="输入关键字">
+                </div>
+                <div class="form-group">
+                    <label for="keywords">申请时间</label>
+                    <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords"
+                           placeholder="开始时间">
                     <label for="keywords">到</label>
-                    <input type="text" name="end_time" class="form-control date_timepicker_end" id="keywords" placeholder="结束时间">
+                    <input type="text" name="end_time" class="form-control date_timepicker_end" id="keywords"
+                           placeholder="结束时间">
                 </div>
                 <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索</a>
                 <!--<a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>-->
             </div>
         </form>
-        <table id="list"><tr><td></td></tr></table>
+        <table id="list">
+            <tr>
+                <td></td>
+            </tr>
+        </table>
         <div id="pager"></div>
     </div>
 <?php $this->start('script'); ?>
@@ -43,24 +50,127 @@
                 url: "/withdraw/getDataList",
                 datatype: "json",
                 mtype: "POST",
-                colNames:
-                    [
-                        '申请人',
-                        '提现金额',
-                        '提现方式',
-                        '提现账号',
-                        '银行',
-                        '状态',
-                        '操作'
-                    ],
+                colNames: [
+                    '用户编号',
+                    '用户昵称',
+                    '申请人',
+                    '电话号码',
+                    '提现方式',
+                    '银行',
+                    '银行卡号',
+                    '支付宝账号',
+                    '微信账号',
+                    '提现金额',
+                    '申请时间',
+                    '受理时间',
+                    '状态',
+                    '受理操作',
+                    '操作'
+                ],
                 colModel: [
-                    {name:'truename',editable:true,align:'center'},
-                    {name:'amount',editable:true,align:'center'},
-                    {name:'type',editable:true,align:'center'},
-                    {name:'cardno',editable:true,align:'center'},
-                    {name:'bank',editable:true,align:'center'},
-                    {name:'status',editable:true,align:'center'},
-                    {name:'actionBtn',align:'center',viewable:false,sortable:false,frozen:true,formatter:actionFormatter}],
+                    {name: 'user.id', editable: true, align: 'center'},
+                    {name: 'user.nick', editable: true, align: 'center'},
+                    {name: 'truename', editable: true, align: 'center'},
+                    {name: 'user.phone', editable: true, align: 'center'},
+                    {
+                        name: 'type',
+                        editable: true,
+                        align: 'center',
+                        formatter: function actionFormatter(cellvalue, options, rowObject) {
+                            switch (cellvalue) {
+                                case 1:
+                                    cellvalue = '支付宝';
+                                    break;
+                                case 2:
+                                    cellvalue = '银联'
+                                    break;
+                            }
+                            return cellvalue;
+                        }
+                    },
+                    {name: 'bank', editable: true, align: 'center'},
+                    //银行卡号
+                    {
+                        name: 'cardno', editable: true, align: 'center',
+                        formatter: function actionFormatter(cellvalue, options, rowObject) {
+                            console.log(rowObject);
+                            switch (rowObject.type) {
+                                case 2:  //银联
+                                    break;
+                                case 1:  //支付宝
+                                case 3:  //微信
+                                    cellvalue = '';
+                                    break;
+                            }
+                            return cellvalue;
+                        }
+                    },
+                    //微信账号
+                    {
+                        name: 'cardno', editable: true, align: 'center',
+                        formatter: function (cellvalue, options, rowObject) {
+                            switch (rowObject.type) {
+                                case 1:  //支付宝
+                                    break;
+                                case 2:  //银联
+                                case 3:  //微信
+                                    cellvalue = '';
+                                    break;
+                            }
+                            return cellvalue;
+                        }
+                    },
+                    //支付宝账号
+                    {
+                        name: 'cardno', editable: true, align: 'center',
+                        formatter: function (cellvalue, options, rowObject) {
+                            switch (rowObject.type) {
+                                case 3:  //支付宝
+                                    break;
+                                case 2:  //银联
+                                case 1:  //微信
+                                    cellvalue = '';
+                                    break;
+                            }
+                            return cellvalue;
+                        }
+                    },
+                    {name: 'amount', editable: true, align: 'center'},
+                    {name: 'create_time', editable: true, align: 'center'},
+                    {name: 'deal_time', editable: true, align: 'center'},
+                    {
+                        name: 'status', editable: true, align: 'center',
+                        formatter: function (cellvalue, options, rowObject) {
+                            switch (cellvalue) {
+                                case 1:
+                                    cellvalue = '正在审核';
+                                    break;
+                                case 2:
+                                    cellvalue = '审核通过'
+                                    break;
+                                case 3:
+                                    cellvalue = '审核不通过'
+                                    break;
+                            }
+                            return cellvalue;
+                        }
+                    },
+                    {
+                        name: 'dealBtn',
+                        align: 'center',
+                        viewable: false,
+                        sortable: false,
+                        frozen: true,
+                        formatter: dealFormatter
+                    },
+                    {
+                        name: 'actionBtn',
+                        align: 'center',
+                        viewable: false,
+                        sortable: false,
+                        frozen: true,
+                        formatter: actionFormatter
+                    }],
                 pager: "#pager",
                 rowNum: window._config.showDef,
                 rowList: window._config.pages,
@@ -86,11 +196,37 @@
             $('#list').jqGrid('setFrozenColumns');
         });
 
+        function dealFormatter(cellvalue, options, rowObject) {
+            if(rowObject.status != 2) {
+                response = '<a title="确认提现" onClick="dealOrder(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
+                return response;
+            }
+            return '';
+        }
+
         function actionFormatter(cellvalue, options, rowObject) {
             response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-            response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-            response += '<a title="编辑" href="/cost/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
             return response;
+        }
+
+        function dealOrder(id) {
+            layer.confirm('确认提现？', {
+                btn: ['确认', '取消'] //按钮
+            }, function () {
+                $.ajax({
+                    type: 'post',
+                    data: {id: id},
+                    dataType: 'json',
+                    url: '/withdraw/deal',
+                    success: function (res) {
+                        layer.msg(res.msg);
+                        if (res.status) {
+                            $('#list').trigger('reloadGrid');
+                        }
+                    }
+                })
+            }, function () {
+            });
         }
 
         function delRecord(id) {
@@ -101,7 +237,7 @@
                     type: 'post',
                     data: {id: id},
                     dataType: 'json',
-                    url: '/cost/delete',
+                    url: '/withdraw/delete',
                     success: function (res) {
                         layer.msg(res.msg);
                         if (res.status) {
@@ -117,37 +253,13 @@
             //搜索
             var postData = $('#table-bar-form').serializeArray();
             var data = {};
-            $.each(postData,function(i,n){
+            $.each(postData, function (i, n) {
                 data[n.name] = n.value;
             });
             $.zui.store.pageSet('searchData', data); //本地存储查询参数 供导出操作等调用
             $("#list").jqGrid('setGridParam', {
                 postData: data
             }).trigger("reloadGrid");
-        }
-
-        function doExport() {
-            //导出excel
-            var sortColumnName = $("#list").jqGrid('getGridParam', 'sortname');
-            var sortOrder = $("#list").jqGrid('getGridParam', 'sortorder');
-            var searchData = $.zui.store.pageGet('searchData')?$.zui.store.pageGet('searchData'):{};
-            searchData['sidx'] = sortColumnName;
-            searchData['sort'] = sortOrder;
-            var searchQueryStr  = $.param(searchData);
-            $("body").append("<iframe src='/cost/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
-        }
-
-        function doView(id) {
-            //查看明细
-            url = '/cost/view/'+id;
-            layer.open({
-                type: 2,
-                title: '查看详情',
-                shadeClose: true,
-                shade: 0.8,
-                area: ['45%', '70%'],
-                content: url//iframe的url
-            });
         }
     </script>
 <?php

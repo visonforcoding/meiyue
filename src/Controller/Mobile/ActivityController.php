@@ -496,8 +496,7 @@ class ActivityController extends AppController
                 $user = $this->user;
             }
             $limit = 99;
-            $where = Array();
-
+            $where = ['income' => 1];
             if ('week' == $type) {
                 $where['Flow.create_time >='] = new Time('last sunday');
             } else if ('month' == $type) {
@@ -507,7 +506,6 @@ class ActivityController extends AppController
                         new Time($da->year . '-' . $da->month . '-' . '01 00:00:00')
                     );
             }
-
             $i = 1;
             $query = $FlowTable->find()
                 ->contain([

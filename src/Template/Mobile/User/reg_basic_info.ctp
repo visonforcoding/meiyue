@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <h1>基本信息</h1>
     </div>
-</header>
+</header> -->
 <link rel="stylesheet" type="text/css" href="/mobile/css/LArea.css"/>
 <div class="wraper">
     <form method="post">

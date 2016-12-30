@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>个人信息</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <h3 class="basic_info_integrity">当前资料完整度<?= $percent; ?>%</h3>
     <div class="identify_img_ifo mt40">

@@ -32,13 +32,13 @@
     {{/places}}
 </script>
 <?php $this->end('static') ?>
-<header>
+<!-- <header>
     <div class="header">
         <span class="iconfont toback" onclick="history.back();">&#xe602;</span>
         <h1>约会详情</h1>
         <!--<span class="r_btn">编辑</span>-->
     </div>
-</header>
+</header> -->
 
 <!-- 主view -->
 <div class="wraper page-current" id="page-orderSkill">

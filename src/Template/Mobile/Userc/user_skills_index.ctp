@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <h1>我的技能</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <?php if(count($userskills)): ?>
     <div class="ability_items">

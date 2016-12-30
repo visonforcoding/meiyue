@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="window.location.href='/userc/edit-info'">&#xe602;</i>
         <h1>基本照片与视频上传</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="up_identify_box bgff mt40">
         <?php if (!($user->images) || !($user->video)): ?>
@@ -133,13 +133,18 @@
                 action: 'update_basic_video'
             });
         $.util.showPreloader();
-        $.util.setCookie('UPLOAD_IV', true, 30);
+        $.util.setCookie('UPLOAD_IV', true, 15);
         $(this).removeAttr('id');
         $(this).addClass('disabled');
-        setTimeout(function () {
-            $.util.hidePreloader();
-            location.href = '/userc/edit-info';
-        }, 3000);
+        $.util.ajax({
+            url: '/user/clear-basic-pv',
+            func: function (res) {
+                $.util.hidePreloader();
+                $(this).removeClass('disabled');
+                location.href = '/userc/edit-info';
+            }
+        });
+
     })
 
 </script>

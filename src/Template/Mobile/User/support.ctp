@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>支持我的人</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <ul class="praised_list mt20 bgff">
         <?php if($supports): ?>

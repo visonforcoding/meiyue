@@ -23,12 +23,12 @@
     {{/datas}}
 </script>
 <?php $this->end('static'); ?>
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>我的派对</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="home_paty_container">
         <div class="date_list_header">

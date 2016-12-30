@@ -1,10 +1,10 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <h1>基本信息</h1>
         <span id="next" class="r_btn">提交</span>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <!--基本信息三步-->
     <div class="basicinfo-header">

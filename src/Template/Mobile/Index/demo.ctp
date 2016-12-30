@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <h1>基本照片与视频上传</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="up_identify_box bgff mt40">
         <div class="inner">

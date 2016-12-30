@@ -4,6 +4,7 @@ namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
 use App\Model\Entity\User;
+use App\Model\Entity\Withdraw;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Core\Exception\Exception;
 use Cake\I18n\Time;
@@ -1020,26 +1021,54 @@ class UsercController extends AppController {
 
 
     /*
-     * 兑换美币-支付宝
+     * 兑换美币
      */
-    public function exchangeAli()
+    public function exchangeView($type)
     {
         $this->handCheckLogin();
         $this->set([
             'pageTitle'=>'兑换美币申请',
-            'user' => $this->user
+            'user' => $this->user,
+            'type' => $type
         ]);
     }
 
 
-    /*
-     * 兑换美币-银联
+    /**
+     * 检查兑换
+     * @param User  申请人
+     * @param Withdraw  兑换相关
+     * @return int 状态码：1#可以兑换 2#存在等待受理申请 3#今日已经提交过了 4#非兑换日 5#美币不足 6#兑换金额超过20000 7#兑换金额少于500
      */
-    public function exchangeYinlian()
+    private function checkApply(User $user, Withdraw $withdraw)
     {
-        $this->set([
-            'pageTitle'=>'兑换美币申请'
-        ]);
+        if($user->money < $withdraw->viramount) {
+            return 5; //美币不足
+        }
+        if(500 > $withdraw->viramount) {
+            return 7; //兑换金额小于500
+        }
+        if(20000 < $withdraw->viramount) {
+            return 6; //兑换金额大于20000
+        }
+        //检查提现情况
+        $withdrawTb = TableRegistry::get("Withdraw");
+        $withdraw = $withdrawTb->find()->where(['user_id' => $this->user->id])->orderDesc('create_time')->first();
+        if($withdraw) {
+            if($withdraw->status == 1) {
+                return 2; //存在等待受理申请
+            }
+            $current_time = new Time();
+            if($withdraw->create_time == $current_time) {
+                return 3; //今日已经提交过了
+            }
+            if(!(($current_time->format('w') == '0') || ($current_time->format('w') == '3'))) {
+                return 4; //非兑换日
+            }
+            return 1;
+        } else {
+            return 1;
+        }
     }
 
 
@@ -1050,31 +1079,49 @@ class UsercController extends AppController {
     {
         $this->handCheckLogin();
         if($this->request->is("POST")) {
-            $withdrawTb = TableRegistry::get("Withdraw");
-            //检查提现情况
-            $withdraw = $withdrawTb->find()->where(['user_id' => $this->user->id, 'status' => 1])->count();
-            if($withdraw) {
-                return $this->Util->ajaxReturn(['status' => false, 'msg' => '不能重复提交']);
-            }
             $data = $this->request->data;
             $pwd = $data['passwd'];
             if(!$pwd) {
                 return $this->Util->ajaxReturn(['status' => false, 'msg' => '密码不能为空']);
             } else {
                 if(!(new \Cake\Auth\DefaultPasswordHasher)->check($pwd, $this->user->pwd)) {
-                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '密码错误']);
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '登录密码错误，请重新输入']);
                 }
             }
+            $withdrawTb = TableRegistry::get("Withdraw");
             $withdraw = $withdrawTb->newEntity();
             $withdraw = $withdrawTb->patchEntity($withdraw, $data);
             $withdraw->user_id = $this->user->id;
             $withdraw->viramount = $withdraw->amount;
             $withdraw->amount = ($withdraw->amount) * 0.8;
             $withdraw->status = 1;
-            if($withdrawTb->save($withdraw)) {
-                return $this->Util->ajaxReturn(['status' => true, 'msg' => '提交成功']);
-            }
-            exit();
+            switch($this->checkApply($this->user, $withdraw)) {
+                case 1:
+                    if($withdrawTb->save($withdraw)) {
+                        return $this->Util->ajaxReturn(['status' => true, 'msg' => '申请成功']);
+                    } else {
+                        return $this->Util->ajaxReturn(['status' => false, 'msg' => '申请失败']);
+                    }
+                    break;
+                case 2:
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '存在待受理申请']);
+                    break;
+                case 3:
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '今日已经申请了']);
+                    break;
+                case 4:
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '非周三或周日不能提交申请']);
+                    break;
+                case 5:
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '美币不足']);
+                    break;
+                case 6:
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '每次申请兑换不能多于20000美币']);
+                    break;
+                case 7:
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '每次申请兑换不能少于500美币']);
+                    break;
+            };
             return $this->Util->ajaxReturn(['status' => false, 'msg' => '提交失败']);
         }
     }
@@ -1112,6 +1159,21 @@ class UsercController extends AppController {
         $this->set([
             'user' => $this->user,
             'pageTitle'=>'我的访客'
+        ]);
+    }
+
+
+    /**
+     * 成为经纪人
+     */
+    public function beAgent()
+    {
+        if($this->request->is('POST')) {
+            $this->handCheckLogin();
+
+        }
+        $this->set([
+            'pageTitle'=>'成为经纪人'
         ]);
     }
 }
