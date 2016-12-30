@@ -116,10 +116,10 @@
                 <h3 class="pay_desc color_y">等待赴约中</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 2): ?>
-                        <span data-orderid="{{id}}" class="refuse w_refuse_status_10" >取消订单</span>
-                        <span data-orderid="{{id}}" class="refuse go_order" >确认到达</span>
+                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="refuse w_refuse_status_10" >取消订单</span>
+                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="refuse go_order" >确认到达</span>
                     <?php else: ?>
-                        <span data-orderid="{{id}}" class="refuse m_refuse_status_10" >取消订单</span>
+                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="refuse m_refuse_status_10" >取消订单</span>
                         <span data-orderid="{{id}}" data-stime="{{start_time}}" class="orders go_order" >赴约成功</span>
                     <?php endif; ?>
                 </div>
@@ -398,6 +398,7 @@
         //状态10时 男方取消订单
         var orderid = $(this).data('orderid');
         var stime = $(this).data('stime');
+        console.log(stime);
         var text;
         if ((new Date(stime) - new Date()) > 2 * 60 * 60) {
             text = '平台将只退回约单金额的70%,剩余的30%将打至美女账户作为补偿，是否继续？';
