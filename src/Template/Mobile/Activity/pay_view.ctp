@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>活动报名</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="activity_pay_detail flex box_start">
         <div class="picinfo">

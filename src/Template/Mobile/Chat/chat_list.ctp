@@ -26,13 +26,13 @@
     {{/sessions}}
 </script>
 <?php $this->end('static') ?>
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <h1>消息</h1>
         <span class="r_btn">忽略全部</span>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <ul class="chatBox">
         <li>

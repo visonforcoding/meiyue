@@ -21,7 +21,6 @@
                         </div>
                         <div class="home_list_r_info">
                             <input name="nick" id="nick" type="text" placeholder="请输入昵称"/>
-
                         </div>
                     </div>
                 </li>

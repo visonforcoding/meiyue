@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <h1>发表评价</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="judge_container">
         <div class="avatar">

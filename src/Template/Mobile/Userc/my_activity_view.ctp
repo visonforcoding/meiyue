@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <span class="iconfont toback" onclick="history.back();">&#xe602;</span>
         <h1>活动详情</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="activity_detail_box">
         <?php $activity = $actregistration['activity']; ?>

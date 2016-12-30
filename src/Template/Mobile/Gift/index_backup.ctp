@@ -1,10 +1,10 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>礼物</h1>
         <!--<span class="r_btn">赠送</span>-->
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="judge_container allgift_container">
         <div class="avatar">

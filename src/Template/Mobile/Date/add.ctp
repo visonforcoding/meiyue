@@ -5,12 +5,12 @@ use Cake\I18n\Time;
 ?>
 <!-- 添加约会主界面 -->
 <div class="wraper page-current" id="page-Date">
-    <header>
+    <!-- <header>
         <div class="header">
             <span class="l_btn" id="cancel-btn" onclick="history.back();">取消</span>
             <span class="r_btn" id="release-btn">发布</span>
         </div>
-    </header>
+    </header> -->
     <div class="edit_date_box">
         <form>
             <ul class="mt40 outerblock">

@@ -1,4 +1,4 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <h1>
@@ -6,7 +6,7 @@
         </h1>
         <span class="r_btn release-btn"><?= isset($userskill) ? '重新发布' : '发布' ?></span>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <form>
         <div class="edit_ability bgff mt40">

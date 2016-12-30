@@ -71,6 +71,10 @@ class UserTable extends Table {
             'className' => 'Inviter',
             'foreignKey' => 'invited_id'
         ]);
+        $this->hasMany('Inviteds', [
+            'className' => 'Inviter',
+            'foreignKey' => 'inviter_id'
+        ]);
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

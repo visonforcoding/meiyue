@@ -1,11 +1,11 @@
 
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <span class="r_btn release-btn" id="submit">保存</span>
         <h1>基本信息</h1>
     </div>
-</header>
+</header> -->
 <link rel="stylesheet" type="text/css" href="/mobile/css/LArea.css"/>
 <div class="wraper">
     <form method="post">
@@ -168,20 +168,21 @@
                         </div>
                         <div class="home_list_r_info">
                             <div class="home-basic-option">
-                                <input type="text" placeholder="你的星座" readonly="readonly" value="<?= Zodiac::getStr($user->zodiac); ?>"/>
+                                <input type="text" placeholder="你的星座" readonly="readonly" value="<?= isset($user->zodiac)?Zodiac::getStr($user->zodiac):'请选择星座'; ?>"/>
                                 <select id="zodiac" name="zodiac" onchange='tochange(this)'>
-                                        <option value="1" <?= ($user->zodiac == 1)?'selected':''; ?>>白羊座</option>
-                                        <option value="2" <?= ($user->zodiac ==2)?'selected':''; ?>>金牛座</option>
-                                        <option value="3" <?= ($user->zodiac ==3)?'selected':''; ?>>双子座</option>
-                                        <option value="4" <?= ($user->zodiac == 4)?'selected':''; ?>>巨蟹座</option>
-                                        <option value="5" <?= ($user->zodiac == 5)?'selected':''; ?>>狮子座</option>
-                                        <option value="6" <?= ($user->zodiac == 6)?'selected':''; ?>>处女座</option>
-                                        <option value="7" <?= ($user->zodiac == 7)?'selected':''; ?>>天秤座</option>
-                                        <option value="8" <?= ($user->zodiac == 8)?'selected':''; ?>>天蝎座</option>
-                                        <option value="9" <?= ($user->zodiac == 9)?'selected':''; ?>>射手座</option>
-                                        <option value="10" <?= ($user->zodiac == 10)?'selected':''; ?>>摩羯座</option>
-                                        <option value="11" <?= ($user->zodiac == 11)?'selected':''; ?>>水瓶座</option>
-                                        <option value="12" <?= ($user->zodiac == 12)?'selected':''; ?>>双鱼座</option>
+                                    <option value="0" <?= isset($user->zodiac)?'':'selected'; ?>>请选择星座</option>
+                                    <option value="1" <?= ($user->zodiac == 1)?'selected':''; ?>>白羊座</option>
+                                    <option value="2" <?= ($user->zodiac ==2)?'selected':''; ?>>金牛座</option>
+                                    <option value="3" <?= ($user->zodiac ==3)?'selected':''; ?>>双子座</option>
+                                    <option value="4" <?= ($user->zodiac == 4)?'selected':''; ?>>巨蟹座</option>
+                                    <option value="5" <?= ($user->zodiac == 5)?'selected':''; ?>>狮子座</option>
+                                    <option value="6" <?= ($user->zodiac == 6)?'selected':''; ?>>处女座</option>
+                                    <option value="7" <?= ($user->zodiac == 7)?'selected':''; ?>>天秤座</option>
+                                    <option value="8" <?= ($user->zodiac == 8)?'selected':''; ?>>天蝎座</option>
+                                    <option value="9" <?= ($user->zodiac == 9)?'selected':''; ?>>射手座</option>
+                                    <option value="10" <?= ($user->zodiac == 10)?'selected':''; ?>>摩羯座</option>
+                                    <option value="11" <?= ($user->zodiac == 11)?'selected':''; ?>>水瓶座</option>
+                                    <option value="12" <?= ($user->zodiac == 12)?'selected':''; ?>>双鱼座</option>
                                 </select>
                             </div>
                         </div>

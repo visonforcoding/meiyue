@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <span class="iconfont toback" onclick="history.back();">&#xe602;</span>
         <h1><?= $pageTitle; ?></h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="inner mt40">
         <?php if($isme && $user->gender == 2): ?>

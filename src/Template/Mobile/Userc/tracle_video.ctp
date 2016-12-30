@@ -1,10 +1,10 @@
-<header>
+<!-- <header>
     <div class="header">
         <span class="l_btn" onclick="history.back(); ">取消</span>
         <h1>添加动态</h1>
         <span class="r_btn">发布</span>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="submit_box_textarea">
         <div class="inner">

@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <h1>美约认证信息填写</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="identify_img_ifo">
         <ul class="inner">

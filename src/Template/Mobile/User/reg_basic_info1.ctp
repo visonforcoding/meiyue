@@ -1,10 +1,10 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <h1>基本信息</h1>
         <span id="next" class="r_btn">下一步</span>
     </div>
-</header>
+</header> -->
 <link rel="stylesheet" type="text/css" href="/mobile/css/LArea.css"/>
 <div class="wraper bgff">
     <!--基本信息三步-->

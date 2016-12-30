@@ -37,7 +37,7 @@ class WithdrawTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Users', [
+        $this->belongsTo('User', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
             'className' => 'User'
@@ -98,7 +98,7 @@ class WithdrawTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['user_id'], 'User'));
         //$rules->add($rules->existsIn(['admin_id'], 'Admins'));
         return $rules;
     }

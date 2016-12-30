@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Admin;
 
+use Cake\I18n\Time;
 use Wpadmin\Controller\AppController;
 
 /**
@@ -52,33 +53,6 @@ class WithdrawController extends AppController
     }
 
     /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $cost = $this->Cost->newEntity();
-        if ($this->request->is('post')) {
-            $cost = $this->Cost->patchEntity($cost, $this->request->data);
-            if ($this->Cost->save($cost)) {
-                 $this->Util->ajaxReturn(true,'添加成功');
-            } else {
-                 $errors = $cost->errors();
-                 $this->Util->ajaxReturn(['status'=>false, 'msg'=>getMessage($errors),'errors'=>$errors]);
-            }
-        }
-        $this->set(compact('cost'));
-        $this->set([
-            'pageTitle' => '添加价格',
-            'bread' => [
-                'first' => ['name' => '价格管理'],
-                'second' => ['name' => '添加价格'],
-            ],
-        ]);
-    }
-
-    /**
      * Edit method
      *
      * @param string|null $id Cost id.
@@ -121,15 +95,40 @@ class WithdrawController extends AppController
         $this->request->allowMethod('post');
          $id = $this->request->data('id');
                 if ($this->request->is('post')) {
-                $cost = $this->Cost->get($id);
-                 if ($this->Cost->delete($cost)) {
+                $withdraw = $this->Withdraw->get($id);
+                 if ($this->Withdraw->delete($withdraw)) {
                      $this->Util->ajaxReturn(true,'删除成功');
                 } else {
-                    $errors = $cost->errors();
+                    $errors = $withdraw->errors();
                     $this->Util->ajaxReturn(true,getMessage($errors));
                 }
           }
     }
+
+
+    /**
+     * deal method
+     *
+     * @param string|null $id Cost id.
+     * @return \Cake\Network\Response|null Redirects to index.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function deal()
+    {
+        $this->request->allowMethod('post');
+        $id = $this->request->data('id');
+        if ($this->request->is('post')) {
+            $withdraw = $this->Withdraw->get($id);
+            $res = $this->Withdraw->query()->update()->set(['status' => 2, 'deal_time' => (new Time())])->where(['id' => $id])->execute();
+            if ($res) {
+                $this->Util->ajaxReturn(true,'受理成功');
+            } else {
+                $errors = $withdraw->errors();
+                $this->Util->ajaxReturn(true,getMessage($errors));
+            }
+        }
+    }
+
 
 /**
 * get jqgrid data
@@ -143,19 +142,27 @@ public function getDataList()
         $rows = $this->request->data('rows');
         $sort = 'Withdraw.'.$this->request->data('sidx');
         $order = $this->request->data('sord');
-        $keywords = $this->request->data('keywords');
+        $idKw = $this->request->data('id_kw');
+        $nickKw = $this->request->data('nick_kw');
+        $keywords = $this->request->data('id_kw');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
-        if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+        $contain = ['User' => function($q) {
+            return $q->select(['id', 'nick', 'phone']);
+        }];
+        if (!empty($idKw)) {
+            $where[' User.id'] = $idKw;
+        }
+        if (!empty($nickKw)) {
+            $where['User.nick like'] = "%$nickKw%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
+            $where['and'] = [['Withdraw.create_time >' => $begin_time], ['Withdraw.create_time <' => $end_time]];
         }
-                $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order,$where);
+                $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order,$where, $contain);
                 $this->autoRender = false;
         $this->response->type('json');
         $this->response->body(json_encode($data));

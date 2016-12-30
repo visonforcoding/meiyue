@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>设置</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="account_items">
         <a class="commonlayer inner mt20 ablock" href="/userc/acct-set">

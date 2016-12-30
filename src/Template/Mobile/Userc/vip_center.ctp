@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>会员中心</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="center__container">
         <ul class="outerblock">

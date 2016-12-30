@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <h1>身份认证</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="identify_info_des">
         <div class="inner">

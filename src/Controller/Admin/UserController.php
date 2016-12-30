@@ -406,7 +406,110 @@ class UserController extends AppController {
         $this->response->body(json_encode($data));
         $this->response->send();
         $this->response->stop();
+    }
 
+    /**
+     * 业务员管理
+     */
+    public function agentIndex()
+    {
+        $this->set([
+            'pageTitle' => '业务员管理',
+            'bread' => [
+                'first' => ['name' => '用户管理'],
+                'second' => ['name' => '业务员管理'],
+            ],
+        ]);
+    }
+
+    /**
+     * 获取业务员
+     *
+     */
+    public function getAgentList()
+    {
+        $this->request->allowMethod('ajax');
+        $page = $this->request->data('page');
+        $rows = $this->request->data('rows');
+        $sort = 'User.' . $this->request->data('sidx');
+        $order = $this->request->data('sord');
+        $keywords = $this->request->data('keywords');
+        $begin_time = $this->request->data('begin_time');
+        $end_time = $this->request->data('end_time');
+        $where = [];
+        if (!empty($keywords)) {
+            $where[' username like'] = "%$keywords%";
+        }
+        if (!empty($begin_time) && !empty($end_time)) {
+            $begin_time = date('Y-m-d', strtotime($begin_time));
+            $end_time = date('Y-m-d', strtotime($end_time));
+            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
+        }
+        $where['is_agent IN'] = [1, 3];
+        $query = $this->User->find();
+        $query->hydrate(false);
+        if (!empty($where)) {
+            $query->where($where);
+        }
+        $query->select(['id', 'nick', 'phone', 'is_agent']);
+        $query->orderDesc('is_agent');
+        $query->contain([
+            'Inviteds' => function($q) {
+                return $q->select(['id', 'inviter_id']);
+            },
+            'Flows' => function($q) {
+                return $q->select(['user_id','amount'])->where(['type IN' => [19, 20], 'income' => 1]);
+            }
+        ]);
+        if (!empty($sort) && !empty($order)) {
+            $query->order([$sort => $order]);
+        }
+        $query->limit(intval($rows))
+            ->page(intval($page));
+        $query->formatResults(function($items) {
+            return $items->map(function($item) {
+                $item['invitnum'] = count($item['inviteds']);
+                $item['income'] = 0;
+                foreach($item['flows'] as $flow) {
+                    $item['income'] += $flow['amount'];
+                }
+                return $item;
+            });
+        });
+        $res = $query->toArray();
+        $nums = $query->count();
+        if (empty($res)) {
+            $res = array();
+        }
+        if ($nums > 0) {
+            $total_pages = ceil($nums / $rows);
+        } else {
+            $total_pages = 0;
+        }
+        $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
+        $this->autoRender = false;
+        $this->response->type('json');
+        $this->response->body(json_encode($data));
+        $this->response->send();
+        $this->response->stop();
+    }
+
+    /**
+     * 经纪人审核
+     * @param $uid
+     * @param $status
+     */
+    public function checkAgent($uid, $status)
+    {
+        $this->request->allowMethod('ajax');
+        if($this->request->is('POST')) {
+            $res = $this->User->query()->update()->set(['is_agent' => $status])->where(['id' => $uid])->execute();
+            if($res) {
+                $this->Util->ajaxReturn(['status' => true, '审核成功']);
+            } else {
+                $this->Util->ajaxReturn(['status' => false, '审核失败']);
+            }
+        }
     }
 
 

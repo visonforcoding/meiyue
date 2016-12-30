@@ -24,11 +24,11 @@
 </script>
 <?php $this->end('static') ?>
 
-<header>
+<!-- <header>
     <div class="header">
         <h1>土豪财富榜</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper bgff">
     <h3 class="rich_header"></h3>
     <!--土豪第一名-->

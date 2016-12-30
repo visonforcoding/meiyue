@@ -1,9 +1,9 @@
-<header>
+<!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <h1>邀请注册有奖</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <?php if(isset($user) && $user->has_invs): ?>
         <div class="share_sucess_tips">

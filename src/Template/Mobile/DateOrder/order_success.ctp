@@ -17,12 +17,12 @@
     {{/users}}
 </script>
 <?php $this->end('static') ?>
-<header>
+<!-- <header>
     <div class="header">
         <span class="iconfont toback">&#xe602;</span>
         <h1>支付成功</h1>
     </div>
-</header>
+</header> -->
 <div class="wraper">
     <div class="date_pay_content flex flex_justify">
         <div class="date_pay_leftcon">

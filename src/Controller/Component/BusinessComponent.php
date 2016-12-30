@@ -51,6 +51,14 @@ class BusinessComponent extends Component
 
         $mytop = null;
         //获取我的排名
+        $mwhere = ['user_id' => $userid, 'income' => 1];
+        if('week' == $type) {
+            $mwhere['Flow.create_time >='] = new Time('last sunday');
+        } else if('month' == $type) {
+            $da = new Time();
+            $mwhere['Flow.create_time >='] =
+                new Time(new Time($da->year . '-' . $da->month . '-' . '01 00:00:00'));
+        }
         $FlowTable = TableRegistry::get('Flow');
         $query = $FlowTable->find();
         $query->contain(['User' => function($q) use($userid) {
@@ -58,7 +66,7 @@ class BusinessComponent extends Component
                 ->where(['User.id' => $userid]);
         }])
             ->select(['total' => 'sum(amount)'])
-            ->where(['user_id' => $userid])
+            ->where($mwhere)
             ->map(function($row) {
                 $row['user']['age'] = getAge($row['user']['birthday']);
                 $row['ishead'] = false;
@@ -73,8 +81,7 @@ class BusinessComponent extends Component
         }
 
         //获取我的排名对象
-        $where = Array(
-        );
+        $where = ['income' => 1];
         if('week' == $type) {
             $where['Flow.create_time >='] = new Time('last sunday');
         } else if('month' == $type) {
