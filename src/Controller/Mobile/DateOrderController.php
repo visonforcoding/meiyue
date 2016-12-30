@@ -973,7 +973,7 @@ class DateOrderController extends AppController
                  //2小时开外
                 $refuse_msg = '平台将只退回约单金额的70%,剩余的30%将打至美女账户作为补偿，是否继续？';
              }else{
-                $refuse_msg = '平台将只退回约单金额的30%,剩余的20%将打至美女账户作为补偿，是否继续？';
+                $refuse_msg = '平台将只退回约单金额的30%,剩余的70%将打至美女账户作为补偿，是否继续？';
              }
         }else{
             $refuse_msg = '将会扣除约单20%的美币作为惩罚';
