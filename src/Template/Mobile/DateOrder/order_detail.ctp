@@ -69,7 +69,7 @@
                     <?php endif; ?>
                     <?php if ($order->status == 8): ?>
                         订单关闭
-                        <h3 class="color_y tips">对方已拒绝</h3>
+                        <h3 class="color_y tips">对方已取消</h3>
                     <?php endif; ?>
                     <?php if ($order->status == 9): ?>
                         订单关闭
@@ -121,7 +121,7 @@
                     <?php endif; ?>
                     <?php if ($order->status == 8): ?>
                         订单关闭
-                        <h3 class="color_y tips">您已拒绝</h3>
+                        <h3 class="color_y tips">您已取消</h3>
                     <?php endif; ?>
                     <?php if ($order->status == 9): ?>
                         订单关闭
@@ -323,7 +323,7 @@
             <?php endif; ?>
         </div>
     <?php endif; ?>
-    <?php if (in_array($order->status, [12, 18])): ?>
+    <?php if (in_array($order->status, [12, 8])): ?>
         <div class="potion_footer flex flex_justify">
             <span id="remove_order" class="footerbtn cancel">删除订单</span>
             <span  class="footerbtn gopay">惩罚成功</span>
