@@ -31,7 +31,28 @@ class IndexController extends AppController {
             'pageTitle' => '发现-美约'
         ]);
     }
-
+    
+     /**
+     * 获取地图上的用户
+     */
+    public function getMapUsers() {
+        $lng = $this->request->data('lng');
+        $lat = $this->request->data('lat');
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $users = $UserTable->find()->select(['id', 'avatar', 'login_coord_lng', 'login_coord_lat',
+                        'distance' => "getDistance($lng,$lat,login_coord_lng,login_coord_lat)"])
+                ->where(['gender' => 2, 'status' => 3])
+                ->orderDesc('distance')
+                ->limit(10)->formatResults(function($items) {
+                    return $items->map(function($item) {
+                                $item['avatar'] = $this->Util->getServerDomain() . createImg($item['avatar']);
+                                $item['link'] = '/index/homepage/' . $item['id'];
+                                return $item;
+                            });
+                })
+                ->toArray();
+        return $this->Util->ajaxReturn(['users'=>$users]);
+    }
     
     /**
      * 土豪榜

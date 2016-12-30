@@ -16,7 +16,7 @@ use PayOrderType;
  * @property \App\Controller\Component\AlipayComponent $Alipay
  * @property \App\Controller\Component\BusinessComponent $Business
  */
-class WxController extends AppController {
+class WxTestController extends AppController {
 
     public function initialize() {
         parent::initialize();
@@ -236,8 +236,8 @@ class WxController extends AppController {
         $PayorderTable = \Cake\ORM\TableRegistry::get('Payorder');
         $payorder = $PayorderTable->get($id);
         $out_trade_no = $payorder->order_no;
-        $fee = $order->price;  //支付金额
-//        $fee = 0.01;  //支付金额
+//        $fee = $order->price;  //支付金额
+        $fee = 0.01;  //支付金额
         $this->loadComponent('Wxpay');
         $isApp = false;
         $aliPayParameters = '';
@@ -276,6 +276,7 @@ class WxController extends AppController {
             'payorder' => $payorder,
             'pageTitle' => '美币充值'
         ]);
+        $this->render('/Mobile/Wx/pay');
     }
 
     /**
