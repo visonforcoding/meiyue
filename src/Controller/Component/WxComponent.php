@@ -157,7 +157,7 @@ class WxComponent extends Component {
             if($this->request->env('SERVER_ADDR')!=$this->master_ip||
                     $this->request->env('SERVER_NAME')!=$this->master_domain){
                 //非中控服务器请求
-                \Cake\Log\Log::notice('非中控请求','devlog');
+                \Cake\Log\Log::notice('中控请求','devlog');
                 return $this->handMasterRequest();
             }
         }
@@ -217,14 +217,17 @@ class WxComponent extends Component {
     protected function handMasterRequest(){
         $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
         $api_url = 'http://'.$this->master_domain.self::MASTER_TOKEN_API;
+        \Cake\Log\Log::debug($api_url,'devlog');
         $time = time();
         $res = $httpClient->post($api_url,[
             'timestamp'=>$time,
-            'access_token'=>strtoupper(md5($time . 'dBkuJtWzHuPJFtTjZqHJugGP'))
+            'access_token'=>strtoupper(md5($time . '64e3f4e947776b2d6a61ffbf8ad05df4'))
         ]);
+        \Cake\Log\Log::error($res,'devlog');
         if(!$res->isOk()){
             return false;
         }else{
+            \Cake\Log\Log::error($res->body(),'devlog');
             return $this->Encrypt->decrypt($res->body());
         }
     }

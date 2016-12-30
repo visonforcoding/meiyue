@@ -106,7 +106,40 @@
             }
         }
     });
+ //调用微信JS api 支付
+    function jsApiCall()
+    {
+        WeixinJSBridge.invoke('getBrandWCPayRequest',<?= json_encode($jsApiParameters) ?>,
+                function (res) {
+                    if (res.err_msg == "get_brand_wcpay_request：ok") {
+                        $.util.alert('支付成功');
+                        setTimeout(function () {
+                            window.location.href = '/wx/pay-success/<?= $payorder->id ?>';
+                        }, 1000);
+                    }else{
+                        $.util.alert('未成功支付');
+                    }
+//                    $.each(res, function (i, n) {
+//                        alert(i + ':' + n);
+//                    });
+                }
+        );
+    }
 
+    function callpay()
+    {
+        console.log('微信支付被唤起');
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+            }
+        } else {
+            jsApiCall();
+        }
+    }
     LEMON.event.unrefresh();
 </script>
 <?php $this->end('script'); ?>
