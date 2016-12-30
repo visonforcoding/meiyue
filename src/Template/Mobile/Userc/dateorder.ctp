@@ -180,7 +180,7 @@
                         <span data-orderid="{{id}}" class="refuse" >查看评价</span>
                         <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
                     </div>
-                <?php else: ?>
+                   <?php else: ?>
                     <h3 class="pay_desc color_y">交易成功</h3>
                     <div class="groupbtn">
                         <a href="/date-order/appraise/{{id}}"><span data-orderid="{{id}}" class="orders appraise" >评价</span></a>
@@ -192,8 +192,8 @@
                 <?php if ($user->gender == 2): ?>
                     <h3 class="pay_desc color_y">交易成功</h3>
                     <div class="groupbtn">
-                        <a href="/date-order/view-appraise/{{id}}"><span data-orderid="{{id}}" class="refuse" >查看评价</span></a>
                         <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                        <a href="/date-order/view-appraise/{{id}}"><span data-orderid="{{id}}" class="refuse" >查看评价</span></a>
                     </div>
                 <?php else: ?>
                     <h3 class="pay_desc color_y">交易成功</h3>
@@ -381,7 +381,7 @@
     $(document).on('tap', '.refuse_status_7', function () {
         //状态7时 女方取消订单
         var orderid = $(this).data('orderid');
-        $.util.confirm('确定要取消订单吗?', '将会扣除20%的约单金额作为惩罚。', function () {
+        $.util.confirm('确定要取消订单吗?', '将会扣除10%的约单金额作为惩罚。', function () {
             $.util.ajax({
                 url: '/date-order/cancel-date-order-7',
                 data: {order_id: orderid},

@@ -285,8 +285,8 @@
     <?php endif; ?>
     <?php if ($order->status == 16): ?>
         <div class="potion_footer flex flex_justify">
-            <a href="/date-order/show-appraise/<?= $order->id ?>" class="footerbtn gopay">查看评价</a>
             <span  id="remove_order" class="footerbtn cancel">删除订单</span>
+            <a href="/date-order/show-appraise/<?= $order->id ?>" class="footerbtn gopay">查看评价</a>
         </div>
     <?php endif; ?>
 <?php else: ?>
@@ -371,15 +371,17 @@
     var refuse_msg = '<?= $refuse_msg ?>';
     $(document).on('tap', '#refuse_status_3', function () {
         //状态3时的拒绝接单 和 取消订单
-        $.util.ajax({
-            url: '/date-order/cancel-date-order-3',
-            data: {order_id: orderid},
-            func: function (res) {
-                $.util.alert(res.msg);
-                if(res.status){
-                    refresh();
+        $.util.confirm('确定要取消订单吗?', '将会扣除10%的约单金额作为惩罚。', function () {
+            $.util.ajax({
+                url: '/date-order/cancel-date-order-7',
+                data: {order_id: orderid},
+                func: function (res) {
+                    $.util.alert(res.msg);
+                    setTimeout(function () {
+                        refresh();
+                    }, 300);
                 }
-            }
+            })
         })
     });
     
@@ -407,6 +409,21 @@
                     if (res.status) {
                         refresh();
                     }
+                }
+            })
+        })
+    });
+    $(document).on('tap', '#refuse_status_7', function () {
+        //状态7时 取消订单
+        $.util.confirm('确定要取消订单吗?', '将会扣除10%的约单金额作为惩罚。', function () {
+            $.util.ajax({
+                url: '/date-order/cancel-date-order-7',
+                data: {order_id: orderid},
+                func: function (res) {
+                    $.util.alert(res.msg);
+                    setTimeout(function () {
+                        refresh();
+                    }, 300);
                 }
             })
         })
