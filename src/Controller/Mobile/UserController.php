@@ -978,5 +978,28 @@ class UserController extends AppController {
         }
         return $this->Util->ajaxReturn(['status' => false, 'msg' => '操作失败']);
     }
+
+
+    /**
+     * 申请成为经纪人
+     */
+    public function want2bAgent()
+    {
+        $this->handCheckLogin();
+        if($this->request->is('POST')) {
+            if($this->user->is_agent == 1) {
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '你已经是经纪人,无需申请']);
+            }
+            if($this->user->is_agent == 3) {
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '已经申请过，无需重复申请']);
+            }
+            $res = $this->User->query()->update()->set(['is_agent' => 3])->where(['id' => $this->user->id])->execute();
+            if($res) {
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '申请成功']);
+            } else {
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '申请失败']);
+            }
+        }
+    }
 }
         

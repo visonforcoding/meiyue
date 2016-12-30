@@ -11,5 +11,20 @@
             </ul>
         </div>
     </div>
-    <a href="#this" class="identify_footer_potion">我要成为经纪人</a>
+    <a onclick="apply();" class="identify_footer_potion">我要成为经纪人</a>
 </div>
+
+<script>
+    function apply() {
+        $.util.ajax({
+            url: '/user/want2b-agent',
+            func: function (res) {
+                console.log(res);
+                $.util.alert(res.msg);
+                setTimeout(function() {
+                    location.href='/user/index';
+                }, 2000)
+            }
+        });
+    }
+</script>
