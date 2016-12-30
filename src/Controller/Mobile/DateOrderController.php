@@ -603,7 +603,7 @@ class DateOrderController extends AppController
            'paytype'=>2, 
            'remark'=> '女士在接受订单后取消订单退回预约金'
         ]);
-        //扣除违约金
+        //扣除违约金   10%
         $breach_amount = 0.1*$dateorder->amount;
         $w_pre_amount = $dateorder->dater->money;
         $dateorder->dater->money = $dateorder->dater->money-$breach_amount;
