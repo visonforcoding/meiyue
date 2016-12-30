@@ -82,6 +82,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/do-upload/*', ['plugin' => 'wpadmin', 'controller' => 'util', 'action' => 'doUpload']);
 
     $routes->connect('/do-download/*', ['plugin' => 'wpadmin', 'controller' => 'util', 'action' => 'download']);
+    $routes->connect('/get-token/*',['prefix'=>'mobile','controller'=>'api','action'=>'wxtoken']);
     //m端
     if($subdomain=='mobile'){
         $routes->connect('/', ['prefix' => 'mobile', 'controller' => 'index', 'action' => 'index']);
