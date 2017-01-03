@@ -67,8 +67,8 @@
                             <div class="flex">
                                 <div class='flex flex_center set-voted-wid'><span class="voted_place silver"><?= $count ?></span></div>
                                 <div class="voted_place_info">
-                                    <span class="avatar"><img src="<?= $top->avatar ?>"/></span>
-                                    <h3  onclick="location.href='/user/male-homepage/<?= $top->id; ?>'">
+                                    <span class="avatar" onclick="location.href='/user/male-homepage/<?= $top->id; ?>'"><img src="<?= $top->avatar ?>"/></span>
+                                    <h3>
                                         <span class="voted_name"><?= $top->nick ?></span>
                                         <span class="voted_number color_gray">已消费：<?= $top->total ?>美币</span>
                                     </h3>

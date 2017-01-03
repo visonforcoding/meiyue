@@ -602,6 +602,7 @@ class BusinessComponent extends Component
                 $admoney = $amount * $sr_percent;
                 $type = 20;  //好友获得收入
             }
+            $inv->income += $admoney;
             $preAmount = $invitor->money;
             $invitor->money += $admoney;
             $afterAmount = $invitor->money;
@@ -621,13 +622,12 @@ class BusinessComponent extends Component
                 'paytype'=>1,   //余额支付
                 'remark'=> getFlowType($type)
             ]);
-
-            $userTb = TableRegistry::get('User');
+            $inv->dirty('invitor', true);
             $transRes = $FlowTable->connection()->transactional(
-                function() use ($FlowTable, &$flow, $userTb, &$invitor){
+                function() use ($FlowTable, &$flow, $invtb, &$inv){
                     $flores = $FlowTable->save($flow);
-                    $ures = $userTb->save($invitor);
-                    return $flores&&$ures;
+                    $ires = $invtb->save($inv);
+                    return $flores&&$ires;
                 }
             );
             return $transRes;

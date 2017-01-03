@@ -714,3 +714,7 @@ ALTER TABLE `lm_user`
 #用户表添加是否经纪人
 ALTER TABLE `lm_user`
 	ADD COLUMN `is_agent` TINYINT NOT NULL DEFAULT '1' COMMENT '是否是经纪人：1是2否' AFTER `invit_code`;
+
+#邀请表添加获得佣金字段
+ALTER TABLE `lm_invitation`
+	ADD COLUMN `income` DOUBLE NOT NULL DEFAULT '0' COMMENT '获得佣金' AFTER `status`;

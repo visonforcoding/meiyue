@@ -391,13 +391,13 @@
                 $(this).addClass('current');
                 if ($(this).attr('act') == 'top_1') {
                     obj.cur_tab = obj.week_tab;
-                    obj.loadDataWithoutPage(obj.tab_action[0], 'top_week');
+                    obj.loadDataWithoutPage(obj.tab_action[obj.cur_tab], 'top_week');
                 } else if ($(this).attr('act') == 'top_2') {
                     obj.cur_tab = obj.month_tab;
-                    obj.loadDataWithoutPage(obj.tab_action[1], 'top_month');
+                    obj.loadDataWithoutPage(obj.tab_action[obj.cur_tab], 'top_month');
                 } else if ($(this).attr('act') == 'top_3') {
                     obj.cur_tab = obj.rich_tab;
-                    obj.loadDataWithoutPage(obj.tab_action[2], 'rich_list');
+                    obj.loadDataWithoutPage(obj.tab_action[obj.cur_tab], 'rich_list');
                 }
 
             });
