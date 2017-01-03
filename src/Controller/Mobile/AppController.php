@@ -103,9 +103,9 @@ class AppController extends Controller {
 
     public function beforeFilter(Event $event) {
         $this->checkLogin();  //检测登陆和自动登录
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
         if(!$this->request->isLemon()){
             $this->user = $this->request->session()->read('User.mobile');
-            $UserTable = \Cake\ORM\TableRegistry::get('User');
             if($this->user){
                 $this->user = $UserTable->findById($this->user->id)->first();
             }
