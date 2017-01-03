@@ -42,12 +42,20 @@
             </div>
         <?php endif; ?>
         <?php if ($user->auth_status == UserStatus::CHECKING): ?>
-            <div class="inner">
-                <divn class="piclist_con videolist  relpotion">
-                    <video class="basevd" controls="controls" preload="preload" 
-                           src="<?= $user->auth_video ?>" poster="<?= $user->auth_video_cover ?>">
+            <div class="up_identify_box bgff mt40">
+                <div class="inner">
+                    <div class="title">
+                        <h3 class="color_black">我的真人视频认证</h3>
+                    </div>
+                    <div class="fact_identify">
+                       <div class="home_pic_info" style='padding:0;'>
+                        <div class="home_video">
+                           <video width='100%' height='auto' class="basevd" controls="controls" preload="preload" 
+                           src="<?= $user->auth_video ?>" poster="<?= $user->auth_video_cover ?>"></video>
+                        </div>
+                      </div>
+                    </div>
                 </div>
-                    <!--上传-->
             </div>
         <?php endif; ?>
     </div>
