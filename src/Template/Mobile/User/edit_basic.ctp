@@ -1,10 +1,10 @@
-<!-- <header>
+ <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <span class="r_btn release-btn" id="submit">保存</span>
         <h1>基本信息</h1>
     </div>
-</header>-->
+</header>
 <link rel="stylesheet" type="text/css" href="/mobile/css/LArea.css"/>
 <div class="wraper">
     <form method="post">
@@ -108,51 +108,27 @@
                             </div>
                             <div class="home_list_r_info flex flex_end">
                                 <div class="home-basic-option">
-                                <input  id="bwh_b" name="bwh_b" type="text" placeholder="胸围" readonly="readonly" value="<?= $user->bwh_b; ?>"/>
-                                <select onchange='tochange(this)'>
-                                    <option value="0">胸围</option>
-                                    <option value="80">80</option>
-                                    <option value="81">81</option>
-                                    <option value="82">82</option>
-                                    <option value="83">83</option>
-                                    <option value="84">84</option>
-                                    <option value="85">85</option>
-                                    <option value="86">86</option>
-                                    <option value="87">87</option>
-                                    <option value="88">88</option>
-                                    <option value="89">89</option>
+                                <input id="bwh_b" name="bwh_b" type="text" placeholder="胸围" readonly="readonly" value="<?= $user->bwh_b; ?>"/>
+                                <select onchange='inputChange(this)'>
+                                    <?php for($i= 80;$i<=89;$i ++): ?>
+                                        <option value="<?= $i; ?>" <?= (isset($user->bwh_b) && $user->bwh_b == $i)?'selected':''; ?>><?= $i; ?></option>
+                                    <?php endfor; ?>
                                     <option value="90+">90+</option>
                                 </select>
                                 </div>|<div class="home-basic-option">
                                 <input id="bwh_w" name="bwh_w" type="text" placeholder="腰围" value="<?= $user->bwh_w; ?>"  readonly="readonly"/>
-                                <select onchange='tochange(this)'>
-                                    <option value="0">腰围</option>
-                                    <option value="60">60</option>
-                                    <option value="61">61</option>
-                                    <option value="62">62</option>
-                                    <option value="63">63</option>
-                                    <option value="64">64</option>
-                                    <option value="65">65</option>
-                                    <option value="66">66</option>
-                                    <option value="67">67</option>
-                                    <option value="68">68</option>
-                                    <option value="69">69</option>
+                                <select onchange='inputChange(this)'>
+                                    <?php for($i= 60;$i<=69;$i ++): ?>
+                                        <option value="<?= $i; ?>" <?= (isset($user->bwh_w) && $user->bwh_w == $i)?'selected':''; ?>><?= $i; ?></option>
+                                    <?php endfor; ?>
                                     <option value="70+">70+</option>
                                 </select>
                                 </div>|<div class="home-basic-option">
                                 <input id="bwh_h" name="bwh_h" type="text" placeholder="臀围" value="<?= $user->bwh_h; ?>" readonly="readonly"/>
-                                <select onchange='tochange(this)'>
-                                    <option value="0">臀围</option>
-                                    <option value="80">80</option>
-                                    <option value="81">81</option>
-                                    <option value="82">82</option>
-                                    <option value="83">83</option>
-                                    <option value="84">84</option>
-                                    <option value="85">85</option>
-                                    <option value="86">86</option>
-                                    <option value="87">87</option>
-                                    <option value="88">88</option>
-                                    <option value="89">89</option>
+                                <select onchange='inputChange(this)'>
+                                    <?php for($i= 80;$i<=89;$i ++): ?>
+                                        <option value="<?= $i; ?>" <?= (isset($user->bwh_h) && $user->bwh_h == $i)?'selected':''; ?>><?= $i; ?></option>
+                                    <?php endfor; ?>
                                     <option value="90+">90+</option>
                                 </select>
                                 </div>
@@ -315,7 +291,7 @@
                     <div class="home_items sport_items">
                         <div class="home_list_l_info"><span class="itemsname">喜欢的运动<br>/娱乐</span></div>
                         <div class="home_list_r_info   plaintext">
-                             <textarea id="sport" name="sport" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入喜欢的运动/娱乐"><?= $user->sport; ?></textarea>
+                             <textarea id="sport" name="sport" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入运动/娱乐"><?= $user->sport; ?></textarea>
                         </div>
                     </div>
                 </li>
@@ -323,7 +299,7 @@
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">个性签名</span></div>
                         <div class="home_list_r_info  plaintext">
-                            <textarea id="sign" name="sign" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="个性签名"><?= $user->sign; ?></textarea>
+                            <textarea id="sign" name="sign" class="plaintext-con" style="overflow-y:hidden;" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请输入个性签名"><?= $user->sign; ?></textarea>
                         </div>
                     </div>
                 </li>
@@ -453,6 +429,9 @@
     });
 
     function submitForm() {
+        var form = $('form');
+        console.log(form.serialize());
+        return;
         <?php if($user->gender == 2): ?>
         if (($('#birthday').val()).length == 0) {
             $.util.alert('请填写正确的出生日期');
