@@ -3,6 +3,7 @@
 namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
+use App\Model\Table\FlowTable;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Database\Type\FloatType;
 use Cake\ORM\TableRegistry;
@@ -927,10 +928,42 @@ class UserController extends AppController {
      * 已邀请到的人
      */
     public function shareList() {
+        $this->handCheckLogin();
+        $flowTb = TableRegistry::get('Flow');
+        $flows = $flowTb->find()->select(['total' => 'sum(amount)'])->where(['user_id' => $this->user->id, 'type IN' => [19, 20]]);
+        $invitTable = TableRegistry::get('Inviter');
+        $invitcount = $invitTable->find()->where(['inviter_id' => $this->user->id])->count();
+        $total = $flows->first()->total;
         $this->set([
             'user' => $this->user,
+            'total' => $total,
+            'count' => $invitcount,
             'pageTitle'=>'已成功邀请的人'
         ]);
+    }
+
+
+    /**
+     * 我的-我的派对-分页获取我的派对列表
+     */
+    public function getInvits($page) {
+        $this->handCheckLogin();
+        $invitTable = TableRegistry::get('Inviter');
+        $limit = 10;
+        $datas = $invitTable->find()
+            ->contain([
+                'Invited' => function($q) {
+                    return $q->select(['id', 'avatar', 'nick', 'gender', 'recharge', 'charm']);
+                },
+            ])
+            ->where(['inviter_id' => $this->user->id])
+            ->limit($limit)
+            ->page($page)
+            ->map(function($row) {
+                return $row;
+            });
+        return $this->Util->ajaxReturn(['datas'=>$datas]);
+
     }
 
 

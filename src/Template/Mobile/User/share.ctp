@@ -7,7 +7,7 @@
 <div class="wraper">
     <?php if(isset($user) && $user->has_invs): ?>
         <div class="share_sucess_tips">
-            <a href="#this" class="ablock">已成功邀请的人<i class="iconfont fr">&#xe605;</i></a>
+            <a href="/user/share-list" class="ablock">已成功邀请的人<i class="iconfont fr">&#xe605;</i></a>
         </div>
     <?php endif; ?>
     <div class="share_items_list <?php if(isset($user) && $user->has_invs): ?>mt20<?php endif; ?>">
