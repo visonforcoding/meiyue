@@ -417,6 +417,7 @@ use Cake\I18n\Time;
             return;
         }
         $('#thePlace').val($('#selfInput').val());
+        place_name = $('#selfInput').val();
         location.hash = '';
     }
     function toSelfplace() {
