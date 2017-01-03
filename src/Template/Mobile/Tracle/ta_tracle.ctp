@@ -129,8 +129,10 @@
                 '取消关注',
                 '确认不再关注此人？',
                 function() {
+                    $.util.alert('click');
                     flag = true;
-                }
+                },
+                null
             );
         } else {
             flag = true;
