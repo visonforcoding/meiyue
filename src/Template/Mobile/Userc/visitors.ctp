@@ -3,7 +3,7 @@
     <script id="male-list-tpl" type="text/html">
         {{#visitors}}
         <li>
-            <a class="praised_block click-visitor-item" data-id="{{visiter.id}}">
+            <a class="praised_block" onclick="viewta({{visiter.id}});">
                 <div class="praised_list_left">
                     <span class="avatar"><img src="{{visiter.avatar}}" alt="" /></span>
                     <h3>
@@ -22,7 +22,7 @@
     <script id="female-list-tpl" type="text/html">
         {{#visitors}}
         <li>
-            <a class="praised_block click-visitor-item" data-id="{{visiter.id}}">
+            <a class="praised_block" onclick="viewta({{visiter.id}});">
                 <div class="praised_list_left">
                     <span class="avatar"><img src="{{visiter.avatar}}" alt="" /></span>
                     <h3>
@@ -31,7 +31,7 @@
                     </h3>
                 </div>
                 <div class="praised_list_right">
-                    <span class="attractive ">魅力值<i class="numbers">{{visiter.charm}}</i><i class="iconfont ico">{{#isfan}}&#xe61e;{{/isfan}}{{^isfan}}&#xe61f;{{/isfan}}</i></span>
+                    <span class="attractive ">魅力值<i class="numbers">{{visiter.charm}}</i><!--<i class="iconfont ico">{{#isfan}}&#xe61e;{{/isfan}}{{^isfan}}&#xe61f;{{/isfan}}</i>--></span>
                 </div>
             </a>
         </li>
@@ -90,14 +90,9 @@
             });
         }, 2000)
 
-        $(document).on('tap', '.click-visitor-item', function() {
-            var uid = $(this).data('id');
-            var gender = <?= $user->gender; ?>;
-            if(gender == 2) {
-                location.href='/user/male-homepage/' + uid;
-            } else {
-                location.href='/index/homepage/' + uid;
-            }
-        });
+
+        function viewta(uid) {
+            location.href = (<?= $user->gender; ?> == 2)?'/user/male-homepage/' + uid:'/index/homepage/' + uid;
+        }
     </script>
 <?php $this->end('script'); ?>

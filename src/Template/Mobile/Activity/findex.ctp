@@ -3,7 +3,7 @@
         <div class="date_list">
             <div class="date_list_header changwid" id="imgTab">
                 <div id="tab-2" class="todate"><span class="headertab">派对</span></div>
-                <div id="tab-3" class="todate"><span class="headertab">头牌</span></div>
+                <div id="tab-3" class="todate"><span class="headertab">选美</span></div>
             </div>
         </div>
         <div class="activity_list_con" id='imgBox'>

@@ -12,15 +12,15 @@
     <?php endif; ?>
     <div class="share_items_list <?php if(isset($user) && $user->has_invs): ?>mt20<?php endif; ?>">
         <div class="inner">
-            <h3 class="title">方式一：分享链接得提成</h3>
-            <p class="desc">好友点击你的链接并在30分钟内注册成功后，你将获得该好友赚取金额10%(女性好友）或充值金额15%（男性好友）的提成。</p>
+            <h3 class="title">方式一：分享链接</h3>
+            <p class="desc">好友点击你的链接并在15分钟内注册成功后，你将获得该好友赚取金额10%(女性好友）或充值金额15%（男性好友）的提成。</p>
             <a href="javascript:shareBanner();" class="btn btn_t_border mt40">立即分享</a>
         </div>
     </div>
     <div class="share_items_list mt20 mb60">
         <div class="inner">
-            <h3 class="title">方式二：扫描我的二维码得提成</h3>
-            <p class="desc">好友扫描你的二维码后在注册时，输入你的邀请码，你将获得该好友赚取金额10%（女性好友）或者充值金额15%（男性好友）的提成。</p>
+            <h3 class="title">方式二：邀请码</h3>
+            <p class="desc">好友在注册时，输入你的邀请码，你将获得该好友赚取金额10%（女性好友）或者充值金额15%（男性好友）的提成。</p>
             <span class="share_desc">您的邀请码<br /><strong><?= isset($user)?$user->invit_code:'--'; ?></strong></span>
             <!--<a href="javascript:void(0);" class="btn btn_t_border mt20">生成我的海报</a>-->
         </div>
@@ -50,8 +50,12 @@
 <script>
     function shareBanner() {
         window.shareConfig.link = '<?= getHost().'/user/login'; ?><?= isset($user)?'?ivc='.$user->invit_code:'';?>';
-        window.shareConfig.title = '标题';
-        var share_desc = '这个是分享描述';
+        window.shareConfig.title = '我刚注册成为【美约APP】用户，你也一起来加入吧！';
+        <?php if(isset($user) && ($user->gender == 1)): ?>
+            var share_desc = '美约APP，中国首个互联网高端社交与明星孵化平台，全网实名信息认证，高净值人士的社交选择！';
+        <?php else: ?>
+            var share_desc = '美约APP，中国首个互联网高端社交与明星孵化平台，全网实名信息认证，优质资源打造最强网红，让你的颜值和才华成就你的事业！';
+        <?php endif; ?>
         share_desc && (window.shareConfig.desc = share_desc);
         LEMON.show.shareBanner();
     }

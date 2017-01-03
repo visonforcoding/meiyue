@@ -5,7 +5,20 @@
     </div>
 </header> -->
 <div class="wraper">
-    <?php if ($user->auth_status == UserStatus::NOPASS): ?>
+    <?php if (!$user->auth_video): ?>
+        <div class="identify_info_des">
+            <div class="inner">
+                <ul>
+                    <li>
+                        <h3><i class="iconfont color_y">&#xe604;</i>为什么要真人视频认证？</h3>
+                        <div class="con">
+                            <p>美约作为一个真实的高端红人工作交友平台，希望给大家提供一个真诚的工作交友环境。请放心您上传的真人视频仅供审核用，仅自己可见，其他人无法看到。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    <?php elseif ($user->auth_status == UserStatus::NOPASS): ?>
         <div class="identity_audit_pass">
             <i class='iconfont color_error'>&#xe61a;</i>
             <h3 class="jump_tipscon">审核不通过!</h3>
