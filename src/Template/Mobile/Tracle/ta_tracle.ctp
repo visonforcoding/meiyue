@@ -123,35 +123,34 @@
         followIt(user_id);
     });
     function followIt(id) {
-        var flag = false;
         if($('.likeIt').text()=='已关注') {
             $.util.confirm(
                 '取消关注',
                 '确认不再关注此人？',
                 function() {
-                    $.util.alert('click');
-                    flag = true;
+                    follow(id);
                 },
                 null
             );
         } else {
-            flag = true;
+            follow(id);
         }
-        if(flag) {
-            $.util.ajax({
-                url: '/user/follow',
-                data: {id: id},
-                func: function (res) {
-                    if(res.status) {
-                        if($('.likeIt').first().text() == '+ 关注') {
-                            $('.likeIt').text('已关注');
-                        } else {
-                            $('.likeIt').text('+ 关注');
-                        }
+    }
+
+    function follow(id) {
+        $.util.ajax({
+            url: '/user/follow',
+            data: {id: id},
+            func: function (res) {
+                if(res.status) {
+                    if($('.likeIt').first().text() == '+ 关注') {
+                        $('.likeIt').text('已关注');
+                    } else {
+                        $('.likeIt').text('+ 关注');
                     }
                 }
-            })
-        }
+            }
+        })
     }
 
     $(document).on('tap', '.praise-btn', function() {
