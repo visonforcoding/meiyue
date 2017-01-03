@@ -9,7 +9,7 @@
                 <span class="customer">{{buyer.nick}}</span>
             </div>
             <a style="display:block" href="/date-order/order-detail/{{id}}">
-                <div class="place_pic flex flex_justify bdbottom">
+                <div class="place_pic flex flex_justify" style='border-bottom:1px #efefef solid;'>
                     <div  class="place_info_desc">
                         <span class="place">
                             <img src="{{dater.avatar}}"/>
