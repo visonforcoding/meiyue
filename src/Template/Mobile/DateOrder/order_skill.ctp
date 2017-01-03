@@ -36,9 +36,9 @@
     <div class="header">
         <span class="iconfont toback" onclick="history.back();">&#xe602;</span>
         <h1>约会详情</h1>
-        <!--<span class="r_btn">编辑</span>-->
+        <span class="r_btn">编辑</span>
     </div>
-</header> -->
+</header>-->
 
 <!-- 主view -->
 <div class="wraper page-current" id="page-orderSkill">
@@ -324,6 +324,12 @@
     });
     $('#order_create').on('tap', function () {
         //生成订单
+        if($.util.isWX){
+            $.util.confirm('提示信息','为保障约会顺利安全，必须下载app才能约她',function(){
+                document.location.href =  '/down-app';
+            },null,'残忍拒绝','立即下载');
+            return;
+        }
         if ((!place_name)) {
             $.util.alert('请选择地点')
             return;

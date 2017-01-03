@@ -28,6 +28,7 @@
                     </div>
                     <span data-pay="wx" class="iconfont choose color_y">&#xe635;</span>
                 </li>
+                <?php if(!$isWx): ?>
                 <li class="choosed">
                     <div class="paytype">
                         <i class="iconfont payico alipay">&#xe625;</i>
@@ -37,6 +38,7 @@
                     </div>
                     <span data-pay="ali" class="iconfont choose">&#xe615;</span>
                 </li>
+                <?php endif; ?>
                 <!--<li class="choosed">
                     <div class="paytype">
                         <i class="iconfont payico cardpay">&#xe621;</i>
