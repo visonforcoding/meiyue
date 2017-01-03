@@ -102,12 +102,10 @@
 
     //可以定制输出内容data.datas为数据列表
     function calFunc(data) {
-
         if (data.datas) {
             var curdatetime = new Date();
             var datas = data.datas;
             for (key in datas) {
-
                 tmp = datas[key];
                 if (tmp.bustr == '已经结束') {
                     tmp.bucls = 'btn_light';
@@ -118,7 +116,6 @@
                 }
                 //返回格式化回调
                 datas[key] = tmp;
-
             }
             data.datas = datas;
 
