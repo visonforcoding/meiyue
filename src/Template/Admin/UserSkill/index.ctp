@@ -49,8 +49,9 @@
                 url: "/user-skill/get-data-list",
                 datatype: "json",
                 mtype: "POST",
-                colNames: ['名称', '费用/小时', '约会说明', '标签', '是否启用', '审核状态', '操作'],
+                colNames: ['用户姓名', '名称', '费用/小时', '约会说明', '标签', '是否启用', '审核状态', '操作'],
                 colModel: [
+                    {name: 'user.nick', editable: true, align: 'center'},
                     {name: 'skill.name', editable: true, align: 'center'},
                     {name: 'cost.money', editable: true, align: 'center'},
                     {name: 'description', editable: true, align: 'center'},

@@ -59,6 +59,7 @@
                         <p><?= $data->description ?></p>
                     </div>
                 </li>
+                <?php if(count($data->tags)): ?>
                 <li class="flex">
                     <h3 class="commontitle">我的标签</h3>
                     <div class="con con_mark flex maxwid80">
@@ -67,6 +68,7 @@
                         <?php endforeach; ?>
                     </div>
                 </li>
+                <?php endif; ?>
             </ul>
         </div>
         <div class="date_des mt20">
@@ -90,7 +92,7 @@
                             <span>地点</span>
                             <div>
                                 <a id="showChoosePlace" href="#choosePlace">
-                                    <input id="thePlace" class="color_gray alignright" placeholder='请选择' readonly value="" />
+                                    <input id="thePlace" class="alignright" placeholder='请选择' readonly value="" />
                                     <i class="iconfont r_con">&#xe605;</i>
                                 </a>
                             </div>
