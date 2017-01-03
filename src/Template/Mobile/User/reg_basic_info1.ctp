@@ -1,10 +1,10 @@
-<header>
+<!--<header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
         <h1>基本信息</h1>
         <span id="next" class="r_btn">下一步</span>
     </div>
-</header>
+</header>-->
 <link rel="stylesheet" type="text/css" href="/mobile/css/LArea.css"/>
 <div class="wraper bgff">
     <!--基本信息三步-->
@@ -430,10 +430,14 @@ use Cake\I18n\Date; ?>
     });
 
     $('#next').on('click', function () {
-        /*if (!$('#avatar').val()) {
+        nextStep();
+    });
+
+    function nextStep() {
+        if (!$('#avatar').val()) {
             $.util.alert('未选择头像');
             return false;
-        }*/
+        }
         if (($('#birthday').val()).length == 0) {
             $.util.alert('请填写正确的出生日期');
             $('#birthday').val('<?= new Date('1991-1-1'); ?>');
@@ -487,17 +491,17 @@ use Cake\I18n\Date; ?>
             data: form.serialize(),
             func: function (res) {
                 if (res.status) {
-                    //window.location.href = '/user/reg-basic-info-2/' + user_id;
+                    window.location.href = '/user/reg-basic-info-2/' + user_id;
                 } else {
                     console.log(res);
                 }
             }
         });
-    });
+    }
 
     LEMON.sys.setTopRight('下一步');
     window.onTopRight = function () {
-        $("#next").trigger('click');
+        nextStep();
     };
 </script>
 <?= $this->end('script'); ?>
