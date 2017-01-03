@@ -287,6 +287,7 @@ class UserController extends AppController {
             $user = $this->User->get($user->id);
             $user = $this->User->patchEntity($user, $this->request->data());
             $user->reg_step = 3;
+            $user->auth_status = 1;
             if ($this->User->save($user)) {
                 return $this->Util->ajaxReturn(true, '保存成功');
             }
