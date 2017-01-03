@@ -229,7 +229,8 @@ class WxController extends AppController {
      * 预约支付页  此页面URL 需在微信公众号的微信支付那里配置 支付域
      * @param int $id  订单id
      */
-    public function pay($id = null, $title = '充值') {
+    public function pay($id = null) {
+        $title = $this->request->query('title')?$this->request->query('title'):'充值';
         $redurl = $this->request->query('redurl');
         $PayorderTable = \Cake\ORM\TableRegistry::get('Payorder');
         $payorder = $PayorderTable->get($id);

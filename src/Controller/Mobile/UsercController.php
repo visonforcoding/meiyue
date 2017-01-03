@@ -868,7 +868,7 @@ class UsercController extends AppController {
             if($PayorderTable->save($payorder)){
                 return $this->Util->ajaxReturn([
                         'status'=>true,
-                        'redirect_url'=>'/wx/pay/'.$payorder->id.'/'.$pack->title.'?redurl='.$redurl,
+                        'redirect_url'=>'/wx/pay/'.$payorder->id.'?title='.$pack->title.'&redurl='.$redurl,
                     ]);
             }else{
                 return $this->Util->ajaxReturn([
