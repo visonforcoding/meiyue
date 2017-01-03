@@ -279,8 +279,6 @@
     }
     $('#submit').on('tap', function () {
         var form = $('form');
-        console.log(form.serialize());
-        return;
         $.util.ajax({
             data: form.serialize(),
             func: function (res) {
