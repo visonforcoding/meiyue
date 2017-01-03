@@ -56,7 +56,7 @@
         <?php if($user->video): ?>
         <div id="see-basic-mv" class="inner home_video mt20  flex flex_center  relpotion init">
             <?php if($browseRight): ?>
-                <video id="see-basic-mv" controls="controls" preload="preload" poster="<?= $user->video_cover; ?>" autoplay="autoplay"><source src="<?= $user->video; ?>" type="video/mp4"></video>
+                <video controls="controls" preload="preload" poster="<?= $user->video_cover; ?>"><source src="<?= $user->video; ?>" type="video/mp4"></video>
             <?php else: ?>
                 <img src="<?= $user->video_cover ?>" />
                 <div class='play-icon'><i class='iconfont'>&#xe6b8;</i></div>
