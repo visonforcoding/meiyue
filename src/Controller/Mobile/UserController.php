@@ -924,6 +924,17 @@ class UserController extends AppController {
 
 
     /**
+     * 已邀请到的人
+     */
+    public function shareList() {
+        $this->set([
+            'user' => $this->user,
+            'pageTitle'=>'已成功邀请的人'
+        ]);
+    }
+
+
+    /**
      * 检查私聊权限
      * @param $uid
      * @return \Cake\Network\Response|null
