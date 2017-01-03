@@ -70,7 +70,6 @@ class AppController extends Controller {
             ['user', 'wreglogin'],
             ['news', 'index'],
             ['news', 'view'],
-            ['chat', 'chatlist'],
         );
         if($this->request->isWeixin()){
             array_push($this->firewall, ['user','index']);
@@ -103,7 +102,7 @@ class AppController extends Controller {
     }
 
     public function beforeFilter(Event $event) {
-        $this->checkLogin();
+        $this->checkLogin();  //检测登陆和自动登录
         if(!$this->request->isLemon()){
             $this->user = $this->request->session()->read('User.mobile');
             $UserTable = \Cake\ORM\TableRegistry::get('User');
