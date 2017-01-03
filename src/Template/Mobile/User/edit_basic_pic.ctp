@@ -64,12 +64,12 @@
                     <h3 class="color_black">基本视频</h3>
                 </div>
                 <div class="fact_identify">
-                    <dl class="Idcard">
-                        <dt id="up_video">
-                            <video width="100%" height="100%" controls="controls" preload="preload"
-                                   src="<?= $user->video ?>" poster="<?= $user->video_cover ?>">
-                        </dt>
-                    </dl>
+                     <div class="home_pic_info" style='padding:0;'>
+                        <div class="home_video">
+                            <video width="100%" height="auto" controls="controls" preload="preload"
+                                   src="<?= $user->video ?>" poster="<?= $user->video_cover ?>"></video>
+                        </div>
+                      </div>
                 </div>
             </div>
         </div>
