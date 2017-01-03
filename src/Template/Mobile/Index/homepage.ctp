@@ -139,7 +139,7 @@
         <?php if($user->charm > 0): ?>
         <li>
             <a class="items flex flex_justify" href="javascript:toVoted();">
-                <span class="seach_name">TA的评选</span>
+                <span class="seach_name">TA的选美</span>
                 <span class="golook"><i class="iconfont r_icon">&#xe605;</i></span>
             </a>
         </li>
@@ -296,9 +296,9 @@
 
     function shareBanner() {
         window.shareConfig.link = '<?= getHost().'/index/homepage/'.$user->id; ?><?= isset($loginer)?'?ivc='.$loginer->invit_code:'';?>';
-        window.shareConfig.title = '标题';
+        window.shareConfig.title = '一个人宅家好无聊，想出去疯玩没人陪？';
         window.shareConfig.imgUrl = '<?= getHost().(isset($user)?$user->avatar:'/upload/ico/meiyue.png');?>';
-        var share_desc = '美女主页分享';
+        var share_desc = '上美约APP，约K歌、约电影、约游戏，同城上万高颜值美女在线，期待与你相遇！';
         share_desc && (window.shareConfig.desc = share_desc);
         LEMON.show.shareBanner();
     }

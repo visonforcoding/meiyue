@@ -92,93 +92,63 @@
 
     //修改按钮显示状态
     function changeSwitchShow($selector) {
-
         if($selector.hasClass('switch-all')) {
-
             if ($selector.hasClass('on')) {
-
                 $('.switch-btn').each(function(){
                     $(this).removeClass('on');
                     $(this).addClass('off');
                 })
-
             } else {
-
                 $('.switch-btn').each(function(){
                     $(this).removeClass('off');
                     $(this).addClass('on');
                 })
-
             }
-
         } else {
-
             if ($selector.hasClass('on')) {
-
                 $selector.removeClass('on');
                 $selector.addClass('off');
-
             } else {
-
                 $selector.removeClass('off');
                 $selector.addClass('on');
-
             }
             if(isAllSwitchSame()) {
-
                 if ($('.switch-all').hasClass('on')) {
-
                     $('.switch-btn').each(function(){
                         $(this).removeClass('on');
                         $(this).addClass('off');
                     })
-
                 } else {
-
                     $('.switch-btn').each(function(){
                         $(this).removeClass('off');
                         $(this).addClass('on');
                     })
-
                 }
-
+            } else {
+                $('.switch-all').toggle('on');
+                $('.switch-all').toggle('off');
             }
-
         }
 
     }
 
     function isAllSwitchSame() {
-
         var onFlag = false;
         var offFlag = false;
-        $('.switch').each(function(){
-
+        $('.switch-btn').each(function(){
             if(!$(this).hasClass('switch-all')) {
-
                 if($(this).hasClass('on')) {
-
                     onFlag = true;
-
                 } else {
-
                     offFlag = true;
-
                 }
-
             }
-
         });
         if(onFlag == offFlag) {
-
             return false;
-
         } else {
-
             return true;
-
         }
-
     }
 
 </script>

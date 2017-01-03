@@ -72,7 +72,7 @@
             </li>
             <li>
                 <a href="/user/voted"  class="home_items">
-                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60c;</i><span class="itemsname">我的评选</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60c;</i><span class="itemsname">我的选美</span></div>
                     <div class="home_list_r_info">
 
                         <i class="iconfont">&#xe605;</i>
@@ -143,10 +143,44 @@
     </div>
 </div>
 <div style="height:53px"></div>
+<div class="footer_submit_btn">
+    <div class="submit_ico_group">
+        <a href="/userc/tracle-pic" class="submit_ico2 submit_ico" id="picbtn">
+            <span class="iconfont">&#xe6b9;</span>
+        </a>
+        <a href="/userc/tracle-video" class="submit_ico3 submit_ico" id="videobtn">
+            <span class="iconfont">&#xe6b8;</span>
+        </a>
+        <div class="submit_ico1 submit_ico" id="submitbtn" data-type='0'>
+            <span>发布<br />动态</span>
+        </div>
+    </div>
+</div>
+
 <!--底部-->
 <?= $this->element('footer', ['active' => 'me']) ?>
 <?php $this->start('script'); ?>
 <script type="text/javascript">
+
+    $('#submitbtn').on('tap', function () {
+        var data = $(this).data('type');
+        switch (data) {
+            case '0':
+                $('#videobtn').removeClass('moveright').addClass('moveleft');
+                $('#picbtn').removeClass('movedown').addClass('moveup');
+                $(this).html('<i class="iconfont">&#xe653;</i>');
+                $(this).attr('data-type', '1');
+                break;
+            case '1':
+                $('#videobtn').removeClass('moveleft').addClass('moveright');
+                $('#picbtn').removeClass('moveup').addClass('movedown');
+                $(this).html('<span>发布<br />动态</span>');
+                $(this).attr('data-type', '0');
+                break;
+            default:
+                break;
+        }
+    })
     //$.util.showPreloader('前往登录..');
     window.onActiveView = function () {
         if (!$.util.getCookie('token_uin')) {

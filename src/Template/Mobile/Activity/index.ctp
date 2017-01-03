@@ -4,7 +4,7 @@
             <div class="date_list_header" id="imgTab">
                 <div id="tab-1" class="alldate"><span class="headertab">约会</span></div>
                 <div id="tab-2" class="todate"><span class="headertab">派对</span></div>
-                <div id="tab-3" class="todate"><span class="headertab">头牌</span></div>
+                <div id="tab-3" class="todate"><span class="headertab">选美</span></div>
             </div>
         </div>
         <div class="activity_list_con" id='imgBox'>

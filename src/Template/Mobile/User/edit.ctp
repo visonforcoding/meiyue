@@ -29,7 +29,6 @@
 
             </li>
             <li class="clearfix" <?= (!($user->idfront) || !($user->idback) || !($user->idperson) || ($user->id_status == UserStatus::NOPASS)) ? 'onclick="window.location.href=\'/userc/edit-auth\';"' : '' ?>>
-
                 <span class="fl">身份认证</span>
                 <?php if (!($user->idfront) || !($user->idback) || !($user->idperson)): ?>
                     <i class="iconfont right_ico fr">&#xe605;</i>
@@ -51,8 +50,12 @@
             <?php if ($user->gender == 2): ?>
                 <li class="clearfix">
                     <span class="fl">真人视频认证</span>
-                    <?php if (!$user->auth_status == UserStatus::PASS): ?>
-                        <i class="iconfont right_ico fr">&#xe605;</i>
+                    <?php if (!$user->auth_video): ?>
+                        <span class="fr"  onclick="window.location.href = '/userc/edit-true';">
+                            <i class="iconfont right_ico fr">&#xe605;</i>
+                        </span>
+                    <?php elseif ($user->auth_status == UserStatus::PASS): ?>
+                        <!--<i class="iconfont right_ico fr">&#xe605;</i>-->
                         <span class="fr">
                             <i class="color_gray fr-des">审核通过</i>
                         </span>
@@ -165,4 +168,5 @@
             $('#status-btn').html('<span class="fl">基本照片与视频上传</span><span class="fr"><i class="color_gray fr-des">上传中</i></span>');
         }
     }
+    LEMON.sys.back('/user/index');
 </script>
