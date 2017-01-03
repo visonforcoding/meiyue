@@ -177,20 +177,20 @@ class WxController extends AppController {
     public function Mpay($id = null, $title = '充值') {
         $this->handCheckLogin();
         $mb = $this->request->query('mb');
-        if($mb){
+        if ($mb) {
             $title = '充值';
             $price = $mb;
         }
-        if($this->request->is('post')){
-            if($mb){
+        if ($this->request->is('post')) {
+            if ($mb) {
                 $this->loadComponent('Business');
-                $r = $this->Business->createPayorder($this->user,['mb'=>$mb]);
-                if($r){
+                $r = $this->Business->createPayorder($this->user, ['mb' => $mb]);
+                if ($r) {
                     $id = $r->id;
                     $PayorderTable = \Cake\ORM\TableRegistry::get('Payorder');
                     $payorder = $PayorderTable->get($id);
                     $out_trade_no = $payorder->order_no;
-            //        $fee = $order->price;  //支付金额
+                    //        $fee = $order->price;  //支付金额
                     $fee = 0.01;  //支付金额
                     $this->loadComponent('Wxpay');
                     $isApp = false;
@@ -206,27 +206,25 @@ class WxController extends AppController {
                     }
                     $body = $payorder->title;
                     $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
-                    \Cake\Log\Log::debug($jsApiParameters,'devlog');
+                    \Cake\Log\Log::debug($jsApiParameters, 'devlog');
                     return $this->Util->ajaxReturn([
-                        'status'=>true,
-                        'msg'=>'支付订单已生成',
-                        'wxPay'=> json_encode($jsApiParameters),
-                        'aliPay'=>$aliPayParameters
-                        ]);
-                }else{
-                    return $this->Util->ajaxReturn(false,'服务器开小差');
+                                'status' => true,
+                                'msg' => '支付订单已生成',
+                                'wxPay' => json_encode($jsApiParameters),
+                                'aliPay' => $aliPayParameters
+                    ]);
+                } else {
+                    return $this->Util->ajaxReturn(false, '服务器开小差');
                 }
             }
         }
         $this->set([
             'title' => $title,
-            'price'=>$price,
+            'price' => $price,
             'pageTitle' => '美币充值'
         ]);
     }
 
-    
-    
     /**
      * 预约支付页  此页面URL 需在微信公众号的微信支付那里配置 支付域
      * @param int $id  订单id
@@ -236,7 +234,7 @@ class WxController extends AppController {
         $PayorderTable = \Cake\ORM\TableRegistry::get('Payorder');
         $payorder = $PayorderTable->get($id);
         $out_trade_no = $payorder->order_no;
-        $fee = $order->price;  //支付金额
+        $fee = $payorder->price;  //支付金额
 //        $fee = 0.01;  //支付金额
         $this->loadComponent('Wxpay');
         $isApp = false;
@@ -250,17 +248,17 @@ class WxController extends AppController {
             $body = $payorder->remark;
             $aliPayParameters = $this->Alipay->setPayParameter($out_trade_no, $title, $fee, $body);
         }
-        if(!$openid&&$this->request->is('weixin')&&!$this->request->session()->check('Pay.getopenid')){
+        if (!$openid && $this->request->is('weixin') && !$this->request->session()->check('Pay.getopenid')) {
             //跳转获取 openid 只跳一次
-            $this->request->session()->write('Pay.getopenid',true);
+            $this->request->session()->write('Pay.getopenid', true);
             $this->Wx->getUserJump(true, true);
         }
-        $code=$this->request->query('code');
-        if($code&&!$openid){
+        $code = $this->request->query('code');
+        if ($code && !$openid) {
             $res = $this->Wx->getUser($code);
-            if($res){
+            if ($res) {
                 $openid = $res->openid;
-                $this->request->session()->write('Pay.openid',$openid);
+                $this->request->session()->write('Pay.openid', $openid);
             }
         }
         $body = $payorder->title;
@@ -399,7 +397,7 @@ class WxController extends AppController {
         if ($id) {
             $OrderTable = TableRegistry::get('Payorder');
             $order = $OrderTable->get($id);
-            if($order) {
+            if ($order) {
                 $st = [
                     'pageTitle' => '充值成功',
                     'msg1' => '充值成功！',
@@ -407,31 +405,30 @@ class WxController extends AppController {
                     'rebtname' => '查看我的钱包',
                     'reurl' => '/userc/my-purse'
                 ];
-                switch($order->type) {
+                switch ($order->type) {
                     case PayOrderType::CHONGZHI:
-                        $st['msg2'] = '充值金额：'.$order->price.'美币';
+                        $st['msg2'] = '充值金额：' . $order->price . '美币';
                         break;
                     case PayOrderType::BUY_TAOCAN:
                     case PayOrderType::BUY_CHONGZHI_TAOCAN:
                         $pack = TableRegistry::get('Package')->get($order->relate_id);
-                        if($pack->type == PackType::VIP) {
+                        if ($pack->type == PackType::VIP) {
                             $st['pageTitle'] = '购买成功';
                             $st['msg1'] = '购买成功!';
                             $st['rebtname'] = '查看会员中心';
                             $st['reurl'] = '/userc/vip-center';
-                        } elseif($pack->type == PackType::RECHARGE) {
-                            $st['msg2'] = '充值金额：'.$pack->vir_money.'美币';
+                        } elseif ($pack->type == PackType::RECHARGE) {
+                            $st['msg2'] = '充值金额：' . $pack->vir_money . '美币';
                         }
                         break;
                 }
             }
         }
         $this->set([
-            'pageTitle' => isset($st['pageTitle'])?$st['pageTitle']:'',
+            'pageTitle' => isset($st['pageTitle']) ? $st['pageTitle'] : '',
             'st' => $st
         ]);
     }
-
 
     /**
      * 微信的上传图片接口
@@ -477,7 +474,5 @@ class WxController extends AppController {
             'url' => $url,
         ]);
     }
-
-
 
 }
