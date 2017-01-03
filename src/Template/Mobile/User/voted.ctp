@@ -12,7 +12,7 @@
         <ul class="voted_list voted-line">
             <?php if($wektop): ?>
             <li>
-                <a href="/activity/index/1#2" class="title ablock flex flex_justify">
+                <a href="<?= ($user->gender == 1)?'/activity/index/1#3':'/activity/index/1#2'; ?>" class="title ablock flex flex_justify">
                     <span class="rank color_y">
                         <i class="iconfont">&#xe645;</i>
                         周榜头牌
@@ -51,7 +51,7 @@
             <?php endif; ?>
             <?php if($montop): ?>
             <li>
-                <a href="/activity/index/2#2" class="title ablock flex flex_justify">
+                <a href="<?= ($user->gender == 1)?'/activity/index/2#3':'/activity/findex/2#2'; ?>" class="title ablock flex flex_justify">
                     <span class="rank color_y">
                         <i class="iconfont">&#xe645;</i>
                         月榜头牌
