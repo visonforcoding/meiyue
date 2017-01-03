@@ -1,9 +1,9 @@
 <link rel="stylesheet" type="text/css" href="/mobile/css/LArea.css"/>
 <div class="wraper bgff">
     <div class="info-header-tips">
-        <!--        <div class="closed">
-                    <a href="#this" class="iconfont">&#xe684;</a>
-                </div>-->
+        <!--<div class="closed">
+            <a href="#this" class="iconfont">&#xe684;</a>
+        </div>-->
         <h3 class="aligncenter title">完善个人信息<br/>可以提高魅力值哦~</h3>
     </div>
     <form>
@@ -31,7 +31,7 @@
                                 class="itemsname">期</span></div>
                         <div class="home_list_r_info">
                             <div class="home-basic-option">
-                                <input type="text" placeholder="出生日期" readonly="readonly"/>
+                                <input name="birthday" type="text" placeholder="出生日期" readonly="readonly"/>
                                 <input type="date" onchange='inputChange(this)'/>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                         <div class="home_list_r_info">
                             <div class="home-basic-option">
                                 <input type="text" id="weight" name="weight" placeholder="你的体重" readonly="readonly"/>
-                                <select onchange='tochange(this)'>
+                                <select onchange='inputChange(this)'>
                                     <option value="55-">55-KG</option>
                                     <option value="56">56KG</option>
                                     <option value="57">57KG</option>
@@ -78,7 +78,7 @@
                         <div class="home_list_r_info">
                             <div class="home-basic-option">
                                 <input type="text" id="height" name="height" placeholder="你的身高" readonly="readonly"/>
-                                <select onchange='tochange(this)'>
+                                <select onchange='inputChange(this)'>
                                     <option value="160-">160-CM</option>
                                     <option value="161">161CM</option>
                                     <option value="162">162CM</option>
@@ -279,6 +279,8 @@
     }
     $('#submit').on('tap', function () {
         var form = $('form');
+        console.log(form.serialize());
+        return;
         $.util.ajax({
             data: form.serialize(),
             func: function (res) {
