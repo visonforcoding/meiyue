@@ -72,6 +72,9 @@ class AppController extends Controller {
             ['news', 'view'],
             ['chat', 'chatlist'],
         );
+        if($this->request->isWeixin()){
+            array_push($this->firewall, ['user','index']);
+        }
     }
 
     /**
@@ -100,10 +103,13 @@ class AppController extends Controller {
     }
 
     public function beforeFilter(Event $event) {
-        $this->user = $this->request->session()->read('User.mobile');
-        $UserTable = \Cake\ORM\TableRegistry::get('User');
-        if($this->user){
-            $this->user = $UserTable->findById($this->user->id)->first();
+        $this->checkLogin();
+        if(!$this->request->isLemon()){
+            $this->user = $this->request->session()->read('User.mobile');
+            $UserTable = \Cake\ORM\TableRegistry::get('User');
+            if($this->user){
+                $this->user = $UserTable->findById($this->user->id)->first();
+            }
         }
         $this->coord = $this->request->cookie('coord')?$this->request->cookie('coord'):'114.044555,22.6453';
         //$this->coord = $this->request->cookie('coord');
@@ -122,7 +128,6 @@ class AppController extends Controller {
         if (!$this->user && $this->request->isLemon()) {
             //debug($this->request->cookie('login_token'));
         }
-        return $this->checkLogin();
     }
 
     /**
@@ -133,7 +138,7 @@ class AppController extends Controller {
         $controller = strtolower($this->request->param('controller'));
         $action = strtolower($this->request->param('action'));
         $request_aim = [$controller, $action];
-        if (!in_array($request_aim, [['user', 'login'], ['user', 'register']])) {
+        if (!in_array($request_aim,  $this->firewall)) {
             //静默登陆
             $this->wxBaseLogin();
             $this->baseLogin();
@@ -151,14 +156,14 @@ class AppController extends Controller {
      */
     protected function baseLogin() {
         //\Cake\Log\Log::debug('进入APP登录自动登录','devlog');
-        $user = $this->request->session()->check('User.mobile');
         $url = '/' . $this->request->url;
-        if ($this->request->isLemon() && $this->request->cookie('token_uin') && !$user) {
+        if ($this->request->isLemon() && $this->request->cookie('token_uin')) {
             //如果是APP，获取user_token 自动登录
             $user_token = $this->request->cookie('token_uin');
             $UserTable = \Cake\ORM\TableRegistry::get('User');
             $user = $UserTable->find()->where(['user_token' => $user_token, 'enabled' => 1, 'is_del' => 0])->first();
             if ($user) {
+                $this->user = $user;
                 $this->request->session()->write('User.mobile', $user);
                 $this->response->cookie([
                     'name' => 'login_stauts',
@@ -166,7 +171,6 @@ class AppController extends Controller {
                     'path' => '/',
                     'expire' => time() + 1200
                 ]);
-                $this->user = $this->request->session()->read('User.mobile');
             }
         }
     }
@@ -184,6 +188,7 @@ class AppController extends Controller {
             $UserTable = \Cake\ORM\TableRegistry::get('User');
             $user = $UserTable->find()->where(['user_token' => $user_token, 'enabled' => 1, 'is_del' => 0])->first();
             if ($user) {
+                $this->user = $user;
                 $this->request->session()->write('User.mobile', $user);
                 $this->response->cookie([
                     'name' => 'login_stauts',
@@ -191,7 +196,6 @@ class AppController extends Controller {
                     'path' => '/',
                     'expire' => time() + 1200
                 ]);
-                $this->user = $this->request->session()->read('User.mobile');
             }
         }
         if (!$user) {

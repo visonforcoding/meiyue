@@ -95,6 +95,10 @@ class UserController extends AppController {
                     if ($this->request->is('weixin') && !$user->wx_openid) {
                         $bind_wx = true;
                     }
+                    if($this->request->is('weixin')&&$user->gender==2){
+                        //女性不让登录微信
+                         return $this->Util->ajaxReturn(['status' => false, 'msg' => '女性用户请在APP端登录']);
+                    }
                     $data['login_time'] = date('Y-m-d H:i:s');
                     if ($coord) {
                         $data['login_coord'] = $coord;
@@ -166,12 +170,12 @@ class UserController extends AppController {
                 $user->login_coord_lat = $coord[1];
             }
             //从im 池中获取im 账号绑定
-            /*$this->loadComponent('Business');
+            $this->loadComponent('Business');
             $im = $this->Business->getNetim();
             if ($im) {
                 $user->imaccid = $im['accid'];
                 $user->imtoken = $im['token'];
-            }*/
+            }
             //登录时间
             $user->login_time = date('Y-m-d H:i:s');
             $user = $this->User->patchEntity($user, $data);
@@ -222,6 +226,9 @@ class UserController extends AppController {
                 \Cake\Log\Log::error($user->errors());
                 return $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($user->errors())]);
             }
+        }
+        if($this->request->is('weixin')){
+            
         }
         $this->set([
             'pageTitle' => '美约-注册'
