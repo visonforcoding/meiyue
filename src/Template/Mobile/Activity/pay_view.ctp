@@ -7,7 +7,7 @@
 <div class="wraper">
     <div class="activity_pay_detail flex box_start">
         <div class="picinfo">
-            <img src='/mobile/images/activity_item.jpg'/>
+            <img src='<?= createImg(isset($activity['big_img'])?$activity['big_img']:''); ?>'/>
         </div>
         <div class="r_info">
             <h3><?= isset($activity)?$activity['title']:'' ?></h3>
