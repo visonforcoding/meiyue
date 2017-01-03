@@ -40,6 +40,16 @@ class ChatController extends AppController {
     
     
     /**
+     * 聊天页
+     */
+    public function chatDetail()
+    {
+        
+    }
+
+    
+
+    /**
      * 返回
      * @return type
      */
