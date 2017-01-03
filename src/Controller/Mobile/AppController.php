@@ -155,13 +155,14 @@ class AppController extends Controller {
      * app 的静默(自动)登录
      */
     protected function baseLogin() {
-        //\Cake\Log\Log::debug('进入APP登录自动登录','devlog');
+        \Cake\Log\Log::debug('进入APP登录自动登录','devlog');
         $url = '/' . $this->request->url;
         if ($this->request->isLemon() && $this->request->cookie('token_uin')) {
             //如果是APP，获取user_token 自动登录
             $user_token = $this->request->cookie('token_uin');
             $UserTable = \Cake\ORM\TableRegistry::get('User');
             $user = $UserTable->find()->where(['user_token' => $user_token, 'enabled' => 1, 'is_del' => 0])->first();
+            \Cake\Log\Log::debug($user,'devlog');
             if ($user) {
                 $this->user = $user;
                 $this->request->session()->write('User.mobile', $user);
