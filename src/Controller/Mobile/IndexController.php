@@ -6,6 +6,7 @@ use App\Controller\Mobile\AppController;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 use PayOrderType;
+use ServiceType;
 
 /**
  * Index Controller
@@ -251,12 +252,25 @@ class IndexController extends AppController {
                 });
             }
         }
+
+        //检查查看权限
+        $canBrowse = false;
+        $this->loadComponent('Business');
+        //检查权限和名额剩余
+        if(isset($this->user)) {
+            $res = $this->Business->checkRight($this->user->id, $id, ServiceType::BROWSE);
+            if($res == \SerRight::OK_CONSUMED) {
+                $canBrowse = true;
+            }
+        }
+
         //若登录
         $this->set([
             'pageTitle' => '发现-主页',
             'user' => $user,
             'loginer' => $this->user,
             'age' => $age,
+            'browseRight' => $canBrowse,
             'distance' => $distance,
             'birthday' => $birthday,
             'isFollow' => $isFollow,

@@ -35,14 +35,16 @@
     var TagsPicker = function() {};
     var _func;  //回调函数
     var _max;   //最大选择数量
+    var _curnum;  //当前选择数量
     TagsPicker.prototype.show = function(func, datas, limit) {
         _func = func;
         _max = (limit)?limit:4;
-
+        _curnum = 0;
         //初始化显示
         $(".tag-item").each(function(){
             if(datas.indexOf($(this).attr('tag-id')) != -1) {
                 $(this).addClass("active");
+                _curnum ++;
             }
         })
         $(".tags-container").show();
@@ -51,8 +53,14 @@
     $('.tag-item').on('click', function(){
         if($(this).hasClass('active')) {
             $(this).removeClass("active");
+            _curnum --;
         } else {
-            $(this).addClass("active");
+            if(_curnum < 4) {
+                _curnum ++;
+                $(this).addClass("active");
+            } else {
+                $.util.alert('最多选择四个标签');
+            }
         }
     });
 

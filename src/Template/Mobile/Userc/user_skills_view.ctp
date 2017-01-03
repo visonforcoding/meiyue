@@ -16,7 +16,7 @@
                         <div class='col-importent'>技能名称</div>
                         <div class="r_info">
                         <span id="show-skill-name">
-                            <?= isset($userskill) ? $userskill['skill']['name'] : '请选择' ?>
+                            <?= isset($userskill) ? $userskill['skill']['name'] : '<span class="color_gray">请选择</span>' ?>
                         </span>
                             <i class="iconfont rcon">&#xe605;</i>
                             <input id="skill-id-input" name="skill_id" type="text"
@@ -29,8 +29,8 @@
                         <div class='col-importent'>技能价格</div>
                         <div class="r_info">
                             <span id="show-cost">
-                                <?= (isset($userskill) && isset($userskill->cost))?$userskill->cost->money:0; ?>
-                                <i class="smalldes">美币/小时</i>
+                                <?= (isset($userskill) && isset($userskill->cost))?$userskill->cost->money.'<i class="smalldes">美币/小时</i>':'<span class="color_gray">请选择</span>'; ?>
+
                             </span>
                             <i class="iconfont rcon">&#xe605;</i>
                             <input
@@ -53,7 +53,7 @@
                         <div id="tag-container" class="r_info">
 
                             <?php if (!isset($userskill)): ?>
-                                <i class="smalldes">4个以内</i>
+                                <span class="color_gray">请选择</span>
                                 <i class="iconfont rcon">&#xe605;</i>
                             <?php else: ?>
                            

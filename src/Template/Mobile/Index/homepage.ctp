@@ -54,9 +54,13 @@
             <?php endif; ?>
         </ul>
         <?php if($user->video): ?>
-        <div id="see-basic-mv" class="inner home_video mt20  flex flex_center  relpotion">
-            <img src="<?= $user->video_cover ?>" />
-            <div class='play-icon'><i class='iconfont'>&#xe6b8;</i></div>
+        <div id="see-basic-mv" class="inner home_video mt20  flex flex_center  relpotion init">
+            <?php if($browseRight): ?>
+                <video id="see-basic-mv" controls="controls" preload="preload" poster="<?= $user->video_cover; ?>" autoplay="autoplay"><source src="<?= $user->video; ?>" type="video/mp4"></video>
+            <?php else: ?>
+                <img src="<?= $user->video_cover ?>" />
+                <div class='play-icon'><i class='iconfont'>&#xe6b8;</i></div>
+            <?php endif; ?>
         </div>
         <?php endif;?>
     </div>
@@ -415,18 +419,21 @@
 
 
     function initVideo() {
-        $.util.ajax({
-            url:'/tracle/see-bvideo/<?=$user->id?>',
-            method: 'POST',
-            func:function(res){
-                console.log(res);
-                if(res.status) {
-                    $('#see-basic-mv').html('<video id="see-basic-mv" controls="controls" preload="preload" poster="'+ res.video_cover +'" autoplay="autoplay"><source src="'+ res.video +'" type="video/mp4"></video>');
-                } else {
-                    $.util.alert(res.msg);
+        if($('#see-basic-mv').hasClass('init')) {
+            $.util.ajax({
+                url:'/tracle/see-bvideo/<?=$user->id?>',
+                method: 'POST',
+                func:function(res){
+                    console.log(res);
+                    if(res.status) {
+                        $('#see-basic-mv').html('<video id="see-basic-mv" controls="controls" preload="preload" poster="'+ res.video_cover +'" autoplay="autoplay"><source src="'+ res.video +'" type="video/mp4"></video>');
+                        $(this).removeClass('init')
+                    } else {
+                        $.util.alert(res.msg);
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 
 

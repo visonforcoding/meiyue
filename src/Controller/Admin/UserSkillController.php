@@ -197,7 +197,9 @@ class UserSkillController extends AppController
         if (!empty($where)) {
             $query->where($where);
         }
-        $query->contain(['Skill', 'Cost', 'Tags']);
+        $query->contain(['Skill', 'Cost', 'Tags', 'User' => function($q) {
+            return $q->select(['nick']);
+        }]);
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
