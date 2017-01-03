@@ -1,11 +1,10 @@
-
 <!-- <header>
     <div class="header">
         <i class="iconfont toback" onclick="history.back();">&#xe602;</i>
         <span class="r_btn release-btn" id="submit">保存</span>
         <h1>基本信息</h1>
     </div>
-</header> -->
+</header>-->
 <link rel="stylesheet" type="text/css" href="/mobile/css/LArea.css"/>
 <div class="wraper">
     <form method="post">
@@ -60,26 +59,26 @@
                         </div>
                         <div class="home_list_r_info">
                             <div class="home-basic-option">
-                                <input type="text" placeholder="你的体重" readonly="readonly" value="<?= $user->weight; ?>KG"/>
+                                <input type="text" placeholder="你的体重" readonly="readonly" value="<?= isset($user->weight)?$user->weight:'40-'; ?>KG"/>
                                 <select id="weight" name="weight" onchange='tochange(this)'>
-                                    <option value="40-">40-KG</option>
-                                    <option value="40">40KG</option>
-                                    <option value="41">41KG</option>
-                                    <option value="42">42KG</option>
-                                    <option value="43">43KG</option>
-                                    <option value="44">44KG</option>
-                                    <option value="45">45KG</option>
-                                    <option value="46">46KG</option>
-                                    <option value="47">47KG</option>
-                                    <option value="48">48KG</option>
-                                    <option value="49">49KG</option>
-                                    <option value="50">50KG</option>
-                                    <option value="51">51KG</option>
-                                    <option value="52">52KG</option>
-                                    <option value="53">53KG</option>
-                                    <option value="54">54KG</option>
-                                    <option value="55">55KG</option>
-                                    <option value="55+">55+KG</option>
+                                    <option value="40-" <?= (isset($user->weight) && $user->weight == '40-')?'selected':''; ?>>40-KG</option>
+                                    <option value="40" <?= (isset($user->weight) && $user->weight == '40')?'selected':''; ?>>40KG</option>
+                                    <option value="41" <?= (isset($user->weight) && $user->weight == '41')?'selected':''; ?>>41KG</option>
+                                    <option value="42" <?= (isset($user->weight) && $user->weight == '42')?'selected':''; ?>>42KG</option>
+                                    <option value="43" <?= (isset($user->weight) && $user->weight == '43')?'selected':''; ?>>43KG</option>
+                                    <option value="44" <?= (isset($user->weight) && $user->weight == '44')?'selected':''; ?>>44KG</option>
+                                    <option value="45" <?= (isset($user->weight) && $user->weight == '45')?'selected':''; ?>>45KG</option>
+                                    <option value="46" <?= (isset($user->weight) && $user->weight == '46')?'selected':''; ?>>46KG</option>
+                                    <option value="47" <?= (isset($user->weight) && $user->weight == '47')?'selected':''; ?>>47KG</option>
+                                    <option value="48" <?= (isset($user->weight) && $user->weight == '48')?'selected':''; ?>>48KG</option>
+                                    <option value="49" <?= (isset($user->weight) && $user->weight == '49')?'selected':''; ?>>49KG</option>
+                                    <option value="50" <?= (isset($user->weight) && $user->weight == '50')?'selected':''; ?>>50KG</option>
+                                    <option value="51" <?= (isset($user->weight) && $user->weight == '51')?'selected':''; ?>>51KG</option>
+                                    <option value="52" <?= (isset($user->weight) && $user->weight == '52')?'selected':''; ?>>52KG</option>
+                                    <option value="53" <?= (isset($user->weight) && $user->weight == '53')?'selected':''; ?>>53KG</option>
+                                    <option value="54" <?= (isset($user->weight) && $user->weight == '54')?'selected':''; ?>>54KG</option>
+                                    <option value="55" <?= (isset($user->weight) && $user->weight == '55')?'selected':''; ?>>55KG</option>
+                                    <option value="55+" <?= (isset($user->weight) && $user->weight == '55+')?'selected':''; ?>>55+KG</option>
                                 </select>
                            </div>
                         </div>
@@ -91,10 +90,10 @@
                                 class="itemsname">高</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
                             <div class="home-basic-option">
-                                <input type="text" placeholder="你的身高" value="<?= $user->height; ?>CM" readonly="readonly"/>
+                                <input type="text" placeholder="你的身高" value="<?= isset($user->height)?$user->height:155; ?>CM" readonly="readonly"/>
                                 <select id="height" name="height" onchange='tochange(this)'>
                                     <?php for($i= 155;$i<=200;$i ++): ?>
-                                        <option value="<?= $i; ?>" <?= ($user->height == $i)?'selected':''; ?>><?= $i; ?>CM</option>
+                                        <option value="<?= $i; ?>" <?= (isset($user->height) && $user->height == $i)?'selected':''; ?>><?= $i; ?>CM</option>
                                     <?php endfor; ?>
                                 </select>
                                 </div>
@@ -171,18 +170,18 @@
                                 <input type="text" placeholder="你的星座" readonly="readonly" value="<?= isset($user->zodiac)?Zodiac::getStr($user->zodiac):'请选择星座'; ?>"/>
                                 <select id="zodiac" name="zodiac" onchange='tochange(this)'>
                                     <option value="0" <?= isset($user->zodiac)?'':'selected'; ?>>请选择星座</option>
-                                    <option value="1" <?= ($user->zodiac == 1)?'selected':''; ?>>白羊座</option>
-                                    <option value="2" <?= ($user->zodiac ==2)?'selected':''; ?>>金牛座</option>
-                                    <option value="3" <?= ($user->zodiac ==3)?'selected':''; ?>>双子座</option>
-                                    <option value="4" <?= ($user->zodiac == 4)?'selected':''; ?>>巨蟹座</option>
-                                    <option value="5" <?= ($user->zodiac == 5)?'selected':''; ?>>狮子座</option>
-                                    <option value="6" <?= ($user->zodiac == 6)?'selected':''; ?>>处女座</option>
-                                    <option value="7" <?= ($user->zodiac == 7)?'selected':''; ?>>天秤座</option>
-                                    <option value="8" <?= ($user->zodiac == 8)?'selected':''; ?>>天蝎座</option>
-                                    <option value="9" <?= ($user->zodiac == 9)?'selected':''; ?>>射手座</option>
-                                    <option value="10" <?= ($user->zodiac == 10)?'selected':''; ?>>摩羯座</option>
-                                    <option value="11" <?= ($user->zodiac == 11)?'selected':''; ?>>水瓶座</option>
-                                    <option value="12" <?= ($user->zodiac == 12)?'selected':''; ?>>双鱼座</option>
+                                    <option value="1" <?= (isset($user->zodiac) && $user->zodiac == 1)?'selected':''; ?>>白羊座</option>
+                                    <option value="2" <?= (isset($user->zodiac) && $user->zodiac ==2)?'selected':''; ?>>金牛座</option>
+                                    <option value="3" <?= (isset($user->zodiac) && $user->zodiac ==3)?'selected':''; ?>>双子座</option>
+                                    <option value="4" <?= (isset($user->zodiac) && $user->zodiac == 4)?'selected':''; ?>>巨蟹座</option>
+                                    <option value="5" <?= (isset($user->zodiac) && $user->zodiac == 5)?'selected':''; ?>>狮子座</option>
+                                    <option value="6" <?= (isset($user->zodiac) && $user->zodiac == 6)?'selected':''; ?>>处女座</option>
+                                    <option value="7" <?= (isset($user->zodiac) && $user->zodiac == 7)?'selected':''; ?>>天秤座</option>
+                                    <option value="8" <?= (isset($user->zodiac) && $user->zodiac == 8)?'selected':''; ?>>天蝎座</option>
+                                    <option value="9" <?= (isset($user->zodiac) && $user->zodiac == 9)?'selected':''; ?>>射手座</option>
+                                    <option value="10" <?= (isset($user->zodiac) && $user->zodiac == 10)?'selected':''; ?>>摩羯座</option>
+                                    <option value="11" <?= (isset($user->zodiac) && $user->zodiac == 11)?'selected':''; ?>>水瓶座</option>
+                                    <option value="12" <?= (isset($user->zodiac) && $user->zodiac == 12)?'selected':''; ?>>双鱼座</option>
                                 </select>
                             </div>
                         </div>
@@ -199,14 +198,14 @@
                                     <input type="text" placeholder="你的罩杯" readonly="readonly" value="<?= $user->cup; ?>"/>
                                     <select id="cup" name="cup"  onchange='tochange(this)'>
                                         <option value="0">选罩杯</option>
-                                        <option value="A" <?= ($user->cup == 'A')?'selected':''; ?>>A</option>
-                                        <option value="B" <?= ($user->cup == 'B')?'selected':''; ?>>B</option>
-                                        <option value="C" <?= ($user->cup == 'C')?'selected':''; ?>>C</option>
-                                        <option value="D" <?= ($user->cup == 'D')?'selected':''; ?>>D</option>
-                                        <option value="E" <?= ($user->cup == 'E')?'selected':''; ?>>E</option>
-                                        <option value="F" <?= ($user->cup == 'F')?'selected':''; ?>>F</option>
-                                        <option value="G" <?= ($user->cup == 'G')?'selected':''; ?>>G</option>
-                                        <option value="H" <?= ($user->cup == 'H')?'selected':''; ?>>H</option>
+                                        <option value="A" <?= (isset($user->cup) && $user->cup == 'A')?'selected':''; ?>>A</option>
+                                        <option value="B" <?= (isset($user->cup) && $user->cup == 'B')?'selected':''; ?>>B</option>
+                                        <option value="C" <?= (isset($user->cup) && $user->cup == 'C')?'selected':''; ?>>C</option>
+                                        <option value="D" <?= (isset($user->cup) && $user->cup == 'D')?'selected':''; ?>>D</option>
+                                        <option value="E" <?= (isset($user->cup) && $user->cup == 'E')?'selected':''; ?>>E</option>
+                                        <option value="F" <?= (isset($user->cup) && $user->cup == 'F')?'selected':''; ?>>F</option>
+                                        <option value="G" <?= (isset($user->cup) && $user->cup == 'G')?'selected':''; ?>>G</option>
+                                        <option value="H" <?= (isset($user->cup) && $user->cup == 'H')?'selected':''; ?>>H</option>
                                     </select>
                                    </div>
                             </div>
@@ -220,10 +219,10 @@
                                 class="itemsname">态</span><?php if($user->gender == 2): ?><i class="iconfont ico"></i><?php endif; ?></div>
                         <div class="home_list_r_info">
                              <div class="home-basic-option">
-                                    <input type="text" placeholder="你的情感状态" readonly="readonly" value="<?= ($user->state == 1)?'单身':'私密'; ?>"/>
+                                    <input type="text" placeholder="你的情感状态" readonly="readonly" value="<?= (isset($user->state) && $user->state == 1)?'单身':'私密'; ?>"/>
                                     <select id="state" name="state" onchange='tochange(this)'>
-                                        <option value="1" <?= ($user->state == 1)?'selected':'';?>>单身</option>
-                                        <option value="2" <?= ($user->state == 2)?'selected':'';?>>私密</option>
+                                        <option value="1" <?= (isset($user->state) && $user->state == 1)?'selected':'';?>>单身</option>
+                                        <option value="2" <?= (isset($user->state) && $user->state == 2)?'selected':'';?>>私密</option>
                                     </select>
                             </div>
                         </div>
@@ -450,6 +449,10 @@
         }
     });
     $('#submit').on('click', function () {
+        submitForm();
+    });
+
+    function submitForm() {
         <?php if($user->gender == 2): ?>
         if (($('#birthday').val()).length == 0) {
             $.util.alert('请填写正确的出生日期');
@@ -514,8 +517,7 @@
                 }
             }
         });
-    });
-
+    }
 
     function chooseTagsCallBack(tagsData) {
         var html = "";
@@ -561,7 +563,7 @@
 
     LEMON.sys.setTopRight('保存')
     window.onTopRight = function () {
-        $("#submit").trigger('click');
+        submitForm();
     }
 </script>
 <?= $this->end('script'); ?>

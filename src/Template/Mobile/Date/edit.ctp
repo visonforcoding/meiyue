@@ -296,7 +296,10 @@
 
 
                 $(".release-btn").on('click', function () {
+                    release();
+                })
 
+                function release() {
                     //验证开始日期
                     var start_time = new Date($("#start-time").val());
                     var current_time = new Date();
@@ -307,7 +310,7 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: '/date/edit/' + $(this).attr('date-id'),
+                        url: '/date/edit/<?= $date['id'] ?>',
                         data: $("form").serialize(),
                         dataType: 'json',
                         success: function (res) {
@@ -321,8 +324,7 @@
                             }
                         }
                     });
-
-                })
+                }
 
 
                 $(".delete-btn").on('click', function () {
@@ -458,6 +460,6 @@
                 LEMON.sys.back('/date/index');
                 LEMON.sys.setTopRight('重新发布')
                 window.onTopRight = function () {
-                    $(".release-btn").trigger('click');
+                    release();
                 }
 </script>

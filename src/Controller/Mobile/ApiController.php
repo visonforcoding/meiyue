@@ -297,6 +297,7 @@ class ApiController extends AppController {
                 }
             } else {
                 $user->images = serialize($images);
+                $user->status = 1;
                 if ($UserTable->save($user)) {
                     $this->jsonResponse(true, '保存成功');
                 } else {
@@ -380,6 +381,7 @@ class ApiController extends AppController {
                 }
             } else {
                 $user = $UserTable->patchEntity($user, $data);
+                $user->status = 1;
                 if ($UserTable->save($user)) {
                     $this->jsonResponse(true, '保存成功');
                 } else {

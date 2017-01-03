@@ -117,6 +117,10 @@
 
     addEvent();
     $(".release-btn").on('click', function () {
+        release();
+    })
+
+    function release() {
         var url = '';
         if ('<?= isset($userskill)?'edit':'add' ?>' == 'add') {
             url = '/userc/user-skill-save/';
@@ -143,7 +147,7 @@
                 $.util.hidePreloader();
             }
         });
-    })
+    }
 
 
     //约会主题选择回调函数
@@ -177,28 +181,6 @@
         })
         new TagsPicker().show(chooseTagsCallBack, currentDatas, 4);
     });
-
-
-    /*$('.switch').on('click', function () {
-
-        //判断此时开关显示状态
-        if ($(".switch").hasClass('on')) {
-
-            $(".switch").removeClass('on');
-            $(".switch").addClass('off');
-            $(".switch_str").text('下线');
-            $("#use_status").val('0');
-
-        } else {
-
-            $(".switch").removeClass('off');
-            $(".switch").addClass('on');
-            $(".switch_str").text('上线');
-            $("#use_status").val('1');
-
-        }
-
-    })*/
 
 
     function chooseCostCB(val) {
@@ -245,7 +227,7 @@
     var rbtname = '<?= isset($userskill) ? '重新发布' : '发布' ?>';
     LEMON.sys.setTopRight(rbtname)
     window.onTopRight = function () {
-        $(".release-btn").trigger('click');
+        release();
     }
     LEMON.event.unrefresh();
 </script>

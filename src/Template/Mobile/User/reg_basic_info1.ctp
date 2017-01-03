@@ -409,6 +409,10 @@ use Cake\I18n\Date; ?>
     });
 
     $('#next').on('click', function () {
+        nextStep();
+    });
+
+    function nextStep() {
         if (!$('#avatar').val()) {
             $.util.alert('未选择头像');
             return false;
@@ -472,11 +476,11 @@ use Cake\I18n\Date; ?>
                 }
             }
         });
-    });
+    }
 
     LEMON.sys.setTopRight('下一步');
     window.onTopRight = function () {
-        $("#next").trigger('click');
+        nextStep();
     };
 </script>
 <?= $this->end('script'); ?>
