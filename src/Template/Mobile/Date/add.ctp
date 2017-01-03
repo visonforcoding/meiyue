@@ -299,6 +299,10 @@ use Cake\I18n\Time;
 
 
     $("#release-btn").on('click', function () {
+        release();
+    });
+
+    function release() {
         $date_time = $("#time").val();
         if (!$date_time) {
             $.util.alert("请选择约会时间!");
@@ -320,8 +324,7 @@ use Cake\I18n\Time;
                 }
             }
         });
-    });
-
+    }
 
     var place_name, coord_lng, coord_lat;
     $(document).on('tap', '.place_link', function () {
@@ -435,6 +438,6 @@ use Cake\I18n\Time;
     LEMON.event.unrefresh();
     LEMON.sys.setTopRight('发布');
     window.onTopRight = function () {
-        $("#release-btn").trigger('click');
+        release();
     }
 </script>

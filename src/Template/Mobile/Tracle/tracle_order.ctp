@@ -71,6 +71,10 @@
 <script>
     var loadflag = true;  //允许请求开关
     $('#submit-btn').on('click', function() {
+        submit();
+    });
+
+    function submit() {
         checkflag = true;
         $("form input").each(function() {
             var text = $(this).data('text');
@@ -110,7 +114,7 @@
                 }
             }
         });
-    });
+    }
 
 
     $('.each-item').on('click', function() {
@@ -124,7 +128,7 @@
     LEMON.event.unrefresh();
     LEMON.sys.setTopRight('提交');
     window.onTopRight = function () {
-        $("#submit-btn").trigger('click');
+        submit();
     }
 </script>
 <?php $this->end(); ?>
