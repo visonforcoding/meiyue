@@ -34,6 +34,12 @@
                     <?php endif; ?>
                 </div>
                 {{/wait_prepay}}
+                {{#timeout_prepay}}
+                <h3 class="pay_desc color_y">订单关闭</h3>
+                <div class="groupbtn">
+                        <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
+                </div>
+                {{/timeout_prepay}}
                 {{#finish_prepay}}
                 <h3 class="pay_desc color_y">已预付：{{pre_pay}}美币</h3>
                 <div class="groupbtn">
@@ -475,6 +481,9 @@
                 switch (n.status) {
                     case 1:
                         data.orders[i]['wait_prepay'] = true;  //订单生成 未支付预约金
+                        break;
+                    case 2:
+                        data.orders[i]['timeout_prepay'] = true;  //超时 未支付 预约金
                         break;
                     case 3:
                         data.orders[i]['finish_prepay'] = true;  //男方支付完预约金 等待女方确认
