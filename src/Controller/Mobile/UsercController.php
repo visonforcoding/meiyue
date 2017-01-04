@@ -1188,4 +1188,28 @@ class UsercController extends AppController
             'pageTitle' => '成为经纪人'
         ]);
     }
+    
+    
+    /**
+     * 检测用户状态
+     */
+    public function checkUserStatus()
+    {
+       if($this->user->status==3){
+           return $this->Util->ajaxReturn(true, '审核通过');
+       }else{
+           switch ($this->user->status){
+               case 0:
+                   $msg = '您暂无此权限，认证信息未上传成功。';
+                   break;
+               case 1:
+                   $msg = '您暂无此权限，认证信息正在审核中。';
+                   break;
+               case 2:
+                   $msg = '您暂无此权限，认证信息审核未通过。';
+                   break;
+           }
+           return $this->Util->ajaxReturn(false,$msg);
+       }
+    }
 }

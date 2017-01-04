@@ -301,7 +301,7 @@ class TestController extends AppController {
                         $res = $this->Netim->prepayMsg($dateorder);
                         debug($res);
                         exit();
-                    }
+           }
 
                     /**
                      * 

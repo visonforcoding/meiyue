@@ -43,7 +43,7 @@
     </div>
     <div class="inner mt60">
         <div class="inner">
-            <a href="/userc/user-skills-view/add" class="btn btn_t_border inner">新增</a>
+            <a href="/userc/user-skills-view/add" id="add-skill" class="btn btn_t_border inner">新增</a>
         </div>
     </div>
 </div>
@@ -58,7 +58,20 @@
     $('.skill-item').on('click', function(){
         window.location.href = '/userc/user-skills-view/edit/' + $(this).attr('item-id');
     })
-
+    $('#add-skill').bind('click',function(event){
+        event.preventDefault();
+        var url = $(this).attr('href');
+        $.util.ajax({
+            url:'/userc/check-user-status',
+            func:function(res){
+                if(!res.status){
+                    $.util.alert(res.msg);
+                }else{
+                    document.location.href = url;
+                }
+            }
+        })
+    });
 
     $('.switch-btn').on('click', function (e) {
         e.stopPropagation();

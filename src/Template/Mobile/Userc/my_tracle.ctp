@@ -143,7 +143,20 @@ $('#submitbtn').on('tap', function () {
         })
         return data;
     }
-
+    $('#videobtn,#picbtn').bind('click',function(event){
+        event.preventDefault();
+        var url = $(this).attr('href');
+        $.util.ajax({
+            url:'/userc/check-user-status',
+            func:function(res){
+                if(!res.status){
+                    $.util.alert(res.msg);
+                }else{
+                    document.location.href = url;
+                }
+            }
+        })
+    });
     $(document).on('tap', '#del-mv-btn', function() {
         var flag = $(this).hasClass('cdel');
         var type = $(this).data('mvtype');
