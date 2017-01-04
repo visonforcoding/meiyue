@@ -167,9 +167,9 @@
             <form action="">
                 <div class="search-box flex flex_justify">
                     <div class="search-btn">
-                        <i class="iconfont ico">&#xe689;</i><input type="text" placeholder="请输入约会地点" results="5" />
+                        <i class="iconfont ico">&#xe689;</i><input id="searchInput" type="text" placeholder="请输入约会地点" results="5" />
                     </div>
-                    <span class="cancel-btn color_y">搜索</span>
+                    <span class="cancel-btn color_y" onclick='submitSearchPlace()'>搜索</span>
                 </div>
             </form>
         </div>
@@ -264,6 +264,7 @@
         $('#selfPlace').show();
         $('#listPlace').hide();
     }
+    
 
     var dPicker = new mydateTimePicker();
     dPicker.init(choosedateCallBack);
@@ -273,6 +274,18 @@
 
     var curpage = 1;
     var gurl = '/date-order/find-place/' + skill_id + '/';
+    var query = '';
+    function submitSearchPlace(){
+        curpage = 1;
+        var searchKey = $('#searchInput').val();
+        if(!searchKey){
+            $.util.alert('请输入地址');
+            return;
+        }
+        query = '?tag='+searchKey;
+        $.util.asyLoadData({gurl: gurl, page: curpage, tpl: '#place-list-tpl', id: '#place-list', key: 'places'
+            ,query:query});
+    }
     $(window).on('hashchange', function () {
         //页面切换
         if (location.hash == '#choosePlace') {
@@ -284,7 +297,7 @@
                     $.util.listScroll('place-list', function () {
                         //window.holdLoad = false;  //打开加载锁  可以开始再次加载
                         $.util.asyLoadData({gurl: gurl, page: curpage,
-                            tpl: '#place-list-tpl', id: '#place-list', more: true, key: 'places'});
+                            tpl: '#place-list-tpl', id: '#place-list', more: true, key: 'places',query:query});
                     })
                 });
             }, 2000)
