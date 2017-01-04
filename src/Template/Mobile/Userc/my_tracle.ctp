@@ -33,7 +33,7 @@
                 <span class="tracle_footer_info"><i class="iconfont">&#xe65c;</i>{{view_nums}}</span>
                 <span class="tracle_footer_info"><i class="iconfont">&#xe633;</i> {{praise_nums}}</span>
             </div>
-            <div id="del-mv-btn" class="{{^status_pass}}cdel{{/status_pass}} tracle_footer_info" data-id="{{id}}"><i class="iconfont">&#xe650;</i>
+            <div id="del-mv-btn" data-mvtype='{{#is_pic}}1{{/is_pic}}{{#is_video}}2{{/is_video}}' class="{{^status_pass}}cdel{{/status_pass}} tracle_footer_info" data-id="{{id}}"><i class="iconfont">&#xe650;</i>
             </div>
         </div>
     </section>
@@ -146,12 +146,20 @@ $('#submitbtn').on('tap', function () {
 
     $(document).on('tap', '#del-mv-btn', function() {
         var flag = $(this).hasClass('cdel');
+        var type = $(this).data('mvtype');
         if(!flag) {
             var video_count = parseInt($('.video-count').length);
             var pic_count = parseInt($('.pic-count').length);
-            if(pic_count <= 1 || video_count <= 1) {
-                $.util.alert('至少要保留一条视频动态和一条图片动态');
-                return;
+            if(type == '1') {
+                if(pic_count <= 1) {
+                    $.util.alert('至少要保留一条图片动态');
+                    return;
+                }
+            } else if(type == '2') {
+                if(video_count <= 1) {
+                    $.util.alert('至少要保留一条视频动态');
+                    return;
+                }
             }
         }
         var mvid = $(this).data('id');
