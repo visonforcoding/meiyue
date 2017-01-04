@@ -44,9 +44,9 @@
                 <h3 class="pay_desc color_y">已预付：{{pre_pay}}美币</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 1): ?>
-                        <span data-orderid="{{id}}"  class="refuse refuse_status_3 clickable">取消约单</span>
+                        <span data-orderid="{{id}}"  class="refuse m_refuse_status_3 clickable">取消约单</span>
                     <?php else: ?>
-                        <span data-orderid="{{id}}"  class="refuse refuse_status_3 clickable">拒绝</span>
+                        <span data-orderid="{{id}}"  class="refuse w_refuse_status_3 clickable">拒绝</span>
                         <span data-orderid="{{id}}"  class="orders receive_order clickable">接单</span>
                     <?php endif; ?>
                 </div>
@@ -370,10 +370,27 @@
             }
         });
     });
-    $(document).on('click', '.refuse_status_3', function () {
+    $(document).on('click', '.m_refuse_status_3', function () {
         //状态3时的拒绝接单 和 取消订单
         var orderid = $(this).data('orderid');
         $.util.confirm('确定要取消订单吗?', '取消订单后，预约金将退回到您的账户中，但会影响您在美女中的排名，是否继续？', function () {
+            $.util.ajax({
+                url: '/date-order/cancel-date-order-3',
+                data: {order_id: orderid},
+                func: function (res) {
+                    $.util.alert(res.msg);
+                    setTimeout(function () {
+                        refresh();
+                    }, 300);
+                }
+            });
+        });
+    });
+    
+    $(document).on('click', '.w_refuse_status_3', function () {
+        //状态3时的拒绝接单 和 取消订单
+        var orderid = $(this).data('orderid');
+        $.util.confirm('提示信息', '确定不接受此订单？', function () {
             $.util.ajax({
                 url: '/date-order/cancel-date-order-3',
                 data: {order_id: orderid},
