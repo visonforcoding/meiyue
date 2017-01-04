@@ -406,9 +406,8 @@
         //状态10时 男方取消订单
         var orderid = $(this).data('orderid');
         var stime = $(this).data('stime');
-        console.log(stime);
         var text;
-        if ((new Date(stime) - new Date()) > 2 * 60 * 60) {
+        if ((new Date(stime) - new Date()) > 2 * 60 * 60*1000) {
             text = '平台将只退回约单金额的70%,剩余的30%将打至美女账户作为补偿，是否继续？';
         } else {
             text = '平台将只退回约单金额的30%,剩余的70%将打至美女账户作为补偿，是否继续？';
