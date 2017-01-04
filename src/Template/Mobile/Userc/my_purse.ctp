@@ -98,7 +98,11 @@
 
 
     function duihuan() {
+        <?php if($status[0] == 1): ?>
         $('.choose-type').toggleClass('hide');
+        <?php else: ?>
+        $.util.alert('<?= $status[1]; ?>');
+        <?php endif; ?>
     }
 
     $.util.tap($('.choose-type-close'), function() {
@@ -122,6 +126,5 @@
     function toYinlianpage() {
         window.location.href = '/userc/exchange-view/2';
     }
-
     LEMON.sys.back('/user/index');
 </script>

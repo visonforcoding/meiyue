@@ -118,7 +118,6 @@
     var user_id = <?=$user->id?>;
     $.util.choosImgs('demoImg');
     $.util.chooseVideo('up_video');
-
     $('#submit').on('tap', function () {
         if ($('#demoImg').data('max') === '0')
             LEMON.event.uploadPics({
@@ -138,15 +137,13 @@
         $(this).addClass('disabled');
         $.util.ajax({
             url: '/user/clear-basic-pv',
+            method: 'POST',
             func: function (res) {
                 $.util.hidePreloader();
-                $(this).removeClass('disabled');
                 location.href = '/userc/edit-info';
             }
         });
-
     })
-
 </script>
 <?= $this->end('script'); ?>
 
