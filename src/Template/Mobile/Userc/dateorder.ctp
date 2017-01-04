@@ -69,7 +69,7 @@
                         <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
                     <?php else: ?>
                         <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
-                        <span data-orderid="{{id}}"  class="receive_order">退款成功</span>
+                        <span data-orderid="{{id}}"  class="refuse">退款成功</span>
                     <?php endif; ?>
                 </div>
                 {{/refuse_status_5}}
