@@ -33,7 +33,7 @@
 <script>
     var user_id = <?= $user->id ?>;
     $.util.choosImgs('add_tracle');
-    LEMON.sys.setTopRight('发送')
+    LEMON.sys.setTopRight('发送');
     window.onTopRight = function () {
         var tracle_body = $('#body').val();
         var param = {};

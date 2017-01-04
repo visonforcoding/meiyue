@@ -540,10 +540,16 @@ class UsercController extends AppController
             ->limit(10)
             ->toArray();
         $withdraw = TableRegistry::get('Withdraw')->find()->where(['user_id' => $this->user->id, 'status' => 1])->first();
+        if($this->user->gender == 2) {
+            $status = $this->checkApply($this->user, 500);
+        } else {
+            $status = [0, '非法操作'];
+        }
         $this->set([
             'pageTitle' => '我的钱包',
             'user' => $this->user,
             'top5flows' => $top5flows,
+            'status' => $status,
             'withdraw' => $withdraw
         ]);
     }
@@ -1052,37 +1058,37 @@ class UsercController extends AppController
     /**
      * 检查兑换
      * @param User  申请人
-     * @param Withdraw  兑换相关
+     * @param Withdraw  兑换美币数额
      * @return int 状态码：1#可以兑换 2#存在等待受理申请 3#今日已经提交过了 4#非兑换日 5#美币不足 6#兑换金额超过20000 7#兑换金额少于500
      */
-    private function checkApply(User $user, Withdraw $withdraw)
+    private function checkApply(User $user, $amount)
     {
-        if ($user->money < $withdraw->viramount) {
-            return 5; //美币不足
+        if ($user->money < $amount) {
+            return [5, '美币不足']; //美币不足
         }
-        if (500 > $withdraw->viramount) {
-            return 7; //兑换金额小于500
+        if (500 > $amount) {
+            return [7, '每次申请兑换不能少于500美币']; //兑换金额小于500
         }
-        if (20000 < $withdraw->viramount) {
-            return 6; //兑换金额大于20000
+        if (20000 < $amount) {
+            return [6, '每次申请兑换不能多于20000美币']; //兑换金额大于20000
         }
         //检查提现情况
         $withdrawTb = TableRegistry::get("Withdraw");
         $withdraw = $withdrawTb->find()->where(['user_id' => $this->user->id])->orderDesc('create_time')->first();
         if ($withdraw) {
             if ($withdraw->status == 1) {
-                return 2; //存在等待受理申请
+                return [2, '存在等待受理申请']; //存在等待受理申请
             }
             $current_time = new Time();
             if ($withdraw->create_time == $current_time) {
-                return 3; //今日已经提交过了
+                return [3, '今日已经提交过了']; //今日已经提交过了
             }
             if (!(($current_time->format('w') == '0') || ($current_time->format('w') == '3'))) {
-                return 4; //非兑换日
+                return [4, '非兑换日']; //非兑换日
             }
-            return 1;
+            return [1, '可以兑换'];
         } else {
-            return 1;
+            return [1, '可以兑换'];
         }
     }
 
@@ -1110,7 +1116,8 @@ class UsercController extends AppController
             $withdraw->viramount = $withdraw->amount;
             $withdraw->amount = ($withdraw->amount) * 0.8;
             $withdraw->status = 1;
-            switch ($this->checkApply($this->user, $withdraw)) {
+            $res = $this->checkApply($this->user, $withdraw->viramount);
+            switch ($res[0]) {
                 case 1:
                     if ($withdrawTb->save($withdraw)) {
                         return $this->Util->ajaxReturn(['status' => true, 'msg' => '申请成功']);
@@ -1119,22 +1126,12 @@ class UsercController extends AppController
                     }
                     break;
                 case 2:
-                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '存在待受理申请']);
-                    break;
                 case 3:
-                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '今日已经申请了']);
-                    break;
                 case 4:
-                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '非周三或周日不能提交申请']);
-                    break;
                 case 5:
-                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '美币不足']);
-                    break;
                 case 6:
-                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '每次申请兑换不能多于20000美币']);
-                    break;
                 case 7:
-                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '每次申请兑换不能少于500美币']);
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => $res[1]]);
                     break;
             };
             return $this->Util->ajaxReturn(['status' => false, 'msg' => '提交失败']);

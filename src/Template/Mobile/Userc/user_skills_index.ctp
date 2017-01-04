@@ -105,33 +105,28 @@
                 })
             }
         } else {
-            if ($selector.hasClass('on')) {
+            if($selector.hasClass('on')) {
                 $selector.removeClass('on');
                 $selector.addClass('off');
             } else {
                 $selector.removeClass('off');
                 $selector.addClass('on');
             }
-            if(isAllSwitchSame()) {
-                if ($('.switch-all').hasClass('on')) {
-                    $('.switch-btn').each(function(){
-                        $(this).removeClass('on');
-                        $(this).addClass('off');
-                    })
-                } else {
-                    $('.switch-btn').each(function(){
-                        $(this).removeClass('off');
-                        $(this).addClass('on');
-                    })
-                }
+            if(isAllSwitchSame() == 3) {
+                $('.switch-all').addClass('on');
+                $('.switch-all').removeClass('off');
             } else {
-                $('.switch-all').toggle('on');
-                $('.switch-all').toggle('off');
+                $('.switch-all').addClass('off');
+                $('.switch-all').removeClass('on');
             }
         }
-
     }
 
+    /**
+     * 检查按钮状态
+     * 1#有开有关 2#全部都关闭 3#全部都打开
+     * @returns {boolean}
+     */
     function isAllSwitchSame() {
         var onFlag = false;
         var offFlag = false;
@@ -145,10 +140,11 @@
             }
         });
         if(onFlag == offFlag) {
-            return false;
-        } else {
-            return true;
+            return 1;
+        } else if(offFlag) {
+            return 2;
+        } else if(onFlag) {
+            return 3;
         }
     }
-
 </script>
