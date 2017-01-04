@@ -222,7 +222,7 @@
     <?php if ($order->status == 2): ?>
         <div class="bottomblock">
             <div class="flex flex_end">
-                <span  id="remove_order" class="footerbtn gopay">删除订单</span>
+                <span  id="remove_order" class="identify_dark_potion">删除订单</span>
             </div>
         </div>
     <?php endif; ?>
