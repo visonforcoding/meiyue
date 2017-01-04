@@ -378,6 +378,15 @@ class ApiController extends AppController {
                             $this->jsonResponse(true, $user->errors());
                         }
                     }
+                    if ($param->action == 'add_basic_video') {
+                         $user = $UserTable->patchEntity($user, $data);
+                         $user->status = 1;
+                        if ($UserTable->save($user)) {
+                            $this->jsonResponse(true, '保存成功');
+                        } else {
+                            $this->jsonResponse(true, $user->errors());
+                        }
+                    }
                 }
             } else {
                 $user = $UserTable->patchEntity($user, $data);

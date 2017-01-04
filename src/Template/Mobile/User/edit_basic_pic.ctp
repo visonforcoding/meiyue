@@ -120,16 +120,22 @@
     $.util.chooseVideo('up_video');
     $('#submit').on('tap', function () {
         if ($('#demoImg').data('max') === '0')
+            var param = {};
+            param['action'] = 'update_basic_pic';
+            param = JSON.stringify(param);
             LEMON.event.uploadPics({
                 key: 'demoImg',
                 user_id: user_id,
-                action: 'update_basic_pic'
+                param:param
             });
         if ($('#up_video').data('choosed'))
+             var param = {};
+            param['action'] = 'update_basic_video';
+            param = JSON.stringify(param);
             LEMON.event.uploadVideo({
                 key: 'up_video',
                 user_id: user_id,
-                action: 'update_basic_video'
+                param:param
             });
         $.util.showPreloader();
         $.util.setCookie('UPLOAD_IV', true, 15);

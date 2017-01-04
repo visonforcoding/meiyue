@@ -97,7 +97,10 @@
             return false;
         }
         if ($('#up_video').data('choosed')) {
-            LEMON.event.uploadVideo({key: 'up_video', user_id: user_id});
+            var param = {};
+            param['action'] = 'add_basic_video';
+            param = JSON.stringify(param);
+            LEMON.event.uploadVideo({key: 'up_video', user_id: user_id,param:param});
         }else{
             $.util.alert('请上传基本视频');
             return false;
