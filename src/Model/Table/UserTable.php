@@ -32,7 +32,7 @@ class UserTable extends Table {
         parent::initialize($config);
 
         $this->table('lm_user');
-        $this->displayField('id');
+        $this->displayField('nick');
         $this->primaryKey('id');
         $this->hasMany('UserSkills', [
             'className' => 'UserSkill',

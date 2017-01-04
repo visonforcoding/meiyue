@@ -513,3 +513,42 @@ class PayOrderType {
         return $status;
     }
 }
+
+
+/**
+ * 平台消息类
+ * Class MsgpushType
+ */
+class MsgpushType {
+    const CUSTOM = 1; //自定义
+
+    const COMMON = 1;  //普通类型，即文字加链接
+    const GETJSON = -1;
+    public static function getToWho($who = null) {
+        $towhos = [
+            MsgpushType::CUSTOM => '自定义',
+        ];
+
+        if($who == MsgpushType::GETJSON) {
+           return json_encode($towhos);
+        } if($who) {
+            return isset($towhos[$who])?$towhos[$who]:'未知';
+        } else {
+            return $towhos;
+        }
+    }
+
+    public static function getType($type) {
+        $types = [
+            MsgpushType::COMMON => '普通类型',
+        ];
+
+        if($type == MsgpushType::GETJSON) {
+            return json_encode(COMMON);
+        } if($type) {
+            return isset($types[$type])?$types[$type]:'未知类型';
+        } else {
+            return $types;
+        }
+    }
+}
