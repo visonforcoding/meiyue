@@ -30,24 +30,24 @@
                 <h3 class="pay_desc color_y">待支付预约金</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 1): ?>
-                        <span data-orderid="{{id}}"  class="orders pay_status_1">付款</span>
+                        <span data-orderid="{{id}}"  class="orders pay_status_1 clickable">付款</span>
                     <?php endif; ?>
                 </div>
                 {{/wait_prepay}}
                 {{#timeout_prepay}}
                 <h3 class="pay_desc color_y">订单关闭</h3>
                 <div class="groupbtn">
-                        <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
+                        <span data-orderid="{{id}}"  class="refuse remove_order clickable">删除订单</span>
                 </div>
                 {{/timeout_prepay}}
                 {{#finish_prepay}}
                 <h3 class="pay_desc color_y">已预付：{{pre_pay}}美币</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 1): ?>
-                        <span data-orderid="{{id}}"  class="refuse refuse_status_3">取消约单</span>
+                        <span data-orderid="{{id}}"  class="refuse refuse_status_3 clickable">取消约单</span>
                     <?php else: ?>
-                        <span data-orderid="{{id}}"  class="refuse refuse_status_3">拒绝</span>
-                        <span data-orderid="{{id}}"  class="orders receive_order">接单</span>
+                        <span data-orderid="{{id}}"  class="refuse refuse_status_3 clickable">拒绝</span>
+                        <span data-orderid="{{id}}"  class="orders receive_order clickable">接单</span>
                     <?php endif; ?>
                 </div>
                 {{/finish_prepay}}
@@ -55,9 +55,9 @@
                 <h3 class="pay_desc color_y">订单关闭</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 2): ?>
-                        <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
+                        <span data-orderid="{{id}}"  class="refuse remove_order clickable">删除订单</span>
                     <?php else: ?>
-                        <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
+                        <span data-orderid="{{id}}"  class="refuse remove_order clickable">删除订单</span>
                         <span data-orderid="{{id}}"  class="refuse">退款成功</span>
                     <?php endif; ?>
                 </div>
@@ -66,10 +66,10 @@
                 <h3 class="pay_desc color_y">订单关闭</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 2): ?>
-                        <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
+                        <span data-orderid="{{id}}"  class="refuse remove_order clickable">删除订单</span>
                     <?php else: ?>
-                        <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
-                        <span data-orderid="{{id}}"  class="refuse">退款成功</span>
+                        <span data-orderid="{{id}}"  class="refuse remove_order clickable">删除订单</span>
+                        <span data-orderid="{{id}}"  class="refuse clickable">退款成功</span>
                     <?php endif; ?>
                 </div>
                 {{/refuse_status_5}}
@@ -77,10 +77,10 @@
                 <h3 class="pay_desc color_y">订单关闭</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 2): ?>
-                        <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
+                        <span data-orderid="{{id}}"  class="refuse remove_order clickable">删除订单</span>
                     <?php else: ?>
-                        <span data-orderid="{{id}}"  class="refuse remove_order">删除订单</span>
-                        <span data-orderid="{{id}}"  class="refuse">退款成功</span>
+                        <span data-orderid="{{id}}"  class="refuse remove_order clickable">删除订单</span>
+                        <span data-orderid="{{id}}"  class="refuse ">退款成功</span>
                     <?php endif; ?>
                 </div>
                 {{/w_timeout_receive}}
@@ -88,9 +88,9 @@
                 <h3 class="pay_desc color_y">待付尾款</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 1): ?>
-                        <span data-orderid="{{id}}" class="orders pay_status_7" >付尾款</span>
+                        <span data-orderid="{{id}}" class="orders pay_status_7 clickable" >付尾款</span>
                     <?php else: ?>
-                        <span data-orderid="{{id}}"  class="refuse cancel_order refuse_status_7">取消订单</span>
+                        <span data-orderid="{{id}}"  class="refuse cancel_order refuse_status_7 clickable">取消订单</span>
                     <?php endif; ?>
                 </div>
                 {{/finish_receive}}
@@ -98,10 +98,10 @@
                 <h3 class="pay_desc color_y">订单关闭</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 1): ?>
-                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                        <span data-orderid="{{id}}" class="refuse remove_order clickable" >删除订单</span>
                         <span data-orderid="{{id}}" class="refuse" >退款成功</span>
                     <?php else: ?>
-                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                        <span data-orderid="{{id}}" class="refuse remove_order clickable" >删除订单</span>
                         <span data-orderid="{{id}}" class="refuse" >惩罚成功</span>
                     <?php endif; ?>
                 </div>
@@ -110,10 +110,10 @@
                 <h3 class="pay_desc color_y">订单关闭</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 2): ?>
-                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                        <span data-orderid="{{id}}" class="refuse remove_order clickable" >删除订单</span>
                         <span data-orderid="{{id}}" class="refuse" >补偿成功</span>
                     <?php else: ?>
-                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                        <span data-orderid="{{id}}" class="refuse remove_order clickable" >删除订单</span>
                         <span data-orderid="{{id}}" class="refuse" >惩罚成功</span>
                     <?php endif; ?>
                 </div>
@@ -122,11 +122,11 @@
                 <h3 class="pay_desc color_y">等待赴约中</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 2): ?>
-                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="refuse w_refuse_status_10" >取消订单</span>
-                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="refuse go_order" >确认到达</span>
+                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="refuse w_refuse_status_10 clickable" >取消订单</span>
+                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="refuse go_order clickable" >确认到达</span>
                     <?php else: ?>
-                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="refuse m_refuse_status_10" >取消订单</span>
-                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="orders go_order" >赴约成功</span>
+                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="refuse m_refuse_status_10 clickable" >取消订单</span>
+                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="orders go_order clickable" >赴约成功</span>
                     <?php endif; ?>
                 </div>
                 {{/finsh_payall}}
@@ -134,10 +134,10 @@
                 <h3 class="pay_desc color_y">赴约中</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 2): ?>
-                        <span data-orderid="{{id}}" class="orders go_order" >确认到达</span>
+                        <span data-orderid="{{id}}" class="orders go_order clickable" >确认到达</span>
                     <?php else: ?>
-                        <span data-orderid="{{id}}" class="refuse complain" >投诉</span>
-                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="refuse go_order" >赴约成功</span>
+                        <span data-orderid="{{id}}" class="refuse complain clickable" >投诉</span>
+                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="refuse go_order clickable" >赴约成功</span>
                     <?php endif; ?>
                 </div>
                 {{/finsh_payall_begin}}
@@ -145,10 +145,10 @@
                 <h3 class="pay_desc color_y">订单关闭</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 2): ?>
-                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                        <span data-orderid="{{id}}" class="refuse remove_order clickable" >删除订单</span>
                         <span data-orderid="{{id}}" class="refuse" >补偿成功</span>
                     <?php else: ?>
-                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                        <span data-orderid="{{id}}" class="refuse remove_order clickable" >删除订单</span>
                         <span data-orderid="{{id}}" class="refuse" >惩罚成功</span>
                     <?php endif; ?>
                 </div>
@@ -157,11 +157,11 @@
                 <h3 class="pay_desc color_y">订单关闭</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 2): ?>
-                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                        <span data-orderid="{{id}}" class="refuse remove_order clickable" >删除订单</span>
                         <span data-orderid="{{id}}" class="refuse" >惩罚成功</span>
                     <?php else: ?>
-                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
-                        <span data-orderid="{{id}}" class="refuse" >补偿成功</span>
+                        <span data-orderid="{{id}}" class="refuse remove_order clickable" >删除订单</span>
+                        <span data-orderid="{{id}}" class="refuse clickable" >补偿成功</span>
                     <?php endif; ?>
                 </div>
                 {{/cancel_status_12}}
@@ -169,13 +169,13 @@
                 <?php if ($user->gender == 2): ?>
                     <h3 class="pay_desc color_y">等待对方确认</h3>
                     <div class="groupbtn">
-                        <span data-orderid="{{id}}" class="refuse" >我已到达</span>
+                        <span data-orderid="{{id}}" class="refuse clickable" >我已到达</span>
                     </div>
                 <?php else: ?>
                     <h3 class="pay_desc color_y">对方已到达</h3>
                     <div class="groupbtn">
-                        <span data-orderid="{{id}}" class="refuse complain" >投诉</span>
-                        <span data-orderid="{{id}}" class="orders go_order" >赴约成功</span>
+                        <span data-orderid="{{id}}" class="refuse complain clickable" >投诉</span>
+                        <span data-orderid="{{id}}" class="orders go_order clickable" >赴约成功</span>
                     </div>
                 <?php endif; ?>
                 {{/confirm_go}}
@@ -183,14 +183,14 @@
                 <?php if ($user->gender == 2): ?>
                     <h3 class="pay_desc color_y">交易成功</h3>
                     <div class="groupbtn">
-                        <span data-orderid="{{id}}" class="refuse" >查看评价</span>
-                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                        <span data-orderid="{{id}}" class="refuse clickable" >查看评价</span>
+                        <span data-orderid="{{id}}" class="refuse remove_order clickable" >删除订单</span>
                     </div>
                    <?php else: ?>
                     <h3 class="pay_desc color_y">交易成功</h3>
                     <div class="groupbtn">
                         <a href="/date-order/appraise/{{id}}"><span data-orderid="{{id}}" class="orders appraise" >评价</span></a>
-                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                        <span data-orderid="{{id}}" class="refuse remove_order clickable" >删除订单</span>
                     </div>
                 <?php endif; ?>
                 {{/finish_order}}
@@ -198,13 +198,13 @@
                 <?php if ($user->gender == 2): ?>
                     <h3 class="pay_desc color_y">交易成功</h3>
                     <div class="groupbtn">
-                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                        <span data-orderid="{{id}}" class="refuse remove_order clickable" >删除订单</span>
                         <a href="/date-order/view-appraise/{{id}}"><span data-orderid="{{id}}" class="refuse" >查看评价</span></a>
                     </div>
                 <?php else: ?>
                     <h3 class="pay_desc color_y">交易成功</h3>
                     <div class="groupbtn">
-                        <span data-orderid="{{id}}" class="refuse remove_order" >删除订单</span>
+                        <span data-orderid="{{id}}" class="refuse remove_order clickable" >删除订单</span>
                     </div>
                 <?php endif; ?>
                 {{/finish_appraise}}
@@ -275,7 +275,7 @@
         });
     }, 2000);
 
-    $(document).on('tap', '.pay_status_1', function () {
+    $(document).on('click', '.pay_status_1', function () {
         //支付预约金
         var orderid = $(this).data('orderid');
         $.util.confirm('确定支付？', '将扣除美币作为预约金', function () {
@@ -299,7 +299,7 @@
         })
     });
 
-    $(document).on('tap', '.complain', function () {
+    $(document).on('click', '.complain', function () {
         //投诉 
         $('#complain-box').removeClass('hide');
     });
@@ -313,7 +313,7 @@
         $('#complain-box').addClass('hide');
     });
 
-    $(document).on('tap', '.remove_order', function () {
+    $(document).on('click', '.remove_order', function () {
         //删除订单
         var orderid = $(this).data('orderid');
         var obj = $(this);
@@ -333,7 +333,7 @@
         })
 
     });
-    $(document).on('tap', '.pay_status_7', function () {
+    $(document).on('click', '.pay_status_7', function () {
         //支付尾款
         var orderid = $(this).data('orderid');
         $.util.confirm('确定支付？', '将扣除美币支付尾款', function () {
@@ -355,7 +355,7 @@
             });
         })
     });
-    $(document).on('tap', '.receive_order', function () {
+    $(document).on('click', '.receive_order', function () {
         //美女接收订单
         var orderid = $(this).data('orderid');
         $.util.ajax({
@@ -370,7 +370,7 @@
             }
         });
     });
-    $(document).on('tap', '.refuse_status_3', function () {
+    $(document).on('click', '.refuse_status_3', function () {
         //状态3时的拒绝接单 和 取消订单
         var orderid = $(this).data('orderid');
         $.util.confirm('确定要取消订单吗?', '取消订单后，预约金将退回到您的账户中，但会影响您在美女中的排名，是否继续？', function () {
@@ -386,7 +386,7 @@
             });
         });
     });
-    $(document).on('tap', '.refuse_status_7', function () {
+    $(document).on('click', '.refuse_status_7', function () {
         //状态7时 女方取消订单
         var orderid = $(this).data('orderid');
         $.util.confirm('确定要取消订单吗?', '将会扣除10%的约单金额作为惩罚。', function () {
@@ -402,7 +402,7 @@
             });
         });
     });
-    $(document).on('tap', '.m_refuse_status_10', function () {
+    $(document).on('click', '.m_refuse_status_10', function () {
         //状态10时 男方取消订单
         var orderid = $(this).data('orderid');
         var stime = $(this).data('stime');
@@ -426,7 +426,7 @@
             });
         });
     });
-    $(document).on('tap', '.w_refuse_status_10', function () {
+    $(document).on('click', '.w_refuse_status_10', function () {
         //状态10时 女方取消订单
         var orderid = $(this).data('orderid');
         $.util.confirm('确定要取消订单吗?', '将会扣除20%的约单金额作为惩罚。', function () {
@@ -442,7 +442,7 @@
             })
         })
     });
-    $(document).on('tap', '.go_order', function () {
+    $(document).on('click', '.go_order', function () {
         //状态10时 女方取消订单
         var orderid = $(this).data('orderid');
         $.util.ajax({
@@ -456,7 +456,7 @@
             }
         })
     });
-    $('.date_list_header div').on('tap', function () {
+    $('.date_list_header div').on('click', function () {
         //tap切换
         curpage = 1;
         query = $(this).data('query');
