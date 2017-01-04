@@ -340,11 +340,12 @@ class DateOrderController extends AppController
      * @return type
      */
     public function findPlace($id,$page){
+        $tag = $this->request->query('tag');
         $SkillTable = TableRegistry::get('Skill');
         $skill = $SkillTable->get($id);
         $query = $skill->q_key;
         $this->loadComponent('Bdmap');
-        $places = $this->Bdmap->placeSearchNearBy($query, $this->coord,$page);
+        $places = $this->Bdmap->placeSearchNearBy($query, $this->coord,$page,$tag);
         return $this->Util->ajaxReturn(['places'=>$places]);
     }
     

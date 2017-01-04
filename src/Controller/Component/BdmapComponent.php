@@ -37,27 +37,28 @@ class BdmapComponent extends Component {
         $this->ak = $conf['mapkey'];
     }
 
+    //http://api.map.baidu.com/place/v2/search?ak=tWrZdNVPFi5kZDxTnErP9VWq&filter=&location=23.120589%2C113.331059&mcode=com.juhui.yiqi&output=json&page_num=0&page_size=5&query=%E7%BD%91%E5%90%A7&radius=200000000&region=%E5%B9%BF%E5%B7%9E&scope=2&tag=%E6%B1%9F
     //http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-placeapi
     //http://api.map.baidu.com/place/v2/search?query=银行&location=39.915,116.404&radius=2000&output=xml&ak={您的密钥}
     public function placeSearchNearBy($query, $location, $page_num = null, $tag = null, $scope = null, $radius = 10000) {
         $api_url = '/place/v2/search?';
         $location = $this->formatCoord($location);
         $params = [
-            'query' => $query,
-            'location' => $location,
-            'radius' => $radius,
-            'output' => 'json',
-            'coord_type' => $this->coord_type,
             'ak' => $this->ak,
+            'location' => $location,
+            'coord_type' => $this->coord_type,
+            'output' => 'json',
+            'radius' => $radius,
             'page_num' => $this->page_num,
             'page_size' => $this->page_size,
+            'query' => $query,
             'scope' => $this->scope
         ];
         if ($tag) {
             $params['tag'] = $tag;
         }
         if ($page_num) {
-            $params['page_num'] = $page_num;
+            $params['page_num'] = $page_num-1;
         }
         if ($scope) {
             $params['scope'] = $scope;
