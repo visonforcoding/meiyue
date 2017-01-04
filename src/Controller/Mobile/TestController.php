@@ -37,6 +37,12 @@ class TestController extends AppController {
         exit();
         //debug(\Cake\Core\Configure::read('Redis.default'));
     }
+    
+    public function testTime(){
+        $time = Time::now();
+        debug($time);
+        debug($time->day);exit();
+    }
 
     public function getIm(){
         

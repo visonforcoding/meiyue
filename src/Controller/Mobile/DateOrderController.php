@@ -982,13 +982,16 @@ class DateOrderController extends AppController
              }
         }else{
             $refuse_msg = '将会扣除约单20%的美币作为惩罚';
-        }       
+        }
+        $start_time = clone $order->start_time;
+        $expire_time = $start_time->addHours(24)->i18nFormat('M月d日H时');
         $this->set([
             'order'=>$order,
             'user'=>  $this->user,
             'pageTitle'=>'订单详情',
             'refuse_msg'=>$refuse_msg,
-            'lasth'=>$lasth
+            'lasth'=>$lasth,
+            'expire_time'=>$expire_time
         ]);                      
         
     }
