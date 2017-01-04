@@ -746,12 +746,12 @@ class DateOrderController extends AppController
                 $w_remark = '男士在接受订单后约会时间2小时之内取消订单退回70%约单金';
                  //返还男士30%约单价格
                 $m_pre_money = $dateorder->buyer->money;
-                $m_amount = 0.7*$dateorder->amount;
+                $m_amount = 0.3*$dateorder->amount;
                 $dateorder->buyer->money = $dateorder->buyer->money+$m_amount;
                 $m_after_amount = $dateorder->buyer->money;
                 $m_income = 1;
                 //返还女士70%的约单价格
-                $w_amount = 0.3*$dateorder->amount;
+                $w_amount = 0.7*$dateorder->amount;
                 $w_pre_amount = $dateorder->dater->money;
                 $dateorder->dater->money = $dateorder->dater->money-$w_amount;
                 $w_after_amount = $dateorder->dater->money;
@@ -850,6 +850,7 @@ class DateOrderController extends AppController
                 ,'UserSkill.Skill'
             ]
         ]);
+               
         if($this->user->gender==2){
             $order->status = 13;
             if($DateorderTable->save($order)){
@@ -859,6 +860,9 @@ class DateOrderController extends AppController
                 return $this->Util->ajaxReturn(true,'成功接受');
             }
         }else{
+            if($order->start_time > new \Cake\I18n\Date()){
+                return $this->Util->ajaxReturn(false,'还未到达约会时间不可进行此操作');
+            }    
             //男
             $order->status = 15; //订单完成
             //女方收款
