@@ -19,7 +19,7 @@
             <time class="smalldes">{{datetime}}</time>
         </div>
         <div class="r-btn flex">
-            <div class="focus">关注</div>
+            <div class="focus clickable">关注</div>
             <div data-accid="{{to}}" class="del clickable">删除</div>
         </div>
     </li>
@@ -71,7 +71,7 @@ var account = LEMON.db.get('im_accid');
 var token = LEMON.db.get('im_token');
 var nim = NIM.getInstance({
     debug: true,
-    appKey: '<?=$imkey?>',
+    appKey: '<?= $imkey ?>',
     account: account,
     token: token,
     onconnect: onConnect,
@@ -140,9 +140,9 @@ function onUpdateSession(session) {
     } else {
         //旧会话 新消息
         $obj = $('#chat-' + newSess);
-        if(!session.lastMsg.text){
+        if (!session.lastMsg.text) {
             var content = JSON.parse(session.lastMsg.content);
-            switch(content.type){
+            switch (content.type) {
                 case 5:
                     session.lastMsg.text = '[约单]';
                     break;
@@ -184,8 +184,27 @@ $(document).on('click', '.user', function () {
     LEMON.event.imTalk(param);
     setRead(accid);
 });
+$(document).on('click', '.focus', function () {
+    //关注
+     var user_id = $(this).data('id');
+     var obj = $(this);
+    $.util.ajax({
+        url: '/user/follow',
+        data: {id: user_id},
+        func: function (res) {
+            if (res.status) {
+                if(res.action=='focus'){
+                    obj.text('取消关注');
+                }else{
+                    obj.text('关注');
+                }
+            }
+            $.util.alert(res.msg);
+        }
+    })
+});
 
-$(document).on('click','.del',function(){
+$(document).on('click', '.del', function () {
     //删除会话
     var id = $(this).data('accid');
     setRead(id);
@@ -193,8 +212,8 @@ $(document).on('click','.del',function(){
         scene: 'p2p',
         to: id,
         done: function (error, obj) {
-            if(!error){
-              $('#chat-' + id).addClass('remove')
+            if (!error) {
+                $('#chat-' + id).addClass('remove')
             }
         }
     });
@@ -223,15 +242,16 @@ function getRender(sessions, res) {
     return rendered;
 }
 
-function getUnread (id, num){
-    var total= LEMON.db.get('num'+id) || 0;
-    if(num) total++;
-    LEMON.db.set('num'+id, total);
+function getUnread(id, num) {
+    var total = LEMON.db.get('num' + id) || 0;
+    if (num)
+        total++;
+    LEMON.db.set('num' + id, total);
     return total;
 }
-function setRead (id){
+function setRead(id) {
     backUnread[id] = 0;
-    LEMON.db.set('num'+id, 0);
+    LEMON.db.set('num' + id, 0);
     $('#chat-' + id).find('.num').html(0).hide();
 }
 

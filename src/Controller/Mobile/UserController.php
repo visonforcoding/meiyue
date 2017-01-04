@@ -607,7 +607,7 @@ class UserController extends AppController {
                 if (!$transRes) {
                     return $this->Util->ajaxReturn(false, '取消关注失败');
                 } else {
-                    return $this->Util->ajaxReturn(true, '取消关注成功');
+                    return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'取消关注成功','action'=>'unfocus']);
                 }
             } else {
                 //查看是否被该用户关注过
@@ -630,7 +630,7 @@ class UserController extends AppController {
                 } else {
                     $newfans->type = 1;
                     if (!$FansTable->save($newfans)) {
-                        return $this->Util->ajaxReturn(true, '关注失败');
+                        return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'关注成功','action'=>'focus']);
                     }
                 }
                 //发送一条关注消息给被关注者

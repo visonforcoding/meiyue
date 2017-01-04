@@ -59,8 +59,19 @@
     });
     LEMON.sys.back('/user/index');
 
-    $("#publish-date-info").on('click', function(){
-        location.href = "/date/add";
+    $('#publish-date-info').bind('click',function(event){
+        event.preventDefault();
+        var url = $(this).attr('href');
+        $.util.ajax({
+            url:'/userc/check-user-status',
+            func:function(res){
+                if(!res.status){
+                    $.util.alert(res.msg);
+                }else{
+                    document.location.href = "/date/add";
+                }
+            }
+        })
     });
 
     //点击tab的切换效果
