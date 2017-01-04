@@ -371,9 +371,9 @@
     var refuse_msg = '<?= $refuse_msg ?>';
     $(document).on('tap', '#refuse_status_3', function () {
         //状态3时的拒绝接单 和 取消订单
-        $.util.confirm('确定要取消订单吗?', '将会扣除10%的约单金额作为惩罚。', function () {
+        $.util.confirm('确定要取消订单吗?', '取消订单后，预约金将退回到您的账户中，但会影响您在美女中的排名，是否继续？', function () {
             $.util.ajax({
-                url: '/date-order/cancel-date-order-7',
+                url: '/date-order/cancel-date-order-3',
                 data: {order_id: orderid},
                 func: function (res) {
                     $.util.alert(res.msg);

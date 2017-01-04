@@ -362,21 +362,23 @@
                     //refresh();
                 }, 300);
             }
-        })
+        });
     });
     $(document).on('tap', '.refuse_status_3', function () {
         //状态3时的拒绝接单 和 取消订单
         var orderid = $(this).data('orderid');
-        $.util.ajax({
-            url: '/date-order/cancel-date-order-3',
-            data: {order_id: orderid},
-            func: function (res) {
-                $.util.alert(res.msg);
-                setTimeout(function () {
-                    refresh();
-                }, 300);
-            }
-        })
+        $.util.confirm('确定要取消订单吗?', '取消订单后，预约金将退回到您的账户中，但会影响您在美女中的排名，是否继续？', function () {
+            $.util.ajax({
+                url: '/date-order/cancel-date-order-3',
+                data: {order_id: orderid},
+                func: function (res) {
+                    $.util.alert(res.msg);
+                    setTimeout(function () {
+                        refresh();
+                    }, 300);
+                }
+            });
+        });
     });
     $(document).on('tap', '.refuse_status_7', function () {
         //状态7时 女方取消订单
@@ -391,8 +393,8 @@
                         refresh();
                     }, 300);
                 }
-            })
-        })
+            });
+        });
     });
     $(document).on('tap', '.m_refuse_status_10', function () {
         //状态10时 男方取消订单
