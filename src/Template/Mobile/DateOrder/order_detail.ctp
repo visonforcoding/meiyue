@@ -76,8 +76,14 @@
                         <h3 class="color_y tips">超时未支付尾款，自动关闭</h3>
                     <?php endif; ?>
                     <?php if ($order->status == 10): ?>
-                        等待对方赴约中
-                        <h3 class="color_y tips">请提前预定好场地</h3>
+                        <?php if ($order->start_time < date('Y-m-d H:i:s')): ?>
+                            赴约中
+                            <h3 class="color_y tips">
+                                系统将于<?= $expire_time ?>自动确认</h3>
+                        <?php else: ?>
+                            等待对方赴约中
+                            <h3 class="color_y tips">请提前预定好场地</h3>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <?php if ($order->status == 11): ?>
                         订单关闭
@@ -128,8 +134,12 @@
                         <h3 class="color_y tips">对方超时未支付尾款</h3>
                     <?php endif; ?>
                     <?php if ($order->status == 10): ?>
-                        约单已生成
-                        <h3 class="color_y tips">请及时到达约会地点</h3>
+                        <?php if ($order->start_time < date('Y-m-d H:i:s')): ?>
+                            赴约中
+                        <?php else: ?>
+                            约单已生成
+                            <h3 class="color_y tips">请及时到达约会地点</h3>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <?php if ($order->status == 11): ?>
                         订单关闭
@@ -252,7 +262,7 @@
     <?php if ($order->status == 10): ?>
         <?php if ($order->start_time < date('Y-m-d H:i:s')): ?>
             <div class="potion_footer flex flex_justify">
-                <span id="refuse_status_10" class="footerbtn cancel">取消约单</span>
+                <span id="complain" class="footerbtn cancel complain">投诉</span>
                 <span id="godate" class="footerbtn gopay">赴约成功</span>
             </div>
         <?php else: ?>
@@ -317,9 +327,10 @@
     <?php endif; ?>
     <?php if ($order->status == 10): ?>
         <div class="potion_footer flex flex_justify">
-            <span id="remove_order" class="footerbtn cancel">删除订单</span>
-            <?php if ($order->start_time > date('Y-m-d H:i:s')): ?>
-                <span  id="godate" class="footerbtn gopay">到达约会目的地</span>
+            <?php if ($order->start_time < date('Y-m-d H:i:s')): ?>
+                <span  id="godate" class="identify_footer_potion">到达约会目的地</span>
+            <?php else: ?>
+                <span id="refuse_status_10" class="identify_dark_potion">取消订单</span>
             <?php endif; ?>
         </div>
     <?php endif; ?>
@@ -384,19 +395,19 @@
             })
         })
     });
-    
+
     $(document).on('tap', '#complain', function () {
         //投诉 
         $('#complain-box').removeClass('hide');
     });
-    $('#tel-complain').on('click',function(){
-       //拨电话
-       LEMON.event.tel('0755-33580266');
-       $('#complain-box').addClass('hide');
+    $('#tel-complain').on('click', function () {
+        //拨电话
+        LEMON.event.tel('0755-33580266');
+        $('#complain-box').addClass('hide');
     });
-    $('#cancel-complain').on('click',function(){
+    $('#cancel-complain').on('click', function () {
         //取消
-       $('#complain-box').addClass('hide');
+        $('#complain-box').addClass('hide');
     });
     $(document).on('tap', '#refuse_status_10', function () {
         //状态10时 取消订单
@@ -476,7 +487,7 @@
             }
         });
     });
-    
+
     $(document).on('tap', '#remove_order', function () {
         //删除订单
         $.util.confirm('提示', '确定删除订单么', function () {
