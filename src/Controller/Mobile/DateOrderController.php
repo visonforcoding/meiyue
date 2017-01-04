@@ -737,7 +737,7 @@ class DateOrderController extends AppController
                 //返还女士30%的约单价格
                 $w_amount = 0.3*$dateorder->amount;
                 $w_pre_amount = $dateorder->dater->money;
-                $dateorder->dater->money = $dateorder->dater->money-$w_amount;
+                $dateorder->dater->money = $dateorder->dater->money+$w_amount;
                 $w_after_amount = $dateorder->dater->money;
                 $w_income = 1;
                
@@ -753,7 +753,7 @@ class DateOrderController extends AppController
                 //返还女士70%的约单价格
                 $w_amount = 0.7*$dateorder->amount;
                 $w_pre_amount = $dateorder->dater->money;
-                $dateorder->dater->money = $dateorder->dater->money-$w_amount;
+                $dateorder->dater->money = $dateorder->dater->money+$w_amount;
                 $w_after_amount = $dateorder->dater->money;
                 $w_income = 1;
             }
