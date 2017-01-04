@@ -50,7 +50,7 @@
                     $.util.alert('资料上传中，请等待上传结果……');
                     setTimeout(function() {
                         window.location.href='/userc/my-tracle';
-                    }, 1000)
+                    }, 2000)
                 }
             });
         }

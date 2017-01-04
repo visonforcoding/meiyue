@@ -13,7 +13,7 @@
         <!--示例-->
         <div class="up_identify_box bgff">
             <div class="inner">
-                <div  class="fact_identify" id="add_tracle">
+                <div class="fact_identify" id="add_tracle">
                     <dl class="Idcard" data-id="up">
                         <dt><img src="/mobile/images/upimg.png" /></dt>
                     </dl>
@@ -47,10 +47,11 @@
                     $.util.alert('资料上传中，请等待上传结果……');
                     setTimeout(function() {
                         window.location.href='/userc/my-tracle';
-                    }, 1000)
+                    }, 2000)
                 }
             });
         }
+        return;
     }
 </script>
 <?= $this->end('script'); ?>
