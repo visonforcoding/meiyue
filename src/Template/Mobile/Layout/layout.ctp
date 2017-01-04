@@ -23,7 +23,7 @@
                 .footer{display: none;}
                 .navbar,.raper{top:0;}
                 .find_list_box{padding-top:1.4rem;}
-                .choose_parmes{padding-top:0;margin-top: 0}
+                .choose_parmes{padding-top:0;margin-top:0.3rem}
 
             </style>
         </script>
