@@ -429,9 +429,6 @@
     });
 
     function submitForm() {
-        var form = $('form');
-        console.log(form.serialize());
-        return;
         <?php if($user->gender == 2): ?>
         if (($('#birthday').val()).length == 0) {
             $.util.alert('请填写正确的出生日期');
