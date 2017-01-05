@@ -74,7 +74,9 @@
     </div>
 </div>
 <div style="height:62px;"></div>
-<?php if ($user->auth_status == UserStatus::NOPASS): ?>
+<?php if (!$user->auth_video): ?>
+    <a id="submit" class="identify_footer_potion">提交审核</a>
+<?php elseif ($user->auth_status == UserStatus::NOPASS): ?>
     <a id="submit" class="identify_footer_potion">重新审核</a>
 <?php endif; ?>
 <?= $this->start('script'); ?>
