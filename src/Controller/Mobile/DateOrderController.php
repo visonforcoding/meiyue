@@ -860,7 +860,7 @@ class DateOrderController extends AppController
                 return $this->Util->ajaxReturn(true,'成功接受');
             }
         }else{
-            if($order->start_time > new \Cake\I18n\Date()){
+            if($order->start_time > new \Cake\I18n\Time()){
                 return $this->Util->ajaxReturn(false,'还未到达约会时间不可进行此操作');
             }    
             //男

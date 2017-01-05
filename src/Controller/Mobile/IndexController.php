@@ -63,6 +63,7 @@ class IndexController extends AppController {
         $query = $UserTable->find()->select(['id','avatar','nick','recharge'])
                               ->where(['enabled'=>1,'gender'=>1])
                               ->orderDesc('recharge')
+                              ->orderAsc('User.id')
                               ->offset(0)
                               ->limit(3);
         if($this->user){
@@ -89,7 +90,9 @@ class IndexController extends AppController {
         $query = $UserTable->find()->select(['id','avatar','nick','recharge'])
                           ->where(['enabled'=>1,'gender'=>1])
                           ->orderDesc('recharge')
+                          ->orderAsc('User.id')
                           ->limit(10);
+        $query->distinct(['User.id']);
         if($this->user){
             $user_id = $this->user->id;
             $query->contain([
@@ -98,11 +101,13 @@ class IndexController extends AppController {
                             }
                         ]);
         }
-        if($page=1){
+        \Cake\Log\Log::debug($page,'devlog');
+        if ($page == 1) {
             $query->offset(3);
         }else{
             $query->page($page);
-        }                                
+        }
+        \Cake\Log\Log::debug($query,'devlog');
         $richs = $query->toArray();                
         return $this->Util->ajaxReturn(['richs'=>$richs]);                            
     }
