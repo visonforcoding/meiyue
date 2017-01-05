@@ -8,7 +8,7 @@
 <style>
     .footerbtn.noactive{
         border-left: 1px solid #dadada;
-        color:#bbb;
+        color:#dadada;
     }
 </style>
 <div class="wraper">
