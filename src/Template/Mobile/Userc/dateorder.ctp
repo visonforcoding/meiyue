@@ -424,7 +424,7 @@
         var orderid = $(this).data('orderid');
         var stime = $(this).data('stime');
         var text;
-        if ((new Date(stime) - new Date()) > 2 * 60 * 60*1000) {
+        if ((new Date($.util.date2ios(stime)) - new Date()) > 2 * 60 * 60*1000) {
             text = '平台将只退回约单金额的70%,剩余的30%将打至美女账户作为补偿，是否继续？';
         } else {
             text = '平台将只退回约单金额的30%,剩余的70%将打至美女账户作为补偿，是否继续？';
@@ -523,7 +523,7 @@
                         data.orders[i]['m_timeout_payall'] = true;  //受邀者超时未付尾款
                         break;
                     case 10:
-                        if (new Date() > new Date(n.start_time)) {
+                        if (new Date() > new Date($.util.date2ios(n.start_time))) {
                             data.orders[i]['finsh_payall_begin'] = true;  //付了尾款并且到了约会时间
                         } else {
                             data.orders[i]['finsh_payall'] = true;  //受邀者付尾款
