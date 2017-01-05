@@ -25,7 +25,7 @@
             <label class="col-md-2 control-label">跳转链接</label>
             <div class="col-md-8">
                 <?php
-                echo $this->Form->input('to_url', ['label' => false, 'class' => 'form-control', 'type' => 'url', 'required' => false]);
+                echo $this->Form->input('to_url', ['label' => false, 'class' => 'form-control', 'required' => false]);
                 ?>
             </div>
         </div>
@@ -34,7 +34,7 @@
             <div class="col-md-8">
                 <?php
                 $sizes = MsgpushType::getToWho();
-                echo $this->Form->select('towho', $sizes, ['default' => MsgpushType::CUSTOM, 'class' => 'form-control']);
+                echo $this->Form->select('towho', $sizes, ['default' => MsgpushType::TO_CUSTOM, 'class' => 'form-control']);
                 ?>
             </div>
         </div>

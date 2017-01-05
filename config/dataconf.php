@@ -44,9 +44,9 @@ return [
         'alipay_public_key'=>  dirname(__FILE__).'/alipay/key/alipay_public_key.pem',
     ],
     'umeng_android' => [
-        'AppKey' => '57ba6b60e0f55ab9d9000c6b',
-        'AppMasterSecret' => '3hp1turhor6aedcp2wbbgwzbystkhybl',
-        'UmengMessageSecret' => 'b0ca7c93038671e440142e5263768d8e',
+        'AppKey' => '58637f708630f54f66001a42',
+        'AppMasterSecret' => 'g1qwkqscsbhmk8e3wjfqtetiatyjhwac',
+        'UmengMessageSecret' => '67bcef177bfa94db3dd30e89d0e27fb0',
     ],
     'umeng_ios' => [
         'AppKey' => '58637b8307fe654cea001c93',
