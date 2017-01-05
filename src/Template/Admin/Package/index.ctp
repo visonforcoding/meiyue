@@ -55,6 +55,7 @@
             mtype: "POST",
             colNames:
                 ['名称',
+                 '荣誉称号',
                  '类型',
                  '聊天名额',
                  '查看动态名额',
@@ -69,6 +70,7 @@
                 ],
             colModel: [
                 {name:'title',editable:true,align:'center'},
+                {name:'honour_name',editable:true,align:'center'},
                 {name:'type',editable:true,align:'center'},
                 {
                     name:'chat_num',

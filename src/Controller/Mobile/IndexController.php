@@ -197,7 +197,13 @@ class IndexController extends AppController {
                 'Fans',
                 'Follows',
                 'Upacks' => function($q) {
-                    return $q->orderDesc('create_time')->limit(1);
+                    return $q->where([
+                        'OR' => [
+                            'rest_chat >' => 0,
+                            'rest_browse >' =>0
+                        ],
+                        'deadline >=' => new Time()
+                    ])->orderDesc('cost')->limit(1);
                 },
                 'Tags' => function($q) {
                     return $q->select(['name'])->where(['parent_id !=' => 0]);
@@ -208,6 +214,12 @@ class IndexController extends AppController {
                 if(count($row['upacks'])) {
                     $row->upakname = $row['upacks'][0]['title'];
                 }
+                $row['upackname'] = null;
+                if(count($row['upacks'])) {
+                    $upk = $row['upacks'][0];
+                    $row['upackname'] = $upk->honour_name;
+                }
+                $row['upacks'] = [];
                 $row->facount = count($row->fans);
                 $row->focount = count($row->follows);
                 return $row;

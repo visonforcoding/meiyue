@@ -102,8 +102,8 @@
                 <img src="{{user.avatar}}">
             </span>
                 <h3>
-                <span class="place_name"><i class="name">{{user.nick}}</i> <i class="vip">VIP 5</i><i
-                        class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
+                <span class="place_name"><i class="name">{{user.nick}}</i><!-- <i class="vip">VIP 5</i><i
+                        class="cup"><img src="/mobile/images/cup.jpg"/></i>--></span>
                 <span class="place_number color_gray"><em class="color_y"><i
                             class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
                             本周魅力值：<i class="color_y max-num">{{total}}</i>
@@ -124,7 +124,7 @@
 
 <script id="mytop-list-tpl" type="text/html">
     {{#mydata}}
-    <li class="flex flex_justify" onclick="window.location.href='/index/homepage/{{user.id}}'">
+    <li class="flex flex_justify">
         <div class="flex">
             <span class="place silver">{{index}}</span>
             <div class="place_info">
@@ -132,8 +132,8 @@
                 <img src="{{user.avatar}}">
             </span>
                 <h3>
-                <span class="place_name"><i class="name">{{user.nick}}</i> <i class="vip">VIP 5</i><i
-                        class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
+                <span class="place_name"><i class="name">{{user.nick}}</i><!-- <i class="vip">VIP 5</i><i
+                        class="cup"><img src="/mobile/images/cup.jpg"/></i>--></span>
                 <span class="place_number color_gray"><em class="color_y"><i
                             class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
                             本周魅力值：<i class="color_y max-num">{{total}}</i>
@@ -162,7 +162,7 @@
                         <img src="{{avatar}}"/>
                     </span>
                     <h3>
-                        <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip">VIP普通</span></div>
+                        <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}</div>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
                 </div>

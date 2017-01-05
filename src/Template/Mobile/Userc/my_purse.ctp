@@ -92,10 +92,9 @@
 
 <script>
 
-    /*$('.loader-more').on('tap', function() {
+    $('.loader-more').on('tap', function() {
         window.location.href='/userc/purse-detail';
-    });*/
-
+    });
 
     function duihuan() {
         <?php if($status[0] == 1): ?>

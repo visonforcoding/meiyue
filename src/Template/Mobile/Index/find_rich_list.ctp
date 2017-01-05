@@ -132,6 +132,13 @@ function followIt(id, $obj) {
         url: '/user/follow',
         data: {id: id},
         func: function (res) {
+            if(res.status) {
+                if($obj.find('i').hasClass('activeico')) {
+                    $.util.alert('取消点赞成功');
+                } esle {
+                    $.util.alert('点赞成功');
+                }
+            }
             $obj.find('i').toggleClass('activeico');
             $.util.alert(res.msg);
         }

@@ -88,7 +88,7 @@ class UsercController extends AppController
         $likes = $UserFansTable->find()
             ->hydrate(false)
             ->contain(['Follower' => function ($q) {
-                return $q->select(['id', 'birthday', 'avatar', 'nick', 'charm']);
+                return $q->select(['id', 'birthday', 'avatar', 'nick', 'charm', 'gender', 'recharge']);
             }])
             ->where(['user_id' => $this->user->id])
             ->limit(intval($limit))
@@ -97,6 +97,9 @@ class UsercController extends AppController
                 return $items->map(function ($item) {
                     $item['follower']['avatar'] = createImg($item['follower']['avatar']) . '?w=90&h=90&fit=stretch';
                     $item['follower']['age'] = isset($item['follower']['birthday']) ? getAge($item['follower']['birthday']) : 'xx';
+                    if($item['follower']['gender'] == 1) {
+                        $item['follower']['charm'] = $item['follower']['recharge'];
+                    }
                     return $item;
                 });
             })

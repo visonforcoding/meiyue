@@ -394,6 +394,7 @@ class BusinessComponent extends Component
             'cost' => $pack->price,
             'vir_money' => $pack->vir_money,
             'deadline' => $deadline,
+            'honour_name' => $pack->honour_name,
         ]);
         $user = $order->user;
         $transRes = $userPackTb

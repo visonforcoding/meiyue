@@ -15,7 +15,7 @@
                         <div class='identify-user-info'>
                         <h3 class='flex'>
                             <span>
-                                <?= $user->nick ?></span><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><?php if($user->recharge): ?><span class="diamonds"><img src="/mobile/images/zs.png" class="responseimg"/></span><?php endif; ?><?php if($pack): ?><span class="highter-vip">VIP普通</span><?php endif; ?> </h3>
+                                <?= $user->nick ?></span><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><?php if($user->recharge): ?><span class="diamonds"><img src="/mobile/images/zs.png" class="responseimg"/></span><?php endif; ?><?php if(isset($pack)&&isset($pack->upackname)): ?><span class="highter-vip"><?= $pack->upackname; ?></span><?php endif; ?> </h3>
                                
                             <?php if($user->id_status == UserStatus::PASS): ?>
                                 <div class="bottom-btn">
@@ -127,14 +127,14 @@
                     </div>
                 </a>
             </li>
-           <li>
+           <!--<li>
                 <a href="/userc/be-agent"  class="home_items">
                     <div class="home_list_l_info flex"><i class="iconfont ico">&#xe69b;</i><span class="itemsname">我要成为经纪人</span></div>
                     <div class="home_list_r_info">
                         <i class="iconfont">&#xe605;</i>
                     </div>
                 </a>
-            </li>
+            </li>-->
             <li>
                 <a href="/userc/install"  class="home_items">
                     <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe6bc;</i><span class="itemsname">设置</span></div>
