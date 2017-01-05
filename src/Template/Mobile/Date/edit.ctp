@@ -428,6 +428,7 @@
         if (location.hash == '#choosePlace') {
             if (!skill_id) {
                 $.util.alert('请先选择约会主题');
+                location.hash = '#this';
                 return;
             }
             curpage = 1;

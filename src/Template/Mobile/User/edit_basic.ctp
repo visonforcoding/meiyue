@@ -393,6 +393,9 @@
         if (v.length > 5) {
             $(this).val(v.substr(0, 5));
         }
+    });
+    $('#nick').blur(function () {
+        var v = $(this).val();
         if(v.length == 0) {
             $(this).val(originNick);
         }

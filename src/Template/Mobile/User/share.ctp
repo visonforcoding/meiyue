@@ -5,11 +5,9 @@
     </div>
 </header> -->
 <div class="wraper">
-    <?php if(isset($user) && $user->has_invs): ?>
-        <div class="share_sucess_tips">
-            <a href="/user/share-list" class="ablock">已成功邀请的人<i class="iconfont fr">&#xe605;</i></a>
-        </div>
-    <?php endif; ?>
+    <div class="share_sucess_tips">
+        <a href="/user/share-list" class="ablock">已成功邀请的人<i class="iconfont fr">&#xe605;</i></a>
+    </div>
     <div class="share_items_list <?php if(isset($user) && $user->has_invs): ?>mt20<?php endif; ?>">
         <div class="inner">
             <h3 class="title">方式一：分享链接</h3>
@@ -51,12 +49,7 @@
     function shareBanner() {
         window.shareConfig.link = '<?= getHost().'/user/login'; ?><?= isset($user)?'?ivc='.$user->invit_code:'';?>';
         window.shareConfig.title = '我刚注册成为【美约APP】用户，你也一起来加入吧！';
-        <?php if(isset($user) && ($user->gender == 1)): ?>
-            var share_desc = '美约APP，中国首个互联网高端社交与明星孵化平台，全网实名信息认证，高净值人士的社交选择！';
-        <?php else: ?>
-            var share_desc = '美约APP，中国首个互联网高端社交与明星孵化平台，全网实名信息认证，优质资源打造最强网红，让你的颜值和才华成就你的事业！';
-        <?php endif; ?>
-        share_desc && (window.shareConfig.desc = share_desc);
+        window.shareConfig.desc = '美约APP，全网实名信息认证，同城真实高端社交新选择！';
         LEMON.show.shareBanner();
     }
 </script>

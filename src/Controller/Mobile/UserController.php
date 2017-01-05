@@ -6,6 +6,7 @@ use App\Controller\Mobile\AppController;
 use App\Model\Table\FlowTable;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Database\Type\FloatType;
+use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 use Cake\Controller\Controller;
 use PackType;
@@ -40,14 +41,22 @@ class UserController extends AppController {
             return $this->render('nologin');
         }
         $template = 'index';
+        $pack = null;
         if ($this->user->gender == 1) {
             $template = 'home_m';
+            $packTb = TableRegistry::get('UserPackage');
+            $pack = $packTb->find()->where([
+                'OR' => [
+                    'rest_chat >' => 0,
+                    'rest_browse >' =>0
+                ],
+                'deadline >=' => new Time()
+            ])->orderDesc('cost')->limit(1);
         }
         $fanTb = TableRegistry::get('UserFans');
         $fans = $fanTb->find()->where(['following_id' => $this->user->id])->count();
         $followers = $fanTb->find()->where(['user_id' => $this->user->id])->count();
-        $packTb = TableRegistry::get('UserPackage');
-        $pack = $packTb->find()->where(['user_id' => $this->user->id])->orderDesc('create_time')->first();
+
         $this->set([
             'facount' => $fans,
             'focount' => $followers,
@@ -916,14 +925,13 @@ class UserController extends AppController {
                 $this->user->invit_code = $this->Business->createInviteCode($this->user->id);
                 $this->User->save($this->user);
             }
-
-            $invsTb = TableRegistry::get('Inviter');
+            /*$invsTb = TableRegistry::get('Inviter');
             $invs = $invsTb->find()->where(['inviter_id' => $this->user->id, 'status' => 1])->count();
             if($invs) {
                 $this->user->has_invs = true;
             } else {
                 $this->user->has_invs = false;
-            }
+            }*/
         }
         $this->set([
             'user' => $this->user,

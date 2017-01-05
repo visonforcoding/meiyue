@@ -574,6 +574,15 @@ class ActivityController extends AppController
             $i = 1;
             $richs = $userTb->find()
                 ->select(['recharge', 'consumed', 'nick', 'id', 'avatar'])
+                ->contain(['Upacks' => function($q) {
+                    return $q->where([
+                                'OR' => [
+                                    'rest_chat >' => 0,
+                                    'rest_browse >' =>0
+                                ],
+                                'deadline >=' => new Time()
+                            ])->orderDesc('cost')->limit(1);
+                }])
                 ->where(['recharge >' => 0, 'gender' => 1])
                 ->orderDesc('recharge')
                 ->limit(99)
@@ -590,6 +599,12 @@ class ActivityController extends AppController
 
                     //判断我的性别
                     $row['ismale'] = true;
+                    $row['upackname'] = null;
+                    if(count($row['upacks'])) {
+                        $upk = $row['upacks'][0];
+                        $row['upackname'] = $upk->honour_name;
+                    }
+                    $row['upacks'] = [];
                     if (!$user || $user->gender == 2) {
                         $row['ismale'] = false;
                     }

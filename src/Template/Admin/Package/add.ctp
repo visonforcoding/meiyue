@@ -21,6 +21,22 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-md-2 control-label">荣誉称号</label>
+            <div class="col-md-8">
+                <?php
+                echo $this->Form->input(
+                    'honour_name',
+                    [
+                        'label' => false,
+                        'type' => 'text',
+                        'value' => '',
+                        'class' => 'form-control',
+                    ]
+                );
+                ?>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-md-2 control-label">套餐类型</label>
             <div class="col-md-8">
             <?php

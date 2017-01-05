@@ -26,11 +26,14 @@
         <span class="text">总共已赚取</span>
         <span class="number color_friends"><?= isset($total)?$total:0;?></span>
     </div>
-    <div class="share_num_list mt20">
-        <p class="alignright inner totalnum">共<?= isset($count)?$count:0?>人</p>
+    <div class="share_num_list mt20 empty_container">
+        <?php if($count > 0): ?><p class="alignright inner totalnum">共<?= $count?>人</p><?php endif; ?>
         <ul id="list-con" class="share_num_detail outerblock">
             <!--列表显示-->
         </ul>
+        <div class="empty-content mt160">
+            <p class="empty-tips">暂无成功邀请的人</p>
+        </div>
     </div>
 </div>
 <script>
@@ -65,6 +68,9 @@
     function calFunc(data) {
         if (data.datas) {
             var datas = data.datas;
+            if((data.datas).length) {
+                $('.empty-content').html('');
+            }
             for (key in datas) {
                 tmp = datas[key];
                 if(tmp['invited']['gender'] == 1) {

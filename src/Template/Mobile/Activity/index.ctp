@@ -134,8 +134,8 @@
                 <img src="{{user.avatar}}">
             </span>
                 <h3>
-                <span class="place_name"><i class="name">{{user.nick}}</i> <i class="rich-vip">VIP</i><i
-                        class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
+                <span class="place_name"><i class="name">{{user.nick}}</i><!-- <i class="rich-vip">VIP</i><i
+                        class="cup"><img src="/mobile/images/cup.jpg"/></i>--></span>
                 <span class="place_number color_gray"><em class="color_y"><i
                             class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
                             本周魅力值：<i class="color_y max-num">{{total}}</i>
@@ -165,8 +165,8 @@
                 <img src="{{user.avatar}}">
             </span>
                 <h3>
-                <span class="place_name"><i class="name">{{user.nick}}</i> <i class="rich-vip">VIP</i><i
-                        class="cup"><img src="/mobile/images/cup.jpg"/></i></span>
+                <span class="place_name"><i class="name">{{user.nick}}</i><!-- <i class="rich-vip">VIP</i><i
+                        class="cup"><img src="/mobile/images/cup.jpg"/></i>--></span>
                 <span class="place_number color_gray"><em class="color_y"><i
                             class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
                             本周魅力值：<i class="color_y max-num">{{total}}</i>
@@ -182,7 +182,7 @@
                 <div class="voted_place_info">
                     <span class="avatar"><img src="{{avatar}}"/></span>
                     <h3>
-                        <span class="voted_name"><i class='nick'>{{nick}}</i><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip" >VIP 普通</span></span>
+                        <span class="voted_name"><i class='nick'>{{nick}}</i><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}</span>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
                 </div>
@@ -208,7 +208,7 @@
                         <img src="{{avatar}}"/>
                     </span>
                     <h3>
-                        <span class="voted_name"><i class='nick'>{{nick}}</i><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip">VIP 普通</span></span>
+                        <span class="voted_name"><i class='nick'>{{nick}}</i><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}</span>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
                 </div>

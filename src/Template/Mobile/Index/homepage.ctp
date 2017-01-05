@@ -98,7 +98,7 @@
                     <li class="itms_list">
                         <div class="items flex flex_justify">
                             <span class="items_name">
-                                <i class="iconfont color_y">&#xe631;</i>
+                                <i class="iconfont color_y"><?= $user_skill->skill->class ?></i>
                                 <?= $user_skill->skill->name ?>
                             </span>
                             <div>
@@ -168,6 +168,14 @@
                 <span class="golook"><?= $user->hometown ?></span>
             </div>
         </li>
+        <?php endif; ?>
+        <?php if(trim($user->place)): ?>
+            <li>
+                <div class="items flex">
+                    <span class="seach_name">常出没地</span>
+                    <span class="golook"><?= $user->place ?></span>
+                </div>
+            </li>
         <?php endif; ?>
         <?php if($user->food): ?>
         <li>
@@ -296,9 +304,9 @@
 
     function shareBanner() {
         window.shareConfig.link = '<?= getHost().'/index/homepage/'.$user->id; ?><?= isset($loginer)?'?ivc='.$loginer->invit_code:'';?>';
-        window.shareConfig.title = '一个人宅家好无聊，想出去疯玩没人陪？';
+        window.shareConfig.title = '一人宅家好无聊，想去疯玩没人陪？';
         window.shareConfig.imgUrl = '<?= getHost().(isset($user)?$user->avatar:'/upload/ico/meiyue.png');?>';
-        var share_desc = '上美约APP，约K歌、约电影、约游戏，同城上万高颜值美女在线，期待与你相遇！';
+        var share_desc = '上美约APP，约K歌、美食、运动、工作，同城上万高颜值美女在线';
         share_desc && (window.shareConfig.desc = share_desc);
         LEMON.show.shareBanner();
     }
