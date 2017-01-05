@@ -83,6 +83,7 @@ class DateorderShell extends Shell {
                     //超过30分钟未支付  订单自动关闭
             \Cake\Log\Log::info('约单:'.$order->id.'超过30分钟未支付预约金,正在被自动处理','cron');
             $order->status = 2;
+            $order->close_time = date('Y-m-d H:i:s');
             $res = $DateorderTable->save($order);
             if($res){
                 dblog('dateorder','1条约单被执行状态1操作','dateorder_id:'.$order->id);
@@ -110,6 +111,7 @@ class DateorderShell extends Shell {
             //1.订单状态改变
             //2.退回预约金
             $order->status = 6;
+            $order->close_time = date('Y-m-d H:i:s');
             $m_pre_money = $order->buyer->money;
             $m_amount = $order->pre_pay;
             $order->buyer->money = $order->buyer->money+$order->pre_pay;
@@ -155,7 +157,8 @@ class DateorderShell extends Shell {
             //超过6小时 未支付尾款  预约金自动打到美女账户中 
             //1.订单状态改变
             //2.女方获得预约金
-            $order->status = 9;   //消费者超时未付尾款 
+            $order->status = 9;   //消费者超时未付尾款
+            $order->close_time = date('Y-m-d H:i:s');
             $w_pre_money = $order->dater->money;
             $w_amount = $order->pre_pay;
             $order->dater->money = $order->dater->money+$w_amount;
@@ -203,6 +206,7 @@ class DateorderShell extends Shell {
             //1.订单状态改变
             //2.女方获得约单金
             $order->status = 15;   //订单完成 
+            $order->close_time = date('Y-m-d H:i:s');
             $w_pre_money = $order->dater->money;
             $w_amount = $order->amount;
             $order->dater->money = $order->dater->money+$w_amount;

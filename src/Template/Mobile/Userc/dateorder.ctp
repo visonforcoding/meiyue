@@ -183,14 +183,14 @@
                 <?php if ($user->gender == 2): ?>
                     <h3 class="pay_desc color_y">交易成功</h3>
                     <div class="groupbtn">
-                        <span data-orderid="{{id}}" class="refuse clickable" >查看评价</span>
                         <span data-orderid="{{id}}" class="refuse remove_order clickable" >删除订单</span>
+                        <span data-orderid="{{id}}" class="refuse clickable" >查看评价</span>
                     </div>
                 <?php else: ?>
                     <h3 class="pay_desc color_y">交易成功</h3>
                     <div class="groupbtn">
-                        <a href="/date-order/appraise/{{id}}"><span data-orderid="{{id}}" class="orders appraise" >评价</span></a>
                         <span data-orderid="{{id}}" class="refuse remove_order clickable" >删除订单</span>
+                        <a href="/date-order/appraise/{{id}}"><span data-orderid="{{id}}" class="orders appraise" >评价</span></a>
                     </div>
                 <?php endif; ?>
                 {{/finish_order}}
@@ -455,8 +455,8 @@ $(document).on('click', '.w_refuse_status_10', function () {
                     refresh();
                 }, 300);
             }
-        })
-    })
+        });
+    });
 });
 $(document).on('click', '.go_order', function () {
     //赴约成功
