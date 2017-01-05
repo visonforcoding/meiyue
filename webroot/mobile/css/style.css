@@ -465,7 +465,7 @@ color:#fff; line-height: 20px;padding-right: .1rem;}
 /*筛选*/
 .choose_parmes{margin-top:1rem;background: #1a1713;width:100%;padding-top:20px;padding-bottom:20px;}
 .choose_parmes .height_left{display: block;width:20%;margin-top:10px;}
-.choose_parmes .height_left i{font-size: 8px;vertical-align: bottom;font-weight: normal;}
+.choose_parmes .height_left i{font-size: 12px;vertical-align: bottom;font-weight: normal;}
 .choose_parmes .scale{/*width:80%;*/}
 .choose_parmes .scale input{width:100%;}
 .choose_parmes input[type="range"] {/*background: rgba(56,48,36,1);*/background:#fff;border-radius: 15px;-webkit-appearance: none;height:6px;}
@@ -984,10 +984,10 @@ color:#999;padding:.1rem;}
 .footer_submit_btn{position: fixed;bottom:62px;right:.3rem;}
 .footer_submit_btn .submit_ico{display: block;width:60px;height:60px;border-radius: 50%;/*display:flex;align-items: center;justify-content: center;*/color:#fff;position:absolute;top:0;left:0;}
 .submit_ico_group{position:relative;width:60px;height:60px;border-radius: 50%;}
-.footer_submit_btn .submit_ico2,.footer_submit_btn .submit_ico3{font-size: 26px;color:#9ba3ac;background: #fff;box-shadow: 0 1px 2px rgba(0,0,0,.2);line-height: 58px;text-align:center;}
+.footer_submit_btn .submit_ico2,.footer_submit_btn .submit_ico3{font-size: 26px;color:#9ba3ac;background: #fff;box-shadow: 0 1px 2px rgba(0,0,0,.2);line-height: 60px;text-align:center;}
 .footer_submit_btn .submit_ico2 span,.footer_submit_btn .submit_ico3 span{height:26px;}
-.footer_submit_btn .submit_ico1{olor:#fff;font-size: 15px;box-shadow: 0 5px 8px rgba(254,202,195,.8);border:1px #fff solid;display:-webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: center;background: -webkit-linear-gradient(top,#ff6979,#ff6979);background: linear-gradient(top,#ff6979,#ff6979);}
-.footer_submit_btn .submit_ico1 .iconfont{font-size:30px;}
+.footer_submit_btn .submit_ico1{color:#fff;font-size: 15px;box-shadow: 0 0 5px rgba(254,202,195,.8);border:1px #fff solid;display:-webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: center;background: -webkit-linear-gradient(top,#ff6979,#ff6979);background: linear-gradient(top,#ff6979,#ff6979);}
+.footer_submit_btn .submit_ico1 .iconfont{font-size:30px;vertical-align: top;}
 .footer_submit_btn .moveup{-webkit-animation: moveup .3s ease-out;-webkit-animation-fill-mode: forwards;animation: moveup .3s ease;animation-fill-mode: forwards;}
 .footer_submit_btn .movedown{-webkit-animation: movedown .3s ease-out;-webkit-animation-fill-mode: forwards;animation: movedown .3s ease;animation-fill-mode: forwards;}
 .footer_submit_btn .moveleft{-webkit-animation: moveleft .3s ease-out;-webkit-animation-fill-mode: forwards;animation: moveleft .3s ease;animation-fill-mode: forwards;}
