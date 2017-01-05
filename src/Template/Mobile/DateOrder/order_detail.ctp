@@ -203,7 +203,7 @@
                 <div>合计</div><div><?= $order->amount ?>美币</div>
             </li>
             <li class="flex flex_justify">
-                <?php if (in_array($order->status, ['3'])): ?>
+                <?php if ($order->status > 3): ?>
                     <div>已支付预约金</div><div><?= $order->pre_pay ?>美币</div>
                 <?php endif; ?>
                 <?php if (in_array($order->status, ['13', '10'])): ?>
@@ -266,7 +266,8 @@
                 <span id="godate" class="footerbtn gopay">赴约成功</span>
             </div>
         <?php else: ?>
-            <span  id="refuse_status_10" class="identify_dark_potion">取消订单</span>
+            <span  id="refuse_status_10" class=footerbtn cancel">取消订单</span>
+            <span id="godate" class="footerbtn gopay">赴约成功</span>
         <?php endif; ?>
     <?php endif; ?>
     <?php if (in_array($order->status, [11, 9])): ?>
@@ -330,7 +331,8 @@
             <?php if ($order->start_time < date('Y-m-d H:i:s')): ?>
                 <span  id="godate" class="identify_footer_potion">到达约会目的地</span>
             <?php else: ?>
-                <span id="refuse_status_10" class="identify_dark_potion">取消订单</span>
+                <span id="refuse_status_10" class="footerbtn cancel">取消订单</span>
+                <span  id="godate" class="footerbtn gopay">到达约会目的地</span>
             <?php endif; ?>
         </div>
     <?php endif; ?>
@@ -478,14 +480,16 @@
     });
     $('#godate').on('tap', function () {
         //赴约成功
-        $.util.ajax({
-            url: '/date-order/go-order',
-            data: {order: orderid},
-            func: function (res) {
-                $.util.alert(res.msg);
-                refresh();
-            }
-        });
+         $.util.confirm('提示', '订单将结束,约单金额将转到美女账户中,确认操作？', function () {
+            $.util.ajax({
+                url: '/date-order/go-order',
+                data: {order: orderid},
+                func: function (res) {
+                    $.util.alert(res.msg);
+                    refresh();
+                }
+            });
+         });
     });
 
     $(document).on('tap', '#remove_order', function () {
