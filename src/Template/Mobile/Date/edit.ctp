@@ -32,7 +32,7 @@
                     <div class="edit_date_items flex">
                         <h3 class="edit_l_con">约会标题</h3>
                         <div class="edit_r_con">
-                            <input type="text" name="title" value="<?= $date['title'] ?>"/>
+                            <input id='title' type="text" name="title" value="<?= $date['title'] ?>"/>
                         </div>
                     </div>
                 </li>
@@ -114,16 +114,20 @@
                     <div class="edit_date_items flex flex_justify marks_edit">
                         <span class="edit_l_con">个人标签</span>
                         <div class="edit_r_con edit_r_marks" id="tag-container">
-                            <?php foreach ($date['tags'] as $item): ?>
-                                <a class="mark"><?= $item['name'] ?>
-                                    <input
-                                        type="text"
-                                        name='tags[_ids][]'
-                                        value="<?= $item['id'] ?>"
-                                        tag-name="<?= $item['name'] ?>"
-                                        hidden/>
-                                </a>
-                            <?php endforeach; ?>
+                            <?php if(count($date['tags'])): ?>
+                                <span class="color_light">请选择个人标签</span>
+                            <?php else: ?>
+                                <?php foreach ($date['tags'] as $item): ?>
+                                    <a class="mark"><?= $item['name'] ?>
+                                        <input
+                                            type="text"
+                                            name='tags[_ids][]'
+                                            value="<?= $item['id'] ?>"
+                                            tag-name="<?= $item['name'] ?>"
+                                            hidden/>
+                                    </a>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </li>
@@ -131,7 +135,7 @@
             <div class="mt40 inner edit_date_desc">
                 <h3 class="title">约会说明</h3>
                 <div class="text_con">
-                    <textarea name="description" ><?= $date['description']; ?></textarea>
+                    <textarea id="description" name="description" placeholder="可以简要介绍自己的特点，说说对约会的要求和期待。（100字以内）"><?= $date['description']; ?></textarea>
                 </div>
             </div>
             <input type="text" name="user_id" value="<?= $user->id ?>" hidden>
@@ -307,7 +311,41 @@
                         $.util.alert("约会时间不能早于当前时间!");
                         return;
                     }
-
+                    $date_time = $("#time").val();
+                    $skill = $("#skill-id-input").val();
+                    $title = $("#title").val();
+                    $place = $("#thePlace").val();
+                    $cost = $("#cost-input").val();
+                    $desc = $("#description").val();
+                    $tag = $("#tag-container").find('input').length;
+                    if(!$skill) {
+                        $.util.alert('请选择约会主题');
+                        return;
+                    }
+                    if(!$title) {
+                        $.util.alert('请填写约会标题');
+                        return;
+                    }
+                    if (!$date_time) {
+                        $.util.alert("请选择约会时间!");
+                        return;
+                    }
+                    if(!$place) {
+                        $.util.alert('请选择约会地点');
+                        return;
+                    }
+                    if(!$cost) {
+                        $.util.alert('请选择约会价格');
+                        return;
+                    }
+                    if(!$tag) {
+                        $.util.alert('请选择个人标签');
+                        return;
+                    }
+                    if(!$desc) {
+                        $.util.alert('请输入约会说明');
+                        return;
+                    }
                     $.ajax({
                         type: 'POST',
                         url: '/date/edit/<?= $date['id'] ?>',
@@ -325,8 +363,6 @@
                         }
                     });
                 }
-
-
                 $(".delete-btn").on('click', function () {
 
                     if (confirm("确定删除?")) {
@@ -336,12 +372,12 @@
                             dataType: 'json',
                             success: function (res) {
                                 if (typeof res === 'object') {
-                                    if (res.status) {
-                                        $.util.alert(res.msg);
-                                        window.location.href = '/date/index';
-                                    } else {
-                                        $.util.alert(res.msg);
-                                    }
+                                    $.util.alert(res.msg);
+                                    setTimeout(function() {
+                                        if (res.status) {
+                                            window.location.href = '/date/index';
+                                        }
+                                    }, 1000)
                                 }
                             }
                         });

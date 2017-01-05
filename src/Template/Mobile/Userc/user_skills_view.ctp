@@ -51,12 +51,10 @@
                         <div class='col-importent'>个人标签</div>
                          <div class='ability-marks-box'>
                         <div id="tag-container" class="r_info">
-
                             <?php if (!isset($userskill)): ?>
                                 <span class="color_gray">请选择</span>
                                 <i class="iconfont rcon">&#xe605;</i>
                             <?php else: ?>
-                           
                                 <?php foreach ($userskill['tags'] as $item): ?>
                                     <a class="mark">
                                         <?= $item['name'] ?>
@@ -127,6 +125,26 @@
         } else {
             url = '/userc/user-skill-save/<?= $userskill['id']?>';
         }
+        var skill = $('#skill-id-input').val();
+        var cost = $('#cost-id-input').val();
+        var desc = $('#description-input').val();
+        var tag = $('#tag-container').find('input').length;
+        if(!skill) {
+            $.util.alert('请选择技能名称');
+            return;
+        }
+        if(!cost) {
+            $.util.alert('请选择价格');
+            return;
+        }
+        if(!tag) {
+            $.util.alert('至少需要一个个人标签');
+            return;
+        }
+        if(!desc) {
+            $.util.alert('请填写约会说明');
+            return;
+        }
         $.util.showPreloader();
         $.ajax({
             type: 'POST',
@@ -136,10 +154,11 @@
             success: function (res) {
                 $.util.hidePreloader();
                 if (typeof res === 'object') {
+                    $.util.alert(res.msg);
                     if (res.status) {
-                        window.location.href = '/userc/user-skills-index';
-                    } else {
-                        $.util.alert(res.msg);
+                        setTimeout(function () {
+                            window.location.href = '/userc/user-skills-index';
+                        }, 1000)
                     }
                 }
             },
