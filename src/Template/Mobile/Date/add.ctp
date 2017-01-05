@@ -127,6 +127,7 @@ use Cake\I18n\Time;
                         <span class="edit_l_con">个人标签</span>
                         <div class="edit_r_con edit_r_marks" id="tag-container">
                             <!--标签容器-->
+                            <span class="color_light">请选择个人标签</span>
                         </div>
                     </div>
                 </li>
@@ -137,7 +138,7 @@ use Cake\I18n\Time;
                     <textarea
                         id="description"
                         name="description"
-                        placeholder="您的说明将是屌丝买单的动力"></textarea>
+                        placeholder="可以简要介绍自己的特点，说说对约会的要求和期待。（100字以内）"></textarea>
                 </div>
             </div>
             <input id="user-id" type="text" name="user_id" value="<?= $user->id ?>" hidden>
@@ -304,8 +305,38 @@ use Cake\I18n\Time;
 
     function release() {
         $date_time = $("#time").val();
+        $skill = $("#skill-id-input").val();
+        $title = $("#title").val();
+        $place = $("#thePlace").val();
+        $cost = $("#cost-input").val();
+        $desc = $("#description").val();
+        $tag = $("#tag-container").find('input').length;
+        if(!$skill) {
+            $.util.alert('请选择约会主题');
+            return;
+        }
+        if(!$title) {
+            $.util.alert('请填写约会标题');
+            return;
+        }
         if (!$date_time) {
             $.util.alert("请选择约会时间!");
+            return;
+        }
+        if(!$place) {
+            $.util.alert('请选择约会地点');
+            return;
+        }
+        if(!$cost) {
+            $.util.alert('请选择约会价格');
+            return;
+        }
+        if(!$tag) {
+            $.util.alert('请选择个人标签');
+            return;
+        }
+        if(!$desc) {
+            $.util.alert('请输入约会说明');
             return;
         }
         $.ajax({
@@ -315,12 +346,12 @@ use Cake\I18n\Time;
             dataType: 'json',
             success: function (res) {
                 if (typeof res === 'object') {
-                    if (res.status) {
-                        $.util.alert(res.msg);
-                        window.location.href = '/date/index';
-                    } else {
-                        $.util.alert(res.msg);
-                    }
+                    $.util.alert(res.msg);
+                    setTimeout(function() {
+                        if (res.status) {
+                            window.location.href = '/date/index';
+                        }
+                    }, 1000)
                 }
             }
         });

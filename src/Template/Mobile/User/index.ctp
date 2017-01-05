@@ -93,7 +93,7 @@
             </li>
             <li id="my-dates-btn">
                 <a href="/date/index"  class="home_items">
-                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60f;</i><span class="itemsname">约会管理</span></div>
+                    <div class="home_list_l_info  flex"><i class="iconfont">&#xe60f;</i><span class="itemsname">发布约会</span></div>
                     <div class="home_list_r_info">
                         <i class="iconfont">&#xe605;</i>
                     </div>

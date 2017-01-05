@@ -31,7 +31,7 @@
         </div>
     <?php endif; ?>
     <div class="identify_info_des">
-        <?php if ($user->auth_status == UserStatus::NOPASS): ?>
+        <?php if (!$user->auth_video || ($user->auth_status == UserStatus::NOPASS)): ?>
             <div class="inner">
                 <ul>
                     <li>
@@ -81,8 +81,7 @@
 <script>
     var user_id = <?= $user->id ?>;
     $.util.chooseAuthVideo('auth_video', '注意依次做以下动作：点头，露齿笑，往左转头，举右手');
-    LEMON.sys.setTopRight('提交');
-    window.onTopRight = function () {
+    $('#submit').on('click', function() {
         $.util.showPreloader();
         if ($('#auth_video').data('choosed'))
             var param = {};
@@ -92,12 +91,10 @@
             if (res) {
                 $.util.alert('视频已提交');
                 setTimeout(function () {
-                    document.location.href = '/user/reg-basic-info-3/' + user_id;
+                    document.location.href = '/userc/edit-info';
                 }, 1000);
             }
         });
-        //$.util.alert('完成注册
-
-    };
+    });
 </script>
 <?= $this->end('script'); ?>
