@@ -163,7 +163,8 @@ class MenuController extends AppController {
         $res = $this->getJsonForJqrid($page, $rows, '', $sort, $order, $where);
         $this->autoRender = false;
         $this->response->type('json');
-        $this->response->send(json_encode($res));
+        $this->response->body(json_encode($res));
+        $this->response->send();
         $this->response->stop();
     }
 
