@@ -8,7 +8,7 @@ use Wpadmin\Controller\AppController;
 /**
  * Ptmsg Controller
  *
- * @property \App\Model\Table\CostTable $Cost
+ * @property \App\Model\Table\CostTable $Ptmsg
  */
 class PtmsgController extends AppController
 {
@@ -40,18 +40,40 @@ class PtmsgController extends AppController
     public function view($id = null)
     {
         $this->viewBuilder()->autoLayout(false);
-        $cost = $this->Cost->get($id, [
+        $ptmsg = $this->Ptmsg->get($id, [
             'contain' => []
         ]);
         $this->set([
-            'cost' => $cost,
-            'pageTitle' => '添加价格',
+            'ptmsg' => $ptmsg,
+            'pageTitle' => '平台消息详情',
             'bread' => [
-                'first' => ['name' => '价格管理'],
-                'second' => ['name' => '添加价格'],
+                'first' => ['name' => '平台消息管理'],
+                'second' => ['name' => '平台消息详情'],
             ],
         ]);
-        $this->set('_serialize', ['cost']);
+    }
+
+
+    /**
+     * SendView method
+     *
+     * @param string|null $id Cost id.
+     * @return void
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function sendView($id = null)
+    {
+        $ptmsg = $this->Ptmsg->get($id, [
+            'contain' => []
+        ]);
+        $this->set([
+            'ptmsg' => $ptmsg,
+            'pageTitle' => '【'.$ptmsg->title."】推送列表",
+            'bread' => [
+                'first' => ['name' => '平台消息管理'],
+                'second' => ['name' => '【'.$ptmsg->title."】推送列表"],
+            ],
+        ]);
     }
 
     /**
@@ -67,13 +89,39 @@ class PtmsgController extends AppController
             if(count($uids) <= 0) {
                 $this->Util->ajaxReturn(false, '对象不能为空');
             }
-            $ptmsg = $this->Ptmsg->patchEntity($ptmsg, $this->request->data);
+            $this->loadComponent('Business');
+            /*$ptmsg = $this->Ptmsg->patchEntity($ptmsg, $this->request->data);
             $ptmsg->msg_type = MsgpushType::COMMON;
-            if ($this->Ptmsg->save($ptmsg)) {
+            $ptmsgtb = $this->Ptmsg;
+            $res = $this->Ptmsg->connection()->transactional(function() use($ptmsg, $ptmsgtb, $uids) {
+                $msgpushTb = TableRegistry::get('Msgpush');
+                $ptres = $ptmsgtb->save($ptmsg);
+                $msgres = false;
+                if($ptres) {
+                    $msgpushes = [];
+                    foreach($uids as $uid) {
+                        $msgpushes[] = [
+                            'msg_id' => $ptmsg->id,
+                            'user_id' => $uid,
+                            'is_read' => 0,
+                            'is_del' => 0
+                        ];
+                    }
+                    $msgpushes = $msgpushTb->newEntities($msgpushes);
+                    $msgres = $msgpushTb->saveMany($msgpushes);
+                }
+                return $msgres&&$ptres;
+            });*/
+            $message = [
+                'towho' => MsgpushType::TO_CUSTOM,
+                'title' => $this->request->data('title'),
+                'body' => $this->request->data('body'),
+                'to_url' => $this->request->data('to_url')
+            ];
+            if ($this->Business->sendPtMsg($uids, $message)) {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
-                $errors = $ptmsg->errors();
-                $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
+                $this->Util->ajaxReturn(false, '添加失败');
             }
         }
         $this->set(compact('ptmsg'));
@@ -168,6 +216,41 @@ class PtmsgController extends AppController
     }
 
 
+    /**
+     * get jqgrid data
+     *
+     * @return json
+     */
+    public function getSendList()
+    {
+        $this->request->allowMethod('ajax');
+        $page = $this->request->data('page');
+        $rows = $this->request->data('rows');
+        $msgid = $this->request->data('msgid');
+        $key = $this->request->data('keywords');
+        $sort = 'Msgpush.' . $this->request->data('sidx');
+        $order = $this->request->data('sord');
+        $contain = ['User' => function($q) {
+            return $q->select(['nick', 'gender']);
+        }];
+        if(!$msgid) {
+            return $this->Util->ajaxReturn([]);
+        }
+        $where = ['msg_id' => $msgid];
+        if($key) {
+            $where[' User.nick like'] = "%$key%";
+        }
+        $data = $this->getJsonForJqrid($page, $rows, 'Msgpush', $sort, $order, $where, $contain);
+        $this->autoRender = false;
+        $this->response->type('json');
+        $this->response->body(json_encode($data));
+        $this->response->send();
+        $this->response->stop();
+    }
+
+    /**
+     * 用户模糊检索
+     */
     public function findUser()
     {
         $this->request->allowMethod('ajax');

@@ -5,6 +5,7 @@ use App\Model\Entity\Payorder;
 use Cake\Controller\Component;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use MsgpushType;
 use PackType;
 use PayOrderType;
 use SerRight;
@@ -24,6 +25,7 @@ class BusinessComponent extends Component
      *
      * @var array
      */
+    public $components = ['Push'];
     protected $_defaultConfig = [];
 
     /**
@@ -633,5 +635,121 @@ class BusinessComponent extends Component
             return $transRes;
         }
         return false;
+    }
+
+    /**
+     * 发送平台消息-单发
+     * @param int $uid 推送对象
+     * @param array $message 推送消息体
+     *      [
+     *          'towho' => 推送说明(直接调用MsgpushType::TO_**类型的，例如，约会过程的通知使用MsgpushType::TO_DATER),
+     *          'title' => string 标题,
+     *          'body' => string 消息体,
+     *          'to_url' => string 跳转链接,
+     *      ]
+     * @param boolean $umeng 是否推送消息
+     * @return int 例如：MsgpushTye::ERROR_NOUSER
+     */
+    public function sendSMsg($uid, $message = [], $umeng = false)
+    {
+        return $this->sendMsg([$uid], $message, $umeng);
+    }
+
+    /**
+     * 发送平台消息-群发
+     * @param array $uids 推送对象集
+     * @param array $message 推送消息体
+     *      [
+     *          'towho' => 推送说明(直接调用MsgpushType::TO_**类型的，例如，约会过程的通知使用MsgpushType::TO_DATER),
+     *          'title' => string 标题,
+     *          'body' => string 消息体,
+     *          'to_url' => string 跳转链接,
+     *      ]
+     * @param boolean $umeng 是否推送消息
+     * @return int 例如：MsgpushTye::ERROR_NOUSER
+     */
+    public function sendMsg($uids = [], $message = [], $umeng = false)
+    {
+        if($umeng) {
+            $title = isset($message[2])?$message[2]:'';
+            $content = ' ';
+            $ticker = isset($message[2])?$message[2]:'';
+            $alias = '';
+            $utb = TableRegistry::get("User");
+            $users = $utb->find('list')->where(['id IN' => $uids])->toArray();
+            $alias = implode($users, ',');
+            if(count($uids) >= 50) {
+                $this->Push->sendFile($title, $content, $ticker, str_replace(',', "\n", $alias), 'MY', false);
+            } else if(count($uids > 0)) {
+                $this->Push->sendAlias($alias, $title, $content, $ticker, 'MY', false);
+            }
+        }
+        return $this->sendPtMsg();
+    }
+
+
+    /**
+     * 发送平台消息-单发
+     * @param int $uid 推送对象
+     * @param array $message 推送消息体
+     *      [
+     *          'towho' => 推送说明(直接调用MsgpushType::TO_**类型的，例如，约会过程的通知使用MsgpushType::TO_DATER),
+     *          'title' => string 标题,
+     *          'body' => string 消息体,
+     *          'to_url' => string 跳转链接,
+     *      ]
+     * @return int 例如：MsgpushTye::ERROR_NOUSER
+     */
+    public function sendSPtMsg($uid, $message = [])
+    {
+        return $this->sendPtMsg([$uid], $message);
+    }
+
+
+    /**
+     * 发送平台消息-群发
+     * @param array $uids 推送对象集
+     * @param array $message 推送消息体
+     *      [
+     *          'towho' => 推送说明(直接调用MsgpushType::TO_**类型的，例如，约会过程的通知使用MsgpushType::TO_DATER),
+     *          'title' => string 标题,
+     *          'body' => string 消息体,
+     *          'to_url' => string 跳转链接,
+     *      ]
+     * @return int 例如：MsgpushTye::ERROR_NOUSER
+     */
+    public function sendPtMsg($uids = [], $message = [])
+    {
+        $ptmsgtb = TableRegistry::get('Ptmsg');
+        $ptmsg = $ptmsgtb->newEntity();
+        if(count($uids) <= 0) {
+            return MsgpushType::ERROR_NOUSER;
+        }
+        $ptmsg = $ptmsgtb->patchEntity($ptmsg, $message);
+        $ptmsg->msg_type = MsgpushType::TO_CUSTOM;
+        $res = $ptmsgtb->connection()->transactional(function() use($ptmsg, $ptmsgtb, $uids) {
+            $msgpushTb = TableRegistry::get('Msgpush');
+            $ptres = $ptmsgtb->save($ptmsg);
+            $msgres = false;
+            if($ptres) {
+                $msgpushes = [];
+                foreach($uids as $uid) {
+                    $msgpushes[] = [
+                        'msg_id' => $ptmsg->id,
+                        'user_id' => $uid,
+                        'is_read' => 0,
+                        'is_del' => 0
+                    ];
+                }
+                $msgpushes = $msgpushTb->newEntities($msgpushes);
+                $msgres = $msgpushTb->saveMany($msgpushes);
+            }
+            return $msgres&&$ptres;
+        });
+        if ($res) {
+            return MsgpushType::SUCCESS;
+        } else {
+            return MsgpushType::FAILD;
+        }
     }
 }

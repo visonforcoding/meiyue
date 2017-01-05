@@ -62,10 +62,10 @@ class MsgpushTable extends Table
             ->allowEmpty('id', 'create');
         $validator
             ->integer('msg_id')
-            ->allowEmpty('msg_id', 'create');
+            ->requirePresence('msg_id');
         $validator
             ->integer('user_id')
-            ->allowEmpty('user_id', 'create');
+            ->requirePresence('user_id');
         return $validator;
     }
 }

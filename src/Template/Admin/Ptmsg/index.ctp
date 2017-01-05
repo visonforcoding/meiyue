@@ -33,7 +33,6 @@
     <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
     <script>
         var towhos = <?= MsgpushType::getToWho(MsgpushType::GETJSON); ?>;
-        console.log(towhos);
         $(function () {
             $('#main-content').bind('resize', function () {
                 $("#list").setGridWidth($('#main-content').width() - 40);
@@ -91,6 +90,7 @@
         function actionFormatter(cellvalue, options, rowObject) {
             response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
             response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
+            response += '<a title="发送名单" href="/ptmsg/send-view/' + rowObject.id + '" class="grid-btn "><i class="icon icon-envelope"></i> </a>';
             return response;
         }
 
@@ -140,7 +140,7 @@
 
         function doView(id) {
             //查看明细
-            url = '/cost/view/' + id;
+            url = '/ptmsg/view/' + id;
             layer.open({
                 type: 2,
                 title: '查看详情',
@@ -150,6 +150,7 @@
                 content: url//iframe的url
             });
         }
+
     </script>
 <?php
 $this->end();

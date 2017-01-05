@@ -229,7 +229,6 @@ class Umeng {
             $ios_brocast->setPredefinedKeyValue("file_id", $ios_data->data->file_id); // 设置上传的file_id
             $ios_res = json_decode($ios_brocast->send());
         }
-        
         if ($ios_data->ret == 'FAIL' && $android_data->ret == 'FAIL') {
             if ($production_mode) {
                 return false;
@@ -248,7 +247,7 @@ class Umeng {
             if ($production_mode) {
                 return true;
             } else {
-                return 'ios任务id:' . $ios_res->data->msg_id . '|android任务id:' . $android_res->data->msg_id;
+                return 'ios任务id:' . $ios_res->data->task_id . '|android任务id:' . $android_res->data->task_id;
             }
         }
     }

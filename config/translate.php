@@ -520,13 +520,24 @@ class PayOrderType {
  * Class MsgpushType
  */
 class MsgpushType {
-    const CUSTOM = 1; //自定义
-
-    const COMMON = 1;  //普通类型，即文字加链接
+    const TO_CUSTOM = 1; //自定义
+    const TO_DATER = 2; //约会消息通知
+    const TO_ACTIVITY = 3; //派对消息通知
+    const TO_REGISTER = 4; //注册审核消息通知
+    //消息类型
+    const COMMON = 21;  //普通类型，即文字加链接
+    //推送状态及错误码
+    const ERROR_NOUSER = 11;  //缺少推送对象
+    const SUCCESS = 12;  //推送成功
+    const FAILD = 13;  //推送失败
+    //获取数据格式
     const GETJSON = -1;
     public static function getToWho($who = null) {
         $towhos = [
-            MsgpushType::CUSTOM => '自定义',
+            MsgpushType::TO_CUSTOM => '自定义',
+            MsgpushType::TO_DATER => '约会消息通知',
+            MsgpushType::TO_ACTIVITY => '派对消息通知',
+            MsgpushType::TO_REGISTER => '注册审核消息通知',
         ];
 
         if($who == MsgpushType::GETJSON) {

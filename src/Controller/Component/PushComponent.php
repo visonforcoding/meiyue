@@ -94,7 +94,7 @@ class PushComponent extends Component {
      * @param string $sound ios声音
      * @return boolean true:发送成功;false:发送失败;
      */
-    public function sendFile($title, $content, $ticker, $file, $alias_type = 'BGB', $production_mode = 'true', $extra = '', $badge = '', $after_open = '', $sound = ''){
+    public function sendFile($title, $content, $ticker, $file, $alias_type = 'MY', $production_mode = 'true', $extra = '', $badge = '', $after_open = '', $sound = ''){
         $umngObj = new Umeng($this->android_key, $this->android_secret, $this->ios_key, $this->ios_secret);
         $res = $umngObj->sendFile($title, $content, $ticker, $file, $alias_type, $production_mode, $extra, $badge, $after_open, $sound);
         return $res;
