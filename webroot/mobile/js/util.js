@@ -746,6 +746,9 @@ $.util = {
                 .replace(/ss|SS/, $.util.addZero(date.getSeconds(), 2)).replace(/s|S/g, date.getSeconds())
                 .replace(/w/g, date.getDay()).replace(/W/g, arrWeek[date.getDay()]);
         return str;
+    },
+    date2ios:function(time){
+        return time.replace(/\-/g, "/");  
     }
 };
 
