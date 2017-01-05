@@ -12,16 +12,17 @@
                 <ul class='opci'>
                     <li class="blight userinfo">
                         <a href="/userc/edit-info" class="cover_block">
-
-                        <h3>
+                        <div class='identify-user-info'>
+                        <h3 class='flex'>
                             <span>
-                                <?= $user->nick ?><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><?php if($user->recharge): ?><span class="diamonds"><img src="/mobile/images/zs.png" class="responseimg"/></span><?php endif; ?><?php if($pack): ?><span class="highter-vip">VIP 普通</span><?php endif; ?></span>
+                                <?= $user->nick ?></span><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><?php if($user->recharge): ?><span class="diamonds"><img src="/mobile/images/zs.png" class="responseimg"/></span><?php endif; ?><?php if($pack): ?><span class="highter-vip">VIP普通</span><?php endif; ?> </h3>
+                               
                             <?php if($user->id_status == UserStatus::PASS): ?>
                                 <div class="bottom-btn">
                                     <span class="identify-info id-btn">身份已认证</span>
                                 </div>
                             <?php endif; ?>
-                        </h3>
+                          </div>
                            <!--  <h3>
                                 <span><i class="iconfont">&#xe628;</i></span>
                                 <span class="flag price"><?= $this->Number->format($user->money) ?>美币</span>
@@ -121,7 +122,7 @@
                 <a href="/user/share"  class="home_items">
                     <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe612;</i><span class="itemsname">邀请好友注册</span></div>
                     <div class="home_list_r_info">
-
+                         <span class="color_gray">成为合伙人</span>
                         <i class="iconfont">&#xe605;</i>
                     </div>
                 </a>

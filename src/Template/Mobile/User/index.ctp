@@ -13,20 +13,22 @@
                 <ul class="">
                     <li class="bbottom userinfo" onclick="window.location.href='/userc/edit-info'">
                         <a href="#this" class="cover_block">
-                            <h3>
-                                <span><?= $user->nick ?>
-                                    <span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>
-                                </span>
+                            <div class='identify-user-info'>
+                                <h3 class='flex'>
+                                    <span><?= $user->nick ?></span>
+                                        <span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>
+                                </h3>  
                                 <div class="bottom-btn">
                                     <?php if($user->id_status == UserStatus::PASS): ?>
                                     <span class="identify-info id-btn">身份已认证</span>
                                     <?php endif; ?>
                                     <!--<span class="identify-info video-btn">视频已认证</span>-->
                                 </div>
-                            </h3>
-									<span class="cover_r_ico">
-										<i class="iconfont">&#xe605;</i>
-									</span>
+                            </div>
+							<span class="cover_r_ico">
+								<i class="iconfont">&#xe605;</i>
+							</span>
+                            
                         </a>
                     </li>
                     <li class="follow">
