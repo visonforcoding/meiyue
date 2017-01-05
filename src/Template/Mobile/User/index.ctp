@@ -161,7 +161,10 @@
 <?= $this->element('footer', ['active' => 'me']) ?>
 <?php $this->start('script'); ?>
 <script type="text/javascript">
-
+    if ($.util.isAPP){
+        console.log($.util.isAPP);
+        $('.footer_submit_btn').css('bottom','10px')
+    }
     $('#submitbtn').on('tap', function () {
         var data = $(this).data('type');
         switch (data) {
