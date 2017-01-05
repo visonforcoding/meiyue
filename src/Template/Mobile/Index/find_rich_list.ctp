@@ -9,7 +9,7 @@
                 <div class="voted_place_info">
                     <span class="avatar"><img src="{{avatar}}"/></span>
                     <h3 onclick="location.href='/user/male-homepage/{{id}}'">
-                        <span class="voted_name">{{nick}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip">vip普通</span></span>
+                        <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip">VIP普通</span></div>
                         <span class="voted_number color_gray">已消费：{{recharge}}美币</span>
                     </h3>
                 </div>
@@ -62,10 +62,10 @@
                         <?php continue; ?>
                     <?php endif; ?>
                     <?php $count++; ?>
-                    <li>
+                    <li style='border-bottom:1px #efefef solid;'>
                         <div class="voted_con flex flex_justify">
                             <div class="flex">
-                                <div class='flex flex_center set-voted-wid'><span class="voted_place silver"><?= $count ?></span></div>
+                                <div class='flex flex_center'><span class="voted_place silver"><?= $count ?></span></div>
                                 <div class="voted_place_info">
                                     <span class="avatar" onclick="location.href='/user/male-homepage/<?= $top->id; ?>'"><img src="<?= $top->avatar ?>"/></span>
                                     <h3>
@@ -86,7 +86,7 @@
                 <?php endforeach; ?>
             <?php endif; ?>
         </ul>
-        <ul id="rich-list" class="voted_list outerblock"> 
+        <ul id="rich-list" class="voted_list outerblock  set-voted-wid" > 
 
         </ul>
     </div>

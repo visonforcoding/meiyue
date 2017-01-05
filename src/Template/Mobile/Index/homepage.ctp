@@ -224,20 +224,20 @@
                 <a id="focusIt">
                     <i class="iconfont">&#xe63d;</i><i class="status-txt">已关注</i>
                 </a>
-            </li> | 
+            </li>|
         <?php else: ?>
             <li>
                 <a id="focusIt" class="active">
                     <i class="iconfont">&#xe63d;</i><i class="status-txt">关注</i>
                 </a>
-            </li>  | 
+            </li>|
         <?php endif; ?>
         <?php if (count($user->user_skills) > 0): ?>
         <li>
             <a id="dateit">
                 <i class="iconfont">&#xe632;</i>约TA
             </a>
-        </li>   |    
+        </li>|
         <?php endif; ?>
         <li id="chat-btn">
             <a>
