@@ -20,7 +20,8 @@
                     <time>{{create_time}}</time>
                 </h3>
             </div>
-            <span class="focusbtn likeIt" data-id="<?= $user->id; ?>">{{#followed}}已关注{{/followed}}{{^followed}}+ 关注{{/followed}}</span>
+            {{#followed}}<div class="button btn_light likeIt" data-id="{{user.id}}">已关注</div>{{/followed}}
+            {{^followed}}<div class="button btn_dark_t likeIt" data-id="{{user.id}}">+ 关注</div>{{/followed}}
         </div>
         <div class="con inner">
             <p class="text">{{body}}</p>
@@ -144,9 +145,14 @@
             func: function (res) {
                 if(res.status) {
                     if($('.likeIt').first().text() == '+ 关注') {
+                        $.util.alert('关注成功');
                         $('.likeIt').text('已关注');
+                        $('.likeIt').removeClass('btn_dark_t');
+                        $('.likeIt').addClass('btn_light');
                     } else {
                         $('.likeIt').text('+ 关注');
+                        $('.likeIt').removeClass('btn_light');
+                        $('.likeIt').addClass('btn_dark_t');
                     }
                 }
             }

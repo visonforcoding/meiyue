@@ -341,6 +341,7 @@
             func: function (res) {
                 if(res.status){
                     if(obj.hasClass('active')){
+                        $.util.alert('关注成功');
                         obj.find('.status-txt').first().text('已关注');
                     }else{
                         obj.find('.status-txt').first().text('关注');
