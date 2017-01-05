@@ -144,14 +144,7 @@ class AppController extends Controller {
      * @return array total 总页数 page 当前页码 records 总记录数 rows 数据数组
      * 
      */
-    protected function getJsonForJqrid(
-        $page,
-        $limit,
-        $modelName = '',
-        $sort = '',
-        $order = '',
-        $where = '',
-        $contain = '')
+    protected function getJsonForJqrid($page,$limit,$modelName = '',$sort = '',$order = '',$where = '',$contain = '')
     {
         $Table = TableRegistry::get(!empty($modelName) ? $modelName : $this->modelClass);
         $query = $Table->find();

@@ -5,6 +5,12 @@
         <span class="r_btn iconfont ico">&#xe603;</span>
     </div>
 </header> -->
+<style>
+    .footerbtn.noactive{
+        border-left: 1px solid #dadada;
+        color:#bbb;
+    }
+</style>
 <div class="wraper">
     <div class="date_head_info">
         <div class="date_head_con inner flex flex_justify">
@@ -342,10 +348,20 @@
             <span  class="footerbtn gopay">惩罚成功</span>
         </div>
     <?php endif; ?>
+    <?php if ($order->status == 15): ?>
+        <div class="potion_footer flex flex_justify">
+            <span  id="remove_order" class="footerbtn cancel">删除订单</span>
+            <a class="footerbtn cancel noactive" href="/date-order/show-appraise/<?= $order->id ?>">
+                查看评价
+            </a>
+        </div>
+    <?php endif; ?>
     <?php if ($order->status == 16): ?>
         <div class="potion_footer flex flex_justify">
-            <span  id="remove_order" class="footerbtn gopay">删除订单</span>
-            <a href="/date-order/show-appraise/<?= $order->id ?>"><span  class="footerbtn cancel">查看评价</span></a>
+            <span  id="remove_order" class="footerbtn cancel ">删除订单</span>
+            <a class="footerbtn gopay " href="/date-order/show-appraise/<?= $order->id ?>">
+                查看评价
+            </a>
         </div>
     <?php endif; ?>
 <?php endif; ?>
@@ -480,7 +496,7 @@
     });
     $('#godate').on('tap', function () {
         //赴约成功
-         $.util.confirm('提示', '订单将结束,约单金额将转到美女账户中,确认操作？', function () {
+        $.util.confirm('提示', '订单将结束,约单金额将转到美女账户中,确认操作？', function () {
             $.util.ajax({
                 url: '/date-order/go-order',
                 data: {order: orderid},
@@ -489,7 +505,7 @@
                     refresh();
                 }
             });
-         });
+        });
     });
 
     $(document).on('tap', '#remove_order', function () {

@@ -666,7 +666,8 @@ class DateOrderController extends AppController
          //订单状态更改
          if($dateorder->status!=10){
               return $this->Util->ajaxReturn(false,'订单已被更改，您无法进行此操作');
-         }       
+         }
+        $dateorder->close_time = date('Y-m-d H:i:s');
         $FlowTable = TableRegistry::get('Flow');
         if($this->user->gender==2){
                 //男士已支付预约金 女士确认接单之前
@@ -865,6 +866,7 @@ class DateOrderController extends AppController
             }    
             //男
             $order->status = 15; //订单完成
+            $order->close_time = date('Y-m-d H:i:s');
             //女方收款
             $pre_amount = $order->dater->money;
             $order->dater->money = $order->amount+$pre_amount;
