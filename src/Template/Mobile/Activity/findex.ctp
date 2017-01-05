@@ -162,7 +162,7 @@
                         <img src="{{avatar}}"/>
                     </span>
                     <h3>
-                        <span class="voted_name">{{nick}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip">VIP普通</span></span>
+                        <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip">VIP普通</span></div>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
                 </div>
