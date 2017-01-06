@@ -1,6 +1,5 @@
  <style type="text/css">
-        *{margin:0;padding:0;}
-            .checkbwh{position:fixed;bottom:0;max-width:750px;width:100%;height:240px;
+       .checkbwh{position:fixed;bottom:0;max-width:750px;width:100%;height:240px;
                 /*background: #fff url(../css/img/line.png) repeat-x  0 85px;*/
                 background: #fff;-webkit-transition: height .2s ease;transition: height .2s ease;
                 z-index:999;
@@ -12,7 +11,7 @@
             .checkbwh .l_box{text-align: center;overflow: auto;
                 -webkit-overflow-scrolling: touch;z-index:999;
                 width:100%;
-                height:200px;margin-top:-25px;}
+                height:170px;margin-top:-10px;}
             .checkbwh .l_box::-webkit-scrollbar,.checkbwh .r_box::-webkit-scrollbar{display: none;}
             .checkbwh li{line-height: 40px;height:40px;width:100%;font-size:14px;color:#ccc;}
             /*.checkdate span{height:30px;line-height: 30px;}*/
@@ -92,6 +91,7 @@
                     </ul>
                 </div>
                 </div>
+                <div class="c_date_head bdbottom flex" style="height:10px;"></div>
                 </div>
             </div>
             <script type="text/javascript">
