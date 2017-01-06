@@ -114,12 +114,12 @@
                          <div class="r_info smalldes">
                         <span>
                             查看
-                            <?= ($item->chat_num)?>
+                            <?= ($item->browse_num)?>
                         </span>
                              |
                         <span>
                             聊天
-                            <?= ($item->browse_num) ?>
+                            <?= ($item->chat_num) ?>
                         </span>
                          </div>
                      </li>

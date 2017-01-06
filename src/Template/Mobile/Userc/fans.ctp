@@ -12,7 +12,7 @@
                     </h3>
                 </div>
                 <div class="praised_list_right">
-                    <span class="attractive ">魅力值<i class="numbers">3000</i><!--<i class="iconfont ico">&#xe61e;</i>--></span>
+                    <span class="attractive ">魅力值<i class="numbers">{{user.charm}}</i><!--<i class="iconfont ico">&#xe61e;</i>--></span>
                 </div>
             </a>
         </li>

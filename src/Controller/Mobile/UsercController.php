@@ -30,7 +30,7 @@ class UsercController extends AppController
     }
 
     /**
-     * 美女粉丝  男赞赏我的
+     * (美女)我的粉丝  （男）赞赏我的
      */
     public function fans($page = null)
     {
@@ -39,7 +39,7 @@ class UsercController extends AppController
             $limit = 10;
             $UserFansTable = \Cake\ORM\TableRegistry::get('UserFans');
             $fans = $UserFansTable->find()->hydrate(false)->contain(['User' => function ($q) {
-                return $q->select(['id', 'birthday', 'avatar', 'nick']);
+                return $q->select(['id', 'birthday', 'avatar', 'nick', 'gender', 'charm', 'recharge']);
             }])->where(['following_id' => $this->user->id])
                 ->limit(intval($limit))
                 ->page(intval($page))
@@ -47,6 +47,9 @@ class UsercController extends AppController
                     return $items->map(function ($item) {
                         $item['user']['avatar'] = createImg($item['user']['avatar']) . '?w=44&h=44&fit=stretch';
                         $item['user']['age'] = isset($item['user']['birthday']) ? getAge($item['user']['birthday']) : 'xx';
+                        if($item['user']['gender'] == 1) {
+                            $item['user']['charm'] = $item['user']['recharge'];
+                        }
                         return $item;
                     });
                 })->toArray();
@@ -820,6 +823,7 @@ class UsercController extends AppController
      */
     public function vipBuy()
     {
+        $this->handCheckLogin();
         $packTb = TableRegistry::get('Package');
         $reurl = $this->request->query('reurl');
         $packs = $packTb
@@ -828,10 +832,145 @@ class UsercController extends AppController
             ->orderDesc('show_order');
 
         $this->set([
+            'user' => $this->user,
             'packs' => $packs,
             'pageTitle' => '购买套餐',
             'reurl' => $reurl
         ]);
+    }
+
+
+    /**
+     * 美币支付套餐
+     *
+     */
+    public function taocanPay()
+    {
+        $this->handCheckLogin();
+        if($this->request->is("POST")) {
+            $pid = $this->request->data('pid');
+            $packTb = TableRegistry::get('Package');
+            $pack = null;
+            try {
+                $pack = $packTb->get($pid);
+            } catch (Exception $e){
+                return $this->Util->ajaxReturn(false, '套餐不存在');
+            }
+            if(!$pack) {
+                return $this->Util->ajaxReturn(false, '套餐不存在');
+            }
+            if($pack->type != PackType::VIP) {
+                return $this->Util->ajaxReturn(false, '非法套餐');
+            }
+            if($pack->price > $this->user->money) {
+                return $this->Util->ajaxReturn(false, '美币不足');
+            }
+            $pre_amount = $this->user->money;
+            $this->user->money -= $pack->price;
+            $packTypeStr = PackType::getPackageType(PackType::VIP);
+            $flowType = 15;  //购买vip套餐
+
+            //生成流水记录
+            $FlowTable = TableRegistry::get('Flow');
+            $flow = $FlowTable->newEntity([
+                'buyer_id' => $this->user->id,
+                'type' => $flowType,  //购买套餐
+                'relate_id'=>$pack->id,   //关联的订单id
+                'type_msg' => '美币购买'.$packTypeStr,
+                'income' => 2,
+                'amount' => $pack->price,
+                'price'=> $pack->price,
+                'pre_amount' => $pre_amount,
+                'after_amount' => $this->user->money,
+                'paytype'=> 1,
+                'status' => 1,
+                'remark' => '美币购买'.$packTypeStr
+            ]);
+
+            //生成套餐购买记录
+            //查询当前用户账户下套餐的最长有效期
+            $addDays = $pack->vali_time + 1;
+            $deadline = new Time("+$addDays day");
+            $deadline->hour = 0;
+            $deadline->second = 0;
+            $deadline->minute = 0;
+            $userPackTb = TableRegistry::get('UserPackage');
+            $query = $userPackTb
+                ->find()
+                ->select(['longestdl' => 'max(deadline)'])
+                ->where([
+                    'user_id' => $this->user->id,
+                    'deadline >' => new Time()
+                ]);
+            $ownPach = $query->first();
+            //计算出最长有效期
+            //是否需要更新UserPackage表和UsedPackage表该用户的截止日期标志
+            $udFlag = false;
+            if($ownPach->longestdl) {
+                $longestdl = new Time($ownPach->longestdl);
+                if($deadline > $longestdl) {
+                    //购买的套餐以最长截止日期为准
+                    $udFlag = true;
+                } else {
+                    $deadline = $longestdl;
+                }
+            }
+            $userPack = $userPackTb->newEntity([
+                'title' => $pack->title,
+                'user_id' => $this->user->id,
+                'package_id' => $pack->id,
+                'chat_num' => $pack->chat_num,
+                'rest_chat' => $pack->chat_num,
+                'browse_num' => $pack->browse_num,
+                'rest_browse' => $pack->browse_num,
+                'type' => $pack->type,
+                'cost' => $pack->price,
+                'vir_money' => $pack->vir_money,
+                'deadline' => $deadline,
+                'honour_name' => $pack->honour_name,
+            ]);
+
+            $user = $this->user;
+            $transRes = $userPackTb
+                ->connection()
+                ->transactional(
+                    function() use ($FlowTable, $flow, $user, $userPack, $userPackTb, $udFlag, $deadline){
+                        $updateUsedres = true;
+                        $updateUseres = true;
+                        //更新UserPackage表和UsedPackage表该用户的截止日期
+                        //如果用户买了新的套餐，该套餐截止日期比现有的长，则更新所有未过期的已购买套餐
+                        if($udFlag) {
+                            $usedPackTb = TableRegistry::get('UsedPackage');
+                            $updateUsedres = $usedPackTb
+                                ->query()
+                                ->update()
+                                ->set(['deadline' => $deadline])
+                                ->where(['user_id' => $user->id, 'deadline >=' => new Time()])
+                                ->execute();
+
+                            $updateUseres = $userPackTb
+                                ->query()
+                                ->update()
+                                ->set(['deadline' => $deadline])
+                                ->where(['user_id' => $user->id, 'deadline >=' => new Time()])
+                                ->execute();
+                        }
+                        $useres = TableRegistry::get('User')->save($user);
+                        $flowres = $FlowTable->save($flow);
+                        return
+                            $flowres
+                            &&$useres
+                            &&$userPackTb->save($userPack)
+                            &&$updateUsedres
+                            &&$updateUseres;
+                    });
+
+            if ($transRes) {
+                return $this->Util->ajaxReturn(true, '购买成功');
+            }else{
+                return $this->Util->ajaxReturn(false, '购买失败');
+            }
+        }
     }
 
     /**
