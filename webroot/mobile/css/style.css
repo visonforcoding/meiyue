@@ -31,8 +31,8 @@
 .loginbox input::-webkit-input-placeholder { /* WebKit browsers */ color: #514128 } 
 .loginbox div i{margin-right:.3rem;}
 .outerlogin{width:100%;text-align: center;margin-top:2.4rem;}
-.register_bottom_tips{width:100%;text-align: center;margin-top:.3rem;font-size: 12px;}
-.outerlogin a{color:#987845;}
+.register_bottom_tips{width:100%;text-align: center;margin-top:.8rem;font-size: 10px;}
+.outerlogin a{color:#987845;opacity: .8;}
 .register_bottom_tips a{color:#fff;opacity:.5;}
 .getlogin{text-align: center;font-size:12px;margin-top: 15px;}
 .getlogin a{color:#cc9930;}
