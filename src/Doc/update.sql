@@ -715,6 +715,23 @@ ALTER TABLE `lm_user`
 ALTER TABLE `lm_user`
 	ADD COLUMN `is_agent` TINYINT NOT NULL DEFAULT '1' COMMENT '是否是经纪人：1是2否' AFTER `invit_code`;
 
+
+
+
+CREATE TABLE `report` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`type` TINYINT(4) NULL DEFAULT '1' COMMENT '举报类型',
+	`user_id` INT(11) NULL DEFAULT NULL COMMENT '用户id',
+	`create_time` DATETIME NULL DEFAULT NULL,
+	`update_time` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='举报'
+ENGINE=InnoDB
+;
+
+
 #邀请表添加获得佣金字段
 ALTER TABLE `lm_invitation`
 	ADD COLUMN `income` DOUBLE NOT NULL DEFAULT '0' COMMENT '获得佣金' AFTER `status`;
+

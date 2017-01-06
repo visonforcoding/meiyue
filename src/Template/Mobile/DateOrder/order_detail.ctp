@@ -209,7 +209,7 @@
                 <div>合计</div><div><?= $order->amount ?>美币</div>
             </li>
             <li class="flex flex_justify">
-                <?php if ($order->status > 3): ?>
+                <?php if ($order->status > 2 && $order->status < 10): ?>
                     <div>已支付预约金</div><div><?= $order->pre_pay ?>美币</div>
                 <?php endif; ?>
                 <?php if (in_array($order->status, ['13', '10'])): ?>
@@ -272,8 +272,10 @@
                 <span id="godate" class="footerbtn gopay">赴约成功</span>
             </div>
         <?php else: ?>
-            <span  id="refuse_status_10" class=footerbtn cancel">取消订单</span>
-            <span id="godate" class="footerbtn gopay">赴约成功</span>
+            <div class="potion_footer flex flex_justify">
+                <span  id="refuse_status_10" class="footerbtn cancel">取消订单</span>
+                <span id="godate" class="footerbtn gopay">赴约成功</span>
+            </div>
         <?php endif; ?>
     <?php endif; ?>
     <?php if (in_array($order->status, [11, 9])): ?>
