@@ -10,15 +10,15 @@
     </div>
     <div class="share_items_list <?php if(isset($user) && $user->has_invs): ?>mt20<?php endif; ?>">
         <div class="inner">
-            <h3 class="title">方式一：分享链接</h3>
-            <p class="desc">好友点击你的链接并在15分钟内注册成功后，你将获得该好友赚取金额10%(女性好友）或充值金额15%（男性好友）的提成。</p>
+            <h3 class="title">方式一：链接</h3>
+            <p class="desc">邀请好友来注册，好友点击您分享的链接并于15分钟内注册成功，您将获得[女性好友]平台赚取金额的10%佣金，或[男性好友]平台充值金额的15%佣金。</p>
             <a href="javascript:shareBanner();" class="btn btn_t_border mt40">立即分享</a>
         </div>
     </div>
     <div class="share_items_list mt20 mb60">
         <div class="inner">
             <h3 class="title">方式二：邀请码</h3>
-            <p class="desc">好友在注册时，输入你的邀请码，你将获得该好友赚取金额10%（女性好友）或者充值金额15%（男性好友）的提成。</p>
+            <p class="desc">邀请好友来注册，好友在注册时输入您的邀请码并注册成功，您将获得[女性好友]平台赚取金额的10%佣金，或[男性好友]平台充值金额的15%佣金。</p>
             <span class="share_desc">您的邀请码<br /><strong><?= isset($user)?$user->invit_code:'--'; ?></strong></span>
             <!--<a href="javascript:void(0);" class="btn btn_t_border mt20">生成我的海报</a>-->
         </div>

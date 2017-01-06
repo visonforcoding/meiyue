@@ -135,7 +135,7 @@ function followIt(id, $obj) {
             if(res.status) {
                 if($obj.find('i').hasClass('activeico')) {
                     $.util.alert('取消点赞成功');
-                } esle {
+                } else {
                     $.util.alert('点赞成功');
                 }
             }

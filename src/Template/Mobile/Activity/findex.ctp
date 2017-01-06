@@ -96,7 +96,7 @@
     {{#datas}}
     <li class="flex flex_justify">
         <div class="flex">
-            <span class="place silver">{{index}}</span>
+            <span class="place {{#top3}}silver{{/top3}}">{{index}}</span>
             <div class="place_info">
             <span class="avatar">
                 <img src="{{user.avatar}}">
@@ -156,7 +156,7 @@
     <li class='ul-con'>
         <div class="voted_con flex flex_justify">
             <div class="flex" onclick="window.location.href='/user/male-homepage/{{id}}'">
-                <span class="voted_place silver">{{index}}</span>
+                <span class="voted_place {{#top3}}silver{{/top3}}">{{index}}</span>
                 <div class="voted_place_info">
                     <span class="avatar">
                         <img src="{{avatar}}"/>

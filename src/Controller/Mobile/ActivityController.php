@@ -523,6 +523,10 @@ class ActivityController extends AppController
                 ->map(function ($row) use (&$i, $user) {
                     $row['user']['age'] = getAge($row['user']['birthday']);
                     $row['index'] = $i;
+                    $row['top3'] = false;
+                    if($i <= 3) {
+                        $row['top3'] = true;
+                    }
                     $row['ishead'] = false;
                     if ($user) {
                         $row['ismale'] = ($user->gender == 1) ? true : false;
@@ -609,6 +613,10 @@ class ActivityController extends AppController
                         $row['ismale'] = false;
                     }
                     $row['index'] = $i;
+                    $row['top3'] = false;
+                    if($i <= 3) {
+                        $row['top3'] = true;
+                    }
                     $i++;
                     return $row;
                 });
