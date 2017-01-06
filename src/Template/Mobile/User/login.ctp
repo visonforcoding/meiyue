@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="login_box_btn">
-        <a id="submit" class="btn btn_bg_y disabled mt160">登录</a>
+        <a id="submit" class="btn btn_bg_y disabled mt120">登录</a>
         <div class="login_group mt40">
             <a href="/user/register?gender=1" class="btn btn_bg_t ">注册男</a>
             <a href="/user/register?gender=2" class="btn btn_bg_t">注册女</a>
