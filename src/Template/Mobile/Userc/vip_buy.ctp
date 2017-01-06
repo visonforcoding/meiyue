@@ -13,11 +13,11 @@
                     <!-- VIP套餐 -->
                     <?php if($item->type == 1): ?>
                     <li>
-                        <div class="items flex flex_justify"  onclick="payView(<?= $item->id; ?>)">
+                        <div class="items flex flex_justify"  onclick="toPay(<?= $item->id; ?>, <?= $item->price; ?>)">
                             <h3 class="commontext bright color_friends">
-                                <span class="high-vip">
-                                    <img src="/mobile/images/higther-vip.png" class="responseimg"/>
-                                </span> 
+                                <span class='btn_dark'>
+                                    <?= $item->title; ?>
+                                </span>
                                 <i class="unit"><?= $item->vali_time; ?>天</i>
                             </h3>
                             <div class="smalldes closed" data-type = "0">
@@ -139,7 +139,52 @@
         return false;
     });
 
-    //支付
+
+    /**
+     * 购买vip套餐
+     */
+    var usermoney = <?= isset($user->money)?$user->money:0;?>;
+    function toPay($packid, $price) {
+        if(usermoney < $price) {
+            $.util.confirm(
+                '余额不足',
+                '您的美币不足，是否进行充值支付？',
+                function() {
+                    payView($packid);
+                },
+                null
+            );
+            return;
+        }
+        $.util.confirm(
+            '确认购买',
+            '确定支付'+$price+'美币购买？',
+            function() {
+                $.util.showPreloader();
+                $.ajax({
+                    type: 'POST',
+                    url: '/userc/taocan-pay',
+                    dataType: 'json',
+                    data: {pid: $packid},
+                    success: function (res) {
+                        $.util.hidePreloader();
+                        if (typeof res === 'object') {
+                            $.util.alert(res.msg);
+                            if (res.status) {
+                                location.href='/userc/vip-center';
+                            }
+                        }
+                    }
+                });
+            },
+            null
+        );
+    }
+
+
+    /**
+     * 购买充值套餐
+     */
     function payView($packid)
     {
         $.util.showPreloader();
@@ -153,7 +198,7 @@
                     if (res.status) {
                         document.location.href = res.redirect_url;
                     } else {
-                        alert(res.msg);
+                        $.util.alert(res.msg);
                     }
                 }
             }
