@@ -21,7 +21,7 @@
             .checkbwh .c_date .c_date_head{height:40px;background: #fff;font-size: 15px;position: relative;z-index: 2;}
             .checkbwh .c_date .c_date_head div{text-align: center;}
         </style>
-         <div class="checkbwh" id="checkbwh">
+         <div class="checkbwh" id="checkbwh" hidden>
             <div class="title inner flex flex_justify">
                 <span class="l_sure" id="cancel-btn">取消</span>
                 <span class="r_cancel" id="submit-btn">确定</span>
@@ -95,7 +95,7 @@
                 </div>
             </div>
             <script type="text/javascript">
-                var checkbwh = function(o){
+                var checkBwh = function(o){
                      var opt = {
                         calfun: null, //回调函数
                         bust: 0,  //胸围
@@ -104,7 +104,7 @@
                     }
                     $.extend(this, this.opt, o);
                 }
-                 $.extend(checkbwh.prototype, {
+                 $.extend(checkBwh.prototype, {
                     init:function(func, bust, waist, hips){
                         this.calfun = func;
                         this.addEvent();
@@ -161,7 +161,7 @@
                         return;
                     }
                     if(!obj.hips){
-                        $.util.alert("请选臀围!");
+                        $.util.alert("请选择臀围!");
                         return;
                     }
                      obj.hide();
@@ -195,7 +195,7 @@
                         return content.eq(num).attr('val');
                     }
                  });
-                 var a = new checkbwh();
-                 a.init(null, '81', '62', '82');
+                 // var a = new checkbwh();
+                 // a.init(null, '81', '62', '82');
                  
             </script>
