@@ -47,11 +47,12 @@
                             <p class="smallarea">注意依次做以下动作：点头，露齿笑，往左转头，举右手</p>
                             <div id="auth_video" class="btn btn_dark_t mt40">点击录制</div>
                             <div class="fact_identify mt40"   style="display: none;">
-                                <dl  class="Idcard personimg">
-                                    <dt>
-                                    <img src="/mobile/images/upimg.png" alt="" />
-                                    </dt>
-                                </dl>
+                              <div class="home_pic_info" style='padding:0;'>
+                                <div class="home_video relpotion flex flex_center">
+                                     <img src="/mobile/images/upimg.png" alt="" />
+                                     <div class="play-icon"><i class="iconfont"></i></div>
+                                </div>
+                              </div>
                             </div>
                         </div>
                     </div>
