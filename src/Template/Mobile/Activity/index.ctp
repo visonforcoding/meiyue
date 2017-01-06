@@ -31,24 +31,25 @@
             <section>
                 <div class="abanner">
                     <ul class="tou-imglist" id="oBox">
-                        <?php foreach($carousels as $carousel): ?>
-                            <li><a href="<?= $carousel->to_url; ?>"><img src="<?= createImg($carousel->url); ?>"/></a></li>
+                        <?php foreach ($carousels as $carousel): ?>
+                            <li><a href="<?= $carousel->to_url; ?>"><img src="<?= createImg($carousel->url); ?>"/></a>
+                            </li>
                         <?php endforeach; ?>
                     </ul>
                     <div class="yd flex flex_center" id="oTab">
-                        <?php foreach($carousels as $key => $$carousel): ?>
-                            <span class="<?= ($key == 0)?'cur':'';?>"></span>
+                        <?php foreach ($carousels as $key => $$carousel): ?>
+                            <span class="<?= ($key == 0) ? 'cur' : ''; ?>"></span>
                         <?php endforeach; ?>
                     </div>
                 </div>
-                <?php if(isset($user) && $user->gender == 2): ?>
-                <div class="invite">
-                    <a href="#this" class="btn btn_t_border">邀请好友支持我</a>
-                </div>
+                <?php if (isset($user) && $user->gender == 2): ?>
+                    <div class="invite">
+                        <a href="#this" class="btn btn_t_border">邀请好友支持我</a>
+                    </div>
                 <?php else: ?>
-                <div class="cover_bottom_header mt20">
-                    <img src="/mobile/images/tp.jpg"/>
-                </div>
+                    <div class="cover_bottom_header mt20">
+                        <img src="/mobile/images/tp.jpg"/>
+                    </div>
                 <?php endif; ?>
                 <div class="rank_list">
                     <ul class="rank_header">
@@ -85,7 +86,8 @@
                     <img src="{{user.avatar}}"/>
                 </span>
             <div class="place_info">
-                <h3 class="userinfo ft0"><i class="name">{{user.nick}}</i><span class="age">{{user.age}}岁</span> <em class="price color_y fr"><i
+                <h3 class="userinfo ft0"><i class="name">{{user.nick}}</i><span class="age">{{user.age}}岁</span> <em
+                        class="price color_y fr"><i
                             class="lagernum">{{total_price}}</i>元/约会金</em>
                 </h3>
                 <h3 class="otherinfo">
@@ -128,7 +130,7 @@
     {{#datas}}
     <li class="flex flex_justify" onclick="window.location.href='/index/homepage/{{user.id}}'">
         <div class="flex">
-            <span class="place silver">{{index}}</span>
+            <span class="place {{#top3}}silver{{/top3}}">{{index}}</span>
             <div class="place_info">
             <span class="avatar">
                 <img src="{{user.avatar}}">
@@ -144,35 +146,17 @@
             </div>
         </div>
         {{#ismale}}
-    <span class="button btn_dark suport-btn" onclick="window.location.href='/gift/index/{{user.id}}';event.stopPropagation(); ">
+    <span class="button btn_dark suport-btn"
+          onclick="window.location.href='/gift/index/{{user.id}}';event.stopPropagation(); ">
         支持她
     </span>
         {{/ismale}}
     </li>
-    {{#ishead}}<div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
+    {{#ishead}}
+    <div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
     {{/datas}}
 </script>
 
-
-
-<script id="mytop-list-tpl" type="text/html">
-    {{#mydata}}
-    <li class="flex flex_justify" onclick="window.location.href='/index/homepage/{{user.id}}'">
-        <div class="flex">
-            <span class="place silver">{{index}}</span>
-            <div class="place_info">
-            <span class="avatar">
-                <img src="{{user.avatar}}">
-            </span>
-                <h3>
-                <span class="place_name"><i class="name">{{user.nick}}</i><!-- <i class="rich-vip">VIP</i><i
-                        class="cup"><img src="/mobile/images/cup.jpg"/></i>--></span>
-                <span class="place_number color_gray"><em class="color_y"><i
-                            class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
-                            本周魅力值：<i class="color_y max-num">{{total}}</i>
-                        </span>
-                </h3>
-</script>
 <script id="rich-list-tpl" type="text/html">
     {{#datas}}
     <li class='ul-con'>
@@ -182,7 +166,9 @@
                 <div class="voted_place_info">
                     <span class="avatar"><img src="{{avatar}}"/></span>
                     <h3>
-                        <span class="voted_name"><i class='nick'>{{nick}}</i><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}</span>
+                        <span class="voted_name"><i class='nick'>{{nick}}</i><span class="hot"><img
+                                    src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span
+                                class="highter-vip">{{upackname}}</span>{{/upackname}}</span>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
                 </div>
@@ -208,7 +194,9 @@
                         <img src="{{avatar}}"/>
                     </span>
                     <h3>
-                        <span class="voted_name"><i class='nick'>{{nick}}</i><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}</span>
+                        <span class="voted_name"><i class='nick'>{{nick}}</i><span class="hot"><img
+                                    src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span
+                                class="highter-vip">{{upackname}}</span>{{/upackname}}</span>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
                 </div>
@@ -269,15 +257,15 @@
 
     $.extend(activity.prototype, {
         init: function () {
-            /*var curtr = '<?= isset($curtab)?$curtab:'date'; ?>';
-            if(curtr == 'date') {
-                this.cur_tab = 1;
-            } else if(curtr == 'party') {
-                this.cur_tab = 2;
-            } else if(curtr == 'top') {
-                this.cur_tab = 3;
-            }*/
-            if(/#1|#2|#3/.test(location.hash)) {
+            /*var curtr = '<?= isset($curtab) ? $curtab : 'date'; ?>';
+             if(curtr == 'date') {
+             this.cur_tab = 1;
+             } else if(curtr == 'party') {
+             this.cur_tab = 2;
+             } else if(curtr == 'top') {
+             this.cur_tab = 3;
+             }*/
+            if (/#1|#2|#3/.test(location.hash)) {
                 this.cur_tab = location.hash.replace('#', '');
             }
             this.tabEvent();
@@ -301,7 +289,7 @@
                 min: $(window).width(), //响应滑动的最小移动距离
                 viewDom: $('.activity_list'),
                 fun: function (index) {
-                    location.hash = '#'+index;
+                    location.hash = '#' + index;
                     index = parseInt(index);
                     //判断是否是在当前页，禁止本页触发tab切换事件
                     if (obj.cur_tab == index && !this.isInit) {
@@ -318,7 +306,7 @@
         tabInit: function (index) {
             if (!this.tabInitLoad[index]) return;
             //首次加载数据
-            if(index != this.tab_top) {
+            if (index != this.tab_top) {
                 this.asyLoadData(this.cur_tab);
             } else {
                 if (!this.top_obj) {
@@ -360,7 +348,7 @@
                             if (obj.tabInitLoad[curtab]) {
                                 nodataRend = Mustache.render(
                                     nodataTmpl,
-                                    {'text':'约会即将发布，敬请期待哟~', 'icon':'xe60f;', 'top':'350'}
+                                    {'text': '约会即将发布，敬请期待哟~', 'icon': 'xe60f;', 'top': '350'}
                                 );
                             }
                             break;
@@ -368,12 +356,12 @@
                             if (obj.tabInitLoad[curtab]) {
                                 nodataRend = Mustache.render(
                                     nodataTmpl,
-                                    {'text':'选美即将上线，敬请期待哟~', 'icon':'xe645;', 'top':'80'}
+                                    {'text': '选美即将上线，敬请期待哟~', 'icon': 'xe645;', 'top': '80'}
                                 );
                                 /*if(data.carousel) {
-                                    $('#party-coverimg')
-                                        .html("<a href='"+data.carousel.to_url+"'><img src='"+data.carousel.url+"'/></a>");
-                                }*/
+                                 $('#party-coverimg')
+                                 .html("<a href='"+data.carousel.to_url+"'><img src='"+data.carousel.url+"'/></a>");
+                                 }*/
                             }
                             break;
                         case obj.tab_top:
@@ -382,15 +370,15 @@
                             break;
                     }
 
-                    if(obj.tabInitLoad[curtab]) {
-                        if((data.datas).length == 0) {
+                    if (obj.tabInitLoad[curtab]) {
+                        if ((data.datas).length == 0) {
                             rendered = nodataRend;
                         }
                         $(obj.listId[curtab]).html(rendered);
                         obj.tabInitLoad[curtab] = 0;
                     } else {
-                        if((data.datas).length == 0) {
-                            if(obj.tabLoadEnd[curtab] && obj.tabLoadHold[curtab]) return;
+                        if ((data.datas).length == 0) {
+                            if (obj.tabLoadEnd[curtab] && obj.tabLoadHold[curtab]) return;
                             obj.tabLoadEnd[curtab] = 1;
                             $(obj.listId[curtab]).append('<p class="smallarea aligncenter mt20">没有更多数据了</p>');
                             return;
@@ -425,8 +413,8 @@
     $.extend(topPage.prototype, {
         init: function () {
             var obj = this;
-            $('.top-tab').each(function() {
-                if($(this).attr('act') == ('top_'+obj.cur_tab)) {
+            $('.top-tab').each(function () {
+                if ($(this).attr('act') == ('top_' + obj.cur_tab)) {
                     $(this).addClass('current');
                 }
             });
@@ -465,9 +453,9 @@
                 success: function (res) {
                     $.util.hidePreloader();
                     if (res.status) {
-                        if('rich_list' == tab) {
-                            if(res.mydata) {
-                                if(res.mydata.paiming) {
+                        if ('rich_list' == tab) {
+                            if (res.mydata) {
+                                if (res.mydata.paiming) {
                                     var mytmpl = $('#myrich-tpl').html();
                                     var myrend = Mustache.render(mytmpl, res);
                                     $('#my-top').html(myrend);
@@ -491,31 +479,31 @@
     activityobj.init();
 
     /*$(document).on('tap', '.likeIt', function () {
-        var user_id = $(this).data('id');
-        var $obj = $(this);
-        followIt(user_id,$obj);
-    });
-    function followIt(id, $obj) {
-        $.util.ajax({
-            url: '/user/follow',
-            data: {id: id},
-            func: function (res) {
-                $obj.find('i').toggleClass('activeico');
-                $.util.alert(res.msg);
-            }
-        })
-    }*/
+     var user_id = $(this).data('id');
+     var $obj = $(this);
+     followIt(user_id,$obj);
+     });
+     function followIt(id, $obj) {
+     $.util.ajax({
+     url: '/user/follow',
+     data: {id: id},
+     func: function (res) {
+     $obj.find('i').toggleClass('activeico');
+     $.util.alert(res.msg);
+     }
+     })
+     }*/
 
     /*$(document).on('tap', '.act-item', function() {
-        var actid = $(this).data('id');
-        window.location.href='/activity/view/' + actid;
-    });*/
+     var actid = $(this).data('id');
+     window.location.href='/activity/view/' + actid;
+     });*/
 
     function toActView(actid) {
-        window.location.href='/activity/view/' + actid;
+        window.location.href = '/activity/view/' + actid;
     }
 
-    $(document).on('click', '.join-act', function(event) {
+    $(document).on('click', '.join-act', function (event) {
         event.stopPropagation();
         $actid = $(this).data('id');
         window.location.href = '/activity/pay-view/' + $actid;
@@ -524,7 +512,7 @@
     //头牌轮播图
     $.util.loop({
         tp: 'img', //图片img或是文字text
-        min : 5,
+        min: 5,
         loadImg: true,
         moveDom: $('#oBox'), // eg: $('#loopImgUl')
         moveChild: $('#oBox li'), //$('#loopImgUl li')
