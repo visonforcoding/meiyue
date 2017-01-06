@@ -84,7 +84,7 @@
         </div>
         <div class="items_adress flex flex_justify">
             <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
-            <div class="button {{^isend}}join-act btn_dark{{/isend}}{{#isend}}btn_light{{/isend}}" data-id="{{id}}">
+            <div class="button {{^isend}}btn_dark{{/isend}}{{#isend}}btn_light{{/isend}}" {{^isend}}onclick="joinAct({{id}})"{{/isend}}">
                 {{^isend}}我要报名{{/isend}}{{#isend}}报名结束{{/isend}}
             </div>
         </div>
@@ -461,11 +461,15 @@
         window.location.href='/activity/view/' + actid;
     }
 
-    $(document).on('click', '.join-act', function(event) {
+    function joinAct($actid) {
         event.stopPropagation();
-        $actid = $(this).data('id');
-        window.location.href = '/activity/pay-view/' + $actid;
-    });
+        $.util.checkLogin('/activity/pay-view/' + $actid);
+    }
+    /*$(document).on('click', '.join-act', function(event) {
+         event.stopPropagation();
+         $actid = $(this).data('id');
+         $.util.checkLogin('/activity/pay-view/' + $actid);
+    });*/
 
 
     //头牌轮播图
