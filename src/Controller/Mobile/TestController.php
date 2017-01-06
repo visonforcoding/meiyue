@@ -21,6 +21,7 @@ use MongoDB\BSON\Timestamp;
  */
 class TestController extends AppController {
 
+
     public function test() {
         $this->loadComponent('Business');
         //var_dump(round1214 / 1000);
@@ -37,18 +38,19 @@ class TestController extends AppController {
         exit();
         //debug(\Cake\Core\Configure::read('Redis.default'));
     }
-    
-    public function testTime(){
+
+    public function testTime() {
         $time = Time::now();
         debug($time);
-        debug($time->day);exit();
+        debug($time->day);
+        exit();
     }
 
-    public function getIm(){
+    public function getIm() {
         
     }
-    
-    protected  function dec2s4($dec) {
+
+    protected function dec2s4($dec) {
         $base = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $result = '';
         do {
@@ -255,100 +257,100 @@ class TestController extends AppController {
 //        debug($area);exit();
             }
 
-            public function testIm($from, $to, $type = 5) {
-                $Netim = new \App\Pack\Netim();
-                if ($type == 1) {
-                    $msg = $Netim->generateTextMsgBody(createRandomCode(2) . '测试消息' . date('Y-m-d H:i:s'));
-                }
-                if ($type == 5) {
-                    $from_body = '美女XX已接受了你的请求,请及时赴约';
-                    $from_prefix = '';
-                    $from_link = $this->Util->getServerDomain() . '/order/detail/1';
-                    $from_body = '美女XX已接受了你的请求,请及时赴约';
-                    $from_link_text = '查看详情';
-                    $from_msg = $Netim->generateCustomMsgBody($from_body, $from_link, $from_link_text, $from_prefix);
+    public function testIm($from, $to, $type = 5) {
+        $Netim = new \App\Pack\Netim();
+        if ($type == 1) {
+            $msg = $Netim->generateTextMsgBody(createRandomCode(2) . '测试消息' . date('Y-m-d H:i:s'));
+        }
+        if ($type == 5) {
+            $from_body = '美女XX已接受了你的请求,请及时赴约';
+            $from_prefix = '';
+            $from_link = $this->Util->getServerDomain() . '/order/detail/1';
+            $from_body = '美女XX已接受了你的请求,请及时赴约';
+            $from_link_text = '查看详情';
+            $from_msg = $Netim->generateCustomMsgBody($from_body, $from_link, $from_link_text, $from_prefix);
 
-                    $to_prefix = '[约吃饭]';
-                    $to_link = $this->Util->getServerDomain() . '/order/detail/1';
-                    $to_body = '我希望你在拉格朗日傅里叶变换餐厅等我，我已付完钱开好了。。';
-                    $to_link_text = '查看详情';
-                    $to_msg = $Netim->generateCustomMsgBody($to_body, $to_link, $to_link_text, $to_prefix);
-                    $msg = $Netim->generateCustomMsg(5, $from_msg, $to_msg);
-                    $res = $Netim->sendMsg($from, $to, $msg);
-                    debug($msg);
-                    $res = $Netim->sendMsg($from, $to, $msg);
-                    debug($res);
-                    exit();
-                    return;
-                }
+            $to_prefix = '[约吃饭]';
+            $to_link = $this->Util->getServerDomain() . '/order/detail/1';
+            $to_body = '我希望你在拉格朗日傅里叶变换餐厅等我，我已付完钱开好了。。';
+            $to_link_text = '查看详情';
+            $to_msg = $Netim->generateCustomMsgBody($to_body, $to_link, $to_link_text, $to_prefix);
+            $msg = $Netim->generateCustomMsg(5, $from_msg, $to_msg);
+            $res = $Netim->sendMsg($from, $to, $msg);
+            debug($msg);
+            $res = $Netim->sendMsg($from, $to, $msg);
+            debug($res);
+            exit();
+            return;
+        }
+        exit();
+    }
+
+    public function testImByOrder($id) {
+        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+        $dateorder = $DateorderTable->get($id, [
+            'contain' => [
+                'Dater' => function($q) {
+                    return $q->select(['id', 'phone', 'nick', 'imaccid', 'avatar']);
+                },
+                        'Buyer' => function($q) {
+                    return $q->select(['id', 'phone', 'nick', 'imaccid', 'avatar']);
+                },
+                        'UserSkill.Skill'
+                    ]
+                ]);
+                $this->loadComponent('Netim');
+                $res = $this->Netim->prepayMsg($dateorder);
+                debug($res);
                 exit();
-            }
-
-            public function testImByOrder($id) {
-                $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
-                $dateorder = $DateorderTable->get($id, [
-                    'contain' => [
-                        'Dater' => function($q) {
-                            return $q->select(['id', 'phone', 'nick', 'imaccid', 'avatar']);
-                        },
-                                'Buyer' => function($q) {
-                            return $q->select(['id', 'phone', 'nick', 'imaccid', 'avatar']);
-                        },
-                                'UserSkill.Skill'
-                            ]
-                        ]);
-                        $this->loadComponent('Netim');
-                        $res = $this->Netim->prepayMsg($dateorder);
-                        debug($res);
-                        exit();
-           }
+    }
 
                     /**
                      * 
                      */
-                    public function testGift($from, $to, $gift = 1) {
-                        $UserTable = TableRegistry::get('User');
-                        $from = $UserTable->get('70');
-                        $to = $UserTable->get('72');
-                        $GiftTable = TableRegistry::get('Gift');
-                        $gift = $GiftTable->get('4');
-                        $this->loadComponent('Netim');
-                        $res = $this->Netim->giftMsg($from, $to, $gift);
-                        debug($res);
-                        exit();
-                    }
+    public function testGift($from, $to, $gift = 1) {
+        $UserTable = TableRegistry::get('User');
+        $from = $UserTable->get('70');
+        $to = $UserTable->get('72');
+        $GiftTable = TableRegistry::get('Gift');
+        $gift = $GiftTable->get('4');
+        $this->loadComponent('Netim');
+        $res = $this->Netim->giftMsg($from, $to, $gift);
+        debug($res);
+        exit();
+    }
 
-                    public function testRe() {
-                        return $this->redirect('/test/b');
-                        echo 'test';
-                        exit();
-                    }
+    public function testRe() {
+        return $this->redirect('/test/b');
+        echo 'test';
+        exit();
+    }
 
-                    public function b() {
-                        echo 'fff';
-                        exit();
-                    }
+    public function b() {
+        echo 'fff';
+        exit();
+    }
 
-                    public function std($str) {
-                        fclose(STDOUT);
-                        $o = file_get_contents('php://stdout');
-                        fopen('app.log', 'wb');
-                    }
+    public function std($str) {
+        fclose(STDOUT);
+        $o = file_get_contents('php://stdout');
+        fopen('app.log', 'wb');
+    }
 
-                    public function testSms() {
-                        $mobiles = ['13763053901'];
-                        $content = '程序猿何必为难程序猿';
-                        $this->loadComponent('Sms');
-                        $res = $this->Sms->send($mobiles, $content);
-                        debug($res);
-                        exit();
-                    }
+    public function testSms() {
+        $mobiles = ['13763053901'];
+        $content = '程序猿何必为难程序猿';
+        $this->loadComponent('Sms');
+        $res = $this->Sms->send($mobiles, $content);
+        debug($res);
+        exit();
+    }
 
-                    public function testCity() {
-                        $res = getCity('天津,天津');
-                        debug($res);
-                        exit();
-                    }
+    public function testCity() {
+        $res = getCity('天津,天津');
+        debug($res);
+        exit();
+    }
 
-                }
+}
                 

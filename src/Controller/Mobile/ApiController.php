@@ -20,7 +20,7 @@ class ApiController extends AppController {
 
     protected $noAcl = [
         'upload', 'wxtoken', 'ckregister', 'recordphone', 'saveuserbasicpic',
-        'saveuserbasicvideo', 'getmapusers', 'gettoken'
+        'saveuserbasicvideo', 'getmapusers', 'gettoken','reportuser'
     ];
 
     public function initialize() {
@@ -67,8 +67,8 @@ class ApiController extends AppController {
     }
 
     protected function baseCheckAcl() {
-        //\Cake\Log\Log::debug('接口debug', 'devlog');
-        //\Cake\Log\Log::debug($this->request->data(), 'devlog');
+        \Cake\Log\Log::debug('接口debug', 'devlog');
+        \Cake\Log\Log::debug($this->request->data(), 'devlog');
         $timestamp = $this->request->data('timestamp');
         $access_token = $this->request->data('access_token');
         if (!$timestamp || !$access_token) {
@@ -498,6 +498,26 @@ class ApiController extends AppController {
             $user->avatar = $this->Util->getServerDomain() . $user->avatar;
             $this->jsonResponse(['status' => true, 'redirect_url' => $redirect_url,
                 'token_uin' => $user_token, 'msg' => '登入成功', 'user' => $user]);
+        }
+    }
+    
+    
+    
+    /**
+     * 举报用户
+     */
+    public function reportUser(){
+        $user_id = $this->request->data('user_id');
+        $type = $this->request->data('type');
+        if(!$user_id||!$type){
+            $this->jsonResponse(false,'参数不正确');
+        }
+        $ReportTable = \Cake\ORM\TableRegistry::get('Report');
+        $report = $ReportTable->newEntity($this->request->data());
+        if($ReportTable->save($report)){
+            $this->jsonResponse(true,'保存成功');
+        }else{
+            $this->jsonResponse(false,'保存失败');
         }
     }
 

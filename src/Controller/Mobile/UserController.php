@@ -192,7 +192,7 @@ class UserController extends AppController {
                 //男性则直接登录
                 $user->reg_step = 9;  //注册完毕
                 $user->status = 0;
-                $user->is_agent = 2;  //默认不是经纪人
+                $user->is_agent = 1;  //默认不是经纪人
             }else{
                 $user->reg_step = 1;
                 $user->status = 1;
