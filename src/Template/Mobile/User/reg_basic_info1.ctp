@@ -6,7 +6,7 @@
     </div>
 </header>-->
 <link rel="stylesheet" type="text/css" href="/mobile/css/LArea.css"/>
-<div class="wraper bgff">
+<div class="wraper">
     <!--基本信息三步-->
     <div class="basicinfo-header">
         <div class="line-box">
@@ -27,7 +27,7 @@
         </div>
     </div>
     <form>
-        <div class="identify_img_ifo mt40">
+        <div class="identify_img_ifo">
             <ul class="inner">
                 <li class="clearfix">
                     <span class="fl">头 像</span>
@@ -131,64 +131,12 @@
                         </div>
                     </div>
                 </li>
-                <li class="bwh right-ico">
+                <li class="right-ico">
                     <div class="home_items">
                         <div class="home_list_l_info"><span class="itemsname">三</span><span class="itemsname">围</span>
                         </div>
-                        <div class="home_list_r_info flex flex_end">
-                            <div class="home-basic-option">
-                                <input id="bwh_b" name="bwh_b" type="text" placeholder="胸围" readonly="readonly"/>
-                                <select name="" onchange='tochange(this)'>
-                                    <option value="0">胸围</option>
-                                    <option value="80">80</option>
-                                    <option value="81">81</option>
-                                    <option value="82">82</option>
-                                    <option value="83">83</option>
-                                    <option value="84">84</option>
-                                    <option value="85">85</option>
-                                    <option value="86">86</option>
-                                    <option value="87">87</option>
-                                    <option value="88">88</option>
-                                    <option value="89">89</option>
-                                    <option value="90+">90+</option>
-                                </select>
-                            </div>
-                            |
-                            <div class="home-basic-option">
-                                <input id="bwh_w" name="bwh_w" type="text" placeholder="腰围" readonly="readonly"/>
-                                <select name="" onchange='tochange(this)'>
-                                    <option value="0">腰围</option>
-                                    <option value="60">60</option>
-                                    <option value="61">61</option>
-                                    <option value="62">62</option>
-                                    <option value="63">63</option>
-                                    <option value="64">64</option>
-                                    <option value="65">65</option>
-                                    <option value="66">66</option>
-                                    <option value="67">67</option>
-                                    <option value="68">68</option>
-                                    <option value="69">69</option>
-                                    <option value="70+">70+</option>
-                                </select>
-                            </div>
-                            |
-                            <div class="home-basic-option">
-                                <input id="bwh_h" name="bwh_h" type="text" placeholder="臀围" readonly="readonly"/>
-                                <select name="" onchange='tochange(this)'>
-                                    <option value="0">臀围</option>
-                                    <option value="80">80</option>
-                                    <option value="81">81</option>
-                                    <option value="82">82</option>
-                                    <option value="83">83</option>
-                                    <option value="84">84</option>
-                                    <option value="85">85</option>
-                                    <option value="86">86</option>
-                                    <option value="87">87</option>
-                                    <option value="88">88</option>
-                                    <option value="89">89</option>
-                                    <option value="90+">90+</option>
-                                </select>
-                            </div>
+                        <div class="home_list_r_info">
+                            <input id="bwh_b" name="bwh_b" type="text" placeholder="请选择三围" readonly="readonly"/>
                         </div>
                     </div>
                 </li>
@@ -302,7 +250,7 @@
                 </li>-->
         </div>
     </form>
-    <div style='height:20px'></div>
+    <div style='height:20px' class='bgff'></div>
 </div>
 
 <!--标签选择框-->
@@ -311,6 +259,8 @@
 use Cake\I18n\Date; ?>
 <?= $this->cell('Select::place'); ?>
 <?= $this->start('script'); ?>
+<!--三围选择框-->
+<?= $this->element('checkbwh'); ?>
 <script src="/mobile/js/LArea.js" type="text/javascript"></script>
 <script src="/mobile/js/LAreaData1.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -407,14 +357,19 @@ use Cake\I18n\Date; ?>
             $(this).val(v.substr(0, 3));
         }
     });
-    $('#bwh_b, #bwh_h, #bwh_w').keyup(function () {
-        var v = parseInt($(this).val());
-        if (v > 99) {
-            $(this).val(($(this).val()).substr(0, 2))
-        }
-        if (v < 0) {
-            $(this).val(0);
-        }
+    // $('#bwh_b, #bwh_h, #bwh_w').keyup(function () {
+    //     var v = parseInt($(this).val());
+    //     if (v > 99) {
+    //         $(this).val(($(this).val()).substr(0, 2))
+    //     }
+    //     if (v < 0) {
+    //         $(this).val(0);
+    //     }
+    // });
+    var cBwh = new checkBwh();
+    cBwh.init(null,'82','62','82');
+    $('#bwh_b').on('tap', function() {
+         cBwh.show();
     });
     $('#profession').keyup(function () {
         var v = $(this).val();

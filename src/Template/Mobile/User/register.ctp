@@ -17,13 +17,13 @@
         </div>
         <div class="password">
             <i class="iconfont">&#xe69a;</i>
-            <input type="text" placeholder="请输入6位邀请码(选填)" id="incode" />
+            <input type="text" placeholder="(选填)6位邀请码" id="incode" />
         </div>
-        <a id="submit"  class="btn btn_bg_y mt160 disabled">注册</a>
+        <a id="submit"  class="btn btn_bg_y mt100 disabled">注册</a>
         <h4 class="getlogin"><a href="/user/login">已有账号，直接登录</a></h4>
     </div>
     <div class="register_bottom_tips">
-        <a href="#this">注册表明已阅读并接受“用户服务协议”</a>
+        <a href="#this">注册表明已阅读并接受<i class='color_y'>“用户服务协议”</i></a>
     </div>
 </div>
 <?= $this->start('script') ?>
