@@ -537,13 +537,35 @@ class IndexController extends AppController {
     }
 
 
-    /*public function test1() {
-        $this->loadComponent('Business');
-        $payOrderTb = TableRegistry::get('Payorder');
-        $payorder = $payOrderTb->get(45, ['contain' => ['User']]);
-        $res = $this->Business->handViewWxPay($payorder, 100, 2, 'No1247184781748917');
-        debug($res);
-        exit();
-    }*/
+    public function herJoinView($uid)
+    {
+        $actTb = TableRegistry::get('Actregistration');
+        $dateTb = TableRegistry::get('Date');
+        $acts = $actTb->find()
+            ->contain(['Activity'])
+            ->where(['user_id' => $uid, 'Actregistration.status' => 1, 'Activity.end_time >' => new Time()])
+            ->map(function($row) {
+                $row['start_time'] = $row['activity']['start_time'];
+                return $row;
+            })
+            ->toArray();
+        $dates = $dateTb->find()
+            ->contain(['User' => function($q) {
+                return $q->select(['avatar']);
+            }])
+            ->where(['user_id' => $uid, 'Date.status IN' => [1, 2], 'end_time >' => new Time()])
+            ->toArray();
+        $mergeArr = array_merge($acts, $dates);
+        $newArr = [];
+        foreach($mergeArr as $arr) {
+            $key = $arr['start_time'];
+            $newArr[$key->timestamp] = $arr;
+        }
+        $sortArr = asort($newArr);
+        $this->set([
+            'datas' => $sortArr,
+            'pageTitle'=>'已成功邀请的人'
+        ]);
+    }
 
 }
