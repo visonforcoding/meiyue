@@ -9,7 +9,7 @@
                 <div class="voted_place_info">
                     <span class="avatar"><img src="{{avatar}}"/></span>
                     <h3 onclick="location.href='/user/male-homepage/{{id}}'">
-                        <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="highter-vip">VIP普通</span></div>
+                        <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}</div>
                         <span class="voted_number color_gray">已消费：{{recharge}}美币</span>
                     </h3>
                 </div>
@@ -35,8 +35,8 @@
     <?php if ($top3): ?>
         <div class="rich_list_first inner flex">
             <div class="rich_first_left">
-                <div class="first_info">
-                    <div class="first_info_img" onclick="location.href='/user/male-homepage/<?= $top3[0]->id; ?>'">
+                <div class="first_info" onclick="location.href='/user/male-homepage/<?= $top3[0]->id; ?>'">
+                    <div class="first_info_img">
                         <img src="<?= $top3[0]->avatar ?>" class="richman"/>
                     </div>
                     <div class="first_info_bg"></div>
@@ -69,7 +69,7 @@
                                 <div class="voted_place_info">
                                     <span class="avatar" onclick="location.href='/user/male-homepage/<?= $top->id; ?>'"><img src="<?= $top->avatar ?>"/></span>
                                     <h3>
-                                        <span class="voted_name"><?= $top->nick ?></span>
+                                        <span class="voted_name"><?= $top->nick ?></span><?php if(isset($upackname)):?><span class="highter-vip"><?= $upackname; ?></span><?php endif; ?>
                                         <span class="voted_number color_gray">已消费：<?= $top->total ?>美币</span>
                                     </h3>
                                 </div>

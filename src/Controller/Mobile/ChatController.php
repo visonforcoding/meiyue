@@ -74,7 +74,41 @@ class ChatController extends AppController {
     public function meiyueMessage()
     {
         $this->set([
+            'user' => $this->user,
             'pageTitle'=>'平台消息',
         ]);
+    }
+
+    /**
+     *获取我的平台消息
+     */
+    public function getMessages($page = null)
+    {
+        $limit = 10;
+        $msgpush = TableRegistry::get('Msgpush');
+        //修改数据已读状态
+        $msgpush->query()->update()
+            ->set(['is_read' => 1])
+            ->where(['user_id' => $this->user->id])
+            ->limit(intval($limit))
+            ->page(intval($page))
+            ->execute();
+        $datas = $msgpush->find()
+            ->hydrate(false)
+            ->contain(['Ptmsg' => function ($q) {
+                return $q->where(['is_del' => 0])->orderDesc('create_time');
+            }])
+            ->where(['user_id' => $this->user->id])
+            ->limit(intval($limit))
+            ->page(intval($page))
+            ->formatResults(function ($items) {
+                return $items->map(function ($item) {
+                    $createTime = new Time($item['create_time']);
+                    $item['create_time'] = $createTime->i18nFormat('yyyy-MM-dd HH:mm');
+                    return $item;
+                });
+            })
+            ->toArray();
+        return $this->Util->ajaxReturn(['datas' => $datas]);
     }
 }
