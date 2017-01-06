@@ -15,10 +15,10 @@
                     <li>
                         <div class="items flex flex_justify"  onclick="toPay(<?= $item->id; ?>, <?= $item->price; ?>)">
                             <h3 class="commontext bright color_friends">
-                                <span class='btn_dark'>
-                                    <?= $item->title; ?>
+                                <span class="high-vip">
+                                    <img src="/mobile/images/higther-vip.png" class="responseimg"/>
                                 </span>
-                                <i class="unit"><?= $item->vali_time; ?>天</i>
+                                <?= $item->vali_time; ?>天</i>
                             </h3>
                             <div class="smalldes closed" data-type = "0">
                                 <i class="iconfont color_y">&#xe62f;</i>
@@ -145,6 +145,7 @@
      */
     var usermoney = <?= isset($user->money)?$user->money:0;?>;
     function toPay($packid, $price) {
+        $.util.showPreloader();
         if(usermoney < $price) {
             $.util.confirm(
                 '余额不足',

@@ -118,7 +118,7 @@
         </div>
         <div class="items_adress flex flex_justify">
             <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
-            <div class="{{^isend}}join-act btn_dark{{/isend}}{{#isend}}btn_light{{/isend}} button" data-id="{{id}}">
+            <div class="{{^isend}}btn_dark{{/isend}}{{#isend}}btn_light{{/isend}} button" {{^isend}}onclick="joinAct({{id}})"{{/isend}}>
                 {{^isend}}我要报名{{/isend}}{{#isend}}报名结束{{/isend}}
             </div>
         </div>
@@ -473,7 +473,6 @@
 
     var activityobj = new activity();
     activityobj.init();
-
     /*$(document).on('tap', '.likeIt', function () {
      var user_id = $(this).data('id');
      var $obj = $(this);
@@ -494,16 +493,22 @@
      var actid = $(this).data('id');
      window.location.href='/activity/view/' + actid;
      });*/
-
     function toActView(actid) {
         window.location.href = '/activity/view/' + actid;
     }
 
-    $(document).on('click', '.join-act', function (event) {
+
+    function joinAct($actid) {
+        event.stopPropagation();
+        $.util.checkLogin('/activity/pay-view/' + $actid);
+    }
+
+
+   /* $(document).on('click', '.join-act', function (event) {
         event.stopPropagation();
         $actid = $(this).data('id');
-        window.location.href = '/activity/pay-view/' + $actid;
-    });
+        $.util.checkLogin('/activity/pay-view/' + $actid);
+    });*/
 
     //头牌轮播图
     $.util.loop({

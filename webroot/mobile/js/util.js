@@ -433,14 +433,15 @@ $.util = {
             if(!url) {
                 return false;
             }
-            if($.util.isAPP) {
-                LEMON.event.login();
-            } else {
-                setTimeout(function () {
-                    location.href = '/user/login?redirect_url=' + encodeURI(document.URL);
-                }, 1000);
-            }
-
+            setTimeout(function() {
+                if($.util.isAPP) {
+                    LEMON.event.login();
+                } else {
+                    setTimeout(function () {
+                        location.href = '/user/login?redirect_url=' + encodeURI(document.URL);
+                    }, 1000);
+                }
+            }, 1000);
         }
     },
     /**

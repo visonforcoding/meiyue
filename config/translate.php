@@ -45,6 +45,7 @@ class UserStatus {
     const CHECKING = 1;  //待审核
     const NOPASS = 2;    //审核不通过
     const PASS = 3;    //审核通过
+    const SHARE_PASS = 4;    //非美女审核通过
 
     const GETJSON = -1; //获取json数据
     public static function getStatus($st = null) {
@@ -52,7 +53,8 @@ class UserStatus {
             UserStatus::NONEED => '无需审核',
             UserStatus::CHECKING => '正在审核',
             UserStatus::NOPASS => '审核不通过',
-            UserStatus::PASS => '审核通过'
+            UserStatus::PASS => '审核通过',
+            UserStatus::SHARE_PASS => '非美女审核通过'
         );
         if(CheckStatus::GETJSON == $st) {
             return json_encode($status);

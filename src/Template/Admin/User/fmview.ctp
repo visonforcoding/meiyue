@@ -207,34 +207,25 @@
             </tr>
             <tr>
                 <td class="horizone-title">
-                    待审核
-                    <input type="radio" <?= ($user->status == UserStatus::CHECKING)?'checked="checked"':''?> name="status" value="<?= UserStatus::CHECKING;?>" />
-                    审核通过
-                    <input type="radio" <?= ($user->status == UserStatus::PASS)?'checked="checked"':''?> name="status" value="<?= UserStatus::PASS;?>" />
-                    审核不通过
-                    <input type="radio" <?= ($user->status == UserStatus::NOPASS)?'checked="checked"':''?> name="status" value="<?= UserStatus::NOPASS;?>" />
+
+                    <input type="radio" <?= ($user->status == UserStatus::CHECKING)?'checked="checked"':''?> name="status" value="<?= UserStatus::CHECKING;?>" />待审核<br>
+                    <input type="radio" <?= ($user->status == UserStatus::PASS)?'checked="checked"':''?> name="status" value="<?= UserStatus::PASS;?>" />美女审核通过<br>
+                    <input type="radio" <?= ($user->status == UserStatus::PASS)?'checked="checked"':''?> name="status" value="<?= UserStatus::SHARE_PASS;?>" />非美女审核通过(不展示)<br>
+                    <input type="radio" <?= ($user->status == UserStatus::NOPASS)?'checked="checked"':''?> name="status" value="<?= UserStatus::NOPASS;?>" />审核不通过
                 </td>
                 <td class="horizone-title">
-                    待审核
-                    <input type="radio" <?= ($user->id_status == UserStatus::CHECKING)?'checked="checked"':''?> name="id_status" value="<?= UserStatus::CHECKING;?>" />
-                    审核通过
-                    <input type="radio" <?= ($user->id_status == UserStatus::PASS)?'checked="checked"':''?> name="id_status" value="<?= UserStatus::PASS;?>" />
-                    审核不通过
-                    <input type="radio" <?= ($user->id_status == UserStatus::NOPASS)?'checked="checked"':''?> name="id_status" value="<?= UserStatus::NOPASS;?>" />
+                    <input type="radio" <?= ($user->id_status == UserStatus::CHECKING)?'checked="checked"':''?> name="id_status" value="<?= UserStatus::CHECKING;?>" />待审核<br>
+                    <input type="radio" <?= ($user->id_status == UserStatus::PASS)?'checked="checked"':''?> name="id_status" value="<?= UserStatus::PASS;?>" />审核通过<br>
+                    <input type="radio" <?= ($user->id_status == UserStatus::NOPASS)?'checked="checked"':''?> name="id_status" value="<?= UserStatus::NOPASS;?>" />审核不通过
                 </td>
                 <td class="horizone-title">
-                    待审核
-                    <input type="radio" <?= ($user->auth_status == UserStatus::CHECKING)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::CHECKING;?>" />
-                    审核通过
-                    <input type="radio" <?= ($user->auth_status == UserStatus::PASS)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::PASS;?>" />
-                    审核不通过
-                    <input type="radio" <?= ($user->auth_status == UserStatus::NOPASS)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::NOPASS;?>" />
+                    <input type="radio" <?= ($user->auth_status == UserStatus::CHECKING)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::CHECKING;?>" />待审核<br>
+                    <input type="radio" <?= ($user->auth_status == UserStatus::PASS)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::PASS;?>" />审核通过<br>
+                    <input type="radio" <?= ($user->auth_status == UserStatus::NOPASS)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::NOPASS;?>" />审核不通过
                 </td>
                 <td class="horizone-title">
-                    正常
-                    <input type="radio" <?= ($user->enabled == 1)?'checked="checked"':''?> name="enabled" value="1" />
-                    禁用
-                    <input type="radio" <?= ($user->enabled == 0)?'checked="checked"':''?> name="enabled" value="0" />
+                    <input type="radio" <?= ($user->enabled == 1)?'checked="checked"':''?> name="enabled" value="1" />正常<br>
+                    <input type="radio" <?= ($user->enabled == 0)?'checked="checked"':''?> name="enabled" value="0" />禁用<br>
                 </td>
                 <td class="horizone-title" >
                     <button type='button' onclick="submitdata();">确定</button>
