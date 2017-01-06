@@ -71,10 +71,27 @@ class IndexController extends AppController {
             $query->contain([
                             'Fans'=>function($q)use($user_id){
                                 return $q->where(['user_id'=>$user_id]);
+                            },
+                            'Upacks' => function($q) {
+                                return $q->where([
+                                    'OR' => [
+                                        'rest_chat >' => 0,
+                                        'rest_browse >' =>0
+                                    ],
+                                    'deadline >=' => new Time()
+                                ])->orderDesc('cost')->limit(1);
                             }
                         ]);
         }
-        $top3 = $query->toArray();
+        $top3 = $query->map(function($row) {
+            $row['upackname'] = null;
+            if(count($row['upacks'])) {
+                $upk = $row['upacks'][0];
+                $row['upackname'] = $upk->honour_name;
+            }
+            $row['upacks'] = [];
+            return $row;
+        })->toArray();
         $this->set([
             'user' => $this->user,
             'pageTitle' => '美约',
@@ -88,16 +105,25 @@ class IndexController extends AppController {
     public function getRichList($page){
         $UserTable = TableRegistry::get('User');
         $query = $UserTable->find()->select(['id','avatar','nick','recharge'])
-                          ->where(['enabled'=>1,'gender'=>1])
-                          ->orderDesc('recharge')
-                          ->orderAsc('User.id')
-                          ->limit(10);
+            ->where(['enabled'=>1,'gender'=>1])
+            ->orderDesc('recharge')
+            ->orderAsc('User.id')
+            ->limit(10);
         $query->distinct(['User.id']);
         if($this->user){
             $user_id = $this->user->id;
             $query->contain([
                             'Fans'=>function($q)use($user_id){
                                 return $q->where(['user_id'=>$user_id]);
+                            },
+                            'Upacks' => function($q) {
+                                return $q->where([
+                                    'OR' => [
+                                        'rest_chat >' => 0,
+                                        'rest_browse >' =>0
+                                    ],
+                                    'deadline >=' => new Time()
+                                ])->orderDesc('cost')->limit(1);
                             }
                         ]);
         }
@@ -108,7 +134,15 @@ class IndexController extends AppController {
             $query->page($page);
         }
         \Cake\Log\Log::debug($query,'devlog');
-        $richs = $query->toArray();                
+        $richs = $query->map(function($row) {
+            $row['upackname'] = null;
+            if(count($row['upacks'])) {
+                $upk = $row['upacks'][0];
+                $row['upackname'] = $upk->honour_name;
+            }
+            $row['upacks'] = [];
+            return $row;
+        })->toArray();
         return $this->Util->ajaxReturn(['richs'=>$richs]);                            
     }
     /**

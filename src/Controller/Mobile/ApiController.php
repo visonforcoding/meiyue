@@ -521,4 +521,17 @@ class ApiController extends AppController {
         }
     }
 
+
+    /**
+     * 检查是否有未读消息
+     */
+    public function checkRead()
+    {
+        $uid = $this->request->data("uid");
+        $msgpush = TableRegistry::get('Msgpush');
+        $num = $msgpush->find()
+            ->where(['user_id' => $uid, 'is_read' => 0])
+            ->count();
+        $this->jsonResponse(['num' => $num]);
+    }
 }

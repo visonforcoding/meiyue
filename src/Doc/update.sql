@@ -735,3 +735,38 @@ ENGINE=InnoDB
 ALTER TABLE `lm_invitation`
 	ADD COLUMN `income` DOUBLE NOT NULL DEFAULT '0' COMMENT '获得佣金' AFTER `status`;
 
+#平台消息表
+CREATE TABLE `lm_ptmsg` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`towho` VARCHAR(50) NULL DEFAULT '1' COMMENT '推送对象：1#自定义 2#',
+	`msg_type` TINYINT(4) NULL DEFAULT '1' COMMENT '消息类型',
+	`title` VARCHAR(50) NOT NULL COMMENT '标题',
+	`body` VARCHAR(255) NOT NULL COMMENT '内容',
+	`to_url` VARCHAR(255) NOT NULL COMMENT '跳转链接',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL COMMENT '最近修改时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='平台消息'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=19
+;
+
+#平台消息推送表
+CREATE TABLE `lm_msgpush` (
+ `id` INT(11) NOT NULL AUTO_INCREMENT,
+ `msg_id` INT(11) NOT NULL DEFAULT '0' COMMENT '消息id',
+ `user_id` INT(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+ `is_read` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '是否已读：0#未读 1#已读',
+ `is_del` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '是否删除：0#否 1#是',
+ `create_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '发送时间',
+ `update_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
+ PRIMARY KEY (`id`)
+)
+COMMENT='消息推送表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=21
+;
+

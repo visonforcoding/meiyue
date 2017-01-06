@@ -162,13 +162,11 @@
     <li class='ul-con'>
         <div class="voted_con flex flex_justify">
             <div class="flex">
-                <span class="voted_place silver">{{index}}</span>
+                <span class="voted_place {{#top3}}silver{{/top3}}">{{index}}</span>
                 <div class="voted_place_info">
                     <span class="avatar"><img src="{{avatar}}"/></span>
                     <h3>
-                        <span class="voted_name"><i class='nick'>{{nick}}</i><span class="hot"><img
-                                    src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span
-                                class="highter-vip">{{upackname}}</span>{{/upackname}}</span>
+                        <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}</div>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
                 </div>
@@ -194,9 +192,7 @@
                         <img src="{{avatar}}"/>
                     </span>
                     <h3>
-                        <span class="voted_name"><i class='nick'>{{nick}}</i><span class="hot"><img
-                                    src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span
-                                class="highter-vip">{{upackname}}</span>{{/upackname}}</span>
+                        <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}</div>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
                 </div>
