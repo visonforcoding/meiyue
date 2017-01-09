@@ -367,7 +367,11 @@ use Cake\I18n\Date; ?>
     //     }
     // });
     var cBwh = new checkBwh();
-    cBwh.init(null,'82','62','82');
+    
+    function chooseBwhCallBack(bust,waist,hips){
+         $('#bwh_b').val(bust+ ' | '+ waist + ' | '+hips);
+    }
+    cBwh.init(chooseBwhCallBack);
     $('#bwh_b').on('tap', function() {
          cBwh.show();
     });
