@@ -164,6 +164,13 @@
                         $.util.alert("请选择臀围!");
                         return;
                     }
+                    if(obj.calfun){
+                        var _bust = obj.bust,
+                        _waist = obj.waist,
+                        _hips = obj.hips;
+                        obj.calfun(_bust,_waist,_hips);
+
+                    }
                      obj.hide();
                    },
                    addEvent:function(){
@@ -176,15 +183,15 @@
                     });
                       // 胸围
                     $('.bust').on('scroll', function () {
-                        obj._start_time = obj.scrollEvent(this, $('.bust li'));
+                        obj.bust = obj.scrollEvent(this, $('.bust li'));
                     });
                       // 腰围
                     $('.waist').on('scroll', function () {
-                        obj._start_time = obj.scrollEvent(this, $('.waist li'));
+                        obj.waist = obj.scrollEvent(this, $('.waist li'));
                     });
                       // 臀围
                     $('.hips').on('scroll', function () {
-                        obj._start_time = obj.scrollEvent(this, $('.hips li'));
+                        obj.hips = obj.scrollEvent(this, $('.hips li'));
                     });
                    },
                    scrollEvent: function(em, content) {
