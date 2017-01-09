@@ -185,6 +185,21 @@
                 break;
         }
     })
+
+    $('#videobtn,#picbtn').bind('click',function(event){
+        event.preventDefault();
+        var url = $(this).attr('href');
+        $.util.ajax({
+            url:'/userc/check-user-status',
+            func:function(res){
+                if(!res.status){
+                    $.util.alert(res.msg);
+                }else{
+                    document.location.href = url;
+                }
+            }
+        })
+    });
     //$.util.showPreloader('前往登录..');
     window.onActiveView = function () {
         if (!$.util.getCookie('token_uin')) {
