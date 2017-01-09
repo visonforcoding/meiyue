@@ -73,14 +73,18 @@
 </div>
 <div style="height:1.4rem;"></div>
 <div class="bottomblock">
-    <div class="flex flex_end">
-        <span class="total">约会金：<i class="color_y"></i>
-            <span class="color_y">
-                <i class="color_y lagernum"><?= getCost($date['start_time'], $date['end_time'], $date['price']); ?></i>美币
+    <?php if($date['status'] == 2): ?>
+        <div class="flex flex_end">
+            <span class="total">约会金：<i class="color_y"></i>
+                <span class="color_y">
+                    <i class="color_y lagernum"><?= getCost($date['start_time'], $date['end_time'], $date['price']); ?></i>美币
+                </span>
             </span>
-        </span>
-        <a id="order_pay" class="nowpay">立即支付</a>
-    </div>
+            <a id="order_pay" class="nowpay">立即支付</a>
+        </div>
+    <?php else: ?>
+        <a class="identify_footer_potion">已有赴约</a>
+    <?php endif; ?>
 </div>
 
 
