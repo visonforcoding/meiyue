@@ -137,7 +137,7 @@
                         <span data-orderid="{{id}}" class="orders go_order clickable" >确认到达</span>
                     <?php else: ?>
                         <span data-orderid="{{id}}" class="refuse complain clickable" >投诉</span>
-                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="refuse orders go_order clickable" >赴约成功</span>
+                        <span data-orderid="{{id}}" data-stime="{{start_time}}" class="refuse orders m_go_order clickable" >赴约成功</span>
                     <?php endif; ?>
                 </div>
                 {{/finsh_payall_begin}}
@@ -458,7 +458,7 @@ $(document).on('click', '.w_refuse_status_10', function () {
         });
     });
 });
-$(document).on('click', '.go_order', function () {
+$(document).on('click', '.m_go_order', function () {
     //赴约成功
     $.util.confirm('提示', '订单将结束,约单金额将转到美女账户中,确认操作？', function () {
         var orderid = $(this).data('orderid');
@@ -472,6 +472,20 @@ $(document).on('click', '.go_order', function () {
                 }, 300);
             }
         });
+    });
+});
+$(document).on('click', '.go_order', function () {
+    //赴约成功
+    var orderid = $(this).data('orderid');
+    $.util.ajax({
+        url: '/date-order/go-order',
+        data: {order: orderid},
+        func: function (res) {
+            $.util.alert(res.msg);
+            setTimeout(function () {
+                refresh();
+            }, 300);
+        }
     });
 });
 $('.date_list_header div').on('click', function () {
