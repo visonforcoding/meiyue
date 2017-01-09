@@ -7,8 +7,8 @@
             <div class="flex">
                 <span class="voted_place">{{count}}</span>
                 <div class="voted_place_info">
-                    <span class="avatar"><img src="{{avatar}}"/></span>
-                    <h3 onclick="location.href='/user/male-homepage/{{id}}'">
+                    <span class="avatar" onclick="location.href='/user/male-homepage/{{id}}'"><img src="{{avatar}}"/></span>
+                    <h3>
                         <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}</div>
                         <span class="voted_number color_gray">已消费：{{recharge}}美币</span>
                     </h3>
