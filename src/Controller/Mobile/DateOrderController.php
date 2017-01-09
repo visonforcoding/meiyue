@@ -35,8 +35,6 @@ class DateOrderController extends AppController
             return $q->select(['nick', 'birthday', 'gender', 'money', 'avatar']);
         }]]);
         $this->set(['date' => $date, 'user' => $this->user, 'pageTitle' => '美约-约会详情']);
-
-
     }
 
     

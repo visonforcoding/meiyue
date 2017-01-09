@@ -45,7 +45,6 @@ class ActregistrationTable extends Table
             'foreignKey' => 'activity_id',
             'joinType' => 'INNER'
         ]);
-
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

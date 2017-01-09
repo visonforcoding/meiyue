@@ -229,6 +229,12 @@ class IndexController extends AppController {
                 'UserSkills.Skill',
                 'UserSkills.Cost',
                 'Fans',
+                'Dates' => function($q) {
+                    return $q->where(['status IN' => [1, 2], 'end_time >' => new Time()]);
+                },
+                'Actreg.Activity' => function($q) {
+                    return $q->where(['Actreg.status' => 1, 'Activity.end_time >' => new Time()]);
+                },
                 'Follows',
                 'Upacks' => function($q) {
                     return $q->where([
@@ -245,6 +251,10 @@ class IndexController extends AppController {
             ])
             ->where(['id' => $id])
             ->map(function($row) {
+                $row->hasjoin = false;
+                if(count($row->dates) || count($row->actreg)) {
+                    $row->hasjoin = true;
+                }
                 if(count($row['upacks'])) {
                     $row->upakname = $row['upacks'][0]['title'];
                 }
@@ -542,28 +552,54 @@ class IndexController extends AppController {
         $actTb = TableRegistry::get('Actregistration');
         $dateTb = TableRegistry::get('Date');
         $acts = $actTb->find()
+            ->hydrate(false)
             ->contain(['Activity'])
             ->where(['user_id' => $uid, 'Actregistration.status' => 1, 'Activity.end_time >' => new Time()])
             ->map(function($row) {
                 $row['start_time'] = $row['activity']['start_time'];
+                $startTime = $row['activity']['start_time'];
+                $curTime = new Time();
+                $row['bucls'] = 'btn_dark';
+                if ((($row['activity']['male_rest'] == 0) && ($row['activity']['female_rest'] == 0)) || ($startTime <= $curTime)) {
+                    $row['bustr'] = '报名结束';
+                    $row['bucls'] = 'btn_light';
+                } else {
+                    $row['bustr'] = '我要报名';
+                }
                 return $row;
             })
             ->toArray();
         $dates = $dateTb->find()
+            ->hydrate(false)
             ->contain(['User' => function($q) {
                 return $q->select(['avatar']);
             }])
             ->where(['user_id' => $uid, 'Date.status IN' => [1, 2], 'end_time >' => new Time()])
+            ->map(function($row) {
+                $row['bucls'] = 'btn_dark';
+                switch ($row['status']) {
+                    case 1:
+                            $row['bustr'] = '已有赴约';
+                            $row['bucls'] = 'btn_light';
+                        break;
+                    case 2:
+                            $row['bustr'] = '立即赴约';
+                        break;
+                };
+                return $row;
+            })
             ->toArray();
         $mergeArr = array_merge($acts, $dates);
-        $newArr = [];
+        $keyArr = [];
         foreach($mergeArr as $arr) {
             $key = $arr['start_time'];
-            $newArr[$key->timestamp] = $arr;
+            $keyArr[] = $key->timestamp;
         }
-        $sortArr = asort($newArr);
+        if(count($keyArr)) {
+            array_multisort($keyArr, SORT_DESC, SORT_NUMERIC, $mergeArr);
+        }
         $this->set([
-            'datas' => $sortArr,
+            'datas' => $mergeArr,
             'pageTitle'=>'已成功邀请的人'
         ]);
     }

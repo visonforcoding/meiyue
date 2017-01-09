@@ -75,6 +75,16 @@ class UserTable extends Table {
             'className' => 'Inviter',
             'foreignKey' => 'inviter_id'
         ]);
+        //发起的约会
+        $this->hasMany('Dates', [
+            'className' => 'Date',
+            'foreignKey' => 'user_id'
+        ]);
+        //派对报名
+        $this->hasMany('Actreg', [
+            'className' => 'Actregistration',
+            'foreignKey' => 'user_id'
+        ]);
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

@@ -130,12 +130,14 @@
             </a>
         </li>
         <?php endif; ?>
-        <!--<li>
-            <a class="items flex flex_justify">
+        <?php if($user->hasjoin): ?>
+        <li>
+            <a class="items flex flex_justify" href="javascript:toJoind();">
                 <span class="seach_name">Ta的约会/派对</span>
                 <span class="golook"><i class="iconfont r_icon">&#xe605;</i></span>
             </a>
-        </li>-->
+        </li>
+        <?php endif; ?>
         <?php if($user->charm > 0): ?>
         <li>
             <a class="items flex flex_justify" href="javascript:toVoted();">
@@ -320,6 +322,10 @@
 
     function toVoted() {
         $.util.checkLogin('/user/voted/<?=$user->id?>');
+    }
+
+    function toJoind() {
+        location.href='/index/her-join-view/<?=$user->id?>';
     }
 
     $('#send-gift').on('click', function(event) {
