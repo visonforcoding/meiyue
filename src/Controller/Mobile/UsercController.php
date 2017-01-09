@@ -1305,6 +1305,9 @@ class UsercController extends AppController
                         $item['visiter']['avatar'] = createImg($item['visiter']['avatar']) . '?w=44&h=44&fit=stretch';
                         $item['visiter']['age'] = isset($item['visiter']['birthday']) ? getAge($item['visiter']['birthday']) : 'xx';
                         //$item['visiter']['isfan'] = (count($item['visiter']['follows']));
+                        if($item['visiter']['gender'] == 1) {
+                            $item['visiter']['charm'] = $item['visiter']['recharge'];
+                        }
                         return $item;
                     });
                 })->toArray();
