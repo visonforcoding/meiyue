@@ -67,7 +67,7 @@
             url = '/userc/visitors/' + page + '.json';
             $.getJSON(url, function (data) {
                 window.holdLoad = false;
-                if (data.visitors) {
+                if ((data.visitors).length) {
                     var rendered = Mustache.render(template, data);
                     if (more) {
                         $('#visitors-list').append(rendered);
@@ -77,6 +77,8 @@
                     }
                     $.util.hidePreloader();
                 } else {
+                    $.util.hidePreloader();
+                    $('#visitors-list').append('<p class="smallarea aligncenter mt20">没有更多数据了</p>');
                     window.holdLoad = true;
                 }
             });
