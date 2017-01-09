@@ -37,9 +37,6 @@
                         <a href="/user/share" class="btn btn_t_border">邀请好友支持我</a>
                     </div>
                 <?php else: ?>
-                    <div class="cover_bottom_header mt20">
-                        <img src="/mobile/images/tp.jpg"/>
-                    </div>
                 <?php endif; ?>
                 <div class="rank_list">
                     <ul class="rank_header">

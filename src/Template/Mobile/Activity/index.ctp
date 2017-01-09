@@ -47,9 +47,6 @@
                         <a href="#this" class="btn btn_t_border">邀请好友支持我</a>
                     </div>
                 <?php else: ?>
-                    <div class="cover_bottom_header mt20">
-                        <img src="/mobile/images/tp.jpg"/>
-                    </div>
                 <?php endif; ?>
                 <div class="rank_list">
                     <ul class="rank_header">
@@ -118,10 +115,12 @@
         </div>
         <div class="items_adress flex flex_justify">
             <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
-            <div class="{{^isend}}btn_dark{{/isend}}{{#isend}}btn_light{{/isend}} button" {{^isend}}onclick="joinAct({{id}})"{{/isend}}>
-                {{^isend}}我要报名{{/isend}}{{#isend}}报名结束{{/isend}}
-            </div>
+            <div class="{{^isend}}btn_dark{{/isend}}{{#isend}}btn_light{{/isend}} button"
+                 {{^isend}}onclick="joinAct({{id}})" {{
+            /isend}}>
+            {{^isend}}我要报名{{/isend}}{{#isend}}报名结束{{/isend}}
         </div>
+    </div>
     </div>
     {{/datas}}
 </script>
@@ -166,7 +165,10 @@
                 <div class="voted_place_info">
                     <span class="avatar"><img src="{{avatar}}"/></span>
                     <h3>
-                        <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}</div>
+                        <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img
+                                    src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span
+                                class="highter-vip">{{upackname}}</span>{{/upackname}}
+                        </div>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
                 </div>
@@ -192,7 +194,10 @@
                         <img src="{{avatar}}"/>
                     </span>
                     <h3>
-                        <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}</div>
+                        <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img
+                                    src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span
+                                class="highter-vip">{{upackname}}</span>{{/upackname}}
+                        </div>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
                 </div>
@@ -504,11 +509,11 @@
     }
 
 
-   /* $(document).on('click', '.join-act', function (event) {
-        event.stopPropagation();
-        $actid = $(this).data('id');
-        $.util.checkLogin('/activity/pay-view/' + $actid);
-    });*/
+    /* $(document).on('click', '.join-act', function (event) {
+     event.stopPropagation();
+     $actid = $(this).data('id');
+     $.util.checkLogin('/activity/pay-view/' + $actid);
+     });*/
 
     //头牌轮播图
     $.util.loop({
