@@ -9,7 +9,7 @@
             <div class="chat-left-info flex">
                 <div class="avatar">
                     <img src="{{avatar}}"/>
-                    <div class="num" {{unreadst}}>{{unread}}</div>
+                    <div class="num" {{unreadst}} {{unread}}></div>
                 </div>
                 <div class="chat-text">
                     <h3 class="name">{{nick}}</h3>
@@ -158,7 +158,7 @@ function onUpdateSession(session) {
             $('#chat-list').prepend($obj);
         }
         session.unread = getUnread(session.to, session.unread);
-        session.unread > 0 && $obj.find('.num').html(session.unread).show();
+        session.unread > 0 && $obj.find('.num').html('').show();
         $obj.find('span.last-info').html(session.lastMsg.text);
         $obj.find('time').html($.util.getImShowTime(new Date(session.updateTime)));
     }
@@ -243,8 +243,8 @@ function getRender(sessions, res) {
 }
 
 function getUnread(id, num) {
-    var total = LEMON.db.get('num' + id) || 0;
-    if (num)
+    var total = LEMON.db.get('num' + id) || num || 0;
+    if (num > 0)
         total++;
     LEMON.db.set('num' + id, total);
     return total;
