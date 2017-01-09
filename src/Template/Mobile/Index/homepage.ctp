@@ -454,7 +454,15 @@
         checkBrownR(2);
     })
 
-    $('#showWx').on('tap', function() {
+
+    $.util.tap($('#showWx'), function() {
+        if(!$.util.isLogin()) {
+            $.util.alert('请先登录');
+            setTimeout(function() {
+                LEMON.event.login();
+            }, 1000)
+            return;
+        }
         $.util.ajax({
             url:'/index/check-wx-rig/<?=$user->id?>',
             method: 'POST',
@@ -482,11 +490,48 @@
                         $('.raper .gopay').off('click');
                     });
                 }
-
             }
         })
     });
 
+    /*$('#showWx').on('tap', function() {
+        if(!$.util.isLogin()) {
+            $.util.alert('请先登录');
+            setTimeout(function() {
+                LEMON.event.login();
+            }, 1000)
+            return;
+        }
+        $.util.ajax({
+            url:'/index/check-wx-rig/<?=$user->id?>',
+            method: 'POST',
+            func:function(res){
+                if(res.status) {
+                    showx();
+                } else {
+                    $('.raper').removeClass('hide');
+                    $('.raper .showxpay').show();
+                    $('.raper .cancel').on('click', function() {
+                        $('.raper').addClass('hide');
+                        $('.raper .showxpay').hide();
+                        $('.raper .cancel').off('click');
+                    });
+                    $('.raper .gopay').on('click', function() {
+                        $('.raper').addClass('hide');
+                        $('.raper .showxpay').hide();
+                        if(res.moneycheck) {
+                            showmbpay();
+                        } else {
+                            $.util.confirm('美币不足','您的美币余额不足，前往充值美币？', function() {
+                                showxpay();
+                            }, null);
+                        }
+                        $('.raper .gopay').off('click');
+                    });
+                }
+            }
+        })
+    });*/
 
     function showmbpay() {
         $.util.showPreloader();
@@ -527,13 +572,6 @@
      * 显示微信框
      */
     function showx() {
-        if(!$.util.isLogin()) {
-            $.util.alert('请先登录');
-            setTimeout(function() {
-                LEMON.event.login();
-            }, 1000)
-            return;
-        }
         $.util.ajax({
             url:'/index/check-wx-rig/<?=$user->id?>',
             method: 'POST',
