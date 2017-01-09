@@ -46,7 +46,11 @@ class ChatController extends AppController {
      */
     public function chatDetail()
     {
-        
+        $netim_conf = \Cake\Core\Configure::read('netim');
+        $imkey = $netim_conf['app_key'];
+        $this->set([
+            'imkey'=>$imkey
+        ]);
     }
 
     

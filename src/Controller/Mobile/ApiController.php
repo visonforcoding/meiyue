@@ -20,7 +20,7 @@ class ApiController extends AppController {
 
     protected $noAcl = [
         'upload', 'wxtoken', 'ckregister', 'recordphone', 'saveuserbasicpic',
-        'saveuserbasicvideo', 'getmapusers', 'gettoken','reportuser'
+        'saveuserbasicvideo', 'getmapusers', 'gettoken','reportuser','checkread'
     ];
 
     public function initialize() {

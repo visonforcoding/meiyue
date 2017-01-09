@@ -1,3 +1,6 @@
+<?php $this->start('static') ?>
+<script src="/mobile/js/NIM_Web_NIM_v3.2.0.js"></script>
+<?php $this->end('static');?>
 <header>
     <div class="header">
         <i class="iconfont toback">&#xe602;</i>
@@ -11,7 +14,7 @@
         <li class="pull-left">
             <div class="chat-con flex  box_start">
                 <div class="avatar">
-                    <img src="../images/avatar.jpg"/>
+                    <img src="/mobile/images/avatar.jpg"/>
                 </div>
                 <div class="chatbox">
                     您好，在吗？今晚有空吗今晚有空吗今晚有空吗今晚有空吗今晚有空吗今晚有空吗今晚有空吗？
@@ -21,11 +24,11 @@
         <li class="pull-left">
             <div class="chat-con flex box_start">
                 <div class="avatar">
-                    <img src="../images/avatar.jpg"/>
+                    <img src="/mobile/images/avatar.jpg"/>
                 </div>
                 <div class="chatbox">
                     <div class="gift-box">
-                        <img src="../images/gift01.png"/>
+                        <img src="/mobile/images/gift01.png"/>
                     </div>
                     <div class="gift-num aligncenter">
                         飞吻 x <i>1</i>
@@ -39,11 +42,11 @@
         <li class="pull-left">
             <div class="chat-con flex box_start">
                 <div class="avatar">
-                    <img src="../images/avatar.jpg"/>
+                    <img src="/mobile/images/avatar.jpg"/>
                 </div>
                 <div class="chatbox">
                     <div class="gift-box">
-                        <img src="../images/gift02.png"/>
+                        <img src="/mobile/images/gift02.png"/>
                     </div>
                     <div class="gift-num aligncenter">
                         爱心 x <i>1</i>
@@ -61,7 +64,7 @@
                     有空。约不？
                 </div>
                 <div class="avatar">
-                    <img src="../images/avatar.jpg"/>
+                    <img src="/mobile/images/avatar.jpg"/>
                 </div>
             </div>
         </li>
@@ -70,7 +73,7 @@
         <li class="pull-left">
             <div class="chat-con flex">
                 <div class="avatar">
-                    <img src="../images/avatar.jpg"/>
+                    <img src="/mobile/images/avatar.jpg"/>
                 </div>
                 <div class="chatbox">
                     您好，在吗？
@@ -84,7 +87,7 @@
                     您好，在吗？今晚有空吗今晚有空吗今晚有空吗今晚有空吗今晚有空吗今晚有空吗今晚有空吗？
                 </div>
                 <div class="avatar">
-                    <img src="../images/avatar.jpg"/>
+                    <img src="/mobile/images/avatar.jpg"/>
                 </div>
             </div>
         </li>

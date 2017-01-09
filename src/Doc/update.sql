@@ -770,3 +770,8 @@ ENGINE=InnoDB
 AUTO_INCREMENT=21
 ;
 
+
+ALTER TABLE `lm_user`
+	ALTER `user_token` DROP DEFAULT;
+ALTER TABLE `lm_user`
+	CHANGE COLUMN `user_token` `user_token` VARCHAR(32) NOT NULL COMMENT '用户标志' AFTER `pwd`;
