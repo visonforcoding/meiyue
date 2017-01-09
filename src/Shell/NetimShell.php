@@ -134,5 +134,27 @@ class NetimShell extends Shell {
             }
         }
     }
+    
+    
+    /**
+     * 补掉没有imaccid的用户
+     */
+    public function addUserIm(){
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $users = $UserTable->find()->select(['imaccid','imtoken','id'])
+                ->where(['imaccid'=>''])
+                ->orWhere(['imtoken'=>''])
+                ->toArray();
+        foreach ($users as $user) {
+            $im = $this->getIm();
+            if ($im) {
+                $user->imaccid = $im['accid'];
+                $user->imtoken = $im['token'];
+            }
+            if($UserTable->save($user)){
+               \Cake\Log\Log::info('更新user im信息成功', 'cron'); 
+            }
+        }
+    }
 
 }
