@@ -25,6 +25,7 @@ class ChatController extends AppController {
     public function chatList(){
         $netim_conf = \Cake\Core\Configure::read('netim');
         $imkey = $netim_conf['app_key'];
+        $unread = $this->checkRead();
         if(!$this->user){
             $this->set([
                 'pageTitle'=>'消息'
@@ -34,6 +35,7 @@ class ChatController extends AppController {
         $this->set([
             'pageTitle'=>'消息',
             'user' => $this->user,
+            'unread' => $unread,
             'imkey'=>$imkey,
         ]);
     }
@@ -110,5 +112,19 @@ class ChatController extends AppController {
             })
             ->toArray();
         return $this->Util->ajaxReturn(['datas' => $datas]);
+    }
+
+
+    /**
+     * 检查是否有未读消息
+     */
+    protected function checkRead()
+    {
+        $uid = $this->request->data("uid");
+        $msgpush = TableRegistry::get('Msgpush');
+        $num = $msgpush->find()
+            ->where(['user_id' => $uid, 'is_read' => 0])
+            ->count();
+        return $num;
     }
 }

@@ -7,7 +7,7 @@
 <div class="wraper">
     <ul id="list-container" class="chart-systerm-box inner">
         <li class="timebox">
-            <time><?= $user->create_time->i18nFormat('yyyy-MM-dd HH:mm');?></time>
+            <time><?= isset($user->create_time)?$user->create_time->i18nFormat('yyyy-MM-dd HH:mm'):'XXXX-XX-XX XX:XX';?></time>
         </li>
         <li class="infobox">
             <p>Hi，欢迎来到美约，希望你在这里玩得开心哦~</p>

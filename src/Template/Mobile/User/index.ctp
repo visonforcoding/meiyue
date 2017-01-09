@@ -76,7 +76,6 @@
                 <a href="/user/voted"  class="home_items">
                     <div class="home_list_l_info  flex"><i class="iconfont">&#xe60c;</i><span class="itemsname">我的选美</span></div>
                     <div class="home_list_r_info">
-
                         <i class="iconfont">&#xe605;</i>
                     </div>
                 </a>
