@@ -50,7 +50,7 @@
         <li>
             <a href="/chat/meiyue-message" class="a-height flex flex_justify">
                 <div class="l-info-name">平台消息</div>
-                <div class="tips-box"><span class="tips"></span><i class="iconfont rcon">&#xe605;</i></div>
+                <div class="tips-box"><?php if($unread):?><span class="tips"></span><?php endif; ?><i class="iconfont rcon">&#xe605;</i></div>
             </a>
         </li>
     </ul>
