@@ -1061,5 +1061,73 @@ class UserController extends AppController {
             }
         }
     }
+
+
+    /**
+     * 查看我的个人主页
+     */
+    public function MyHomepage()
+    {
+        $this->handCheckLogin();
+        $user = $this->User->find()
+            ->contain([
+                'UserSkills' => function($q) {
+                    return $q->where(['is_used' => 1, 'is_checked' => 1]);
+                },
+                'UserSkills.Skill',
+                'UserSkills.Cost',
+                'Fans',
+                'Dates' => function($q) {
+                    return $q->where(['status IN' => [1, 2], 'end_time >' => new Time()]);
+                },
+                'Actreg.Activity' => function($q) {
+                    return $q->where(['Actreg.status' => 1, 'Activity.end_time >' => new Time()]);
+                },
+                'Follows',
+                'Upacks' => function($q) {
+                    return $q->where([
+                        'OR' => [
+                            'rest_chat >' => 0,
+                            'rest_browse >' =>0
+                        ],
+                        'deadline >=' => new Time()
+                    ])->orderDesc('cost')->limit(1);
+                },
+                'Tags' => function($q) {
+                    return $q->select(['name'])->where(['parent_id !=' => 0]);
+                }
+            ])
+            ->where(['id' => $this->user->id])
+            ->map(function($row) {
+                $row->age = getAge($row->birthday);
+                $row->birthday = getMD($row->birthday);
+                $row->hasjoin = false;
+                if(count($row->dates) || count($row->actreg)) {
+                    $row->hasjoin = true;
+                }
+                if(count($row['upacks'])) {
+                    $row->upakname = $row['upacks'][0]['title'];
+                }
+                $row['upackname'] = null;
+                if(count($row['upacks'])) {
+                    $upk = $row['upacks'][0];
+                    $row['upackname'] = $upk->honour_name;
+                }
+                $row['upacks'] = [];
+                $row->facount = count($row->fans);
+                $row->focount = count($row->follows);
+                return $row;
+            })
+            ->first();
+
+        $this->set([
+            'pageTitle' => '发现-主页',
+            'user' => $user,
+        ]);
+        if($this->user->gender == 2) {
+            $this->render('/Mobile/User/my_fhomepage');
+        }
+    }
+
 }
         

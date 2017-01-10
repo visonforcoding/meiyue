@@ -211,8 +211,8 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                  */
                 case "event.viewImgExt":
                     registerAPI(null, api, function () {
-                        var imgs = arguments[1], cImg = arguments[0], index = 0, i = 0, status = arguments[2], status = arguments[3],
-                            user_id = arguments[4], view_id = arguments[5], to_url = arguments[6];
+                        var imgs = arguments[1], cImg = arguments[0], index = 0, i = 0, status = arguments[2], user_id = arguments[3],
+                            view_id = arguments[4], to_url = arguments[5];
                         for (; i < imgs.length; i++) {
                             if (imgs[i] == cImg) {
                                 index = i;

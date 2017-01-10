@@ -118,7 +118,6 @@ class BusinessComponent extends Component
      *      int usedid 作用对象id
      *      int type   使用类型，见ServiceType类
      * 返回结果：
-     *      Array('status' => case [, 'rest' => int]) //case 2时有rest返回
      *          case 0:不合法参数
      *          case 1:可以访问（已经消耗过额度）
      *          case 2:可以访问（尚未消耗额度）
@@ -131,10 +130,7 @@ class BusinessComponent extends Component
             &&$type === null
             &&!ServiceType::containType($type)
         ) {
-            return Array(
-                'status' => 0,
-                'msg' => '非法参数'
-            );
+            return 0;
         }
 
         //检查是否有权限看

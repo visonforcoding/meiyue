@@ -318,11 +318,9 @@ class IndexController extends AppController {
         $canBrowse = false;
         $this->loadComponent('Business');
         //检查权限和名额剩余
+        $browseRight = null;
         if(isset($this->user)) {
-            $res = $this->Business->checkRight($this->user->id, $id, ServiceType::BROWSE);
-            if($res == \SerRight::OK_CONSUMED) {
-                $canBrowse = true;
-            }
+            $browseRight = $this->Business->checkRight($this->user->id, $id, ServiceType::BROWSE);
         }
 
         //若登录
@@ -331,7 +329,7 @@ class IndexController extends AppController {
             'user' => $user,
             'loginer' => $this->user,
             'age' => $age,
-            'browseRight' => $canBrowse,
+            'browseRight' => $browseRight,
             'distance' => $distance,
             'birthday' => $birthday,
             'isFollow' => $isFollow,
