@@ -66,7 +66,6 @@ class AppController extends Controller {
             ['user', 'regbasicinfo1'],
             ['user', 'regbasicinfo2'],
             ['user', 'regbasicinfo3'],
-            ['user', 'regbasicinfo4'],
             ['user', 'wreglogin'],
             ['news', 'index'],
             ['news', 'view'],

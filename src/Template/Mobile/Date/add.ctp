@@ -245,6 +245,9 @@ use Cake\I18n\Time;
 <script src="/mobile/js/mustache.min.js"></script>
 <script>
     var skill_id = '';
+    var curpage = 1;
+    var query = '';
+    var gurl = '/date-order/find-place/' + skill_id + "/";
     //约会主题选择回调函数
     function chooseSkillCallBack(userSkill) {
         $("#skill-id-input").val(userSkill['id']);
@@ -252,6 +255,7 @@ use Cake\I18n\Time;
         $('#cost-btn').val(userSkill['cost'] + " 美币/小时");
         $('#cost-input').val(userSkill['cost']);
         skill_id = userSkill['skill_id'];
+        gurl = '/date-order/find-place/' + skill_id + "/";
     }
 
     $("#show-skill-name").on('click', function () {
@@ -376,9 +380,7 @@ use Cake\I18n\Time;
     });
 
 
-    var curpage = 1;
-    var query = '';
-    var gurl = '/date-order/find-place/' + skill_id + "/";
+
     function submitSearchPlace(){
         curpage = 1;
         var searchKey = $('#searchInput').val();

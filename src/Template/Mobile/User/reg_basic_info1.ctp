@@ -145,7 +145,10 @@
                         <div class="home_list_l_info"><span class="itemsname">三</span><span class="itemsname">围</span>
                         </div>
                         <div class="home_list_r_info">
-                            <input id="bwh_b" name="bwh_b" type="text" placeholder="请选择三围" readonly="readonly"/>
+                            <input type="hidden" id="bwh_b" name="bwh_b"/>
+                            <input type="hidden" id="bwh_w" name="bwh_w"/>
+                            <input type="hidden" id="bwh_h" name="bwh_h"/>
+                            <input id="bwh"  type="text" placeholder="请选择三围" readonly="readonly"/>
                         </div>
                     </div>
                 </li>
@@ -378,10 +381,13 @@ use Cake\I18n\Date; ?>
     var cBwh = new checkBwh();
     
     function chooseBwhCallBack(bust,waist,hips){
-         $('#bwh_b').val(bust+ ' | '+ waist + ' | '+hips);
+         $('#bwh_b').val(bust);
+         $('#bwh_w').val(waist);
+         $('#bwh_h').val(hips);
+         $('#bwh').val(bust+ ' | '+ waist + ' | '+hips);
     }
     cBwh.init(chooseBwhCallBack);
-    $('#bwh_b').on('tap', function() {
+    $('#bwh').on('tap', function() {
          cBwh.show();
     });
     $('#profession').keyup(function () {
