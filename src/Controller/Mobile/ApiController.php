@@ -13,6 +13,7 @@ use Wpadmin\Utils\UploadFile;
  * @property \App\Controller\Component\WxComponent $Wx
  * @property \App\Controller\Component\EncryptComponent $Encrypt
  * @property \App\Controller\Component\UtilComponent $Util
+ * @property \App\Controller\Component\BusinessComponent $Business
  *
  */
 class ApiController extends AppController {
@@ -547,6 +548,7 @@ class ApiController extends AppController {
         $type = $this->request->data("type");
         $res = false;
         if(ServiceType::containType($type)) {
+            $this->loadComponent('Business');
             $res = $this->Business->consumeRight($uid, $vid, $type);
         }
         if($res) {
