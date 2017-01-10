@@ -19,6 +19,7 @@ var scroll = function(o) {
         offset:0,
         loadImg:false,
         image:[],
+        touchEvent : true, //是否要禁用touch事件  禁用touch后,可以设置autoTime,自动轮播
         loopScroll : false, //是否要循环滚动
         lockScrY : false, //是否让竖向滚动
         stopOnce : false, //hold时停一次
@@ -77,6 +78,7 @@ $.extend(scroll.prototype, {
     },
     startEvent : function() {
         var obj = this, mid = this.moveDom.get(0), ael=function(dom){
+            if(!this.touchEvent) return;
             dom.addEventListener("touchstart", obj, false);
             dom.addEventListener("touchmove", obj, false);
             dom.addEventListener("touchend", obj, false);
