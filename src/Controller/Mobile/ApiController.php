@@ -3,6 +3,7 @@
 namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
+use ServiceType;
 use Wpadmin\Utils\UploadFile;
 
 /**
@@ -533,5 +534,25 @@ class ApiController extends AppController {
             ->where(['user_id' => $uid, 'is_read' => 0])
             ->count();
         $this->jsonResponse(['num' => $num]);
+    }
+
+
+    /**
+     * 消耗套餐名额
+     */
+    public function consumePack()
+    {
+        $uid = $this->request->data("user_id");
+        $vid = $this->request->data("view_id");
+        $type = $this->request->data("type");
+        $res = false;
+        if(ServiceType::containType($type)) {
+            $res = $this->Business->consumeRight($uid, $vid, $type);
+        }
+        if($res) {
+            $this->jsonResponse(true, '消费成功');
+        } else {
+            $this->jsonResponse(false, '消费失败');
+        }
     }
 }
