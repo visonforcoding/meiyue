@@ -153,7 +153,7 @@
             <div class="search_place_header inner">
                 <div class="search-box flex flex_justify">
                     <div class="search-btn">
-                        <input type="text" id="selfInput" value="" placeholder="请输入约会地点" results="5" />
+                        <input type="text" id="selfInput" value="" placeholder="请注意输入公共场合" results="5" />
                     </div>
                     <span class="cancel-btn color_y" onclick='submitSelfPlace()'>提交</span>
                 </div>
