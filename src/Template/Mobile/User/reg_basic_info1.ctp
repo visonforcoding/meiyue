@@ -105,7 +105,16 @@
                                     <option value="53">53KG</option>
                                     <option value="54">54KG</option>
                                     <option value="55">55KG</option>
-                                    <option value="56">55+KG</option>
+                                    <option value="60">60KG</option>
+                                    <option value="65">65KG</option>
+                                    <option value="70">70KG</option>
+                                    <option value="75">75KG</option>
+                                    <option value="80">80KG</option>
+                                    <option value="85">85KG</option>
+                                    <option value="90">90KG</option>
+                                    <option value="95">95KG</option>
+                                    <option value="100">100KG</option>
+                                    <option value="100">100+KG</option>
                                 </select>
                             </div>
                         </div>

@@ -119,6 +119,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
         "event.invite", //短信分享
         "event.getLocation",
         "event.viewImg",
+        "event.viewImgExt",
         "event.tel",
         "event.uploadPic", //选择并上传单个图片 返回服务器地址
         "event.uploadPics", //上传9个图片
@@ -201,6 +202,24 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                             }
                         }
                         return JSApiInvoke(api, {imgs: imgs, index: index}, '');
+                    });
+                    break;
+                /**
+                 * 特殊接口，仅限用与美约业务
+                 * status 状态（包括：1:可以继续访问 2: 需要消耗名额 3: 需要购买会员）
+                 *
+                 */
+                case "event.viewImgExt":
+                    registerAPI(null, api, function () {
+                        var imgs = arguments[1], cImg = arguments[0], index = 0, i = 0, status = arguments[2], status = arguments[3],
+                            user_id = arguments[4], view_id = arguments[5], to_url = arguments[6];
+                        for (; i < imgs.length; i++) {
+                            if (imgs[i] == cImg) {
+                                index = i;
+                                break;
+                            }
+                        }
+                        return JSApiInvoke(api, {imgs: imgs, index: index, status: status, user_id: user_id, view_id: view_id, to_url: to_url}, '');
                     });
                     break;
                 case "event.imList":

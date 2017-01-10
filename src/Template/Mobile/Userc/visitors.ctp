@@ -45,9 +45,12 @@
         </div>
     </header> -->
     <div class="wraper">
-        <ul id="visitors-list" class="praised_list mt20 bgff">
+        <ul id="visitors-list" class="praised_list bgff">
 
         </ul>
+        <div id="blank-area">
+
+        </div>
     </div>
 <?php $this->start('script'); ?>
     <script type="text/javascript">
@@ -78,7 +81,7 @@
                     $.util.hidePreloader();
                 } else {
                     $.util.hidePreloader();
-                    $('#visitors-list').append('<p class="smallarea aligncenter mt20">没有更多数据了</p>');
+                    $('#blank-area').append('<p class="smallarea aligncenter mt60">没有更多数据了</p><br>');
                     window.holdLoad = true;
                 }
             });
@@ -86,6 +89,10 @@
 
         setTimeout(function () {
             $(window).on("scroll", function () {
+                if(curpage == 1) {
+                    document.body.scrollTop = 0;
+                }
+                console.log("body:" + document.body.scrollTop + "|document:" + (($(document).height() - $(window).height()) - 100));
                 $.util.listScroll('visitors-list', function () {
                     loadUser(curpage + 1, true);
                 })
