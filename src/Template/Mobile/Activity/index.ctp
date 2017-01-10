@@ -287,7 +287,7 @@
                 lockScrY: true,
                 //imgInitLazy: 1000,
                 index: obj.cur_tab,
-                min: '300px', //响应滑动的最小移动距离
+                min:15, //响应滑动的最小移动距离
                 viewDom: $('.activity_list'),
                 fun: function (index) {
                     location.hash = '#' + index;
@@ -524,7 +524,8 @@
         moveChild: $('#oBox li'), //$('#loopImgUl li')
         tab: $('#oTab span'), //$('#loopImgBar li')
         loopScroll: true,
-        autoTime: 0,
+        autoTime: 3000,
+        touchEvent:true,
         lockScrY: true,
         //imgInitLazy: 1000,
         index: 1,

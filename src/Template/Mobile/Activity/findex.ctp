@@ -242,7 +242,7 @@
                 loopScroll: false,
                 autoTime: 0,
                 lockScrY: true,
-                min: $(window).width(), //响应滑动的最小移动距离
+                min:15, //响应滑动的最小移动距离
                 //imgInitLazy: 1000,
                 index: obj.cur_tab,
                 viewDom: $('.activity_list'),
@@ -478,9 +478,11 @@
         moveChild: $('#oBox li'), //$('#loopImgUl li')
         tab: $('#oTab span'), //$('#loopImgBar li')
         loopScroll: true,
-        autoTime: 0,
+        touchEvent:true,
+        autoTime: 3000,
         lockScrY: true,
         //imgInitLazy: 1000,
+        min:$(window).width();
         index: 1,
         viewDom: $('.abanner'),
         fun: function (index) {

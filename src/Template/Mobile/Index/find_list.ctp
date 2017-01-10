@@ -123,7 +123,14 @@
         skill = $(this).data('id');
         loadUser(curpage, false, '?skill=' + skill+'&ageL='+ageL+'&ageR='+ageR+'&heightL='+heightL+'&heightR='+heightR);
     });
-    $('#selectMenu').on('tap', function () {
+   
+    // $('#selectMenu_box').on('tap',function(e){
+    //         e.preventDefault();
+    //         setTimeout(function(){
+    //             $('#selectMenu_box').hide();
+    //         },301)
+    //     });
+     $('#selectMenu').on('tap', function () {
         onTopRight();
     });
     window.onTopRight = function(){
@@ -133,8 +140,10 @@
             window.search_age = new ranger({dom:$('#age'), range:[18, 40]});
         }
     }
+   
     $('#search').on('click',function(){
         $('#selectMenu_box').hide();
+
         var height = window.search_height.reRange;
         var age = window.search_age.reRange;
         console.log(age);
