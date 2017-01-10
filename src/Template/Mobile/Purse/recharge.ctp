@@ -16,33 +16,33 @@
         </div>
     </div>
     <div class='mt20 charge_container_con'>
-        <h3 class="title">快捷充值送特权</h3>
+        <h3 class="title">快捷充值</h3>
         <ul class='flex flex_justify charge-package' id='package'>
-            <li class='items flex flex_center active'>
+            <li class='items flex flex_center active' onclick="quickPay(100);">
                 <div>
                     <h3 class='color_friends'>
-                        <span class='lagernum'>1000</span><i class='unit'>美币</i>
+                        <span class='lagernum'>100</span><i class='unit'>美币</i>
                     </h3>
-                    <div class='color_y aligncenter price'>￥1000</div>
+                    <div class='color_y aligncenter price'>￥100</div>
                 </div>
             </li>
-             <li class='items flex flex_center'>
+             <li class='items flex flex_center' onclick="quickPay(200);">
                 <div>
                     <h3 class='color_friends'>
-                        <span class='lagernum'>1000</span><i class='unit'>美币</i>
+                        <span class='lagernum'>200</span><i class='unit'>美币</i>
                     </h3>
-                    <div class='color_y aligncenter price'>￥1000</div>
+                    <div class='color_y aligncenter price'>￥200</div>
                 </div>
             </li>
-             <li class='items flex flex_center'>
+             <li class='items flex flex_center' onclick="quickPay(400);">
                 <div>
                     <h3 class='color_friends'>
-                        <span class='lagernum'>1000</span><i class='unit'>美币</i>
+                        <span class='lagernum'>400</span><i class='unit'>美币</i>
                     </h3>
-                    <div class='color_y aligncenter price'>￥1000</div>
+                    <div class='color_y aligncenter price'>￥400</div>
                 </div>
             </li>
-             <li class='items flex flex_center'>
+             <li class='items flex flex_center' onclick="quickPay(1000);">
                 <div>
                     <h3 class='color_friends'>
                         <span class='lagernum'>1000</span><i class='unit'>美币</i>
@@ -124,6 +124,19 @@
             }
         });
     });
+
+
+     function quickPay(num) {
+         $.util.ajax({
+             url:'/purse/create-payorder<?= isset($redurl)?"?redurl=".$redurl:""; ?>',
+             data:{mb:num},
+             func:function(res){
+                 if(res.status){
+                     document.location.href = res.redirect_url;
+                 }
+             }
+         });
+     };
 
 
     //支付
