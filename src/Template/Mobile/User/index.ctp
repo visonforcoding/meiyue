@@ -5,7 +5,7 @@
              <i class="iconfont install">&#xe661;</i>
          </div> -->
         <div class="home_cover_info flex">
-					<span class="avatar">
+					<span class="avatar" onclick="window.location.href='/userc/edit-info'">
 						<img src="<?= createImg($user->avatar) . '?w=150' ?>" class="avatar-pic" onclick="location.href='/user/my-homepage'"/>
 						<div class="vip"><img src="/mobile/images/vip.png" class="responseimg"/></div>
 					</span>
@@ -31,7 +31,7 @@
                             
                         </a>
                     </li>
-                    <li class="follow">
+                    <li class="follow flex flex_justify">
                         <a class="like" href="/userc/likes">喜欢 <i><?= $focount; ?></i></a>
                         <a class="like" href="/userc/fans">粉丝 <i><?= $facount; ?></i></a>
                         <a class="like" href="/userc/visitors">访客 <i><?= $user->visitnum; ?></i></a>

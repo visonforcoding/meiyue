@@ -287,7 +287,7 @@
                 lockScrY: true,
                 //imgInitLazy: 1000,
                 index: obj.cur_tab,
-                min: $(window).width(), //响应滑动的最小移动距离
+                min: '300px', //响应滑动的最小移动距离
                 viewDom: $('.activity_list'),
                 fun: function (index) {
                     location.hash = '#' + index;
@@ -528,6 +528,7 @@
         lockScrY: true,
         //imgInitLazy: 1000,
         index: 1,
+         min: $(window).width(), //响应滑动的最小移动距离
         viewDom: $('.abanner'),
         fun: function (index) {
 

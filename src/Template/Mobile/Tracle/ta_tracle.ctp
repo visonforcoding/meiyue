@@ -43,7 +43,7 @@
                 <span class="tracle_footer_info">
                     <i class="iconfont">&#xe65c;</i>{{view_nums}}
                 </span>
-                <span class="tracle_footer_info praise-btn {{#ispraised}}color_y{{/ispraised}}" data-id="{{id}}">
+                <span class="tracle_footer_info praise praise-btn {{#ispraised}}color_y{{/ispraised}}" data-id="{{id}}">
                     <i class="iconfont">&#xe633;</i><span class="praise-num">{{praise_nums}}</span>
                 </span>
             </div>

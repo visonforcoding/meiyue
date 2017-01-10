@@ -92,7 +92,7 @@
                             <span>地点</span>
                             <div>
                                 <a id="showChoosePlace" href="#choosePlace">
-                                    <input id="thePlace" class="alignright" placeholder='请选择' readonly value="" />
+                                    <input id="thePlace" class="alignright" placeholder='请选择约会地点' readonly value="" />
                                     <i class="iconfont r_con">&#xe605;</i>
                                 </a>
                             </div>

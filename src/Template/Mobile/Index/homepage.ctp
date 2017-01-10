@@ -125,7 +125,7 @@
         <?php if($user->wx_ishow && $user->wxid): ?>
         <li>
             <a name="showWx" class="items flex flex_justify" >
-                <span class="seach_name">查看TA的微信</span>
+                <span class="seach_name color_y">查看TA的微信</span>
                 <span id="showWx" class="golook">点击查看</span>
             </a>
         </li>

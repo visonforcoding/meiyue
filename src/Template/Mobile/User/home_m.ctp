@@ -5,9 +5,9 @@
                     <i class="iconfont install">&#xe661;</i>
                 </div>-->
         <div class="home_cover_info flex">
-            <span class="avatar">
+            <a href="/userc/edit-info" class="avatar">
                 <img src="<?= createImg($user->avatar) . '?w=150' ?>"  class="avatar-pic"/>
-            </span>
+            </a>
             <div class="cover_left_info">
                 <ul class='opci'>
                     <li class="blight userinfo">
@@ -33,7 +33,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="follow flex">
+                    <li class="follow flex flex_justify">
                         <div><a href="/userc/fans">赞赏我 <i><?= $facount ?></i>&nbsp;</a></div>
                         <div><a href="/userc/likes"> 关注 <i><?= $focount ?></i>&nbsp;</a></div>
                         <div><a href="/userc/visitors">访客 <i><?= $user->visitnum; ?>&nbsp;</i></a></div>
