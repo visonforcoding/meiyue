@@ -15,13 +15,50 @@
             <input id="mb" type="tel" placeholder="点击输入"/>
         </div>
     </div>
+    <div class='mt20 charge_container_con'>
+        <h3 class="title">快捷充值送特权</h3>
+        <ul class='flex flex_justify charge-package' id='package'>
+            <li class='items flex flex_center active'>
+                <div>
+                    <h3 class='color_friends'>
+                        <span class='lagernum'>1000</span><i class='unit'>美币</i>
+                    </h3>
+                    <div class='color_y aligncenter price'>￥1000</div>
+                </div>
+            </li>
+             <li class='items flex flex_center'>
+                <div>
+                    <h3 class='color_friends'>
+                        <span class='lagernum'>1000</span><i class='unit'>美币</i>
+                    </h3>
+                    <div class='color_y aligncenter price'>￥1000</div>
+                </div>
+            </li>
+             <li class='items flex flex_center'>
+                <div>
+                    <h3 class='color_friends'>
+                        <span class='lagernum'>1000</span><i class='unit'>美币</i>
+                    </h3>
+                    <div class='color_y aligncenter price'>￥1000</div>
+                </div>
+            </li>
+             <li class='items flex flex_center'>
+                <div>
+                    <h3 class='color_friends'>
+                        <span class='lagernum'>1000</span><i class='unit'>美币</i>
+                    </h3>
+                    <div class='color_y aligncenter price'>￥1000</div>
+                </div>
+            </li>
+        </ul>
+    </div>
     <div class="charge_container_con  mt20">
-        <h3 class="title">快捷充值送特权套餐</h3>
+        <h3 class="title">快捷充值送特权</h3>
         <ul id="changed">
             <?php foreach ($packs as $item): ?>
                 <li>
                     <div class="items flex flex_justify inner">
-                        <h3 class="bright color_friends"><span class="lagernum"><?= $item->title; ?></span> <i
+                        <h3 class="bright color_friends" onclick="payView(<?= $item->id; ?>)"><span class="lagernum"><?= $item->title; ?></span> <i
                                 class="unit"><?= $item->vali_time; ?>天&nbsp;</i></h3>
                         <div class="smalldes closed" data-type="0"><i class="iconfont color_y">&#xe62f;</i> <i
                                 class="slide-btn-name">点击展开详情</i></div>
@@ -64,6 +101,9 @@
             default:
                 break;
         }
+    })
+    $('#package li').on('tap',function(){
+        $(this).addClass('active').siblings().removeClass('active');
     })
 </script>
 <?php $this->start('script'); ?>
