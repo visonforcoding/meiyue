@@ -55,7 +55,7 @@
         </ul>
         <?php if($user->video): ?>
         <div id="see-basic-mv" class="inner home_video mt20  flex flex_center  relpotion init">
-            <?php if($browseRight): ?>
+            <?php if($browseRight == SerRight::OK_CONSUMED): ?>
                 <video preload="preload" poster="<?= $user->video_cover; ?>"><source src="<?= $user->video; ?>" type="video/mp4"></video>
             <?php else: ?>
                 <img src="<?= $user->video_cover ?>" />
@@ -469,10 +469,12 @@
             }, 1000)
             return;
         }
+        $.util.showPreloader();
         $.util.ajax({
             url:'/index/check-wx-rig/<?=$user->id?>',
             method: 'POST',
             func:function(res){
+                $.util.hidePreloader();
                 if(res.status) {
                     showx();
                 } else {
@@ -578,8 +580,18 @@
         });
         var curimg = $(this).find('img').first().attr('src');
         var imgpath = '<?= getHost(); ?>' + curimg;
-        console.log(imgpath.replace(/\?.*/, ''));
-        LEMON.event.viewImg(imgpath.replace(/\?.*/, ''), imgs);
+        var status = <?= isset($browseRight)?$browseRight:-1 ?>;
+        var user_id = <?= isset($loginer)?$loginer->id:-1; ?>;
+        var view_id = <?= isset($user)?$user->id:-1; ?>;
+        var to_url = '';
+        <?php if(SerRight::OK_CONSUMED == $browseRight): ?>
+        to_url = '/tracle/ta-tracle/<?=$user->id?>';
+        <?php elseif(SerRight::NO_HAVENONUM == $browseRight): ?>
+        to_url = '/userc/vip-buy?reurl=/index/homepage/<?= $user->id; ?>';
+        <?php elseif(SerRight::NO_HAVENUM == $browseRight): ?>
+        to_url = '/tracle/ta-tracle/<?=$user->id?>';
+        <?php endif; ?>
+        LEMON.event.viewImgExt(imgpath.replace(/\?.*/, ''), imgs, status, user_id, view_id, to_url);
     });
 
     function tel() {
