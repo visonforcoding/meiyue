@@ -16,7 +16,7 @@
         <a id="submit" class="btn btn_bg_y disabled mt120">登录</a>
         <div class="login_group mt40">
             <a href="/user/register?gender=1" class="btn btn_bg_t ">注册男</a>
-            <a href="/user/register?gender=2" class="btn btn_bg_t">注册女</a>
+            <a href="/user/register?gender=2" id="regW" class="btn btn_bg_t">注册女</a>
         </div>
         <!--<a href="regiser.html" class="btn btn_bg_t mt40">注册</a>-->
     </div>
@@ -65,6 +65,16 @@
                     }
                 }
             }, 'json');
+        }
+    });
+     $('#regW').bind('click',function(event){
+        event.preventDefault();
+        var url = $(this).attr('href');
+        if(!$.util.isAPP){
+            $.util.alert('女性用户请使用APP进行注册');
+            setTimeout(function(){
+                    document.location.href = '/down-app';
+            },1500);
         }
     });
     $.util.checkShare();
