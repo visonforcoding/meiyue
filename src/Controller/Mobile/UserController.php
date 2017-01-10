@@ -20,6 +20,7 @@ use UserStatus;
  * @property \App\Model\Table\UserTable $User
  * @property \App\Controller\Component\BusinessComponent $Business
  * @property \App\Controller\Component\SmsComponent $Sms
+ * @property \App\Controller\Component\NetimComponent $Netim
  */
 class UserController extends AppController {
 
@@ -387,6 +388,8 @@ class UserController extends AppController {
             $avatar = $this->request->data('avatar');
             $user->avatar = $avatar;
             if ($this->User->save($user)) {
+                $this->loadComponent('Netim');
+                $this->Netim->addUpInfoQueue($user->id);
                 return $this->Util->ajaxReturn(['status' => true, 'msg' => '保存成功', 'realUrl' => $this->Util->getServerDomain().$avatar]);
             }
             return $this->Util->ajaxReturn(false, '保存失败');

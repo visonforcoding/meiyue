@@ -19,7 +19,9 @@
             <time class="smalldes">{{datetime}}</time>
         </div>
         <div class="r-btn flex">
-            <div class="focus clickable">关注</div>
+            <?php if($user->gender==1): ?>
+            <div data-id="{{user_id}}" class="focus clickable">关注</div>
+            <?php endif;?>
             <div data-accid="{{to}}" class="del clickable">删除</div>
         </div>
     </li>
@@ -108,6 +110,7 @@ function onDisconnect(error) {
     }
 }
 function onSessions(sessions) {
+    console.log('收到会话列表', sessions);
     $.each(sessions, function (i, n) {
         accids.push(n.to);
     });
