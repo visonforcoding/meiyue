@@ -1066,9 +1066,8 @@ class UserController extends AppController {
     /**
      * 查看我的个人主页
      */
-    public function MyHomepage()
+    public function MyHomepage($uid)
     {
-        $this->handCheckLogin();
         $user = $this->User->find()
             ->contain([
                 'UserSkills' => function($q) {
@@ -1097,7 +1096,7 @@ class UserController extends AppController {
                     return $q->select(['name'])->where(['parent_id !=' => 0]);
                 }
             ])
-            ->where(['id' => $this->user->id])
+            ->where(['id' => $uid])
             ->map(function($row) {
                 $row->age = getAge($row->birthday);
                 $row->birthday = getMD($row->birthday);
@@ -1120,8 +1119,12 @@ class UserController extends AppController {
             })
             ->first();
 
+        $title = '预览TA的主页';
+        if($user->id == $uid) {
+            $title = '预览我的主页';
+        }
         $this->set([
-            'pageTitle' => '发现-主页',
+            'pageTitle' => $title,
             'user' => $user,
         ]);
         if($this->user->gender == 2) {

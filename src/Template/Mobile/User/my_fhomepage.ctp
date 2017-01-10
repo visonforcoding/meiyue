@@ -42,15 +42,15 @@
         <div class="home_pic_info mt40">
             <ul class="inner flex">
                 <?php if (@unserialize($user->images)): ?>
-                    <?php foreach(array_slice(unserialize($user->images), 0, 3) as $img): ?>
+                    <?php foreach(array_slice(unserialize($user->images), 0, 4) as $img): ?>
                         <li class="img-item"><img src="<?= createImg($img) ?>?w=160" onload="$.util.setWH(this);"/></li>
                     <?php endforeach; ?>
-                    <li>
+                   <!-- <li>
                         <a class='ablock' >
-                            <img src="<?= unserialize($user->images)[3]; ?>?w=160" onload="$.util.setWH(this);"/>
+                            <img src="<?/*= unserialize($user->images)[3]; */?>?w=160" onload="$.util.setWH(this);"/>
                             <span>更多私房</span>
                         </a>
-                    </li>
+                    </li>-->
                 <?php endif; ?>
             </ul>
             <?php if($user->video): ?>
@@ -121,7 +121,7 @@
             <li>
                 <a name="showWx" class="items flex flex_justify" >
                     <span class="seach_name">查看TA的微信</span>
-                    <span id="showWx" class="golook">点击查看</span>
+                    <span id="showWx" class="golook" style="color: #dadada;">点击查看</span>
                 </a>
             </li>
         <?php endif; ?>
@@ -222,6 +222,16 @@
     window.onTopRight = function () {
         shareBanner();
     }
+
+
+    $(document).on('click', '.img-item', function() {
+        var imgs = [];
+        $('.img-item img').each(function() {
+            imgs.push((this.src).replace(/\?.*/, ''));
+        });
+        LEMON.event.viewImg(imgpath.replace(/\?.*/, ''), imgs);
+    });
+
 
     function shareBanner() {
         window.shareConfig.link = '<?= getHost().'/index/homepage/'.$user->id; ?><?= isset($user)?'?ivc='.$user->invit_code:'';?>';

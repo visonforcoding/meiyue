@@ -25,7 +25,7 @@ class ActivityController extends AppController
     public function index($top_tab = 1)
     {
         $carouselTb = TableRegistry::get('Carousel');
-        $carousels = $carouselTb->find()->where(['position' => CarouselPosition::TOP_BIGIMG, 'status' => 1])->toArray();
+        $carousels = $carouselTb->find()->where(['position' => CarouselPosition::TOP_BIGIMG, 'status' => 1])->select(['id', 'position', 'url', 'status'])->toArray();
         $this->set([
             'top_tab' => $top_tab,
             "user" => $this->user,
@@ -666,5 +666,18 @@ class ActivityController extends AppController
         } catch (Exception $e) {
             return $this->Util->ajaxReturn(false, '服务器大姨妈啦~~');
         }
+    }
+
+
+    public function carouselPage($id) {
+        $carousel = TableRegistry::get('Carousel')->get($id);
+        $title = '出错啦~~';
+        if($carousel) {
+            $title = $carousel->title;
+        }
+        $this->set([
+            'carousel' => $carousel,
+            'pageTitle' => $title
+        ]);
     }
 }

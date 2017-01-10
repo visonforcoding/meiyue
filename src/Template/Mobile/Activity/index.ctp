@@ -32,7 +32,7 @@
                 <div class="abanner">
                     <ul class="tou-imglist" id="oBox">
                         <?php foreach ($carousels as $carousel): ?>
-                            <li><a href="<?= $carousel->to_url; ?>"><img src="<?= createImg($carousel->url); ?>"/></a>
+                            <li><a href="/activity/carousel-page/<?= $carousel->id; ?>"><img src="<?= createImg($carousel->url); ?>"/></a>
                             </li>
                         <?php endforeach; ?>
                     </ul>

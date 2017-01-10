@@ -37,11 +37,15 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">跳转链接</label>
+        <label class="col-md-2 control-label">图文详情</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('to_url', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <script
+                name='page'
+                id='page'
+                rows='2'
+                type="text/plain"
+                class='form-control-editor'>
+                </script>
         </div>
     </div>
     <div class="form-group">
@@ -77,10 +81,13 @@
 <script type="text/javascript" src="/wpadmin/lib/jqupload/jquery.uploadfile.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
+<script src="/wpadmin/lib/ueditor/ueditor.config.js" ></script>
+<script src="/wpadmin/lib/ueditor/ueditor.all.js" ></script>
+<script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>
 <script>
     $(function () {
         initJqupload('url', '/wpadmin/util/doUpload?dir=carousel', 'jpg,png,gif,jpeg'); //初始化图片上传
-
+        var ue = UE.getEditor('page'); //初始化富文本编辑器
         $('form').submit(function () {
             var form = $(this);
             $.ajax({
