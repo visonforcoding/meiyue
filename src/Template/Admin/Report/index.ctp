@@ -47,14 +47,26 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['举报类型', '用户id', 'create_time', 'update_time', '操作'],
+                                ['举报类型', '用户', '创建时间', '操作'],
                         colModel: [
                             {name: 'type', editable: false, align: 'center',formatter:function(cell,opt,row){
-                                    
+                                    switch(cell){
+                                        case 1:
+                                            return '色情信息';
+                                            break;
+                                        case 2:
+                                            return '恶意骚扰';
+                                            break;
+                                        case 3:
+                                            return '违法行为';
+                                            break;
+                                        case 4:
+                                            return '其他';
+                                            break;
+                                    }
                             }},
                             {name: 'user.nick', editable: false, align: 'center'},
                             {name: 'create_time', editable: false, align: 'center'},
-                            {name: 'update_time', editable: false, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, frozen: true, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: window._config.showDef,
