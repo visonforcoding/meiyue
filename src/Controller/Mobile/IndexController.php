@@ -600,7 +600,7 @@ class IndexController extends AppController {
         }
         $this->set([
             'datas' => $mergeArr,
-            'pageTitle'=>'已成功邀请的人'
+            'pageTitle'=>'Ta的约会/派对'
         ]);
     }
 

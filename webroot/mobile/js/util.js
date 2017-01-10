@@ -270,10 +270,11 @@ $.util = {
 
         var obj = this, st = document.body.scrollTop;
 
-        //console.log([$(document).height(), $(window).height(),$(document).height()-$(window).height()-200,st].join('-'));
+        /*console.log([$(document).height(), $(window).height(),$(document).height()-$(window).height()-200,st].join('-'));*/
+        //console.log('scrollTop:' + st + '||' + (($(document).height() - $(window).height()) - 300));
 //        if (loadFunc && st >= (($(document).height() - $(window).height()) - 300)) {
 //        if (loadFunc && st >= (($(document).height() ))) {
-        if (loadFunc && st >= (($(document).height() - $(window).height()) - 300)) {
+        if (loadFunc && st >= (($(document).height() - $(window).height()) - 100)) {
             loadFunc();
             $.util.initLoadImg(listId);
         }

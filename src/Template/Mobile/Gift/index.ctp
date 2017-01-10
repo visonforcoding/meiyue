@@ -56,7 +56,7 @@
                         $('#allgift .items').removeClass('active');
                         setTimeout(function(){
                             LEMON.event.back();
-                            $.util.openTalk(res);
+                            //$.util.openTalk(res);
                         },500);
                     }
                 })
