@@ -6,7 +6,7 @@
          </div> -->
         <div class="home_cover_info flex">
 					<span class="avatar" onclick="window.location.href='/userc/edit-info'">
-						<img src="<?= createImg($user->avatar) . '?w=150' ?>" class="avatar-pic" onclick="location.href='/user/my-homepage'"/>
+						<img src="<?= createImg($user->avatar) . '?w=150' ?>" class="avatar-pic" onclick="location.href='/user/my-homepage/<?= $user->id; ?>'"/>
 						<div class="vip"><img src="/mobile/images/vip.png" class="responseimg"/></div>
 					</span>
             <div class="cover_left_info">

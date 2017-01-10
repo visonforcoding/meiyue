@@ -23,7 +23,7 @@
                 <div class="abanner">
                     <ul class="tou-imglist" id="oBox">
                         <?php foreach($carousels as $carousel): ?>
-                            <li><a href="<?= $carousel->to_url; ?>"><img src="<?= createImg($carousel->url); ?>"/></a></li>
+                            <li><a href="/activity/carousel-page/<?= $carousel->id; ?>"><img src="<?= createImg($carousel->url); ?>"/></a></li>
                         <?php endforeach; ?>
                     </ul>
                     <div class="yd flex flex_center" id="oTab">
@@ -125,7 +125,7 @@
         <div class="flex">
             <span class="place silver">{{index}}</span>
             <div class="place_info">
-            <span class="avatar">
+            <span class="avatar" onclick="location.href='/user/my-homepage/{{user.id}}'">
                 <img src="{{user.avatar}}">
             </span>
                 <h3>

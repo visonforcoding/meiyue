@@ -100,6 +100,9 @@
         </ul>
     </div>
     <!--<div class="complete_basic_info mt100">完善个人资料有奖，<a href="#this">点击查看详情</a></div>-->
+    <?php if($user->gender == 2): ?>
+        <div class="complete_basic_info mt100"><a href="/user/my-homepage/<?= $user->id; ?>">预览我的主页</a></div>
+    <?php endif; ?>
 </div>
 
 <?php $this->start('script'); ?>

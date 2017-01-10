@@ -44,7 +44,7 @@
                 <span class="coast color_friends">已消费：<?= $top3[0]->recharge ?></span>
             </div>
             <div class="rich_first_right">
-                <div data-id="<?= $top3[0]->id ?>" class="first_r_info beauty likeIt">魅力值 
+                <div data-id="<?= $top3[0]->id ?>" class="first_r_info beauty likeIt">魅力值
                     <i class='iconfont commico <?php if(isset($top3[0]->fans)):?>
                         <?php if($top3[0]->fans): ?>activeico<?php endif;?><?php endif;?>'></i>
                 </div>
