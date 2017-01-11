@@ -34,7 +34,7 @@
 <?= $this->element('footer', ['active' => 'chat']) ?>
 <div class="shadow fullwraper flex box_bottom">
     <div class="login-tips">
-        <h3 class="slogin">美约，生活更美好每一天每一天！</h3>
+        <h3 class="slogin">美约圈-美女、精英生活社交圈</h3>
         <a id="go-login" class="jumpbtn">
             登录/注册
         </a>

@@ -413,6 +413,7 @@
                     if (res.status) {
                         if(('top_week' == tab || 'top_month' == tab) && res.mydata) {
                             if(res.mydata) {
+                                $('#my-top').show();
                                 var mytemp = $('#mytop-list-tpl').html();
                                 var myrend = Mustache.render(mytemp, res);
                                 $('#my-top').html(myrend);
@@ -421,7 +422,7 @@
                             $(obj.container_id).html(rendered);
                             return;
                         }
-                        $('#my-top').html('');
+                        $('#my-top').hide();
                         var rendered = Mustache.render(template, res);
                         $(obj.container_id).html(rendered);
                     }
