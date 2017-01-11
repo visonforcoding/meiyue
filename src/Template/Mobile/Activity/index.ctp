@@ -103,23 +103,23 @@
         <div class="items_pic">
             <img src="{{big_img}}"/>
         </div>
-        <div class="items_con">
+        <div class="items_con flex flex_justify">
             <h3 class="items_title">{{title}}</h3>
             <div class="items_time flex flex_justify mt20">
-                <div>{{ad}}</div>
-                <div>
-                    <i class="iconfont ico">&#xe64b;</i>
-                    {{time}}
-                </div>
-            </div>
-        </div>
-        <div class="items_adress flex flex_justify">
-            <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
-            <div class="{{^isend}}btn_dark{{/isend}}{{#isend}}btn_light{{/isend}} button"
+                <div class="{{^isend}}btn_dark{{/isend}}{{#isend}}btn_light{{/isend}} button"
                  {{^isend}}onclick="joinAct({{id}})" {{
             /isend}}>
             {{^isend}}我要报名{{/isend}}{{#isend}}报名结束{{/isend}}
         </div>
+            </div>
+        </div>
+        <div class="items_adress flex flex_justify">
+            <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
+            
+         <div>
+            <i class="iconfont ico">&#xe64b;</i>
+            {{time}}
+         </div>
     </div>
     </div>
     {{/datas}}
@@ -268,7 +268,6 @@
             var obj = this;
             $.util.loop({
                 tp: 'text', //图片img或是文字text
-                //min: $(window).width(), //响应滑动的最小移动距离
                 loadImg: true,
                 isInit: true,
                 moveDom: $('#imgBox'),
@@ -278,8 +277,8 @@
                 autoTime: 0,
                 lockScrY: true,
                 //imgInitLazy: 1000,
+                min:0,
                 index: obj.cur_tab,
-                min:15, //响应滑动的最小移动距离
                 viewDom: $('.activity_list'),
                 fun: function (index) {
                     location.hash = '#' + index;
@@ -510,18 +509,16 @@
     //头牌轮播图
     $.util.loop({
         tp: 'img', //图片img或是文字text
-        //min: 5,
         loadImg: true,
         moveDom: $('#oBox'), // eg: $('#loopImgUl')
         moveChild: $('#oBox li'), //$('#loopImgUl li')
         tab: $('#oTab span'), //$('#loopImgBar li')
         loopScroll: true,
         autoTime: 3000,
-        touchEvent:true,
+        touchEvent:false,
         lockScrY: true,
         //imgInitLazy: 1000,
         index: 1,
-        min: $(window).width(), //响应滑动的最小移动距离
         viewDom: $('.abanner'),
         fun: function (index) {
 
