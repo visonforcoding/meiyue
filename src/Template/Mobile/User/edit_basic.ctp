@@ -434,7 +434,7 @@
         <?php if ($user->gender == 2): ?>
             <div class="home_fill_basic_info ">
                 <div class="items_title">
-                    <h3>我的微信 <i>（用户查看你的微信你会有收入哦）</i></h3>
+                    <h3>我的微信 <i>（用户查看你的微信，你将获得80元收入哦）</i></h3>
                 </div>
                 <ul>
                     <li class='home_fill_hobby'>
@@ -448,8 +448,7 @@
                 </ul>
                 <div class="isDisplay">
                     <input id="show-wx" name="wx_ishow" value="1" hidden>
-                    <span class="displaybtn <?= ($user->wx_ishow == 1) ? 'choose' : ''; ?>"><i
-                                class="iconfont">&#xe64c;</i>展示赚钱</span>
+                    <span class="displaybtn <?= ($user->wx_ishow == 1)?'choose':''; ?>"><i class="iconfont">&#xe64c;</i>允许用户付费查看</span>
                 </div>
             </div>
         <?php endif; ?>
