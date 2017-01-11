@@ -21,7 +21,7 @@
         <!--<a href="regiser.html" class="btn btn_bg_t mt40">注册</a>-->
     </div>
     <div class="outerlogin">
-        <a href="/index/index">游客身份浏览进入</a>
+        <a href="/index/index">逛一逛</a>
     </div>
 </div>
 <?= $this->start('script'); ?>
