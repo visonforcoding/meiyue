@@ -69,7 +69,7 @@
                     <dl class="Idcard">
                         <dt id="up_video">
                         <img src="/mobile/images/upimg.png" alt="" />
-                        <i class="iconfont playbtn">&#xe600;</i>
+                        <!-- <i class="iconfont playbtn">&#xe600;</i> -->
                         </dt>
                     </dl>
                 </div>
