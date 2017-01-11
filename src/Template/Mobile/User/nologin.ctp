@@ -125,7 +125,7 @@
 <?= $this->element('footer', ['active' => 'me']) ?>
 <div class="shadow fullwraper flex box_bottom">
     <div class="login-tips">
-        <h3 class="slogin">美约，高颜值社交圈</h3>
+        <h3 class="slogin">美约圈-美女、精英生活社交圈</h3>
         <a id="go-login" class="jumpbtn">
             登录/注册
         </a>
