@@ -310,8 +310,8 @@ class TestController extends AppController {
      */
     public function testGift($from, $to, $gift = 1) {
         $UserTable = TableRegistry::get('User');
-        $from = $UserTable->get('70');
-        $to = $UserTable->get('72');
+        $from = $UserTable->get('72');
+        $to = $UserTable->get('70');
         $GiftTable = TableRegistry::get('Gift');
         $gift = $GiftTable->get('4');
         $this->loadComponent('Netim');
