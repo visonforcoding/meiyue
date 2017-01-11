@@ -1364,24 +1364,16 @@ class UsercController extends AppController
      */
     public function suggest()
     {
+        $this->handCheckLogin();
         if ($this->request->is("POST")) {
             $data = $this->request->data;
-            $pwd = $data['passwd'];
-            if (!$pwd) {
-                return $this->Util->ajaxReturn(['status' => false, 'msg' => '密码不能为空']);
-            } else {
-                if (!(new \Cake\Auth\DefaultPasswordHasher)->check($pwd, $this->user->pwd)) {
-                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '登录密码错误，请重新输入']);
-                }
+            $suggestTb = TableRegistry::get("Suggest");
+            $suggest = $suggestTb->newEntity();
+            $suggest->user_id = $this->user->id;
+            $suggest = $suggestTb->patchEntity($suggest, $data);
+            if($suggestTb->save($suggest)) {
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '提交成功']);
             }
-            $withdrawTb = TableRegistry::get("Withdraw");
-            $withdraw = $withdrawTb->newEntity();
-            $withdraw = $withdrawTb->patchEntity($withdraw, $data);
-            $withdraw->user_id = $this->user->id;
-            $withdraw->viramount = $withdraw->amount;
-            $withdraw->amount = ($withdraw->amount) * 0.8;
-            $withdraw->status = 1;
-            $res = $this->checkApply($this->user, $withdraw->viramount);
             return $this->Util->ajaxReturn(['status' => false, 'msg' => '提交失败']);
         }
         $this->set([
