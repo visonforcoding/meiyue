@@ -52,7 +52,7 @@ class UserController extends AppController {
                     'rest_browse >' =>0
                 ],
                 'deadline >=' => new Time()
-            ])->orderDesc('cost')->limit(1);
+            ])->orderDesc('cost')->first();
         }
         $fanTb = TableRegistry::get('UserFans');
         $fans = $fanTb->find()->where(['following_id' => $this->user->id])->count();

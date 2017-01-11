@@ -119,9 +119,16 @@
                                     <option value="55" <?= (isset($user->weight) && $user->weight == '55') ? 'selected' : ''; ?>>
                                         55KG
                                     </option>
-                                    <option value="55+" <?= (isset($user->weight) && $user->weight == '55+') ? 'selected' : ''; ?>>
-                                        55+KG
-                                    </option>
+                                    <option value="60" <?= (isset($user->weight) && $user->weight == '60') ? 'selected' : ''; ?>>60KG</option>
+                                    <option value="65" <?= (isset($user->weight) && $user->weight == '65') ? 'selected' : ''; ?>>65KG</option>
+                                    <option value="70" <?= (isset($user->weight) && $user->weight == '70') ? 'selected' : ''; ?>>70KG</option>
+                                    <option value="75" <?= (isset($user->weight) && $user->weight == '75') ? 'selected' : ''; ?>>75KG</option>
+                                    <option value="80" <?= (isset($user->weight) && $user->weight == '80') ? 'selected' : ''; ?>>80KG</option>
+                                    <option value="85" <?= (isset($user->weight) && $user->weight == '85') ? 'selected' : ''; ?>>85KG</option>
+                                    <option value="90" <?= (isset($user->weight) && $user->weight == '90') ? 'selected' : ''; ?>>90KG</option>
+                                    <option value="95" <?= (isset($user->weight) && $user->weight == '95') ? 'selected' : ''; ?>>95KG</option>
+                                    <option value="100" <?= (isset($user->weight) && $user->weight == '100') ? 'selected' : ''; ?>>100KG</option>
+                                    <option value="100+" <?= (isset($user->weight) && $user->weight == '100+') ? 'selected' : ''; ?>>100+KG</option>
                                 </select>
                             </div>
                         </div>

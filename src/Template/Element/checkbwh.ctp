@@ -46,7 +46,13 @@
                         <li val='87'>87</li>
                         <li val='88'>88</li>
                         <li val='89'>89</li>
-                        <li val='90+'>90+</li>
+                        <li val='90'>90</li>
+                        <li val='91'>91</li>
+                        <li val='92'>92</li>
+                        <li val='93'>93</li>
+                        <li val='94'>94</li>
+                        <li val='95'>95</li>
+                        <li val='95+'>95+</li>
                         <li></li>
                         <li></li>
                         <li></li>
@@ -66,7 +72,13 @@
                         <li val='67'>67</li>
                         <li val='68'>68</li>
                         <li val='69'>69</li>
-                        <li val='69'>70+</li>
+                        <li val='70'>70</li>
+                        <li val='71'>71</li>
+                        <li val='72'>72</li>
+                        <li val='73'>73</li>
+                        <li val='74'>74</li>
+                        <li val='75'>75</li>
+                        <li val='75+'>75+</li>
                         <li></li>
                         <li></li>
                         <li></li>
@@ -85,7 +97,18 @@
                         <li val='87'>87</li>
                         <li val='88'>88</li>
                         <li val='89'>89</li>
-                        <li val='90+'>90+</li>
+                        <li val='90'>90</li>
+                        <li val='91'>91</li>
+                        <li val='92'>92</li>
+                        <li val='93'>93</li>
+                        <li val='94'>94</li>
+                        <li val='95'>95</li>
+                        <li val='96'>96</li>
+                        <li val='97'>97</li>
+                        <li val='98'>98</li>
+                        <li val='99'>99</li>
+                        <li val='100'>100</li>
+                        <li val='100+'>100+</li>
                         <li></li>
                         <li></li>
                         <li></li>

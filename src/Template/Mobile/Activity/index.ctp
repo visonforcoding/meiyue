@@ -447,6 +447,7 @@
                     if (res.status) {
                         if ('rich_list' == tab) {
                             if (res.mydata) {
+                                $('#my-top').show();
                                 if (res.mydata.paiming) {
                                     var mytmpl = $('#myrich-tpl').html();
                                     var myrend = Mustache.render(mytmpl, res);
@@ -457,7 +458,7 @@
                             $(obj.container_id).html(rendered);
                             return;
                         }
-                        $('#my-top').html('');
+                        $('#my-top').hide();
                         var rendered = Mustache.render(template, res);
                         $(obj.container_id).html(rendered);
                     }
