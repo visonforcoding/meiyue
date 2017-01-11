@@ -205,8 +205,7 @@ $.util = {
     loginWX: function (cb) {
         if (window.__isAPP) {
             LEMON.login.wx(cb);
-        }
-        else if ($.util.isWX) {
+        } else if ($.util.isWX) {
             location.href = '/wx/get-user-jump';
         }
     },
@@ -277,8 +276,7 @@ $.util = {
         if (loadFunc && st >= (($(document).height() - $(window).height()) - 100)) {
             loadFunc();
             $.util.initLoadImg(listId);
-        }
-        else {
+        } else {
             window.holdLoad = false;
         }
         $.util.loadImg();
@@ -302,7 +300,7 @@ $.util = {
         });
     },
     isLogin: function () {
-        if(!$.util.isAPP){
+        if (!$.util.isAPP) {
             return true;
         }
         return !!$.util.getCookie('token_uin');
@@ -376,8 +374,7 @@ $.util = {
                     'urls': imgs}
                 );
             }
-        }
-        else if ($.util.isAPP) {
+        } else if ($.util.isAPP) {
             LEMON.event.viewImg(csrc, imgs);
         }
     },
@@ -390,8 +387,7 @@ $.util = {
         if (ptag) {
             act = 'c';
             param.push('ptag=' + ptag);
-        }
-        else if ($.util.getParam('ptag')) {
+        } else if ($.util.getParam('ptag')) {
             param.push('ptag=' + $.util.getParam('ptag'));
         }
         param.push('act=' + act);
@@ -425,17 +421,17 @@ $.util = {
      */
     checkLogin: function (url) {
         if ($.util.isLogin()) {
-            if(!url) {
+            if (!url) {
                 return true;
             }
             location.href = url;
         } else {
             $.util.alert('请登录后再操作', 1000);
-            if(!url) {
+            if (!url) {
                 return false;
             }
-            setTimeout(function() {
-                if($.util.isAPP) {
+            setTimeout(function () {
+                if ($.util.isAPP) {
                     LEMON.event.login();
                 } else {
                     setTimeout(function () {
@@ -574,8 +570,7 @@ $.util = {
                     if (len == max)
                         up.hide();
                 })
-            }
-            else if (cid >= 0 && cid < max) {
+            } else if (cid >= 0 && cid < max) {
                 LEMON.event.changePic({'key': id, 'index': cid}, function (res) {
                     res = JSON.parse(res);
                     $('#' + res.key).find('img').eq(res.index).attr('src', 'http://image.com/' + (new Date()).getTime() + '/' + res.key + '/' + res.index);
@@ -601,10 +596,10 @@ $.util = {
      * 判断是否上传过  用属性  data('choosed')
      * @param id
      */
-    chooseAuthVideo: function (id,str) {
+    chooseAuthVideo: function (id, str) {
         var dom = $('#' + id);
         dom.on('tap', function () {
-            LEMON.event.chooseAuthVideo({'key': id,'str':str}, function (res) {
+            LEMON.event.chooseAuthVideo({'key': id, 'str': str}, function (res) {
                 res = JSON.parse(res);
                 dom.next('div').find('img').eq(0).attr('src', 'http://video.com/' + (new Date()).getTime() + '/' + res.key);
                 dom.data('choosed', 'ok');
@@ -629,7 +624,7 @@ $.util = {
         minute = minute < 10 ? ('0' + minute) : minute;
         var second = date.getSeconds();
         second = second < 10 ? ('0' + second) : second;
-        return reType == 'json' ? {y:y,m:m,d:d,h:h,minute:minute,second:second} : y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+        return reType == 'json' ? {y: y, m: m, d: d, h: h, minute: minute, second: second} : y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
     },
     /**
      * 获取当前时间
@@ -637,10 +632,10 @@ $.util = {
      */
     getImShowTime: function (date) {
         var imTime = $.util.getFormatTime(date, 'json'),
-            cTime = $.util.getFormatTime('', 'json'),
-            tmp = imTime.d + ':' +imTime.minute;
+                cTime = $.util.getFormatTime('', 'json'),
+                tmp = imTime.d + ':' + imTime.minute;
 
-        return (imTime.m != cTime.m || imTime.d != cTime.d ? imTime.m + '-' +imTime.d + ' ' : '') + tmp;
+        return (imTime.m != cTime.m || imTime.d != cTime.d ? imTime.m + '-' + imTime.d + ' ' : '') + tmp;
     },
     /**
      * 处理js错误
@@ -711,35 +706,38 @@ $.util = {
             });
         }
     },
-    checkShare:function(){
-        if($.util.getParam('ivc')){
+    checkShare: function () {
+        if ($.util.getParam('ivc')) {
             $.util.setCookie('IVCOD', $.util.getParam('ivc'), 15);
         }
     },
-    getShareCode: function() {
+    getShareCode: function () {
         return $.util.getCookie('IVCOD');
     },
     openTalk: function (res) {
         var param = {};
         param['accid'] = res.obj.imaccid;
+        if(!$.util.isAPP){
+            window.location.href = '/chat/chat-detail/'+res.obj.imaccid;
+        }
         param['nick'] = res.obj.nick;
         param['avatar'] = res.obj.avatar;
         param['id'] = res.obj.id;
         LEMON.event.imTalk(param);
     },
-    setWH: function(img) {
-        img.height < img.width ? $(img).css({'height':'100%'}) : $(img).css({'width': '100%'})
+    setWH: function (img) {
+        img.height < img.width ? $(img).css({'height': '100%'}) : $(img).css({'width': '100%'})
     },
-    addZero:function(p,len){
-        var str = '0000000000000000000'+p;
-        return str.substr(str.length-len, len);
+    addZero: function (p, len) {
+        var str = '0000000000000000000' + p;
+        return str.substr(str.length - len, len);
     },
     /**
      * eg: $.util.dateformat('yyyy/mm/dd hh:ii:ss', new Date())
      */
     dateformat: function (formatStr, date) {
         var arrWeek = ['日', '一', '二', '三', '四', '五', '六'],
-            str = formatStr
+                str = formatStr
                 .replace(/yyyy|YYYY/, date.getFullYear()).replace(/yy|YY/, $.util.addZero(date.getFullYear() % 100, 2))
                 .replace(/mm|MM/, $.util.addZero(date.getMonth() + 1, 2)).replace(/m|M/g, date.getMonth() + 1)
                 .replace(/dd|DD/, $.util.addZero(date.getDate(), 2)).replace(/d|D/g, date.getDate())
@@ -749,9 +747,9 @@ $.util = {
                 .replace(/w/g, date.getDay()).replace(/W/g, arrWeek[date.getDay()]);
         return str;
     },
-    date2ios:function(time){
-        return time.replace(/\-/g, "/");  
-    }
+    date2ios: function (time) {
+        return time.replace(/\-/g, "/");
+    },
 };
 
 $.util.isWX = navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1;
