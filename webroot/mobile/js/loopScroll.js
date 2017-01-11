@@ -78,7 +78,7 @@ $.extend(scroll.prototype, {
     },
     startEvent : function() {
         var obj = this, mid = this.moveDom.get(0), ael=function(dom){
-            if(!this.touchEvent) return;
+          if(!obj.touchEvent) return;
             dom.addEventListener("touchstart", obj, false);
             dom.addEventListener("touchmove", obj, false);
             dom.addEventListener("touchend", obj, false);
