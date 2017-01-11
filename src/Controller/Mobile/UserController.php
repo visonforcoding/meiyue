@@ -138,10 +138,11 @@ class UserController extends AppController {
      * 用户注册
      */
     public function register() {
+        $gender = $this->request->query('gender') ? $this->request->query('gender') : 1;
         if ($this->request->is('ajax')) {
             //验证验证码
             $data = $this->request->data();
-            $data['gender'] = $this->request->query('gender') ? $this->request->query('gender') : 1;
+            $data['gender'] = $gender;
             $SmsTable = \Cake\ORM\TableRegistry::get('Smsmsg');
             $sms = $SmsTable->find()->where(['phone'])->orderDesc('create_time')->first();
             //验证码验证
@@ -241,6 +242,7 @@ class UserController extends AppController {
             
         }
         $this->set([
+            'gender' => $gender,
             'pageTitle' => '美约-注册'
         ]);
     }

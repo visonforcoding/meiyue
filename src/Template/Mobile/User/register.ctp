@@ -23,7 +23,11 @@
         <h4 class="getlogin"><a href="/user/login">已有账号，直接登录</a></h4>
     </div>
     <div class="register_bottom_tips">
-        <a href="#this">注册表明已阅读并接受<i class='color_y'>“用户服务协议”</i></a>
+        <?php if($gender == 1): ?>
+            <a href="/index/agreement-user">注册表明已阅读并接受<i class='color_y'>“用户服务协议”</i></a>
+        <?php else: ?>
+            <a href="/index/agreement-artist">注册表明已阅读并接受<i class='color_y'>“艺人入驻协议”</i></a>
+        <?php endif; ?>
     </div>
 </div>
 <?= $this->start('script') ?>

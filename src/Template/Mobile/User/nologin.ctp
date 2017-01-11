@@ -6,15 +6,14 @@
         </div>-->
         <div class="home_cover_info flex">
             <span class="avatar">
-                <img src="/mobile/images/avatar.jpg" class="avatar-pic"/>
+                <img src="/mobile/images/m_avatar_2.png" class="avatar-pic"/>
             </span>
             <div class="cover_left_info">
                 <ul class="opci">
                     <li class="bbottom userinfo">
                         <a href="#this" class="cover_block">
                             <h3>
-                                <span>未登录<i class="iconfont">&#xe628;</i></span>
-                                <span class="flag"><img src="/mobile/images/zui.png" alt="" /></span>
+                                <span>未登录</span>
                             </h3>
                             <span class="cover_r_ico">
                                 <i class="iconfont">&#xe605;</i>
@@ -37,7 +36,7 @@
                 <a href="#this"  class="home_items">
                     <div class="home_list_l_info flex"><i class="iconfont">&#xe60e;</i><span class="itemsname">我的钱包</span></div>
                     <div class="home_list_r_info">
-                        <span class="cashpic"><img src="/mobile/images/cash.png" alt="" />352</span>
+                        <span class="cashpic"><img src="/mobile/images/cash.png" alt="" /></span>
                         <i class="iconfont">&#xe605;</i>
                     </div>
                 </a>
@@ -46,7 +45,6 @@
                 <a href="#this"  class="home_items">
                     <div class="home_list_l_info  flex"><i class="iconfont">&#xe60a;</i><span class="itemsname">订单管理</span></div>
                     <div class="home_list_r_info">
-                        <span class="tips"></span>
                         <i class="iconfont">&#xe605;</i>
                     </div>
                 </a>

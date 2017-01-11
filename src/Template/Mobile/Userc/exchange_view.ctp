@@ -67,7 +67,7 @@
 </div>
 <div class="bottomblock">
     <div class="flex flex_end">
-        <span class="total">所兑换人民币：<i class="color_y">￥</i> <i class="color_y numbers" id="show-true-amount">400元</i></span>
+        <span class="total">所兑换人民币：<i class="color_y">￥</i> <i class="color_y numbers" id="show-true-amount"></i></span>
         <a class="nowpay">立即申请</a>
     </div>
 </div>

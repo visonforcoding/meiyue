@@ -602,4 +602,19 @@ class IndexController extends AppController {
         ]);
     }
 
+
+    public function agreementUser()
+    {
+        $this->set([
+            'pageTitle'=>'美约平台用户服务协议'
+        ]);
+    }
+
+
+    public function agreementArtist()
+    {
+        $this->set([
+            'pageTitle'=>'美动控股艺人入驻协议'
+        ]);
+    }
 }

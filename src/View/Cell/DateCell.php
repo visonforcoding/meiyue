@@ -77,7 +77,7 @@ class DateCell extends Cell
     public function costsView()
     {
         $this->loadModel("Cost");
-        $list = $this->Cost->find("threaded")->toArray();
+        $list = $this->Cost->find()->orderAsc('money')->toArray();
         $this->set(["list" => $list]);
     }
 

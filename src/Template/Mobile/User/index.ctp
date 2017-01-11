@@ -7,7 +7,7 @@
         <div class="home_cover_info flex">
 					<span class="avatar" onclick="window.location.href='/userc/edit-info'">
 						<img src="<?= createImg($user->avatar) . '?w=150' ?>" class="avatar-pic" onclick="location.href='/user/my-homepage/<?= $user->id; ?>'"/>
-						<div class="vip"><img src="/mobile/images/vip.png" class="responseimg"/></div>
+						<!--<div class="vip"><img src="/mobile/images/vip.png" class="responseimg"/></div>-->
 					</span>
             <div class="cover_left_info">
                 <ul class="">
@@ -125,6 +125,14 @@
             <li>
                 <a href='/user/share'  class="home_items">
                     <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe612;</i><span class="itemsname">邀请好友注册</span></div>
+                    <div class="home_list_r_info">
+                        <i class="iconfont">&#xe605;</i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href=""  class="home_items">
+                    <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe6bc;</i><span class="itemsname">意见反馈</span></div>
                     <div class="home_list_r_info">
 
                         <i class="iconfont">&#xe605;</i>
