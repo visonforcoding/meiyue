@@ -40,7 +40,7 @@
         <li>
             <a href="/user/share" class="a-height flex flex_justify">
                 <div class="l-info-name">邀请好友注册</div>
-                <i class="iconfont rcon">&#xe605;</i>
+                <div> <span class='color_gray'>成为合伙人</span> <i class="iconfont rcon">&#xe605;</i></div>
             </a>
         </li>
         <li>
