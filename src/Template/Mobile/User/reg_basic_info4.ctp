@@ -1,8 +1,8 @@
 <div class="wraper fullwraper  bgff pt40">
     <div class="info-header-tips">
          <div class="closed">
-                <a href="#this" class="iconfont">&#xe684;</a>
-          </div>
+            <a onclick="pass2();" class="iconfont">&#xe684;</a>
+         </div>
         <h3 class="aligncenter title">完善个人信息<br />可以提高魅力值哦~</h3>
     </div>
     <div class="home_fill_basic_info home_fill_hobby change-home-info mt40">
@@ -112,7 +112,7 @@
         </form>
     </div>
     <div class="other-info-jump">
-        <a id="submit" href="#this" class="color_y">填好了，进入首页 ></a>
+        <a id="submit" class="color_y">填好了，进入首页 ></a>
     </div>
 
 </div>
@@ -132,10 +132,12 @@
             $.util.alert('喜欢的运动输入过长');
         }
     });
-    LEMON.sys.setTopRight('跳过');
-    window.onTopRight = function () {
+
+
+    function pass2() {
         window.location.href = '/index/find-rich-list';
     }
+
     $('#submit').on('tap', function () {
         if ($('#food').length > 12) {
             $.util.alert('喜欢的美食输入过长');

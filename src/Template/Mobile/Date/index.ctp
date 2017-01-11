@@ -50,6 +50,7 @@
     </li>
 </script>
 
+
 <script type="text/javascript">
 
     //首次获取列表数据
@@ -95,8 +96,9 @@
             dataType: "json",
             success:function(res) {
                 if(res.status) {
+                    var tpl = 'tpl';
                     if((res.datas).length == 0) {
-                        $('#dates-list-container').html('');
+                        $('#dates-list-container').html('<div class="empty_container"><div class="empty-content mt160"><span class="empty-ico-box bg-active"><i class="iconfont empty-ico">&#xe691;</i></span><p class="empty-tips">您还没有发布过约会，赶快发布提升魅力值吧~</p></div></div>');
                         return;
                     }
                     $.util.dataToTpl("dates-list-container", "tpl", res.datas, function(d){
