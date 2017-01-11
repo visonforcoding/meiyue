@@ -238,9 +238,7 @@
                 </li>
                  <li class='plaintext-box'>
                     <div class="home_items">
-                       <div class="home_list_l_info"><span class="itemsname">工</span><span
-                                class="itemsname">作</span><span class="itemsname">经</span><span
-                                class="itemsname">历</span>
+                       <div class="home_list_l_info"><span class="itemsname">工作经历<br/>/及荣誉
                            </span>
                         </div>
                         <div class="home_list_r_info  plaintext">
