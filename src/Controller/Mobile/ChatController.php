@@ -44,12 +44,17 @@ class ChatController extends AppController {
     /**
      * 聊天页
      */
-    public function chatDetail()
+    public function chatDetail($accid)
     {
+        $UserTable = TableRegistry::get('User');
+        $to_user = $UserTable->find()->select(['nick','avatar','id'])->where(['imaccid'=>$accid])->first();
         $netim_conf = \Cake\Core\Configure::read('netim');
         $imkey = $netim_conf['app_key'];
         $this->set([
-            'imkey'=>$imkey
+            'imkey'=>$imkey,
+            'to_user'=>$to_user,
+            'pageTitle'=>$to_user->nick,
+            'user'=> $this->user
         ]);
     }
 

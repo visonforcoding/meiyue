@@ -4,24 +4,26 @@
 <script id="chat-list-tpl" type="text/html">
     {{#sessions}}
     <li id="chat-{{to}}" class="active flex">
-        <div data-accid="{{to}}" data-id="{{user_id}}" data-avatar="{{avatar}}" data-nick="{{nick}}"  
-             class="ablock flex flex_justify user clickable">
-            <div class="chat-left-info flex">
-                <div class="avatar">
-                    <img src="{{avatar}}"/>
-                    <div class="num" {{unreadst}} {{unread}}></div>
-                </div>
-                <div class="chat-text">
-                    <h3 class="name">{{nick}}</h3>
-                    <span class="last-info line1">{{lastMsg.text}}</span>
-                </div>
-            </div>
-            <time class="smalldes">{{datetime}}</time>
-        </div>
+        <a href="/chat/chat-detail/{{to}}">
+            <div data-accid="{{to}}" data-id="{{user_id}}" data-avatar="{{avatar}}" da                 ta-nick="{{nick}}"  
+             class="ablock flex flex_just                     ify user clickable">
+            <div class="c                         hat-left-info flex">
+                                             <div class="avatar">
+                             <img src="{{avatar}}"/>
+                             <div class="num" {{unreadst}} {{unread}}></div>
+                         </div>
+                         <div class="chat-text">
+                             <h3 class="name">{{nick}}</h3>
+                             <span class="last-info line1">{{lastMsg.text}}</span>
+                         </div>
+                     </div>
+                     <time class="smalldes">{{datetime}}</time>
+                 </div>
+        </a>
         <div class="r-btn flex">
-            <?php if($user->gender==1): ?>
-            <div data-id="{{user_id}}" class="focus clickable">关注</div>
-            <?php endif;?>
+            <?php if ($user->gender == 1): ?>
+                <!--<div data-id="{{user_id}}" class="focus clickable">关注</div>-->
+            <?php endif; ?>
             <div data-accid="{{to}}" class="del clickable">删除</div>
         </div>
     </li>
@@ -52,7 +54,7 @@
         <li>
             <a href="/chat/meiyue-message" class="a-height flex flex_justify">
                 <div class="l-info-name">平台消息</div>
-                <div class="tips-box"><?php if($unread):?><span class="tips"></span><?php endif; ?><i class="iconfont rcon">&#xe605;</i></div>
+                <div class="tips-box"><?php if ($unread): ?><span class="tips"></span><?php endif; ?><i class="iconfont rcon">&#xe605;</i></div>
             </a>
         </li>
     </ul>
@@ -68,8 +70,6 @@ var backUnread = {};
 var data = {};
 var accids = [];   //列表accid
 var account = LEMON.db.get('im_accid');
-//var account = 'meiyue_110';
-//var token = '89e66f7fc9ac977d0d7298d397e05820';
 var token = LEMON.db.get('im_token');
 var nim = NIM.getInstance({
     debug: true,
@@ -187,25 +187,26 @@ $(document).on('click', '.user', function () {
     LEMON.event.imTalk(param);
     setRead(accid);
 });
-$(document).on('click', '.focus', function () {
-    //关注
-     var user_id = $(this).data('id');
-     var obj = $(this);
-    $.util.ajax({
-        url: '/user/follow',
-        data: {id: user_id},
-        func: function (res) {
-            if (res.status) {
-                if(res.action=='focus'){
-                    obj.text('取消关注');
-                }else{
-                    obj.text('关注');
-                }
-            }
-            $.util.alert(res.msg);
-        }
-    })
-});
+
+//$(document).on('click', '.focus', function () {
+//    //关注
+//     var user_id = $(this).data('id');
+//     var obj = $(this);
+//    $.util.ajax({
+//        url: '/user/follow',
+//        data: {id: user_id},
+//        func: function (res) {
+//            if (res.status) {
+//                if(res.action=='focus'){
+//                    obj.text('取消关注');
+//                }else{
+//                    obj.text('关注');
+//                }
+//            }
+//            $.util.alert(res.msg);
+//        }
+//    })
+//});
 
 $(document).on('click', '.del', function () {
     //删除会话
@@ -275,5 +276,7 @@ function setRead(id) {
 //    LEMON.db.set('num'+id, 0);
 //    $('#chat-' + id).find('.num').html(0).hide();
 //}
+
+
 </script>
 <?php $this->end('script'); ?>

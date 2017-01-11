@@ -644,7 +644,7 @@ class UserController extends AppController {
                 } else {
                     $newfans->type = 1;
                     if (!$FansTable->save($newfans)) {
-                        return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'关注成功','action'=>'focus']);
+                        return $this->Util->ajaxReturn(['status'=>false, 'msg'=>'关注失败']);
                     }
                 }
                 //发送一条关注消息给被关注者
@@ -659,7 +659,7 @@ class UserController extends AppController {
                 //$followCount = $FansTable->find()->where(['user_id' => $user_id])->count();
                 //$me->focus_nums = $followCount;
                 //$this->User->save($me);
-                return $this->Util->ajaxReturn(true, '关注成功');
+                return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'关注成功','action'=>'focus']);
             }
         }
     }
