@@ -36,12 +36,12 @@
                 <span class="iconfont rcon">&#xe605;</span>
             </a>
         </li>
-        <li>
+        <!--<li>
             <a class="commonlayer ablock">
                 <div>意见反馈</div>
                 <span class="iconfont rcon">&#xe605;</span>
             </a>
-        </li>
+        </li>-->
         <li>
             <a class="commonlayer ablock" href="/mobile/html/home_aboutus.html">
                 <div>关于我们</div>

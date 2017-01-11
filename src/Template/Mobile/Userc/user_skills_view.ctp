@@ -29,7 +29,7 @@
                         <div class='col-importent'>技能价格</div>
                         <div class="r_info">
                             <span id="show-cost">
-                                <?= (isset($userskill) && isset($userskill->cost))?$userskill->cost->money.'<i class="smalldes">美币/小时</i>':'<span class="color_gray">请选择</span>'; ?>
+                                <?= (isset($userskill) && isset($userskill->cost))?$userskill->cost->money.'<i class="smalldes">美币/小时</i>':'<span class="color_gray">200/h~300/h更受欢迎哦~</span>'; ?>
 
                             </span>
                             <i class="iconfont rcon">&#xe605;</i>
@@ -76,7 +76,7 @@
             <div class="date_text">
                 <div class="b_title col-importent">约会说明</div>
                 <div class="r_text">
-                    <textarea id="description-input" name="description" placeholder="100个字以内"><?= empty($userskill['description'])?'':$userskill['description']; ?></textarea>
+                    <textarea id="description-input" name="description" placeholder="可以描述自己的特长，曾获得过的技能奖项，能给对方带来什么。"><?= empty($userskill['description'])?'':$userskill['description']; ?></textarea>
                 </div>
             </div>
         </div>

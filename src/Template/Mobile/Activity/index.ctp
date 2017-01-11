@@ -258,14 +258,6 @@
 
     $.extend(activity.prototype, {
         init: function () {
-            /*var curtr = '<?= isset($curtab) ? $curtab : 'date'; ?>';
-             if(curtr == 'date') {
-             this.cur_tab = 1;
-             } else if(curtr == 'party') {
-             this.cur_tab = 2;
-             } else if(curtr == 'top') {
-             this.cur_tab = 3;
-             }*/
             if (/#1|#2|#3/.test(location.hash)) {
                 this.cur_tab = location.hash.replace('#', '');
             }
@@ -276,7 +268,7 @@
             var obj = this;
             $.util.loop({
                 tp: 'text', //图片img或是文字text
-                min: $(window).width(), //响应滑动的最小移动距离
+                //min: $(window).width(), //响应滑动的最小移动距离
                 loadImg: true,
                 isInit: true,
                 moveDom: $('#imgBox'),
@@ -518,7 +510,7 @@
     //头牌轮播图
     $.util.loop({
         tp: 'img', //图片img或是文字text
-        min: 5,
+        //min: 5,
         loadImg: true,
         moveDom: $('#oBox'), // eg: $('#loopImgUl')
         moveChild: $('#oBox li'), //$('#loopImgUl li')
@@ -529,7 +521,7 @@
         lockScrY: true,
         //imgInitLazy: 1000,
         index: 1,
-         min: $(window).width(), //响应滑动的最小移动距离
+        min: $(window).width(), //响应滑动的最小移动距离
         viewDom: $('.abanner'),
         fun: function (index) {
 

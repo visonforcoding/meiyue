@@ -26,7 +26,6 @@
 </div>
 <?= $this->start('script'); ?>
 <script>
-
     wx.config(<?= json_encode($wxConfig) ?>);
     $('#phone,#pwd').on('keyup', function () {
         var phone = $('#phone').val();

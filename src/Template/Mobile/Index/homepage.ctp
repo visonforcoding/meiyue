@@ -580,7 +580,7 @@
         });
         var curimg = $(this).find('img').first().attr('src');
         var imgpath = '<?= getHost(); ?>' + curimg;
-        var status = <?= isset($browseRight)?$browseRight:-1 ?>;
+        var status = <?= isset($browseRight)?$browseRight:$browseRight ?>;
         var user_id = <?= isset($loginer)?$loginer->id:-1; ?>;
         var view_id = <?= isset($user)?$user->id:-1; ?>;
         var to_url = '';
@@ -608,14 +608,6 @@
     }
 
     $.util.tap($('#chat-btn'), function() {
-        /*var param = {};
-        var accid = '<?= $user->imaccid; ?>';
-        var nick = '<?= $user->nick; ?>';
-        var avatar = '<?= getHost().$user->avatar; ?>';
-        param['accid'] = accid;
-        param['nick'] = nick;
-        param['avatar'] = avatar;
-        LEMON.event.imTalk(param);*/
         checkim();
     });
 

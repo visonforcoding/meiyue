@@ -55,6 +55,7 @@
                 <div class="l_box waist" style='width:34%;'>
                     <ul class="items">
                         <li></li>
+                        <li val='55'>55</li>
                         <li val='60'>60</li>
                         <li val='61'>61</li>
                         <li val='62'>62</li>
@@ -175,10 +176,10 @@
                    },
                    addEvent:function(){
                     var obj = this;
-                     $('#submit-btn').on('click', function(){
+                    $.util.tap($('#submit-btn'), function(){
                            obj.submit();
-                        });
-                    $('#cancel-btn').on('click', function(){
+                    });
+                    $.util.tap($('#cancel-btn'), function(){
                         obj.hide();
                     });
                       // 胸围

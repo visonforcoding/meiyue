@@ -18,7 +18,7 @@
     <div class='mt20 charge_container_con'>
         <h3 class="title">快捷充值</h3>
         <ul class='flex flex_justify charge-package' id='package'>
-            <li class='items flex flex_center active' onclick="quickPay(100);">
+            <li class='items flex flex_center' onclick="quickPay(100);">
                 <div>
                     <h3 class='color_friends'>
                         <span class='lagernum'>100</span><i class='unit'>美币</i>

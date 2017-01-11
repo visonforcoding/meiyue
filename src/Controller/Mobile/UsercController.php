@@ -1357,4 +1357,35 @@ class UsercController extends AppController
            return $this->Util->ajaxReturn(false,$msg);
        }
     }
+
+
+    /**
+     * 意见反馈
+     */
+    public function suggest()
+    {
+        if ($this->request->is("POST")) {
+            $data = $this->request->data;
+            $pwd = $data['passwd'];
+            if (!$pwd) {
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '密码不能为空']);
+            } else {
+                if (!(new \Cake\Auth\DefaultPasswordHasher)->check($pwd, $this->user->pwd)) {
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '登录密码错误，请重新输入']);
+                }
+            }
+            $withdrawTb = TableRegistry::get("Withdraw");
+            $withdraw = $withdrawTb->newEntity();
+            $withdraw = $withdrawTb->patchEntity($withdraw, $data);
+            $withdraw->user_id = $this->user->id;
+            $withdraw->viramount = $withdraw->amount;
+            $withdraw->amount = ($withdraw->amount) * 0.8;
+            $withdraw->status = 1;
+            $res = $this->checkApply($this->user, $withdraw->viramount);
+            return $this->Util->ajaxReturn(['status' => false, 'msg' => '提交失败']);
+        }
+        $this->set([
+            'pageTitle' => '意见反馈'
+        ]);
+    }
 }

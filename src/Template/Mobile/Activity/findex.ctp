@@ -474,7 +474,7 @@
     //头牌轮播图
     $.util.loop({
         tp: 'img', //图片img或是文字text
-        min : 5,
+        //min : 5,
         loadImg: true,
         moveDom: $('#oBox'), // eg: $('#loopImgUl')
         moveChild: $('#oBox li'), //$('#loopImgUl li')
@@ -484,7 +484,7 @@
         autoTime: 3000,
         lockScrY: true,
         //imgInitLazy: 1000,
-        min:$(window).width();
+        min:$(window).width(),
         index: 1,
         viewDom: $('.abanner'),
         fun: function (index) {

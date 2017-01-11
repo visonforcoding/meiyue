@@ -136,6 +136,15 @@
                 </a>
             </li>-->
             <li>
+                <a href=""  class="home_items">
+                    <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe6bc;</i><span class="itemsname">意见反馈</span></div>
+                    <div class="home_list_r_info">
+
+                        <i class="iconfont">&#xe605;</i>
+                    </div>
+                </a>
+            </li>
+            <li>
                 <a href="/userc/install"  class="home_items">
                     <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe6bc;</i><span class="itemsname">设置</span></div>
                     <div class="home_list_r_info">
