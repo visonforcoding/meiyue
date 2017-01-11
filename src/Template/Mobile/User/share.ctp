@@ -6,19 +6,19 @@
 </header> -->
 <div class="wraper">
     <div class="share_sucess_tips">
-        <a href="/user/share-list" class="ablock">已成功邀请的人<i class="iconfont fr">&#xe605;</i></a>
+        <a href="/user/share-list" class="ablock">查看我的佣金<i class="iconfont fr">&#xe605;</i></a>
     </div>
     <div class="share_items_list <?php if(isset($user) && $user->has_invs): ?>mt20<?php endif; ?>">
         <div class="inner">
             <h3 class="title">方式一：链接</h3>
-            <p class="desc">邀请好友来注册，好友点击您分享的链接并于15分钟内注册成功，您将获得[女性好友]平台赚取金额的10%佣金，或[男性好友]平台充值金额的15%佣金。</p>
+            <p class="desc">分享平台上的任意链接出去，系统将自动记录ID，凡男性用户注册后的每一笔消费，您将获得15%佣金，女性用户注册后的每一笔收入，您都有10%佣金。</p>
             <a href="javascript:shareBanner();" class="btn btn_t_border mt40">立即分享</a>
         </div>
     </div>
     <div class="share_items_list mt20 mb60">
         <div class="inner">
             <h3 class="title">方式二：邀请码</h3>
-            <p class="desc">邀请好友来注册，好友在注册时输入您的邀请码并注册成功，您将获得[女性好友]平台赚取金额的10%佣金，或[男性好友]平台充值金额的15%佣金。</p>
+            <p class="desc">用户注册时填写您的邀请码，男性用户的每一笔消费，您将获得15%佣金，女性用户的每一笔收入，您都有10%佣金。</p>
             <span class="share_desc">您的邀请码<br /><strong><?= isset($user)?$user->invit_code:'--'; ?></strong></span>
             <!--<a href="javascript:void(0);" class="btn btn_t_border mt20">生成我的海报</a>-->
         </div>

@@ -31,7 +31,7 @@
                 <li>
                     <h3><i class="iconfont color_y">&#xe604;</i>为什么要真人视频认证？</h3>
                     <div class="con">
-                        <p>美约作为一个真实的高端红人工作交友平台，希望给大家提供一个真诚的工作交友环境。请放心您上传的真人视频仅供审核用，仅自己可见，其他人无法看到。</p>
+                        <p class='smallarea'>作为一款高端真实的社交软件，我们鼓励您认证真实身份，让每一份友谊都能建立在真实的基础上。您上传的任何信息，仅供审核使用且TA人无法查看，敬请放心。</p>
                     </div>
                 </li>
             </ul>
@@ -44,7 +44,7 @@
                     <h3><i class="iconfont color_y">&#xe604;</i>我的认证视频</h3>
                     <div class="con">
                         <div class="up_identify_box">
-                            <p class="smallarea">注意依次做以下动作：点头，露齿笑，往左转头，举右手</p>
+                            <p class="color_error">请对准手机屏幕，依次完成以下动作：点头，左转头，右转头，露齿笑。</p>
                             <div id="auth_video" class="btn btn_dark_t mt40">点击录制</div>
                             <div class="fact_identify mt40"   style="display: none;">
                               <div class="home_pic_info" style='padding:0;'>

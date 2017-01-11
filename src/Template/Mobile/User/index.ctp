@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li class="follow flex flex_justify">
-                        <a class="like" href="/userc/likes">喜欢 <i><?= $focount; ?></i></a>
+                        <a class="like" href="/userc/likes">我喜欢 <i><?= $focount; ?></i></a>
                         <a class="like" href="/userc/fans">粉丝 <i><?= $facount; ?></i></a>
                         <a class="like" href="/userc/visitors">访客 <i><?= $user->visitnum; ?></i></a>
                     </li>
