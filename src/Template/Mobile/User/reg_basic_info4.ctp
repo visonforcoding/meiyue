@@ -5,7 +5,7 @@
           </div>
         <h3 class="aligncenter title">完善个人信息<br />可以提高魅力值哦~</h3>
     </div>
-    <div class="home_fill_basic_info home_fill_hobby mt40">
+    <div class="home_fill_basic_info home_fill_hobby change-home-info mt40">
         <form>
             <ul>
                 <!--            <li>
@@ -92,7 +92,7 @@
                             <div class="home_list_l_info"><span class="itemsname">个性标签：</span></div>
                             <div class="home_list_r_info ability-marks-box">
                                 <div id="tag-container" class="r_info">
-                                    <input name="tag" type="text" placeholder="请选择" readonly="readonly" />
+                                    <input name="tag" type="text" placeholder="请选择个性标签" readonly="readonly" />
                                 </div>
                             </div>
                     </div>
@@ -104,7 +104,7 @@
                             <i class="iconfont ico"></i>
                         </div>
                         <div class="home_list_r_info">
-                            <input name="wxid" type="text" placeholder="请输入" />
+                            <input name="wxid" type="text" placeholder="请输入微信号" />
                         </div>
                     </div>
                 </li>
@@ -112,7 +112,7 @@
         </form>
     </div>
     <div class="other-info-jump">
-        <a id="submit" href="#this" class="color_y">填好了，进入首页</a>
+        <a id="submit" href="#this" class="color_y">填好了，进入首页 ></a>
     </div>
 
 </div>
