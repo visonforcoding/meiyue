@@ -71,20 +71,20 @@
         <div class="items_pic">
             <img src="{{big_img}}"/>
         </div>
-        <div class="items_con">
+        <div class="items_con flex flex_justify">
             <h3 class="items_title">{{title}}</h3>
-            <div class="items_time flex flex_justify mt20">
-                <div>{{ad}}</div>
-                <div>
-                    <i class="iconfont ico">&#xe64b;</i>
-                    {{time}}
-                </div>
+            <div class="items_time">
+                 <div class="button {{^isend}}btn_dark{{/isend}}{{#isend}}btn_light{{/isend}}" {{^isend}}onclick="joinAct({{id}})"{{/isend}}">
+                  {{^isend}}我要报名{{/isend}}{{#isend}}报名结束{{/isend}}
+                 </div>
             </div>
         </div>
         <div class="items_adress flex flex_justify">
             <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
-            <div class="button {{^isend}}btn_dark{{/isend}}{{#isend}}btn_light{{/isend}}" {{^isend}}onclick="joinAct({{id}})"{{/isend}}">
-                {{^isend}}我要报名{{/isend}}{{#isend}}报名结束{{/isend}}
+           
+            <div>
+                <i class="iconfont ico">&#xe64b;</i>
+                {{time}}
             </div>
         </div>
     </div>
@@ -235,7 +235,6 @@
             var obj = this;
             $.util.loop({
                 tp: 'text', //图片img或是文字text
-                min: $(window).width(), //响应滑动的最小移动距离
                 loadImg: true,
                 isInit: true,
                 moveDom: $('#imgBox'),
@@ -244,7 +243,6 @@
                 loopScroll: false,
                 autoTime: 0,
                 lockScrY: true,
-                min:15, //响应滑动的最小移动距离
                 //imgInitLazy: 1000,
                 index: obj.cur_tab,
                 viewDom: $('.activity_list'),
@@ -474,17 +472,15 @@
     //头牌轮播图
     $.util.loop({
         tp: 'img', //图片img或是文字text
-        //min : 5,
         loadImg: true,
         moveDom: $('#oBox'), // eg: $('#loopImgUl')
         moveChild: $('#oBox li'), //$('#loopImgUl li')
         tab: $('#oTab span'), //$('#loopImgBar li')
         loopScroll: true,
-        touchEvent:true,
+        touchEvent:false,
         autoTime: 3000,
         lockScrY: true,
         //imgInitLazy: 1000,
-        min:$(window).width(),
         index: 1,
         viewDom: $('.abanner'),
         fun: function (index) {
