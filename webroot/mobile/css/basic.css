@@ -221,7 +221,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder  { /* WebKi
 .wraper .outerblock li:last-of-type{border-bottom: none;}
 .commontitle{font-size: 12px;color:#666;line-height: .6rem;}
 .commonarea{font-size:12px;color:#9f9f9f;line-height: .44rem;}
-.commontips{color:#eab96a;font-size:11px;line-height: 20px;}
+.commontips{color:#eab96a;font-size:11px;/*line-height: 20px;*/}
 .flex{display:-webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: start;}
 .flex_end{-webkit-box-pack: end;}
 .flex_justify{-webkit-box-pack: justify;}
