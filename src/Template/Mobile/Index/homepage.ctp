@@ -580,7 +580,7 @@
         });
         var curimg = $(this).find('img').first().attr('src');
         var imgpath = '<?= getHost(); ?>' + curimg;
-        var status = <?= isset($browseRight)?$browseRight:$browseRight ?>;
+        var status = <?= isset($browseRight)?$browseRight:-1 ?>;
         var user_id = <?= isset($loginer)?$loginer->id:-1; ?>;
         var view_id = <?= isset($user)?$user->id:-1; ?>;
         var to_url = '';
