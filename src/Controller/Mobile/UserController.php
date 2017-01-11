@@ -940,7 +940,7 @@ class UserController extends AppController {
         }
         $this->set([
             'user' => $this->user,
-            'pageTitle'=>'邀请注册有奖'
+            'pageTitle'=>'成为美约合伙人'
         ]);
     }
 

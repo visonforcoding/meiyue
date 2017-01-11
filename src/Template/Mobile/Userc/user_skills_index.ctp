@@ -12,6 +12,15 @@
             <div class="switch-btn switch <?= $is_all_used?'on':'off' ?> switch-all"><i class="swithbtn"></i></div>
         </div>
     </div>
+    <?php else: ?>
+    <div class="empty_container">
+        <div class="empty-content  mt350">
+            <span class="empty-ico-box bg-light">
+                <i class="iconfont empty-ico">&#xe698;</i>
+            </span>
+            <p class="empty-tips">你还没有发布过技能，赶快发布提升魅力值吧~</p>
+        </div>
+    </div>
     <?php endif; ?>
     <div class="ability_items mt20">
         <ul class="outerblock">
