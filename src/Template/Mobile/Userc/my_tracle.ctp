@@ -33,7 +33,7 @@
                 <span class="tracle_footer_info"><i class="iconfont">&#xe65c;</i>{{view_nums}}</span>
                 <span class="tracle_footer_info praise"><i class="iconfont">&#xe633;</i> {{praise_nums}}</span>
             </div>
-            <div id="del-mv-btn" class='del' data-mvtype='{{#is_pic}}1{{/is_pic}}{{#is_video}}2{{/is_video}}' class="{{^status_pass}}cdel{{/status_pass}} tracle_footer_info" data-id="{{id}}"><i class="iconfont">&#xe650;</i>
+            <div id="del-mv-btn" data-mvtype='{{#is_pic}}1{{/is_pic}}{{#is_video}}2{{/is_video}}' class="{{^status_pass}}cdel{{/status_pass}} tracle_footer_info del" data-id="{{id}}"><i class="iconfont">&#xe650;</i>
             </div>
         </div>
     </section>

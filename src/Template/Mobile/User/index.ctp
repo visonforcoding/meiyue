@@ -5,7 +5,7 @@
              <i class="iconfont install">&#xe661;</i>
          </div> -->
         <div class="home_cover_info flex">
-					<span class="avatar" onclick="window.location.href='/userc/edit-info'">
+					<span class="avatar" onclick="window.location.href='/user/my-homepage/<?= $user->id; ?>'">
 						<img src="<?= createImg($user->avatar) . '?w=150' ?>" class="avatar-pic" onclick="location.href='/user/my-homepage/<?= $user->id; ?>'"/>
 						<!--<div class="vip"><img src="/mobile/images/vip.png" class="responseimg"/></div>-->
 					</span>

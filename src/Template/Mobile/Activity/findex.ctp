@@ -97,7 +97,7 @@
         <div class="flex">
             <span class="place {{#top3}}silver{{/top3}}">{{index}}</span>
             <div class="place_info">
-            <span class="avatar">
+            <span class="avatar" onclick="location.href='/user/my-homepage/{{user.id}}'">
                 <img src="{{user.avatar}}">
             </span>
                 <h3>
@@ -445,8 +445,11 @@
             url: '/user/follow',
             data: {id: id},
             func: function (res) {
-                $obj.find('i').toggleClass('activeico');
-                $.util.alert(res.msg);
+                var msg = (res.msg).replace('关注', '点赞');
+                $.util.alert(msg);
+                if(res.status) {
+                    $obj.find('i').toggleClass('activeico');
+                }
             }
         })
     }

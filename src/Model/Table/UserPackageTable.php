@@ -37,6 +37,8 @@ class UserPackageTable extends Table
             'className' => 'UsedPackage',
             'foreignKey' => 'package_id'
         ]);
+
+        $this->belongsTo('User');
         
         $this->addBehavior('Timestamp', [
             'events' => [

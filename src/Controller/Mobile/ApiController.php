@@ -289,6 +289,7 @@ class ApiController extends AppController {
                     }
                     if ($param->action == 'update_basic_pic'||$param->action=='add_basic_pic') {
                         $user->images = serialize($images);
+                        $user->status = 1;
                         if ($UserTable->save($user)) {
                             $this->jsonResponse(true, '保存成功');
                         } else {
@@ -374,6 +375,7 @@ class ApiController extends AppController {
                     if ($param->action == 'update_basic_video') {
                         $user->video = $data['video'];
                         $user->video_cover = $data['video_cover'];
+                        $user->status = 1;
                         if ($UserTable->save($user)) {
                             $this->jsonResponse(true, '保存成功');
                         } else {
