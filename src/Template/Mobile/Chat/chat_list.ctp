@@ -4,22 +4,20 @@
 <script id="chat-list-tpl" type="text/html">
     {{#sessions}}
     <li id="chat-{{to}}" class="active flex">
-        <a href="/chat/chat-detail/{{to}}">
-            <div data-accid="{{to}}" data-id="{{user_id}}" data-avatar="{{avatar}}" da                 ta-nick="{{nick}}"  
-                 class="ablock flex flex_justify user clickable">
-                <div class="chat-left-info flex">
-                    <div class="avatar">
-                        <img src="{{avatar}}"/>
-                        <div class="num" {{unreadst}} {{unread}}></div>
-                    </div>
-                    <div class="chat-text">
-                        <h3 class="name">{{nick}}</h3>
-                        <span class="last-info line1">{{lastMsg.text}}</span>
-                    </div>
+        <div data-accid="{{to}}" data-id="{{user_id}}" data-avatar="{{avatar}}" data-nick="{{nick}}"  
+             class="ablock flex flex_justify user clickable">
+            <div class="chat-left-info flex">
+                <div class="avatar">
+                    <img src="{{avatar}}"/>
+                    <div class="num" {{unreadst}} {{unread}}></div>
                 </div>
-                <time class="smalldes">{{datetime}}</time>
+                <div class="chat-text">
+                    <h3 class="name">{{nick}}</h3>
+                    <span class="last-info line1">{{lastMsg.text}}</span>
+                </div>
             </div>
-        </a>
+            <time class="smalldes">{{datetime}}</time>
+        </div>
         <div class="r-btn flex">
             <?php if ($user->gender == 1): ?>
                 <!--<div data-id="{{user_id}}" class="focus clickable">关注</div>-->
@@ -114,6 +112,10 @@ function onSessions(sessions) {
     $.each(sessions, function (i, n) {
         accids.push(n.to);
     });
+    nim.getUsers({
+        accounts: accids,
+        done: getUsersDone
+    });
     $.util.ajax({
         url: '/chat/getSesList',
         data: {accids: accids},
@@ -131,6 +133,10 @@ function onUpdateSession(session) {
     var newSess = session.to;
     if ($.inArray(newSess, accids) == -1) {
         //新会话
+        nim.getUsers({
+            accounts: [newSess],
+            done: getUsersDone
+        });
         $.util.ajax({
             url: '/chat/getSesList',
             data: {accids: [newSess]},
@@ -166,6 +172,19 @@ function onUpdateSession(session) {
         $obj.find('time').html($.util.getImShowTime(new Date(session.updateTime)));
     }
     updateSessionsUI();
+}
+function getUsersDone(error, users) {
+    //获取到用户名片
+    console.log(error);
+    console.log(users);
+    console.log('获取用户名片数组' + (!error ? '成功' : '失败'));
+    if (!error) {
+        onUsers(users);
+    }
+}
+function onUsers(users) {
+    console.log('收到用户名片列表', users);
+    data.users = nim.mergeUsers(data.users, users);
 }
 function updateSessionsUI() {
     // 刷新界面
