@@ -70,7 +70,7 @@
                 <div class="paytype">
                     <i class="iconfont payico alipay">&#xe625;</i>
                     <h3 class="paydes">
-                        <span class="impordes">支付宝支付</span>
+                        <span class="impordes">支付宝</span>
                         <em class="small">推荐使用</em>
                     </h3>
                 </div>
@@ -80,7 +80,7 @@
                 <div class="paytype">
                     <i class="iconfont payico cardpay">&#xe621;</i>
                     <h3 class="paydes">
-                        <span class="impordes">银联支付</span>
+                        <span class="impordes">银联</span>
                         <em class="small">银联账户使用</em>
                     </h3>
                 </div>
