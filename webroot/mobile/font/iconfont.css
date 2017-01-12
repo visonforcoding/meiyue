@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1483431894499'); /* IE9*/
-  src: url('iconfont.eot?t=1483431894499#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1483431894499') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1483431894499') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1483431894499#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1484225509731'); /* IE9*/
+  src: url('iconfont.eot?t=1484225509731#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1484225509731') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1484225509731') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1484225509731#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -340,4 +340,8 @@
 .icon-jingjiren:before { content: "\e69b"; }
 
 .icon-shezhi11:before { content: "\e6bc"; }
+
+.icon-yijianfankui:before { content: "\e69c"; }
+
+.icon-shezhi2:before { content: "\e69d"; }
 

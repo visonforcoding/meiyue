@@ -341,31 +341,32 @@
 		            loopScroll: false,
 		            autoTime: 0,
 		            lockScrY: true,
-		            min: $(window).width(), //响应滑动的最小移动距离
+		            min: 0, //响应滑动的最小移动距离
 		            //imgInitLazy: 1000,
+		            touchEvent : true,
 		            index: 1,
 		            viewDom: $('.activity_list'),
 		            fun: function (index) {
 		            	
 		            }
         		});
-        		 $.util.loop({
-		            tp: 'img', //图片img或是文字text
-		            min : 5,
-		            loadImg: true,
-		            moveDom: $('#oBox'), // eg: $('#loopImgUl')
-		            moveChild: $('#oBox li'), //$('#loopImgUl li')
-		            tab: $('#oTab span'), //$('#loopImgBar li')
-		            loopScroll: true,
-		            autoTime: 0,
-		            lockScrY: true,
-		            //imgInitLazy: 1000,
-		            index: 1,
-		            viewDom: $('.abanner'),
-		            fun: function (index) {
-		            	
-		            }
-        		});
+//      		 $.util.loop({
+//		            tp: 'img', //图片img或是文字text
+//		            min : 5,
+//		            loadImg: true,
+//		            moveDom: $('#oBox'), // eg: $('#loopImgUl')
+//		            moveChild: $('#oBox li'), //$('#loopImgUl li')
+//		            tab: $('#oTab span'), //$('#loopImgBar li')
+//		            loopScroll: true,
+//		            autoTime: 0,
+//		            lockScrY: true,
+//		            //imgInitLazy: 1000,
+//		            index: 1,
+//		            viewDom: $('.abanner'),
+//		            fun: function (index) {
+//		            	
+//		            }
+//      		});
         		$('#rank li').on('tap',function(){
         			var index=$(this).index();
         			$(this).addClass('current').siblings().removeClass('current');
