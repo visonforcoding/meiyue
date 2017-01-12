@@ -149,7 +149,7 @@
 <div class="wraper page" id="page-choosePlace" hidden>
     <div id="selfPlace" class='aPlace' hidden>
         <div class="place-self">
-            <h3 class="basic_info_integrity">没有合适地点，<a href="javascript:toListplace();" class="color_y">回到搜索地址</a></h3>
+            <h3 class="basic_info_integrity">请注意输入公共场合，<a href="javascript:toListplace();" class="color_y">返回选择地址</a></h3>
             <div class="search_place_header inner">
                 <div class="search-box flex flex_justify">
                     <div class="search-btn">
