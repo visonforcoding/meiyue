@@ -110,7 +110,7 @@ function createImg($url) {
 function buildLinkString($params) {
     $string = '';
     foreach ($params as $key => $value) {
-        $string.= $key . '="' . $value . '"&';
+        $string .= $key . '="' . $value . '"&';
     }
     //去掉最后一个&字符
     $string = substr($string, 0, count($string) - 2);
@@ -178,22 +178,22 @@ function getDistance($coordinate1, $lng, $lat) {
 //用户将开始时间和结束时间合成页面需要的格式
 function getFormateDT($startTime, $endTime) {
     $timestr = $startTime->year
-        . "/"
-        . $startTime->month
-        . "/"
-        . $startTime->day
-        . " "
-        . $startTime->hour
-        . ":00~"
-        . $endTime->hour
-        . ":00";
+            . "/"
+            . $startTime->month
+            . "/"
+            . $startTime->day
+            . " "
+            . $startTime->hour
+            . ":00~"
+            . $endTime->hour
+            . ":00";
     return $timestr;
 }
 
 //获取年月日
 function getYMD($time) {
 
-    $timestr = $time->year . '年'. $time->month . "月" . $time->day . '日';
+    $timestr = $time->year . '年' . $time->month . "月" . $time->day . '日';
     return $timestr;
 }
 
@@ -213,7 +213,7 @@ function getHIS($startTime, $endTime) {
 //根据出生日期计算年龄
 function getAge($birthday) {
     $currentday = new Date();
-    if(!($birthday instanceof Date)){
+    if (!($birthday instanceof Date)) {
         return '--';
     }
     return ($currentday->year - $birthday->year);
@@ -231,7 +231,6 @@ function getCost(\Cake\I18n\Time $start_time, \Cake\I18n\Time $end_time, $price,
     return getLast($start_time, $end_time) * $price * $percent;
 }
 
-
 /**
  * //根据开始时间，结束时间，单价计算总价和付费百分比计算价格
  * @param \Cake\I18n\Time $start_time
@@ -243,7 +242,6 @@ function getCost(\Cake\I18n\Time $start_time, \Cake\I18n\Time $end_time, $price,
 function getLast(\Cake\I18n\Time $start_time, \Cake\I18n\Time $end_time) {
     return ($end_time->timestamp - $start_time->timestamp) / 3600;
 }
-
 
 /**
  * 生成浮点随机数
@@ -275,21 +273,23 @@ function dblog($flag, $msg, $data = null) {
     try {
         $LogTable->save($log);
     } catch (\Exception $exc) {
-        Cake\Log\Log::error('devlog',$log->errors());
-        Cake\Log\Log::error('devlog',$exc->getTraceAsString());
+        Cake\Log\Log::error('devlog', $log->errors());
+        Cake\Log\Log::error('devlog', $exc->getTraceAsString());
     }
 }
 
-
-function generateImgUrl($url,$domain,$glide=false){
-    $url =  preg_replace('/upload/', 'imgs', $url);
+function generateImgUrl($url, $domain=null, $glide = false) {
+    if(!$domain){
+        $domain = env('HTTP_HOST');
+    }
+    $url = preg_replace('/upload/', 'imgs', $url);
+    return $url;
 }
-
 
 function getHost($proto = 'http') {
-    return $proto.'://'.$_SERVER['HTTP_HOST'];
+    return $proto . '://' . $_SERVER['HTTP_HOST'];
 }
 
-function getCity($str){
-    return preg_replace('/北京,|天津,|重庆,|上海,/','', $str);   
+function getCity($str) {
+    return preg_replace('/北京,|天津,|重庆,|上海,/', '', $str);
 }
