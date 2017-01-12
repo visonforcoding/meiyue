@@ -7,7 +7,7 @@
         <a href="/chat/chat-detail/{{to}}">
             <div data-accid="{{to}}" data-id="{{user_id}}" data-avatar="{{avatar}}" da                 ta-nick="{{nick}}"  
              class="ablock flex flex_just                     ify user clickable">
-            <div class="c                         hat-left-info flex">
+            <div class="chat-left-info flex">
                                              <div class="avatar">
                              <img src="{{avatar}}"/>
                              <div class="num" {{unreadst}} {{unread}}></div>
