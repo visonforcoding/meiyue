@@ -145,7 +145,7 @@
                 </h3>
             </div>
         </div>
-        <span class="button btn_dark suport-btn support-her" data-id="{{user.id}}">
+        <span class="button btn_dark suport-btn" onclick="supportHer({{user.id}});">
         支持她
         </span>
     </li>
@@ -525,9 +525,8 @@
     });
 
 
-    $.util.tap($('.support-her'), function (event) {
+    function supportHer(id) {
         var id = $(this).data('id');
         $.util.checkLogin('/gift/index/' + id);
-        event.stopPropagation();
-    })
+    };
 </script>
