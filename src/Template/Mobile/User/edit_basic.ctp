@@ -532,8 +532,8 @@
     });
     $('#place, #food, #movie, #music, #sport, #sign').keyup(function () {
         var v = $(this).val();
-        if (v.length > 12) {
-            $(this).val(v.substring(0, 12));
+        if (v.length > 20) {
+            $(this).val(v.substring(0, 26));
         }
     });
     $('#submit').on('click', function () {

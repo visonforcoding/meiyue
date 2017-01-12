@@ -45,7 +45,6 @@
                     <div class="con">
                         <div class="up_identify_box">
                             <p class="color_error">请对准手机屏幕，依次完成以下动作：点头，左转头，右转头，露齿笑。</p>
-                            <div id="auth_video" class="btn btn_dark_t mt40">点击录制</div>
                             <div class="fact_identify mt40"   style="display: none;">
                               <div class="home_pic_info" style='padding:0;'>
                                 <div class="home_video relpotion flex flex_center">
@@ -54,6 +53,7 @@
                                 </div>
                               </div>
                             </div>
+                            <div id="auth_video" class="btn btn_dark_t mt20">点击录制</div>
                         </div>
                     </div>
                 </li>

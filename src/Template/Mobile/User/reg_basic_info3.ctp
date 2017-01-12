@@ -30,7 +30,7 @@
             <div class="inner">
                 <div class="upload_more_title">
                     <h3 class="color_black">照片和视频认证示范</h3>
-                    <p>请上传自己的性感、具有诱惑力的照片，注意不能有私密处的裸露。</p>
+                    <p>上传的基本照片视频将会展示在个人主页中，请请上传自己性感，具有诱惑力的照片和视频，注意不能有私密处的裸露。</p>
                 </div>
                 <div class="fact_identify">
                     <dl class="Idcard">
@@ -50,7 +50,7 @@
         <div class="up_identify_box bgff mt40">
             <div class="inner">
                 <div class="title">
-                    <h3 class="color_black">如上图所示，上传9张认证照片</h3>
+                    <h3 class="color_black">如上图所示，上传9张基本照片</h3>
                 </div>
                 <div  class="fact_identify" id="demoImg">
                     <dl class="Idcard" data-id="up">
@@ -63,7 +63,7 @@
         <div class="up_identify_box bgff mt40">
             <div class="inner">
                 <div class="title">
-                    <h3 class="color_black">如上图所示，上传认证视频</h3>
+                    <h3 class="color_black">如上图所示，上传基本视频</h3>
                 </div>
                 <div class="fact_identify">
                     <dl class="Idcard">
