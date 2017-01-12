@@ -51,6 +51,7 @@ class UserController extends AppController {
                     'rest_chat >' => 0,
                     'rest_browse >' =>0
                 ],
+                'user_id' => $this->user->id,
                 'deadline >=' => new Time()
             ])->orderDesc('cost')->first();
         }
