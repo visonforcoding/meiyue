@@ -114,14 +114,14 @@ function onSessions(sessions) {
     $.each(sessions, function (i, n) {
         accids.push(n.to);
     });
-    $.util.ajax({
-        url: '/chat/getSesList',
-        data: {accids: accids},
-        func: function (res) {
-            $('#chat-list').html(getRender(sessions, res));
-        }
-    })
-    console.log('收到会话列表', sessions);
+//    $.util.ajax({
+//        url: '/chat/getSesList',
+//        data: {accids: accids},
+//        func: function (res) {
+//            $('#chat-list').html(getRender(sessions, res));
+//        }
+//    })
+//    console.log('收到会话列表', sessions);
     data.sessions = nim.mergeSessions(data.sessions, sessions);
     updateSessionsUI();
 }
