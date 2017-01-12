@@ -83,8 +83,7 @@
             <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
            
             <div>
-                <i class="iconfont ico">&#xe64b;</i>
-                {{time}}
+                <i class="iconfont ico">&#xe64b;</i>{{time}}
             </div>
         </div>
     </div>

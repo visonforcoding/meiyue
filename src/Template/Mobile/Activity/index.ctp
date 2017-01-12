@@ -106,7 +106,7 @@
         </div>
         <div class="items_con flex flex_justify">
             <h3 class="items_title">{{title}}</h3>
-            <div class="items_time flex flex_justify mt20">
+            <div class="items_time flex flex_justify">
                 <div class="{{^isend}}btn_dark{{/isend}}{{#isend}}btn_light{{/isend}} button"
                      {{^isend}}onclick="joinAct({{id}})" {{
                 /isend}}>
