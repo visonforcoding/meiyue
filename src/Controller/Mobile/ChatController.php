@@ -37,6 +37,7 @@ class ChatController extends AppController {
             'user' => $this->user,
             'unread' => $unread,
             'imkey'=>$imkey,
+            'domain'=> $this->Util->getServerDomain()
         ]);
     }
     

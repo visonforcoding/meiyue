@@ -203,7 +203,7 @@ $(document).on('click', '.user', function () {
     var param = {};
     var accid = $(this).data('accid');
     var nick = $(this).data('nick');
-    var avatar = $(this).data('avatar');
+    var avatar = '<?=$domain?>'+$(this).data('avatar');
     var user_id = $(this).data('id');
     param['imaccid'] = accid;
     param['nick'] = nick;
