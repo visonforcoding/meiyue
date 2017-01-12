@@ -213,7 +213,7 @@ class NetimShell extends Shell {
             try {
                 $res = $Netim->updateInfo($user->imaccid, $param);
             } catch (\Exception $exc) {
-                \Cake\Log\Log::error('更新user 名片信息成功', 'cron');
+                \Cake\Log\Log::error('更新user 名片信息失败', 'cron');
             }
             if ($res) {
                 \Cake\Log\Log::info('更新user 名片信息成功', 'cron');

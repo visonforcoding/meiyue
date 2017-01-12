@@ -279,6 +279,8 @@ class UserController extends AppController {
             $user = $this->User->patchEntity($user, $data);
             $user->reg_step = 2;
             if ($this->User->save($user)) {
+                $this->loadComponent('Netim');
+                $this->Netim->addUpInfoQueue($user->id);
                 return $this->Util->ajaxReturn(true, '保存成功');
             } else {
                 return $this->Util->ajaxReturn(false, '保存失败');
