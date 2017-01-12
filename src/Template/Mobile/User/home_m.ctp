@@ -148,7 +148,7 @@
              </li>-->
             <li>
                 <a href="/userc/suggest" class="home_items">
-                    <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe6bc;</i><span
+                    <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe69c;</i><span
                                 class="itemsname">意见反馈</span></div>
                     <div class="home_list_r_info">
 
@@ -158,7 +158,7 @@
             </li>
             <li>
                 <a href="/userc/install" class="home_items">
-                    <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe6bc;</i><span
+                    <div class="home_list_l_info  flex"><i class="iconfont ico">&#xe69d;</i><span
                                 class="itemsname">设置</span></div>
                     <div class="home_list_r_info">
 
