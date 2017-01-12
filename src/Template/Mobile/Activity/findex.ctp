@@ -50,7 +50,7 @@
                         <ul class="outerblock voted_list bgff" id="my-top">
                             <!-- 我的头牌 -->
                         </ul>
-                        <ul class="outerblock voted_list bgff" id="top-list">
+                        <ul class="outerblock voted_list bgff set-voted-wid" id="top-list">
                             <!-- 头牌列表 -->
                         </ul>
                     </div>
