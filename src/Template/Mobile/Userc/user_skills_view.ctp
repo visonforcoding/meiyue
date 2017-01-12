@@ -16,7 +16,7 @@
                         <div class='col-importent'>技能名称</div>
                         <div class="r_info">
                         <span id="show-skill-name">
-                            <?= isset($userskill) ? $userskill['skill']['name'] : '<span class="color_gray">请选择</span>' ?>
+                            <?= isset($userskill) ? $userskill['skill']['name'] : '<span style="color: #dadada;">请选择</span>' ?>
                         </span>
                             <i class="iconfont rcon">&#xe605;</i>
                             <input id="skill-id-input" name="skill_id" type="text"
@@ -29,7 +29,7 @@
                         <div class='col-importent'>技能价格</div>
                         <div class="r_info">
                             <span id="show-cost">
-                                <?= (isset($userskill) && isset($userskill->cost))?$userskill->cost->money.'<i class="smalldes">美币/小时</i>':'<span class="color_gray">200/h~300/h更受欢迎哦~</span>'; ?>
+                                <?= (isset($userskill) && isset($userskill->cost))?$userskill->cost->money.'<i class="smalldes">美币/小时</i>':'<span style="color: #dadada;">200/h~300/h更受欢迎哦~</span>'; ?>
 
                             </span>
                             <i class="iconfont rcon">&#xe605;</i>
@@ -52,7 +52,7 @@
                          <div class='ability-marks-box flex'>
                         <div id="tag-container" class="r_info">
                             <?php if (!isset($userskill)): ?>
-                                <span class="color_gray">请选择</span>
+                                <span style="color: #dadada;">请选择</span>
                             <?php else: ?>
                                 <?php foreach ($userskill['tags'] as $item): ?>
                                     <a class="mark">

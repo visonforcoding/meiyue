@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Admin;
 
+use Cake\ORM\TableRegistry;
 use Wpadmin\Controller\AppController;
 
 /**
@@ -18,7 +19,10 @@ class PackageController extends AppController
      */
     public function index()
     {
+        $upackTb = TableRegistry::get('UserPackage');
+        $total = $upackTb->find()->count();
         $this->set([
+            'total' => $total,
             'package' => $this->Package,
             'pageTitle' => '套餐购买管理 ',
             'bread' => [
@@ -165,10 +169,64 @@ class PackageController extends AppController
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $where = [];
+        $contain = ['UserPackage' => function($q) {
+            return $q->select(['id', 'package_id']);
+        }];
         if (!empty($keywords)) {
             $where[' title like'] = "%$keywords%";
         }
-        $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order, $where);
+        $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order, $where, $contain);
+        $this->autoRender = false;
+        $this->response->type('json');
+        $this->response->body(json_encode($data));
+        $this->response->send();
+        $this->response->stop();
+    }
+
+
+    /**
+     * 销售详情
+     */
+    public function sell($id)
+    {
+        $pack = $this->Package->get($id);
+        $this->set([
+            'id' => $id,
+            'pageTitle' => '【'.$pack->title.'】销售详细 ',
+            'bread' => [
+                'first' => ['name' => '套餐管理'],
+                'second' => ['name' => '套餐销售详细'],
+            ],
+        ]);
+    }
+
+
+    /**
+     * 获取套餐销售记录
+     */
+    public function getSellDatas($id)
+    {
+        $this->request->allowMethod('ajax');
+        $page = $this->request->data('page');
+        $rows = $this->request->data('rows');
+        $sort = 'UserPackage.' . $this->request->data('sidx');
+        $order = $this->request->data('sord');
+        $keywords = $this->request->data('keywords');
+        $begin_time = $this->request->data('begin_time');
+        $end_time = $this->request->data('end_time');
+        $where = ['package_id' => $id];
+        $contain = ['User' => function($q) {
+            return $q->select(['id', 'nick']);
+        }];
+        if (!empty($keywords)) {
+            $where[' User.nick like'] = "%$keywords%";
+        }
+        if (!empty($begin_time) && !empty($end_time)) {
+            $begin_time = date('Y-m-d', strtotime($begin_time));
+            $end_time = date('Y-m-d', strtotime($end_time));
+            $where['and'] = [['UserPackage.create_time >' => $begin_time], ['UserPackage.create_time <' => $end_time]];
+        }
+        $data = $this->getJsonForJqrid($page, $rows, 'UserPackage', $sort, $order, $where, $contain);
         $this->autoRender = false;
         $this->response->type('json');
         $this->response->body(json_encode($data));

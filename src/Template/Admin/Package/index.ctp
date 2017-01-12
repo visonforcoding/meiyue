@@ -27,6 +27,10 @@
                     <i class="icon icon-search"></i>
                     搜索
                 </a>
+                <a class="btn btn-small btn-warning">
+                    <i class="icon icon-shopping-cart"></i>
+                    总销量：<?= $total; ?>
+                </a>
             </div>
         </form>
         <table id="list"><tr><td></td></tr></table>
@@ -62,6 +66,7 @@
                  '充值美币',
                  '价格',
                  '库存',
+                 '销量',
                  '有效期',
                  '创建时间',
                  '修改时间',
@@ -100,6 +105,11 @@
                 {name:'vir_money',editable:true,align:'center'},
                 {name:'price',editable:true,align:'center'},
                 {name:'stock',editable:true,align:'center'},
+                {name:'user_package',editable:true,align:'center',
+                    formatter:function(cellvalue, options, rowObject) {
+                        return cellvalue.length;
+                    }
+                },
                 {name:'vali_time',editable:true,align:'center'},
                 {name:'create_time',editable:true,align:'center'},
                 {name:'update_time',editable:true,align:'center'},
@@ -147,6 +157,8 @@
             '<i class="icon icon-trash"></i> </a>';
         response += '<a title="编辑" href="/package/edit/' + rowObject.id + '" ' +
             'class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+        response += '<a title="销售详情" href="/package/sell/' + rowObject.id + '" ' +
+            'class="grid-btn "><i class="icon icon-shopping-cart"></i> </a>';
         return response;
     }
 

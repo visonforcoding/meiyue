@@ -172,7 +172,9 @@
                         if (typeof res === 'object') {
                             $.util.alert(res.msg);
                             if (res.status) {
-                                location.href='/userc/vip-center';
+                                setTimeout(function() {
+                                    location.href='/userc/vip-center';
+                                }, 1000);
                             }
                         }
                     }

@@ -50,7 +50,7 @@
                 <li class="flex">
                     <span class="accountname">提现美币</span>
                     <div class="input_exchange">
-                        <input  id="amount-input" name="amount" type="number" value="500" />
+                        <input  id="amount-input" name="amount" type="number" value="" />
                     </div>
                 </li>
                 <li class="flex">

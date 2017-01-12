@@ -32,7 +32,8 @@
                 <div class="abanner">
                     <ul class="tou-imglist" id="oBox">
                         <?php foreach ($carousels as $carousel): ?>
-                            <li><a href="/activity/carousel-page/<?= $carousel->id; ?>"><img src="<?= createImg($carousel->url); ?>"/></a>
+                            <li><a href="/activity/carousel-page/<?= $carousel->id; ?>"><img
+                                            src="<?= createImg($carousel->url); ?>"/></a>
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -84,8 +85,8 @@
                 </span>
             <div class="place_info">
                 <h3 class="userinfo ft0"><i class="name">{{user.nick}}</i><span class="age">{{user.age}}岁</span> <em
-                        class="price color_y fr"><i
-                            class="lagernum">{{total_price}}</i>元/约会金</em>
+                            class="price color_y fr"><i
+                                class="lagernum">{{total_price}}</i>元/约会金</em>
                 </h3>
                 <h3 class="otherinfo">
                     <time class="color_gray"><i class="iconfont">&#xe622;</i> {{time}}</time>
@@ -107,19 +108,19 @@
             <h3 class="items_title">{{title}}</h3>
             <div class="items_time flex flex_justify mt20">
                 <div class="{{^isend}}btn_dark{{/isend}}{{#isend}}btn_light{{/isend}} button"
-                 {{^isend}}onclick="joinAct({{id}})" {{
-            /isend}}>
-            {{^isend}}我要报名{{/isend}}{{#isend}}报名结束{{/isend}}
-        </div>
+                     {{^isend}}onclick="joinAct({{id}})" {{
+                /isend}}>
+                {{^isend}}我要报名{{/isend}}{{#isend}}报名结束{{/isend}}
             </div>
         </div>
-        <div class="items_adress flex flex_justify">
-            <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
-            
-         <div>
+    </div>
+    <div class="items_adress flex flex_justify">
+        <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
+
+        <div>
             <i class="iconfont ico">&#xe64b;</i>
             {{time}}
-         </div>
+        </div>
     </div>
     </div>
     {{/datas}}
@@ -127,8 +128,8 @@
 
 <script id="top-list-tpl" type="text/html">
     {{#datas}}
-    <li class="flex flex_justify" onclick="window.location.href='/index/homepage/{{user.id}}'">
-        <div class="flex">
+    <li class="flex flex_justify">
+        <div class="flex" onclick="window.location.href='/index/homepage/{{user.id}}'">
             <span class="place {{#top3}}silver{{/top3}}">{{index}}</span>
             <div class="place_info">
             <span class="avatar">
@@ -137,19 +138,16 @@
                 <h3>
                 <span class="place_name"><i class="name">{{user.nick}}</i><!-- <i class="rich-vip">VIP</i><i
                         class="cup"><img src="/mobile/images/cup.jpg"/></i>--></span>
-                <span class="place_number color_gray"><em class="color_y"><i
-                            class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
+                    <span class="place_number color_gray"><em class="color_y"><i
+                                    class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
                             本周魅力值：<i class="color_y max-num">{{total}}</i>
                         </span>
                 </h3>
             </div>
         </div>
-        {{#ismale}}
-    <span class="button btn_dark suport-btn"
-          onclick="window.location.href='/gift/index/{{user.id}}';event.stopPropagation(); ">
+        <span class="button btn_dark suport-btn support-her" data-id="{{user.id}}">
         支持她
-    </span>
-        {{/ismale}}
+        </span>
     </li>
     {{#ishead}}
     <div style="height:20px;background:#f4f4f4"></div>{{/ishead}}
@@ -166,8 +164,8 @@
                     <span class="avatar"><img src="{{avatar}}"/></span>
                     <h3>
                         <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img
-                                    src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span
-                                class="highter-vip">{{upackname}}</span>{{/upackname}}
+                                        src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span
+                                    class="highter-vip">{{upackname}}</span>{{/upackname}}
                         </div>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
@@ -195,8 +193,8 @@
                     </span>
                     <h3>
                         <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img
-                                    src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span
-                                class="highter-vip">{{upackname}}</span>{{/upackname}}
+                                        src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span
+                                    class="highter-vip">{{upackname}}</span>{{/upackname}}
                         </div>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
@@ -277,7 +275,7 @@
                 autoTime: 0,
                 lockScrY: true,
                 //imgInitLazy: 1000,
-                min:0,
+                min: 0,
                 index: obj.cur_tab,
                 viewDom: $('.activity_list'),
                 fun: function (index) {
@@ -516,7 +514,7 @@
         tab: $('#oTab span'), //$('#loopImgBar li')
         loopScroll: true,
         autoTime: 3000,
-        touchEvent:false,
+        touchEvent: false,
         lockScrY: true,
         //imgInitLazy: 1000,
         index: 1,
@@ -526,4 +524,10 @@
         }
     });
 
+
+    $.util.tap($('.support-her'), function (event) {
+        var id = $(this).data('id');
+        $.util.checkLogin('/gift/index/' + id);
+        event.stopPropagation();
+    })
 </script>
