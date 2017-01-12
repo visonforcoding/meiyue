@@ -43,7 +43,6 @@
                     </li>
                 <?php endif; ?>
             </ul>
-            <p class="commontips inner mt20">为了保障财产安全，每周只能在周三、周日兑换各一次，且每次不超过 20,000 美币。</p>
             <div class="commontitle inner mt20">
                 <h3>当前虚拟币：<?= $user->money; ?> 美币</h3>
             </div>
@@ -61,7 +60,12 @@
                     </div>
                 </li>
             </ul>
-            <p class="commontips inner mt20">注:兑换申请成功后平台将会在24小时之内把钱打入所提现的账户中。</p>
+            <div class="commontips inner mt20">
+                <div>
+                    <p>注意：1）为保障财产安全，只能每周三、日兑换各一次，每次不少于100美币；</p>
+                    <p>2）兑换申请成功后，平台将在24小时内把钱打入所提现账户。</p>
+                </div>
+            </div>
         </div>
     </form>
 </div>

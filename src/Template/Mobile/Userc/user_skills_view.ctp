@@ -49,11 +49,10 @@
                 <li>
                     <div id="choose_tags_btn" class="items flex flex_justify">
                         <div class='col-importent'>个人标签</div>
-                         <div class='ability-marks-box'>
+                         <div class='ability-marks-box flex'>
                         <div id="tag-container" class="r_info">
                             <?php if (!isset($userskill)): ?>
                                 <span class="color_gray">请选择</span>
-                                <i class="iconfont rcon">&#xe605;</i>
                             <?php else: ?>
                                 <?php foreach ($userskill['tags'] as $item): ?>
                                     <a class="mark">
@@ -67,6 +66,7 @@
                                 <?php endforeach; ?>
                             <?php endif; ?>
                              </div>
+                             <i class="iconfont rcon">&#xe605;</i>
                         </div>
                     </div>
                 </li>
