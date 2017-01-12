@@ -6,19 +6,19 @@
     <li id="chat-{{to}}" class="active flex">
         <a href="/chat/chat-detail/{{to}}">
             <div data-accid="{{to}}" data-id="{{user_id}}" data-avatar="{{avatar}}" da                 ta-nick="{{nick}}"  
-             class="ablock flex flex_just                     ify user clickable">
-            <div class="chat-left-info flex">
-                                             <div class="avatar">
-                             <img src="{{avatar}}"/>
-                             <div class="num" {{unreadst}} {{unread}}></div>
-                         </div>
-                         <div class="chat-text">
-                             <h3 class="name">{{nick}}</h3>
-                             <span class="last-info line1">{{lastMsg.text}}</span>
-                         </div>
-                     </div>
-                     <time class="smalldes">{{datetime}}</time>
-                 </div>
+                 class="ablock flex flex_justify user clickable">
+                <div class="chat-left-info flex">
+                    <div class="avatar">
+                        <img src="{{avatar}}"/>
+                        <div class="num" {{unreadst}} {{unread}}></div>
+                    </div>
+                    <div class="chat-text">
+                        <h3 class="name">{{nick}}</h3>
+                        <span class="last-info line1">{{lastMsg.text}}</span>
+                    </div>
+                </div>
+                <time class="smalldes">{{datetime}}</time>
+            </div>
         </a>
         <div class="r-btn flex">
             <?php if ($user->gender == 1): ?>
