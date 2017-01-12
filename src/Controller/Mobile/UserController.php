@@ -201,6 +201,9 @@ class UserController extends AppController {
                 $user->is_agent = 1; //默认是经纪人
             }
             if ($this->User->save($user)) {
+                //进入更新队列
+                $this->loadComponent('Netim');
+                $this->Netim->addUpInfoQueue($user->id);
                 if($data['incode']) {
                     $this->loadComponent('Business');
                     $this->Business->create2Invit($data['incode'], $user->id);
@@ -255,6 +258,8 @@ class UserController extends AppController {
             $data = $this->request->data();
             $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
+                $this->loadComponent('Netim');
+                $this->Netim->addUpInfoQueue($user->id);
                 return $this->Util->ajaxReturn(true, '保存成功');
             } else {
                 return $this->Util->ajaxReturn(false, '保存失败');
