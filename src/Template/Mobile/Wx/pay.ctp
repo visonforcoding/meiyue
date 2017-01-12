@@ -23,7 +23,7 @@
                     <div class="paytype">
                         <i class="iconfont payico color_wx">&#xe638;</i>
                         <h3 class="paydes">
-                            <span class="impordes">微信支付</span>
+                            <span class="impordes">微信</span>
                         </h3>
                     </div>
                     <span data-pay="wx" class="iconfont choose color_y">&#xe635;</span>
@@ -33,7 +33,7 @@
                     <div class="paytype">
                         <i class="iconfont payico alipay">&#xe625;</i>
                         <h3 class="paydes">
-                            <span class="impordes">支付宝支付</span>
+                            <span class="impordes">支付宝</span>
                         </h3>
                     </div>
                     <span data-pay="ali" class="iconfont choose">&#xe615;</span>
