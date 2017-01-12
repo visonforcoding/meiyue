@@ -240,7 +240,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder  { /* WebKi
 .color_org{color:#fe8c5a;}
 .color_y{color:#eab96a;}
 .color_ycc{color:#cc9930;}
-.color_black{color:#303030;}
+.color_black{color:#666;}
 .color_error{color:#fd6a56;}
 .color_des{color:#777;}
 .color_ts{color:#4db6ff;}
@@ -272,11 +272,11 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder  { /* WebKi
 /*字体图标*/
 @font-face {
     font-family: 'iconfont';
-    src: url('../font/iconfont.eot?t=0103');
-    src: url('../font/iconfont.eot?t=0103#iefix') format('embedded-opentype'),
-        url('../font/iconfont.woff?t=0103') format('woff'),
-        url('../font/iconfont.ttf?t=0103') format('truetype'),
-        url('../font/iconfont.svg?t=0103#iconfont') format('svg');
+    src: url('../font/iconfont.eot?t=0112');
+    src: url('../font/iconfont.eot?t=0112#iefix') format('embedded-opentype'),
+        url('../font/iconfont.woff?t=0112') format('woff'),
+        url('../font/iconfont.ttf?t=0112') format('truetype'),
+        url('../font/iconfont.svg?t=0112#iconfont') format('svg');
 }
 
 .iconfont{
