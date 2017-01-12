@@ -77,9 +77,9 @@ class ApiController extends AppController {
             return $this->jsonResponse(false, '参数不正确', 412);
         }
         $timediff = time() - $timestamp;
-        if ($timediff > 30 * 60) {
-            return $this->jsonResponse(false, '时间参数过期', 408);
-        }
+//        if ($timediff > 30 * 60) {
+//            return $this->jsonResponse(false, '时间参数过期', 408);
+//        }
         $sign = strtoupper(md5($timestamp . self::TOKEN));
         \Cake\Log\Log::debug($sign);
         if ($sign != $access_token) {

@@ -148,8 +148,13 @@ class NetimComponent extends Component {
     public function addUpInfoQueue($id){
         $redis = new \Redis();
         $redis_conf = \Cake\Core\Configure::read('Redis.default');
-        $redis->connect($redis_conf['host'], $redis_conf['port']);
-        $redis->rPush(\App\Shell\NetimShell::REDIS_WAIT_UPINFO_KEY, $id); //缓冲进redis 队列
+        try {
+            $redis->connect($redis_conf['host'], $redis_conf['port']);
+            $redis->rPush(\App\Shell\NetimShell::REDIS_WAIT_UPINFO_KEY, $id); //缓冲进redis 队列
+        } catch (Exception $exc) {
+            dblog('redis error','netim更新名片进入队列失败', '用户id:'.$id);
+        }
+
     }
 
 }
