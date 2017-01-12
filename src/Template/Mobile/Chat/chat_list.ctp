@@ -65,6 +65,8 @@
 <?php $this->start('script'); ?>
 <script type="text/javascript">
 var backUnread = {};
+var sessList = [];
+var render;
 var data = {};
 var accids = [];   //列表accid
 var account = LEMON.db.get('im_accid');
@@ -109,6 +111,7 @@ function onDisconnect(error) {
 }
 function onSessions(sessions) {
     console.log('收到会话列表', sessions);
+    sessList = sessions;
     $.each(sessions, function (i, n) {
         accids.push(n.to);
     });
@@ -116,13 +119,6 @@ function onSessions(sessions) {
         accounts: accids,
         done: getUsersDone
     });
-    $.util.ajax({
-        url: '/chat/getSesList',
-        data: {accids: accids},
-        func: function (res) {
-            $('#chat-list').html(getRender(sessions, res));
-        }
-    })
     console.log('收到会话列表', sessions);
     data.sessions = nim.mergeSessions(data.sessions, sessions);
     updateSessionsUI();
@@ -133,18 +129,11 @@ function onUpdateSession(session) {
     var newSess = session.to;
     if ($.inArray(newSess, accids) == -1) {
         //新会话
+        sessList = [session];
+        accids.push(newSess);
         nim.getUsers({
             accounts: [newSess],
-            done: getUsersDone
-        });
-        $.util.ajax({
-            url: '/chat/getSesList',
-            data: {accids: [newSess]},
-            func: function (res) {
-                //新聊天
-                accids.push(newSess);
-                $('#chat-list').prepend(getRender([session], res));
-            }
+            done: getNewUsersDone
         });
     } else {
         //旧会话 新消息
@@ -174,9 +163,26 @@ function onUpdateSession(session) {
     updateSessionsUI();
 }
 function getUsersDone(error, users) {
-    //获取到用户名片
+    //获取初始话列表
     console.log(error);
     console.log(users);
+    console.log(sessList);
+    var res = {users:users};
+    render = getRender(sessList, res);
+     $('#chat-list').html(render);
+    console.log('获取用户名片数组' + (!error ? '成功' : '失败'));
+    if (!error) {
+        onUsers(users);
+    }
+}
+function getNewUsersDone(error, users) {
+    //获取新会话 
+    console.log(error);
+    console.log(users);
+    console.log(sessList);
+    var res = {users:users};
+    render = getRender(sessList, res);
+    $('#chat-list').prepend(render);
     console.log('获取用户名片数组' + (!error ? '成功' : '失败'));
     if (!error) {
         onUsers(users);
@@ -199,11 +205,12 @@ $(document).on('click', '.user', function () {
     var nick = $(this).data('nick');
     var avatar = $(this).data('avatar');
     var user_id = $(this).data('id');
-    param['accid'] = accid;
+    param['imaccid'] = accid;
     param['nick'] = nick;
     param['avatar'] = avatar;
     param['id'] = user_id;
-    LEMON.event.imTalk(param);
+    var res = {obj:param};
+    $.util.openTalk(res);
     setRead(accid);
 });
 
@@ -247,13 +254,14 @@ function getRender(sessions, res) {
         sessions[i]['nick'] = '';
         sessions[i]['avatar'] = '';
         $.each(res.users, function (k, v) {
-            if (n.to == v.imaccid) {
+            if (n.to == v.account) {
+                var custom = JSON.parse(v.custom);
                 n.unread = getUnread(n.to, n.unread);
                 sessions[i]['nick'] = v.nick;
                 sessions[i]['avatar'] = v.avatar;
                 sessions[i]['datetime'] = $.util.getImShowTime(new Date(n.updateTime));
                 sessions[i]['unreadst'] = n.unread > 0 ? '' : 'hidden';
-                sessions[i]['user_id'] = v.id;
+                sessions[i]['user_id'] = custom.id;
             }
         })
     })
