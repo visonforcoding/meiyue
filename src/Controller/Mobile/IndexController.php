@@ -140,7 +140,7 @@ class IndexController extends AppController {
             $row['recharge'] = intval($row['recharge']);
             if(count($row['upacks'])) {
                 $upk = $row['upacks'][0];
-                $row['upackname'] = $upk->honour_name;
+                $row['upackname'] = ($upk->honour_name)?$upk->honour_name:$upk->title;
             }
             $row['upacks'] = [];
             return $row;

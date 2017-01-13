@@ -562,6 +562,9 @@ class UsercController extends AppController
         if($inv->total) {
             $withdrawed = ($with->total)?$with->total:0;
             $canTixian = $inv->total - $withdrawed;
+            if($this->user->money < $canTixian) {
+                $canTixian = $this->user->money;
+            }
         }
         $this->set([
             'pageTitle' => '我的钱包',
@@ -1232,7 +1235,11 @@ class UsercController extends AppController
             $inv = $invTb->find()->select(['total' => 'sum(income)'])->where(['inviter_id' => $user->id]);
             $with = $withdrawTb->find()->select(['total' => 'sum(amount)'])
                 ->where(['user_id' => $user->id, 'status' => 2]);
-            if(!$with->first()->total || (($inv->first()->total - $with->first()->total) < $amount)) {
+            $money = $inv->first()->total - $with->first()->total;
+            if($user->money < $money) {
+                $money = $user->money;
+            }
+            if(!$with->first()->total || ($money < $amount)) {
                 return [5, '可兑换美币不足']; //美币不足
             }
         }

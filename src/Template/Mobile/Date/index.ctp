@@ -79,7 +79,18 @@
             $.util.alert($msg);
             return;
         }
-        document.location.href = "/date/add";
+        <?php if($skill >= 1): ?>
+            document.location.href = "/date/add";
+        <?php else: ?>
+            $.util.confirm(
+                '发布约会',
+                '您需要到【我的-技能管理】中，添加相应技能后，才能发布约会哦~',
+                function() {
+                    location.href='/userc/user-skills-index';
+                },
+                null
+            );
+        <?php endif; ?>
     });
 
     //点击tab的切换效果

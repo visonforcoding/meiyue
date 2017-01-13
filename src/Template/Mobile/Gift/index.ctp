@@ -54,10 +54,12 @@
                         $.util.alert(res.msg);
                         gid = null;
                         $('#allgift .items').removeClass('active');
-                        setTimeout(function(){
-                            LEMON.event.back();
-                            //$.util.openTalk(res);
-                        },500);
+                        if(res.status) {
+                            setTimeout(function(){
+                                LEMON.event.back();
+                                //$.util.openTalk(res);
+                            },500);
+                        }
                     }
                 })
             },

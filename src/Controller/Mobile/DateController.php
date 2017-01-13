@@ -1,5 +1,6 @@
 <?php
 namespace App\Controller\Mobile;
+use Cake\Database\Schema\Table;
 use Cake\Datasource\ResultSetInterface;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
@@ -68,7 +69,9 @@ class DateController extends AppController
             $sort = array_merge($sortNorms, $sortDowns);
             return $this->Util->ajaxReturn(['datas' => $sort, 'status' => true]);
         }
-        $this->set(["user" => $this->user, 'pageTitle' => '美约-约会管理']);
+        $uSkillTb = TableRegistry::get('UserSkill');
+        $uskillCount = $uSkillTb->find()->where(['user_id' => $this->user->id, 'is_used' => 1, 'is_checked' => 1])->count();
+        $this->set(["user" => $this->user, 'skill' => $uskillCount, 'pageTitle' => '美约-约会管理']);
     }
 
     /**
