@@ -171,7 +171,6 @@
 <?php $this->start('script'); ?>
 <script type="text/javascript">
     if ($.util.isAPP){
-        console.log($.util.isAPP);
         $('.footer_submit_btn').css('bottom','10px')
     }
     $('#submitbtn').on('tap', function () {
@@ -210,6 +209,11 @@
     });
     //$.util.showPreloader('前往登录..');
     window.onActiveView = function () {
+        // $('#submitbtn').html('<span>发布<br />动态</span>');
+        // $('#submitbtn').attr('data-type', '0');
+        // $('#videobtn').removeClass('moveleft,moveright');
+        // $('#picbtn').removeClass('moveup,movedown');
+
         if (!$.util.getCookie('token_uin')) {
 //            alert('我又没登陆');
 //            LEMON.event.login(function (res) {
@@ -220,7 +224,7 @@
 //            });
         }
     }
-
+ window.onBackView =  window.onActiveView();
     function tel() {
         $.util.confirm(
             '联系客服',

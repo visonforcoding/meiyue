@@ -49,7 +49,7 @@
             </li>
             <?php if ($user->gender == 2): ?>
                 <li class="clearfix">
-                    <span class="fl">真人视频认证</span>
+                    <span class="fl">真人脸部识别</span>
                     <?php if (!$user->auth_video): ?>
                         <span class="fr"  onclick="window.location.href = '/userc/edit-true';">
                             <i class="iconfont right_ico fr">&#xe605;</i>
@@ -79,7 +79,7 @@
             <?php if ($user->gender == 2): ?>
                 <li class="clearfix">
                     <a id="status-btn">
-                        <span class="fl">基本照片与视频上传</span>
+                        <span class="fl">基本照片与视频</span>
                         <?php if (!($user->images) || !($user->video)): ?>
                             <i class="iconfont right_ico fr" onclick="window.location.href = '/userc/edit-basic-pic';">&#xe605;</i>
                         <?php elseif ($user->status == UserStatus::PASS): ?>
