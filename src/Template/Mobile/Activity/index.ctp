@@ -266,10 +266,10 @@
         },
         tabEvent: function () {
             var obj = this;
-            $.util.loop({
+            aaaa = $.util.loop({
                 tp: 'text', //图片img或是文字text
                 min:1,
-                minp:80,
+                minp:20,
                 loadImg: true,
                 isInit: true,
                 moveDom: $('#imgBox'),
