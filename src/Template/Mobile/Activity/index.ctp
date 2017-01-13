@@ -266,8 +266,8 @@
             var obj = this;
             $.util.loop({
                 tp: 'text', //图片img或是文字text
-                min:10,
-                minp:100,
+                min:1,
+                minp:80,
                 loadImg: true,
                 isInit: true,
                 moveDom: $('#imgBox'),
