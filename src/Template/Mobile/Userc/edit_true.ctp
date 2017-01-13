@@ -10,7 +10,7 @@
             <div class="inner">
                 <ul>
                     <li>
-                        <h3><i class="iconfont color_y">&#xe604;</i>为什么要真人视频认证？</h3>
+                        <h3><i class="iconfont color_y">&#xe604;</i>为什么要真人脸部识别？</h3>
                         <div class="con">
                             <p>美约作为一个真实的高端红人工作交友平台，希望给大家提供一个真诚的工作交友环境。请放心您上传的真人视频仅供审核用，仅自己可见，其他人无法看到。</p>
                         </div>
@@ -38,7 +38,7 @@
                         <h3><i class="iconfont color_y">&#xe604;</i>我的认证视频</h3>
                         <div class="con">
                             <div class="up_identify_box">
-                                <p class="smallarea">注意依次做以下动作：点头，露齿笑，往左转头，举右手</p>
+                                <p class="smallarea">请对准手机屏幕：1.露齿笑，2.左转头，3.右转头</p>
                                 <div id="auth_video" class="btn btn_dark_t mt40">点击录制</div>
                                 <div class="fact_identify mt40"   style="display: none;">
                                     <dl  class="Idcard personimg">
