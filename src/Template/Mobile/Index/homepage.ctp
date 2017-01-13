@@ -680,7 +680,7 @@
         var nick = '<?= $user->nick; ?>';
         var avatar = '<?= getHost().$user->avatar; ?>';
         var user_id = '<?= $user->id; ?>';
-        param['accid'] = accid;
+        param['imaccid'] = accid;
         param['nick'] = nick;
         param['avatar'] = avatar;
         param['id'] = user_id;
