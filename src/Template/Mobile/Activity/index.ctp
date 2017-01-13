@@ -529,7 +529,6 @@
 
 
     function supportHer(id) {
-        var id = $(this).data('id');
         $.util.checkLogin('/gift/index/' + id);
     };
 </script>

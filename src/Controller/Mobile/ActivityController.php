@@ -539,7 +539,7 @@ class ActivityController extends AppController
                     return $row;
                 });
             $tops = $query->toArray();
-            $mytop = Array();
+            $mytop = null;
 
             if ($user) {
                 if ($user->gender == 2) {
@@ -612,7 +612,7 @@ class ActivityController extends AppController
                     $row['upackname'] = null;
                     if(count($row['upacks'])) {
                         $upk = $row['upacks'][0];
-                        $row['upackname'] = $upk->honour_name;
+                        $row['upackname'] = ($upk->honour_name)?$upk->honour_name:$upk->title;
                     }
                     $row['upacks'] = [];
                     if (!$user || $user->gender == 2) {

@@ -124,7 +124,7 @@
     {{#mydata}}
     <li class="flex flex_justify">
         <div class="flex">
-            <span class="place silver">{{index}}</span>
+            <span class="place {{#istop3}}silver{{/istop3}}">{{index}}</span>
             <div class="place_info">
             <span class="avatar" onclick="location.href='/user/my-homepage/{{user.id}}'">
                 <img src="{{user.avatar}}">
@@ -411,12 +411,14 @@
                     $.util.hidePreloader();
                     if (res.status) {
                         if(('top_week' == tab || 'top_month' == tab) && res.mydata) {
-                            if(res.mydata) {
-                                $('#my-top').show();
-                                var mytemp = $('#mytop-list-tpl').html();
-                                var myrend = Mustache.render(mytemp, res);
-                                $('#my-top').html(myrend);
+                            res.mydata.istop3 = true;
+                            if(res.mydata.index > 3) {
+                                res.mydata.istop3 = false
                             }
+                            $('#my-top').show();
+                            var mytemp = $('#mytop-list-tpl').html();
+                            var myrend = Mustache.render(mytemp, res);
+                            $('#my-top').html(myrend);
                             var rendered = Mustache.render(template, res);
                             $(obj.container_id).html(rendered);
                             return;

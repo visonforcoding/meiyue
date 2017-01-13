@@ -3,6 +3,7 @@
 namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
+use Cake\ORM\TableRegistry;
 use ServiceType;
 use Wpadmin\Utils\UploadFile;
 
@@ -22,7 +23,7 @@ class ApiController extends AppController {
 
     protected $noAcl = [
         'upload', 'wxtoken', 'ckregister', 'recordphone', 'saveuserbasicpic',
-        'saveuserbasicvideo', 'getmapusers', 'gettoken','reportuser','checkread','consumepack'
+        'saveuserbasicvideo', 'getmapusers', 'gettoken','reportuser','checkread','consumepack', 'checkright'
     ];
 
     public function initialize() {
@@ -528,15 +529,23 @@ class ApiController extends AppController {
 
     /**
      * 检查是否有未读消息
+     * @param user_id
+     * @return json
+     *  {
+     *      fangke: 新访客数量（未读）,
+     *      ptmessage: 新平台消息（未读）
+     *  }
      */
     public function checkRead()
     {
-        $uid = $this->request->data("uid");
+        $uid = $this->request->data("user_id");
         $msgpush = TableRegistry::get('Msgpush');
+        $visitorTb = TableRegistry::get('Visitor');
         $num = $msgpush->find()
             ->where(['user_id' => $uid, 'is_read' => 0])
             ->count();
-        $this->jsonResponse(['num' => $num]);
+        $vnum = $visitorTb->find()->where(['visited_id' => $uid, 'is_read' => 0])->count();
+        $this->jsonResponse(['fangke' => $vnum, 'ptmessage' => $num]);
     }
 
 
@@ -558,5 +567,31 @@ class ApiController extends AppController {
         } else {
             $this->jsonResponse(false, '消费失败');
         }
+    }
+
+
+    /**
+     * 检查是否可以聊天/查看动态接口
+     * @param user1_id 登录者id
+     * @param user2_id 聊天者id
+     * @param type 2 服务类型：参考ServiceType::CHAT
+     * @return right
+     *          case 0:不合法参数
+     *          case 1:可以访问（已经消耗过额度）
+     *          case 2:可以访问（尚未消耗额度）
+     *          case 3:不可以访问（没有额度可以消耗）
+     */
+    public function checkRight()
+    {
+        $this->loadComponent('Business');
+        $uid = $this->request->data("user1_id");
+        $vid = $this->request->data("user2_id");
+        $type = $this->request->data("type");
+        $res = 0;
+        if(ServiceType::containType($type)) {
+            $this->loadComponent('Business');
+            $res = $this->Business->checkRight($uid, $vid, $type);
+        }
+        $this->jsonResponse(['right' => $res]);
     }
 }

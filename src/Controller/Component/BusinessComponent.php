@@ -118,10 +118,10 @@ class BusinessComponent extends Component
      *      int usedid 作用对象id
      *      int type   使用类型，见ServiceType类
      * 返回结果：
-     *          case 0:不合法参数
-     *          case 1:可以访问（已经消耗过额度）
-     *          case 2:可以访问（尚未消耗额度）
-     *          case 3:不可以访问（没有额度可以消耗）
+ *          case 0:不合法参数
+ *          case 1:可以访问（已经消耗过额度）
+ *          case 2:可以访问（尚未消耗额度）
+ *          case 3:不可以访问（没有额度可以消耗）
      */
     public function checkRight($userid = null, $usedid = null, $type = null) {
         if(
