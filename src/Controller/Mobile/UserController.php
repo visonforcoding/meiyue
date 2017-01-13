@@ -136,6 +136,9 @@ class UserController extends AppController {
     }
     
     public function regChooseSex(){
+        $this->set([
+            'pageTitle' => '美约-注册',
+        ]);
         
     }
 
