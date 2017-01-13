@@ -719,6 +719,7 @@ $.util = {
         param['accid'] = res.obj.imaccid;
         if(!$.util.isAPP){
             window.location.href = '/chat/chat-detail/'+res.obj.imaccid;
+            return;
         }
         param['nick'] = res.obj.nick;
         param['avatar'] = res.obj.avatar;
