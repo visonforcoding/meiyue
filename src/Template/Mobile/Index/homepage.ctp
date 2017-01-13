@@ -684,7 +684,9 @@
         param['nick'] = nick;
         param['avatar'] = avatar;
         param['id'] = user_id;
-        LEMON.event.imTalk(param);
+        //LEMON.event.imTalk(param);
+        var res = {obj:param};
+        $.util.openTalk(res);
     }
 </script>
 <?php $this->end('script'); ?>

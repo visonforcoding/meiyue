@@ -6,6 +6,7 @@ use App\Controller\Mobile\AppController;
 use App\Model\Table\FlowTable;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Database\Type\FloatType;
+use Cake\I18n\Date;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 use Cake\Controller\Controller;
@@ -686,7 +687,9 @@ class UserController extends AppController {
             $id = $this->user->id;
         }
         $wektop = $this->Business->getMyTop('week', $id);
+        $wektop->total = intval($wektop->total);
         $montop = $this->Business->getMyTop('month', $id);
+        $montop->total = intval($montop->total);
         $this->set([
             'isme' => $isme,
             'user' => $this->user,
@@ -706,12 +709,21 @@ class UserController extends AppController {
         $spTb = TableRegistry::get('Support');
         $supports = $spTb
                 ->find()
-                ->select(['supporter_id', 'spcount' => 'count(1)'])
+                ->contain(['Supporter'])
+                ->select(['supporter.nick' , 'supporter.recharge' , 'supporter.id', 'supporter.avatar', 'supporter.birthday', 'spcount' => 'count(1)'])
                 ->where(['supported_id' => $this->user->id])
-                ->orderDesc('create_time')
+                ->orderDesc('Support.create_time')
                 ->group('supporter_id')
+                ->formatResults(function ($items) {
+                    return $items->map(function ($item) {
+                        $item['supporter']['birthday'] = getAge(new Date($item['supporter']['birthday']));
+                        $item['supporter']['recharge'] = intval($item['supporter']['recharge']);
+                        return $item;
+                    });
+                })
                 ->toArray();
-        $supporterids = [];
+        //正式上线后如果没有问题下面的代码可以删掉了
+        /*$supporterids = [];
         $sortFlows = [];
         foreach ($supports as $item) {
             $supporterids[] = $item->supporter_id;
@@ -727,14 +739,24 @@ class UserController extends AppController {
                     ->select(['total' => 'sum(amount)'])
                     ->where(['buyer_id IN' => $supporterids, 'type' => 14])
                     ->group('buyer_id')
+                    ->formatResults(function ($items) {
+                        return $items->map(function ($item) {
+                            if($item['buyer']['gender'] == 1) {
+                                $item['buyer']['total'] = intval($item['follower']['recharge']);
+                            } else {
+                                $item['buyer']['total'] = intval($item['follower']['charm']);
+                            }
+                            return $item;
+                        });
+                    })
                     ->toArray();
             foreach ($flows as $item) {
                 $sortFlows[$item->buyer->id] = $item;
             }
-        }
+        }*/
         $this->set([
             'supports' => $supports,
-            'flows' => $sortFlows,
+            //'flows' => $sortFlows,
             'pageTitle' => '支持我的人'
         ]);
     }

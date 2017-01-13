@@ -62,17 +62,24 @@
 
     $('#publish-date-info').bind('click',function(event){
         event.preventDefault();
-        var url = $(this).attr('href');
-        $.util.ajax({
-            url:'/userc/check-user-status',
-            func:function(res){
-                if(!res.status){
-                    $.util.alert(res.msg);
-                }else{
-                    document.location.href = "/date/add";
-                }
-            }
-        })
+        var status = <?= $user->status; ?>;
+        $msg = '';
+        switch (status){
+            case 0:
+                $msg = '您暂无此权限，认证信息未上传成功。';
+                break;
+            case 1:
+                $msg = '您暂无此权限，认证信息正在审核中。';
+                break;
+            case 2:
+                $msg = '您暂无此权限，认证信息审核未通过。';
+                break;
+        }
+        if(3 != status) {
+            $.util.alert($msg);
+            return;
+        }
+        document.location.href = "/date/add";
     });
 
     //点击tab的切换效果

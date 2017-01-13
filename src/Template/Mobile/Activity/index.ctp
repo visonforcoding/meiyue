@@ -37,11 +37,13 @@
                             </li>
                         <?php endforeach; ?>
                     </ul>
+                    <?php if(count($carousels) > 1): ?>
                     <div class="yd flex flex_center" id="oTab">
                         <?php foreach ($carousels as $key => $$carousel): ?>
                             <span class="<?= ($key == 0) ? 'cur' : ''; ?>"></span>
                         <?php endforeach; ?>
                     </div>
+                    <?php endif; ?>
                 </div>
                 <?php if (isset($user) && $user->gender == 2): ?>
                     <div class="invite">

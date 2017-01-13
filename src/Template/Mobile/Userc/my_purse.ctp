@@ -7,23 +7,39 @@
 <div class="wraper">
     <div class="purse_list">
         <div class="purse_list_top">
-            <span class="purse_ico">
-                <img src="/mobile/images/cash1.png"/>
-            </span>
-            <h3 class="purse_list_tright">
-                <span class="balance">钱包余额</span>
-                <span class="numbers"><i><?= $user->money ?></i>美币</span>
-            </h3>
+            <div class="flex flex_center">
+						<span class="purse_ico">
+							<img src="/mobile/images/cash1.png"/>
+						</span>
+                <h3 class="purse_list_tright">
+                    <span class="balance">钱包余额</span>
+                    <span class="numbers"><i><?= $user->money ?></i>美币</span>
+                </h3>
+            </div>
+            <div><p class="smallarea aligncenter moneycharge">可兑换余额<?= ($user->gender == 1)?$canTixian: $user->money;?>美币</p></div>
         </div>
+
         <div class="purse_list_bottom">
             <?php if ($user->gender == 1): ?>
-            <span onclick="window.location.href='/purse/recharge'" class="btn btn_bg_t">充值</span>
-                <p><a href="/activity/index/3#3" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
-            <?php else: ?>
-                <span class="btn btn_bg_t" onclick="duihuan();">兑换美币</span>
-                <?php if(isset($withdraw->viramount)): ?>
-                <p class="tips">正在申请提现 <?= $withdraw->viramount; ?> 美币</p>
+                <?php if($canTixian): ?>
+                    <div class="flex flex_justify inner">
+                        <div class="wid50" onclick="duihuan();"><span class="btn btn_bg_t">兑换美币</span></div>
+                        <div class="wid50" onclick="window.location.href='/purse/recharge'">
+                            <span class="btn btn_bg_active">充值</span>
+                        </div>
+                    </div>
+                    <p><a href="/activity/index/3#3" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
+                <?php else: ?>
+                    <div class="flex flex_justify inner" onclick="window.location.href='/purse/recharge'">
+                        <span class="btn btn_bg_active">充值</span>
+                    </div>
+                    <p><a href="/activity/index/3#3" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
                 <?php endif; ?>
+            <?php else: ?>
+                <div class="flex flex_justify inner" onclick="duihuan();"><span class="btn btn_bg_t">兑换美币</span></div>
+            <?php endif; ?>
+            <?php if(isset($withdraw->viramount)): ?>
+                <p class="tips">正在申请提现 <?= $withdraw->viramount; ?> 美币</p>
             <?php endif; ?>
         </div>
     </div>

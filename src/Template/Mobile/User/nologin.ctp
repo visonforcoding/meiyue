@@ -20,9 +20,10 @@
                             </span>
                         </a>
                     </li>
-                    <li class="follow flex">
-                        <a class="like" style='margin-right:.4rem;'>喜欢 <i>0</i></a> 
+                    <li class="follow flex flex_justify">
+                        <a class="like">喜欢 <i>0</i></a>
                         <a class="like">粉丝 <i>0</i></a>
+                        <a class="like">访客 <i>0</i></a>
                     </li>
                 </ul>
             </div>

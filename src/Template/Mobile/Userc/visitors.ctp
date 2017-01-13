@@ -81,7 +81,11 @@
                     $.util.hidePreloader();
                 } else {
                     $.util.hidePreloader();
-                    $('#blank-area').append('<p class="smallarea aligncenter mt60">没有更多数据了</p><br>');
+                    if(curpage == 1) {
+                        $('#blank-area').append('<p class="smallarea aligncenter mt60">您暂时没有访客哦</p><br>');
+                    } else {
+                        $('#blank-area').append('<p class="smallarea aligncenter mt60">没有更多数据了</p><br>');
+                    }
                     window.holdLoad = true;
                 }
             });

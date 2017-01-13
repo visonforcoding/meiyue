@@ -2,6 +2,7 @@
 namespace App\Controller\Mobile;
 use Cake\Datasource\ResultSetInterface;
 use Cake\I18n\Time;
+use Cake\ORM\TableRegistry;
 use DateState;
 
 /**
@@ -63,6 +64,7 @@ class DateController extends AppController
                     $sortNorms[] = $data;
                 }
             }
+            $uSkillTb = TableRegistry::get('UserSkill');
             $sort = array_merge($sortNorms, $sortDowns);
             return $this->Util->ajaxReturn(['datas' => $sort, 'status' => true]);
         }
@@ -105,6 +107,9 @@ class DateController extends AppController
     public function add()
     {
         $date = $this->Date->newEntity();
+        if($this->user->status != 3) {
+            return $this->Util->ajaxReturn(false, "发布失败");
+        }
         if ($this->request->is('post')) {
             $date = $this->Date->patchEntity($date, $this->request->data);
             if ($this->Date->save($date)) {

@@ -165,6 +165,7 @@ function getFlowType($index = null) {
         '18' => '支付微信查看金',
         '19' => '好友充值美币',
         '20' => '好友获得收入',
+        '21' => '兑换美币',
         ];
     if ($index) {
         return $flowType[$index];
