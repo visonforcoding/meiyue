@@ -182,7 +182,6 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                     break;
                     //无参数   无回调
                 case "event.back":
-                case "sys.endReg":
                 case "sys.delTalk":
                     registerAPI(null, api, function () {
                         if (!isAPP) {
@@ -203,7 +202,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                         }
                         return JSApiInvoke(api, {imgs: imgs, index: index}, '');
                     });
-                    break;
+                    break;   
                 /**
                  * 特殊接口，仅限用与美约业务
                  * status 状态（包括：1:可以继续访问 2: 需要消耗名额 3: 需要购买会员）
@@ -222,6 +221,7 @@ if (navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios') > 0) {  //
                         return JSApiInvoke(api, {imgs: imgs, index: index, status: status, user_id: user_id, view_id: view_id, to_url: to_url}, '');
                     });
                     break;
+                case "sys.endReg":     
                 case "event.imList":
                 case "event.unrefresh":
                 case "sys.clearWebCatch":
