@@ -29,7 +29,7 @@
         <div class="inner">
             <ul>
                 <li>
-                    <h3><i class="iconfont color_y">&#xe604;</i>为什么要真人视频认证？</h3>
+                    <h3><i class="iconfont color_y">&#xe604;</i>为什么要真人脸部识别？</h3>
                     <div class="con">
                         <p class='smallarea'>作为一款高端真实的社交软件，我们鼓励您认证真实身份，让每一份友谊都能建立在真实的基础上。您上传的任何信息，仅供审核使用且TA人无法查看，敬请放心。</p>
                     </div>
@@ -41,10 +41,10 @@
         <div class="inner">
             <ul>
                 <li>
-                    <h3><i class="iconfont color_y">&#xe604;</i>我的认证视频</h3>
+                    <h3><i class="iconfont color_y">&#xe604;</i>我的真人脸部识别</h3>
                     <div class="con">
                         <div class="up_identify_box">
-                            <p class="color_error">请对准手机屏幕，依次完成以下动作：点头，左转头，右转头，露齿笑。</p>
+                            <p class="color_error">请对准手机屏幕：1.露齿笑，2.左转头，3.右转头</p>
                             <div class="fact_identify mt40"   style="display: none;">
                               <div class="home_pic_info" style='padding:0;'>
                                 <div class="home_video relpotion flex flex_center">
