@@ -263,6 +263,24 @@ class Netim {
              return false;
         }
     }
+    
+    /**
+     * 
+     * @param array $accids
+     */
+    public function getUinfos($accids){
+        $url = 'https://api.netease.im/nimserver/user/getUinfos.action';
+        $str = json_encode($accids);
+        $param['accids'] = $str;
+        $res = $this->httpPost($url, $param);
+        if($res->isOk()){
+            $resp = json_decode($res->body());
+                \Cake\Log\Log::info('Netim getUinfos'.$res->body(),'devlog');
+                return $resp;
+        }else{
+             return false;
+        }
+    }
 
 
 }
