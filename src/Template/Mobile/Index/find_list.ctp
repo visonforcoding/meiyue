@@ -42,40 +42,41 @@
 </div>
 <!--筛选-->
 <div id="selectMenu_box" class="raper" hidden>
-    <div class="choose_parmes">
-        <div class="inner">
-            <div class="height flex">
-                <span class="height_left color_y">身高 <i class="">(cm)</i></span>
-                <div class="scale">
-                    <div class="line flex flex_justify">
-                        <h1>155</h1><h1>160</h1><h1>165</h1><h1>170</h1><h1>175</h1><h1>180</h1><h1>185+</h1>
-                    </div>
-                    <div id='height' class="block range">
-                        <div class='meaBox'></div>
-                        <div data-bar="left" class='mea' style="left: 0"></div>
-                        <div data-bar="right" class='mea' style="right: 0"></div>
-                    </div>
+</div>
+<div class="choose_parmes" style='position:fixed;top:0;z-index:12;padding-top:30px;' id='parmes' hidden>
+    <div class="inner">
+        <div class="height flex">
+            <span class="height_left color_y">身高 <i class="">(cm)</i></span>
+            <div class="scale">
+                <div class="line flex flex_justify">
+                    <h1>155</h1><h1>160</h1><h1>165</h1><h1>170</h1><h1>175</h1><h1>180</h1><h1>185+</h1>
                 </div>
-            </div>
-            <div class="height flex">
-                <span class="height_left color_y">年龄 <i class="">(岁)</i></span>
-                <div class="scale">
-                    <div class="line flex flex_justify">
-                        <h1>18</h1><h1>20</h1><h1>24</h1><h1>26</h1><h1>30</h1><h1>35</h1><h1>40+</h1>
-                    </div>
-                    <div id='age' class="block range">
-                        <div class='meaBox'></div>
-                        <div data-bar="left" class='mea' style="left: 0"></div>
-                        <div data-bar="right" class='mea' style="right: 0"></div>
-                    </div>
+                <div id='height' class="block range">
+                    <div class='meaBox'></div>
+                    <div data-bar="left" class='mea' style="left: 0"></div>
+                    <div data-bar="right" class='mea' style="right: 0"></div>
                 </div>
             </div>
         </div>
-        <div class="inner btlight">
-            <span id="search" class="btn surebtn mt40 ">确定</span>
+        <div class="height flex">
+            <span class="height_left color_y">年龄 <i class="">(岁)</i></span>
+            <div class="scale">
+                <div class="line flex flex_justify">
+                    <h1>18</h1><h1>20</h1><h1>24</h1><h1>26</h1><h1>30</h1><h1>35</h1><h1>40+</h1>
+                </div>
+                <div id='age' class="block range">
+                    <div class='meaBox'></div>
+                    <div data-bar="left" class='mea' style="left: 0"></div>
+                    <div data-bar="right" class='mea' style="right: 0"></div>
+                </div>
+            </div>
         </div>
     </div>
+    <div class="inner btlight">
+        <span id="search" class="btn surebtn mt40 ">确定</span>
+    </div>
 </div>
+
 <div style="height:1.4rem"></div>
 <?= $this->element('footer', ['active' => 'find']) ?>
 <?php $this->start('script'); ?>
@@ -134,16 +135,18 @@
         onTopRight();
     });
     window.onTopRight = function(){
-        $('#selectMenu_box').toggle();
+        $('#selectMenu_box,#parmes').toggle();
+
         if(!window.search_height){
             window.search_height = new ranger({dom:$('#height'), range:[155, 185]});
             window.search_age = new ranger({dom:$('#age'), range:[18, 40]});
         }
     }
-   
+   $('#selectMenu_box').on('click',function(){
+         $('#selectMenu_box,#parmes').hide();
+   });
     $('#search').on('click',function(){
-        $('#selectMenu_box').hide();
-
+        $('#selectMenu_box,#parmes').hide();
         var height = window.search_height.reRange;
         var age = window.search_age.reRange;
         console.log(age);
