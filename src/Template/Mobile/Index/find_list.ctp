@@ -35,7 +35,7 @@
         </ul>
     </div>
     <div class="find_list_box">
-        <div id="user-list" class="inner">
+        <div id="user-list" class="innercon">
 
         </div>
     </div>
