@@ -17,10 +17,10 @@
         <div class="loginwraper"></div>
         <div class="wraper loginpage">
             <a href="login.html" class="check_sex_login">登录</a>
-            <h3 class="check_sex_title">您的性别</h3>
+            <h3 class="check_sex_title">您想</h3>
             <div class="check_sex_type">
-                <a data-sex="男" href="/index/find-list" class="btn sex btn_bg_y">男</a>
-                <a data-sex="女" href="/index/find-rich-list" class="btn sex btn_bg_t mt40">女</a>
+                <a data-sex="男" href="/index/find-list" class="btn sex btn_bg_y">先看看</a>
+                <a data-sex="女" href="/index/find-rich-list" class="btn sex btn_bg_t mt40">入驻美约</a>
             </div>
         </div>
         <script>

@@ -19,9 +19,15 @@
             <i class="iconfont">&#xe69a;</i>
             <input type="text" placeholder="(选填)6位邀请码" id="incode" />
         </div>
-        <a id="submit"  class="btn btn_bg_y mt100 disabled">注册</a>
+         </div>
+        <!-- <a id="submit"  class="btn btn_bg_y mt100 disabled">注册</a> -->
+        <div class="login_box_btn">
+            <div class="login_group mt80">
+                <a href="/user/register?gender=1" class="btn btn_bg_t">我是用户</a>
+                <a href="/user/register?gender=2" id="regW" class="btn btn_bg_active">申请入驻</a>
+            </div>
+        </div>
         <h4 class="getlogin"><a href="/user/login">已有账号，直接登录</a></h4>
-    </div>
     <div class="register_bottom_tips">
         <?php if($gender == 1): ?>
             <a href="/index/agreement-user">注册表明已阅读并接受<i class='color_y'>“用户服务协议”</i></a>
