@@ -1154,14 +1154,14 @@ class UserController extends AppController {
             ->first();
 
         $title = '预览TA的主页';
-        if($user->id == $uid) {
+        if($this->user && ($this->user->id == $uid)) {
             $title = '预览我的主页';
         }
         $this->set([
             'pageTitle' => $title,
             'user' => $user,
         ]);
-        if($this->user->gender == 2) {
+        if($user->gender == 2) {
             $this->render('/Mobile/User/my_fhomepage');
         }
     }
