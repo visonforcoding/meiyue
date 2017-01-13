@@ -527,6 +527,7 @@ class ActivityController extends AppController
                     $row['user']['age'] = getAge($row['user']['birthday']);
                     $row['index'] = $i;
                     $row['top3'] = false;
+                    $row['total'] = intval($row['total']);
                     if($i <= 3) {
                         $row['top3'] = true;
                     }
@@ -543,6 +544,7 @@ class ActivityController extends AppController
             if ($user) {
                 if ($user->gender == 2) {
                     $mytop = $this->Business->getMyTop($type, $this->user->id);
+                    $mytop->total = intval($mytop->total);
                 }
             }
             return $this->Util->ajaxReturn(['datas' => $tops, 'mydata' => $mytop, 'status' => true]);
@@ -606,6 +608,7 @@ class ActivityController extends AppController
 
                     //判断我的性别
                     $row['ismale'] = true;
+                    $row['recharge'] = intval($row['recharge']);
                     $row['upackname'] = null;
                     if(count($row['upacks'])) {
                         $upk = $row['upacks'][0];

@@ -29,25 +29,60 @@
         <ul id="like-list" class="praised_list mt20 bgff">
 
         </ul>
+        <div id="blank-area" class="empty_container">
+
+        </div>
     </div>
 <?php $this->start('script'); ?>
     <script>
         var curpage = 1;
-        $.util.asyLoadData({
-            gurl: '/userc/get-likes-list/', page: curpage, tpl: '#like-list-tpl', id: '#like-list',
-            key: 'likes'
-        });
+        loadUser(curpage);
         setTimeout(function () {
-            //滚动加载
             $(window).on("scroll", function () {
                 $.util.listScroll('like-list', function () {
-                    $.util.asyLoadData({
-                        gurl: '/userc/get-likes-list/', page: curpage,
-                        tpl: '#like-list-tpl', id: '#like-list', more: true, key: 'likes'
-                    });
+                    loadUser(curpage + 1, true);
                 })
             });
-        }, 2000);
+        }, 2000)
+
+        function loadUser(page, more, query) {
+            $.util.showPreloader();
+            var template = $('#like-list-tpl').html();
+            Mustache.parse(template);   // optional, speeds up future uses
+            url = '/userc/get-likes-list/' + page + '.json';
+            $.getJSON(url, function (data) {
+                window.holdLoad = false;
+                $.util.hidePreloader();
+                if ((data.likes).length) {
+                    var rendered = Mustache.render(template, data);
+                    if (more) {
+                        $('#like-list').append(rendered);
+                        if (!data.fans.length) {
+                            window.holdLoad = true;
+                        } else {
+                            curpage++;
+                        }
+                    } else {
+                        $('#like-list').html(rendered);
+                    }
+                } else {
+                    $blankStr = '<div class="empty-content  mt350"><span class="empty-ico-box bg-light">' +
+                        '<i class="iconfont empty-ico">&#xe699;</i></span>' +
+                        '<p class="empty-tips">你还没有赞赏过的人，快去寻找那个他吧~</p>' +
+                        '<div class="empty-btn inner"><a href="/index/find-rich-list" class="btn btn_t_border">立即寻找他</a></div></div>';
+                    if(curpage == 1) {
+                        if(1 == <?= $user->gender; ?>) {
+                            $blankStr = '<div class="empty-content  empty-text mt350">' +
+                                '<p class="empty-tips">你还没有关注任何人<br />点击' +
+                                '<a href="/index/find-list" class="color_y">发现列表</a> 去找喜欢的吧~</p></div>';
+                        }
+                    } else {
+                        $blankStr = '<p class="smallarea aligncenter mt60">没有更多数据了</p><br>';
+                    }
+                    $('#blank-area').html($blankStr);
+                }
+            });
+        }
 
         $(document).on('tap', '.likeIt', function () {
             var user_id = $(this).data('id');

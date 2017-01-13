@@ -48,7 +48,9 @@ class UsercController extends AppController
                         $item['user']['avatar'] = createImg($item['user']['avatar']) . '?w=44&h=44&fit=stretch';
                         $item['user']['age'] = isset($item['user']['birthday']) ? getAge($item['user']['birthday']) : 'xx';
                         if($item['user']['gender'] == 1) {
-                            $item['user']['charm'] = $item['user']['recharge'];
+                            $item['user']['charm'] = intval($item['user']['recharge']);
+                        } else {
+                            $item['user']['charm'] = intval($item['user']['charm']);
                         }
                         return $item;
                     });
@@ -86,28 +88,32 @@ class UsercController extends AppController
      */
     public function getLikesList($page = null)
     {
-        $limit = 10;
-        $UserFansTable = \Cake\ORM\TableRegistry::get('UserFans');
-        $likes = $UserFansTable->find()
-            ->hydrate(false)
-            ->contain(['Follower' => function ($q) {
-                return $q->select(['id', 'birthday', 'avatar', 'nick', 'charm', 'gender', 'recharge']);
-            }])
-            ->where(['user_id' => $this->user->id])
-            ->limit(intval($limit))
-            ->page(intval($page))
-            ->formatResults(function ($items) {
-                return $items->map(function ($item) {
-                    $item['follower']['avatar'] = createImg($item['follower']['avatar']) . '?w=90&h=90&fit=stretch';
-                    $item['follower']['age'] = isset($item['follower']['birthday']) ? getAge($item['follower']['birthday']) : 'xx';
-                    if($item['follower']['gender'] == 1) {
-                        $item['follower']['charm'] = $item['follower']['recharge'];
-                    }
-                    return $item;
-                });
-            })
-            ->toArray();
-        return $this->Util->ajaxReturn(['likes' => $likes]);
+        if ($this->request->is('json')) {
+            $limit = 10;
+            $UserFansTable = \Cake\ORM\TableRegistry::get('UserFans');
+            $likes = $UserFansTable->find()
+                ->hydrate(false)
+                ->contain(['Follower' => function ($q) {
+                    return $q->select(['id', 'birthday', 'avatar', 'nick', 'charm', 'gender', 'recharge']);
+                }])
+                ->where(['user_id' => $this->user->id])
+                ->limit(intval($limit))
+                ->page(intval($page))
+                ->formatResults(function ($items) {
+                    return $items->map(function ($item) {
+                        $item['follower']['avatar'] = createImg($item['follower']['avatar']) . '?w=90&h=90&fit=stretch';
+                        $item['follower']['age'] = isset($item['follower']['birthday']) ? getAge($item['follower']['birthday']) : 'xx';
+                        if($item['follower']['gender'] == 1) {
+                            $item['follower']['charm'] = intval($item['follower']['recharge']);
+                        } else {
+                            $item['follower']['charm'] = intval($item['follower']['charm']);
+                        }
+                        return $item;
+                    });
+                })
+                ->toArray();
+            return $this->Util->ajaxReturn(['likes' => $likes]);
+        }
     }
 
 
@@ -539,23 +545,30 @@ class UsercController extends AppController
     {
         $this->handCheckLogin();
         $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+        $withdrawTb = TableRegistry::get("Withdraw");
         $top5flows = $FlowTable->find()
             ->where(['user_id' => $this->user->id])
             ->orWhere(['buyer_id' => $this->user->id])
             ->orderDesc('create_time')
             ->limit(10)
             ->toArray();
-        $withdraw = TableRegistry::get('Withdraw')->find()->where(['user_id' => $this->user->id, 'status' => 1])->first();
-        if($this->user->gender == 2) {
-            $status = $this->checkApply($this->user, 500);
-        } else {
-            $status = [0, '非法操作'];
+        $withdraw = $withdrawTb->find()->where(['user_id' => $this->user->id, 'status' => 1])->first();
+        $status = $this->checkApply($this->user, 500);
+        $invTb = TableRegistry::get('Inviter');
+        $inv = $invTb->find()->select(['total' => 'sum(income)'])->where(['inviter_id' => $this->user->id])->first();
+        $with = $withdrawTb->find()->select(['total' => 'sum(amount)'])
+            ->where(['user_id' => $this->user->id, 'status' => 2])->first();
+        $canTixian = 0;
+        if($inv->total) {
+            $withdrawed = ($with->total)?$with->total:0;
+            $canTixian = $inv->total - $withdrawed;
         }
         $this->set([
             'pageTitle' => '我的钱包',
             'user' => $this->user,
             'top5flows' => $top5flows,
             'status' => $status,
+            'canTixian' => $canTixian,
             'withdraw' => $withdraw
         ]);
     }
@@ -1196,6 +1209,14 @@ class UsercController extends AppController
         ]);
     }
 
+    public function test()
+    {
+        $uTb =  TableRegistry::get('User');
+        $user = $uTb->get(25);
+        $res = $this->checkApply($user, 10000);
+        debug($res);
+        exit();
+    }
 
     /**
      * 检查兑换
@@ -1205,6 +1226,16 @@ class UsercController extends AppController
      */
     private function checkApply(User $user, $amount)
     {
+        $withdrawTb = TableRegistry::get("Withdraw");
+        if($user->gender == 1) {
+            $invTb = TableRegistry::get('Inviter');
+            $inv = $invTb->find()->select(['total' => 'sum(income)'])->where(['inviter_id' => $user->id]);
+            $with = $withdrawTb->find()->select(['total' => 'sum(amount)'])
+                ->where(['user_id' => $user->id, 'status' => 2]);
+            if(!$with->first()->total || (($inv->first()->total - $with->first()->total) < $amount)) {
+                return [5, '可兑换美币不足']; //美币不足
+            }
+        }
         if ($user->money < $amount) {
             return [5, '美币不足']; //美币不足
         }
@@ -1215,7 +1246,6 @@ class UsercController extends AppController
             return [6, '每次申请兑换不能多于20000美币']; //兑换金额大于20000
         }
         //检查提现情况
-        $withdrawTb = TableRegistry::get("Withdraw");
         $withdraw = $withdrawTb->find()->where(['user_id' => $this->user->id])->orderDesc('create_time')->first();
         if ($withdraw) {
             if ($withdraw->status == 1) {
@@ -1306,7 +1336,9 @@ class UsercController extends AppController
                         $item['visiter']['age'] = isset($item['visiter']['birthday']) ? getAge($item['visiter']['birthday']) : 'xx';
                         //$item['visiter']['isfan'] = (count($item['visiter']['follows']));
                         if($item['visiter']['gender'] == 1) {
-                            $item['visiter']['charm'] = $item['visiter']['recharge'];
+                            $item['visiter']['charm'] = intval($item['visiter']['recharge']);
+                        } else {
+                            $item['visiter']['charm'] = intval($item['visiter']['charm']);
                         }
                         return $item;
                     });
@@ -1340,22 +1372,23 @@ class UsercController extends AppController
      */
     public function checkUserStatus()
     {
-       if($this->user->status==3){
-           return $this->Util->ajaxReturn(true, '审核通过');
-       }else{
-           switch ($this->user->status){
-               case 0:
-                   $msg = '您暂无此权限，认证信息未上传成功。';
-                   break;
-               case 1:
-                   $msg = '您暂无此权限，认证信息正在审核中。';
-                   break;
-               case 2:
-                   $msg = '您暂无此权限，认证信息审核未通过。';
-                   break;
-           }
-           return $this->Util->ajaxReturn(false,$msg);
-       }
+        $this->handCheckLogin();
+        if($this->user->status==3){
+            return $this->Util->ajaxReturn(true, '审核通过');
+        }else{
+            switch ($this->user->status){
+                case 0:
+                    $msg = '您暂无此权限，认证信息未上传成功。';
+                    break;
+                case 1:
+                    $msg = '您暂无此权限，认证信息正在审核中。';
+                    break;
+                case 2:
+                    $msg = '您暂无此权限，认证信息审核未通过。';
+                    break;
+            }
+            return $this->Util->ajaxReturn(false,$msg);
+        }
     }
 
 

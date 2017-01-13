@@ -85,6 +85,7 @@ class IndexController extends AppController {
         }
         $top3 = $query->map(function($row) {
             $row['upackname'] = null;
+            $row['recharge'] = intval($row['recharge']);
             if(count($row['upacks'])) {
                 $upk = $row['upacks'][0];
                 $row['upackname'] = $upk->honour_name;
@@ -136,6 +137,7 @@ class IndexController extends AppController {
         \Cake\Log\Log::debug($query,'devlog');
         $richs = $query->map(function($row) {
             $row['upackname'] = null;
+            $row['recharge'] = intval($row['recharge']);
             if(count($row['upacks'])) {
                 $upk = $row['upacks'][0];
                 $row['upackname'] = $upk->honour_name;

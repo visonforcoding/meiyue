@@ -19,6 +19,8 @@ class SkillController extends AppController
      */
     public function index()
     {
+        /*debug($this->Skill->find('threaded')->order(['order' => 'asc'])->toArray());
+        exit();*/
         $this->set([
             'skills' => $this->Skill->find('threaded')->toArray(),
             'pageTitle' => '技能管理 ',
@@ -28,6 +30,23 @@ class SkillController extends AppController
             ],
         ]);
     }
+
+
+    /**
+     * 修改顺序
+     */
+    public function cpositon() {
+        if ($this->request->is('post')) {
+            $data = $this->request->data;
+            $res = false;
+            if ($res) {
+                $this->Util->ajaxReturn(true, '修改成功');
+            } else {
+                $this->Util->ajaxReturn(false, '修改失败');
+            }
+        }
+    }
+
 
     public function iconView() {
         $this->viewBuilder()->autoLayout(false);

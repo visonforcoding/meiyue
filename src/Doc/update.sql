@@ -775,3 +775,10 @@ ALTER TABLE `lm_user`
 	ALTER `user_token` DROP DEFAULT;
 ALTER TABLE `lm_user`
 	CHANGE COLUMN `user_token` `user_token` VARCHAR(32) NOT NULL COMMENT '用户标志' AFTER `pwd`;
+
+#后台技能管理表
+ALTER TABLE `lm_skill`
+	CHANGE COLUMN `is_shown` `is_shown` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '是否显示在发现页' AFTER `poi_cls`,
+	CHANGE COLUMN `shown_order` `shown_order` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT '在发现页显示顺序，数值越小越靠前' AFTER `is_shown`,
+	CHANGE COLUMN `parent_id` `parent_id` INT(11) NOT NULL DEFAULT '0' COMMENT '上级id' AFTER `shown_order`,
+	ADD COLUMN `order` INT(11) NOT NULL DEFAULT '0' COMMENT '顺序' AFTER `parent_id`;

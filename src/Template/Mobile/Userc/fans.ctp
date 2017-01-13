@@ -29,6 +29,9 @@
         <ul id="fans-list" class="praised_list mt20 bgff">
 
         </ul>
+        <div id="blank-area" class="empty_container">
+
+        </div>
     </div>
 <?php $this->start('script'); ?>
     <script type="text/javascript">
@@ -41,8 +44,9 @@
             Mustache.parse(template);   // optional, speeds up future uses
             url = '/userc/fans/' + page + '.json';
             $.getJSON(url, function (data) {
-                window.holdLoad = false
-                if (data.fans) {
+                window.holdLoad = false;
+                $.util.hidePreloader();
+                if ((data.fans).length) {
                     var rendered = Mustache.render(template, data);
                     if (more) {
                         $('#fans-list').append(rendered);
@@ -54,7 +58,21 @@
                     } else {
                         $('#fans-list').html(rendered);
                     }
-                    $.util.hidePreloader();
+                } else {
+                    $blankStr = '<div class="empty-content  mt350"><span class="empty-ico-box bg-light">' +
+                        '<i class="iconfont empty-ico">&#xe699;</i></span>' +
+                        '<p class="empty-tips">你暂时还没有粉丝，赶快更新动态吧~</p>' +
+                        '<div class="empty-btn inner"><a href="/userc/my-tracle" class="btn btn_t_border">我的动态</a></div></div>';
+                    if(curpage == 1) {
+                        if(1 == <?= $user->gender; ?>) {
+                            $blankStr = '<div class="empty-content  empty-text">' +
+                                '<p class="empty-tips">还没有人赞赏过你<br />快去' +
+                                '<a href="/purse/recharge" class="color_y">充值</a>提升魅力值吧</p></div>';
+                        }
+                    } else {
+                        $blankStr = '<p class="smallarea aligncenter mt60">没有更多数据了</p><br>';
+                    }
+                    $('#blank-area').html($blankStr);
                 }
             });
         }

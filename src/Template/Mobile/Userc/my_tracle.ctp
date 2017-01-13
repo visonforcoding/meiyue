@@ -11,12 +11,14 @@
                     <time>{{create_time}}</time>
                 </h3>
             </div>
-           <div class="color_error"> <i>{{#status_checking}}正在审核{{/status_checking}}{{#status_notpass}}审核不通过{{/status_notpass}}</i></div>
+            <div class="color_error"><i>{{#status_checking}}正在审核{{/status_checking}}{{#status_notpass}}审核不通过{{/status_notpass}}</i>
+            </div>
         </div>
         <div class="con inner">
             <p class="text">{{body}}</p>
             {{#is_pic}}
-            <ul class="piclist_con {{#status_pass}}pic-count{{/status_pass}}" id="imgcontainer_{{id}}" data-index="{{id}}">
+            <ul class="piclist_con {{#status_pass}}pic-count{{/status_pass}}" id="imgcontainer_{{id}}"
+                data-index="{{id}}">
                 {{#images}}
                 <li><img src="{{.}}?w=240" onload="$.util.setWH(this)"/></li>
                 {{/images}}
@@ -24,7 +26,10 @@
             {{/is_pic}}
             {{#is_video}}
             <div class="piclist_con videolist {{#status_pass}}video-count{{/status_pass}} relpotion">
-                <video id="really-cool-video"  class="video-js vjs-default-skin  vjs-16-9" width="100%" height="165px"  poster="{{video_cover}}" controls><source src="{{video}}" type="video/mp4"></video>
+                <video id="really-cool-video" class="video-js vjs-default-skin  vjs-16-9" width="100%" height="165px"
+                       poster="{{video_cover}}" controls>
+                    <source src="{{video}}" type="video/mp4">
+                </video>
             </div>
             {{/is_video}}
         </div>
@@ -33,21 +38,23 @@
                 <span class="tracle_footer_info"><i class="iconfont">&#xe65c;</i>{{view_nums}}</span>
                 <span class="tracle_footer_info praise"><i class="iconfont">&#xe633;</i> {{praise_nums}}</span>
             </div>
-            <div id="del-mv-btn" data-mvtype='{{#is_pic}}1{{/is_pic}}{{#is_video}}2{{/is_video}}' class="{{^status_pass}}cdel{{/status_pass}} tracle_footer_info del" data-id="{{id}}"><i class="iconfont">&#xe650;</i>
+            <div id="del-mv-btn" data-mvtype='{{#is_pic}}1{{/is_pic}}{{#is_video}}2{{/is_video}}'
+                 class="{{^status_pass}}cdel{{/status_pass}} tracle_footer_info del" data-id="{{id}}"><i
+                        class="iconfont">&#xe650;</i>
             </div>
         </div>
     </section>
     {{/movements}}
 </script>
 <?php $this->end('static') ?>
-<?php $this->start('css')?>
+<?php $this->start('css') ?>
 <style>
-     .video-js{
+    .video-js {
         background-color: #000;
-   		padding: 0 .1rem;
+        padding: 0 .1rem;
     }
 </style>
-<?php $this->end('css')?>
+<?php $this->end('css') ?>
 <!-- <header>
     <div class="header">
         <span class="iconfont toback" onclick="history.back();">&#xe602;</span>
@@ -68,7 +75,7 @@
             <span class="iconfont">&#xe6b8;</span>
         </a>
         <div class="submit_ico1 submit_ico" id="submitbtn" data-type='0'>
-            <span>发布<br />动态</span>
+            <span>发布<br/>动态</span>
         </div>
     </div>
 </div>
@@ -87,37 +94,41 @@
     </div>
 </div>
 <script type="text/javascript">
-$('#submitbtn').on('tap', function () {
-    var data = $(this).data('type');
-    switch (data) {
-        case '0':
-            $('#videobtn').removeClass('moveright').addClass('moveleft');
-            $('#picbtn').removeClass('movedown').addClass('moveup');
-            $(this).html('<i class="iconfont">&#xe653;</i>');
-            $(this).attr('data-type', '1');
-            break;
-        case '1':
-            $('#videobtn').removeClass('moveleft').addClass('moveright');
-            $('#picbtn').removeClass('moveup').addClass('movedown');
-            $(this).html('<span>发布<br />动态</span>');
-            $(this).attr('data-type', '0');
-            break;
-        default:
-            break;
-    }
-})
+    $('#submitbtn').on('tap', function () {
+        var data = $(this).data('type');
+        switch (data) {
+            case '0':
+                $('#videobtn').removeClass('moveright').addClass('moveleft');
+                $('#picbtn').removeClass('movedown').addClass('moveup');
+                $(this).html('<i class="iconfont">&#xe653;</i>');
+                $(this).attr('data-type', '1');
+                break;
+            case '1':
+                $('#videobtn').removeClass('moveleft').addClass('moveright');
+                $('#picbtn').removeClass('moveup').addClass('movedown');
+                $(this).html('<span>发布<br />动态</span>');
+                $(this).attr('data-type', '0');
+                break;
+            default:
+                break;
+        }
+    })
 </script>
 
 <script>
     var curpage = 1;
-    $.util.asyLoadData({gurl: '/userc/get-tracle-list/', page: curpage, tpl: '#movement-list-tpl', id: '#tracle-list',
-        key: 'movements', func: calFunc});
+    $.util.asyLoadData({
+        gurl: '/userc/get-tracle-list/', page: curpage, tpl: '#movement-list-tpl', id: '#tracle-list',
+        key: 'movements', func: calFunc
+    });
     setTimeout(function () {
         //滚动加载
         $(window).on("scroll", function () {
             $.util.listScroll('tracle-list', function () {
-                $.util.asyLoadData({gurl: '/tracle/get-tracle-list/', page: curpage,
-                    tpl: '#movement-list-tpl', id: '#tracle-list', more: true, key: 'movements', func: calFunc});
+                $.util.asyLoadData({
+                    gurl: '/tracle/get-tracle-list/', page: curpage,
+                    tpl: '#movement-list-tpl', id: '#tracle-list', more: true, key: 'movements', func: calFunc
+                });
             })
         });
     }, 2000);
@@ -130,12 +141,12 @@ $('#submitbtn').on('tap', function () {
             data.movements[i]['count'] = count;
             if (n.type === 1 || n.type === 3) {
                 data.movements[i]['is_pic'] = true;
-            } else if(n.type === 2 || n.type === 4){
+            } else if (n.type === 2 || n.type === 4) {
                 data.movements[i]['is_video'] = true;
             }
             var movement = data.movements[i];
-            if(movement['images']) {
-                $.each(movement['images'], function(j, m) {
+            if (movement['images']) {
+                $.each(movement['images'], function (j, m) {
                     movement['images'][j] = (movement['images'][j]).replace(/upload/, 'imgs');
                 });
             }
@@ -143,33 +154,33 @@ $('#submitbtn').on('tap', function () {
         })
         return data;
     }
-    $('#videobtn,#picbtn').bind('click',function(event){
+    $('#videobtn,#picbtn').bind('click', function (event) {
         event.preventDefault();
         var url = $(this).attr('href');
         $.util.ajax({
-            url:'/userc/check-user-status',
-            func:function(res){
-                if(!res.status){
+            url: '/userc/check-user-status',
+            func: function (res) {
+                if (!res.status) {
                     $.util.alert(res.msg);
-                }else{
+                } else {
                     document.location.href = url;
                 }
             }
         })
     });
-    $(document).on('tap', '#del-mv-btn', function() {
+    $(document).on('tap', '#del-mv-btn', function () {
         var flag = $(this).hasClass('cdel');
         var type = $(this).data('mvtype');
-        if(!flag) {
+        if (!flag) {
             var video_count = parseInt($('.video-count').length);
             var pic_count = parseInt($('.pic-count').length);
-            if(type == '1') {
-                if(pic_count <= 1) {
+            if (type == '1') {
+                if (pic_count <= 1) {
                     $.util.alert('至少要保留一条图片动态');
                     return;
                 }
-            } else if(type == '2') {
-                if(video_count <= 1) {
+            } else if (type == '2') {
+                if (video_count <= 1) {
                     $.util.alert('至少要保留一条视频动态');
                     return;
                 }
@@ -179,13 +190,13 @@ $('#submitbtn').on('tap', function () {
         $.util.confirm(
             '删除动态',
             '确定要删除此动态吗？',
-            function() {
+            function () {
                 $.util.ajax({
                     url: '/tracle/delete/' + mvid,
                     method: 'POST',
                     func: function (res) {
                         $.util.alert(res.msg);
-                        if(res.status) {
+                        if (res.status) {
                             location.reload();
                         }
                     }
@@ -197,12 +208,12 @@ $('#submitbtn').on('tap', function () {
 
     allMovements = {};
     function storeImgs(objs) {
-        if(objs.length > 0) {
-            objs.forEach(function(e) {
-                if((e.images).length > 0) {
+        if (objs.length > 0) {
+            objs.forEach(function (e) {
+                if ((e.images).length > 0) {
                     handImgs = [];
                     unHandImgs = e.images
-                    unHandImgs.forEach(function(img) {
+                    unHandImgs.forEach(function (img) {
                         handImgs.push(('<?= getHost(); ?>' + img).replace(/\?.*/, ''));
                     });
                     allMovements[e.id] = handImgs;
@@ -211,9 +222,9 @@ $('#submitbtn').on('tap', function () {
         }
     }
 
-    $.util.onbody(function(em, target){
-        if(em.id.indexOf('imgcontainer_') != -1){
-            if(target.nodeName == 'IMG') target = target.parentNode;
+    $.util.onbody(function (em, target) {
+        if (em.id.indexOf('imgcontainer_') != -1) {
+            if (target.nodeName == 'IMG') target = target.parentNode;
             var index = $(em).data('index');
             var curimg = '<?= getHost(); ?>' + ($(target).find('img').attr('src')).replace(/imgs/, 'upload');
             LEMON.event.viewImg(curimg.replace(/\?.*/, ''), allMovements[index]);

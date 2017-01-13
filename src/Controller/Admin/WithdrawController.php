@@ -2,6 +2,7 @@
 namespace App\Controller\Admin;
 
 use Cake\I18n\Time;
+use Cake\ORM\TableRegistry;
 use Wpadmin\Controller\AppController;
 
 /**
@@ -118,8 +119,34 @@ class WithdrawController extends AppController
         $this->request->allowMethod('post');
         $id = $this->request->data('id');
         if ($this->request->is('post')) {
-            $withdraw = $this->Withdraw->get($id);
-            $res = $this->Withdraw->query()->update()->set(['status' => 2, 'deal_time' => (new Time())])->where(['id' => $id])->execute();
+            $withdraw = $this->Withdraw->find()->contain(['User'])->where(['Withdraw.id' => $id])->first();
+            $before = $withdraw->user->money;
+            $withdraw->user->money -= $withdraw->viramount;
+            $withdraw->status = 2;
+            $withdraw->deal_time = (new Time());
+            $FlowTable = TableRegistry::get('Flow');
+            $type = 21; //用户提现
+            $flow = $FlowTable->newEntity([
+                'user_id'=> 0,
+                'buyer_id'=> $withdraw->user->id,
+                'type'=> $type,
+                'type_msg'=> getFlowType($type),
+                'income'=> 1,
+                'relate_id'=> $withdraw->id,
+                'amount'=> $withdraw->viramount,
+                'price'=> $withdraw->viramount,
+                'pre_amount'=> $before,
+                'after_amount'=> $withdraw->user->money,
+                'paytype'=> 1,   //余额支付
+                'remark'=> getFlowType($type).'[折算人民币=]'.$withdraw->amount
+            ]);
+            $withdrawTb = $this->Withdraw;
+            $withdraw->dirty('user', true);
+            $res = $FlowTable->connection()->transactional(function() use($withdrawTb, $withdraw, $FlowTable, $flow){
+                $withres = $withdrawTb->save($withdraw);
+                $flowres = $FlowTable->save($flow);
+                return $withres&&$flowres;
+            });
             if ($res) {
                 $this->Util->ajaxReturn(true,'受理成功');
             } else {
