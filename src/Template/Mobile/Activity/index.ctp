@@ -266,6 +266,8 @@
             var obj = this;
             $.util.loop({
                 tp: 'text', //图片img或是文字text
+                min:10,
+                minp:100,
                 loadImg: true,
                 isInit: true,
                 moveDom: $('#imgBox'),
@@ -275,7 +277,6 @@
                 autoTime: 0,
                 lockScrY: true,
                 //imgInitLazy: 1000,
-                min: 0,
                 index: obj.cur_tab,
                 viewDom: $('.activity_list'),
                 fun: function (index) {
