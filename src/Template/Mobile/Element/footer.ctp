@@ -26,7 +26,7 @@
                 <?php endif; ?>
             </span>
         </li>
-        <li <?php if($active=='chat'): ?>class="chat"<?php endif;?>>
+        <li <?php if($active=='chat'): ?>class="active"<?php endif;?>>
             <span class="bar-chat">
                 <a href="/chat/chat-list">
                     <i class="iconfont">&#xe603;</i>私聊
