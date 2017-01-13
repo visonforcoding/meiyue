@@ -134,6 +134,10 @@ class UserController extends AppController {
             'invite_code' => $this->request->query('ivc')
         ]);
     }
+    
+    public function regChooseSex(){
+        
+    }
 
     /**
      * 用户注册

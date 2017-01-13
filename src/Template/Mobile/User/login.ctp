@@ -15,13 +15,13 @@
     <div class="login_box_btn">
         <a id="submit" class="btn btn_bg_y disabled mt120">登录</a>
         <div class="login_group mt40">
-            <a href="/user/register?gender=1" class="btn btn_bg_t ">注册男</a>
-            <a href="/user/register?gender=2" id="regW" class="btn btn_bg_t">注册女</a>
+            <!--<a href="/user/register?gender=1" class="btn btn_bg_t ">注册男</a>-->
+            <!--<a href="/user/register?gender=2" id="regW" class="btn btn_bg_t">注册女</a>-->
+            <a href="/user/reg-choose-sex" style="width:100%;margin-top:0.1rem" class="btn btn_bg_t mt40">注册</a>
         </div>
-        <!--<a href="regiser.html" class="btn btn_bg_t mt40">注册</a>-->
     </div>
     <div class="outerlogin">
-        <a href="/index/index">逛一逛</a>
+        <a href="/user/reg-check-sex">诳一诳</a>
     </div>
 </div>
 <?= $this->start('script'); ?>
