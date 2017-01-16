@@ -69,8 +69,10 @@ var sessList = [];
 var render;
 var data = {};
 var accids = [];   //列表accid
-var account = LEMON.db.get('im_accid');
-var token = LEMON.db.get('im_token');
+//var account = LEMON.db.get('im_accid');
+var account = '<?=$user->imaccid?>';
+//var token = LEMON.db.get('im_token');
+var token = '<?=$user->imtoken?>';
 var nim = NIM.getInstance({
     debug: true,
     appKey: '<?= $imkey ?>',
