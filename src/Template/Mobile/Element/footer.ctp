@@ -2,7 +2,7 @@
     <ul class="clearfix">
         <li <?php if($active=='find'): ?>class="active"<?php endif;?>>
             <span class="bar-find">
-                <a href="/index/index">
+                <a href="/index/find-list">
                     <i class="iconfont">&#xe613;</i>发现
                 </a>
             </span>
