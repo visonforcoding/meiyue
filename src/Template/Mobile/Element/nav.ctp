@@ -1,5 +1,5 @@
 <nav class="bar bar-tab">
-    <a class="tab-item <?php if($active=='find'): ?>active<?php endif;?>" href="/index/index">
+    <a class="tab-item <?php if($active=='find'): ?>active<?php endif;?>" href="/index/find-list">
         <span class="icon icon-home"></span>
         <span class="tab-label">发现</span>
     </a>
