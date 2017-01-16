@@ -694,9 +694,13 @@ class UserController extends AppController {
             $id = $this->user->id;
         }
         $wektop = $this->Business->getMyTop('week', $id);
-        $wektop->total = intval($wektop->total);
         $montop = $this->Business->getMyTop('month', $id);
-        $montop->total = intval($montop->total);
+        if($wektop) {
+            $wektop->total = intval($wektop->total);
+        }
+        if($montop) {
+            $montop->total = intval($montop->total);
+        }
         $this->set([
             'isme' => $isme,
             'user' => $this->user,
