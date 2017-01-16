@@ -85,7 +85,6 @@
             func: function (res) {
                 console.log(res.users);
                 $.each(res.users, function (i, n) {
-                    alert(n.id);
                     var marker = new AMap.Marker({//添加自定义点标记
                         map: map,
                         position: [n.login_coord_lng, n.login_coord_lat], //基点位置
