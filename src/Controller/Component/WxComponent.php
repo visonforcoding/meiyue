@@ -225,7 +225,6 @@ class WxComponent extends Component {
         ]);
         \Cake\Log\Log::error($res,'devlog');
         if(!$res->isOk()){
-            \Cake\Log\Log::error($res->body(),'devlog');
             return false;
         }else{
             \Cake\Log\Log::info($res->body(),'devlog');
