@@ -24,7 +24,9 @@
 
     </div>
     <div class='fixed-position'>
-        <i class='iconfont'>&#xe69e;</i>
+        <div class='fixed-pic'>
+            <img src="/mobile/images/position.png" alt="">
+        </div>
     </div>
 </div>
 <?= $this->element('footer', ['active' => 'find']) ?>
