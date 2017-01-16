@@ -350,4 +350,8 @@ class TestController extends AppController {
         $res = getCity('天津,天津');
     }
 
+    public function serverName(){
+        debug($this->Util->getServerDomain());
+        exit();
+    }
 }
