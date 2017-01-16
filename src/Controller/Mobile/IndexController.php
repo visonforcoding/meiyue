@@ -46,7 +46,7 @@ class IndexController extends AppController {
                 ->orderDesc('distance')
                 ->limit(10)->formatResults(function($items) {
                     return $items->map(function($item) {
-                                $item['avatar'] = $this->Util->getServerDomain() . createImg($item['avatar']);
+                                $item['avatar'] = $this->Util->getServerDomain() . createImg($item['avatar']).'?w=184&h=184&fit=stretch';
                                 $item['link'] = '/index/homepage/' . $item['id'];
                                 return $item;
                             });
