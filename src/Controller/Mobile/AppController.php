@@ -86,7 +86,7 @@ class AppController extends Controller {
         if ($this->request->is('weixin')) {
             $this->loadComponent('Wx');
             $wxConfig = $this->Wx->wxconfig(['onMenuShareTimeline', 'onMenuShareAppMessage', 'scanQRCode',
-                'chooseImage', 'uploadImage', 'previewImage','getLocation','openLocation'], false);
+                'chooseImage', 'uploadImage', 'previewImage','getLocation','openLocation'], true);
         }
         $isLogin = 'no';
         if ($this->user) {
