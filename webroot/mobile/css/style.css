@@ -1295,6 +1295,9 @@ line-height: 14px;color:#fff;font-size:11px;text-align: center;}
 .agreement_box p{text-align: justify;margin:10px 0;}
 .agreement_box h1{font-size: 17px;color:#000;text-align: center;margin:80px 0 30px;font-weight: bold;}
 .agreement_box .agreement_title{color:#000;font-size: 16px;margin:20px 0;}
+/*h5 定位*/
+.fixed-position{position:absolute;left:0;bottom:.6rem;margin:auto;font-size:26px;color:#666;}
+.fixed-position .iconfont{display:block;padding:.2rem .1rem;}
 *{   
     -webkit-touch-callout:none;  /*系统默认菜单被禁用*/   
     -webkit-user-select:none; /*webkit浏览器*/   
