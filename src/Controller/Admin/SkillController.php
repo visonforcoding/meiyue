@@ -38,7 +38,6 @@ class SkillController extends AppController
      */
     public function recover()
     {
-        $skills = $this->Skill->find('threaded')->orderAsc('lft')->toArray();
         $this->Skill->recover();
         echo '修复完毕，成不成功自己看数据库~~';
         exit();
