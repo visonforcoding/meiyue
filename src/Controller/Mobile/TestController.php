@@ -352,6 +352,7 @@ class TestController extends AppController {
 
     public function serverName(){
         debug($this->Util->getServerDomain());
+        debug($this->request);
         exit();
     }
 }
