@@ -35,7 +35,7 @@ class BusinessComponent extends Component
         $skills = \Cake\Cache\Cache::read('topskill');
         if(!$skills){
             $SkillTable = \Cake\ORM\TableRegistry::get('Skill');
-            $skills = $SkillTable->find()->hydrate(true)->where(['parent_id'=>0])->toArray();
+            $skills = $SkillTable->find()->hydrate(true)->where(['parent_id IS' => null])->toArray();
             if($skills){
                 \Cake\Cache\Cache::write('topskill',$skills);
             } 

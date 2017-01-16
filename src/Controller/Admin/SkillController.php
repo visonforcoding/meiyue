@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Admin;
 
+use Aura\Intl\Exception;
 use Wpadmin\Controller\AppController;
 
 /**
@@ -22,7 +23,7 @@ class SkillController extends AppController
         /*debug($this->Skill->find('threaded')->order(['order' => 'asc'])->toArray());
         exit();*/
         $this->set([
-            'skills' => $this->Skill->find('threaded')->toArray(),
+            'skills' => $this->Skill->find('threaded')->orderAsc('lft')->toArray(),
             'pageTitle' => '技能管理 ',
             'bread' => [
                 'first' => ['name' => '基础管理'],
@@ -33,12 +34,37 @@ class SkillController extends AppController
 
 
     /**
-     * 修改顺序
+     * 后台技能表树结构修复
      */
-    public function cpositon() {
+    public function recover()
+    {
+        $skills = $this->Skill->find('threaded')->orderAsc('lft')->toArray();
+        $this->Skill->recover();
+        echo '修复完毕，成不成功自己看数据库~~';
+        exit();
+    }
+
+
+    /**
+     * 节点上下移动
+     */
+    public function move()
+    {
         if ($this->request->is('post')) {
             $data = $this->request->data;
+            $action = $data['act'];
+            $nodeid = $data['node'];
             $res = false;
+            $node = null;
+            try {
+                $node = $this->Skill->get($nodeid);
+                if('up' == $action) {
+                    $res = $this->Skill->moveUp($node);
+                } else {
+                    $res = $this->Skill->moveDown($node);
+                }
+            } catch (Exception $e) {
+            }
             if ($res) {
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
@@ -74,7 +100,7 @@ class SkillController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add($parent_id)
+    public function add($parent_id = null)
     {
         $skill = $this->Skill->newEntity();
         $skill->parent_id = $parent_id;

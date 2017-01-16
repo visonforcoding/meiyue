@@ -7,6 +7,7 @@
         <!--内容-->
         <div class="choose_mark_con inner">
             <?php foreach ($skills as $skill): ?>
+                <?php if(count($skill->children) > 0): ?>
                 <div class="choose_mark__items">
                     <h3 class="commontitle mt20 "><?= $skill->name ?></h3>
                     <ul class="bgff">
@@ -20,6 +21,7 @@
                         <?php endforeach; ?>
                     </ul>
                 </div>
+                <?php endif; ?>
             <?php endforeach; ?>
         </div>
     </div>

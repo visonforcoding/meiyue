@@ -544,7 +544,9 @@ class ActivityController extends AppController
             if ($user) {
                 if ($user->gender == 2) {
                     $mytop = $this->Business->getMyTop($type, $this->user->id);
-                    $mytop->total = intval($mytop->total);
+                    if($mytop) {
+                        $mytop->total = intval($mytop->total);
+                    }
                 }
             }
             return $this->Util->ajaxReturn(['datas' => $tops, 'mydata' => $mytop, 'status' => true]);
