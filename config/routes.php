@@ -53,8 +53,8 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->extensions(['json', 'xml', 'shtml']);
     //子域名模式
     $subdomain = substr(env('HTTP_HOST'), 0, strpos(env('HTTP_HOST'), '.'));
-    if (in_array($subdomain, ['admin', 'm','m-my','admin-my','api'])) {
-        if(in_array($subdomain,['m-my','m','api'])){
+    if (in_array($subdomain, ['admin', 'm','m-my','admin-my','api','api-my'])) {
+        if(in_array($subdomain,['m-my','m','api','api-my'])){
             $subdomain = 'mobile';
         }
         if(in_array($subdomain,['admin','admin-my'])){
@@ -76,7 +76,7 @@ Router::scope('/', function (RouteBuilder $routes) {
         $routes->connect('/group/edit', ['plugin' => 'wpadmin', 'controller' => 'group', 'action' => 'edit']);
         $routes->connect('/actionlog/index', ['plugin' => 'wpadmin', 'controller' => 'actionlog', 'action' => 'index']);
         $routes->connect('/admin/', ['plugin' => 'wpadmin', 'controller' => 'index', 'action' => 'index']);
-        $routes->connect('/', ['plugin' => 'wpadmin', 'controller' => 'index', 'action' => 'index']);
+        $routes->connect('/', ['plugin' => 'wpadmin', 'controller' => 'index', 'action' => 'find-list']);
     }
     //上传
     $routes->connect('/do-upload/*', ['plugin' => 'wpadmin', 'controller' => 'util', 'action' => 'doUpload']);
