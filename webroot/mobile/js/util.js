@@ -718,7 +718,7 @@ $.util = {
         var param = {};
         param['accid'] = res.obj.imaccid;
         if(!$.util.isAPP){
-            window.location.href = '/chat/chat-detail/'+res.obj.imaccid;
+            window.location.href = '/chat/chat-detail/'+res.imaccid;
             return;
         }
         param['nick'] = res.obj.nick;
