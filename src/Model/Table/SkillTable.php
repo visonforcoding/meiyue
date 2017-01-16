@@ -43,6 +43,8 @@ class SkillTable extends Table
             'className' => 'Skills',
             'foreignKey' => 'parent_id'
         ]);
+
+        $this->addBehavior("Tree");
     }
 
     /**

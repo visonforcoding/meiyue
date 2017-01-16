@@ -33,7 +33,7 @@ class DateCell extends Cell
     public function adminSkillsView()
     {
         $SkillTable = \Cake\ORM\TableRegistry::get('Skill');
-        $skills = $SkillTable->find('threaded')->toArray();
+        $skills = $SkillTable->find('threaded')->orderAsc('lft')->toArray();
         $this->set([
             'skills'=>$skills
         ]);
@@ -102,7 +102,7 @@ class DateCell extends Cell
         $skills = \Cake\Cache\Cache::read('topskill');
         if(!$skills){
             $SkillTable = \Cake\ORM\TableRegistry::get('Skill');
-            $skills = $SkillTable->find()->hydrate(true)->where(['parent_id'=>0])->toArray();
+            $skills = $SkillTable->find()->hydrate(true)->where(['parent_id IS'=> null])->toArray();
             if($skills){
                 \Cake\Cache\Cache::write('topskill',$skills);
             }

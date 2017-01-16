@@ -5,7 +5,7 @@
     <div class="panel-body" style="height:500px;overflow-x:hidden;overflow-y:scroll">
         <table id="list"></table>
         <ul class="tree treeview">
-            <li><a href="/skill/add/0" class="add tree-plus" data-id="0"><i class="icon icon-plus-sign"></i></a></li>
+            <li><a href="/skill/add/null" class="add tree-plus" data-id="0"><i class="icon icon-plus-sign"></i></a></li>
             <?php
                 $count = 0;
                 $bmax = count($skills);
@@ -21,10 +21,10 @@
                     <?php endif; ?>
                     <a href="/skill/edit/<?= $item->id ?>" class="edit"><i class="icon icon-pencil"></i></a>
                     <?php if(($count > 1) && ($bmax > 1)): ?>
-                        <a class="up" data-id="<?= $item->id ?>"><i class="icon icon-arrow-up"></i></a>
+                        <a class="up" data-id="<?= $item->id ?>"><i class="icon icon-arrow-up" style="color: orange"></i></a>
                     <?php endif; ?>
                     <?php if(($count < $bmax) && ($bmax > 1)): ?>
-                        <a class="down" data-id="<?= $item->id ?>"><i class="icon icon-arrow-down"></i></a>
+                        <a class="down" data-id="<?= $item->id ?>"><i class="icon icon-arrow-down" style="color: orange"></i></a>
                     <?php endif; ?>
                 </li>
                 <?php if ($item->children): ?>
@@ -41,10 +41,10 @@
                                 <a class="del" data-id="<?= $i->id ?>"><i
                                             class="icon icon-trash"></i></a>
                                 <?php if(($scount > 1) && ($smax > 1)): ?>
-                                    <a class="up" data-id="<?= $i->id ?>"><i class="icon icon-arrow-up"></i></a>
+                                    <a class="up" data-id="<?= $i->id ?>"><i class="icon icon-arrow-up" style="color: orange"></i></a>
                                 <?php endif; ?>
                                 <?php if(($scount < $smax) && ($smax > 1)): ?>
-                                    <a class="down" data-id="<?= $i->id ?>"><i class="icon icon-arrow-down"></i></a>
+                                    <a class="down" data-id="<?= $i->id ?>"><i class="icon icon-arrow-down" style="color: orange"></i></a>
                                 <?php endif; ?>
                             </li>
                         <?php endforeach; ?>
@@ -82,10 +82,10 @@
         $('.up').click(function () {
             var id = $(this).data('id');
             $.ajax({
-                type: 'post',
-                data: {id: id, action: 'up'},
+                type: 'POST',
+                data: {node: id, act: 'up'},
                 dataType: 'json',
-                url: '/skill/cpositon',
+                url: '/skill/move',
                 success: function (res) {
                     layer.msg(res.msg);
                     if (res.status) {
@@ -98,10 +98,10 @@
         $('.down').click(function () {
             var id = $(this).data('id');
             $.ajax({
-                type: 'post',
-                data: {id: id, action: 'down'},
+                type: 'POST',
+                data: {node: id, act: 'down'},
                 dataType: 'json',
-                url: '/skill/cpositon',
+                url: '/skill/move',
                 success: function (res) {
                     layer.msg(res.msg);
                     if (res.status) {
