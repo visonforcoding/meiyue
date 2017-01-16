@@ -23,6 +23,9 @@
     <div id="map_canvas">
 
     </div>
+    <div class='fixed-position'>
+        <i class='iconfont'>&#xe69e;</i>
+    </div>
 </div>
 <?= $this->element('footer', ['active' => 'find']) ?>
 <?php $this->start('script'); ?>
