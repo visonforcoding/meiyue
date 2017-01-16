@@ -166,8 +166,7 @@ class ApiController extends AppController {
         $wxconfig = \Cake\Core\Configure::read('weixin');
         $master_ip = $wxconfig['master_ip'];
         $master_domain = $wxconfig['master_domain'];
-        if ($this->request->env('SERVER_ADDR') != $master_ip ||
-                $this->request->env('SERVER_NAME') != $master_domain) {
+        if ($this->request->env('SERVER_ADDR') != $master_ip ) {
             //非中控服务器请求 保证中控服务器才能进行本地的获取 
             \Cake\Log\Log::notice('非中控请求调取接口:SERVER_NAME:'.$this->request->env('SERVER_NAME'), 'devlog');
             \Cake\Log\Log::notice('非中控请求调取接口:SERVER_ADDR:'.$this->request->env('SERVER_ADDR'), 'devlog');

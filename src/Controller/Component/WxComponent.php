@@ -154,8 +154,7 @@ class WxComponent extends Component {
         \Cake\Log\Log::notice('获取普通accessToken','devlog');
         $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
         if($this->wxconfig['master_model']){
-            if($this->request->env('SERVER_ADDR')!=$this->master_ip||
-                    $this->request->env('SERVER_NAME')!=$this->master_domain){
+            if($this->request->env('SERVER_ADDR')!=$this->master_ip){
                 //非中控服务器请求
                 \Cake\Log\Log::notice('中控请求','devlog');
                 return $this->handMasterRequest();
