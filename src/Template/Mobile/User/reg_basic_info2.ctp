@@ -44,7 +44,7 @@
                     <h3><i class="iconfont color_y">&#xe604;</i>我的真人脸部识别</h3>
                     <div class="con">
                         <div class="up_identify_box">
-                            <p class="color_error">请对准手机屏幕：1.露齿笑，2.左转头，3.右转头</p>
+                            <p class="color_error" style="font-size:15px;">请对准手机屏幕：1.露齿笑，2.左转头，3.右转头</p>
                             <div class="fact_identify mt40"   style="display: none;">
                               <div class="home_pic_info" style='padding:0;'>
                                 <div class="home_video relpotion flex flex_center">
@@ -65,7 +65,7 @@
 <?= $this->start('script'); ?>
 <script>
     var user_id = <?= $user->id ?>;
-    $.util.chooseAuthVideo('auth_video', '注意依次做以下动作：点头，露齿笑，往左转头，举右手');
+    $.util.chooseAuthVideo('auth_video', '请对准手机屏幕：1.露齿笑，2.左转头，3.右转头');
     LEMON.sys.setTopRight('下一步');
     window.onTopRight = function () {
         $.util.showPreloader();

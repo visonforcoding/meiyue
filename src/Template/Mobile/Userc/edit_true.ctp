@@ -38,7 +38,7 @@
                         <h3><i class="iconfont color_y">&#xe604;</i>我的认证视频</h3>
                         <div class="con">
                             <div class="up_identify_box">
-                                <p class="smallarea">请对准手机屏幕：1.露齿笑，2.左转头，3.右转头</p>
+                                <p class="smallarea" style="font-size:15px;">请对准手机屏幕：1.露齿笑，2.左转头，3.右转头</p>
                                 <div id="auth_video" class="btn btn_dark_t mt40">点击录制</div>
                                 <div class="fact_identify mt40"   style="display: none;">
                                     <dl  class="Idcard personimg">
@@ -82,7 +82,7 @@
 <?= $this->start('script'); ?>
 <script>
     var user_id = <?= $user->id ?>;
-    $.util.chooseAuthVideo('auth_video', '注意依次做以下动作：点头，露齿笑，往左转头，举右手');
+    $.util.chooseAuthVideo('auth_video', '请对准手机屏幕：1.露齿笑，2.左转头，3.右转头');
     $('#submit').on('click', function() {
         $.util.showPreloader();
         if ($('#auth_video').data('choosed'))
