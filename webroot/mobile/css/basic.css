@@ -157,7 +157,7 @@ table,tbody,tr,td,th,thead,tfoot{border:1px #e5e5e5 solid;}
 .fullscreen{position:absolute;right:0;left:0;bottom:47px;top:1rem;}
 .fullwraper{position:absolute;top:0;bottom:0;width:100%;max-width:750px;height:100%;}
 .inner{padding:0 .3rem;}
-.innercon{padding:0 .2rem;}
+.innercon{padding:0 .1rem;}
 input::-webkit-input-placeholder,textarea::-webkit-input-placeholder  { /* WebKit browsers */ color: #dadada;} 
 .ablock{display: block;}
 /*限制一行*/

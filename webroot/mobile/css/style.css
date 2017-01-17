@@ -366,7 +366,15 @@ border-radius:0 20px 20px 0;margin-top:3px;}
 .bottomblock .entroll-btn{width:50%;display: block;height:45px;line-height: 45px;text-align: center;}
 .bottomblock .entroll-btn .cancelbtn{color:#EAB96A;}
 .diamonds{display:inline-block;width:.25rem;height:.25rem;margin-left:.05rem;}
-.highter-vip{display:inline-block;padding:0.012rem .03rem;margin-left:.05rem;background: #F1CC7B;font-size: 10px;background:-webkit-linear-gradient(top,#e7c184,#cf9f62);background: linear-gradient(top,#e7c184,#cf9f62);color:#fff;vertical-align:middle;border-radius: 2px;}
+.highter-vip{display:inline-block;padding:0.012rem .03rem;margin-left:.05rem;font-size: 10px;background:-webkit-linear-gradient(top,#eac487,#cb9b5e);background: linear-gradient(top,#eac487,#cb9b5e);color:#fff;vertical-align:middle;border-radius: 2px;}
+/*VIP 普通*/
+.highter-common{background:-webkit-linear-gradient(top,#eac487,#cb9b5e);background: linear-gradient(top,#eac487,#cb9b5e);}
+/*VIP 黄金*/
+.highter-gold{background:-webkit-linear-gradient(top,#ffbf16,#fcb003);background: linear-gradient(top,#ffbf16,#fcb003);}
+/*VIP 白金*/
+.highter-plat{background:-webkit-linear-gradient(top,#fb9703,#f87604);background: linear-gradient(top,#fb9703,#f87604);}
+/*VIP 钻石*/
+.highter-diamonds{background:-webkit-linear-gradient(top,#ea4e33,#c71b09);background: linear-gradient(top,#ea4e33,#c71b09);}
 @media (min-width: 320px) and (max-width: 374px) {
 	.date_detail_place .place_info .userinfo{margin-bottom:.5rem;}
 }
@@ -455,9 +463,9 @@ color:#444;position:relative;padding:0 .15rem;margin-right:.1rem;font-size: 13px
 .navbar a{color:#eab96a;display: block;width:1.2rem;height:28px;line-height: 28px;background: #221f1d;text-align: center;border-radius: 2px;opacity: .8;}
 .navbar .current a{background:#eab96a; color:#fff;}
 .find_list_box{overflow: hidden;padding-top:2.4rem;}
-.find_list_box dl{width:3.45rem;float:left;margin-right:.2rem;margin-top:.3rem;}
+.find_list_box dl{width:3.6rem;float:left;margin-right:.1rem;margin-top:.1rem;}
 .find_list_box dl:nth-of-type(2n){margin-right:0;}
-.find_list_box dt{width:3.45rem;height:3.33rem;overflow: hidden;position: relative;box-shadow: 0 0 1px rgba(0,0,0,.1);border-radius: 3px;}
+.find_list_box dt{width:3.6rem;height:3.47rem;overflow: hidden;position: relative;box-shadow: 0 0 1px rgba(0,0,0,.1);border-radius: 3px;}
 .find_list_box dt img{height:100%;width:100%;display:block;}
 .find_list_box dt h1{width:100%;height:21px;bottom:0;position: absolute;background: rgba(234,185,106,.8);border-radius: 0 0 3px 3px;font-size:12px;
 color:#fff; line-height: 20px;padding-right: .1rem;}
@@ -507,6 +515,7 @@ color:#fff; line-height: 20px;padding-right: .1rem;}
 .home_page_basic .commend .total{margin-left:.1rem;}
 .hot{width:.2rem;height:.27rem;overflow: hidden;display: inline-block;}
 .vip{width:1.07rem;height:.3rem;overflow: hidden;display: inline-block;}
+.viper{width:.89rem;height:.25rem;overflow: hidden;display: inline-block;}
 /*.home_basic_ability{background: #fff;padding:.3rem 0 0;}*/
 .home_pic_info ul{overflow: hidden;}
 .home_pic_info li{width:1.6rem;height:1.6rem;border-radius: 5px;overflow: hidden;margin-right:.16rem;}
@@ -1072,15 +1081,16 @@ color:#999;padding:.1rem;}
 .cover_left_info .price{width:100%;font-size: 12px;color:#EAB96A;}
 .charge_container_list .con{background: #fff;height:45px;width:100%;}
 .charge_container_list .con input{text-align: right;}
-.charge_container_con{background: #fff;padding:.4rem .3rem;}
+.charge_container_con{background: #fff;padding:.3rem;}
 .charge_container_con .rco{font-size: 15px;margin-left:.1rem;}
-.charge_container_con .title{margin-bottom:.4rem;}
+.charge_container_con .title{margin-bottom:.3rem;}
 .charge_container_con .items{background: #fffeee;border:1px #eab96a solid;height:60px;border-radius: 5px;padding:0 .1rem;}
 .charge-package .items{height:70px;width:1.64rem;padding:0;background: #fff;border:1px #f7e4c6 solid;}
 .charge-package .items.active{background:#fffeee;border:1px #eab96a solid;}
 .charge-package .items .price{margin-top:.1rem;}
 .charge-package .items .unit{margin-left:.05rem;}
 .charge_container_con .commontext{/*padding-right:.2rem;*/text-align: center;width:110px;}
+.charge_container_con .commontext .lagernum{font-size: 16px;}
 .charge_container_con .items .unit{font-size:12px;}
 .charge_container_con .bright{border-right:1px dotted #EAB96A;height:60px;line-height: 58px;}
 .charge_container_con .high-vip{width:1.2rem;height:.36rem;overflow: hidden;display: inline-block;vertical-align: middle;}
@@ -1089,7 +1099,8 @@ color:#999;padding:.1rem;}
 .charge_container_con .hidecon{-webkit-transition: max-height .2s ease-in-out;max-height:0;}
 .charge_container_con .showcon{-webkit-transition: max-height .2s ease-in-out;max-height:999px;}
 .charge_container_con .content h1{line-height: 40px;/*margin-bottom:5px;*/}
-.charge_container_con li{padding:.2rem 0;}
+.charge_container_con li{/*padding:.15rem 0;*/ padding-bottom:.3rem;}
+.charge_container_con li:last-of-type{padding-bottom:0;}
 .charge_container_con .content h1 .color_friends{margin-left:.1rem;}
 .charge_container_con .content p .iconfont{font-size: 15px;margin-right: .1rem;}
 .charge_container_con .content p{font-size: 12px;line-height: 22px;}
