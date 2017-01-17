@@ -23,6 +23,7 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property string $avatar
  * @property float $money
  * @property int $status
+ * @property float $recharge
  * @property bool $enabled
  * @property bool $is_del
  * @property string $device

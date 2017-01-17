@@ -43,22 +43,21 @@ class UserController extends AppController {
             return $this->render('nologin');
         }
         $template = 'index';
-        $pack = null;
+        $pack = $this->Business->getVIP($this->user);
         if ($this->user->gender == 1) {
             $template = 'home_m';
-            $packTb = TableRegistry::get('UserPackage');
+            /*$packTb = TableRegistry::get('UserPackage');
             $pack = $packTb->find()->where([
                 'OR' => [
                     'rest_chat >' => 0,
                     'rest_browse >' =>0
                 ],
                 'deadline >=' => new Time()
-            ])->orderDesc('cost')->first();
+            ])->orderDesc('cost')->first();*/
         }
         $fanTb = TableRegistry::get('UserFans');
         $fans = $fanTb->find()->where(['following_id' => $this->user->id])->count();
         $followers = $fanTb->find()->where(['user_id' => $this->user->id])->count();
-
         $this->set([
             'facount' => $fans,
             'focount' => $followers,
@@ -322,7 +321,7 @@ class UserController extends AppController {
         }
         $this->set([
             'user'=>$user,
-            'pageTitle' => '真人视频认证'
+            'pageTitle' => '真人脸部识别'
         ]);
     }
 

@@ -77,8 +77,10 @@
                                               onclick="location.href='/user/male-homepage/<?= $top->id; ?>'"><img
                                                     src="<?= $top->avatar ?>"/></span>
                                         <h3>
-                                            <span class="voted_name"><?= $top->nick ?></span><?php if (isset($upackname)): ?>
-                                                <span class="highter-vip"><?= $upackname; ?></span><?php endif; ?>
+                                            <div class="flex">
+                                                <span class="voted_name"><?= $top->nick ?></span><?php if ($top->upackname): ?>
+                                                <span class="highter-vip"><?= $top->  upackname; ?></span><?php endif; ?>
+                                            </div>
                                             <span class="voted_number color_gray">已消费：<?= $top->total ?>美币</span>
                                         </h3>
                                     </div>

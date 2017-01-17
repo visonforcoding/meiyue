@@ -16,10 +16,14 @@
                                 <h3 class='flex'>
                             <span>
                                 <?= $user->nick ?></span><span class="hot"><img src="/mobile/images/hot.png"
-                                                                                class="responseimg"/></span><?php if ($user->recharge): ?>
+                                                                                class="responseimg"/></span>
+                                <?php if ($user->recharge): ?>
                                         <span class="diamonds"><img src="/mobile/images/zs.png"
-                                                                    class="responseimg"/></span><?php endif; ?><?php if (isset($pack)): ?>
-                                        <span class="highter-vip"><?= isset($pack->honour_name)?$pack->honour_name:$pack->title; ?></span><?php endif; ?> </h3>
+                                                                    class="responseimg"/></span><?php endif; ?>
+                                <?php if ($pack != VIPlevel::NOT_VIP): ?>
+                                    <span class="highter-vip"><?= VIPlevel::getStr($pack);?></span>
+                                <?php endif; ?>
+                                </h3>
                                 <?php if ($user->id_status == UserStatus::PASS): ?>
                                     <div class="bottom-btn">
                                         <span class="identify-info id-btn">身份已认证</span>

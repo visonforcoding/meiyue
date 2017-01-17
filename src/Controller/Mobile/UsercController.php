@@ -1324,9 +1324,19 @@ class UsercController extends AppController
     public function visitors($page = null)
     {
         $this->handCheckLogin();
+        $isvip = false;
+        $visitnum = 0;
+        $visitorTb = TableRegistry::get('Visitor');
+        if($this->Business->getVIP($this->user) != \VIPlevel::NOT_VIP) {
+            $isvip = true;
+        } else {
+            $visitnum = $visitorTb->find()->where(['visited_id' => $this->user->id])->count();
+        }
         if ($this->request->is('json')) {
+            if(!$isvip) {
+                return $this->Util->ajaxReturn(['visitors' => []]);
+            }
             $limit = 10;
-            $visitorTb = TableRegistry::get('Visitor');
             $visitors = $visitorTb->find()->hydrate(false)->contain([
                 'Visiter' => function ($q) {
                     return $q->select(['id', 'birthday', 'avatar', 'nick', 'recharge', 'consumed', 'charm', 'gender']);
@@ -1354,6 +1364,8 @@ class UsercController extends AppController
         }
         $this->set([
             'user' => $this->user,
+            'isvip' => $isvip,
+            'visitnum' => $visitnum,
             'pageTitle' => '我的访客'
         ]);
     }

@@ -151,20 +151,20 @@
                 <div  class="img-thumbnail input-img"  single>
                     <img  alt="请上传宽为690，高小于388的封面图" src=""/>
                 </div>
-                <!--<div style="color:red">请上传宽为690，高小于388的封面图</div>-->
+                <div style="color:red">请上传750*450比例的图片</div>
                 <input name="big_img" value="" type="hidden"/>
                 <div id="big_img" w="690" h="388" class="jqupload">上传</div>
                 <span class="notice">支持格式jpg,png,jpeg</span>
             </div>
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
             <label class="col-md-2 control-label">广告语</label>
             <div class="col-md-8">
                 <?php
-                echo $this->Form->input('ad', ['label' => false, 'class' => 'form-control']);
-                ?>
+/*                echo $this->Form->input('ad', ['label' => false, 'class' => 'form-control']);
+                */?>
             </div>
-        </div>
+        </div>-->
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...'/>

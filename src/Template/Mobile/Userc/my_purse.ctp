@@ -16,7 +16,9 @@
                     <span class="numbers"><i><?= $user->money ?></i>美币</span>
                 </h3>
             </div>
-            <div><p class="smallarea aligncenter moneycharge">可兑换余额<?= ($user->gender == 1)?$canTixian: $user->money;?>美币</p></div>
+            <?php if(($user->gender == 1) && ($canTixian > 0)): ?>
+            <div><p class="smallarea aligncenter moneycharge">可兑换余额<?= ($user->gender == 1)?$canTixian: 0;?>美币</p></div>
+            <?php endif; ?>
         </div>
 
         <div class="purse_list_bottom">
