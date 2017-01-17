@@ -221,7 +221,10 @@ class AppController extends Controller {
      */
     protected function wxBaseLogin() {
         if (!$this->request->is(['ajax', 'post'])) {
-            if ($this->request->isWeixin() && empty($this->user) && !$this->request->session()->check('Login.wxbase')) {
+            if($this->user){
+                return false;
+            }
+            if ($this->request->isWeixin()  && !$this->request->session()->check('Login.wxbase')) {
                 if ($this->request->query('code')) {
                     //若是来自于微信的回传
                     $this->loadComponent('Wx');
