@@ -22,7 +22,7 @@
         <div class="identity_audit_pass">
             <i class='iconfont color_error'>&#xe61a;</i>
             <h3 class="jump_tipscon">审核不通过!</h3>
-            <p class="audit_des">手持身份证的照片不够清晰，请重新拍照然后上传。集奥思路打法骄傲的解放路卡斯加发撒的金风科技。</p>
+            <p class="audit_des">您的真人脸部识别视频可能模糊、遮挡等看不清本人；或不按系统指定动作录制；或使用他人假冒。请重新认证。</p>
         </div>
     <?php elseif ($user->auth_status == UserStatus::CHECKING): ?>
         <div class="identity_audit_pass">
