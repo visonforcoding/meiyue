@@ -29,7 +29,7 @@
     <form>
         <div class="identify_img_ifo">
             <ul class="inner">
-                <li class="clearfix">
+                <li class="clearfix" id="avatar_img_btn">
                     <span class="fl">头 像</span>
                     <div class="iden_r_box fr">
                         <div class="iden_r_pic">
@@ -325,7 +325,7 @@ use Cake\I18n\Date; ?>
             });
         }
     }
-    $('#avatar_img').on('tap', function () {
+    $('#avatar_img_btn').on('tap', function () {
         //点击选择图片
         //alert('点击了图片上传');
         if ($.util.isAPP) {

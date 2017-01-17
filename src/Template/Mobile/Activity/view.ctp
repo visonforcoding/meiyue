@@ -104,4 +104,18 @@
     function topay() {
         $.util.checkLogin('/activity/pay-view/<?= $activity['id']; ?>');
     }
+
+    LEMON.sys.setTopRight('分享');
+    window.onTopRight = function () {
+        shareBanner();
+    };
+    function shareBanner() {
+        window.shareConfig.link = '<?= getHost().'/activity/view/'.$activity['id']; ?><?= isset($user)?'?ivc='.$user->invit_code:'';?>';
+        window.shareConfig.title = '<?= $activity['title'] ?>';
+        window.shareConfig.imgUrl = '<?= getHost().$activity['big_img']; ?>';
+        var share_desc = '<?= isset($activity['share_desc'])?$activity['share_desc']:''; ?>';
+        share_desc && (window.shareConfig.desc = share_desc);
+        LEMON.show.shareBanner();
+    }
+    $.util.checkShare();
 </script>
