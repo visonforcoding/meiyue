@@ -157,6 +157,14 @@
                 <span class="notice">支持格式jpg,png,jpeg</span>
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">分享描述</label>
+            <div class="col-md-8">
+                <?php
+                echo $this->Form->input('share_desc', ['label' => false, 'class' => 'form-control', 'type' => 'textarea']);
+                ?>
+            </div>
+        </div>
         <!--<div class="form-group">
             <label class="col-md-2 control-label">广告语</label>
             <div class="col-md-8">

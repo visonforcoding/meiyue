@@ -34,12 +34,12 @@
                     <div class='color_y aligncenter price'>￥200</div>
                 </div>
             </li>
-             <li class='items flex flex_center' onclick="quickPay(400);">
+             <li class='items flex flex_center' onclick="quickPay(500);">
                 <div>
                     <h3 class='color_friends'>
-                        <span class='lagernum'>400</span><i class='unit'>美币</i>
+                        <span class='lagernum'>500</span><i class='unit'>美币</i>
                     </h3>
-                    <div class='color_y aligncenter price'>￥400</div>
+                    <div class='color_y aligncenter price'>￥500</div>
                 </div>
             </li>
              <li class='items flex flex_center' onclick="quickPay(1000);">

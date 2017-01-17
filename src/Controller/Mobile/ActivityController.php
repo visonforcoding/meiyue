@@ -669,6 +669,7 @@ class ActivityController extends AppController
             $title = $carousel->title;
         }
         $this->set([
+            'user' => $this->user,
             'carousel' => $carousel,
             'pageTitle' => $title
         ]);

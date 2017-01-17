@@ -94,6 +94,19 @@
         history.back();
     })
 
+    LEMON.sys.setTopRight('分享');
+    window.onTopRight = function () {
+        shareBanner();
+    };
+    function shareBanner() {
+        window.shareConfig.link = '<?= getHost().'/date-order/join/'.$date['id']; ?><?= isset($user)?'?ivc='.$user->invit_code:'';?>';
+        window.shareConfig.title = '<?= $date['title'] ?>';
+        window.shareConfig.imgUrl = '<?= getHost().$date['user']['avatar']; ?>';
+        var share_desc = '<?= isset($date['share_desc'])?$date['share_desc']:''; ?>';
+        share_desc && (window.shareConfig.desc = share_desc);
+        LEMON.show.shareBanner();
+    }
+    $.util.checkShare();
 
     $('#order_pay').on('tap',function(){
         var dom = $(this);

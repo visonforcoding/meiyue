@@ -48,8 +48,8 @@
 <script>
     function shareBanner() {
         window.shareConfig.link = '<?= getHost().'/user/login'; ?><?= isset($user)?'?ivc='.$user->invit_code:'';?>';
-        window.shareConfig.title = '我刚注册成为【美约APP】用户，你也一起来加入吧！';
-        window.shareConfig.desc = '美约APP，全网实名信息认证，同城真实高端社交新选择！';
+        window.shareConfig.title = '美约-精选生活新方式，汇聚精英社交圈';
+        window.shareConfig.desc = '点击立即下载注册';
         LEMON.show.shareBanner();
     }
 </script>
