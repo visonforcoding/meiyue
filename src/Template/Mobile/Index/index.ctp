@@ -5,7 +5,7 @@
         overflow: hidden;
         position: absolute;
         top: 1rem;
-        bottom: 67px;
+        bottom: 50px;
         width:100%;
         max-width:750px;
     }
@@ -63,7 +63,7 @@
                 var lng = res.longitude; // 经度，浮点数，范围为180 ~ -180。
                 var speed = res.speed; // 速度，以米/每秒计
                 var accuracy = res.accuracy; // 位置精度
-                map.setZoomAndCenter(14, [lng, lat]);
+                map.setZoomAndCenter(16, [lng, lat]);
                 // 在新中心点添加 marker 
                 var marker = new AMap.Marker({
                     map: map,
@@ -104,9 +104,5 @@
             }
         });
     }
-    $(document).on('click','.user-marker',function(e){
-        e.preventDefault();
-        alert('test');
-    });
 </script>
 <?php $this->end('script'); ?>
