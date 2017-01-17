@@ -21,7 +21,7 @@
             <div class="identity_audit_pass">
                 <i class='iconfont color_error'>&#xe61a;</i>
                 <h3 class="jump_tipscon">审核不通过!</h3>
-                <p class="audit_des">手持身份证的照片不够清晰，请重新拍照然后上传。集奥思路打法骄傲的解放路卡斯加发撒的金风科技。</p>
+                <p class="audit_des">您的身份证照片可能模糊、遮挡等看不清；或没有参照示例上传；或使用他人照片。请重新上传清晰的本人照片。</p>
             </div>
         <?php elseif($user->id_status == UserStatus::CHECKING): ?>
             <div class="identity_audit_pass">

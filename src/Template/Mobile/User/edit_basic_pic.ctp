@@ -5,7 +5,7 @@
     </div>
 </header> -->
 <div class="wraper">
-    <div class="up_identify_box bgff mt40">
+    <div class="up_identify_box bgff">
         <?php if (!($user->images) || !($user->video)): ?>
             <div class="inner">
                 <div class="upload_more_title">
@@ -29,7 +29,9 @@
             <div class="identity_audit_pass">
                 <i class='iconfont color_error'>&#xe681;</i>
                 <h3 class="jump_tipscon">审核不通过!</h3>
-                <p class="audit_des">手持身份证的照片不够清晰，请重新拍照然后上传。集奥思路打法骄傲的解放路卡斯加发撒的金风科技。</p>
+                <p class="audit_des">您的基本照片和视频可能模糊、遮挡等看不清本人；或裸露身体；或使用他人照片。请重新上传清晰的本人照片或视频。
+
+</p>
             </div>
         <?php elseif ($user->status == UserStatus::CHECKING): ?>
             <div class="identity_audit_pass">
