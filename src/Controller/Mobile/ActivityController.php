@@ -8,6 +8,7 @@ use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 use CarouselPosition;
 use League\Flysystem\Exception;
+use PackType;
 
 /**
  * Activity Controller
@@ -577,6 +578,8 @@ class ActivityController extends AppController
                     $this->user->paiming = $mypaiming;
                 }
                 $user = $this->user;
+                $viplev = $this->Business->getVIP($user);
+                $user->upackname = \VIPlevel::getStr($viplev);
                 $followTb = TableRegistry::get('UserFans');
                 if ($user) {
                     $followlist = $followTb->find('all')->where(['user_id' => $this->user->id])->toArray();
@@ -591,8 +594,9 @@ class ActivityController extends AppController
                                     'rest_chat >' => 0,
                                     'rest_browse >' =>0
                                 ],
+                                'type' => PackType::VIP,
                                 'deadline >=' => new Time()
-                            ])->orderDesc('cost')->limit(1);
+                            ]);
                 }])
                 ->where(['recharge >' => 0, 'gender' => 1])
                 ->orderDesc('recharge')
@@ -602,21 +606,31 @@ class ActivityController extends AppController
                     $row['followed'] = false;
                     if ($user) {
                         foreach ($followlist as $item) {
-                            if ($item->following_id == $row->id) {
+                            if ($item->following_id == $row['id']) {
                                 $row['followed'] = true;
                             }
                         }
                     }
-
                     //判断我的性别
                     $row['ismale'] = true;
-                    $row['recharge'] = intval($row['recharge']);
                     $row['upackname'] = null;
-                    if(count($row['upacks'])) {
-                        $upk = $row['upacks'][0];
-                        $row['upackname'] = ($upk->honour_name)?$upk->honour_name:$upk->title;
+                    //累计充值3万元=钻石
+                    if($row['recharge'] >= 30000) {
+                        $row['upackname'] = \VIPlevel::getStr(\VIPlevel::ZUANSHI_VIP);
                     }
-                    $row['upacks'] = [];
+                    //累计充值1万元=白金
+                    else if($row['recharge'] >= 10000) {
+                        $row['upackname'] = \VIPlevel::getStr(\VIPlevel::BAIJIN_VIP);
+                    }
+                    //累计充值3999=黄金
+                    else if($row['recharge'] >= 3999) {
+                        $row['upackname'] = \VIPlevel::getStr(\VIPlevel::HUANGJIN_VIP);
+                    } else {
+                        if(count($row['upacks']) > 0) {
+                            $row['upackname'] = \VIPlevel::getStr(\VIPlevel::COMMON_VIP);
+                        }
+                    }
+                    $row['recharge'] = intval($row['recharge']);
                     if (!$user || $user->gender == 2) {
                         $row['ismale'] = false;
                     }
@@ -628,49 +642,7 @@ class ActivityController extends AppController
                     $i++;
                     return $row;
                 });
-            //旧的算法
-            /*$FlowTable = \Cake\ORM\TableRegistry::get('Flow');
-            $followTb = TableRegistry::get('UserFans');
-            $followlist = [];
-            if($user) {
-                $followTb->find('all')->where(['user_id' => $this->user->id]);
-            }
-            $i = 1;
-            $query = $FlowTable->find()
-                ->contain([
-                    'Buyer'=>function($q){
-                        return $q->select(['id','avatar','nick','phone','gender', 'birthday'])
-                            ->where(['gender'=>1]);
-                    },
-                ])
-                ->select(['buyer_id','total'=>'sum(amount)'])
-                ->where(['type'=>4])
-                ->group('buyer_id')
-                ->orderDesc('total')
-                ->map(function($row) use(&$i, $followlist, $user) {
-                    //检查是否关注
-                    $row['followed'] = false;
-                    foreach($followlist as $item) {
-                        if($item->following_id == $row->buyer->id) {
-                            $row['followed'] = true;
-                        }
-                    }
-                    //判断我的性别
-                    $row['ismale'] = true;
-                    if(!$user || $user->gender == 2) {
-                        $row['ismale'] = false;
-                    }
-                    $row['buyer']['age'] = getAge($row['buyer']['birthday']);
-                    $row['index'] = $i;
-                    if($i == 1) {
-                        $row['ishead'] = true;
-                    } else {
-                        $row['ishead'] = false;
-                    }
-                    $i++;
-                    return $row;
-                });*/
-            return $this->Util->ajaxReturn(['datas' => $richs, 'mydata' => $this->user, 'status' => true]);
+            return $this->Util->ajaxReturn(['datas' => $richs, 'mydata' => $user, 'status' => true]);
         } catch (Exception $e) {
             return $this->Util->ajaxReturn(false, '服务器大姨妈啦~~');
         }

@@ -5,6 +5,7 @@ namespace App\Controller\Mobile;
 use App\Controller\Mobile\AppController;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use PackType;
 use PayOrderType;
 use ServiceType;
 
@@ -78,17 +79,30 @@ class IndexController extends AppController {
                                         'rest_chat >' => 0,
                                         'rest_browse >' =>0
                                     ],
+                                    'type' => PackType::VIP,
                                     'deadline >=' => new Time()
-                                ])->orderDesc('cost')->limit(1);
+                                ]);
                             }
                         ]);
         }
         $top3 = $query->map(function($row) {
             $row['upackname'] = null;
             $row['recharge'] = intval($row['recharge']);
-            if(count($row['upacks'])) {
-                $upk = $row['upacks'][0];
-                $row['upackname'] = $upk->honour_name;
+            //累计充值3万元=钻石
+            if($row['recharge'] >= 30000) {
+                $row['upackname'] = \VIPlevel::getStr(\VIPlevel::ZUANSHI_VIP);
+            }
+            //累计充值1万元=白金
+            else if($row['recharge'] >= 10000) {
+                $row['upackname'] = \VIPlevel::getStr(\VIPlevel::BAIJIN_VIP);
+            }
+            //累计充值3999=黄金
+            else if($row['recharge'] >= 3999) {
+                $row['upackname'] = \VIPlevel::getStr(\VIPlevel::HUANGJIN_VIP);
+            } else {
+                if(count($row['upacks']) > 0) {
+                    $row['upackname'] = \VIPlevel::getStr(\VIPlevel::COMMON_VIP);
+                }
             }
             $row['upacks'] = [];
             return $row;
@@ -123,8 +137,9 @@ class IndexController extends AppController {
                                         'rest_chat >' => 0,
                                         'rest_browse >' =>0
                                     ],
+                                    'type' => PackType::VIP,
                                     'deadline >=' => new Time()
-                                ])->orderDesc('cost')->limit(1);
+                                ]);
                             }
                         ]);
         }
@@ -138,9 +153,21 @@ class IndexController extends AppController {
         $richs = $query->map(function($row) {
             $row['upackname'] = null;
             $row['recharge'] = intval($row['recharge']);
-            if(count($row['upacks'])) {
-                $upk = $row['upacks'][0];
-                $row['upackname'] = ($upk->honour_name)?$upk->honour_name:$upk->title;
+            //累计充值3万元=钻石
+            if($row['recharge'] >= 30000) {
+                $row['upackname'] = \VIPlevel::getStr(\VIPlevel::ZUANSHI_VIP);
+            }
+            //累计充值1万元=白金
+            else if($row['recharge'] >= 10000) {
+                $row['upackname'] = \VIPlevel::getStr(\VIPlevel::BAIJIN_VIP);
+            }
+            //累计充值3999=黄金
+            else if($row['recharge'] >= 3999) {
+                $row['upackname'] = \VIPlevel::getStr(\VIPlevel::HUANGJIN_VIP);
+            } else {
+                if(count($row['upacks']) > 0) {
+                    $row['upackname'] = \VIPlevel::getStr(\VIPlevel::COMMON_VIP);
+                }
             }
             $row['upacks'] = [];
             return $row;

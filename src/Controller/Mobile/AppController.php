@@ -55,6 +55,7 @@ class AppController extends Controller {
         parent::initialize();
         $this->viewBuilder()->layout('layout');
         $this->loadComponent('RequestHandler');
+        $this->loadComponent('Business');
         $this->loadComponent('Flash');
         $this->loadComponent('Util');
         $this->loadComponent('Push');

@@ -2,6 +2,7 @@
 namespace App\Controller\Component;
 
 use App\Model\Entity\Payorder;
+use App\Model\Entity\User;
 use Cake\Controller\Component;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
@@ -106,6 +107,38 @@ class BusinessComponent extends Component
         //计算排名
         $mytop->index = $iquery->count() + 1;
         return $mytop;
+    }
+
+
+    /**
+     * 获取用户vip等级
+     */
+    public function getVIP(User $user)
+    {
+        //累计充值3万元=钻石
+        if($user->recharge >= 30000) {
+            return \VIPlevel::ZUANSHI_VIP;
+        }
+        //累计充值1万元=白金
+        else if($user->recharge >= 10000) {
+            return \VIPlevel::BAIJIN_VIP;
+        }
+        //累计充值3999=黄金
+        else if($user->recharge >= 3999) {
+            return \VIPlevel::HUANGJIN_VIP;
+        }
+
+        $upackTb = TableRegistry::get('UserPackage');
+        $validpack = $upackTb->find()->where([
+            'user_id' => $user->id,
+            'type' => PackType::VIP,
+            'deadline >' => new Time(),
+            'OR' => ['rest_chat >' => 0, 'rest_browse >' => 0]
+        ])->first();
+        if($validpack) {
+            return \VIPlevel::COMMON_VIP;
+        }
+        return \VIPlevel::NOT_VIP;
     }
 
 
@@ -325,11 +358,12 @@ class BusinessComponent extends Component
         $packTypeStr = PackType::getPackageType(PackType::RECHARGE);
         $flowType = 15;  //购买vip套餐
         if($pack->type == PackType::VIP) {
-            $flowType = 16;  //购买充值套餐
-            $order->user->recharge .= $realFee;
             $packTypeStr = PackType::getPackageType(PackType::VIP);
+        } else if($pack->type == PackType::RECHARGE) {
+            $flowType = 16;  //购买充值套餐
+            $order->user->recharge += $realFee;
+            $packTypeStr = PackType::getPackageType(PackType::RECHARGE);
         }
-        $order->user->recharge += $realFee;
         $order->dirty('user', true);  //这里的seller 一定得是关联属性 不是关联模型名称 可以理解为实体
         $OrderTable = TableRegistry::get('Payorder');
 

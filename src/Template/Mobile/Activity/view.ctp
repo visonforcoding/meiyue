@@ -14,8 +14,8 @@
         <div class="desc">
             <span class="title">美约独家</span>
         </div>
-        <p class="bottom_des color_y"><i class="l_sprit iconfont">&#xe64d;</i> <?= $activity['description'] ?> <i
-                class="r_sprit iconfont">&#xe64d;</i></p>
+        <pre class="bottom_des color_y"><i class="l_sprit iconfont">&#xe64d;</i> <?= $activity['description'] ?> <i
+                class="r_sprit iconfont">&#xe64d;</i></pre>
     </div>
     <div class="activity_detail_adress bgff mt20">
         <ul>

@@ -566,3 +566,32 @@ class MsgpushType {
         }
     }
 }
+
+
+/**
+ * vip等级类
+ * Class VIPlevel
+ */
+class VIPlevel {
+    const NOT_VIP = 0;    //非vip
+    const COMMON_VIP = 1;    //普通vip
+    const HUANGJIN_VIP = 2;  //黄金vip
+    const BAIJIN_VIP = 3;    //白金vip
+    const ZUANSHI_VIP = 4;  //钻石vip
+
+    public static function getStr($lev = null) {
+        $levs = [
+            VIPlevel::COMMON_VIP => '普通VIP',
+            VIPlevel::HUANGJIN_VIP => '黄金VIP',
+            VIPlevel::BAIJIN_VIP => '白金VIP',
+            VIPlevel::ZUANSHI_VIP => '钻石VIP',
+        ];
+
+        if($lev !== null) {
+            return isset($levs[$lev])?$levs[$lev]:'';
+        } else {
+            return $levs;
+        }
+
+    }
+}

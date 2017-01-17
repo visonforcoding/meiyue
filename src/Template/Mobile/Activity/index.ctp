@@ -163,7 +163,7 @@
             <div class="flex">
                 <span class="voted_place {{#top3}}silver{{/top3}}">{{index}}</span>
                 <div class="voted_place_info">
-                    <span class="avatar"><img src="{{avatar}}"/></span>
+                    <span class="avatar" onclick="window.location.href='/user/male-homepage/{{id}}'"><img src="{{avatar}}"/></span>
                     <h3>
                         <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img
                                         src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span
@@ -190,7 +190,7 @@
             <div class="flex">
                 <span class="voted_place silver">{{paiming}}</span>
                 <div class="voted_place_info">
-                    <span class="avatar">
+                    <span class="avatar" onclick="window.location.href='/user/male-homepage/{{id}}'">
                         <img src="{{avatar}}"/>
                     </span>
                     <h3>

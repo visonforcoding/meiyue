@@ -45,6 +45,11 @@
         </div>
     </header> -->
     <div class="wraper">
+        <div class="visited-box not-vip-show">
+            <span class="visited-ico iconfont">&#xe64a;</span>
+            <p class="visited-num">有 <span class="lagernum color_y"><?= $visitnum; ?></span> 人来看过你</p>
+            <p class="smallarea">多充值将会使你增加曝光率，让你更受欢迎哦~</p>
+        </div>
         <ul id="visitors-list" class="praised_list bgff">
 
         </ul>
@@ -52,11 +57,14 @@
 
         </div>
     </div>
+    <div style="height:62px;" class="not-vip-show"></div>
+    <a class="identify_footer_potion not-vip-show" id="beVIP">成为会员，立即查看访客信息</a>
 <?php $this->start('script'); ?>
     <script type="text/javascript">
+        <?php if($isvip): ?>
         var curpage = 1;
+        init();
         loadUser(curpage);
-
         function loadUser(page, more, query) {
             $.util.showPreloader();
             var template = '';
@@ -65,7 +73,6 @@
             } else {
                 template = $('#female-list-tpl').html();
             }
-
             Mustache.parse(template);   // optional, speeds up future uses
             url = '/userc/visitors/' + page + '.json';
             $.getJSON(url, function (data) {
@@ -90,7 +97,6 @@
                 }
             });
         }
-
         setTimeout(function () {
             $(window).on("scroll", function () {
                 if(curpage == 1) {
@@ -102,10 +108,16 @@
                 })
             });
         }, 2000)
-
-
         function viewta(uid) {
             location.href = (<?= $user->gender; ?> == 2)?'/user/male-homepage/' + uid:'/index/homepage/' + uid;
         }
+        function init() {
+            $('.not-vip-show').hide();
+        }
+        <?php else: ?>
+        $.util.tap($('#beVIP'), function() {
+            location.href = '/userc/vip-buy?reurl=/userc/visitors';
+        });
+        <?php endif; ?>
     </script>
 <?php $this->end('script'); ?>
