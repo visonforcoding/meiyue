@@ -5,7 +5,7 @@
     </div>
 </header> -->
 <div class="wraper">
-    <h3 class="rich_header"></h3>
+    <!-- <h3 class="rich_header"></h3> -->
     <div class="charge_container_list mt20">
         <div class="flex flex_justify inner">
             <h1 class="commontitle">请输入购买数量</h1>
