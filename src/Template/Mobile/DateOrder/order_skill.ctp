@@ -59,15 +59,15 @@
                         <p><?= $data->description ?></p>
                     </div>
                 </li>
-                <?php if(count($data->tags)): ?>
-                <li class="flex">
-                    <h3 class="commontitle">我的标签</h3>
-                    <div class="con con_mark flex maxwid80">
-                        <?php foreach ($data->tags as $tag): ?>
-                            <a href="#this"><?= $tag->name ?></a>
-                        <?php endforeach; ?>
-                    </div>
-                </li>
+                <?php if (count($data->tags)): ?>
+                    <li class="flex">
+                        <h3 class="commontitle">我的标签</h3>
+                        <div class="con con_mark flex maxwid80">
+                            <?php foreach ($data->tags as $tag): ?>
+                                <a href="#this"><?= $tag->name ?></a>
+                            <?php endforeach; ?>
+                        </div>
+                    </li>
                 <?php endif; ?>
             </ul>
         </div>
@@ -238,7 +238,7 @@
         coord_lng = $(em).data('coordlng');
         coord_lat = $(em).data('coordlat');
     }
-    
+
     function choosePlace(em) {
         $(em).addClass('choose');
         setTimeout(function () {
@@ -264,7 +264,7 @@
         $('#selfPlace').show();
         $('#listPlace').hide();
     }
-    
+
 
     var dPicker = new mydateTimePicker();
     dPicker.init(choosedateCallBack);
@@ -275,34 +275,33 @@
     var curpage = 1;
     var gurl = '/date-order/find-place/' + skill_id + '/';
     var query = '';
-    function submitSearchPlace(){
+    function submitSearchPlace() {
         curpage = 1;
         var searchKey = $('#searchInput').val();
-        if(!searchKey){
+        if (!searchKey) {
             $.util.alert('请输入地址');
             return;
         }
-        query = '?tag='+searchKey;
+        query = '?tag=' + searchKey;
         $.util.asyLoadData({gurl: gurl, page: curpage, tpl: '#place-list-tpl', id: '#place-list', key: 'places'
-            ,query:query});
+            , query: query});
     }
     $(window).on('hashchange', function () {
         //页面切换
         if (location.hash == '#choosePlace') {
             curpage = 1;
             loadHashPage();
-            $.util.asyLoadData({gurl: gurl, page: curpage, tpl: '#place-list-tpl', id: '#place-list', key: 'places'});
+            $.util.asyLoadData({gurl: gurl, page: curpage, tpl: '#place-list-tpl', id: '#place-list', key: 'places', func: calPlace});
             setTimeout(function () {
                 $(window).on("scroll", function () {
                     $.util.listScroll('place-list', function () {
                         //window.holdLoad = false;  //打开加载锁  可以开始再次加载
                         $.util.asyLoadData({gurl: gurl, page: curpage,
-                            tpl: '#place-list-tpl', id: '#place-list', more: true, key: 'places',query:query});
+                            tpl: '#place-list-tpl', id: '#place-list', more: true, key: 'places', query: query, func: calPlace});
                     })
                 });
             }, 2000)
-        }
-        else if (location.hash == '#placeDetail') {
+        } else if (location.hash == '#placeDetail') {
             $.util.showPreloader('加载中...');
             $('#page-placeDetail').find('iframe').remove();
             $('#page-placeDetail').prepend('<iframe width="100%" height="100%"></iframe>');
@@ -314,8 +313,7 @@
                 $.util.hidePreloader();
                 loadHashPage();
             }, 1000);
-        }
-        else {
+        } else {
             loadHashPage();
         }
     });
@@ -340,12 +338,6 @@
     });
     $('#order_create').on('tap', function () {
         //生成订单
-        if($.util.isWX){
-            $.util.confirm('提示信息','为保障约会顺利安全，必须下载app才能约她',function(){
-                document.location.href =  '/down-app';
-            },null,'残忍拒绝','立即下载');
-            return;
-        }
         if ((!place_name)) {
             $.util.alert('请选择地点')
             return;
@@ -408,6 +400,17 @@
             }
         });
     });
+
+    function calPlace(data){
+        if(data.places.length){
+            $.each(data.places,function(i,n){
+               if(!n.detail_info.price){
+                   n.detail_info.price = '未知';
+               } 
+            });
+            return data;
+        }
+    }
 
     LEMON.event.unrefresh();
 </script>
