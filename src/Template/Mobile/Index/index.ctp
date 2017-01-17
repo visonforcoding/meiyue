@@ -47,6 +47,7 @@
     var map = new AMap.Map("map_canvas", {
 
     });
+    var posMarker = [];  //定位标记点
     var markers = [];
     wx.ready(function () {
         getPos();
@@ -64,12 +65,20 @@
                 var speed = res.speed; // 速度，以米/每秒计
                 var accuracy = res.accuracy; // 位置精度
                 map.setZoomAndCenter(16, [lng, lat]);
+                map.remove(posMarker);
                 // 在新中心点添加 marker 
                 var marker = new AMap.Marker({
                     map: map,
+                    draggable: true, //是否可拖动
+                    cursor: 'move',
+                    raiseOnDrag: true,
                     position: [lng, lat]
                 });
-                markers.push(marker);
+                posMarker.push(marker);
+                marker.on('dragend',function(e){
+                   //定位点拖拽完毕 
+                   addUsersMk(e.lnglat.lng,e.lnglat.lat);
+                });
                 addUsersMk(lng, lat);
             }
         })
@@ -83,6 +92,7 @@
 
     function addUsersMk(lng, lat) {
         //添加用户标注
+         map.remove(markers);
         $.util.ajax({
             url: '/index/getMapUsers',
             data: {lng: lng, lat: lat},
@@ -94,9 +104,9 @@
                         position: [n.login_coord_lng, n.login_coord_lat], //基点位置
                         offset: new AMap.Pixel(-17, -42), //相对于基点的偏移位置
                         draggable: false, //是否可拖动
-                        content: '<a href="'+n.link+'" class="user-marker"><img src="' + n.avatar + '"/></a>'   //自定义点标记覆盖物内容
+                        content: '<a href="' + n.link + '" class="user-marker"><img src="' + n.avatar + '"/></a>'   //自定义点标记覆盖物内容
                     });
-                    marker.on('click',function(){
+                    marker.on('click', function () {
                         window.location.href = n.link;
                     });
                     markers.push(marker);
