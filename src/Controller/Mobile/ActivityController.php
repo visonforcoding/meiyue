@@ -518,6 +518,8 @@ class ActivityController extends AppController
                             ->select(['id', 'avatar', 'nick', 'phone', 'gender', 'birthday'])
                             ->where(['gender' => 2]);
                     },
+                    'User.Upacks',
+                    'User.Supporteds',
                 ])
                 ->select(['user_id', 'total' => 'sum(amount)'])
                 ->where($where)
@@ -529,6 +531,10 @@ class ActivityController extends AppController
                     $row['index'] = $i;
                     $row['top3'] = false;
                     $row['total'] = intval($row['total']);
+                    $row['isHongRen'] = false;
+                    if((count($row['user']['supporteds']) >= 100) && (count($row['user']['upacks'] >= 100))) {
+                        $row['isHongRen'] = true;
+                    }
                     if($i <= 3) {
                         $row['top3'] = true;
                     }
@@ -545,9 +551,6 @@ class ActivityController extends AppController
             if ($user) {
                 if ($user->gender == 2) {
                     $mytop = $this->Business->getMyTop($type, $this->user->id);
-                    if($mytop) {
-                        $mytop->total = intval($mytop->total);
-                    }
                 }
             }
             return $this->Util->ajaxReturn(['datas' => $tops, 'mydata' => $mytop, 'status' => true]);
@@ -583,6 +586,11 @@ class ActivityController extends AppController
                 $followTb = TableRegistry::get('UserFans');
                 if ($user) {
                     $followlist = $followTb->find('all')->where(['user_id' => $this->user->id])->toArray();
+                }
+                $user->isActive = false;
+                $user->isTuHao = false;
+                if($mypaiming <= 100) {
+                    $user->isTuHao = true;
                 }
             }
             $i = 1;
@@ -638,6 +646,11 @@ class ActivityController extends AppController
                     $row['top3'] = false;
                     if($i <= 3) {
                         $row['top3'] = true;
+                    }
+                    $row['isActive'] = false;
+                    $row['isTuHao'] = false;
+                    if($row['index'] <= 100) {
+                        $row['isTuHao'] = true;
                     }
                     $i++;
                     return $row;

@@ -9,10 +9,20 @@
                     <li class="userinfo blight">
                         <a href="#this" class="cover_block">
                             <h3>
-                                <span><?= $user->nick; ?><?php if($user->recharge): ?><span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span><span class="diamonds"><img src="/mobile/images/zs.png" class="responseimg"/></span><?php endif; ?><?php if(isset($user->upackname)): ?><span class="highter-vip"><?= $user->upackname; ?></span><?php endif; ?></span>
+                                <span><?= $user->nick; ?>
+                                    <?php if($shown['isActive']): ?>
+                                        <span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>
+                                    <?php endif; ?>
+                                    <?php if($shown['isTuHao']): ?>
+                                        <span class="diamonds"><img src="/mobile/images/zs.png" class="responseimg"/></span>
+                                    <?php endif; ?>
+                                    <?php if ($shown['vipLevel']): ?>
+                                        <span class="highter-vip"><?= VIPlevel::getStr($shown['vipLevel']) ?></span>
+                                    <?php endif; ?>
+                                </span>
                                 <div class="bottom-btn">
-                                    <?php if($user->id_status): ?>
-                                    <span class="identify-info id-btn">身份已认证</span>
+                                    <?php if ($user->id_status): ?>
+                                        <span class="identify-info id-btn">身份已认证</span>
                                     <?php endif; ?>
                                 </div>
                             </h3>

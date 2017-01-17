@@ -43,7 +43,6 @@ class UserController extends AppController {
             return $this->render('nologin');
         }
         $template = 'index';
-        $pack = $this->Business->getVIP($this->user);
         if ($this->user->gender == 1) {
             $template = 'home_m';
             /*$packTb = TableRegistry::get('UserPackage');
@@ -61,7 +60,7 @@ class UserController extends AppController {
         $this->set([
             'facount' => $fans,
             'focount' => $followers,
-            'pack' => $pack
+            'shown' => $this->Business->getShown($this->user)
         ]);
         $this->set([
             'pageTitle' => '美约-我的',
@@ -795,15 +794,9 @@ class UserController extends AppController {
             ->contain([
                 'Fans',
                 'Follows',
-                'Upacks' => function($q) {
-                    return $q->orderDesc('create_time')->limit(1);
-                },
             ])
             ->where(['id' => $uid])
             ->map(function($row) {
-                if(count($row['upacks'])) {
-                    $row->upakname = $row['upacks'][0]['title'];
-                }
                 $row->facount = count($row->fans);
                 $row->focount = count($row->follows);
                 return $row;
@@ -838,6 +831,7 @@ class UserController extends AppController {
 
         $this->set([
             'user' => $user,
+            'shown' => $this->Business->getShown($user),
             'pageTitle' => '个人主页'
         ]);
     }
@@ -1127,15 +1121,6 @@ class UserController extends AppController {
                     return $q->where(['Actreg.status' => 1, 'Activity.end_time >' => new Time()]);
                 },
                 'Follows',
-                'Upacks' => function($q) {
-                    return $q->where([
-                        'OR' => [
-                            'rest_chat >' => 0,
-                            'rest_browse >' =>0
-                        ],
-                        'deadline >=' => new Time()
-                    ])->orderDesc('cost')->limit(1);
-                },
                 'Tags' => function($q) {
                     return $q->select(['name'])->where(['parent_id !=' => 0]);
                 }
@@ -1148,15 +1133,6 @@ class UserController extends AppController {
                 if(count($row->dates) || count($row->actreg)) {
                     $row->hasjoin = true;
                 }
-                if(count($row['upacks'])) {
-                    $row->upakname = $row['upacks'][0]['title'];
-                }
-                $row['upackname'] = null;
-                if(count($row['upacks'])) {
-                    $upk = $row['upacks'][0];
-                    $row['upackname'] = $upk->honour_name;
-                }
-                $row['upacks'] = [];
                 $row->facount = count($row->fans);
                 $row->focount = count($row->follows);
                 return $row;
@@ -1170,6 +1146,7 @@ class UserController extends AppController {
         $this->set([
             'pageTitle' => $title,
             'user' => $user,
+            'shown' => $this->Business->getShown($this->user)
         ]);
         if($user->gender == 2) {
             $this->render('/Mobile/User/my_fhomepage');

@@ -19,8 +19,12 @@
     <div class="home_page_basic">
         <h3 class="aligncenter">
             <span class="home_name"><b><?= $user->nick ?></b></span>
-            <span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>
-            <span class="vip"><img src="/mobile/images/my-hot.png" class="responseimg"/></span>
+            <?php if($shown['isActive']): ?>
+                <span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>
+            <?php endif; ?>
+            <?php if($shown['isHongRen'] == false): ?>
+                <span class="vip"><img src="/mobile/images/my-hot.png" class="responseimg"/></span>
+            <?php endif; ?>
         </h3>
         <div class="home_name_info aligncenter">
             <i class="iconfont color_y"><?= ($user->gender)?'&#xe61d;':'&#xe61c;'; ?></i> <?= $age ?> <i class="job"><?= $user->profession ?></i> <i class="address"><?= $user->city ?> <i class="iconfont">&#xe623;</i><i class='distance'><?= $distance ?></i></i>

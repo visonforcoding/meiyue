@@ -10,9 +10,10 @@
                         <span class="avatar" onclick="location.href='/user/male-homepage/{{id}}'"><img
                                     src="{{avatar}}"/></span>
                         <h3>
-                            <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img
-                                            src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span
-                                        class="highter-vip">{{upackname}}</span>{{/upackname}}
+                            <div class='flex'><span class="voted_name">{{nick}}</span>
+                                {{#isActive}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{/isActive}}
+                                {{#isTuHao}}<span class="hot"><img src="/mobile/images/zs.png" class="responseimg"/></span>{{/isTuHao}}
+                                {{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}
                             </div>
                             <span class="voted_number color_gray">已消费：{{recharge}}美币</span>
                         </h3>
@@ -78,8 +79,18 @@
                                                     src="<?= $top->avatar ?>"/></span>
                                         <h3>
                                             <div class="flex">
-                                                <span class="voted_name"><?= $top->nick ?></span><?php if ($top->upackname): ?>
-                                                <span class="highter-vip"><?= $top->  upackname; ?></span><?php endif; ?>
+                                                <span class="voted_name"><?= $top->nick ?></span>
+                                                <?php if($top->isActive): ?>
+                                                    <span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>
+                                                <?php endif; ?>
+                                                <?php if($top->isTuHao): ?>
+                                                    <span class="hot"><img src="/mobile/images/zs.png" class="responseimg"/></span>
+                                                <?php endif; ?>
+                                                <?php if ($top->upackname): ?>
+                                                <span class="highter-vip">
+                                                    <?= $top->  upackname; ?>
+                                                </span>
+                                                <?php endif; ?>
                                             </div>
                                             <span class="voted_number color_gray">已消费：<?= $top->total ?>美币</span>
                                         </h3>
@@ -134,8 +145,12 @@
                     like = n.fans.length > 0 ? true : false;
                 }
                 data.richs[i]['count'] = count;
+                if(count <= 100) {
+                    //data.richs[i]['isTuHao'] = true;
+                }
                 data.richs[i]['like'] = like;
             })
+            console.log(data);
             return data;
         }
         $(document).on('tap', '.likeIt', function () {

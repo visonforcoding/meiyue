@@ -14,15 +14,17 @@
                         <a href="/userc/edit-info" class="cover_block">
                             <div class='identify-user-info'>
                                 <h3 class='flex'>
-                            <span>
-                                <?= $user->nick ?></span><span class="hot"><img src="/mobile/images/hot.png"
-                                                                                class="responseimg"/></span>
-                                <?php if ($user->recharge): ?>
+                                    <span><?= $user->nick ?></span>
+                                    <?php if($shown['isActive']): ?>
+                                    <span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>
+                                    <?php endif; ?>
+                                    <?php if ($shown['isTuHao']): ?>
                                         <span class="diamonds"><img src="/mobile/images/zs.png"
-                                                                    class="responseimg"/></span><?php endif; ?>
-                                <?php if ($pack != VIPlevel::NOT_VIP): ?>
-                                    <span class="highter-vip"><?= VIPlevel::getStr($pack);?></span>
-                                <?php endif; ?>
+                                                                    class="responseimg"/></span>
+                                    <?php endif; ?>
+                                    <?php if ($shown['vipLevel'] != VIPlevel::NOT_VIP): ?>
+                                        <span class="highter-vip"><?= VIPlevel::getStr($shown['vipLevel']); ?></span>
+                                    <?php endif; ?>
                                 </h3>
                                 <?php if ($user->id_status == UserStatus::PASS): ?>
                                     <div class="bottom-btn">
