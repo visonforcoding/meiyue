@@ -283,7 +283,7 @@
                     <div id="tag-container" class="home_items home-mark-box">
                         <div class="home_list_l_info"><span class="itemsname">个性标签</span></div>
                         <div class="home_list_r_info">
-                            <input name="tag" type="text" placeholder="请选择" readonly="readonly" />
+                            <input name="tag" type="text" placeholder="请选择标签" readonly="readonly" />
                         </div>
                     </div>
                 </li>

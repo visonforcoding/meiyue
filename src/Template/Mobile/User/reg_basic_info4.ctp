@@ -92,7 +92,7 @@
                             <div class="home_list_l_info"><span class="itemsname">个性标签：</span></div>
                             <div class="home_list_r_info ability-marks-box">
                                 <div id="tag-container" class="r_info">
-                                    <input name="tag" type="text" placeholder="请选择个性标签" readonly="readonly" />
+                                    <input name="tag" type="text" placeholder="请选择标签" readonly="readonly" />
                                 </div>
                             </div>
                     </div>
