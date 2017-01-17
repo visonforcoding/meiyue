@@ -221,6 +221,8 @@ class AppController extends Controller {
      */
     protected function wxBaseLogin() {
         if (!$this->request->is(['ajax', 'post'])) {
+            \Cake\Log\Log::debug('wxBaseLogin', 'devlog');
+            \Cake\Log\Log::debug($this->user, 'devlog');
             if($this->user){
                 return false;
             }
