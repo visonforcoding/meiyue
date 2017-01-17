@@ -276,10 +276,10 @@ class TestController extends AppController {
             $to_link_text = '查看详情';
             $to_msg = $Netim->generateCustomMsgBody($to_body, $to_link, $to_link_text, $to_prefix);
             $msg = $Netim->generateCustomMsg(5, $from_msg, $to_msg);
-            $res = $Netim->sendMsg($from, $to, $msg,$type);
+            $res = $Netim->sendMsg($from, $to, $msg, $type);
         }
         debug($msg);
-        $res = $Netim->sendMsg($from, $to, $msg,$msgtype);
+        $res = $Netim->sendMsg($from, $to, $msg, $msgtype);
         debug($res);
         exit();
         return;
@@ -350,9 +350,17 @@ class TestController extends AppController {
         $res = getCity('天津,天津');
     }
 
-    public function serverName(){
+    public function serverName() {
         debug($this->Util->getServerDomain());
         debug($this->request);
         exit();
     }
+
+    public function testRd() {
+        debug(mt_rand(1, 9) * 0.01);
+        $plus = mt_rand(0, 1) ? 1 : -1;
+        debug(100+$plus*mt_rand(1,9)*0.01);
+        exit();
+    }
+
 }
