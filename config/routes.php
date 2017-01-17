@@ -76,7 +76,7 @@ Router::scope('/', function (RouteBuilder $routes) {
         $routes->connect('/group/edit', ['plugin' => 'wpadmin', 'controller' => 'group', 'action' => 'edit']);
         $routes->connect('/actionlog/index', ['plugin' => 'wpadmin', 'controller' => 'actionlog', 'action' => 'index']);
         $routes->connect('/admin/', ['plugin' => 'wpadmin', 'controller' => 'index', 'action' => 'index']);
-        $routes->connect('/', ['plugin' => 'wpadmin', 'controller' => 'index', 'action' => 'find-list']);
+        $routes->connect('/', ['plugin' => 'wpadmin', 'controller' => 'index', 'action' => 'index']);
     }
     //上传
     $routes->connect('/do-upload/*', ['plugin' => 'wpadmin', 'controller' => 'util', 'action' => 'doUpload']);
@@ -86,7 +86,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/down-app/*',['prefix'=>'mobile','controller'=>'other','action'=>'downApp']);
     //m端
     if($subdomain=='mobile'){
-        $routes->connect('/', ['prefix' => 'mobile', 'controller' => 'index', 'action' => 'index']);
+        $routes->connect('/', ['prefix' => 'mobile', 'controller' => 'index', 'action' => 'find-list']);
     }
 
     /**
