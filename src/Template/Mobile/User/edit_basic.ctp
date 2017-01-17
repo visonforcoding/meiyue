@@ -430,7 +430,7 @@
                             <?php foreach ($user->tags as $tag): ?>
                                 <a class='mark'><?= $tag['name']; ?><input type='text' name='tags[_ids][]'
                                                                            value='<?= $tag['id']; ?>'
-                                                                           tag-name='<?= $tag['name']; ?>' hidden></a>
+                                                                           tag-name='<?= $tag['name']; ?>' hidden style='请选择标签'></a>
                             <?php endforeach; ?>
                         </div>
                     </li>
@@ -441,14 +441,14 @@
         <?php if ($user->gender == 2): ?>
             <div class="home_fill_basic_info ">
                 <div class="items_title">
-                    <h3>我的微信 <i>（用户查看你的微信，你将获得80元收入哦）</i></h3>
+                    <h3>我的微信 <i>(用户查看你的微信，你将获得80元/次收入哦)</i></h3>
                 </div>
                 <ul>
                     <li class='home_fill_hobby'>
                         <div class="home_items">
                             <div class="home_list_l_info"><span class="itemsname">微信号：</span></div>
                             <div class="home_list_r_info">
-                                <input name="wxid" type="text" placeholder="请输入" value="<?= $user->wxid; ?>"/>
+                                <input name="wxid" type="text" placeholder="请输入微信号" value="<?= $user->wxid; ?>"/>
                             </div>
                         </div>
                     </li>
