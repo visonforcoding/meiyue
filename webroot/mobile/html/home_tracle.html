@@ -11,6 +11,9 @@
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
 		<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/view.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.footer_submit_btn .foward{-webkit-animation-fill-mode : backwards;animation-fill-mode : backwards;}
+		</style>
 	</head>
 	<body>
 		<header>
@@ -147,12 +150,15 @@
 		<script type="text/javascript">
 			$('#submitbtn').on('tap',function(){
 				var data = $(this).data('type');
+				$('#videobtn').removeClass('foward');
+				$('#picbtn').removeClass('foward');
 				switch(data){
 					case '0':
 						$('#videobtn').removeClass('moveright').addClass('moveleft');
 						$('#picbtn').removeClass('movedown').addClass('moveup');
 						$(this).html('<i class="iconfont">&#xe653;</i>');
 						$(this).attr('data-type','1');
+						setTimeout(change,1000);
 						break;
 					case '1':
 						$('#videobtn').removeClass('moveleft').addClass('moveright');
@@ -162,7 +168,14 @@
 						break;
 					default:break;
 				}
-			})
+			});
+			function change(){
+				$('#picbtn').addClass('foward');
+				$('#videobtn').addClass('foward');
+				$('#submitbtn').html('<span>发布<br />动态</span>');;
+				$('#submitbtn').attr('data-type','0');
+			}
+			
 		</script>
 	</body>
 </html>
