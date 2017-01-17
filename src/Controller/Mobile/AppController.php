@@ -29,6 +29,8 @@ use Cake\Event\Event;
  * @link http://book.cakephp.org/3.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+    
+    const MOBILE_LOGIN_SESSION = 'User.mobile';
 
     /**
      * 无需验证登录的action
@@ -222,6 +224,7 @@ class AppController extends Controller {
      */
     protected function wxBaseLogin() {
         if (!$this->request->is(['ajax', 'post'])) {
+            $this->user = $this->request->session()->read(self::MOBILE_LOGIN_SESSION);
             \Cake\Log\Log::debug('wxBaseLogin', 'devlog');
             \Cake\Log\Log::debug($this->user, 'devlog');
             if($this->user){
