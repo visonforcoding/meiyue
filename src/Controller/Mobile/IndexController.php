@@ -45,10 +45,14 @@ class IndexController extends AppController {
                         'distance' => "getDistance($lng,$lat,login_coord_lng,login_coord_lat)"])
                 ->where(['gender' => 2, 'status' => 3])
                 ->orderDesc('distance')
-                ->limit(10)->formatResults(function($items) {
-                    return $items->map(function($item) {
+                ->limit(10)->formatResults(function($items)use($lng,$lat) {
+                    return $items->map(function($item)use($lng,$lat) {
                                 $item['avatar'] = $this->Util->getServerDomain() . createImg($item['avatar']).'?w=184&h=184&fit=stretch';
                                 $item['link'] = '/index/homepage/' . $item['id'];
+                                $plus = mt_rand(0, 1) ? 1 : -1;
+                                $item['login_coord_lng'] = $lng +$plus*mt_rand(1,38)*0.0001;
+                                $plus = mt_rand(0, 1) ? 1 : -1;
+                                $item['login_coord_lat'] = $lat +$plus*mt_rand(1,31)*0.0001;
                                 return $item;
                             });
                 })

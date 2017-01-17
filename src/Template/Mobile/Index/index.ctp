@@ -15,6 +15,7 @@
         border-radius: 50%;
         overflow: hidden;
         border: 2px solid #F3AD3D;
+        display:block;
     }
     .user-marker img{
         width: 100%;
@@ -46,10 +47,12 @@
     var map = new AMap.Map("map_canvas", {
 
     });
+    var markers = [];
     wx.ready(function () {
         getPos();
     });
     $('#getPos').on('click', function () {
+        map.remove(markers);
         getPos();
     });
     function getPos() {
@@ -66,6 +69,7 @@
                     map: map,
                     position: [lng, lat]
                 });
+                markers.push(marker);
                 addUsersMk(lng, lat);
             }
         })
@@ -90,11 +94,19 @@
                         position: [n.login_coord_lng, n.login_coord_lat], //基点位置
                         offset: new AMap.Pixel(-17, -42), //相对于基点的偏移位置
                         draggable: false, //是否可拖动
-                        content: '<div class="user-marker"><img src="' + n.avatar + '"/></div>'   //自定义点标记覆盖物内容
+                        content: '<a href="'+n.link+'" class="user-marker"><img src="' + n.avatar + '"/></a>'   //自定义点标记覆盖物内容
                     });
+                    marker.on('click',function(){
+                        window.location.href = n.link;
+                    });
+                    markers.push(marker);
                 });
             }
         });
     }
+    $(document).on('click','.user-marker',function(e){
+        e.preventDefault();
+        alert('test');
+    });
 </script>
 <?php $this->end('script'); ?>
