@@ -85,6 +85,11 @@ class UserTable extends Table {
             'className' => 'Actregistration',
             'foreignKey' => 'user_id'
         ]);
+        //支持我的人
+        $this->hasMany('Supporteds', [
+            'className' => 'Support',
+            'foreignKey' => 'supported_id'
+        ]);
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

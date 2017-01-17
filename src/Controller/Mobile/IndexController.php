@@ -92,6 +92,8 @@ class IndexController extends AppController {
         $top3 = $query->map(function($row) {
             $row['upackname'] = null;
             $row['recharge'] = intval($row['recharge']);
+            $row['isTuHao'] = true;
+            $row['isActive'] = false;
             //累计充值3万元=钻石
             if($row['recharge'] >= 30000) {
                 $row['upackname'] = \VIPlevel::getStr(\VIPlevel::ZUANSHI_VIP);
@@ -155,6 +157,8 @@ class IndexController extends AppController {
         }
         \Cake\Log\Log::debug($query,'devlog');
         $richs = $query->map(function($row) {
+            $row['isTuHao'] = true;
+            $row['isActive'] = false;
             $row['upackname'] = null;
             $row['recharge'] = intval($row['recharge']);
             //累计充值3万元=钻石
@@ -269,15 +273,6 @@ class IndexController extends AppController {
                     return $q->where(['Actreg.status' => 1, 'Activity.end_time >' => new Time()]);
                 },
                 'Follows',
-                'Upacks' => function($q) {
-                    return $q->where([
-                        'OR' => [
-                            'rest_chat >' => 0,
-                            'rest_browse >' =>0
-                        ],
-                        'deadline >=' => new Time()
-                    ])->orderDesc('cost')->limit(1);
-                },
                 'Tags' => function($q) {
                     return $q->select(['name'])->where(['parent_id !=' => 0]);
                 }
@@ -288,15 +283,6 @@ class IndexController extends AppController {
                 if(count($row->dates) || count($row->actreg)) {
                     $row->hasjoin = true;
                 }
-                if(count($row['upacks'])) {
-                    $row->upakname = $row['upacks'][0]['title'];
-                }
-                $row['upackname'] = null;
-                if(count($row['upacks'])) {
-                    $upk = $row['upacks'][0];
-                    $row['upackname'] = $upk->honour_name;
-                }
-                $row['upacks'] = [];
                 $row->facount = count($row->fans);
                 $row->focount = count($row->follows);
                 return $row;
@@ -348,7 +334,6 @@ class IndexController extends AppController {
         }
 
         //检查查看权限
-        $canBrowse = false;
         $this->loadComponent('Business');
         //检查权限和名额剩余
         $browseRight = null;
@@ -366,6 +351,7 @@ class IndexController extends AppController {
             'distance' => $distance,
             'birthday' => $birthday,
             'isFollow' => $isFollow,
+            'shown' => $this->Business->getShown($user)
         ]);
         if($user->gender == 1) {
             $this->render('/Mobile/User/male_homepage');

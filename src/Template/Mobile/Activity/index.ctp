@@ -37,12 +37,12 @@
                             </li>
                         <?php endforeach; ?>
                     </ul>
-                    <?php if(count($carousels) > 1): ?>
-                    <div class="yd flex flex_center" id="oTab">
-                        <?php foreach ($carousels as $key => $$carousel): ?>
-                            <span class="<?= ($key == 0) ? 'cur' : ''; ?>"></span>
-                        <?php endforeach; ?>
-                    </div>
+                    <?php if (count($carousels) > 1): ?>
+                        <div class="yd flex flex_center" id="oTab">
+                            <?php foreach ($carousels as $key => $$carousel): ?>
+                                <span class="<?= ($key == 0) ? 'cur' : ''; ?>"></span>
+                            <?php endforeach; ?>
+                        </div>
                     <?php endif; ?>
                 </div>
                 <?php if (isset($user) && $user->gender == 2): ?>
@@ -139,7 +139,10 @@
             </span>
                 <h3>
                 <span class="place_name"><i class="name">{{user.nick}}</i><!-- <i class="rich-vip">VIP</i><i
-                        class="cup"><img src="/mobile/images/cup.jpg"/></i>--></span>
+                        class="cup"><img src="/mobile/images/cup.jpg"/></i>-->
+                    {{#isActive}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{/isActive}}
+                    {{#isHongRen}}<i class="vip"><img src="/mobile/images/my-hot.png" class="responseimg"/></i>{{/isHongRen}}
+                </span>
                     <span class="place_number color_gray"><em class="color_y"><i
                                     class="iconfont color_y">&#xe61d;</i> {{user.age}}</em>
                             本周魅力值：<i class="color_y max-num">{{total}}</i>
@@ -163,11 +166,13 @@
             <div class="flex">
                 <span class="voted_place {{#top3}}silver{{/top3}}">{{index}}</span>
                 <div class="voted_place_info">
-                    <span class="avatar" onclick="window.location.href='/user/male-homepage/{{id}}'"><img src="{{avatar}}"/></span>
+                    <span class="avatar" onclick="window.location.href='/user/male-homepage/{{id}}'"><img
+                                src="{{avatar}}"/></span>
                     <h3>
-                        <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img
-                                        src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span
-                                    class="highter-vip">{{upackname}}</span>{{/upackname}}
+                        <div class='flex'><span class="voted_name">{{nick}}</span>
+                            {{#isActive}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{/isActive}}
+                            {{#isTuHao}}<span class="hot"><img src="/mobile/images/zs.png" class="responseimg"/></span>{{/isTuHao}}
+                            {{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}
                         </div>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
@@ -194,9 +199,10 @@
                         <img src="{{avatar}}"/>
                     </span>
                     <h3>
-                        <div class='flex'><span class="voted_name">{{nick}}</span><span class="hot"><img
-                                        src="/mobile/images/hot.png" class="responseimg"/></span>{{#upackname}}<span
-                                    class="highter-vip">{{upackname}}</span>{{/upackname}}
+                        <div class='flex'><span class="voted_name">{{nick}}</span>
+                            {{#isActive}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{/isActive}}
+                            {{#isTuHao}}<span class="hot"><img src="/mobile/images/zs.png" class="responseimg"/></span>{{/isTuHao}}
+                            {{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}
                         </div>
                         <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
                     </h3>
@@ -268,8 +274,8 @@
             var obj = this;
             aaaa = $.util.loop({
                 tp: 'text', //图片img或是文字text
-                min:1,
-                minp:20,
+                min: 1,
+                minp: 20,
                 loadImg: true,
                 isInit: true,
                 moveDom: $('#imgBox'),
@@ -530,5 +536,6 @@
 
     function supportHer(id) {
         $.util.checkLogin('/gift/index/' + id);
-    };
+    }
+    ;
 </script>

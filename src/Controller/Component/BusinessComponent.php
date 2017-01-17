@@ -64,48 +64,59 @@ class BusinessComponent extends Component
         }
         $FlowTable = TableRegistry::get('Flow');
         $query = $FlowTable->find();
-        $query->contain(['User' => function($q) use($userid) {
-            return $q->select(['id','avatar','nick','phone','gender','birthday'])
-                ->where(['User.id' => $userid]);
-        }])
+        $query->contain([
+            'User' => function($q) use($userid) {
+                return $q->select(['id','avatar','nick','phone','gender','birthday'])
+                        ->where(['User.id' => $userid]);
+            },
+            'User.Upacks',
+            'User.Supporteds',
+        ])
             ->select(['total' => 'sum(amount)'])
             ->where($mwhere)
             ->map(function($row) {
                 $row['user']['age'] = getAge($row['user']['birthday']);
+                $row['total'] = intval($row['total']);
                 $row['ishead'] = false;
+                $row['isHongRen'] = false;
+                if((count($row['user']['supporteds']) >= 100) && (count($row['user']['upacks'] >= 100))) {
+                    $row['isHongRen'] = true;
+                }
                 return $row;
             });
         $mytop = $query->first();
-        $mytop->user->age = isset($mytop->user->birthday)?getAge($mytop->user->birthday):'xx';
-        $mytop->ishead = true;
-        if(!$mytop->total) {
-            //如果魅力值为0则不参与排名
-            return null;
-        }
+        if($mytop) {
+            $mytop->user->age = isset($mytop->user->birthday)?getAge($mytop->user->birthday):'xx';
+            $mytop->ishead = true;
+            if(!$mytop->total) {
+                //如果魅力值为0则不参与排名
+                return null;
+            }
 
-        //获取我的排名对象
-        $where = ['income' => 1];
-        if('week' == $type) {
-            $where['Flow.create_time >='] = new Time('last sunday');
-        } else if('month' == $type) {
-            $da = new Time();
-            $where['Flow.create_time >='] =
-                new Time(new Time($da->year . '-' . $da->month . '-' . '01 00:00:00'));
-        }
-        $where['User.gender'] = 2;
-        $where['User.id !='] = $mytop->user->id;
-        $iquery = $FlowTable
-            ->find('all')
-            ->contain([
-                'User'
-            ])
-            //->select(['total' => 'sum(amount)'])
-            ->where($where)
-            ->group('Flow.user_id')
-            ->having(['sum(amount) >= ' => $mytop->total]);
+            //获取我的排名对象
+            $where = ['income' => 1];
+            if('week' == $type) {
+                $where['Flow.create_time >='] = new Time('last sunday');
+            } else if('month' == $type) {
+                $da = new Time();
+                $where['Flow.create_time >='] =
+                    new Time(new Time($da->year . '-' . $da->month . '-' . '01 00:00:00'));
+            }
+            $where['User.gender'] = 2;
+            $where['User.id !='] = $mytop->user->id;
+            $iquery = $FlowTable
+                ->find('all')
+                ->contain([
+                    'User'
+                ])
+                //->select(['total' => 'sum(amount)'])
+                ->where($where)
+                ->group('Flow.user_id')
+                ->having(['sum(amount) >= ' => $mytop->total]);
 
-        //计算排名
-        $mytop->index = $iquery->count() + 1;
+            //计算排名
+            $mytop->index = $iquery->count() + 1;
+        }
         return $mytop;
     }
 
@@ -139,6 +150,86 @@ class BusinessComponent extends Component
             return \VIPlevel::COMMON_VIP;
         }
         return \VIPlevel::NOT_VIP;
+    }
+
+
+    /**
+     * 检测是否美约红人
+     * 规则：100个被查看动态&&收到100个礼物
+     * @return boolean
+     */
+    public function isMYHongRen(User $user)
+    {
+        if($user->gender == 1) {
+            return false;
+        }
+        $usedPackTb = TableRegistry::get('UsedPackage');
+        $supportTb = TableRegistry::get('Support');
+        $usednum = $usedPackTb->find()->where(['used_id' => $user->id])->count();
+        $supportnum = $supportTb->find()->where(['supported_id' => $user->id])->count();
+        if(($usednum >= 100) && ($supportnum >= 100)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * 检测是否显示土豪徽章
+     * 规则：土豪排名前100
+     * @return boolean
+     */
+    public function isTuHao(User $user)
+    {
+        if($user->gender == 2) {
+            return false;
+        }
+        $userTb = TableRegistry::get('User');
+        $mypaiming = $userTb->find()
+                ->select(['recharge'])
+                ->where(['recharge >' => $user->recharge, 'gender' => 1])
+                ->count() + 1;
+        if($mypaiming <= 100) {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * 检测是否显示活跃徽章
+     * 规则：连续7天登录
+     * @return boolean
+     */
+    public function isActive(User $user)
+    {
+        return false;
+    }
+
+
+    /**
+     * 获取用于显示的徽章数组
+     *
+     */
+    public function getShown(User $user)
+    {
+        $shown = [
+            'isHongRen' => false,
+            'isTuHao' => false,
+            'isActive' => false,
+            'vipLevel' => \VIPlevel::NOT_VIP
+        ];
+        if(!$user) {
+            return $shown;
+        }
+        if($user->gender == 1) {
+            $shown['isHongRen'] = $this->isMYHongRen($user);
+            $shown['vipLevel'] = $this->getVIP($user);
+        } else {
+            $shown['isTuHao'] = $this->isTuHao($user);
+        }
+        $shown['isActive'] = $this->isActive($user);
+        return $shown;
     }
 
 

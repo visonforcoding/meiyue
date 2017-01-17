@@ -53,7 +53,7 @@
         <ul id="visitors-list" class="praised_list bgff">
 
         </ul>
-        <div id="blank-area">
+        <div id="blank-area" class="empty_container">
 
         </div>
     </div>
@@ -61,7 +61,7 @@
     <a class="identify_footer_potion not-vip-show" id="beVIP">成为会员，立即查看访客信息</a>
 <?php $this->start('script'); ?>
     <script type="text/javascript">
-        <?php if($isvip): ?>
+        <?php if($isvip || ($user->gender == 2)): ?>
         var curpage = 1;
         init();
         loadUser(curpage);
@@ -89,9 +89,9 @@
                 } else {
                     $.util.hidePreloader();
                     if(curpage == 1) {
-                        $('#blank-area').append('<p class="smallarea aligncenter mt60">您暂时没有访客哦</p><br>');
+                        $('#blank-area').html('<div class="empty-content  empty-text mt350"><p class="empty-tips">您暂时没有访客哦</p></div>');
                     } else {
-                        $('#blank-area').append('<p class="smallarea aligncenter mt60">没有更多数据了</p><br>');
+                        $('#blank-area').html('<p class="smallarea aligncenter mt60">没有更多数据了</p><br>');
                     }
                     window.holdLoad = true;
                 }

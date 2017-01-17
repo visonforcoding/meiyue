@@ -1333,7 +1333,7 @@ class UsercController extends AppController
             $visitnum = $visitorTb->find()->where(['visited_id' => $this->user->id])->count();
         }
         if ($this->request->is('json')) {
-            if(!$isvip) {
+            if(!$isvip && ($this->user->gender == 1)) {
                 return $this->Util->ajaxReturn(['visitors' => []]);
             }
             $limit = 10;
