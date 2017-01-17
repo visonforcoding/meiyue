@@ -17,7 +17,7 @@
                             <h3 class="commontext bright color_friends">
                                 <span class="lagernum">
                                     <!--<img src="/mobile/images/higther-vip.png" class="responseimg"/>-->
-                                    VIP普通
+                                    <?= $item->title; ?>
                                 </span>
                                 <i class="unit"><?= $item->vali_time; ?>天</i>
                             </h3>
@@ -44,7 +44,7 @@
                                         <i class="iconfont color_y">&#xe654;</i>
                                         查看
                                         <?= (checkIsEndless($item->browse_num))?'无限':$item->browse_num; ?>
-                                        个美女所发布的全部动态
+                                        个美女发布的全部私房写真以及视频专辑
                                     </p>
                                 <?php endif; ?>
                                 <?php if($item->chat_num): ?>
@@ -100,7 +100,7 @@
                                         <i class="iconfont color_y">&#xe654;</i>
                                         查看
                                         <?= checkIsEndless($item->browse_num)?'无限':$item->browse_num; ?>
-                                        个美女所发布的全部动态
+                                        个美女发布的全部私房写真以及视频专辑
                                     </p>
                                     <?php endif; ?>
                                     <?php if($item->chat_num): ?>
