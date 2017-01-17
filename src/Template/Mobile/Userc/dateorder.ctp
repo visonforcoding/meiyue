@@ -243,6 +243,9 @@
                 </ul>
             </section>
 
+            <div class="empty_container" id="empty_container" hidden>
+
+            </div>
         </div>
     </div>
 </div>
@@ -562,6 +565,19 @@ function calFunc(data) {
                     break;
             }
         });
+    } else {
+        if(curpage == 1) {
+            var str = '您暂无订单';
+            if(query == 2) {
+                str = '您没有待确认的订单';
+            } else if(query == 3) {
+                str = '您没有进行中的订单';
+            }
+            $('#empty_container').show();
+            $('#empty_container').html('<div class="empty-content  mt160"><span class="empty-ico-box bg-active">' +
+                '<i class="iconfont empty-ico">&#xe60a;</i></span>' +
+                '<p class="empty-tips">' +str+ '</p></div>');
+        }
     }
     return data;
 }

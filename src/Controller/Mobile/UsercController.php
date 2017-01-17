@@ -845,7 +845,7 @@ class UsercController extends AppController
         $packs = $packTb
             ->find()
             ->where(['is_used' => 1])
-            ->orderDesc('show_order');
+            ->orderAsc('show_order');
 
         $this->set([
             'user' => $this->user,
