@@ -96,12 +96,15 @@
 <script type="text/javascript">
     $('#submitbtn').on('tap', function () {
         var data = $(this).data('type');
+        $('#videobtn').removeClass('foward');
+        $('#picbtn').removeClass('foward');
         switch (data) {
             case '0':
                 $('#videobtn').removeClass('moveright').addClass('moveleft');
                 $('#picbtn').removeClass('movedown').addClass('moveup');
                 $(this).html('<i class="iconfont">&#xe653;</i>');
                 $(this).attr('data-type', '1');
+                setTimeout(changeFB, 3000);
                 break;
             case '1':
                 $('#videobtn').removeClass('moveleft').addClass('moveright');
@@ -113,6 +116,13 @@
                 break;
         }
     })
+
+    function changeFB(){
+        $('#picbtn').addClass('foward').removeClass('moveup');
+        $('#videobtn').addClass('foward').removeClass('moveleft');
+        $('#submitbtn').html('<span>发布<br />动态</span>');;
+        $('#submitbtn').attr('data-type','0');
+    }
 </script>
 
 <script>
