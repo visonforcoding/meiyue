@@ -3,6 +3,7 @@
 namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
+use App\Model\Entity\Msgpush;
 use Cake\ORM\TableRegistry;
 use ServiceType;
 use Wpadmin\Utils\UploadFile;
@@ -290,8 +291,17 @@ class ApiController extends AppController {
                     }
                     if ($param->action == 'update_basic_pic'||$param->action=='add_basic_pic') {
                         $user->images = serialize($images);
-                        $user->status = 1;
+                        if($user->gender == 2) {
+                            $user->status = 1;
+                        }
                         if ($UserTable->save($user)) {
+                            if($param->action=='add_basic_pic') {
+                                $this->Business->sendSMsg($user_id, [
+                                    'towho' => \MsgpushType::TO_REGISTER,
+                                    'title' => '注册-认证信息提交成功',
+                                    'body' => '您填写的认证信息已成功上传，后台人员正在审核中',
+                                ], true);
+                            }
                             $this->jsonResponse(true, '保存成功');
                         } else {
                             dblog('user', '基本图片保存失败', $user->errors());

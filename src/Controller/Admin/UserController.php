@@ -142,9 +142,13 @@ class UserController extends AppController {
         $sort = 'User.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
+        $statuskw = $this->request->data('statuskw');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
+        if(($statuskw !== null) && ($statuskw != 100)) {
+            $where['status'] = $statuskw;
+        }
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
         }
@@ -284,49 +288,47 @@ class UserController extends AppController {
                 if ($res) {
                     if($user->status != $oldStatus) {
                         switch($user->status) {
-                            case 2:  //审核不通过
-                                $this->Push->sendAlias(
-                                    $user->user_token,
-                                    '抱歉，您的注册认证信息审核不通过，请到【我的-个人信息】页中进行修改，重新提交审核。',
-                                    ' ',
-                                    '抱歉，您的注册认证信息审核不通过，请到【我的-个人信息】页中进行修改，重新提交审核。',
-                                    'MY',
-                                    false
-                                );
+                            case UserStatus::NOPASS:  //审核不通过
+                                $this->Business->sendSMsg($user->id, [
+                                    'towho' => \MsgpushType::TO_REGISTER,
+                                    'title' => '审核未通过',
+                                    'body' => '抱歉，您的认证信息未审核通过，主要原因是：您的基本照片和视频涉嫌模糊、遮挡等看不清本人；'.
+                                        '或裸露身体；或使用他人照片。请重新上传清晰的本人照片或视频。',
+                                ], true);
                                 break;
-                            case 3:  //审核通过
-                                $this->Push->sendAlias(
-                                    $user->user_token,
-                                    '恭喜您，认证信息审核通过，快快来发布技能和发布约会吧~',
-                                    ' ',
-                                    '恭喜您，认证信息审核通过，快快来发布技能和发布约会吧~',
-                                    'MY',
-                                    false
-                                );
+                            case UserStatus::PASS:  //审核通过
+                                $this->Business->sendSMsg($user->id, [
+                                    'towho' => \MsgpushType::TO_REGISTER,
+                                    'title' => '美女审核通过',
+                                    'body' => '恭喜您，经评审，您的颜值和技能都在线，认证信息已审核通过，快快来发布技能和发布约会吧~',
+                                ], true);
+                                break;
+                            case UserStatus::SHARE_PASS:  //非美女审核通过
+                                $this->Business->sendSMsg($user->id, [
+                                    'towho' => \MsgpushType::TO_REGISTER,
+                                    'title' => '经纪人审核通过',
+                                    'body' => '经评审，您现在的身份为美约官方合伙人。您可以分享派对、选美、邀请注册等任意链接来获得收入，'.
+                                        '其他功能暂不可用。详情查看：邀请好友注册，或联系您的推荐人。',
+                                ], true);
                                 break;
                         }
                     }
                     if($user->id_status != $oldIdStatus) {
                         switch($user->id_status) {
                             case 2:  //审核不通过
-                                $this->Push->sendAlias(
-                                    $user->user_token,
-                                    '抱歉，您的身份认证审核未通过，主要原因是：您的身份证照片可能模糊、遮挡等看不清；或使用他人照片。请重新上传清晰的本人照片。',
-                                    ' ',
-                                    '抱歉，您的身份认证审核未通过，主要原因是：您的身份证照片可能模糊、遮挡等看不清；或使用他人照片。请重新上传清晰的本人照片。',
-                                    'MY',
-                                    false
-                                );
+                                $this->Business->sendSMsg($user->id, [
+                                    'towho' => \MsgpushType::TO_AUTH_CHECH,
+                                    'title' => '身份认证审核未通过',
+                                    'body' => '抱歉，您的身份认证审核未通过，主要原因是：您的身份证照片可能模糊、遮挡等看不清；'.
+                                        '或没有参照示例上传；或使用他人照片。请重新上传清晰的本人照片。',
+                                ], true);
                                 break;
                             case 3:  //审核通过
-                                $this->Push->sendAlias(
-                                    $user->user_token,
-                                    '恭喜你，身份认证审核通过！',
-                                    ' ',
-                                    '恭喜你，身份认证审核通过！',
-                                    'MY',
-                                    false
-                                );
+                                $this->Business->sendSMsg($user->id, [
+                                    'towho' => \MsgpushType::TO_AUTH_CHECH,
+                                    'title' => '身份认证审核通过',
+                                    'body' => '恭喜你，身份认证审核通过！',
+                                ], true);
                                 break;
                         }
                     }
@@ -354,11 +356,15 @@ class UserController extends AppController {
         $sort = 'User.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
+        $statuskw = $this->request->data('statuskw');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
+        }
+        if(($statuskw !== null) && ($statuskw != 100)) {
+            $where['status'] = $statuskw;
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -434,9 +440,13 @@ class UserController extends AppController {
         $sort = 'User.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
+        $statuskw = $this->request->data('statuskw');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
+        if(($statuskw !== null) && ($statuskw != 100)) {
+            $where['is_agent'] = $statuskw;
+        }
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
         }

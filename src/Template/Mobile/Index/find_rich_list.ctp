@@ -13,7 +13,7 @@
                             <div class='flex'><span class="voted_name">{{nick}}</span>
                                 {{#isActive}}<span class="hot"><img src="/mobile/images/hot.png" class="responseimg"/></span>{{/isActive}}
                                 {{#isTuHao}}<span class="hot"><img src="/mobile/images/zs.png" class="responseimg"/></span>{{/isTuHao}}
-                                {{#upackname}}<span class="highter-vip">{{upackname}}</span>{{/upackname}}
+                                {{#upackname}}<span class="highter-vip {{upackstyle}}">{{upackname}}</span>{{/upackname}}
                             </div>
                             <span class="voted_number color_gray">已消费：{{recharge}}美币</span>
                         </h3>
@@ -87,8 +87,8 @@
                                                     <span class="hot"><img src="/mobile/images/zs.png" class="responseimg"/></span>
                                                 <?php endif; ?>
                                                 <?php if ($top->upackname): ?>
-                                                <span class="highter-vip">
-                                                    <?= $top->  upackname; ?>
+                                                <span class="highter-vip <?= isset($top->upackstyle)?$top->upackstyle:'' ?>">
+                                                    <?= $top->upackname; ?>
                                                 </span>
                                                 <?php endif; ?>
                                             </div>

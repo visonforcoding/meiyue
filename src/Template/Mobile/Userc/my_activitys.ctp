@@ -45,10 +45,27 @@
             </section>
         </div>
     </div>
+    <div class="empty_container empty_container1" hidden>
+        <div class="empty-content  mt160">
+            <span class="empty-ico-box bg-active">
+                <i class="iconfont empty-ico">&#xe60b;</i>
+            </span>
+            <p class="empty-tips">您还没有参加过派对，赶快去<a href="/activity/index#<?= ($user->gender == 2)?1:2?>" class="color_y">活动派对页</a>寻找吧~</p>
+        </div>
+    </div>
+    <div class="empty_container empty_container2" hidden>
+        <div class="empty-content  mt160">
+            <span class="empty-ico-box bg-active">
+                <i class="iconfont empty-ico">&#xe60b;</i>
+            </span>
+            <p class="empty-tips">您没有已结束的派对</p>
+        </div>
+    </div>
 </div>
 
 <script>
     var curpage = 1;
+    var curquery = 1;
     var url = '/userc/get-acts-in-page/';
     var tmpl = '#myAct-list-tpl';
     var conid = 'list-con';
@@ -66,13 +83,11 @@
     $(".date-tab").on('tap', function () {
 
         $(".date-tab").each(function () {
-
             $(this).removeClass('cur');
-
         });
         $(this).addClass('cur');
+        curquery = $(this).data('query');
         var query = "?query=" + $(this).data('query');
-        console.log(query);
         var curpage = 1;
         $.util.asyLoadData({
             gurl: url,
@@ -102,8 +117,8 @@
 
     //可以定制输出内容data.datas为数据列表
     function calFunc(data) {
-        if (data.datas) {
-            var curdatetime = new Date();
+        if ((data.datas).length) {
+            $('.empty_container').hide();
             var datas = data.datas;
             for (key in datas) {
                 tmp = datas[key];
@@ -119,6 +134,14 @@
             }
             data.datas = datas;
 
+        } else {
+            if(curpage == 1 && curquery == 1) {
+                $('.empty_container').hide();
+                $('.empty_container1').show();
+            } else if(curpage == 1 && curquery == 2) {
+                $('.empty_container').hide();
+                $('.empty_container2').show();
+            }
         }
         return data;
     }

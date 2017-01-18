@@ -13,6 +13,15 @@
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
             </div>
             <div class="form-group">
+                <label for="statuskw">审核状态</label>
+                <select name="statuskw" class="form-control">
+                    <option value="100">全部</option>
+                    <option value="1">待审核</option>
+                    <option value="2">审核不通过</option>
+                    <option value="3">审核通过</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="keywords">时间</label>
                 <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
                 <label for="keywords">到</label>

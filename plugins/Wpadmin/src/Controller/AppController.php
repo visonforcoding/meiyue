@@ -27,7 +27,7 @@ class AppController extends Controller {
 
     public function initialize() {
         $this->loadComponent('Flash');
-        $this->loadComponent('Push');
+        $this->loadComponent('Business');
         $this->loadComponent('Wpadmin.Util');
         $this->firewall = array(
             ['admin', 'login'],

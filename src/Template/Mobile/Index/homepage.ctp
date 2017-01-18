@@ -302,7 +302,6 @@
 <?php $this->start('script'); ?>
 <script src="/mobile/js/mustache.min.js"></script>
 <script>
-    LEMON.sys.back('/index/index');
     LEMON.sys.setTopRight('分享')
     window.onTopRight = function () {
         shareBanner();

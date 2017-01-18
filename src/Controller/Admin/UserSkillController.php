@@ -109,24 +109,19 @@ class UserSkillController extends AppController
                 if($oldCheck != $userSkill->is_checked) {
                     switch($userSkill->is_checked) {
                         case 0:   //审核不通过
-                            $this->Push->sendAlias(
-                                $userSkill->user->user_token,
-                                '抱歉，您的'.$userSkill->skill->name.'技能审核未通过，主要原因是：约会说明涉嫌黄色信息；或表达不完整、不清晰。请返回我技能重新编辑发布。',
-                                ' ',
-                                '抱歉，您的'.$userSkill->skill->name.'技能审核未通过，主要原因是：约会说明涉嫌黄色信息；或表达不完整、不清晰。请返回我技能重新编辑发布。',
-                                'MY',
-                                false
-                            );
+                            $this->Business->sendSMsg($userSkill->user->id, [
+                                'towho' => \MsgpushType::TO_SKILL_CHECK,
+                                'title' => '技能审核未通过',
+                                'body' => '抱歉，您的'.$userSkill->skill->name.'技能审核未通过，主要原因是：'.
+                                    '约会说明涉嫌黄色信息；或表达不完整、不清晰。请返回我技能重新编辑发布。',
+                            ], true);
                             break;
                         case 1:   //审核通过
-                            $this->Push->sendAlias(
-                                $userSkill->user->user_token,
-                                '恭喜您，'.$userSkill->skill->name.'技能审核通过，关注度已大大提升！可以去发布约会啦~',
-                                ' ',
-                                '恭喜您，'.$userSkill->skill->name.'技能审核通过，关注度已大大提升！可以去发布约会啦~',
-                                'MY',
-                                false
-                            );
+                            $this->Business->sendSMsg($userSkill->user->id, [
+                                'towho' => \MsgpushType::TO_SKILL_CHECK,
+                                'title' => '技能审核通过',
+                                'body' => '恭喜您，'.$userSkill->skill->name.'技能审核通过，关注度已大大提升！可以去发布约会啦~',
+                            ], true);
                             break;
                         case 2:   //未审核
                             break;
@@ -186,7 +181,11 @@ class UserSkillController extends AppController
         $order = $this->request->data('sord');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
+        $statuskw = $this->request->data('statuskw');
         $where = [];
+        if(($statuskw !== null) && ($statuskw != 100)) {
+            $where['is_checked'] = $statuskw;
+        }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));

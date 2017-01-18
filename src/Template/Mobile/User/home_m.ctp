@@ -23,7 +23,9 @@
                                                                     class="responseimg"/></span>
                                     <?php endif; ?>
                                     <?php if ($shown['vipLevel'] != VIPlevel::NOT_VIP): ?>
-                                        <span class="highter-vip"><?= VIPlevel::getStr($shown['vipLevel']); ?></span>
+                                        <span class="highter-vip <?= VIPlevel::getStyle($shown['vipLevel']); ?>">
+                                            <?= VIPlevel::getStr($shown['vipLevel']); ?>
+                                        </span>
                                     <?php endif; ?>
                                 </h3>
                                 <?php if ($user->id_status == UserStatus::PASS): ?>

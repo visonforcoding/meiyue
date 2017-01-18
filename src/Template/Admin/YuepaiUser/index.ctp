@@ -18,6 +18,15 @@
                         placeholder="输入用户名称">
                 </div>
                 <div class="form-group">
+                    <label for="statuskw">审核状态</label>
+                    <select name="statuskw" class="form-control">
+                        <option value="100">全部</option>
+                        <option value="1">审核通过</option>
+                        <option value="2">待审核</option>
+                        <option value="3">审核不通过</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="keywords">所在地区</label>
                     <input
                         type="text"
