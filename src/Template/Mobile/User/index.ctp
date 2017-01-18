@@ -5,14 +5,13 @@
              <i class="iconfont install">&#xe661;</i>
          </div> -->
         <div class="home_cover_info flex">
-					<span class="avatar" onclick="window.location.href='/user/my-homepage/<?= $user->id; ?>'">
-						<img src="<?= createImg($user->avatar) . '?w=150' ?>" class="avatar-pic"
-                             onclick="location.href='/user/my-homepage/<?= $user->id; ?>'"/>
+					<span class="avatar" onclick="toMyHomepage();">
+						<img src="<?= createImg($user->avatar) . '?w=150' ?>" class="avatar-pic"/>
                         <!--<div class="vip"><img src="/mobile/images/vip.png" class="responseimg"/></div>-->
 					</span>
             <div class="cover_left_info">
                 <ul class="">
-                    <li class="bbottom userinfo" onclick="window.location.href='/userc/edit-info'">
+                    <li class="bbottom userinfo" onclick="toEditInfo();">
                         <a href="#this" class="cover_block">
                             <div class='identify-user-info'>
                                 <h3 class='flex'>
@@ -39,9 +38,9 @@
                         </a>
                     </li>
                     <li class="follow flex flex_justify">
-                        <a class="like" href="/userc/likes">我喜欢 <i><?= $focount; ?></i></a>
-                        <a class="like" href="/userc/fans">粉丝 <i><?= $facount; ?></i></a>
-                        <a class="like" href="/userc/visitors">访客 <i><?= $user->visitnum; ?></i></a>
+                        <a class="like" onclick="toLikes();">我喜欢 <i><?= $focount; ?></i></a>
+                        <a class="like" onclick="toFans();">粉丝 <i><?= $facount; ?></i></a>
+                        <a class="like" onclick="toVisitors();">访客 <i><?= $user->visitnum; ?></i></a>
                     </li>
                 </ul>
             </div>
@@ -52,7 +51,7 @@
     <div class="home_items_list mt40">
         <ul>
             <li>
-                <a href="/userc/my-purse" class="home_items">
+                <a onclick="toMyPurse();" class="home_items">
                     <div class="home_list_l_info flex">
                         <i class="iconfont">&#xe60e;</i><span class="itemsname">我的钱包</span>
                     </div>
@@ -64,7 +63,7 @@
                 </a>
             </li>
             <li>
-                <a href="/userc/dateorder" class="home_items">
+                <a onclick="toOrder();" class="home_items">
                     <div class="home_list_l_info  flex"><i class="iconfont">&#xe60a;</i><span
                                 class="itemsname">订单管理</span></div>
                     <div class="home_list_r_info">
@@ -191,25 +190,6 @@
     if ($.util.isAPP) {
         $('.footer_submit_btn').css('bottom', '10px')
     }
-    $('#submitbtn').on('tap', function () {
-        var data = $(this).data('type');
-        switch (data) {
-            case '0':
-                $('#videobtn').removeClass('moveright').addClass('moveleft');
-                $('#picbtn').removeClass('movedown').addClass('moveup');
-                $(this).html('<i class="iconfont">&#xe653;</i>');
-                $(this).attr('data-type', '1');
-                break;
-            case '1':
-                $('#videobtn').removeClass('moveleft').addClass('moveright');
-                $('#picbtn').removeClass('moveup').addClass('movedown');
-                $(this).html('<span>发布<br />动态</span>');
-                $(this).attr('data-type', '0');
-                break;
-            default:
-                break;
-        }
-    })
 
     $('#videobtn,#picbtn').bind('click', function (event) {
         event.preventDefault();
@@ -225,6 +205,36 @@
             }
         })
     });
+
+    $('#submitbtn').on('tap',function(){
+        var data = $(this).data('type');
+        $('#videobtn').removeClass('foward');
+        $('#picbtn').removeClass('foward');
+        switch(data){
+            case '0':
+                $('#videobtn').removeClass('moveright').addClass('moveleft');
+                $('#picbtn').removeClass('movedown').addClass('moveup');
+                $(this).html('<i class="iconfont">&#xe653;</i>');
+                $(this).attr('data-type','1');
+                setTimeout(changeFB, 3000);
+                break;
+            case '1':
+                $('#videobtn').removeClass('moveleft').addClass('moveright');
+                $('#picbtn').removeClass('moveup').addClass('movedown');
+                $(this).html('<span>发布<br />动态</span>');
+                $(this).attr('data-type','0');
+                break;
+            default:break;
+        }
+    });
+
+    function changeFB(){
+        $('#picbtn').addClass('foward').removeClass('moveup');
+        $('#videobtn').addClass('foward').removeClass('moveleft');
+        $('#submitbtn').html('<span>发布<br />动态</span>');;
+        $('#submitbtn').attr('data-type','0');
+    }
+
     //$.util.showPreloader('前往登录..');
     window.onActiveView = function () {
         // $('#submitbtn').html('<span>发布<br />动态</span>');
@@ -242,6 +252,7 @@
 //            });
         }
     }
+
     window.onBackView = window.onActiveView();
     function tel() {
         $.util.confirm(
@@ -254,6 +265,28 @@
             null,
             '拨打'
         )
+    }
+
+    function toMyHomepage() {
+        location.href='/user/my-homepage/<?= $user->id; ?>';
+    }
+    function toEditInfo() {
+        window.location.href='/userc/edit-info';
+    }
+    function toLikes() {
+        location.href='/userc/likes';
+    }
+    function toFans() {
+        location.href='/userc/fans';
+    }
+    function toVisitors() {
+        location.href='/userc/visitors';
+    }
+    function toMyPurse() {
+        location.href='/userc/my-purse';
+    }
+    function toOrder() {
+        location.href='/userc/dateorder';
     }
 </script>
 <?php $this->end('script'); ?>

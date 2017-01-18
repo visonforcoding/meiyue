@@ -102,7 +102,7 @@
         window.shareConfig.link = '<?= getHost().'/date-order/join/'.$date['id']; ?><?= isset($user)?'?ivc='.$user->invit_code:'';?>';
         window.shareConfig.title = '<?= $date['title'] ?>';
         window.shareConfig.imgUrl = '<?= getHost().$date['user']['avatar']; ?>';
-        var share_desc = '<?= isset($date['share_desc'])?$date['share_desc']:''; ?>';
+        var share_desc = '<?= isset($share)?$share['content']:''; ?>';
         share_desc && (window.shareConfig.desc = share_desc);
         LEMON.show.shareBanner();
     }

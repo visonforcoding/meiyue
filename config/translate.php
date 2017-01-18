@@ -595,3 +595,24 @@ class VIPlevel {
 
     }
 }
+
+
+/**
+ * 系统配置类
+ */
+class Sysetting {
+    const DATE_SHARE_DESC = 1;  //约会页分享描述设置
+
+    public static function getStr($lev = null) {
+        $arr = [
+            Sysetting::DATE_SHARE_DESC => '约会页分享描述',
+        ];
+
+        if($lev !== null) {
+            return isset($arr[$lev])?$arr[$lev]:'未知';
+        } else {
+            return $arr;
+        }
+
+    }
+}

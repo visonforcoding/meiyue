@@ -28,13 +28,21 @@ class DateOrderController extends AppController
      */
     public function join($id = null)
     {
-
+        $share_desc = \Cake\Cache\Cache::read('DATE_SHARE_DESC');
+        if(!$share_desc) {
+            $setTb = TableRegistry::get('Setting');
+            $setting = $setTb->find()->where(['type' => \Sysetting::DATE_SHARE_DESC])->first();
+            if($setting) {
+                $share_desc = $setting;
+                \Cake\Cache\Cache::write('DATE_SHARE_DESC', $setting);
+            }
+        }
         $dateTable = TableRegistry::get("Date");
         $date = $dateTable->get($id, ['contain' => ['UserSkill' =>function($q){
             return $q->contain(['Skill', 'Cost']);}, 'Tags', 'User' => function ($q) {
             return $q->select(['nick', 'birthday', 'gender', 'money', 'avatar']);
         }]]);
-        $this->set(['date' => $date, 'user' => $this->user, 'pageTitle' => '美约-约会详情']);
+        $this->set(['share' => $share_desc, 'date' => $date, 'user' => $this->user, 'pageTitle' => '美约-约会详情']);
     }
 
     
