@@ -1006,10 +1006,10 @@ color:#999;padding:.1rem;}
 .footer_submit_btn .submit_ico1{color:#fff;font-size: 15px;box-shadow: 0 0 5px rgba(254,202,195,.8);border:1px #fff solid;display:-webkit-box;display: box;-webkit-box-align: center;-webkit-box-pack: center;background: -webkit-linear-gradient(top,#f3d88b,#e9b96c);background: linear-gradient(top,#f3d88b,#e9b96c);}
 .footer_submit_btn .submit_ico1 .iconfont{font-size:30px;vertical-align: top;}
 .footer_submit_btn .moveup{-webkit-animation: moveup .3s ease-out;-webkit-animation-fill-mode: forwards;animation: moveup .3s ease;animation-fill-mode: forwards;}
-.footer_submit_btn .foward{-webkit-animation-fill-mode : backwards;animation-fill-mode : backwards;}
+.footer_submit_btn a.foward{-webkit-animation-fill-mode : backwards;animation-fill-mode : backwards;}
 .footer_submit_btn .movedown{-webkit-animation: movedown .3s ease-out;-webkit-animation-fill-mode: forwards;animation: movedown .3s ease;animation-fill-mode: forwards;}
-.footer_submit_btn .moveleft{-webkit-animation: moveleft .3s ease-out;-webkit-animation-fill-mode: forwards;animation: moveleft .3s ease;animation-fill-mode: forwards;}
 .footer_submit_btn .moveright{-webkit-animation: moveright .3s ease-out;-webkit-animation-fill-mode: forwards;animation: moveright .3s ease;animation-fill-mode: forwards;}
+.footer_submit_btn .moveleft{-webkit-animation: moveleft .3s ease-out;-webkit-animation-fill-mode: forwards;animation: moveleft .3s ease;animation-fill-mode: forwards;}
 @-webkit-keyframes moveup{
 	0{-webkit-transform: translateY(0);transform: translateY(0);transform: rotate(.2);}
 	90%{-webkit-transform: translateY(-95px);transform: translateY(-95px);transform: rotate(.9);}
