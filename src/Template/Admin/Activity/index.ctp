@@ -18,6 +18,14 @@
                         placeholder="输入关键字">
                 </div>
                 <div class="form-group">
+                    <label for="statuskw">状态</label>
+                    <select name="statuskw" class="form-control">
+                        <option value="0">全部</option>
+                        <option value="1">正常</option>
+                        <option value="2">下架</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="keywords">时间</label>
                     <input
                         type="text"
@@ -73,7 +81,19 @@
                     {name: 'female_rest', editable: true, align: 'center'},
                     {name: 'punish_percent', editable: true, align: 'center'},
                     {name: 'status', editable: true, align: 'center'},
-                    {name: 'status', editable: true, align: 'center'},
+                    {name: 'status', editable: true, align: 'center',
+                        formatter: function(cellvalue, options, rowObject) {
+                            switch (cellvalue) {
+                                case 1:
+                                    cellvalue = '正常';
+                                    break;
+                                case 2:
+                                    cellvalue = '下架';
+                                    break;
+                            }
+                            return cellvalue;
+                        }
+                    },
                     {name: 'cancelday', editable: true, align: 'center'},
                     {
                         name: 'actionBtn',

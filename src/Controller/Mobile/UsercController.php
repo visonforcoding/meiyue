@@ -45,7 +45,7 @@ class UsercController extends AppController
                 ->page(intval($page))
                 ->formatResults(function ($items) {
                     return $items->map(function ($item) {
-                        $item['user']['avatar'] = createImg($item['user']['avatar']) . '?w=44&h=44&fit=stretch';
+                        $item['user']['avatar'] = createImg($item['user']['avatar']) . '?w=90&h=90&fit=stretch';
                         $item['user']['age'] = isset($item['user']['birthday']) ? getAge($item['user']['birthday']) : 'xx';
                         if($item['user']['gender'] == 1) {
                             $item['user']['charm'] = intval($item['user']['recharge']);
@@ -122,7 +122,7 @@ class UsercController extends AppController
      */
     public function myActivitys()
     {
-        $this->set(['pageTitle' => '我的派对']);
+        $this->set(['user' => $this->user, 'pageTitle' => '我的派对']);
     }
 
 
@@ -1349,7 +1349,7 @@ class UsercController extends AppController
                 ->page(intval($page))
                 ->formatResults(function ($items) {
                     return $items->map(function ($item) {
-                        $item['visiter']['avatar'] = createImg($item['visiter']['avatar']) . '?w=44&h=44&fit=stretch';
+                        $item['visiter']['avatar'] = createImg($item['visiter']['avatar']) . '?w=90&h=90&fit=stretch';
                         $item['visiter']['age'] = isset($item['visiter']['birthday']) ? getAge($item['visiter']['birthday']) : 'xx';
                         //$item['visiter']['isfan'] = (count($item['visiter']['follows']));
                         if($item['visiter']['gender'] == 1) {

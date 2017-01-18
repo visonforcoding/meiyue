@@ -90,24 +90,19 @@ class MovementController extends AppController {
                         case 1:   //待审核
                             break;
                         case 2:   //审核通过
-                            $this->Push->sendAlias(
-                                $movement->user->user_token,
-                                '恭喜您，动态审核通过，关注度已大大提升！',
-                                ' ',
-                                '恭喜您，动态审核通过，关注度已大大提升！',
-                                'MY',
-                                false
-                            );
+                            $this->Business->sendSMsg($movement->user->id, [
+                                'towho' => \MsgpushType::TO_MOVEMENT_CHECK,
+                                'title' => '动态审核通过',
+                                'body' => '恭喜您，动态审核通过，关注度已大大提升！',
+                            ], true);
                             break;
                         case 3:   //审核不通过
-                            $this->Push->sendAlias(
-                                $movement->user->user_token,
-                                '抱歉，您的动态未审核通过，主要原因是：您的动态涉嫌模糊、遮挡等看不清本人；或裸露身体；或使用他人照片。请重新上传清晰的本人照片或视频。',
-                                ' ',
-                                '抱歉，您的动态未审核通过，主要原因是：您的动态涉嫌模糊、遮挡等看不清本人；或裸露身体；或使用他人照片。请重新上传清晰的本人照片或视频。',
-                                'MY',
-                                false
-                            );
+                            $this->Business->sendSMsg($movement->user->id, [
+                                'towho' => \MsgpushType::TO_MOVEMENT_CHECK,
+                                'title' => '动态审核未通过',
+                                'body' => '抱歉，您的动态未审核通过，主要原因是：您的动态涉嫌模糊、遮挡等看不清本人；'.
+                                    '或裸露身体；或使用他人照片。请重新上传清晰的本人照片或视频。',
+                            ], true);
                             break;
                     }
                 }
@@ -161,9 +156,13 @@ class MovementController extends AppController {
         $sort = 'Movement.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
+        $statuskw = $this->request->data('statuskw');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
+        if(($statuskw !== null) && ($statuskw != 100)) {
+            $where['Movement.status'] = $statuskw;
+        }
         if (!empty($keywords)) {
             $where['username like'] = "%$keywords%";
         }

@@ -583,6 +583,7 @@ class ActivityController extends AppController
                 $user = $this->user;
                 $viplev = $this->Business->getVIP($user);
                 $user->upackname = \VIPlevel::getStr($viplev);
+                $user->upackstyle = \VIPlevel::getStyle($viplev);
                 $followTb = TableRegistry::get('UserFans');
                 if ($user) {
                     $followlist = $followTb->find('all')->where(['user_id' => $this->user->id])->toArray();
@@ -625,17 +626,21 @@ class ActivityController extends AppController
                     //累计充值3万元=钻石
                     if($row['recharge'] >= 30000) {
                         $row['upackname'] = \VIPlevel::getStr(\VIPlevel::ZUANSHI_VIP);
+                        $row['upackstyle'] = \VIPlevel::getStyle(\VIPlevel::ZUANSHI_VIP);
                     }
                     //累计充值1万元=白金
                     else if($row['recharge'] >= 10000) {
                         $row['upackname'] = \VIPlevel::getStr(\VIPlevel::BAIJIN_VIP);
+                        $row['upackstyle'] = \VIPlevel::getStyle(\VIPlevel::BAIJIN_VIP);
                     }
                     //累计充值3999=黄金
                     else if($row['recharge'] >= 3999) {
                         $row['upackname'] = \VIPlevel::getStr(\VIPlevel::HUANGJIN_VIP);
+                        $row['upackstyle'] = \VIPlevel::getStyle(\VIPlevel::HUANGJIN_VIP);
                     } else {
                         if(count($row['upacks']) > 0) {
                             $row['upackname'] = \VIPlevel::getStr(\VIPlevel::COMMON_VIP);
+                            $row['upackstyle'] = \VIPlevel::getStyle(\VIPlevel::COMMON_VIP);
                         }
                     }
                     $row['recharge'] = intval($row['recharge']);

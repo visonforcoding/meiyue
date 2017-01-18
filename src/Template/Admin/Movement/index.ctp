@@ -20,6 +20,15 @@
                     <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
                 </div>
                 <div class="form-group">
+                    <label for="statuskw">审核状态</label>
+                    <select name="statuskw" class="form-control">
+                        <option value="100">全部</option>
+                        <option value="1">待审核</option>
+                        <option value="2">审核通过</option>
+                        <option value="3">审核不通过</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="keywords">时间</label>
                     <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
                     <label for="keywords">到</label>
@@ -55,7 +64,7 @@
                             datatype: "json",
                             mtype: "POST",
                             colNames:
-                                    ['用户id', '动态类型', '动态内容', '动态图', '视频', '查看数', '点赞数', '审核状态', '创建时间', '更新时间', '操作'],
+                                    ['用户id', '动态类型', '动态图', '视频', '查看数', '点赞数', '审核状态', '创建时间', '更新时间', '操作'],
                             colModel: [
                                 {name: 'user.nick', editable: false, align: 'center'},
                                 {name: 'type', editable: false, align: 'center', formatter: function (cell, opt, row) {
@@ -69,15 +78,14 @@
                                         }
                                         return cell;
                                     }},
-                                {name: 'body', editable: false, align: 'center'},
                                 {name: 'images', editable: false, align: 'center', formatter: function (cell, opt, row) {
-                                        if (row.type == '2') {
+                                        if (row.type == '2' || row.type == '4') {
                                             return '无';
                                         }
                                         return '<a data-id="' + row.id + '" onclick="showImgs(this)"><i class="icon icon-picture"></i></a>';
                                     }},
                                 {name: 'video', editable: false, align: 'center', formatter: function (cell, opt, row) {
-                                        if (row.type == '1') {
+                                        if (row.type == '1' || row.type == '3') {
                                             return '无';
                                         }
                                         return '<a data-cover="'+row.video_cover+'" data-url="' + cell + '" onclick="showVideo(this)"><i class="icon icon-play-circle"></i></a>';

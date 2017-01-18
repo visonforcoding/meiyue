@@ -173,11 +173,15 @@ class ActivityController extends AppController
         $sort = 'Activity.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
+        $statuskw = $this->request->data('statuskw');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
+        }
+        if($statuskw) {
+            $where['status'] = $statuskw;
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));

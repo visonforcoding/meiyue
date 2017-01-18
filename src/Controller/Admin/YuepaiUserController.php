@@ -34,7 +34,7 @@ class YuepaiUserController extends AppController
     public function check($id, $status) {
         if($this->request->is('POST')) {
             $yuepaiu = $this->YuepaiUser->get($id, ['contain' => ['User' => function($q) {
-                return $q->select(['user_token']);
+                return $q->select(['user_token', 'id']);
             }, 'Yuepai']]);
             if(!CheckStatus::getStatus($status)) {
                 $this->Util->ajaxReturn([
@@ -49,14 +49,11 @@ class YuepaiUserController extends AppController
                 switch($yuepaiu->checked) {
                     case 1:  //审核通过
                         try {
-                            $res = $this->Push->sendAlias(
-                                $yuepaiu->user->user_token,
-                                '恭喜，您申请的约拍已审核通过，请准时于'.getYMD($yuepaiu->yuepai->act_time).'到深圳南山摄影棚。',
-                                ' ',
-                                '恭喜，您申请的约拍已审核通过，请准时于'.getYMD($yuepaiu->yuepai->act_time).'到深圳南山摄影棚。',
-                                'MY',
-                                false
-                            );
+                            $res = $this->Business->sendSMsg($yuepaiu->user->id, [
+                                'towho' => \MsgpushType::TO_YUEPAI_CHECK,
+                                'title' => '约拍审核通过',
+                                'body' => '恭喜，您申请的约拍已审核通过，请准时于'.getYMD($yuepaiu->yuepai->act_time).'到深圳南山摄影棚。',
+                            ], true);
                         } catch(Exception $e) {
                         }
                         break;
@@ -64,14 +61,11 @@ class YuepaiUserController extends AppController
                         break;
                     case 3:  //审核不通过
                         try {
-                            $res = $this->Push->sendAlias(
-                                $yuepaiu->user->user_token,
-                                '抱歉，您申请的约拍未审核通过，主要原因是：您的综合评分未达到约拍的标准，感谢您的支持！',
-                                ' ',
-                                '抱歉，您申请的约拍未审核通过，主要原因是：您的综合评分未达到约拍的标准，感谢您的支持！',
-                                'MY',
-                                false
-                            );
+                            $res = $this->Business->sendSMsg($yuepaiu->user->id, [
+                                'towho' => \MsgpushType::TO_YUEPAI_CHECK,
+                                'title' => '约拍审核未通过',
+                                'body' => '抱歉，您申请的约拍未审核通过，主要原因是：您的综合评分未达到约拍的标准，感谢您的支持！',
+                            ], true);
                         } catch(Exception $e) {
                         }
                         break;
@@ -194,8 +188,12 @@ class YuepaiUserController extends AppController
             $area = $this->request->data('area');
             $begin_time = $this->request->data('begin_time');
             $end_time = $this->request->data('end_time');
+            $statuskw = $this->request->data('statuskw');
             $contain = [];
             $where = [];
+            if(($statuskw !== null) && ($statuskw != 100)) {
+                $where['checked'] = $statuskw;
+            }
             if (!empty($name)) {
                 $where[' name like'] = "%$name%";
             }

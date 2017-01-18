@@ -31,9 +31,14 @@ class TestController extends AppController {
           $user = $userTb->get(28);
           echo $this->Business->shareIncome(0.01, $user);
           exit(); */
-        $payOrderTb = TableRegistry::get("Payorder");
+        /*$payOrderTb = TableRegistry::get("Payorder");
         $payOrder = $payOrderTb->find()->contain('User')->where(['Payorder.id' => 43])->first();
-        echo $this->Business->handPackPay($payOrder, 100, 1, '1827382738772837HSKJ');
+        echo $this->Business->handPackPay($payOrder, 100, 1, '1827382738772837HSKJ');*/
+        $this->Business->sendSMsg(3, [
+            'towho' => \MsgpushType::TO_REGISTER,
+            'title' => '注册-认证信息提交成功',
+            'body' => '您填写的认证信息已成功上传，后台人员正在审核中',
+        ], true);
         exit();
         //debug(\Cake\Core\Configure::read('Redis.default'));
     }

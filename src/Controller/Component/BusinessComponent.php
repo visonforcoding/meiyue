@@ -795,20 +795,19 @@ class BusinessComponent extends Component
     public function sendMsg($uids = [], $message = [], $umeng = false)
     {
         if($umeng) {
-            $title = isset($message[2])?$message[2]:'';
+            $title = isset($message['body'])?$message['body']:'';
             $content = ' ';
-            $ticker = isset($message[2])?$message[2]:'';
-            $alias = '';
+            $ticker = isset($message['body'])?$message['body']:'';
             $utb = TableRegistry::get("User");
             $users = $utb->find('list')->where(['id IN' => $uids])->toArray();
             $alias = implode($users, ',');
             if(count($uids) >= 50) {
-                $this->Push->sendFile($title, $content, $ticker, str_replace(',', "\n", $alias), 'MY', false);
+                $res = $this->Push->sendFile($title, $content, $ticker, str_replace(',', "\n", $alias), 'MY', false);
             } else if(count($uids > 0)) {
-                $this->Push->sendAlias($alias, $title, $content, $ticker, 'MY', false);
+                $res = $this->Push->sendAlias($alias, $title, $content, $ticker, 'MY', false);
             }
         }
-        return $this->sendPtMsg();
+        return $this->sendPtMsg($uids, $message);
     }
 
 

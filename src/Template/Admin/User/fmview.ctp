@@ -210,7 +210,7 @@
 
                     <input type="radio" <?= ($user->status == UserStatus::CHECKING)?'checked="checked"':''?> name="status" value="<?= UserStatus::CHECKING;?>" />待审核<br>
                     <input type="radio" <?= ($user->status == UserStatus::PASS)?'checked="checked"':''?> name="status" value="<?= UserStatus::PASS;?>" />美女审核通过<br>
-                    <input type="radio" <?= ($user->status == UserStatus::PASS)?'checked="checked"':''?> name="status" value="<?= UserStatus::SHARE_PASS;?>" />非美女审核通过(不展示)<br>
+                    <input type="radio" <?= ($user->status == UserStatus::SHARE_PASS)?'checked="checked"':''?> name="status" value="<?= UserStatus::SHARE_PASS;?>" />非美女审核通过(不展示)<br>
                     <input type="radio" <?= ($user->status == UserStatus::NOPASS)?'checked="checked"':''?> name="status" value="<?= UserStatus::NOPASS;?>" />审核不通过
                 </td>
                 <td class="horizone-title">

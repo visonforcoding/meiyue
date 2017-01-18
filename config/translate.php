@@ -526,7 +526,11 @@ class MsgpushType {
     const TO_CUSTOM = 1; //自定义
     const TO_DATER = 2; //约会消息通知
     const TO_ACTIVITY = 3; //派对消息通知
-    const TO_REGISTER = 4; //注册审核消息通知
+    const TO_REGISTER = 4; //注册认证信息审核推送
+    const TO_AUTH_CHECH = 5; //身份认证审核推送
+    const TO_SKILL_CHECK = 6; //技能审核推送
+    const TO_YUEPAI_CHECK = 7; //约拍审核推送
+    const TO_MOVEMENT_CHECK = 8; //动态审核推送
     //消息类型
     const COMMON = 21;  //普通类型，即文字加链接
     //推送状态及错误码
@@ -540,7 +544,11 @@ class MsgpushType {
             MsgpushType::TO_CUSTOM => '自定义',
             MsgpushType::TO_DATER => '约会消息通知',
             MsgpushType::TO_ACTIVITY => '派对消息通知',
-            MsgpushType::TO_REGISTER => '注册审核消息通知',
+            MsgpushType::TO_REGISTER => '注册认证信息审核推送',
+            MsgpushType::TO_AUTH_CHECH => '身份认证审核推送',
+            MsgpushType::TO_SKILL_CHECK => '技能审核推送',
+            MsgpushType::TO_YUEPAI_CHECK => '约拍审核推送',
+            MsgpushType::TO_MOVEMENT_CHECK => '动态审核推送',
         ];
 
         if($who == MsgpushType::GETJSON) {
@@ -593,6 +601,20 @@ class VIPlevel {
             return $levs;
         }
 
+    }
+
+    public static function getStyle($sty) {
+        $levs = [
+            VIPlevel::COMMON_VIP => 'highter-common',
+            VIPlevel::HUANGJIN_VIP => 'highter-gold',
+            VIPlevel::BAIJIN_VIP => 'highter-plat',
+            VIPlevel::ZUANSHI_VIP => 'highter-diamonds',
+        ];
+        if($sty !== null) {
+            return isset($levs[$sty])?$levs[$sty]:'';
+        } else {
+            return '';
+        }
     }
 }
 
