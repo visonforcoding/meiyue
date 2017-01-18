@@ -13,7 +13,6 @@
                 <div class="iden_r_box fr">
                     <div class="iden_r_pic">
                         <img src="<?= $user->avatar; ?>" alt="" />
-                        <input type="hidden" name="avatar" />
                     </div>
                     <i class="iconfont potion">&#xe605;</i>
                 </div>
@@ -100,7 +99,7 @@
         </ul>
     </div>
     <!--<div class="complete_basic_info mt100">完善个人资料有奖，<a href="#this">点击查看详情</a></div>-->
-    <?php if($user->gender == 2): ?>
+    <?php if ($user->gender == 2): ?>
         <div class="complete_basic_info mt100"><a href="/user/my-homepage/<?= $user->id; ?>">预览我的主页</a></div>
     <?php endif; ?>
 </div>
@@ -128,11 +127,13 @@
                         $.util.alert(msg.msg);
                         if (msg.status === true) {
                             $('#avatar_img img').attr('src', msg.path);
-                            $('input[name="avatar"]').val(msg.path);
+                            alert(msg.path);
+                            uploadAvatar(msg.path);
                         }
                     }
                 });
             });
+            return false;
         } else {
             $.util.alert('请在微信或APP上传图片');
         }
@@ -144,10 +145,10 @@
         if (!path) {
             return false;
         }
+        var a = {avatar: path};
         $.util.ajax({
             url: '/user/reg-user-info',
-            method: 'POST',
-            data: {avatar: path},
+            data: a,
             func: function (res) {
                 if (res.status) {
                     LEMON.db.set('avatar', res.realUrl);

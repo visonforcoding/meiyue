@@ -422,7 +422,7 @@ class UserController extends AppController {
         $this->handCheckLogin();
         $user = $this->user;
         if ($this->request->is('post')) {
-            $user = $this->User->get($user['id']);
+            $user = $this->User->get($user->id);
             $user = $this->User->patchEntity($user, $this->request->data());
             if ($this->User->save($user)) {
                 return $this->Util->ajaxReturn(true, '保存成功');
@@ -560,33 +560,28 @@ class UserController extends AppController {
      * @param type $id
      * @return type
      */
-    public function getWxPic() {
+    public function getWxPic($id) {
         $this->loadComponent('Wx');
-        $ids = $this->request->data('ids');
         $imgpaths = [];
-        \Cake\Log\Log::notice($ids, 'devlog');
-        foreach ($ids as $id) {
-            $token = $this->Wx->getAccessToken();
-            $url = 'http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=' . $token . '&media_id=' . $id;
-            $httpClient = new \Cake\Network\Http\Client();
-            $response = $httpClient->get($url);
-            if ($response->isOk()) {
-                $res = $response->body();
-            }
-            $today = date('Y-m-d');
-            $path = 'upload/user/avatar/' . $today;
-            $uniqid = uniqid();
-            if (!is_dir($path)) {
-                mkdir($path, 0777, true);
-            }
-            \Intervention\Image\ImageManagerStatic::make($res)
-                    ->save(WWW_ROOT . $path . '/' . $uniqid . '.jpg');
-            $imgpath = '/' . $path . '/' . $uniqid . '.jpg';
-            $imgpaths[] = $imgpath;
+        $token = $this->Wx->getAccessToken();
+        $url = 'http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=' . $token . '&media_id=' . $id;
+        $httpClient = new \Cake\Network\Http\Client();
+        $response = $httpClient->get($url);
+        if ($response->isOk()) {
+            $res = $response->body();
         }
+        $today = date('Y-m-d');
+        $path = 'upload/user/avatar/' . $today;
+        $uniqid = uniqid();
+        if (!is_dir($path)) {
+            mkdir($path, 0777, true);
+        }
+        \Intervention\Image\ImageManagerStatic::make($res)
+                ->save(WWW_ROOT . $path . '/' . $uniqid . '.jpg');
+        $imgpath = '/' . $path . '/' . $uniqid . '.jpg';
         if ($res) {
             \Cake\Log\Log::notice($imgpaths, 'devlog');
-            return $this->Util->ajaxReturn(['status' => true, 'msg' => '头像上传成功', 'path' => $imgpaths]);
+            return $this->Util->ajaxReturn(['status' => true, 'msg' => '头像上传成功', 'path' => $imgpath]);
         } else {
             return $this->Util->ajaxReturn(false, '头像上传失败');
         }
