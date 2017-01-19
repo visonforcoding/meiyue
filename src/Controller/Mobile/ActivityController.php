@@ -73,6 +73,7 @@ class ActivityController extends AppController
                 'status' => 1,
             ]);
         $datas->limit($limit);
+        $datas->orderDesc('Activity.set_top');
         $datas->orderDesc('Activity.start_time');
         $datas->page($page);
         $datas->formatResults(function (ResultSetInterface $results) {

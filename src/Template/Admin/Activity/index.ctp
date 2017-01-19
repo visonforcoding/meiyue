@@ -133,7 +133,28 @@
             response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
             response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
             response += '<a title="编辑" href="/activity/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+            response += '<a title="置顶" onClick="setTop(' + rowObject.id + ');" class="grid-btn "><i class="icon icon-arrow-up"></i></a>';
             return response;
+        }
+
+        function setTop(id) {
+            layer.confirm('确定置顶？', {
+                btn: ['确认', '取消'] //按钮
+            }, function () {
+                $.ajax({
+                    type: 'post',
+                    data: {id: id},
+                    dataType: 'json',
+                    url: '/activity/set-top',
+                    success: function (res) {
+                        layer.msg(res.msg);
+                        if (res.status) {
+                            $('#list').trigger('reloadGrid');
+                        }
+                    }
+                })
+            }, function () {
+            });
         }
 
         function delRecord(id) {

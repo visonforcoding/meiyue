@@ -137,6 +137,25 @@ class ActivityController extends AppController
 
 
     /**
+     * 置顶
+     */
+    public function setTop()
+    {
+        $this->request->allowMethod('post');
+        $id = $this->request->data('id');
+        if ($this->request->is('post')) {
+            $timestamp = time();
+            $res = $this->Activity->query()->update()->set(['set_top' => $timestamp])->where(['id' => $id])->execute();
+            if ($res) {
+                $this->Util->ajaxReturn(true, '置顶成功');
+            } else {
+                $this->Util->ajaxReturn(true, '置顶失败');
+            }
+        }
+    }
+
+
+    /**
      * 派对报名审核
      */
     public function check()
@@ -177,6 +196,12 @@ class ActivityController extends AppController
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
+        $order = [];
+        if (!empty($sort) && !empty($order)) {
+            $order = ['set_top' => 'desc', $sort => $order];
+        } else {
+            $order = ['set_top' => 'desc'];
+        }
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
         }
@@ -188,7 +213,7 @@ class ActivityController extends AppController
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order, $where);
+        $data = $this->getJsonForJqrid2($page, $rows, '', $order, $where);
         $this->autoRender = false;
         $this->response->type('json');
         $this->response->body(json_encode($data));
