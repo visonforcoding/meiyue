@@ -18,6 +18,7 @@ use Cake\ORM\Entity;
  * @property float $site_lat
  * @property float $site_lng
  * @property int $male_lim
+ * @property int $type
  * @property int $female_lim
  * @property int $male_rest
  * @property int $female_rest

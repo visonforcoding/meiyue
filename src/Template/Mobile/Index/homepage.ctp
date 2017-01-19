@@ -309,9 +309,9 @@
 
     function shareBanner() {
         window.shareConfig.link = '<?= getHost().'/index/homepage/'.$user->id; ?><?= isset($loginer)?'?ivc='.$loginer->invit_code:'';?>';
-        window.shareConfig.title = '一人宅家好无聊，想去疯玩没人陪？';
+        window.shareConfig.title = '<?= $user->nick; ?>的个人主页';
         window.shareConfig.imgUrl = '<?= getHost().(isset($user)?$user->avatar:'/upload/ico/meiyue.png');?>';
-        var share_desc = '上美约APP，约K歌、美食、运动、工作，同城上万高颜值美女在线';
+        var share_desc = '注册美约APP，与全球最富品味的菁英人群，共享生活志趣。';
         share_desc && (window.shareConfig.desc = share_desc);
         LEMON.show.shareBanner();
     }
