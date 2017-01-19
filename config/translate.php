@@ -213,14 +213,14 @@ function getBaiduPOICF() {
 class PackType {
     const VIP = 1;
     const RECHARGE = 2;
-    const OTHER = 3;
+    //const OTHER = 3;
 
     public static function getPackageType($num = null) {
 
         $types = Array(
             PackType::VIP => 'VIP套餐',
             PackType::RECHARGE => '充值套餐',
-            PackType::OTHER => '其他套餐'
+            /*PackType::OTHER => '其他套餐'*/
         );
 
         if($num) {
@@ -327,6 +327,38 @@ class YuepaiStatus {
         return $status;
     }
 
+}
+
+
+/**
+ * 派对类型
+ */
+class ActType {
+    const ALL = 0;  //所有
+    const COMMON = 1;  //普通
+    const STAR = 2;    //星标
+    public static function getType($ty = null) {
+        $types = Array(
+            ActType::COMMON => '普通派对', //普通派对
+            ActType::STAR => '星标派对'
+        );
+        if($ty !== null) {
+            return isset($types[$ty])?$types[$ty]:null;
+        }
+        return $types;
+    }
+    //作用对象的派对类型
+    public static function getWorkType($ty = null) {
+        $types = Array(
+            ActType::ALL => '所有派对', //所有派对
+            ActType::COMMON => '普通派对', //普通派对
+            ActType::STAR => '星标派对'
+        );
+        if($ty !== null) {
+            return isset($types[$ty])?$types[$ty]:null;
+        }
+        return $types;
+    }
 }
 
 

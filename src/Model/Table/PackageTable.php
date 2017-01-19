@@ -58,43 +58,38 @@ class PackageTable extends Table
         $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
-
         $validator
             ->requirePresence('title', 'create')
             ->notEmpty('title');
-
         $validator
             ->requirePresence('type', 'create')
             ->notEmpty('type');
-
         $validator
             ->numeric('chat_num')
             ->requirePresence('chat_num', 'create')
             ->notEmpty('chat_num');
-
         $validator
             ->numeric('browse_num')
             ->requirePresence('browse_num', 'create')
             ->notEmpty('browse_num');
-
         $validator
             ->numeric('vir_money')
             ->requirePresence('vir_money', 'create')
             ->notEmpty('vir_money');
-
         $validator
             ->numeric('price')
             ->requirePresence('price', 'create')
             ->notEmpty('price');
-
         $validator
             ->numeric('vali_time')
             ->requirePresence('vali_time', 'create')
             ->notEmpty('vali_time');
-
         $validator
             ->numeric('stock');
-
+        $validator
+            ->numeric('act_dct');
+        $validator
+            ->numeric('act_send_num');
         return $validator;
     }
 

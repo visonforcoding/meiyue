@@ -89,7 +89,7 @@
 
 
 <script>
-
+    $.util.checkShare();
     $('.toback').on('click', function(){
         history.back();
     })
@@ -100,13 +100,14 @@
     };
     function shareBanner() {
         window.shareConfig.link = '<?= getHost().'/date-order/join/'.$date['id']; ?><?= isset($user)?'?ivc='.$user->invit_code:'';?>';
+        /*window.shareConfig.title = '<?= $date['title'] ?>';*/
+        /*var share_desc = '<?= isset($share)?$share['content']:''; ?>';*/
         window.shareConfig.title = '<?= $date['title'] ?>';
         window.shareConfig.imgUrl = '<?= getHost().$date['user']['avatar']; ?>';
-        var share_desc = '<?= isset($share)?$share['content']:''; ?>';
+        var share_desc = '约美食、约运动、约派对，拒绝平庸，活出态度';
         share_desc && (window.shareConfig.desc = share_desc);
         LEMON.show.shareBanner();
     }
-    $.util.checkShare();
 
     $('#order_pay').on('tap',function(){
         var dom = $(this);

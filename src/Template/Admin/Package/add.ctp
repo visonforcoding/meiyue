@@ -20,11 +20,11 @@
                 ?>
             </div>
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
             <label class="col-md-2 control-label">荣誉称号</label>
             <div class="col-md-8">
                 <?php
-                echo $this->Form->input(
+/*                echo $this->Form->input(
                     'honour_name',
                     [
                         'label' => false,
@@ -33,9 +33,9 @@
                         'class' => 'form-control',
                     ]
                 );
-                ?>
+                */?>
             </div>
-        </div>
+        </div>-->
         <div class="form-group">
             <label class="col-md-2 control-label">套餐类型</label>
             <div class="col-md-8">
@@ -87,6 +87,68 @@
                 无限
                 <?php echo $this->Form->checkbox('browse_endless');?>
             </label>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">派对折扣</label>
+            <div class="col-md-8">
+                <?php
+                echo $this->Form->input(
+                    'act_dct',
+                    [
+                        'label' => false,
+                        'class' => 'form-control',
+                        'value' => 10
+                    ]
+                );
+                ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">折扣派对类型</label>
+            <div class="col-md-8">
+                <?php
+                echo $this->Form->input(
+                    'dct4act_type',
+                    [
+                        'label' => false,
+                        'type' => 'select',
+                        "options" => ActType::getWorkType(),
+                        'class' => 'form-control'
+                    ]
+                );
+                ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">派对赠送数量</label>
+            <div class="col-md-8">
+                <?php
+                echo $this->Form->input(
+                    'act_send_num',
+                    [
+                        'label' => false,
+                        'class' => 'form-control',
+                        'value' => 0
+                    ]
+                );
+                ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">赠送派对类型</label>
+            <div class="col-md-8">
+                <?php
+                echo $this->Form->input(
+                    'send4act_type',
+                    [
+                        'label' => false,
+                        'type' => 'select',
+                        "options" => ActType::getWorkType(),
+                        'class' => 'form-control'
+                    ]
+                );
+                ?>
+            </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">充值美币</label>

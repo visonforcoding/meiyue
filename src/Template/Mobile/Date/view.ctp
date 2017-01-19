@@ -49,19 +49,21 @@
     <?php endif; ?>
 </div>
 
-<div class="inner">
-    <?php if($date['status'] == DateState::NOT_YET): ?>
-        <a class="btn btn_cancel mt60">取消发布</a>
-        <p class="commontips mt40 color_des aligncenter">点击此按钮后，此约会将从活动-约会模块中移除</p>
-    <?php endif; ?>
+<?php if($date['status'] == DateState::NOT_YET): ?>
+<div class="bottomblock">
+    <div class="potion_footer flex flex_justify">
+        <span id="btn_cancel" class="footerbtn cancel">取消发布</span>
+        <span id="btn_chare" class="footerbtn gopay">分享约会</span>
+    </div>
 </div>
+<?php endif; ?>
 <?php if($date['status'] == DateState::BE_DOWN || $date['status'] == DateState::DOWN): ?>
 <p class='aligncenter color_gray mt80 '>此约会已下线</p>
 <?php elseif($date['status'] == DateState::DATED): ?>
 <p class='aligncenter color_gray mt80 '>此约会已有人赴约</p>
 <?php endif; ?>
 <script>
-
+    $.util.checkShare();
     $(".toback").on('click', function(){
         history.back();
     });
@@ -72,29 +74,42 @@
     })
 
 
-    $(".btn_cancel").on('click', function(){
+    $.util.tap($("#btn_cancel"), function() {
         $.util.confirm(
             "取消发布",
             '你的约会将下架',
-            $.util.ajax({
-                type: 'PUT',
-                url: '/date/edit/' + <?= $date['id'] ?> +"/3",
-                dataType: 'json',
-                func: function (res) {
-                    if (typeof res === 'object') {
-                        if (res.status) {
-                            $.util.alert(res.msg);
-                            window.location.href = '/date/index';
-                        } else {
-                            $.util.alert(res.msg);
+            function() {
+                $.util.ajax({
+                    type: 'PUT',
+                    url: '/date/edit/' + <?= $date['id'] ?> +"/3",
+                    dataType: 'json',
+                    func: function (res) {
+                        if (typeof res === 'object') {
+                            if (res.status) {
+                                $.util.alert(res.msg);
+                                window.location.href = '/date/index';
+                            } else {
+                                $.util.alert(res.msg);
+                            }
                         }
                     }
-                }
-            }),null
+                })
+            },null
         );
-
-
     });
+
+    $.util.tap($('#btn_chare'), function() {
+        shareBanner();
+    });
+
+    function shareBanner() {
+        window.shareConfig.link = '<?= getHost().'/date-order/join/'.$date['id']; ?><?= isset($user)?'?ivc='.$user->invit_code:'';?>';
+        window.shareConfig.title = '美约APP，悦享轻奢生活社交新体验';
+        window.shareConfig.imgUrl = '<?= getHost().$date['user']['avatar']; ?>';
+        var share_desc = '约美食、约运动、约派对，拒绝平庸，活出态度';
+        share_desc && (window.shareConfig.desc = share_desc);
+        LEMON.show.shareBanner();
+    }
 
     <?php if($date['status'] != DateState::DATED): ?>
     LEMON.sys.setTopRight('编辑');

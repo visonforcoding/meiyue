@@ -54,6 +54,18 @@
                                         个美女聊天
                                     </p>
                                 <?php endif; ?>
+                                <?php if($item->act_dct < 10 && $item->act_dct > 0): ?>
+                                    <p>
+                                        <i class="iconfont color_y">&#xe654;</i>
+                                        参加<?= ActType::getWorkType($item->dct4act_type); ?>尊享<?= $item->act_dct; ?>折
+                                    </p>
+                                <?php endif; ?>
+                                <?php if($item->act_send_num > 0): ?>
+                                    <p>
+                                        <i class="iconfont color_y">&#xe654;</i>
+                                        赠送<?= $item->act_send_num ?>场<?= ActType::getWorkType($item->send4act_type); ?>
+                                    </p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </li>
@@ -108,6 +120,18 @@
                                         <i class="iconfont color_y">&#xe654;</i>
                                         和<?= checkIsEndless($item->chat_num)?'无限':$item->chat_num; ?>个美女聊天
                                     </p>
+                                    <?php endif; ?>
+                                    <?php if($item->act_dct < 10 && $item->act_dct > 0): ?>
+                                        <p>
+                                            <i class="iconfont color_y">&#xe654;</i>
+                                            参加<?= ActType::getWorkType($item->dct4act_type); ?>尊享<?= $item->act_dct; ?>折
+                                        </p>
+                                    <?php endif; ?>
+                                    <?php if($item->act_send_num > 0): ?>
+                                        <p>
+                                            <i class="iconfont color_y">&#xe654;</i>
+                                            赠送<?= $item->act_send_num ?>场<?= ActType::getWorkType($item->send4act_type); ?>
+                                        </p>
                                     <?php endif; ?>
                                 </div>
                             </div>

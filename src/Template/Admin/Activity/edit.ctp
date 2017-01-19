@@ -13,6 +13,22 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-md-2 control-label">派对类型</label>
+            <div class="col-md-8">
+                <?php
+                echo $this->Form->input(
+                    'type',
+                    [
+                        'label' => false,
+                        'type' => 'select',
+                        "options" => ActType::getType(),
+                        'class' => 'form-control'
+                    ]
+                );
+                ?>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-md-2 control-label">男性报名费</label>
             <div class="col-md-8">
                 <?php
