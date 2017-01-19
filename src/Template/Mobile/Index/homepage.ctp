@@ -17,6 +17,11 @@
      </div>
     <!--基本信息-->
     <div class="home_page_basic">
+         <?php if($user->wx_ishow && $user->wxid): ?>
+            <div class="add-weixin" id="showWx">
+                <img src="/mobile/images/addwx.png" class="responseimg"/>
+            </div>
+        <?php endif; ?>
         <h3 class="aligncenter">
             <span class="home_name"><b><?= $user->nick ?></b></span>
             <?php if($shown['isActive']): ?>
@@ -126,14 +131,6 @@
 
     <!--查看Ta的微信-->
     <ul class="home_seach_info outerblock mt40">
-        <?php if($user->wx_ishow && $user->wxid): ?>
-        <li>
-            <a name="showWx" class="items flex flex_justify" >
-                <span class="seach_name">查看TA的微信</span>
-                <span id="showWx" class="golook  color_y">点击查看</span>
-            </a>
-        </li>
-        <?php endif; ?>
         <?php if($user->hasjoin): ?>
         <li>
             <a class="items flex flex_justify" href="javascript:toJoind();">
