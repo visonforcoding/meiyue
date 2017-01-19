@@ -1360,6 +1360,16 @@ class UsercController extends AppController
                         return $item;
                     });
                 })->toArray();
+            //检查是否未读，收集未读列表并设置为已读
+            $sort = [];
+            foreach ($visitors as $visitor) {
+                if(!$visitor['is_read']) {
+                    $sort[] = $visitor['id'];
+                }
+            }
+            if(count($sort)) {
+                $visitorTb->query()->update()->set(['is_read' => 1])->where(['id IN' => $sort])->execute();
+            }
             return $this->Util->ajaxReturn(['visitors' => $visitors]);
         }
         $this->set([

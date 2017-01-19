@@ -98,13 +98,6 @@ class ChatController extends AppController {
     {
         $limit = 10;
         $msgpush = TableRegistry::get('Msgpush');
-        //修改数据已读状态
-        $msgpush->query()->update()
-            ->set(['is_read' => 1])
-            ->where(['user_id' => $this->user->id])
-            ->limit(intval($limit))
-            ->page(intval($page))
-            ->execute();
         $datas = $msgpush->find()
             ->hydrate(false)
             ->contain(['Ptmsg' => function ($q) {
@@ -121,6 +114,13 @@ class ChatController extends AppController {
                 });
             })
             ->toArray();
+        //修改数据已读状态
+        $msgpush->query()->update()
+            ->set(['is_read' => 1])
+            ->where(['user_id' => $this->user->id])
+            ->limit(intval($limit))
+            ->page(intval($page))
+            ->execute();
         return $this->Util->ajaxReturn(['datas' => $datas]);
     }
 
