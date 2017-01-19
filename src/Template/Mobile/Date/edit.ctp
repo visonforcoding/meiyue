@@ -114,7 +114,7 @@
                     <div class="edit_date_items flex flex_justify marks_edit">
                         <span class="edit_l_con">个人标签</span>
                         <div class="edit_r_con edit_r_marks" id="tag-container">
-                            <?php if (count($date['tags'])): ?>
+                            <?php if (!count($date['tags'])): ?>
                                 <span class="color_light">请选择个人标签</span>
                             <?php else: ?>
                                 <?php foreach ($date['tags'] as $item): ?>
