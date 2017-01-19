@@ -494,12 +494,13 @@ color:#fff; line-height: 20px;padding-right: .1rem;}
 .home_page .header .identify-info{position: absolute;right:.3rem;font-size: 10px;height:18px;line-height: 16px;border:1px #fff solid;border-radius: 3px;padding:0 .1rem;}
 .home_page .header .video-btn{top:20px;opacity: .8;}
 .home_page .header .id-btn{top:50px;opacity:.8}
-.home_page_basic{background: #fff;padding-top:.4rem;}
+.home_page_basic{background: #fff;padding-top:.4rem;position:relative;}
 .home_page_basic .home_name{color:#170e00;font-size: 16px;}
 /*.home_page_basic .home_name em{position:absolute;font-size: 10px;color:#959da7;}*/
 /*.home_page_basic .home_name em i{margin-right:.05rem;}*/
 .home_page_basic .home_name_info .address .ico{font-size: 12px;margin-left:.1rem;}
 .home_page_basic .home_name_info{color:#959da7;font-size: 12px;margin-top:.36rem;}
+.home_page_basic .add-weixin{position:absolute;top:.6rem;right:.8rem;width:.8rem;height:.78rem;}
 .home_page_basic .home_name_info .iconfont{font-size: 14px;vertical-align: top;}
 .home_page_basic .home_name_info .job,.home_page_basic .home_name_info .address{}
 .home_page_basic .home_name_info .address {}
@@ -636,8 +637,8 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .tracle_list .avatar img{}
 .tracle_list .con{/*padding-top:.2rem;*/}
 .tracle_list .con .text{text-align: justify;line-height: 20px;color:#333;}
-.tracle_list .piclist_con{overflow: hidden;margin-top:.2rem;padding-bottom:.2rem;}
-.tracle_list .videolist{height:4rem;border-radius: 3px;position:relative;}
+.tracle_list .piclist_con{overflow: hidden;margin-top:.3rem;padding-bottom:.2rem;}
+.tracle_list .videolist{/*height:4rem;*/border-radius: 3px;position:relative;}
 .tracle_list .videolist img{width:100%;height:auto;display: block;}
 .tracle_list .videolist .playbtn{position: absolute;left:50%;top:50%;margin-left:-20px;margin-top:-20px;color:#fff;font-size: 40px;line-height: normal;}
 .tracle_list .piclist_con li{width:2.22rem;height:2.22rem;overflow: hidden;float:left;border-radius: 5px;margin-right:.1rem;margin-bottom:.1rem;}
@@ -686,6 +687,7 @@ padding:0 .4rem;margin-right:10px;margin-bottom:10px;}
 .voted_list .voted_con{padding:.2rem .3rem;}
 .voted_list .ul-con .voted_con{padding:0;}
 .voted_list .voted-content{padding:.2rem .3rem .4rem;}
+.vosi-voted .voted-content{padding:.2rem .3rem .2rem;}
 .voted_l_info .voted_place_info{padding-left:.7rem;}
 .voted_list .voted_place_info{height:.86rem;/*margin-right:.2rem;*/margin-left:.2rem;}
 .voted_list .voted_place_info h3{padding-left:1.1rem;/*padding-top:.1rem;*/}
@@ -925,7 +927,7 @@ text-align: center;line-height: .63rem;font-size: 17px;color: #666;margin-right:
 .rank_con .place_info .avatar img,.rank_con .place_info h3 .place_name .cup img{width:100%;height:100%;display: block;}
 .rank_con .place_info h3{padding-left:1.1rem;/*padding-top:.15rem;*/}
 .rank_con .place_info h3 .place_name{display: block;font-size: 0;}
-.rank_con .place_info h3 .place_number{font-size: 12px;}
+.rank_con .place_info h3 .place_number{font-size: 12px;/**/display: block;margin-top:.1rem;}
 .rank_con .place_info h3 .place_name .name{font-weight: bold;font-size: 13px;}
 .rank_con .place_info h3 .place_name .rich-vip{display: inline-block;width:20px;color:#fff;background: #fd6a56;border-radius: 2px;font-size: 9px;text-align: center;font-weight: 600;height:12px;line-height: 13px;}
 .rank_con .place_info h3 .place_name .cup{display: inline-block;width:.22rem;height:.24rem;}
