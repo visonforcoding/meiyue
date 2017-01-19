@@ -258,11 +258,14 @@ function getDefultEndless() {
 
 
 /**
+ * 套餐提供的服务功能
  * 消费类型：1#查看动态服务 2#聊天服务
  */
 class ServiceType {
-    const BROWSE =  1;
-    const CHAT = 2;
+    const BROWSE =  1;  //查看动态服务
+    const CHAT = 2;     //聊天服务
+    const ACTIVITY_DISCOUNT = 3;     //参加派对打折
+    const ACTIVITY_FREE = 4;     //赠送派对
 
     public static function containType($type = null) {
         if($type == ServiceType::BROWSE || $type == ServiceType::CHAT) {

@@ -870,7 +870,9 @@ class UserController extends AppController {
             ->limit($limit)
             ->page($page)
             ->map(function($row) {
-                $row->used->age = getAge($row->used->birthday);
+                if($row->used) {
+                    $row->used->age = getAge($row->used->birthday);
+                }
                 $row->deadline = getYMD($row->deadline);
                 return $row;
             });
