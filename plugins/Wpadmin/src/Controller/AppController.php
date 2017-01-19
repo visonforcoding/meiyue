@@ -133,17 +133,17 @@ class AppController extends Controller {
     }
 
     /**
-     * 返回jqgrid 所需的json 数据格式
-     * jqgrid 数据表格jquery  插件 @link http://www.trirand.com/blog/?page_id=15 jqgrid 官网
-     * @param type $page 页码
-     * @param type $limit 每页显示行数
-     * @param type $modelName 表名
-     * @param type $sort 排序字段
-     * @param type $order 排序形式
-     * @param type $where 查询条件
-     * @return array total 总页数 page 当前页码 records 总记录数 rows 数据数组
-     * 
-     */
+ * 返回jqgrid 所需的json 数据格式
+ * jqgrid 数据表格jquery  插件 @link http://www.trirand.com/blog/?page_id=15 jqgrid 官网
+ * @param type $page 页码
+ * @param type $limit 每页显示行数
+ * @param type $modelName 表名
+ * @param type $sort 排序字段
+ * @param type $order 排序形式
+ * @param type $where 查询条件
+ * @return array total 总页数 page 当前页码 records 总记录数 rows 数据数组
+ *
+ */
     protected function getJsonForJqrid($page,$limit,$modelName = '',$sort = '',$order = '',$where = '',$contain = '')
     {
         $Table = TableRegistry::get(!empty($modelName) ? $modelName : $this->modelClass);
@@ -157,10 +157,55 @@ class AppController extends Controller {
         }
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
-            $query->order([$sort => $order]);
+            $query->order(['set_top' => 'desc', $sort => $order]);
         }
         $query->limit(intval($limit))
-                ->page(intval($page));
+            ->page(intval($page));
+        $res = $query->toArray();
+        if (empty($res)) {
+            $res = array();
+        }
+        if ($nums > 0) {
+            $total_pages = ceil($nums / $limit);
+        } else {
+            $total_pages = 0;
+        }
+        $arr = array(
+            'page' => $page,
+            'total' => $total_pages,
+            'records' => $nums,
+            'rows' => $res
+        );
+        return $arr;
+    }
+
+
+    /**
+     * 返回jqgrid 所需的json 数据格式
+     * jqgrid 数据表格jquery  插件 @link http://www.trirand.com/blog/?page_id=15 jqgrid 官网
+     * @param type $page 页码
+     * @param type $limit 每页显示行数
+     * @param type $modelName 表名
+     * @param type $order 排序形式
+     * @param type $where 查询条件
+     * @return array total 总页数 page 当前页码 records 总记录数 rows 数据数组
+     *
+     */
+    protected function getJsonForJqrid2($page,$limit,$modelName = '', $order = [], $where = '',$contain = '')
+    {
+        $Table = TableRegistry::get(!empty($modelName) ? $modelName : $this->modelClass);
+        $query = $Table->find();
+        $query->hydrate(false);
+        if(!empty($contain)) {
+            $query->contain($contain);
+        }
+        if (!empty($where)) {
+            $query->where($where);
+        }
+        $nums = $query->count();
+        $query->order($order);
+        $query->limit(intval($limit))
+            ->page(intval($page));
         $res = $query->toArray();
         if (empty($res)) {
             $res = array();
