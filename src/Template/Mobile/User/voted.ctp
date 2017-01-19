@@ -9,7 +9,7 @@
         <?php if($isme && $user->gender == 2): ?>
         <a href="/user/share" class="btn btn_t_border">邀请好友支持我</a>
         <?php endif; ?>
-        <ul class="voted_list voted-line">
+        <ul class="voted_list voted-line vosi-voted">
             <?php if($wektop): ?>
             <li>
                 <a href="<?= ($user->gender == 1)?'/activity/index/1#3':'/activity/index/1#2'; ?>" class="title ablock flex flex_justify">
