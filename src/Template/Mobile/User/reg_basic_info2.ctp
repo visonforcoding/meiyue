@@ -68,6 +68,10 @@
     $.util.chooseAuthVideo('auth_video', '请对准手机屏幕：1.露齿笑，2.左转头，3.右转头');
     LEMON.sys.setTopRight('下一步');
     window.onTopRight = function () {
+        if(!$('#auth_video').data('choosed')){
+            $.util.alert('请先进行真人脸部识别');
+            return;
+        }
         $.util.showPreloader();
         if ($('#auth_video').data('choosed'))
             var param = {};
