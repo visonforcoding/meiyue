@@ -78,8 +78,8 @@ class ActivityController extends AppController
         $datas->formatResults(function (ResultSetInterface $results) {
             return $results->map(function ($row) {
                 $row->time = $row->start_time->i18nFormat('yyyy-MM-dd');
-                if(count($row->site) >= 14) {
-                    $row->site = substr_replace($row->site, '...', 15);
+                if(mb_strlen($row->site) > 14) {
+                    $row->site = mb_substr($row->site, 0, 14).'...';
                 }
                 $row->isend = false;
                 $startTime = new Time($row->start_time);

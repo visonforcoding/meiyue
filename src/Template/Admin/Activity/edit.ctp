@@ -128,7 +128,7 @@
             <label class="col-md-2 control-label">活动须知</label>
             <div class="col-md-8">
                 <?php
-                echo $this->Form->input('notice', ['label' => false, 'class' => 'form-control']);
+                echo $this->Form->input('notice', ['label' => false, 'class' => 'form-control', 'type' => 'textarea']);
                 ?>
             </div>
         </div>

@@ -118,7 +118,6 @@
     </div>
     <div class="items_adress flex flex_justify">
         <div><i class="iconfont ico">&#xe623;</i>{{site}}</div>
-
         <div>
             <i class="iconfont ico">&#xe64b;</i>
             {{time}}
