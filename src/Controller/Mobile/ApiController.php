@@ -597,6 +597,7 @@ class ApiController extends AppController {
         $uid = $this->request->data("user1_id");
         $vid = $this->request->data("user2_id");
         $type = $this->request->data("type");
+        $user = $this->user;
         $res = 0;
         if(ServiceType::containType($type)) {
             $this->loadComponent('Business');
@@ -605,7 +606,7 @@ class ApiController extends AppController {
         $toUrl = null;
         switch ($res) {
             case \SerRight::NO_HAVENONUM:
-                $toUrl = '/userc/vip-buy?reurl=/index/homepage/'.$this->user->id;
+                $toUrl = '/userc/vip-buy?reurl=/index/homepage/'.$user->id;
                 break;
         }
         $this->jsonResponse(['right' => $res, 'to_url' => $toUrl]);
