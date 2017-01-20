@@ -63,7 +63,7 @@ class UserController extends AppController {
             'shown' => $this->Business->getShown($this->user)
         ]);
         $this->set([
-            'pageTitle' => '美约-我的',
+            'pageTitle' => '我的',
             'user' => $this->user
         ]);
         $this->render($template);
@@ -128,14 +128,14 @@ class UserController extends AppController {
         }
 
         $this->set([
-            'pageTitle' => '美约-登录',
+            'pageTitle' => '登录',
             'invite_code' => $this->request->query('ivc')
         ]);
     }
     
     public function regChooseSex(){
         $this->set([
-            'pageTitle' => '美约-注册',
+            'pageTitle' => '注册',
         ]);
         
     }
@@ -252,7 +252,7 @@ class UserController extends AppController {
         }
         $this->set([
             'gender' => $gender,
-            'pageTitle' => '美约-注册'
+            'pageTitle' => '注册'
         ]);
     }
     
@@ -272,7 +272,7 @@ class UserController extends AppController {
             }
         }
           $this->set([
-            'pageTitle' => '美约-基本信息填写'
+            'pageTitle' => '基本信息填写'
         ]);
     }
 
@@ -299,7 +299,7 @@ class UserController extends AppController {
         }
         $this->set([
             'user'=>$user,
-            'pageTitle' => '美约-基本信息填写'
+            'pageTitle' => '基本信息填写'
         ]);
     }
 
@@ -333,7 +333,7 @@ class UserController extends AppController {
         $user = $this->User->get($id);
         $this->set([
             'user'=>$user,
-            'pageTitle' => '美约-基本图片上传'
+            'pageTitle' => '基本图片上传'
         ]);
     }
     
@@ -360,7 +360,7 @@ class UserController extends AppController {
             return $this->Util->ajaxReturn(false, '保存失败');
         }
         $this->set([
-            'pageTitle' => '美约-完善信息'
+            'pageTitle' => '完善信息'
         ]);
     }
 
@@ -410,7 +410,7 @@ class UserController extends AppController {
             return $this->Util->ajaxReturn(false, '保存失败');
         }
         $this->set([
-            'pageTitle' => '美约-认证信息填写',
+            'pageTitle' => '认证信息填写',
             'user' => $user
         ]);
     }
@@ -431,7 +431,7 @@ class UserController extends AppController {
             }
         }
         $this->set([
-            'pageTitle' => '美约-认证信息填写',
+            'pageTitle' => '认证信息填写',
             'user' => $user
         ]);
     }
@@ -452,7 +452,7 @@ class UserController extends AppController {
             return $this->Util->ajaxReturn(false, '保存失败');
         }
         $this->set([
-            'pageTitle' => '美约-身份审核',
+            'pageTitle' => '身份审核',
         ]);
     }
 
@@ -483,7 +483,7 @@ class UserController extends AppController {
             return $this->Util->ajaxReturn(false, '保存失败');
         }
         $this->set([
-            'pageTitle' => '美约-身份审核',
+            'pageTitle' => '身份审核',
             'user' => $user
         ]);
     }
@@ -493,7 +493,7 @@ class UserController extends AppController {
      */
     public function regIdentify() {
         $this->set([
-            'pageTitle' => '美约-美约认证'
+            'pageTitle' => '美约认证'
         ]);
     }
 

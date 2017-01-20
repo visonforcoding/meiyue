@@ -71,7 +71,7 @@ class DateController extends AppController
         }
         $uSkillTb = TableRegistry::get('UserSkill');
         $uskillCount = $uSkillTb->find()->where(['user_id' => $this->user->id, 'is_used' => 1, 'is_checked' => 1])->count();
-        $this->set(["user" => $this->user, 'skill' => $uskillCount, 'pageTitle' => '美约-约会管理']);
+        $this->set(["user" => $this->user, 'skill' => $uskillCount, 'pageTitle' => '约会管理']);
     }
 
     /**
@@ -98,7 +98,7 @@ class DateController extends AppController
                 $date->status = DateState::DOWN;
             }
         }
-        $this->set(['date' => $date, 'pageTitle' => '美约-约会详情']);
+        $this->set(['date' => $date, 'pageTitle' => '约会详情']);
 
     }
 
@@ -121,7 +121,7 @@ class DateController extends AppController
                 return $this->Util->ajaxReturn(false, "发布失败");
             }
         }
-        $this->set(['user'=>$this->user, 'pageTitle' => '美约-添加约会']);
+        $this->set(['user'=>$this->user, 'pageTitle' => '添加约会']);
     }
 
     /**
@@ -160,7 +160,7 @@ class DateController extends AppController
                 return $this->Util->ajaxReturn(false, "下架失败");
             }
         }
-        $this->set(['date' => $date, 'user'=>$this->user, 'pageTitle' => '美约-约会编辑']);
+        $this->set(['date' => $date, 'user'=>$this->user, 'pageTitle' => '约会编辑']);
     }
 
     /**

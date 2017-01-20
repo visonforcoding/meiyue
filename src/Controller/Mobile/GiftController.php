@@ -125,7 +125,7 @@ class GiftController extends AppController
                    'status'=>true,
                    'code'=>202,    //唤起聊天 
                    'obj'=>$in_user,
-                   'msg'=>'感谢您的支持',    
+                   'msg'=>'谢谢您的礼物，么么哒^u^',
                        ]);
             }
             return $this->Util->ajaxReturn(false, '操作失败');

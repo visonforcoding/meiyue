@@ -43,7 +43,7 @@
             return;
         }
         $.util.confirm(
-            '- 赠送礼物 -',
+            '赠送礼物',
             '赠送一件【' + gname + '】给 <?= $user->nick;?>',
             function() {
                 $.ajax({

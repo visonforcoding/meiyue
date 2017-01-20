@@ -602,6 +602,12 @@ class ApiController extends AppController {
             $this->loadComponent('Business');
             $res = $this->Business->checkRight($uid, $vid, $type);
         }
-        $this->jsonResponse(['right' => $res]);
+        $toUrl = null;
+        switch (res) {
+            case \SerRight::NO_HAVENONUM:
+                $toUrl = '/userc/vip-buy?reurl=/index/homepage/'.$this->user->id;
+                break;
+        }
+        $this->jsonResponse(['right' => $res, 'to_url' => $toUrl]);
     }
 }

@@ -23,8 +23,13 @@ p{background-color: transparent;word-break: break-all;}
     position: fixed;
     z-index:999;
     padding:10px;
-    left:0;top:40%;right:0;margin:auto;width:60px;height:44px;
-    background-color: rgba(0,0,0,.5);
+    left:0;
+    top:40%;
+    right:0;
+    margin:auto;
+    width:auto;
+    height: 80px;
+    background-color: rgba(0,0,0, .4);
     border-radius:10px;
     opacity: 0.7;
 }
@@ -34,12 +39,13 @@ p{background-color: transparent;word-break: break-all;}
 .loader .loader-title{
     text-align: center;
     font-weight: 500;
-    font-size: 0.3rem;
+    font-size: 0.2rem;
     color:#ddd;
 }
 .loader .loader-text {
     padding:10px;
-    background:rgba(0,0,0,0) url('../images/loading.gif')no-repeat center center;
+    height:50px;
+    background:rgba(0,0,0, 0) url('/mobile/css/img/loading2.gif') no-repeat center center;
     background-size:30px 30px;
     border-radius:10px;
 }

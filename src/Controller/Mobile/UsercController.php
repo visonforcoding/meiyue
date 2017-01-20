@@ -215,7 +215,7 @@ class UsercController extends AppController
             'user' => $this->user,
             'actstatus' => $actstatus,
             'actregistration' => $actregistration,
-            'pageTitle' => '美约-活动详情'
+            'pageTitle' => '活动详情'
         ]);
     }
 
@@ -299,7 +299,7 @@ class UsercController extends AppController
             'userskills' => $userskills,
             'is_all_used' => $is_all_used,
             'user' => $this->user,
-            'pageTitle' => '美约-我的技能'
+            'pageTitle' => '我的技能'
         ]);
     }
 
@@ -311,8 +311,8 @@ class UsercController extends AppController
     {
 
         $page_titles = Array(
-            'add' => '美约-添加技能',
-            'edit' => '美约-编辑技能',
+            'add' => '添加技能',
+            'edit' => '编辑技能',
         );
         $userSkillTable = \Cake\ORM\TableRegistry::get('UserSkill');;
         $userskill = null;
@@ -638,7 +638,7 @@ class UsercController extends AppController
         }
         $percent = round($percent / count($inlist) * 100);
 
-        $this->set(['percent' => $percent, 'user' => $user, 'pageTitle' => '美约-个人信息']);
+        $this->set(['percent' => $percent, 'user' => $user, 'pageTitle' => '个人信息']);
         $this->render('/Mobile/User/edit');
 
     }
@@ -672,7 +672,7 @@ class UsercController extends AppController
             }
             return $this->Util->ajaxReturn(false, '修改失败');
         }
-        $this->set(['user' => $user, 'pageTitle' => '美约-个人信息']);
+        $this->set(['user' => $user, 'pageTitle' => '个人信息']);
         $this->render('/Mobile/User/edit_basic');
 
     }
@@ -683,7 +683,7 @@ class UsercController extends AppController
      */
     public function editAuth()
     {
-        $this->set(['user' => $this->user, 'pageTitle' => '美约-身份认证']);
+        $this->set(['user' => $this->user, 'pageTitle' => '身份认证']);
         $this->render('/Mobile/User/edit_auth');
     }
 
@@ -1405,14 +1405,17 @@ class UsercController extends AppController
             return $this->Util->ajaxReturn(true, '审核通过');
         }else{
             switch ($this->user->status){
-                case 0:
+                case \UserStatus::NONEED:
                     $msg = '您暂无此权限，认证信息未上传成功。';
                     break;
-                case 1:
+                case \UserStatus::CHECKING:
                     $msg = '您暂无此权限，认证信息正在审核中。';
                     break;
-                case 2:
+                case \UserStatus::NOPASS:
                     $msg = '您暂无此权限，认证信息审核未通过。';
+                    break;
+                case \UserStatus::SHARE_PASS:
+                    $msg = '您暂无此权限。';
                     break;
             }
             return $this->Util->ajaxReturn(false,$msg);

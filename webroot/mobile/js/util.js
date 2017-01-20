@@ -19,12 +19,40 @@ $.util = {
         $('.alert7-confirm').remove();
         var bL = btnL ? btnL : '取消';
         var bR = btnR ? btnR : '确定';
+        var confirm = '<div class="raper flex flex_center alert7-confirm">' +
+            '<div class="popup" style="display: block;">' +
+            '<div class="popup_con">' +
+            '<p class="aligncenter">'+ title +'</p>' +
+            '<h3 class="aligncenter lagernum">'+ msg +'</h3></div>' +
+            '<div class="popup_footer flex flex_justify">' +
+            '<span class="footerbtn color_y btnL alert7-action-item">'+ bL +'</span>' +
+            '<span class="footerbtn gopay btnR alert7-action-item">'+ bR +'</span></div></div></div>';
+        $('body').append(confirm);
+        $(document).off('click', '.alert7-action-item.btnL');
+        $(document).on('click', '.alert7-action-item.btnL', function () {
+            if (hL && hL instanceof Function) {
+                hL();
+            }
+            $('.alert7-confirm').remove();
+        })
+        $(document).off('click', '.alert7-action-item.btnR');
+        $(document).on('click', '.alert7-action-item.btnR', function () {
+            if (hR && hR instanceof Function) {
+                hR();
+            }
+            $('.alert7-confirm').remove();
+        })
+    },
+    confirm2: function (title, msg, hR, hL, btnL, btnR) {
+        $('.alert7-confirm').remove();
+        var bL = btnL ? btnL : '取消';
+        var bR = btnR ? btnR : '确定';
         var confirm = '<div id="Alert7" class="alert7-confirm">' +
-                '<div class="alert7-container"><div class="alert7-title">' + title +
-                '</div><div class="alert7-message">' + msg +
-                '</div><div class="alert7-actions"><button class="alert7-action-item btnL">' + bL +
-                '</button><button class="alert7-action-item btnR">' + bR
-                + '</button></div></div></div>';
+            '<div class="alert7-container"><div class="alert7-title">' + title +
+            '</div><div class="alert7-message">' + msg +
+            '</div><div class="alert7-actions"><button class="alert7-action-item btnL">' + bL +
+            '</button><button class="alert7-action-item btnR">' + bR
+            + '</button></div></div></div>';
         $('body').append(confirm);
         $(document).off('click', '.alert7-action-item.btnL');
         $(document).on('click', '.alert7-action-item.btnL', function () {
@@ -42,6 +70,23 @@ $.util = {
         })
     },
     showPreloader: function (str) {
+        $.util.hidePreloader();
+        var div = document.createElement('div');
+        div.className = 'loader';
+        var divInner = document.createElement('div');
+        divInner.className = 'loader-inner';
+        div.appendChild(divInner);
+        div.style.cssText = 'width:120px;height:80px';
+        var divText = document.createElement('div');
+        divText.className = 'loader-text';
+        divInner.appendChild(divText);
+        var divTitle = document.createElement('div');
+        divTitle.className = 'loader-title';
+        divTitle.innerHTML = '努力加载中';
+        divInner.appendChild(divTitle);
+        document.body.appendChild(div);
+    },
+    showPreloader2: function (str) {
         $.util.hidePreloader();
         var div = document.createElement('div');
         div.className = 'loader';

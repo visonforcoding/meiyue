@@ -31,7 +31,7 @@ class ActivityController extends AppController
             'top_tab' => $top_tab,
             "user" => $this->user,
             "carousels" => $carousels,
-            'pageTitle' => '美约-活动'
+            'pageTitle' => '活动'
         ]);
         if ($this->user) {
             if ($this->user->gender == 2) {
@@ -49,7 +49,7 @@ class ActivityController extends AppController
             'top_tab' => $top_tab,
             "user" => $this->user,
             "carousels" => $carousels,
-            'pageTitle' => '美约-活动'
+            'pageTitle' => '活动'
         ]);
         if ($this->user) {
             if ($this->user->gender == 1) {
@@ -120,7 +120,7 @@ class ActivityController extends AppController
             'user' => $this->user,
             'actstatus' => $actstatus,
             'activity' => $activity,
-            'pageTitle' => '美约-活动详情'
+            'pageTitle' => '活动详情'
         ]);
     }
 
@@ -224,7 +224,7 @@ class ActivityController extends AppController
             'activity' => $activity,
             'lim' => $lim,
             'actstatus' => $actstatus,
-            'pageTitle' => '美约-活动支付'
+            'pageTitle' => '活动支付'
         ]);
     }
 
@@ -484,7 +484,7 @@ class ActivityController extends AppController
                 ->where(['activity_id' => $activity_id, 'Actregistration.status' => 1]);
 
         }
-        $this->set(['pageTitle' => '美约-派对已报名', 'actres' => $actres, 'user' => $this->user]);
+        $this->set(['pageTitle' => '派对已报名', 'actres' => $actres, 'user' => $this->user]);
     }
 
 
