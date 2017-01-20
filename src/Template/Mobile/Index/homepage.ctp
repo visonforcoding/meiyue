@@ -52,7 +52,7 @@
         <ul class="inner flex">
             <?php if (@unserialize($user->images)): ?>
                 <?php foreach(array_slice(unserialize($user->images), 0, 3) as $img): ?>
-                    <li class="img-item"><img src="<?= createImg($img) ?>?w=160" onload="$.util.setWH(this);"/></li>
+                    <li class="img-item clickable"><img src="<?= createImg($img) ?>?w=160" onload="$.util.setWH(this);"/></li>
                 <?php endforeach; ?>
                 <li onclick="checkBrownR(1);">
                     <a class='ablock' >
@@ -591,6 +591,13 @@
         <?php elseif(SerRight::NO_HAVENUM == $browseRight): ?>
         to_url = '/tracle/ta-tracle/<?=$user->id?>';
         <?php endif; ?>
+        if($.util.isWX){
+            wx.previewImage({
+                current:window.location.origin+curimg, // 当前显示图片的http链接
+                urls:imgs // 需要预览的图片http链接列表
+            });
+            return;
+        }
         LEMON.event.viewImgExt(imgpath.replace(/\?.*/, ''), imgs, status, user_id, view_id, to_url);
     });
 

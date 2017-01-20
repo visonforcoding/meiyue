@@ -349,8 +349,8 @@ class UserController extends AppController {
     /**
      * 女性注册第四步
      */
-    public function regBasicInfo4() {
-        $user = $this->user;
+    public function regBasicInfo4($id) {
+        $user = $this->User->get($id);
         if ($this->request->is('post')) {
             $user = $this->User->get($user->id);
             $user = $this->User->patchEntity($user, $this->request->data());

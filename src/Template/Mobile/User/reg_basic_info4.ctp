@@ -147,6 +147,7 @@
             $.util.alert('喜欢的美食输入过长');
             return false;
         }
+        $.util.showPreloader();
         var form = $('form');
         $.util.ajax({
             data: form.serialize(),
@@ -154,6 +155,7 @@
                 if (res.status) {
                     window.location.href = '/index/find-rich-list';
                 } else {
+                    $.util.hidePreloader();
                     console.log(res);
                 }
             }
