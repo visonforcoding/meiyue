@@ -124,10 +124,8 @@
                 $.util.ajax({
                     url: "/user/getWxPic/" + id,
                     func: function (msg) {
-                        $.util.alert(msg.msg);
                         if (msg.status === true) {
                             $('#avatar_img img').attr('src', msg.path);
-                            alert(msg.path);
                             uploadAvatar(msg.path);
                         }
                     }

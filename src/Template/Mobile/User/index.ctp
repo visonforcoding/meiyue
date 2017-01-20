@@ -259,6 +259,10 @@
             '联系客服',
             '0755-33580266',
             function () {
+                if($.util.isWX){
+                    document.location.href = 'tel:0755-33580266';
+                    return;
+                }
                 LEMON.event.tel('0755-33580266');
             },
             null,
