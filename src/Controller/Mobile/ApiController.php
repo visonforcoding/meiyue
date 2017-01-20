@@ -603,7 +603,7 @@ class ApiController extends AppController {
             $res = $this->Business->checkRight($uid, $vid, $type);
         }
         $toUrl = null;
-        switch (res) {
+        switch ($res) {
             case \SerRight::NO_HAVENONUM:
                 $toUrl = '/userc/vip-buy?reurl=/index/homepage/'.$this->user->id;
                 break;

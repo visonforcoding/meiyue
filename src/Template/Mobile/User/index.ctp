@@ -187,7 +187,6 @@
 <?= $this->element('footer', ['active' => 'me']) ?>
 <?php $this->start('script'); ?>
 <script type="text/javascript">
-    $.util.showPreloader();
     if ($.util.isAPP) {
         $('.footer_submit_btn').css('bottom', '10px')
     }
