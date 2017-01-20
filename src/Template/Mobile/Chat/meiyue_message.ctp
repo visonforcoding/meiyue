@@ -6,6 +6,9 @@
 </header> -->
 <div class="wraper">
     <ul id="list-container" class="chart-systerm-box inner">
+
+    </ul>
+    <ul>
         <li class="timebox">
             <time><?= isset($user->create_time)?$user->create_time->i18nFormat('yyyy-MM-dd HH:mm'):'XXXX-XX-XX XX:XX';?></time>
         </li>

@@ -101,7 +101,7 @@ class ChatController extends AppController {
         $datas = $msgpush->find()
             ->hydrate(false)
             ->contain(['Ptmsg' => function ($q) {
-                return $q->where(['is_del' => 0])->orderDesc('create_time');
+                return $q->where(['is_del' => 0])->orderAsc('create_time');
             }])
             ->where(['user_id' => $this->user->id])
             ->limit(intval($limit))
