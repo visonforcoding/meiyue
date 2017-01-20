@@ -76,7 +76,7 @@ $.util = {
         var divInner = document.createElement('div');
         divInner.className = 'loader-inner';
         div.appendChild(divInner);
-        div.style.cssText = 'width:120px;height:80px';
+        div.style.cssText = 'width:120px;';
         var divText = document.createElement('div');
         divText.className = 'loader-text';
         divInner.appendChild(divText);
