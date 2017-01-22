@@ -4,7 +4,9 @@ namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
 use App\Model\Entity\Msgpush;
+use Aura\Intl\Exception;
 use Cake\ORM\TableRegistry;
+use SerRight;
 use ServiceType;
 use Wpadmin\Utils\UploadFile;
 
@@ -597,17 +599,21 @@ class ApiController extends AppController {
         $uid = $this->request->data("user1_id");
         $vid = $this->request->data("user2_id");
         $type = $this->request->data("type");
-        $user = $this->user;
         $res = 0;
-        if(ServiceType::containType($type)) {
-            $this->loadComponent('Business');
-            $res = $this->Business->checkRight($uid, $vid, $type);
-        }
         $toUrl = null;
-        switch ($res) {
-            case \SerRight::NO_HAVENONUM:
-                $toUrl = '/userc/vip-buy?reurl=/index/homepage/'.$user->id;
-                break;
+        try {
+            $user = TableRegistry::get('User')->get($vid);
+            if(ServiceType::containType($type)) {
+                $this->loadComponent('Business');
+                $res = $this->Business->checkRight($uid, $vid, $type);
+            }
+            switch ($res) {
+                case SerRight::NO_HAVENONUM:
+                    $toUrl = '/userc/vip-buy?reurl=/index/homepage/'.$user->id;
+                    break;
+            }
+        } catch (Exception $e) {
+
         }
         $this->jsonResponse(['right' => $res, 'to_url' => $toUrl]);
     }
