@@ -22,8 +22,8 @@ $.util = {
         var confirm = '<div class="raper flex flex_center alert7-confirm">' +
             '<div class="popup" style="display: block;">' +
             '<div class="popup_con">' +
-            '<p class="aligncenter">'+ title +'</p>' +
-            '<h3 class="aligncenter lagernum">'+ msg +'</h3></div>' +
+            '<p class="aligncenter" style="font: 18px; font-weight: bold">'+ title +'</p>' +
+            '<h3 class="aligncenter lagernum" style="font-size: 14px">'+ msg +'</h3></div>' +
             '<div class="popup_footer flex flex_justify">' +
             '<span class="footerbtn color_y btnL alert7-action-item">'+ bL +'</span>' +
             '<span class="footerbtn gopay btnR alert7-action-item">'+ bR +'</span></div></div></div>';
