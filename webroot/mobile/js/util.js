@@ -28,20 +28,20 @@ $.util = {
             '<span class="footerbtn color_y btnL alert7-action-item">'+ bL +'</span>' +
             '<span class="footerbtn gopay btnR alert7-action-item">'+ bR +'</span></div></div></div>';
         $('body').append(confirm);
-        $(document).off('click', '.alert7-action-item.btnL');
-        $(document).on('click', '.alert7-action-item.btnL', function () {
+        $.util.tap($('.alert7-action-item.btnL'), function(e) {
             if (hL && hL instanceof Function) {
                 hL();
             }
             $('.alert7-confirm').remove();
-        })
-        $(document).off('click', '.alert7-action-item.btnR');
-        $(document).on('click', '.alert7-action-item.btnR', function () {
+            return false;
+        });
+        $.util.tap($('.alert7-action-item.btnR'), function(e) {
             if (hR && hR instanceof Function) {
                 hR();
             }
             $('.alert7-confirm').remove();
-        })
+            return false;
+        });
     },
     confirm2: function (title, msg, hR, hL, btnL, btnR) {
         $('.alert7-confirm').remove();
@@ -54,6 +54,7 @@ $.util = {
             '</button><button class="alert7-action-item btnR">' + bR
             + '</button></div></div></div>';
         $('body').append(confirm);
+
         $(document).off('click', '.alert7-action-item.btnL');
         $(document).on('click', '.alert7-action-item.btnL', function () {
             if (hL && hL instanceof Function) {
@@ -373,6 +374,8 @@ $.util = {
 
         tp = tp ? tp : 'norm';
         range = ranges[tp];
+        obj.off('touchstart');
+        obj.off('touchend');
         obj.on('touchstart', function (e) {
             limit = (new Date()).getTime();
             p = $.util.getPosition(e);
