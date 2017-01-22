@@ -46,11 +46,11 @@ class PurseController extends AppController {
         $redurl = $this->request->query('redurl');
         $payorder = $PayorderTable->newEntity([
             'user_id'=>  $this->user->id,
-            'title'=>'美约美币充值',
+            'title'=>'充值',
             'order_no'=>time() . $this->user->id . createRandomCode(4, 1),
             'price'=>  $this->request->data('mb'),
             'fee'=>  $this->request->data('mb'),
-            'remark'=>  '充值美币'.$this->request->data('mb').'个',
+            'remark'=>  '充值'.$this->request->data('mb').'元',
         ]);
         if($PayorderTable->save($payorder)){
             return $this->Util->ajaxReturn(['status'=>true,'redirect_url'=>'/wx/pay/'.$payorder->id.'?redurl='.$redurl,]);

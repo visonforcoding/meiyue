@@ -82,7 +82,7 @@
             <ul class="items">
                 <li></li>
                 <?php foreach ($list as $item): ?>
-                    <li val='<?= $item->id; ?>'><?= $item->money; ?>美币</li>
+                    <li val='<?= $item->id; ?>'><?= $item->money; ?>元</li>
                 <?php endforeach; ?>
                 <li></li>
                 <li></li>

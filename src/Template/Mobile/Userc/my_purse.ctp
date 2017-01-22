@@ -13,11 +13,11 @@
 						</span>
                 <h3 class="purse_list_tright">
                     <span class="balance">钱包余额</span>
-                    <span class="numbers"><i><?= $user->money ?></i>美币</span>
+                    <span class="numbers"><i><?= $user->money ?></i>元</span>
                 </h3>
             </div>
             <?php if(($user->gender == 1) && ($canTixian > 0)): ?>
-            <div><p class="smallarea aligncenter moneycharge">可兑换余额<?= ($user->gender == 1)?$canTixian: 0;?>美币</p></div>
+            <div><p class="smallarea aligncenter moneycharge">可提现余额<?= ($user->gender == 1)?$canTixian: 0;?>元</p></div>
             <?php endif; ?>
         </div>
 
@@ -25,7 +25,7 @@
             <?php if ($user->gender == 1): ?>
                 <?php if($canTixian): ?>
                     <div class="flex flex_justify inner">
-                        <div class="wid50" onclick="duihuan();"><span class="btn btn_bg_t">兑换美币</span></div>
+                        <div class="wid50" onclick="duihuan();"><span class="btn btn_bg_t">提现</span></div>
                         <div class="wid50" onclick="window.location.href='/purse/recharge'">
                             <span class="btn btn_bg_active">充值</span>
                         </div>
@@ -38,10 +38,10 @@
                     <p><a href="/activity/index/3#3" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
                 <?php endif; ?>
             <?php else: ?>
-                <div class="flex flex_justify inner" onclick="duihuan();"><span class="btn btn_bg_t">兑换美币</span></div>
+                <div class="flex flex_justify inner" onclick="duihuan();"><span class="btn btn_bg_t">提现</span></div>
             <?php endif; ?>
             <?php if(isset($withdraw->viramount)): ?>
-                <p class="tips">正在申请提现 <?= $withdraw->viramount; ?> 美币</p>
+                <p class="tips">正在申请提现 <?= $withdraw->viramount; ?> 元</p>
             <?php endif; ?>
         </div>
     </div>

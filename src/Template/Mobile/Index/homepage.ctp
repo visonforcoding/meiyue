@@ -111,7 +111,7 @@
                                 <?= $user_skill->skill->name ?>
                             </span>
                             <div>
-                                <span class="price"><i><?= $user_skill->cost->money ?></i>美币/h</span>
+                                <span class="price"><i><?= $user_skill->cost->money ?></i>元/h</span>
                                 <a class="date data-ta" data-id="<?= $user_skill->id; ?>">约TA</a>
                             </div>
                         </div>
@@ -264,7 +264,7 @@
     <!--约Ta弹出层-->
     <div class="popup showxpay" hidden>
         <div class="popup_con">
-            <h3 class="aligncenter">需支付100美币才能看到她的微信</h3>
+            <h3 class="aligncenter">需支付100元才能看到她的微信</h3>
         </div>
         <div class="popup_footer flex flex_justify">
             <span class="footerbtn cancel">取消</span>
@@ -491,7 +491,7 @@
                         if(res.moneycheck) {
                             showmbpay();
                         } else {
-                            $.util.confirm('美币不足','您的美币余额不足，前往充值美币？', function() {
+                            $.util.confirm('余额不足','立即前往充值？', function() {
                                 showxpay();
                             }, null);
                         }

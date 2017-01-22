@@ -15,7 +15,7 @@
                                 {{#isTuHao}}<span class="hot"><img src="/mobile/images/zs.png" class="responseimg"/></span>{{/isTuHao}}
                                 {{#upackname}}<span class="highter-vip {{upackstyle}}">{{upackname}}</span>{{/upackname}}
                             </div>
-                            <span class="voted_number color_gray">已消费：{{recharge}}美币</span>
+                            <span class="voted_number color_gray">已消费：{{recharge}}元</span>
                         </h3>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                                                 </span>
                                                 <?php endif; ?>
                                             </div>
-                                            <span class="voted_number color_gray">已消费：<?= $top->total ?>美币</span>
+                                            <span class="voted_number color_gray">已消费：<?= $top->total ?>元</span>
                                         </h3>
                                     </div>
                                 </div>

@@ -37,7 +37,7 @@
         <div class="date_item_des">
             <div class="flex flex_justify bdbottom">
                 <h3 class='maxwid70'><i class="itemsname color_y">[{#skill_name#}]</i>{#title#}</h3>
-                <span class="price">{#price#}美币/小时</span>
+                <span class="price">{#price#}元/小时</span>
             </div>
             <div class="flex flex_justify">
                 <h3>

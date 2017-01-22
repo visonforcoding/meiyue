@@ -263,7 +263,7 @@ class DateorderShell extends Shell {
             $admoney = 0;
             if($invited->gender == 1) {
                 $admoney = $amount * $cz_percent;
-                $type = 19;  //好友充值美币
+                $type = 19;  //好友充值
             } else {
                 $admoney = $amount * $sr_percent;
                 $type = 20;  //好友获得收入

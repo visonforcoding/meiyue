@@ -85,7 +85,7 @@
     <div class="bottomblock">
         <div class="flex flex_end">
             <span class="total"><span
-                    class="color_y"><i><?= ($user['gender'] == 1) ? $activity['male_price'] : $activity['female_price']; ?> </i>美币/人</span></span>
+                    class="color_y"><i><?= ($user['gender'] == 1) ? $activity['male_price'] : $activity['female_price']; ?> </i>元/人</span></span>
             <a onclick="topay();" class="nowpay">我要报名</a>
         </div>
     </div>

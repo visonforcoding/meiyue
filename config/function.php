@@ -293,3 +293,13 @@ function getHost($proto = 'http') {
 function getCity($str) {
     return preg_replace('/北京,|天津,|重庆,|上海,/', '', $str);
 }
+
+
+/**
+ * appstore审核状态
+ * @return int
+ */
+function getAppStoreCheckStatus()
+{
+    return 1;
+}

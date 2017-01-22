@@ -173,7 +173,7 @@
                             {{#isTuHao}}<span class="hot"><img src="/mobile/images/zs.png" class="responseimg"/></span>{{/isTuHao}}
                             {{#upackname}}<span class="highter-vip {{upackstyle}}">{{upackname}}</span>{{/upackname}}
                         </div>
-                        <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
+                        <span class="voted_number color_gray">已消费：{{consumed}}元</span>
                     </h3>
                 </div>
             </div>
@@ -203,7 +203,7 @@
                             {{#isTuHao}}<span class="hot"><img src="/mobile/images/zs.png" class="responseimg"/></span>{{/isTuHao}}
                             {{#upackname}}<span class="highter-vip {{upackstyle}}">{{upackname}}</span>{{/upackname}}
                         </div>
-                        <span class="voted_number color_gray">已消费：{{consumed}}美币</span>
+                        <span class="voted_number color_gray">已消费：{{consumed}}元</span>
                     </h3>
                 </div>
             </div>
