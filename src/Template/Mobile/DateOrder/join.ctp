@@ -61,7 +61,7 @@
             <div class="con inner">
                 <div class="date_time  flex flex_justify">
                     <span>我的钱包</span>
-                    <div class="color_y"><?= isset($user)?$user['money']:'0' ?> 美币</div>
+                    <div class="color_y"><?= isset($user)?$user['money']:'0' ?> 元</div>
                 </div>
             </div>
         </div>
@@ -77,7 +77,7 @@
         <div class="flex flex_end">
             <span class="total">约会金：<i class="color_y"></i>
                 <span class="color_y">
-                    <i class="color_y lagernum"><?= getCost($date['start_time'], $date['end_time'], $date['price']); ?></i>美币
+                    <i class="color_y lagernum"><?= getCost($date['start_time'], $date['end_time'], $date['price']); ?></i>元
                 </span>
             </span>
             <a id="order_pay" class="nowpay">立即支付</a>

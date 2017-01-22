@@ -22,7 +22,7 @@
                             </h3>
                         </div>
                     </div>
-                    <span class="price">{{amount}}美币</span>
+                    <span class="price">{{amount}}元</span>
                 </div>
             </a>
             <div class="flex flex_justify">
@@ -41,7 +41,7 @@
                 </div>
                 {{/timeout_prepay}}
                 {{#finish_prepay}}
-                <h3 class="pay_desc color_y">已预付：{{pre_pay}}美币</h3>
+                <h3 class="pay_desc color_y">已预付：{{pre_pay}}元</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 1): ?>
                         <span data-orderid="{{id}}"  class="refuse m_refuse_status_3 clickable">取消约单</span>
@@ -281,7 +281,7 @@ setTimeout(function () {
 $(document).on('click', '.pay_status_1', function () {
     //支付预约金
     var orderid = $(this).data('orderid');
-    $.util.confirm('确定支付？', '将扣除美币作为预约金', function () {
+    $.util.confirm('确定支付？', '将扣除余额作为预约金', function () {
         $.util.ajax({
             url: '/date-order/order-pay/' + orderid,
             func: function (resp) {
@@ -339,7 +339,7 @@ $(document).on('click', '.remove_order', function () {
 $(document).on('click', '.pay_status_7', function () {
     //支付尾款
     var orderid = $(this).data('orderid');
-    $.util.confirm('确定支付？', '将扣除美币支付尾款', function () {
+    $.util.confirm('确定支付？', '将扣除余额支付尾款', function () {
         $.util.ajax({
             url: '/date-order/orderPayall',
             data: {order: orderid},

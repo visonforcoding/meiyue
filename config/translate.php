@@ -163,9 +163,9 @@ function getFlowType($index = null) {
         '16' => '购买充值套餐',
         '17' => '赴约支付约金',
         '18' => '支付微信查看金',
-        '19' => '好友充值美币',
+        '19' => '好友充值',
         '20' => '好友获得收入',
-        '21' => '兑换美币',
+        '21' => '提现',
         ];
     if ($index) {
         return $flowType[$index];
@@ -537,7 +537,7 @@ class PayOrderType {
     const GETJSON = -1; //获取json数据
     public static function getType($st = null) {
         $status = Array(
-            PayOrderType::CHONGZHI => '充值美币',
+            PayOrderType::CHONGZHI => '充值',
             PayOrderType::BUY_TAOCAN => '购买套餐',
             PayOrderType::BUY_CHONGZHI_TAOCAN => '购买充值套餐',
             PayOrderType::VIEW_WEIXIN => '查看美女微信',

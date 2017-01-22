@@ -414,7 +414,7 @@ class BusinessComponent extends Component
             'after_amount' => $order->user->money,
             'paytype'=>$flowPayType,
             'status' => 1,
-            'remark' => '普通充值'.$order->price.'美币'
+            'remark' => '普通充值'.$order->price
         ]);
         $transRes = $OrderTable->connection()->transactional(function()use(&$order, $OrderTable, $FlowTable, &$flow) {
             return $OrderTable->save($order) &&  $FlowTable->save($flow);
@@ -653,10 +653,10 @@ class BusinessComponent extends Component
         if($type==1){
             $payorder = $PayorderTable->newEntity([
                 'user_id'=> $user->id,
-                'title'=>'美约美币充值',
+                'title'=>'充值',
                 'order_no'=>time() . $user->id . createRandomCode(4, 1),
                 'price'=>  $param['mb'],
-                'remark'=>  '充值美币'.$param['mb'].'个',
+                'remark'=>  '充值'.$param['mb'].'元',
             ]);
         }
         $res = $PayorderTable->save($payorder);
@@ -723,7 +723,7 @@ class BusinessComponent extends Component
             $admoney = 0;
             if($invited->gender == 1) {
                 $admoney = $amount * $cz_percent;
-                $type = 19;  //好友充值美币
+                $type = 19;  //好友充值
             } else {
                 $admoney = $amount * $sr_percent;
                 $type = 20;  //好友获得收入

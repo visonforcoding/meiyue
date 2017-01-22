@@ -97,7 +97,7 @@
                                 type="text"
                                 readonly="true"
                                 placeholder="无需手动填写"
-                                value="<?= $date['price']; ?>美币/小时"/>
+                                value="<?= $date['price']; ?>元/小时"/>
                             <input
                                 id="cost-input"
                                 name="price"
@@ -252,7 +252,7 @@
     function chooseSkillCallBack(userSkill) {
         $("#skill-id-input").val(userSkill['id']);
         $("#show-skill-name").val(userSkill['skill_name']);
-        $('#cost-btn').val(userSkill['cost'] + " 美币/小时");
+        $('#cost-btn').val(userSkill['cost'] + " 元/小时");
         $('#cost-input').val(userSkill['cost']);
         skill_id = userSkill['skill_id'];
         gurl = '/date-order/find-place/' + skill_id + "/";

@@ -74,7 +74,7 @@
         <?php if ($botBtSts == 0): ?>
         <div class="bottomblock">
             <div class="flex flex_end">
-                <span class="total"><span class="color_y"><i><?= ($user['gender'] == 1)?$activity['male_price']:$activity['female_price']; ?> </i>美币/人</span></span>
+                <span class="total"><span class="color_y"><i><?= ($user['gender'] == 1)?$activity['male_price']:$activity['female_price']; ?> </i>元/人</span></span>
                 <a onclick="topay();" class="nowpay">我要报名</a>
             </div>
             </div>
@@ -110,7 +110,7 @@
         <?php if($regist_item): ?>
         $.util.confirm(
             '取消派对',
-            '将扣除报名费<?= $regist_item['punish_percent'] ?>%(即<?= $regist_item['punish'] ?>美币）作为惩罚',
+            '将扣除报名费<?= $regist_item['punish_percent'] ?>%(即<?= $regist_item['punish'] ?>元）作为惩罚',
             function() {
                 $.util.ajax({
                     url: '/activity/cancel/<?= $regist_item['id']; ?>',

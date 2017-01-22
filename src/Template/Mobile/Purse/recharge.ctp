@@ -8,8 +8,8 @@
     <!-- <h3 class="rich_header"></h3> -->
     <div class="charge_container_list mt20">
         <div class="flex flex_justify inner">
-            <h1 class="commontitle">请输入购买数量</h1>
-            <h1 class="color_y">1元 = 1美币</h1>
+            <h1 class="commontitle">请输入充值金额</h1>
+            <!--<h1 class="color_y">1元 = 1美币</h1>-->
         </div>
         <div class="con inner flex flex_end">
             <input id="mb" type="tel" placeholder="点击输入"/>
@@ -21,39 +21,39 @@
             <li class='items flex flex_center' onclick="quickPay(100);">
                 <div>
                     <h3 class='color_friends'>
-                        <span class='lagernum'>100</span><i class='unit'>美币</i>
+                        <span class='lagernum'>100</span><i class='unit'>元</i>
                     </h3>
-                    <div class='color_y aligncenter price'>￥100</div>
+                    <!--<div class='color_y aligncenter price'>￥100</div>-->
                 </div>
             </li>
              <li class='items flex flex_center' onclick="quickPay(200);">
                 <div>
                     <h3 class='color_friends'>
-                        <span class='lagernum'>200</span><i class='unit'>美币</i>
+                        <span class='lagernum'>200</span><i class='unit'>元</i>
                     </h3>
-                    <div class='color_y aligncenter price'>￥200</div>
+                    <!--<div class='color_y aligncenter price'>￥200</div>-->
                 </div>
             </li>
              <li class='items flex flex_center' onclick="quickPay(500);">
                 <div>
                     <h3 class='color_friends'>
-                        <span class='lagernum'>500</span><i class='unit'>美币</i>
+                        <span class='lagernum'>500</span><i class='unit'>元</i>
                     </h3>
-                    <div class='color_y aligncenter price'>￥500</div>
+                    <!--<div class='color_y aligncenter price'>￥500</div>-->
                 </div>
             </li>
              <li class='items flex flex_center' onclick="quickPay(1000);">
                 <div>
                     <h3 class='color_friends'>
-                        <span class='lagernum'>1000</span><i class='unit'>美币</i>
+                        <span class='lagernum'>1000</span><i class='unit'>元</i>
                     </h3>
-                    <div class='color_y aligncenter price'>￥1000</div>
+                    <!--<div class='color_y aligncenter price'>￥1000</div>-->
                 </div>
             </li>
         </ul>
     </div>
     <div class="charge_container_con  mt20">
-        <h3 class="title">快捷充值送特权</h3>
+        <h3 class="title">充值预存送会员</h3>
         <ul id="changed">
             <?php foreach ($packs as $item): ?>
                 <li>
@@ -82,7 +82,7 @@
     </div>
 </div>
 <div style="height:62px;"></div>
-<a id="topay" class="identify_footer_potion">立即支付</a>
+<a id="topay" class="identify_footer_potion">立即充值</a>
 <script type="text/javascript">
     $('#changed .closed').on('tap', function () {
         var data = $(this).data('type');

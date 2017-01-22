@@ -221,7 +221,7 @@ class WxTestController extends AppController {
         $this->set([
             'title' => $title,
             'price'=>$price,
-            'pageTitle' => '美币充值'
+            'pageTitle' => '充值'
         ]);
     }
 
@@ -274,7 +274,7 @@ class WxTestController extends AppController {
             'redurl' => $redurl,
             'title' => $title,
             'payorder' => $payorder,
-            'pageTitle' => '美币充值'
+            'pageTitle' => '充值'
         ]);
         $this->render('/Mobile/Wx/pay');
     }
@@ -410,7 +410,7 @@ class WxTestController extends AppController {
                 ];
                 switch($order->type) {
                     case PayOrderType::CHONGZHI:
-                        $st['msg2'] = '充值金额：'.$order->price.'美币';
+                        $st['msg2'] = '充值金额：'.$order->price.'元';
                         break;
                     case PayOrderType::BUY_TAOCAN:
                     case PayOrderType::BUY_CHONGZHI_TAOCAN:
@@ -421,7 +421,7 @@ class WxTestController extends AppController {
                             $st['rebtname'] = '查看会员中心';
                             $st['reurl'] = '/userc/vip-center';
                         } elseif($pack->type == PackType::RECHARGE) {
-                            $st['msg2'] = '充值金额：'.$pack->vir_money.'美币';
+                            $st['msg2'] = '充值金额：'.$pack->vir_money.'元';
                         }
                         break;
                 }

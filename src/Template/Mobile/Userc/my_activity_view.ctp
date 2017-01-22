@@ -102,7 +102,7 @@
         <?php if($user->gender == 1): ?>
         $.util.confirm(
             '取消派对',
-            '将扣除报名费<?= $actregistration['punish_percent'] ?>%(即<?= $actregistration['punish'] ?>美币）作为惩罚',
+            '将扣除报名费<?= $actregistration['punish_percent'] ?>%(即<?= $actregistration['punish'] ?>元）作为惩罚',
             function() {
                 $.util.ajax({
                     url: '/activity/cancel/<?= $actregistration['id']; ?>',

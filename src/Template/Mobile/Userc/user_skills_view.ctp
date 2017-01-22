@@ -29,7 +29,7 @@
                         <div class='col-importent'>技能价格</div>
                         <div class="r_info">
                             <span id="show-cost">
-                                <?= (isset($userskill) && isset($userskill->cost))?$userskill->cost->money.'<i class="smalldes">美币/小时</i>':'<span style="color: #dadada;">200/h~300/h更受欢迎哦~</span>'; ?>
+                                <?= (isset($userskill) && isset($userskill->cost))?$userskill->cost->money.'<i class="smalldes">元/小时</i>':'<span style="color: #dadada;">200/h~300/h更受欢迎哦~</span>'; ?>
 
                             </span>
                             <i class="iconfont rcon">&#xe605;</i>

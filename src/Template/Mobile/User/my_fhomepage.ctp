@@ -101,7 +101,7 @@
                                 <?= $user_skill->skill->name ?>
                             </span>
                                 <div>
-                                    <span class="price"><i><?= $user_skill->cost->money ?></i>美币/h</span>
+                                    <span class="price"><i><?= $user_skill->cost->money ?></i>元/h</span>
                                     <a class="date data-ta" data-id="<?= $user_skill->id; ?>">约TA</a>
                                 </div>
                             </div>

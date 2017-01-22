@@ -46,7 +46,7 @@
     <div class="activity_pay_type mt20">
         <div class="con flex flex_justify inner">
             <div>我的钱包</div>
-            <div class="color_y"><i class="lagernum"><?= isset($user)?$user->money:''; ?></i> 美币</div>
+            <div class="color_y"><i class="lagernum"><?= isset($user)?$user->money:''; ?></i> 元</div>
         </div>
     </div>
     <?php endif; ?>
@@ -57,7 +57,7 @@
         <?php if ($actstatus == 3): ?>
             <a class="identify_footer_potion">报名结束</a>
         <?php elseif ($actstatus == 1): ?>
-            <span class="total"><span class="color_y">共计：<i class="color_y lagernum" id="count"><?= ($user->gender == 1)?$activity->male_price:$activity->female_price; ?> </i>美币</span></span>
+            <span class="total"><span class="color_y">共计：<i class="color_y lagernum" id="count"><?= ($user->gender == 1)?$activity->male_price:$activity->female_price; ?> </i>元</span></span>
             <a id="pay" href="javascript:void(0);" class="nowpay">立即支付</a>
         <?php elseif ($actstatus == 4): ?>
             <a class="identify_footer_potion">您已报名,审核中</a>

@@ -28,7 +28,7 @@
                 <li class="switchbox flex flex_justify skill-item" item-id="<?= $item['id'];?>">
                     <div><?= $item['skill']['name']; ?></div>
                     <div class="flex">
-                        <i class="smalldes"><?= $item['cost']['money']; ?>美币/小时</i>
+                        <i class="smalldes"><?= $item['cost']['money']; ?>元/小时</i>
                         <?php if($item->is_checked == 1): ?>
                         <div
                             class="switch-btn switch <?= ($item['is_used'] == 1)?'on':'off' ?>"

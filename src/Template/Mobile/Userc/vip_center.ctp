@@ -99,7 +99,7 @@
         </ul>
     </div>
     <div class="center_detail_list mt60">
-        <h3 class="inner commontitle">购买记录</h3>
+        <h3 class="inner commontitle">充值预存记录</h3>
             <?php if(count($userPacks)): ?>
             <div class='buy-record'>
                 <ul class="outerblock bdbottom btop inner">
@@ -136,7 +136,7 @@
     </div>
 </div>
 <div style="height:62px;"></div>
-<a href="/userc/vip-buy" class="identify_footer_potion">购买套餐</a>
+<a href="/userc/vip-buy" class="identify_footer_potion">充值预存></a>
 
 <script>
     LEMON.sys.back('/user/index');

@@ -21,10 +21,10 @@ class WithdrawController extends AppController
     public function index()
     {
         $this->set([
-            'pageTitle' => '美币兑换',
+            'pageTitle' => '提现',
             'bread' => [
                 'first' => ['name' => '客户服务'],
-                'second' => ['name' => '美币兑换'],
+                'second' => ['name' => '提现'],
             ],
         ]);
     }

@@ -48,7 +48,7 @@
             <h3 class="date_top_con_right">
                 <span class="date_ability">[<?= $data->skill->name ?>]</span>
                 <span class="date_guest"><?= $data->user->nick ?> <i class="iconfont color_y">&#xe61d;</i><i class="age color_y"><?= isset($data->user->birthday) ? getAge($data->user->birthday) : 'xx' ?></i></span>
-                <span class="date_much"><i><?= $data->cost->money ?></i> 美币/小时</span>
+                <span class="date_much"><i><?= $data->cost->money ?></i> 元/小时</span>
             </h3>
         </div>
         <div class="date_des change-date-detail mt20">
@@ -107,7 +107,7 @@
                             <div class="date_time flex flex_justify">
                                 <span>共<i id="lasth" class="color_y">0</i>小时</span>
                                 <div>
-                                    <span>合计：<i id="total_money" class="lagernum color_y">0</i><i class="color_y">美币</i></span>
+                                    <span>合计：<i id="total_money" class="lagernum color_y">0</i><i class="color_y">元</i></span>
                                 </div>
                             </div>
                         </li>
@@ -115,7 +115,7 @@
                             <div class="date_time  flex flex_justify">
                                 <span>预约金</span>
                                 <div>
-                                    <span id="order_money_str">0美币</span>
+                                    <span id="order_money_str">0元</span>
                                 </div>
                             </div>
                         </li>
@@ -126,7 +126,7 @@
                 <div class="con inner">
                     <div class="date_time  flex flex_justify">
                         <span>我的钱包</span>
-                        <div class="color_y"><?= $user->money ?> 美币</div>
+                        <div class="color_y"><?= $user->money ?> 元</div>
                     </div>
                 </div>
             </div>
@@ -136,7 +136,7 @@
     <div style="height:1.4rem;"></div>
     <div class="bottomblock">
         <div class="flex flex_end">
-            <span class="total">预约金：<i class="color_y">￥</i> <span class="color_y"><i id="order_money" class="color_y lagernum">0</i>美币</span></span>
+            <span class="total">预约金：<i class="color_y">￥</i> <span class="color_y"><i id="order_money" class="color_y lagernum">0</i>元</span></span>
             <a id="order_create" class="nowpay">立即支付</a>
         </div>
         <!--日期时间选择器-->
@@ -218,7 +218,7 @@
         $('#lasth').html(lasth);
         var price = <?= $data->cost->money ?>;
         $('#total_money').html(lasth * price);
-        $('#order_money_str').html(lasth * price + 'x20%=' + lasth * price * 0.2 + '美币');
+        $('#order_money_str').html(lasth * price + 'x20%=' + lasth * price * 0.2 + '元');
         $('#order_money').html(lasth * price * 0.2);
         var time_tmpstart = (start_datetime).split(" ");
         var time_tmpend = (end_datetime).split(" ");
@@ -368,7 +368,7 @@
             func: function (res) {
                 if (res.status) {
                     var order_id = res.order_id;
-                    $.util.confirm('确定支付？', '将扣除美币作为预约金', function () {
+                    $.util.confirm('确定支付？', '将扣除余额作为预约金', function () {
                         $.util.ajax({
                             url: '/date-order/order-pay/' + order_id,
                             func: function (resp) {

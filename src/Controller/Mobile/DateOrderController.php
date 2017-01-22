@@ -501,7 +501,7 @@ class DateOrderController extends AppController
         //交易流水
         $pre_amount = $this->user->money;
         if($this->user->money < $payment){
-            return $this->Util->ajaxReturn(['status'=>false,'code'=>'201','msg'=>'账户美币不足,请充值']);
+            return $this->Util->ajaxReturn(['status'=>false,'code'=>'201','msg'=>'账户余额不足,请充值']);
         }
         $this->user->money = $this->user->money - $payment;
         $user = $this->user;
@@ -989,7 +989,7 @@ class DateOrderController extends AppController
                 $refuse_msg = '平台将只退回约单金额的30%,剩余的70%将打至美女账户作为补偿，是否继续？';
              }
         }else{
-            $refuse_msg = '将会扣除约单20%的美币作为惩罚';
+            $refuse_msg = '将会扣除约单金额的20%作为惩罚';
         }
         $start_time = clone $order->start_time;
         $expire_time = $start_time->addHours(24)->i18nFormat('M月d日H时');

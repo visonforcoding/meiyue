@@ -44,11 +44,11 @@
                 <?php endif; ?>
             </ul>
             <div class="commontitle inner mt20">
-                <h3>当前虚拟币：<?= $user->money; ?> 美币</h3>
+                <h3>当前可提现金额：<?= $user->money; ?> 元</h3>
             </div>
             <ul class="outerblock bgff">
                 <li class="flex">
-                    <span class="accountname">提现美币</span>
+                    <span class="accountname">提现金额</span>
                     <div class="input_exchange">
                         <input  id="amount-input" name="amount" type="number" value="" />
                     </div>
@@ -62,7 +62,7 @@
             </ul>
             <div class="commontips inner mt20">
                 <div>
-                    <p>*1）为保障财产安全，只能每周三、日兑换各一次，每次不少于100美币；</p>
+                    <p>*1）为保障财产安全，只能每周三、日兑换各一次，每次不少于100元；</p>
                     <p>2）兑换申请成功后，平台将在24小时内把钱打入所提现账户。</p>
                      <!--<p>3）兑换美币将会收取20%的平台管理费。</p>-->
                 </div>

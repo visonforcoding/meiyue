@@ -49,7 +49,7 @@ class NetimComponent extends Component {
         $to_link = $from_link;
         $lasth = $order->end_time->hour - $order->start_time->hour;
         $to_body = '我希望约您在' . $order->site . '，时间为' . $order->start_time . '~' . $order->end_time .
-                '，共' . $lasth . '个小时，已预付诚意金' . $order->pre_pay . '美币，期待您赴约。';
+                '，共' . $lasth . '个小时，已预付诚意金' . $order->pre_pay . '元，期待您赴约。';
         $to_link_text = '查看详情';
         $to_msg = $this->Netim->generateCustomMsgBody($to_body, $to_link, $to_link_text, $to_prefix);
         $msg = $this->Netim->generateCustomMsg(5, $from_msg, $to_msg);

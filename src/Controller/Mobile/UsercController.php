@@ -856,7 +856,7 @@ class UsercController extends AppController
 
 
     /**
-     * 美币支付套餐
+     * 余额支付套餐
      *
      */
     public function taocanPay()
@@ -878,7 +878,7 @@ class UsercController extends AppController
                 return $this->Util->ajaxReturn(false, '非法套餐');
             }
             if($pack->price > $this->user->money) {
-                return $this->Util->ajaxReturn(false, '美币不足');
+                return $this->Util->ajaxReturn(false, '余额不足');
             }
             $pre_amount = $this->user->money;
             $this->user->money -= $pack->price;
@@ -891,7 +891,7 @@ class UsercController extends AppController
                 'buyer_id' => $this->user->id,
                 'type' => $flowType,  //购买套餐
                 'relate_id'=>$pack->id,   //关联的订单id
-                'type_msg' => '美币购买'.$packTypeStr,
+                'type_msg' => '充值'.$packTypeStr,
                 'income' => 2,
                 'amount' => $pack->price,
                 'price'=> $pack->price,
@@ -899,7 +899,7 @@ class UsercController extends AppController
                 'after_amount' => $this->user->money,
                 'paytype'=> 1,
                 'status' => 1,
-                'remark' => '美币购买'.$packTypeStr
+                'remark' => '充值'.$packTypeStr
             ]);
 
             //生成套餐购买记录
@@ -1199,13 +1199,13 @@ class UsercController extends AppController
 
 
     /*
-     * 兑换美币
+     * 提现
      */
     public function exchangeView($type)
     {
         $this->handCheckLogin();
         $this->set([
-            'pageTitle' => '兑换美币申请',
+            'pageTitle' => '提现申请',
             'user' => $this->user,
             'type' => $type
         ]);
@@ -1223,8 +1223,8 @@ class UsercController extends AppController
     /**
      * 检查兑换
      * @param User  申请人
-     * @param Withdraw  兑换美币数额
-     * @return int 状态码：1#可以兑换 2#存在等待受理申请 3#今日已经提交过了 4#非兑换日 5#美币不足 6#兑换金额超过20000 7#兑换金额少于500
+     * @param Withdraw  提现金额
+     * @return int 状态码：1#可以兑换 2#存在等待受理申请 3#今日已经提交过了 4#非兑换日 5#余额不足 6#兑换金额超过20000 7#兑换金额少于500
      */
     private function checkApply(User $user, $amount)
     {
@@ -1239,17 +1239,17 @@ class UsercController extends AppController
                 $money = $user->money;
             }
             if(!$with->first()->total || ($money < $amount)) {
-                return [5, '可兑换美币不足']; //美币不足
+                return [5, '可提现余额不足']; //
             }
         }
         if ($user->money < $amount) {
-            return [5, '美币不足']; //美币不足
+            return [5, '余额不足']; //
         }
         if (500 > $amount) {
-            return [7, '每次申请兑换不能少于500美币']; //兑换金额小于500
+            return [7, '每次申请提现金额不能少于500元']; //兑换金额小于500
         }
         if (20000 < $amount) {
-            return [6, '每次申请兑换不能多于20000美币']; //兑换金额大于20000
+            return [6, '每次申请提现金额不能多于20000元']; //兑换金额大于20000
         }
         //检查提现情况
         $withdraw = $withdrawTb->find()->where(['user_id' => $this->user->id])->orderDesc('create_time')->first();

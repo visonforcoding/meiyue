@@ -705,7 +705,7 @@ class UserController extends AppController {
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
         $Table = $this->User;
-        $column = ['手机号', '密码', '用户标志', 'wx_unionid', '微信的openid', 'app端的微信id', '昵称', '真实姓名', '职业', '邮箱', '1,男，2女', '生日', '星座', '体重(KG)', '身高(cm)', '三围', '罩杯', '家乡', '常驻城市', '头像', '情感状态', '工作经历', '常出没地', '最喜欢美食', '音乐', '电影', '运动', '个性签名', '微信号', '账户余额(美币)', '审核状态1待审核2审核不通过3审核通过', '账号状态 ：1.可用0禁用(控制登录)', '身份证路径', '身份证正面照', '身份证背面照', '手持身份照', '基本照片', '基本视频', '基本视频封面', '充值总额', '是否假删除：1,是0否', '注册设备', '创建时间', '修改时间', '上次登陆时间', '上次登录坐标', '上次登录坐标', '唯一码（用于扫码登录）', '云信token'];
+        $column = ['手机号', '密码', '用户标志', 'wx_unionid', '微信的openid', 'app端的微信id', '昵称', '真实姓名', '职业', '邮箱', '1,男，2女', '生日', '星座', '体重(KG)', '身高(cm)', '三围', '罩杯', '家乡', '常驻城市', '头像', '情感状态', '工作经历', '常出没地', '最喜欢美食', '音乐', '电影', '运动', '个性签名', '微信号', '账户余额', '审核状态1待审核2审核不通过3审核通过', '账号状态 ：1.可用0禁用(控制登录)', '身份证路径', '身份证正面照', '身份证背面照', '手持身份照', '基本照片', '基本视频', '基本视频封面', '充值总额', '是否假删除：1,是0否', '注册设备', '创建时间', '修改时间', '上次登陆时间', '上次登录坐标', '上次登录坐标', '唯一码（用于扫码登录）', '云信token'];
         $query = $Table->find();
         $query->hydrate(false);
         $query->select(['phone', 'pwd', 'user_token', 'union_id', 'wx_openid', 'app_wx_openid', 'nick', 'truename', 'profession', 'email', 'gender', 'birthday', 'zodiac', 'weight', 'height', 'bwh', 'cup', 'hometown', 'city', 'avatar', 'state', 'career', 'place', 'food', 'music', 'movie', 'sport', 'sign', 'wxid', 'money', 'status', 'enabled', 'idpath', 'idfront', 'idback', 'idperson', 'images', 'video', 'video_cover', 'recharge', 'is_del', 'device', 'create_time', 'update_time', 'login_time', 'login_coord_lng', 'login_coord_lat', 'guid', 'imtoken']);

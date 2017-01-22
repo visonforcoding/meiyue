@@ -174,7 +174,7 @@
     <div class="date_ability_list bgff mt20">
         <div class="title flex flex_justify inner">
             <h3><i class="color_y">[<?= $order->user_skill->skill->name ?>]</i> <?= ($order->date) ? $order->date->title : '' ?></h3>
-            <span class="smallarea"><?= $order->price ?>美币/小时</span>
+            <span class="smallarea"><?= $order->price ?>元/小时</span>
         </div>
         <ul class="outerblock btop">
             <li class="flex flex_justify">
@@ -206,20 +206,20 @@
         <h3 class="commontitle inner">付款详情</h3>
         <ul class="b_content outerblock bgff">
             <li class="flex flex_justify">
-                <div>合计</div><div><?= $order->amount ?>美币</div>
+                <div>合计</div><div><?= $order->amount ?>元</div>
             </li>
             <li class="flex flex_justify">
                 <?php if ($order->status > 2 && $order->status < 10): ?>
-                    <div>已支付预约金</div><div><?= $order->pre_pay ?>美币</div>
+                    <div>已支付预约金</div><div><?= $order->pre_pay ?>元</div>
                 <?php endif; ?>
                 <?php if (in_array($order->status, ['13', '10'])): ?>
-                    <div>已支付</div><div><?= $order->amount ?>美币</div>
+                    <div>已支付</div><div><?= $order->amount ?>元</div>
                 <?php endif; ?>
             </li>
         </ul>
         <?php if ($order->status == 7): ?>
             <div class="flex flex_justify date_bosses inner">
-                <div class="bold">剩余尾款</div><div class="color_y"><?= $order->amount - $order->pre_pay ?>美币</div>
+                <div class="bold">剩余尾款</div><div class="color_y"><?= $order->amount - $order->pre_pay ?>元</div>
             </div>
         <?php endif; ?>
         <p class="commontips inner mt20"><a href="#this" class="color_y">退款规则</a></p>
@@ -230,7 +230,7 @@
     <?php if ($order->status == 1): ?>
         <div class="bottomblock">
             <div class="flex flex_end">
-                <span class="total">预约金:<span class="color_y"><?= $order->pre_pay ?> </i>美币</span></span>
+                <span class="total">预约金:<span class="color_y"><?= $order->pre_pay ?> </i>元</span></span>
                 <a  data-id="<?= $order->id ?>" id="prepay" class="nowpay">付款</a>
             </div>
         </div>
@@ -260,7 +260,7 @@
     <?php if ($order->status == 7): ?>
         <div class="bottomblock">
             <div class="flex flex_end">
-                <span class="total">剩余尾款数:<span class="color_y"><?= $order->amount - $order->pre_pay ?> </i>美币</span></span>
+                <span class="total">剩余尾款数:<span class="color_y"><?= $order->amount - $order->pre_pay ?> </i>元</span></span>
                 <a  data-id="<?= $order->id ?>" id="payall" class="nowpay">立即支付</a>
             </div>
         </div>
@@ -386,7 +386,7 @@
     $('#payall').on('tap', function () {
         //立即支付尾款
         var id = $(this).data('id');
-        $.util.confirm('确定支付？', '将扣除相应的美币', function () {
+        $.util.confirm('确定支付？', '将扣除相应的余额', function () {
             $.util.ajax({
                 url: '/date-order/order-payall',
                 data: {order: id},
@@ -461,7 +461,7 @@
     });
     $(document).on('tap', '#prepay', function () {
         //支付预约金
-        $.util.confirm('确定支付？', '将扣除美币作为预约金', function () {
+        $.util.confirm('确定支付？', '将扣除余额作为预约金', function () {
             $.util.ajax({
                 url: '/date-order/order-pay/' + orderid,
                 func: function (resp) {

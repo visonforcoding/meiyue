@@ -105,7 +105,7 @@
             <li>
                 <a href="/user/used-pack" class="home_items">
                     <div class="home_list_l_info  flex"><i class="iconfont">&#xe657;</i><span
-                                class="itemsname">付费查看记录</span></div>
+                                class="itemsname">查看记录</span></div>
                     <div class="home_list_r_info">
                         <i class="iconfont">&#xe605;</i>
                     </div>
