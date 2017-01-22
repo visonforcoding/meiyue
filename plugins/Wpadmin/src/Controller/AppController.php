@@ -157,7 +157,7 @@ class AppController extends Controller {
         }
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
-            $query->order(['set_top' => 'desc', $sort => $order]);
+            $query->order([$sort => $order]);
         }
         $query->limit(intval($limit))
             ->page(intval($page));
