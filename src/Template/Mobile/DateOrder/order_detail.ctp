@@ -215,6 +215,9 @@
                 <?php if (in_array($order->status, ['13', '10'])): ?>
                     <div>已支付</div><div><?= $order->amount ?>元</div>
                 <?php endif; ?>
+                <?php if (in_array($order->status, ['1'])): ?>
+                    <div>未已支付预约金</div><div><?= $order->pre_pay ?>元</div>
+                <?php endif; ?>
             </li>
         </ul>
         <?php if ($order->status == 7): ?>
