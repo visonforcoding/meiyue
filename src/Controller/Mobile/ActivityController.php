@@ -631,17 +631,17 @@ class ActivityController extends AppController
                     $row['ismale'] = true;
                     $row['upackname'] = null;
                     //累计充值3万元=钻石
-                    if($row['recharge'] >= 30000) {
+                    if($row['recharge'] >= \VIPlevel::ZUANSHI_VIP_CONSUME) {
                         $row['upackname'] = \VIPlevel::getStr(\VIPlevel::ZUANSHI_VIP);
                         $row['upackstyle'] = \VIPlevel::getStyle(\VIPlevel::ZUANSHI_VIP);
                     }
                     //累计充值1万元=白金
-                    else if($row['recharge'] >= 10000) {
+                    else if($row['recharge'] >= \VIPlevel::BAIJIN_VIP_CONSUME) {
                         $row['upackname'] = \VIPlevel::getStr(\VIPlevel::BAIJIN_VIP);
                         $row['upackstyle'] = \VIPlevel::getStyle(\VIPlevel::BAIJIN_VIP);
                     }
                     //累计充值3999=黄金
-                    else if($row['recharge'] >= 3999) {
+                    else if($row['recharge'] >= \VIPlevel::HUANGJIN_VIP_CONSUME) {
                         $row['upackname'] = \VIPlevel::getStr(\VIPlevel::HUANGJIN_VIP);
                         $row['upackstyle'] = \VIPlevel::getStyle(\VIPlevel::HUANGJIN_VIP);
                     } else {

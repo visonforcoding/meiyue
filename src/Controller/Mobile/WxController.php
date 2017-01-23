@@ -237,6 +237,7 @@ class WxController extends AppController {
         $pagetitle = $this->request->query('pagetitle')?$this->request->query('pagetitle'):null;
         $redurl = $this->request->query('redurl');
         $PayorderTable = \Cake\ORM\TableRegistry::get('Payorder');
+
         if($id){
             $payorder = $PayorderTable->get($id);
         }else{
@@ -254,7 +255,7 @@ class WxController extends AppController {
             $PayorderTable = TableRegistry::get('Payorder');
             $payorder = $PayorderTable->newEntity([
                 'user_id'=>  $this->user->id,
-                'title'=>'充值',
+                'title'=>$title,
                 'order_no'=>time() . $this->user->id . createRandomCode(4, 1),
                 'type'=> PayOrderType::CHONGZHI,
                 'price'=>  $mb,

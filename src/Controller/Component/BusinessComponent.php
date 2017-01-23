@@ -128,15 +128,15 @@ class BusinessComponent extends Component
     public function getVIP(User $user)
     {
         //累计充值3万元=钻石
-        if($user->recharge >= 30000) {
+        if($user->recharge >= \VIPlevel::ZUANSHI_VIP_CONSUME) {
             return \VIPlevel::ZUANSHI_VIP;
         }
         //累计充值1万元=白金
-        else if($user->recharge >= 10000) {
+        else if($user->recharge >= \VIPlevel::BAIJIN_VIP_CONSUME) {
             return \VIPlevel::BAIJIN_VIP;
         }
         //累计充值3999=黄金
-        else if($user->recharge >= 3999) {
+        else if($user->recharge >= \VIPlevel::HUANGJIN_VIP_CONSUME) {
             return \VIPlevel::HUANGJIN_VIP;
         }
 
