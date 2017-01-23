@@ -166,6 +166,7 @@ function getFlowType($index = null) {
         '19' => '好友充值',
         '20' => '好友获得收入',
         '21' => '提现',
+        '22' => '投诉退回',
         ];
     if ($index) {
         return $flowType[$index];

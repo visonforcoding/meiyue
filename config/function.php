@@ -281,9 +281,12 @@ function dblog($flag, $msg, $data = null) {
 function generateImgUrl($url, $domain=null, $glide = false) {
     if(!$domain){
         $domain = env('HTTP_HOST');
+        if(Cake\Core\Configure::read('img.domain')){
+            $domain = Cake\Core\Configure::read('img.domain');
+        }
     }
     $url = preg_replace('/upload/', 'imgs', $url);
-    return $url;
+    return 'http://'.$domain.$url;
 }
 
 function getHost($proto = 'http') {
