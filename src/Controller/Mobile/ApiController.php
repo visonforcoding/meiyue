@@ -603,9 +603,14 @@ class ApiController extends AppController {
         $toUrl = null;
         try {
             $user = TableRegistry::get('User')->get($vid);
-            if(ServiceType::containType($type)) {
-                $this->loadComponent('Business');
-                $res = $this->Business->checkRight($uid, $vid, $type);
+            $user2 = TableRegistry::get('User')->get($uid);
+            if($user2->gender == 1) {
+                if(ServiceType::containType($type)) {
+                    $this->loadComponent('Business');
+                    $res = $this->Business->checkRight($uid, $vid, $type);
+                }
+            } else {
+                $res = SerRight::OK_CONSUMED;
             }
             switch ($res) {
                 case SerRight::NO_HAVENONUM:
