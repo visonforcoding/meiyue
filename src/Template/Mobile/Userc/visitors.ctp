@@ -76,7 +76,6 @@
             Mustache.parse(template);   // optional, speeds up future uses
             url = '/userc/visitors/' + page + '.json';
             $.getJSON(url, function (data) {
-                window.holdLoad = false;
                 if ((data.visitors).length) {
                     var rendered = Mustache.render(template, data);
                     if (more) {
@@ -86,23 +85,22 @@
                         $('#visitors-list').html(rendered);
                     }
                     $.util.hidePreloader();
+                    window.holdLoad = false;
                 } else {
                     $.util.hidePreloader();
                     if(curpage == 1) {
                         $('#blank-area').html('<div class="empty-content  empty-text mt350"><p class="empty-tips">您暂时没有访客哦</p></div>');
                     } else {
                         $('#blank-area').html('<p class="smallarea aligncenter mt60">没有更多数据了</p><br>');
+                        window.holdLoad = true;
                     }
-                    window.holdLoad = true;
                 }
             });
         }
         setTimeout(function () {
             $(window).on("scroll", function () {
-                if(curpage == 1) {
-                    document.body.scrollTop = 0;
-                }
-                console.log("body:" + document.body.scrollTop + "|document:" + (($(document).height() - $(window).height()) - 100));
+                //st = document.body.scrollTop;
+                //console.log('scrollTop:' + st + '||' + (($(document).height() - $(window).height()) - 100));
                 $.util.listScroll('visitors-list', function () {
                     loadUser(curpage + 1, true);
                 })
@@ -113,6 +111,7 @@
         }
         function init() {
             $('.not-vip-show').hide();
+            window.holdLoad = false;
         }
         <?php else: ?>
         $.util.tap($('#beVIP'), function() {
