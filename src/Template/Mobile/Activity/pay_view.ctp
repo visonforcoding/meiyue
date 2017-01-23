@@ -169,12 +169,11 @@
         }
     });
     $(document).on('tap', '#pay', function() {
-        console.log('paying');
         var num = parseInt($('#num').val());
-        var price = <?= isset($price)?$price:0; ?>;
+        var price = <?= isset($activity->price)?$activity->price:0; ?>;
         var money = <?= isset($user)?$user->money:''; ?>;
         if((num * price > money) && price) {
-            $.util.alert('余额不足，正在跳转到充值页...');
+            $.util.alert('钱包余额不足，立即充值');
             setTimeout(function() {
                 window.location.href='/purse/recharge?redurl=/activity/pay-view/<?= $activity['id']; ?>';
             }, 1000);

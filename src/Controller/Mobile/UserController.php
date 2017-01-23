@@ -835,7 +835,7 @@ class UserController extends AppController {
     public function usedPack()
     {
         $this->set([
-            'pageTitle' => '付费查看记录'
+            'pageTitle' => '查看记录'
         ]);
     }
 

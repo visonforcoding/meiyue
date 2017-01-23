@@ -215,11 +215,14 @@ class ActivityController extends AppController
         $lim = 1;
         if ($this->user->gender == 1) {
             $lim = $activity->male_rest;
+            $activity->price = $activity->male_price;
         } else {
             $lim = $activity->female_rest;
+            $activity->price = $activity->female_price;
         }
         //状态：0#未登录 1#我要报名(男) 2#我要报名(女) 3报名结束(男女) 4#您已报名,审核中(女) 5#您已报名,审核不通过(女) 6#报名成功(女)
         $actstatus = $this->getActStatus($activity);
+
         $this->set([
             'user' => $this->user,
             'activity' => $activity,
@@ -459,9 +462,9 @@ class ActivityController extends AppController
                     });
 
             if ($transRes) {
-                return $this->Util->ajaxReturn(true, '参加成功');
+                return $this->Util->ajaxReturn(true, '报名成功');
             } else {
-                return $this->Util->ajaxReturn(false, '参加失败');
+                return $this->Util->ajaxReturn(false, '报名失败');
             }
         }
     }
