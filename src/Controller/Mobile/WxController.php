@@ -229,11 +229,32 @@ class WxController extends AppController {
      * 预约支付页  此页面URL 需在微信公众号的微信支付那里配置 支付域
      * @param int $id  订单id
      */
-    public function pay($id = null) {
+    public function pay($id = null,$mb=null) {
         $title = $this->request->query('title')?$this->request->query('title'):'充值';
         $redurl = $this->request->query('redurl');
         $PayorderTable = \Cake\ORM\TableRegistry::get('Payorder');
-        $payorder = $PayorderTable->get($id);
+        $pageTitle = '重置';
+        if($id){
+            $payorder = $PayorderTable->get($id);
+        }else{
+            if(!$mb){
+                throw new \Cake\Network\Exception\NotFoundException('未找到充值订单');
+            }
+            $pageTitle = '订单支付';
+            $title = '订单金额';
+            $PayorderTable = TableRegistry::get('Payorder');
+            $payorder = $PayorderTable->newEntity([
+                'user_id'=>  $this->user->id,
+                'title'=>'充值',
+                'order_no'=>time() . $this->user->id . createRandomCode(4, 1),
+                'price'=>  $mb,
+                'fee'=>  $mb,
+                'remark'=>  '充值'.$mb.'元',
+            ]);
+             if(!$PayorderTable->save($payorder)){
+                 throw new \Cake\Network\Exception\NotFoundException('生成订单失败');
+             }
+        }
         $out_trade_no = $payorder->order_no;
         $fee = $payorder->price;  //支付金额
 //        $fee = 0.01;  //支付金额
@@ -273,7 +294,7 @@ class WxController extends AppController {
             'redurl' => $redurl,
             'title' => $title,
             'payorder' => $payorder,
-            'pageTitle' => '充值'
+            'pageTitle' => $pageTitle
         ]);
     }
 

@@ -98,7 +98,7 @@ class DateOrderController extends AppController
                    'status'=>false,
                    'msg'=>'余额不足支付预约金,请先充值',
                    'code'=>201,
-                   'redirect_url'=>'/purse/recharge?redirect_url=/userc/dateorder'
+                   'redirect_url'=>'/wx/pay/0/'.$pre_pay.'?redurl=/date-order/order-detail/'.$res->id
                    ]);
            }
            //成功生成订单
@@ -166,7 +166,7 @@ class DateOrderController extends AppController
            if($this->user->money < $dateorder->pre_pay){
                return $this->Util->ajaxReturn([
                    'status'=>false, 'msg'=>'余额不足支付预约金,请先充值',
-                   'code'=>'201','redirect_url'=>'/purse/recharge?redirect_url=/userc/dateorder']);
+                   'code'=>'201','redirect_url'=>'/wx/pay/0/'.$dateorder->pre_pay.'?redurl=/date-order/order-detail/'.$res->id]);
            }
            $dateorder->status = 3;
            $dateorder->prepay_time = date('Y-m-d H:i:s');
