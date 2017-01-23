@@ -216,7 +216,7 @@
                     <div>已支付</div><div><?= $order->amount ?>元</div>
                 <?php endif; ?>
                 <?php if (in_array($order->status, ['1'])): ?>
-                    <div>未已支付预约金</div><div><?= $order->pre_pay ?>元</div>
+                    <div>未支付预约金</div><div><?= $order->pre_pay ?>元</div>
                 <?php endif; ?>
             </li>
         </ul>
@@ -385,6 +385,7 @@
 </div>
 <?php $this->start('script'); ?>
 <script>
+    LEMON.sys.back('/userc/dateorder');
     var orderid = <?= $order->id ?>;
     $('#payall').on('tap', function () {
         //立即支付尾款

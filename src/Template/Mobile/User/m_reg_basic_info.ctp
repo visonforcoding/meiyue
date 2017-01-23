@@ -278,6 +278,16 @@
         window.location.href = '/index/find-list';
     }
     $('#submit').on('tap', function () {
+        var nick = $('#nick').val();
+        if(!nick){
+            $.util.alert('昵称不可为空');
+            return;
+        }
+        var avatar = $('#nick').val();
+        if(!avatar){
+            $.util.alert('头像不可为空');
+            return;
+        }
         var form = $('form');
         $.util.ajax({
             data: form.serialize(),

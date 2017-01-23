@@ -139,10 +139,10 @@ class AppController extends Controller {
         $controller = strtolower($this->request->param('controller'));
         $action = strtolower($this->request->param('action'));
         $request_aim = [$controller, $action];
+        $this->baseLogin();
         if (!in_array($request_aim,  $this->firewall)) {
             //静默登陆 自动登录
             $this->wxBaseLogin();
-            $this->baseLogin();
         }
         if (in_array($request_aim, $this->firewall) ||
                 in_array($controller, ['user', 'wx', 'pay', 'api', 
