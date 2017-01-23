@@ -95,17 +95,15 @@
                         window.holdLoad = true;
                     }
                 }
+                if(curpage == 1) {
+                    $(window).on("scroll", function () {
+                        $.util.listScroll('visitors-list', function () {
+                            loadUser(curpage + 1, true);
+                        })
+                    });
+                }
             });
         }
-        setTimeout(function () {
-            $(window).on("scroll", function () {
-                //st = document.body.scrollTop;
-                //console.log('scrollTop:' + st + '||' + (($(document).height() - $(window).height()) - 100));
-                $.util.listScroll('visitors-list', function () {
-                    loadUser(curpage + 1, true);
-                })
-            });
-        }, 2000)
         function viewta(uid) {
             location.href = (<?= $user->gender; ?> == 2)?'/user/male-homepage/' + uid:'/index/homepage/' + uid;
         }

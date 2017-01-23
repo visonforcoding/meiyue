@@ -623,6 +623,10 @@ class VIPlevel {
     const BAIJIN_VIP = 3;    //白金vip
     const ZUANSHI_VIP = 4;  //钻石vip
 
+    //成为会员至少需要充值的额度
+    const HUANGJIN_VIP_CONSUME = 3999;
+    const BAIJIN_VIP_CONSUME = 10000;
+    const ZUANSHI_VIP_CONSUME = 30000;
     public static function getStr($lev = null) {
         $levs = [
             VIPlevel::COMMON_VIP => '普通VIP',

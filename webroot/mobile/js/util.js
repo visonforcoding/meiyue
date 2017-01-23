@@ -308,18 +308,19 @@ $.util = {
     },
     //滚动事件
     listScroll: function (listId, loadFunc) {
-        if (window.holdLoad)
+        if (window.holdLoad) {
             return;
+        }
         window.holdLoad = true;
         //setTimeout(function(){window.holdLoad = false;}, 1000);  //只允许1秒加载一次下一页   防止上一个滑动事件还没有结束的状态中
-
         var obj = this, st = document.body.scrollTop;
 
+        //alert('scrollTop:' + st + '||' + (($(document).height() - $(window).height()) - 100));
         /*console.log([$(document).height(), $(window).height(),$(document).height()-$(window).height()-200,st].join('-'));*/
-        //console.log('scrollTop:' + st + '||' + (($(document).height() - $(window).height()) - 300));
+        if (loadFunc && st >= (($(document).height() - $(window).height()) - 200)) {
 //        if (loadFunc && st >= (($(document).height() - $(window).height()) - 300)) {
 //        if (loadFunc && st >= (($(document).height() ))) {
-        if (loadFunc && st >= (($(document).height() - $(window).height()) - 100)) {
+            console.log('here');
             loadFunc();
             $.util.initLoadImg(listId);
         } else {
