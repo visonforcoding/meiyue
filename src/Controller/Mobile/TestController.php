@@ -22,6 +22,10 @@ use MongoDB\BSON\Timestamp;
 class TestController extends AppController {
 
     public function test() {
+        debug($_SERVER);
+        debug($this->request->scheme());
+        debug($this->request->env('REQUEST_SCHEME'));
+        exit();
         $this->loadComponent('Business');
         //var_dump(round1214 / 1000);
         //var_dump(round('42.99687156342637',1));
@@ -365,6 +369,13 @@ class TestController extends AppController {
         debug(mt_rand(1, 9) * 0.01);
         $plus = mt_rand(0, 1) ? 1 : -1;
         debug(100+$plus*mt_rand(1,9)*0.01);
+        exit();
+    }
+    
+    public function getHeader(){
+        debug($this->request->header('foo'));
+        $header_foo = $_SERVER;
+        debug($header_foo);
         exit();
     }
 

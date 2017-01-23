@@ -785,3 +785,20 @@ ALTER TABLE `lm_skill`
 	ADD COLUMN `lft` INT(11) NOT NULL AFTER `parent_id`,
 	ADD COLUMN `rght` INT(11) NOT NULL AFTER `lft`;
 update lm_skill set parent_id = null where parent_id = 0;
+
+
+
+#时间点完善
+ALTER TABLE `lm_dateorder`
+	ADD COLUMN `payall_time` DATETIME NOT NULL COMMENT '支付尾款时间点' AFTER `receive_time`;
+
+ALTER TABLE `lm_dateorder`
+	ADD COLUMN `w_go_time` DATETIME NOT NULL COMMENT '美女确认到达时间点' AFTER `payall_time`,
+	ADD COLUMN `m_go_time` DATETIME NOT NULL COMMENT '男性确认到达时间点' AFTER `w_go_time`;	
+
+ALTER TABLE `lm_dateorder`
+	ADD COLUMN `complain_result` VARCHAR(550) NOT NULL DEFAULT '' COMMENT '投诉原因及处理结果' AFTER `is_complain`;
+
+ALTER TABLE `lm_dateorder`
+	CHANGE COLUMN `is_complain` `is_complain` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '投诉:0 未受理未投诉 1投诉成功 2投诉失败 3维持不变' AFTER `amount`;
+
