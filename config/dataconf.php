@@ -20,10 +20,10 @@ return [
         'salt'=>'d2339263f44886091b8a62ef43196f15',
     ],
     'weixin' => [
-        'appID' => 'wxf3d1e078715e41ce',
-        'appsecret' => '293c2fb5bcf96db8eea854365471d48b',
+        'appID' => 'wx7c0af0940b03ea6a',
+        'appsecret' => '66137552860b8a18daf0a96381d365f7',
         'token'=>'cwptest',
-        'mchid'=>'1296107201',
+        'mchid'=>'1414276802',
         'App_mchid'=>'1420153502',
         'key'=>'33DB349F8DB955DC78FC5F84F8E5D3F8',  //设置的商户key
         'sslcert_path'=> dirname(__FILE__).'/wxcert/apiclient_cert.pem',
@@ -31,9 +31,9 @@ return [
         'notify_url'=>'/wx/wx-notify',
         'AppID'=>'wx77a25160df0c8641',     //APP端的 开放平台appid
         'AppSecret'=>'9835541c22d191e3a227235e561d502b',
-        'master_model'=>false,   //中控模式
-        'master_ip'=>'112.74.88.156' ,   //中控服务器ip
-        'master_domain'=>'m.chinamatop.com'    //中控服务器域名
+        'master_model'=>true,   //中控模式
+        'master_ip'=>'120.76.122.98' ,   //中控服务器ip
+        'master_domain'=>'api.beauty-engine.com'    //中控服务器域名
     ],
     'alipay' => [
         'partner' => '2088521191540268',  //合作者身份
@@ -62,5 +62,8 @@ return [
     'netim'=>[
        'app_key'=>'9e0e349ffbcf4345fdd777a65584fb68',
        'app_secret'=>'1d4cb8f1d21b',
+    ],
+    'img'=>[
+        'domain'=>'imgs.meiyue.dev'
     ]
 ];
