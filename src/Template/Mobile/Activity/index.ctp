@@ -275,6 +275,7 @@
                 tp: 'text', //图片img或是文字text
                 min: 1,
                 minp: 20,
+                smartTouch:true,
                 loadImg: true,
                 isInit: true,
                 moveDom: $('#imgBox'),
