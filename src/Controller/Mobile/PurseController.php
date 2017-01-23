@@ -29,7 +29,7 @@ class PurseController extends AppController {
         $packs = $packTb
             ->find()
             ->where(['is_used' => 1, 'type' => PackType::RECHARGE])
-            ->orderDesc('show_order');
+            ->orderAsc('show_order');
         $this->set([
             'packs' => $packs,
             'redurl' => $redurl,
