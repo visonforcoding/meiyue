@@ -125,7 +125,7 @@ $.extend(scroll.prototype, {
                 break;
             case "touchend":
             case "touchcancel":
-                //if(this.smartTouchHoldX) break;
+                if(this.smartTouchHoldX) break;
                 this.move(e);
                 this.holdAuto = false;
                 break;
@@ -144,8 +144,9 @@ $.extend(scroll.prototype, {
     touchmove : function(e) {
         var mp = this.getPosition(e), x = mp.x - this.sp.x, y = mp.y - this.sp.y;
         if(this.moveCount === 0 && this.smartTouch) {
-            this.smartTouchHoldX = Math.abs(y) - Math.abs(x);
+            this.smartTouchHoldX = Math.abs(y) > Math.abs(x);
         }
+        this.moveCount++;
         if(this.smartTouchHoldX) return;
 
         if (Math.abs(x) - Math.abs(y) > this.min) {
