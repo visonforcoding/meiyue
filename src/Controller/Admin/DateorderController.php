@@ -157,12 +157,12 @@ class DateorderController extends AppController {
             $query->where($where);
         }
         $query->contain([
-            'Buyer'=>function($q){
-                return $q->select(['id','nick','phone']);
-            }, 
-            'Date', 
-            'Dater'=>function($q){
-                return $q->select(['id','nick','phone']);
+            'Buyer' => function($q) {
+                return $q->select(['id', 'nick', 'phone']);
+            },
+            'Date',
+            'Dater' => function($q) {
+                return $q->select(['id', 'nick', 'phone']);
             }, 'UserSkill.Skill']);
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
@@ -247,6 +247,102 @@ class DateorderController extends AppController {
             } else {
                 $this->Util->ajaxReturn(true, '保存失败');
             }
+        }
+    }
+
+    /**
+     * 处理投诉
+     */
+    public function handComplain($order_id) {
+        $DateorderTable = \Cake\ORM\TableRegistry::get('Dateorder');
+        $dateorder = $DateorderTable->get($order_id, [
+            'contain' => [
+                'Buyer' => function($q) {
+                    return $q->select(['phone', 'id', 'money']);
+                }
+                , 'Dater' => function($q) {
+                    return $q->select(['id', 'nick', 'money']);
+                }
+                , 'UserSkill.Skill'
+            ]
+        ]);
+        //订单状态更改
+        if ($dateorder->status < 10) {
+            return $this->Util->ajaxReturn(false, '暂时不能进行此操作');
+        }
+        $result = $this->request->data('result');
+        if($result==3){
+            $dateorder->is_complain = 3;
+            if($DateorderTable->save($dateorder)){
+                return $this->Util->ajaxReturn(true,'操作成功');
+            } else {
+                return $this->Util->ajaxReturn(false,'服务器错误');
+            }
+        }
+        $dateorder->close_time = date('Y-m-d H:i:s');
+        if($result==1){
+             //订单状态更改
+            $dateorder->is_complain = 1;
+            $dateorder->status = 18;
+        }elseif($result==2){
+            $dateorder->is_complain = 2;
+            $dateorder->status = 19;
+        }
+        $m_p = $this->request->data('m_p');
+        $w_p = $this->request->data('w_p');
+        //返还m_p 给男性
+        $amount = $dateorder->amount;
+        $m_amount = $amount*$m_p/100;
+        $m_pre_money = $dateorder->buyer->money;
+        $dateorder->buyer->money = $dateorder->buyer->money+$dateorder->$m_amount;
+        $m_after_amount = $dateorder->buyer->money;
+        
+        $dateorder->dirty('buyer',true);
+         //生成流水
+        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+        $m_flow = $FlowTable->newEntity([
+           'user_id'=> $dateorder->buyer->id,
+           'buyer_id'=>  0,
+           'relate_id'=>$dateorder->id,
+           'type'=>22,
+           'type_msg'=>'订单投诉退回',
+           'income'=>1,
+           'amount'=>$m_amount,
+           'price'=>$m_amount,
+           'pre_amount'=>$m_pre_money,
+           'after_amount'=>$m_after_amount,
+           'paytype'=>2, 
+           'remark'=> '订单投诉的处理'
+        ]);
+        //扣除违约金   10%
+        $breach_amount = $w_p*$dateorder->amount/100;
+        $w_pre_amount = $dateorder->dater->money;
+        $dateorder->dater->money = $dateorder->dater->money+$breach_amount;
+        $w_after_amount = $dateorder->dater->money;
+        $dateorder->dirty('dater',true);
+        //女方的资金流水
+        $w_flow = $FlowTable->newEntity([
+           'user_id'=> $dateorder->dater->id,
+           'buyer_id'=> 0,
+           'relate_id'=>$dateorder->id,
+           'type'=>22,
+           'type_msg'=>'订单投诉退回',
+           'income'=>1,
+           'amount'=>$breach_amount,
+           'price'=>$breach_amount,
+           'pre_amount'=>$w_pre_amount,
+           'after_amount'=>$w_after_amount,
+           'paytype'=>1, 
+           'remark'=> '订单投诉的处理'
+        ]);
+        $transRes = $DateorderTable->connection()
+                 ->transactional(function()use(&$w_flow,$FlowTable,&$m_flow,&$dateorder,$DateorderTable){
+               return $FlowTable->save($m_flow)&&$DateorderTable->save($dateorder)&&$FlowTable->save($w_flow);      
+        });
+       if($transRes){
+            return $this->Util->ajaxReturn(true,'处理成功');
+           }else{
+            return $this->Util->ajaxReturn(false,'处理失败');
         }
     }
 

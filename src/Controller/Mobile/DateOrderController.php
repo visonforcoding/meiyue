@@ -379,7 +379,8 @@ class DateOrderController extends AppController
          //订单状态更改
          if($dateorder->status!=3){
              return $this->Util->ajaxReturn(false,'订单已被更改，您无法进行此操作');
-         }       
+         }
+         $dateorder->close_time = date('Y-m-d H:i:s');
         if($this->user->gender==1){
                 //男士已支付预约金 女士确认接单之前
                 //退还男士预约金
@@ -587,6 +588,7 @@ class DateOrderController extends AppController
         }
         //订单状态更改
         $dateorder->status = 8;
+        $dateorder->close_time = date('Y-m-d H:i:s');
         //返还预约金
         $pre_pay = $dateorder->pre_pay;
         $m_pre_money = $dateorder->buyer->money;
