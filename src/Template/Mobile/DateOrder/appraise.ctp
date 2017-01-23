@@ -7,7 +7,7 @@
 <div class="wraper">
     <div class="judge_container">
         <div class="avatar">
-            <img src="<?= $order->dater->avatar ?>"/>
+            <img src="<?= generateImgUrl($order->dater->avatar); ?>"/>
         </div>
         <h3 class="date_title">[<?= $order->user_skill->skill->name ?>] <?= $order->dater->nick ?></h3>
         <ul class="jude_list" id="judeBox">

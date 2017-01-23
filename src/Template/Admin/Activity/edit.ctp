@@ -171,7 +171,7 @@
             <label class="col-md-2 control-label">封面图</label>
             <div class="col-md-8">
                 <div  class="img-thumbnail input-img"  single>
-                    <img src="<?= $activity->big_img; ?>"/>
+                    <img src="<?= generateImgUrl($activity->big_img); ?>"/>
                 </div>
                 <div style="color:red">请上传750*450比例的图片</div>
                 <input name="big_img" value="<?= $activity->big_img; ?>" type="hidden"/>

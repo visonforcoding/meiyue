@@ -40,18 +40,18 @@
             <div class="fact_identify">
                 <dl class="Idcard">
                     <dt>
-                        <img id="front_img" src="<?= $user->idfront; ?>" alt="" />
+                        <img id="front_img" src="<?= generateImgUrl($user->idfront); ?>" alt="" />
                     </dt>
 
                 </dl>
                 <dl class="Idcard">
                     <dt>
-                        <img id="back_img" src="<?= $user->idback; ?>" alt="" />
+                        <img id="back_img" src="<?= generateImgUrl($user->idback); ?>" alt="" />
                     </dt>
                 </dl>
                 <dl class="Idcard personimg">
                     <dt>
-                        <img id="person_img" src="<?= $user->idperson; ?>" alt="" />
+                        <img id="person_img" src="<?= generateImgUrl($user->idperson); ?>" alt="" />
                     </dt>
                 </dl>
             </div>

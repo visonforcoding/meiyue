@@ -29,6 +29,7 @@ class BusinessComponent extends Component
     public $components = ['Push'];
     protected $_defaultConfig = [];
 
+
     /**
      * 获取1级技能标签 从缓存或数据库当中
      */

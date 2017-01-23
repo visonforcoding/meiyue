@@ -51,7 +51,7 @@
                 <th>赞赏数</th>
                 <th>粉丝数</th>
                 <th>最后登录时间</th>
-                <th class="avatar" rowspan="4"><img src="<?= h($user->avatar); ?>"></th>
+                <th class="avatar" rowspan="4"><img src="<?= generateImgUrl(h($user->avatar)); ?>"></th>
             </tr>
             <tr>
                 <td><?= h($user->id); ?></td>
@@ -141,7 +141,7 @@
                 <?php foreach(unserialize($user->images) as $index => $img): ?>
                     <tr>
                         <td class="horizone-title"><?= $index; ?></td>
-                        <td><img class="baseimg" src="<?= h(createImg($img)); ?>"></td>
+                        <td><img class="baseimg" src="<?= generateImgUrl(h(createImg($img))); ?>"></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
@@ -190,9 +190,9 @@
             <th>手持照</th>
         </tr>
         <tr>
-            <td><img class="idcimg" src="<?= h($user->idfront); ?>"></td>
-            <td><img class="idcimg" src="<?= h($user->idback); ?>"></td>
-            <td><img class="idcimg" src="<?= h($user->idperson); ?>"></td>
+            <td><img class="idcimg" src="<?= generateImgUrl(h($user->idfront)); ?>"></td>
+            <td><img class="idcimg" src="<?= generateImgUrl(h($user->idback)); ?>"></td>
+            <td><img class="idcimg" src="<?= generateImgUrl(h($user->idperson)); ?>"></td>
         </tr>
     </table>
     <form>

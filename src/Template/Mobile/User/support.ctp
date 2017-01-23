@@ -13,7 +13,7 @@
                     <div class="praised_block">
                         <div class="praised_list_left support">
                         <span class="avatar">
-                            <img src="<?= $item['supporter']['avatar']; ?>" alt=""/>
+                            <img src="<?= generateImgUrl($item['supporter']['avatar']); ?>" alt=""/>
                         </span>
                             <h3>
                                 <div class="username"> <?= $item['supporter']['nick'];; ?><span class="age"><i

@@ -456,7 +456,7 @@ class UsercController extends AppController
             ->page($page)
             ->map(function ($row) {
                 $row->time = getFormateDT($row->start_time, $row->end_time);
-                $row->dater->avatar = createImg($row->dater->avatar) . '?w=160';
+                $row->dater->avatar = generateImgUrl($row->dater->avatar) . '?w=160';
                 return $row;
             })
             ->toArray();
@@ -738,6 +738,8 @@ class UsercController extends AppController
             ->page($page)
             ->formatResults(function ($items) {
                 return $items->map(function ($item) {
+                    $item->user->avatar = generateImgUrl($item->user->avatar);
+                    $item->video_cover = generateImgUrl($item->video_cover);
                     $item->status_notpass = false;
                     $item->status_pass = false;
                     $item->status_checking = false;
@@ -753,6 +755,9 @@ class UsercController extends AppController
                             break;
                     }
                     $item['images'] = unserialize($item['images']);
+                    foreach ($item['images'] as &$img) {
+                        $img = generateImgUrl($img);
+                    }
                     //时间语义化转换
                     $item['create_time'] = (new Time($item['create_time']))->timeAgoInWords(
                         ['accuracy' => [
@@ -1348,7 +1353,7 @@ class UsercController extends AppController
                 ->page(intval($page))
                 ->formatResults(function ($items) {
                     return $items->map(function ($item) {
-                        $item['visiter']['avatar'] = createImg($item['visiter']['avatar']) . '?w=90&h=90&fit=stretch';
+                        $item['visiter']['avatar'] = generateImgUrl($item['visiter']['avatar']) . '?w=90&h=90&fit=stretch';
                         $item['visiter']['age'] = isset($item['visiter']['birthday']) ? getAge($item['visiter']['birthday']) : 'xx';
                         //$item['visiter']['isfan'] = (count($item['visiter']['follows']));
                         if($item['visiter']['gender'] == 1) {

@@ -103,6 +103,7 @@ function createImg($url) {
     return preg_replace('/upload/', 'imgs', $url);
 }
 
+
 /**
  * 
  * @param type $params
@@ -277,6 +278,7 @@ function dblog($flag, $msg, $data = null) {
         Cake\Log\Log::error('devlog', $exc->getTraceAsString());
     }
 }
+
 
 function generateImgUrl($url, $domain=null, $glide = false) {
     if(!$domain){

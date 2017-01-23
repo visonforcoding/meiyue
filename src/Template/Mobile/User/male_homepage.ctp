@@ -2,7 +2,7 @@
     <div class="homepage mhomepage flex">
         <div class="home_cover_info flex">
 					<span class="avatar">
-						<img src="<?= $user->avatar; ?>" class="avatar-pic"/>
+						<img src="<?= generateImgUrl($user->avatar); ?>" class="avatar-pic"/>
 					</span>
             <div class="cover_left_info">
                 <ul class="opci">

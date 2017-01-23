@@ -47,7 +47,7 @@ class IndexController extends AppController {
                 ->orderDesc('distance')
                 ->limit(10)->formatResults(function($items)use($lng,$lat) {
                     return $items->map(function($item)use($lng,$lat) {
-                                $item['avatar'] = $this->Util->getServerDomain() . createImg($item['avatar']).'?w=184&h=184&fit=stretch';
+                                $item['avatar'] = generateImgUrl($item['avatar']).'?w=184&h=184&fit=stretch';
                                 $item['link'] = '/index/homepage/' . $item['id'];
                                 $plus = mt_rand(0, 1) ? 1 : -1;
                                 $item['login_coord_lng'] = $lng +$plus*mt_rand(1,38)*0.0001;
@@ -90,6 +90,7 @@ class IndexController extends AppController {
                         ]);
         }
         $top3 = $query->map(function($row) {
+            $row['avatar'] = generateImgUrl($row['avatar']);
             $row['upackname'] = null;
             $row['recharge'] = intval($row['recharge']);
             $row['isTuHao'] = true;

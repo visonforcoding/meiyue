@@ -7,7 +7,7 @@
 <div class="wraper">
     <div class="activity_detail_box">
         <?php $activity = $actregistration['activity']; ?>
-        <img src="<?= $activity['big_img']; ?>" alt=""/>
+        <img src="<?= generateImgUrl($activity['big_img']); ?>" alt=""/>
         <div class="tips"><?= $activity['title'] ?></div>
     </div>
     <div class="activity_detail_bottomdes">

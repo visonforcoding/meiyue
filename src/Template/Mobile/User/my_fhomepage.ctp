@@ -8,7 +8,7 @@
 <div class="wraper">
     <div class="home_page">
         <div class="header" style="overflow:hidden">
-            <img src="<?= $user->avatar; ?>" class="responseimg"/>
+            <img src="<?= generateImgUrl($user->avatar); ?>" class="responseimg"/>
             <!--<span class="l_btn iconfont">&#xe602;</span>
             <span class="r_btn iconfont">&#xe62d;</span>-->
             <?php if($user->status == 3): ?><span class="identify-info  id-btn">视频已认证</span><?php endif; ?>
@@ -47,7 +47,7 @@
             <ul class="inner flex">
                 <?php if (@unserialize($user->images)): ?>
                     <?php foreach(array_slice(unserialize($user->images), 0, 4) as $img): ?>
-                        <li class="img-item"><img src="<?= createImg($img) ?>?w=160" onload="$.util.setWH(this);"/></li>
+                        <li class="img-item"><img src="<?= generateImgUrl($img) ?>?w=160" onload="$.util.setWH(this);"/></li>
                     <?php endforeach; ?>
                    <!-- <li>
                         <a class='ablock' >

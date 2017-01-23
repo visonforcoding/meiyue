@@ -14,7 +14,7 @@
         </h3>
         <div class="place_pic">
 					<span class="place">
-						<img src="<?= $date['user']['avatar'];?>"/>
+						<img src="<?= generateImgUrl($date['user']['avatar']);?>"/>
 					</span>
             <div class="place_info">
                 <h3 class="userinfo"><?= $date['user']['nick']?>

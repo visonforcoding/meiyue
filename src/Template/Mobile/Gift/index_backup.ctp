@@ -8,7 +8,7 @@
 <div class="wraper">
     <div class="judge_container allgift_container">
         <div class="avatar">
-            <img src="<?= $user->avatar; ?>"/>
+            <img src="<?= generateImgUrl($user->avatar); ?>"/>
         </div>
         <h3 class="date_title"><?= $user->nick  ; ?></h3>
     </div>
@@ -25,7 +25,7 @@
                              data-price="<?= $gifts[$j]['price']; ?>">
 
                             <div class="gift_pic">
-                                <img src="<?= $gifts[$j]['pic']; ?>"/>
+                                <img src="<?= generateImgUrl($gifts[$j]['pic']); ?>"/>
                             </div>
                             <div class="bottomtext">
                                 <i><?= $gifts[$j]['price']; ?></i>

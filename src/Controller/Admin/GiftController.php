@@ -129,6 +129,9 @@ class GiftController extends AppController
             $where[' name like'] = "%$keywords%";
         }
         $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order, $where);
+        foreach ($data as &$item) {
+            $item['pic'] = generateImgUrl($item['pic']);
+        }
         $this->autoRender = false;
         $this->response->type('json');
         $this->response->body(json_encode($data));

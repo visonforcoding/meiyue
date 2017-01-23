@@ -142,9 +142,9 @@
             <th>手持照</th>
         </tr>
         <tr>
-            <td><img class="idcimg" src="<?= h($user->idfront); ?>"></td>
-            <td><img class="idcimg" src="<?= h($user->idback); ?>"></td>
-            <td><img class="idcimg" src="<?= h($user->idperson); ?>"></td>
+            <td><img class="idcimg" src="<?= generateImgUrl(h($user->idfront)); ?>"></td>
+            <td><img class="idcimg" src="<?= generateImgUrl(h($user->idback)); ?>"></td>
+            <td><img class="idcimg" src="<?= generateImgUrl(h($user->idperson)); ?>"></td>
         </tr>
     </table>
     <form>

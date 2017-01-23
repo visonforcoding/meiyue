@@ -8,7 +8,7 @@
                         <div class="items_date_info flex flex_justify">
                             <div class="items_left_info">
 							<span class="items_left_picinfo">
-								<img src="<?= isset($data['activity'])?createImg($data['activity']['big_img']):createImg($data['user']['avatar']); ?>"/>
+								<img src="<?= isset($data['activity'])?generateImgUrl($data['activity']['big_img']):generateImgUrl($data['user']['avatar']); ?>"/>
 							</span>
                                 <div class="items_left_textinfo">
                                     <h3><i class="color_y"></i><?= isset($data['activity'])?$data['activity']['title']:$data['title']; ?></h3>

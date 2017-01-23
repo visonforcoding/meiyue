@@ -11,7 +11,7 @@
                 <li>
                     <a <?= (!isset($user) || ($item['user_id'] != $user->id))?'href="/index/homepage/'.$item['user']['id']:''; ?>" class="praised_block">
                         <div class="praised_list_left">
-                            <span class="avatar"><img src="<?= $item['user']['avatar']; ?>" alt="" /></span>
+                            <span class="avatar"><img src="<?= generateImgUrl($item['user']['avatar']); ?>" alt="" /></span>
                             <h3>
                                 <div class="username"><?= $item['user']['nick']; ?>
                                     <span class="age color_y"><i class="iconfont color_y">&#xe61c;</i><?= getAge($item['user']['birthday']); ?>岁</span>
