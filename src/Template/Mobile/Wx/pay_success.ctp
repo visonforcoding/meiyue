@@ -39,19 +39,19 @@
             </div>
         </div>
         <!--其它活跃女神-->
-        <div class="pay_detail_content">
+        <!--<div class="pay_detail_content">
             <h3 class="pady_detail_tips">其它活跃女神</h3>
             <div class="find_list_box">
                 <div id="user-list" class="inner">
 
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 
 <?php $this->start('script'); ?>
     <script>
-        var curpage = 1;
+        /*var curpage = 1;
 
         $.util.asyLoadData({
             gurl: '/index/get-user-list/',
@@ -70,7 +70,7 @@
                     });
                 })
             });
-        }, 2000);
+        }, 2000);*/
         LEMON.sys.back('/user/index');
     </script>
 <?php $this->end('script'); ?>
