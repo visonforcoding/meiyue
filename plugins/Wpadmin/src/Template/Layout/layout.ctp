@@ -90,9 +90,8 @@
         <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
         <script src="/wpadmin/js/jquery.js"></script>
         <!-- ZUI Javascript组件 -->
-        <script src="/wpadmin/lib/zui/js/zui.min.plus.js"></script>
+        <script src="/wpadmin/lib/zui/js/zui.min.js"></script>
         <script src="/wpadmin/lib/datetimepicker/jquery.datetimepicker.js"></script>
-        <script src="/wpadmin/lib/zui/js/affix.js"></script>
         <script src="/wpadmin/lib/layer/layer.js"></script>
         <script src="/wpadmin/lib/layer/extend/layer.ext.js"></script>
         <script src="/wpadmin/js/global.js"></script>
