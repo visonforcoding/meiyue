@@ -872,6 +872,7 @@ class UserController extends AppController {
             ->map(function($row) {
                 if($row->used) {
                     $row->used->age = getAge($row->used->birthday);
+                    $row->used->avatar = generateImgUrl($row->used->avatar);
                 }
                 $row->deadline = getYMD($row->deadline);
                 return $row;

@@ -44,7 +44,7 @@
 <div class="wraper page-current" id="page-orderSkill">
     <div class="find_date_detail">
         <div class="date_top_con flex inner">
-            <span class="place"><img src="<?= createImg($data->user->avatar) . '?w=160' ?>"/></span>
+            <span class="place"><img src="<?= generateImgUrl($data->user->avatar) . '?w=160' ?>"/></span>
             <h3 class="date_top_con_right">
                 <span class="date_ability">[<?= $data->skill->name ?>]</span>
                 <span class="date_guest"><?= $data->user->nick ?> <i class="iconfont color_y">&#xe61d;</i><i class="age color_y"><?= isset($data->user->birthday) ? getAge($data->user->birthday) : 'xx' ?></i></span>

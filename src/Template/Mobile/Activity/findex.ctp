@@ -23,7 +23,7 @@
                 <div class="abanner">
                     <ul class="tou-imglist" id="oBox">
                         <?php foreach($carousels as $carousel): ?>
-                            <li><a href="/activity/carousel-page/<?= $carousel->id; ?>"><img src="<?= createImg($carousel->url); ?>"/></a></li>
+                            <li><a href="/activity/carousel-page/<?= $carousel->id; ?>"><img src="<?= generateImgUrl($carousel->url); ?>"/></a></li>
                         <?php endforeach; ?>
                     </ul>
                     <?php if(count($carousels) > 1): ?>

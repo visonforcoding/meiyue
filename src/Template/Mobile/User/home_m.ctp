@@ -6,7 +6,7 @@
                 </div>-->
         <div class="home_cover_info flex">
             <a href="/userc/edit-info" class="avatar">
-                <img src="<?= createImg($user->avatar) . '?w=150' ?>" class="avatar-pic"/>
+                <img src="<?= generateImgUrl($user->avatar) . '?w=150' ?>" class="avatar-pic"/>
             </a>
             <div class="cover_left_info">
                 <ul class='opci'>

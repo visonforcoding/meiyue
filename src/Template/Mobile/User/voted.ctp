@@ -23,7 +23,7 @@
                     <div class="voted_l_info">
                         <span class="voted_place"><?= $wektop->index?></span>
                         <div class="voted_place_info">
-                            <span class="avatar"><img src="<?= $wektop->user->avatar;?>"/></span>
+                            <span class="avatar"><img src="<?= generateImgUrl($wektop->user->avatar);?>"/></span>
                             <h3>
                                 <span class="voted_name"><?= $wektop->user->nick?></span>
                                 <span class="voted_number color_gray">
@@ -62,7 +62,7 @@
                     <div class="voted_l_info">
                         <span class="voted_place"><?= $montop->index?></span>
                         <div class="voted_place_info">
-                            <span class="avatar"><img src="<?= $montop->user->avatar; ?>"/></span>
+                            <span class="avatar"><img src="<?= generateImgUrl($montop->user->avatar); ?>"/></span>
                             <h3>
                                 <span class="voted_name"><?= $montop->user->nick; ?></span>
                                 <span class="voted_number color_gray">

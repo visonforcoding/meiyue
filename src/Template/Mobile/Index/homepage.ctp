@@ -8,7 +8,7 @@
 <div class="wraper">
     <div class="home_page">
         <div class="header" style="overflow:hidden">
-            <img src="<?= $user->avatar; ?>" class="responseimg"/>
+            <img src="<?= generateImgUrl($user->avatar); ?>" class="responseimg"/>
             <!--<span class="l_btn iconfont">&#xe602;</span>
             <span class="r_btn iconfont">&#xe62d;</span>-->
             <?php if($user->status == 3): ?><span class="identify-info  id-btn">视频已认证</span><?php endif; ?>
@@ -52,11 +52,11 @@
         <ul class="inner flex">
             <?php if (@unserialize($user->images)): ?>
                 <?php foreach(array_slice(unserialize($user->images), 0, 3) as $img): ?>
-                    <li class="img-item clickable"><img src="<?= createImg($img) ?>?w=160" onload="$.util.setWH(this);"/></li>
+                    <li class="img-item clickable"><img src="<?= generateImgUrl($img) ?>?w=160" onload="$.util.setWH(this);"/></li>
                 <?php endforeach; ?>
                 <li onclick="checkBrownR(1);">
                     <a class='ablock' >
-                        <img src="<?= unserialize($user->images)[3]; ?>?w=160" onload="$.util.setWH(this);"/>
+                        <img src="<?= generateImgUrl(unserialize($user->images)[3]); ?>?w=160" onload="$.util.setWH(this);"/>
                         <span>更多私房</span>
                     </a>
                 </li>
@@ -67,7 +67,7 @@
             <?php if($browseRight == SerRight::OK_CONSUMED): ?>
                 <video preload="preload" poster="<?= $user->video_cover; ?>"><source src="<?= $user->video; ?>" type="video/mp4"></video>
             <?php else: ?>
-                <img src="<?= $user->video_cover ?>" />
+                <img src="<?= generateImgUrl($user->video_cover) ?>" />
                 <div class='play-icon'><i class='iconfont'>&#xe6b8;</i></div>
             <?php endif; ?>
         </div>

@@ -28,7 +28,7 @@
             <label class="col-md-2 control-label">上传图片</label>
             <div class="col-md-8">
                 <div style="width:160px;height:160px;"  class="img-thumbnail input-img"  single>
-                    <img width="160px" height="160px" style="width:160px;height:160px;"   src="<?= $carousel->url; ?>"/>
+                    <img width="160px" height="160px" style="width:160px;height:160px;"   src="<?= generateImgUrl($carousel->url); ?>"/>
                 </div>
                 <?php
                 echo $this->Form->hidden('url',['label' => false,'class' => 'form-control']);

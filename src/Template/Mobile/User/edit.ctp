@@ -12,7 +12,7 @@
                 <span class="fl">上传图像</span>
                 <div class="iden_r_box fr">
                     <div class="iden_r_pic">
-                        <img src="<?= $user->avatar; ?>" alt="" />
+                        <img src="<?= generateImgUrl($user->avatar); ?>" alt="" />
                     </div>
                     <i class="iconfont potion">&#xe605;</i>
                 </div>

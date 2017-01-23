@@ -83,6 +83,7 @@ class ActivityController extends AppController
                     $row->site = mb_substr($row->site, 0, 14).'...';
                 }
                 $row->isend = false;
+                $row->big_img = generateImgUrl($row->big_img);
                 $startTime = new Time($row->start_time);
                 $curTime = new Time();
                 if ((($row->male_rest == 0) && ($row->female_rest == 0)) || ($startTime <= $curTime)) {
@@ -529,6 +530,7 @@ class ActivityController extends AppController
                 ->limit($limit)
                 ->map(function ($row) use (&$i, $user) {
                     $row['user']['age'] = getAge($row['user']['birthday']);
+                    $row['user']['avatar'] = generateImgUrl($row['user']['avatar']);
                     $row['index'] = $i;
                     $row['top3'] = false;
                     $row['total'] = intval($row['total']);
@@ -585,6 +587,7 @@ class ActivityController extends AppController
                 $viplev = $this->Business->getVIP($user);
                 $user->upackname = \VIPlevel::getStr($viplev);
                 $user->upackstyle = \VIPlevel::getStyle($viplev);
+                $user->avatar = generateImgUrl($user->avatar);
                 $followTb = TableRegistry::get('UserFans');
                 if ($user) {
                     $followlist = $followTb->find('all')->where(['user_id' => $this->user->id])->toArray();
@@ -648,6 +651,7 @@ class ActivityController extends AppController
                     if (!$user || $user->gender == 2) {
                         $row['ismale'] = false;
                     }
+                    $row['avatar'] = generateImgUrl($row['avatar']);
                     $row['index'] = $i;
                     $row['top3'] = false;
                     if($i <= 3) {

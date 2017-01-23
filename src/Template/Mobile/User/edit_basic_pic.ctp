@@ -51,7 +51,7 @@
                 <div class="fact_identify" id="demoImg">
                     <?php foreach (unserialize($user->images) as $image): ?>
                         <dl class="Idcard" data-id="up">
-                            <dt><img src="<?= $image ?>"/></dt>
+                            <dt><img src="<?= generateImgUrl($image) ?>"/></dt>
                         </dl>
                     <?php endforeach; ?>
                 </div>

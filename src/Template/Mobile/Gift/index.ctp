@@ -7,7 +7,7 @@
 <div class="wraper">
     <div class="judge_container allgift_container">
         <div class="avatar">
-            <img src="<?= $user->avatar; ?>"/>
+            <img src="<?= generateImgUrl($user->avatar); ?>"/>
         </div>
         <h3 class="date_title"><?= $user->nick; ?></h3>
     </div>
@@ -18,7 +18,7 @@
             <?php foreach($gifts as $gift): ?>
                 <div class="items" data-id="<?= $gift->id; ?>" data-name="<?= $gift->name; ?>">
                     <div class="gift_pic">
-                        <img src="<?= $gift->pic; ?>"/>
+                        <img src="<?= generateImgUrl($gift->pic); ?>"/>
                     </div>
                     <div class="bottomtext"><i><?= $gift->price; ?></i> <span class="ico"><img src="/mobile/images/cash01.png" alt=""/></span></div>
                     <span class="iconfont choose">&#xe64c;</span>
