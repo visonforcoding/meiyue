@@ -225,15 +225,18 @@ class WxController extends AppController {
         ]);
     }
 
+
     /**
      * 预约支付页  此页面URL 需在微信公众号的微信支付那里配置 支付域
      * @param int $id  订单id
      */
     public function pay($id = null,$mb=null) {
-        $title = $this->request->query('title')?$this->request->query('title'):'充值';
+        $pageTitle = '充值';
+        $title = '充值';
+        $tit = $this->request->query('title')?$this->request->query('title'):'充值';
+        $pagetitle = $this->request->query('pagetitle')?$this->request->query('pagetitle'):null;
         $redurl = $this->request->query('redurl');
         $PayorderTable = \Cake\ORM\TableRegistry::get('Payorder');
-        $pageTitle = '重置';
         if($id){
             $payorder = $PayorderTable->get($id);
         }else{
@@ -242,11 +245,18 @@ class WxController extends AppController {
             }
             $pageTitle = '订单支付';
             $title = '订单金额';
+            if($pagetitle) {
+                $pageTitle = $pagetitle;
+            }
+            if($tit) {
+                $title = $tit;
+            }
             $PayorderTable = TableRegistry::get('Payorder');
             $payorder = $PayorderTable->newEntity([
                 'user_id'=>  $this->user->id,
                 'title'=>'充值',
                 'order_no'=>time() . $this->user->id . createRandomCode(4, 1),
+                'type'=> PayOrderType::CHONGZHI,
                 'price'=>  $mb,
                 'fee'=>  $mb,
                 'remark'=>  '充值'.$mb.'元',

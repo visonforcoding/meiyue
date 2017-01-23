@@ -172,10 +172,12 @@
         var num = parseInt($('#num').val());
         var price = <?= isset($activity->price)?$activity->price:0; ?>;
         var money = <?= isset($user)?$user->money:''; ?>;
-        if((num * price > money) && price) {
+        var totalcount = num * price;
+        if((totalcount > money) && price) {
             $.util.alert('钱包余额不足，立即充值');
             setTimeout(function() {
-                window.location.href='/purse/recharge?redurl=/activity/pay-view/<?= $activity['id']; ?>';
+                //location.href='/purse/recharge?redurl=/activity/pay-view/<?= $activity['id']; ?>';
+                location.href="/wx/pay/0/"+ totalcount +"?title=活动金额&pagetitle=活动支付&redurl=/activity/pay-view/<?= $activity['id']; ?>";
             }, 1000);
             return;
         }
