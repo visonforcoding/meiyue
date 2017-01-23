@@ -3,38 +3,45 @@
 
 
 var scroll = function(o) {
+    //可配置的项,moveDom  moveChild必选
     this.opt = {
         tp : 'text', //图片img或是文字text  默认text
         moveDom : null, //必选  待移动父元素zepto查询对象
         moveChild : [], //必选  zepto查询对象列表
-        tab : [], //非必选  zepto查询对象列表  导航tab元素
+        tab : [], //zepto查询对象列表  导航tab元素  没有tab可以不要
         viewDom : null, //在那个容器里滑动，算宽度用，默认window  如果你的默认位置不对  那就要检查下这个
         touchDom2:[], //滑动事件的第二控制器   第一控制器是moveDom，   （dom原生对象数组，不建议搞太多）
-        sp : null, //当前触发点的position
         min : 0, //响应滑动的最小移动距离
         minp : 0, //翻页的最小移动距离
         step : 0, //移动的步长 一般是每个元素的长度
-        len : 1, //总元素
         index : 1, //当前位移的元素
-        offset:0,
         loadImg:false,
-        image:[],
         touchEvent : true, //是否要禁用touch事件  禁用touch后,仍然可以设置autoTime,自动轮播
         loopScroll : false, //是否要循环滚动
         lockScrY : false, //是否让竖向滚动
-        stopOnce : false, //hold时停一次
+        smartTouch: false, //是否要智能判断上下滑,还是左右滑,判断上下滑的时候,会屏蔽左右行为
         autoTime : 0,    //自动轮播， 默认不自动， 需要的话就传毫秒值 如5000
-        holdAuto : false,    //自动轮播锁定  当滑出轮播区域后  或是手指在滑动的时候 可以屏蔽自动轮播
         tabClass : 'cur',
         transition : 0.5,
-        imgInit:true, //第一次加载图片
         imgInitLazy:4000, //第一次预加载图片延时
         enableTransX : false,//使用translateX(-n*100%)方式
-        hasTab : true,
         fun : function() {
         }
     };
-    $.extend(this, this.opt, o);
+    //下面的属性是过程中的变量  不需要配置
+    this.privateOpt = {
+        sp : null, //当前触发点的position
+        len : 1, //总元素
+        offset:0,
+        image:[],
+        smartTouchHoldX: false, //配合smartTouch蔽左右行为
+        moveCount: 0, //一个周期内手指触发移动的次数
+        stopOnce : false, //hold时停一次
+        holdAuto : false,    //自动轮播锁定  当滑出轮播区域后  或是手指在滑动的时候 可以屏蔽自动轮播
+        imgInit:true, //第一次加载图片
+        hasTab : true
+    };
+    $.extend(this, this.opt, this.privateOpt, o);
     this.len = this.moveChild.length;
     this.hasTab = this.tab.length > 0;
     this.min = this.min || {'text':100, 'img':1}[this.tp]; //min30是  andiord手Q划不动
@@ -110,12 +117,15 @@ $.extend(scroll.prototype, {
                 this.sp = this.getPosition(e);
                 this.holdAuto = true;
                 this.stopOnce = true;
+                this.smartTouchHoldX = false;
+                this.moveCount = 0;
                 break;
             case "touchmove":
                 this.touchmove(e);
                 break;
             case "touchend":
             case "touchcancel":
+                //if(this.smartTouchHoldX) break;
                 this.move(e);
                 this.holdAuto = false;
                 break;
@@ -133,6 +143,11 @@ $.extend(scroll.prototype, {
     },
     touchmove : function(e) {
         var mp = this.getPosition(e), x = mp.x - this.sp.x, y = mp.y - this.sp.y;
+        if(this.moveCount === 0 && this.smartTouch) {
+            this.smartTouchHoldX = Math.abs(y) - Math.abs(x);
+        }
+        if(this.smartTouchHoldX) return;
+
         if (Math.abs(x) - Math.abs(y) > this.min) {
         //if (Math.abs(x) > Math.abs(y)) {
             e.preventDefault();
