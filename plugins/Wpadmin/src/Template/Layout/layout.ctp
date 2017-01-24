@@ -40,7 +40,7 @@
                                     <?php else: ?>
                                         <?php $avatar = '/wpadmin/img/avatar/avatar.jpg'; ?>
                                     <?php endif; ?>
-                                    <img src="<?= $avatar ?>" alt="Mika Sokeil" class="img-circle">
+                                    <img src="<?= $avatar; ?>" alt="Mika Sokeil" class="img-circle">
                                 </span>
                                 <b class="caret"></b>
                             </a>

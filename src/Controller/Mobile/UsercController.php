@@ -883,7 +883,7 @@ class UsercController extends AppController
                 return $this->Util->ajaxReturn(false, '非法套餐');
             }
             if($pack->price > $this->user->money) {
-                return $this->Util->ajaxReturn(false, '余额不足');
+                return $this->Util->ajaxReturn(false, '钱包余额不足,立即充值');
             }
             $pre_amount = $this->user->money;
             $this->user->money -= $pack->price;

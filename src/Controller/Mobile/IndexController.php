@@ -469,7 +469,7 @@ class IndexController extends AppController {
             return $this->Util->ajaxReturn(false, '非法操作');
         }
         if($this->user->money < $wxfee) {
-            return $this->Util->ajaxReturn(false, '余额不足');
+            return $this->Util->ajaxReturn(false, '钱包余额不足,立即充值');
         }
         //修改支付方费用
         $userTb = TableRegistry::get('User');

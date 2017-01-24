@@ -22,11 +22,11 @@ use MongoDB\BSON\Timestamp;
 class TestController extends AppController {
 
     public function test() {
-        debug($_SERVER);
+        /*debug($_SERVER);
         debug($this->request->scheme());
         debug($this->request->env('REQUEST_SCHEME'));
         exit();
-        $this->loadComponent('Business');
+        $this->loadComponent('Business');*/
         //var_dump(round1214 / 1000);
         //var_dump(round('42.99687156342637',1));
         // debug($this->Util->getServerDomain());
@@ -38,11 +38,16 @@ class TestController extends AppController {
         /*$payOrderTb = TableRegistry::get("Payorder");
         $payOrder = $payOrderTb->find()->contain('User')->where(['Payorder.id' => 43])->first();
         echo $this->Business->handPackPay($payOrder, 100, 1, '1827382738772837HSKJ');*/
-        $this->Business->sendSMsg(3, [
+        /*$this->Business->sendSMsg(3, [
             'towho' => \MsgpushType::TO_REGISTER,
             'title' => '注册-认证信息提交成功',
             'body' => '您填写的认证信息已成功上传，后台人员正在审核中',
-        ], true);
+        ], true);*/
+
+        $this->loadComponent('Push');
+        $this->loadComponent('Business');
+        $this->Business->sendPtMsg([], [], true);
+        //debug($this->Push->sendAll('美约平台广播推送', ' ', '美约平台广播推送'));
         exit();
         //debug(\Cake\Core\Configure::read('Redis.default'));
     }

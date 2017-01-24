@@ -44,7 +44,14 @@
                 colNames: ['用户昵称', '性别', '发送时间'],
                 colModel: [
                     {name: 'user.nick', editable: true, align: 'center'},
-                    {name: 'user.gender', editable: true, align: 'center'},
+                    {name: 'user.gender', editable: true, align: 'center',
+                        formatter: function(cellvalue, options, rowObject) {
+                            if(cellvalue == 1) {
+                                return "男";
+                            }
+                            return '女';
+                        }
+                    },
                     {name: 'create_time', editable: true, align: 'center'},
                 ],
                 pager: "#pager",

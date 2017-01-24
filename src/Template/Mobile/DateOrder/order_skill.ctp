@@ -211,12 +211,13 @@
     var skill_id = <?= $data->skill_id ?>;
     var lasth, start_time, end_time;
     var place_name, coord_lng, coord_lat, place_uid;
+    var price;
     function choosedateCallBack(start_datetime, end_datetime, last_time) {
         start_time = start_datetime;
         end_time = end_datetime;
         lasth = last_time;
         $('#lasth').html(lasth);
-        var price = <?= $data->cost->money ?>;
+        price = <?= $data->cost->money ?>;
         $('#total_money').html(lasth * price);
         $('#order_money_str').html(lasth * price + 'x20%=' + lasth * price * 0.2 + '元');
         $('#order_money').html(lasth * price * 0.2);
@@ -368,7 +369,7 @@
             func: function (res) {
                 if (res.status) {
                     var order_id = res.order_id;
-                    $.util.confirm('确定支付？', '将扣除余额作为预约金', function () {
+                    $.util.confirm('确定支付？', '将会扣除'+(lasth * price * 0.2)+ '元的预约金', function () {
                         $.util.ajax({
                             url: '/date-order/order-pay/' + order_id,
                             func: function (resp) {

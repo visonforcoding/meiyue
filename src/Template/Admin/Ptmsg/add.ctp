@@ -47,6 +47,14 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-md-2 control-label">
+                广播
+            </label>
+            <div class="col-md-8">
+                <?php echo $this->Form->checkbox('toall', ['id' => 'toall']);?>
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type='submit' id='submit' class='btn btn-primary' value='确定推送' data-loading='稍候...'/>
             </div>
@@ -99,7 +107,8 @@
             });
             $('form').submit(function () {
                 var reslist=$("#select-user").select2("data");    //多选
-                if(reslist.length == 0) {
+                var toall = $("#toall").is(':checked');
+                if((reslist.length == 0) && !toall) {
                     layer.alert('至少需要选择一个发送对象');
                     return false;
                 } else {

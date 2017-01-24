@@ -46,11 +46,13 @@
             '赠送礼物',
             '赠送一件【' + gname + '】给 <?= $user->nick;?>',
             function() {
+                $.util.showPreloader('请稍候');
                 $.ajax({
                     url: '/gift/send/<?= $user->id; ?>/' + gid,
                     type: "POST",
                     dataType: "json",
                     success: function (res) {
+                        $.util.hidePreloader();
                         $.util.alert(res.msg);
                         gid = null;
                         $('#allgift .items').removeClass('active');

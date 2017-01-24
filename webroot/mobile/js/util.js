@@ -83,7 +83,10 @@ $.util = {
         divInner.appendChild(divText);
         var divTitle = document.createElement('div');
         divTitle.className = 'loader-title';
-        divTitle.innerHTML = '努力加载中';
+        divTitle.innerHTML = '请稍候';
+        if(str) {
+            divTitle.innerHTML = str;
+        }
         divInner.appendChild(divTitle);
         document.body.appendChild(div);
     },
