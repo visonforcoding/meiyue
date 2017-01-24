@@ -68,7 +68,7 @@
         var giftprice = $(this).data('price');
         var giftid = $(this).data('id');
         if(parseFloat(giftprice) > usermoney) {
-            $.util.alert('您的余额不足~~');
+            $.util.alert('钱包余额不足,立即充值');
             return;
         }
 

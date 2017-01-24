@@ -339,11 +339,13 @@ $(document).on('click', '.remove_order', function () {
 $(document).on('click', '.pay_status_7', function () {
     //支付尾款
     var orderid = $(this).data('orderid');
-    $.util.confirm('确定支付？', '将扣除余额支付尾款', function () {
+    $.util.confirm('确定支付？', '将会扣除<?= $order->amount - $order->pre_pay ?>元的尾款', function () {
+        $.util.showPreloader('支付中');
         $.util.ajax({
             url: '/date-order/orderPayall',
             data: {order: orderid},
             func: function (resp) {
+                $.util.hidePreloader();
                 if (resp.status) {
                     //聊天框
                     $.util.alert(resp.msg);
@@ -361,10 +363,12 @@ $(document).on('click', '.pay_status_7', function () {
 $(document).on('click', '.receive_order', function () {
     //美女接收订单
     var orderid = $(this).data('orderid');
+    $.util.showPreloader('请稍候');
     $.util.ajax({
         url: '/date-order/receive-order',
         data: {orderid: orderid},
         func: function (res) {
+            $.util.hidePreloader();
             $.util.alert(res.msg);
             setTimeout(function () {
                 $.util.openTalk(res);
@@ -376,11 +380,13 @@ $(document).on('click', '.receive_order', function () {
 $(document).on('click', '.m_refuse_status_3', function () {
     //状态3时的拒绝接单 和 取消订单
     var orderid = $(this).data('orderid');
-    $.util.confirm('确定要取消订单吗?', '取消订单后，预约金将退回到您的账户中，但会影响您在美女中的排名，是否继续？', function () {
+    $.util.confirm('确定要取消订单吗?', '将会影响您在土豪榜中的排名', function () {
+        $.util.showPreloader('请稍候');
         $.util.ajax({
             url: '/date-order/cancel-date-order-3',
             data: {order_id: orderid},
             func: function (res) {
+                $.util.hidePreloader();
                 $.util.alert(res.msg);
                 setTimeout(function () {
                     refresh();
@@ -393,7 +399,7 @@ $(document).on('click', '.m_refuse_status_3', function () {
 $(document).on('click', '.w_refuse_status_3', function () {
     //状态3时的拒绝接单 和 取消订单
     var orderid = $(this).data('orderid');
-    $.util.confirm('提示信息', '确定不接受此订单？', function () {
+    $.util.confirm('确定拒绝？', '将会把预约金退回对方账户', function () {
         $.util.ajax({
             url: '/date-order/cancel-date-order-3',
             data: {order_id: orderid},
@@ -409,7 +415,7 @@ $(document).on('click', '.w_refuse_status_3', function () {
 $(document).on('click', '.refuse_status_7', function () {
     //状态7时 女方取消订单
     var orderid = $(this).data('orderid');
-    $.util.confirm('确定要取消订单吗?', '将会扣除10%的约单金额作为惩罚。', function () {
+    $.util.confirm('确定要取消订单?', '将会扣除10%的约单金额作为惩罚', function () {
         $.util.ajax({
             url: '/date-order/cancel-date-order-7',
             data: {order_id: orderid},
@@ -448,11 +454,13 @@ $(document).on('click', '.m_refuse_status_10', function () {
 $(document).on('click', '.w_refuse_status_10', function () {
     //状态10时 女方取消订单
     var orderid = $(this).data('orderid');
-    $.util.confirm('确定要取消订单吗?', '将会扣除20%的约单金额作为惩罚。', function () {
+    $.util.confirm('确定要取消订单?', '将会扣除20%的约单金额作为惩罚', function () {
+        $.util.showPreloader();
         $.util.ajax({
             url: '/date-order/cancel-date-order-10',
             data: {order_id: orderid},
             func: function (res) {
+                $.util.hidePreloader();
                 $.util.alert(res.msg);
                 setTimeout(function () {
                     refresh();
@@ -463,12 +471,14 @@ $(document).on('click', '.w_refuse_status_10', function () {
 });
 $(document).on('click', '.m_go_order', function () {
     //赴约成功
-    $.util.confirm('提示', '订单将结束,约单金额将转到美女账户中,确认操作？', function () {
+    $.util.confirm('提示', '订单将结束,约单金额将转到对方账户中', function () {
         var orderid = $(this).data('orderid');
+        $.util.showPreloader();
         $.util.ajax({
             url: '/date-order/go-order',
             data: {order: orderid},
             func: function (res) {
+                $.util.hidePreloader();
                 $.util.alert(res.msg);
                 setTimeout(function () {
                     refresh();
@@ -479,16 +489,20 @@ $(document).on('click', '.m_go_order', function () {
 });
 $(document).on('click', '.go_order', function () {
     //赴约成功
-    var orderid = $(this).data('orderid');
-    $.util.ajax({
-        url: '/date-order/go-order',
-        data: {order: orderid},
-        func: function (res) {
-            $.util.alert(res.msg);
-            setTimeout(function () {
-                refresh();
-            }, 300);
-        }
+    $.util.confirm(' ', '确认到达目的地？', function () {
+        var orderid = $(this).data('orderid');
+        $.util.showPreloader();
+        $.util.ajax({
+            url: '/date-order/go-order',
+            data: {order: orderid},
+            func: function (res) {
+                $.util.hidePreloader();
+                $.util.alert(res.msg);
+                setTimeout(function () {
+                    refresh();
+                }, 300);
+            }
+        });
     });
 });
 $('.date_list_header div').on('click', function () {

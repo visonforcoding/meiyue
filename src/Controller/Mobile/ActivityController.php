@@ -389,7 +389,7 @@ class ActivityController extends AppController
             }
             //判断余额是否充足
             if ($this->user->money < $price * $num && $price) {
-                return $this->Util->ajaxReturn(false, '余额不足！');
+                return $this->Util->ajaxReturn(false, '钱包余额不足,立即充值');
             }
 
             //修改活动表项

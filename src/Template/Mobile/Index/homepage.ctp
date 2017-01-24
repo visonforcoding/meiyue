@@ -9,8 +9,6 @@
     <div class="home_page">
         <div class="header" style="overflow:hidden">
             <img src="<?= generateImgUrl($user->avatar); ?>" class="responseimg"/>
-            <!--<span class="l_btn iconfont">&#xe602;</span>
-            <span class="r_btn iconfont">&#xe62d;</span>-->
             <?php if($user->status == 3): ?><span class="identify-info  id-btn">视频已认证</span><?php endif; ?>
             <?php if($user->id_status == 3): ?><span class="identify-info video-btn">身份已认证</span><?php endif; ?>
         </div>

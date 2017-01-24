@@ -104,7 +104,7 @@
         if(usermoney < $price) {
             $.util.confirm(
                 '余额不足',
-                '是否立即进行充值支付？',
+                '立即前往充值？',
                 function() {
                     payView($packid);
                 },

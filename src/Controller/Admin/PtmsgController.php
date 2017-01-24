@@ -86,7 +86,8 @@ class PtmsgController extends AppController
         $ptmsg = $this->Ptmsg->newEntity();
         if ($this->request->is('post')) {
             $uids = $this->request->data('user_id');
-            if(count($uids) <= 0) {
+            $toall = $this->request->data('toall');
+            if((count($uids) <= 0) && !$toall) {
                 $this->Util->ajaxReturn(false, '对象不能为空');
             }
             $this->loadComponent('Business');
@@ -118,10 +119,18 @@ class PtmsgController extends AppController
                 'body' => $this->request->data('body'),
                 'to_url' => $this->request->data('to_url')
             ];
-            if ($this->Business->sendPtMsg($uids, $message)) {
-                $this->Util->ajaxReturn(true, '添加成功');
+            if(!$toall) {
+                if ($this->Business->sendPtMsg($uids, $message)) {
+                    $this->Util->ajaxReturn(true, '发送成功');
+                } else {
+                    $this->Util->ajaxReturn(false, '发送失败');
+                }
             } else {
-                $this->Util->ajaxReturn(false, '添加失败');
+                if ($this->Business->sendAMsg($message, true)) {
+                    $this->Util->ajaxReturn(true, '广播成功');
+                } else {
+                    $this->Util->ajaxReturn(false, '广播失败');
+                }
             }
         }
         $this->set(compact('ptmsg'));

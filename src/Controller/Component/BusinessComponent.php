@@ -762,6 +762,29 @@ class BusinessComponent extends Component
         return false;
     }
 
+
+    /**
+     * 发送平台消息-广播
+     * @param array $message 推送消息体
+     *      [
+     *          'towho' => 推送说明(直接调用MsgpushType::TO_**类型的，例如，约会过程的通知使用MsgpushType::TO_DATER),
+     *          'title' => string 标题,
+     *          'body' => string 消息体,
+     *          'to_url' => string 跳转链接,
+     *      ]
+     * @return int 例如：MsgpushTye::ERROR_NOUSER
+     */
+    public function sendAMsg($message = [], $umeng = false)
+    {
+        if($umeng) {
+            $title = isset($message['body'])?$message['body']:'';
+            $content = ' ';
+            $ticker = ' ';
+            $res = $this->Push->sendAll($title, $content, $ticker);
+        }
+        return $this->sendPtMsg([], $message, true);
+    }
+
     /**
      * 发送平台消息-单发
      * @param int $uid 推送对象
@@ -826,7 +849,7 @@ class BusinessComponent extends Component
      */
     public function sendSPtMsg($uid, $message = [])
     {
-        return $this->sendPtMsg([$uid], $message);
+        return $this->sendPtMsg([$uid], $message, true);
     }
 
 
@@ -840,12 +863,20 @@ class BusinessComponent extends Component
      *          'body' => string 消息体,
      *          'to_url' => string 跳转链接,
      *      ]
+     * @param boolean $send2all 是否广播
      * @return int 例如：MsgpushTye::ERROR_NOUSER
      */
-    public function sendPtMsg($uids = [], $message = [])
+    public function sendPtMsg($uids = [], $message = [], $send2all = false)
     {
         $ptmsgtb = TableRegistry::get('Ptmsg');
+        $usertb = TableRegistry::get('User');
         $ptmsg = $ptmsgtb->newEntity();
+        if($send2all) {
+            $alluids = $usertb->find()->hydrate(false)->select(['id'])->toArray();
+            foreach ($alluids as $eachuid) {
+                $uids[] = $eachuid['id'];
+            }
+        }
         if(count($uids) <= 0) {
             return MsgpushType::ERROR_NOUSER;
         }

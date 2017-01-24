@@ -48,7 +48,7 @@ class GiftController extends AppController
             }
             //检查用户余额是否充足
             if($gift->price > $this->user->money) {
-                return $this->Util->ajaxReturn(false, '余额不足');
+                return $this->Util->ajaxReturn(false, '钱包余额不足,立即充值');
             }
 
             //生成支持记录

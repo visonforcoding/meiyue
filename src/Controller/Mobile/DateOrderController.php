@@ -96,7 +96,7 @@ class DateOrderController extends AppController
            if($this->user->money < $pre_pay){
                return $this->Util->ajaxReturn([
                    'status'=>false,
-                   'msg'=>'余额不足支付预约金',
+                   'msg'=>'钱包余额不足,立即充值',
                    'code'=>201,
                    'redirect_url'=>'/wx/pay/0/'.$pre_pay.'?redurl=/date-order/order-detail/'.$res->id
 //                   'redirect_url'=>'/wx/pay/0/'.$pre_pay
@@ -166,8 +166,8 @@ class DateOrderController extends AppController
            $pre_pay = $dateorder->pre_pay;
            if($this->user->money < $dateorder->pre_pay){
                return $this->Util->ajaxReturn([
-                   'status'=>false, 'msg'=>'余额不足支付预约金',
-                   'code'=>'201','redirect_url'=>'/wx/pay/0/'.$dateorder->pre_pay.'?redurl=/date-order/order-detail/'.$res->id,
+                   'status'=>false, 'msg'=>'钱包余额不足,立即充值',
+                   'code'=>'201','redirect_url'=>'/wx/pay/0/'.$dateorder->pre_pay.'?redurl=/date-order/order-detail/'.$dateorder->id,
 //                   'code'=>'201','redirect_url'=>'/wx/pay/0/'.$dateorder->pre_pay
                    ]);
            }
@@ -251,7 +251,7 @@ class DateOrderController extends AppController
             $price = $date->price;
             $amount = $price*$lasth;
             if($this->user->money<$amount){
-                return $this->Util->ajaxReturn(['status' => false, 'msg' => '余额不足,正在跳转到支付页...', 'errorStatus' => 1]);
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '钱包余额不足,立即充值', 'errorStatus' => 1]);
             }
             //生成约单
             $DateorderTable = TableRegistry::get('Dateorder');
@@ -371,10 +371,10 @@ class DateOrderController extends AppController
         $dateorder = $DateorderTable->get($order_id,[
             'contain'=>[
                 'Buyer'=>function($q){
-                    return $q->select(['phone','id','money']);
+                    return $q->select(['gender', 'phone','id','money']);
                 }
                 ,'Dater'=>function($q){
-                    return $q->select(['id','nick','money']);
+                    return $q->select(['gender', 'id', 'nick', 'money']);
                 }
                 ,'UserSkill.Skill'
             ]
@@ -425,10 +425,18 @@ class DateOrderController extends AppController
                return $FlowTable->save($flow)&&$DateorderTable->save($dateorder);      
         });
        if($transRes){
-            return $this->Util->ajaxReturn(true,'取消成功');
-           }else{
-            return $this->Util->ajaxReturn(false,'取消失败');
-        }
+           if($this->user->gender==1){
+               return $this->Util->ajaxReturn(true,'取消成功');
+           } else {
+               return $this->Util->ajaxReturn(true,'拒绝成功');
+           }
+       }else{
+           if($this->user->gender==1){
+               return $this->Util->ajaxReturn(false,'取消失败');
+           } else {
+               return $this->Util->ajaxReturn(false,'拒绝失败');
+           }
+       }
         
     }
     
@@ -468,7 +476,7 @@ class DateOrderController extends AppController
                    'status'=>true,
                    'code'=>202,    //唤起聊天 
                    'obj'=>$dateorder->buyer,
-                   'msg'=>'接受成功',]);
+                   'msg'=>'接单成功',]);
             }
         }
         return $this->Util->ajaxReturn(false,'服务器开小差');
@@ -505,7 +513,7 @@ class DateOrderController extends AppController
         //交易流水
         $pre_amount = $this->user->money;
         if($this->user->money < $payment){
-            return $this->Util->ajaxReturn(['status'=>false,'code'=>'201','msg'=>'账户余额不足,请充值']);
+            return $this->Util->ajaxReturn(['status'=>false,'code'=>'201','msg'=>'钱包余额不足,立即充值']);
         }
         $this->user->money = $this->user->money - $payment;
         $user = $this->user;
@@ -541,13 +549,13 @@ class DateOrderController extends AppController
                    'status'=>true,
                    'redirect_url'=>'/date-order/order-success/'.$order->id,
                    'code'=>202,    //唤起聊天 
-                   'msg'=>'尾款支付成功',
+                   'msg'=>'支付成功',
                    'obj'=>$order->dater
                        ]);
         }else{
             errorMsg($flow, '失败');
             errorMsg($dateorder, '失败');
-            return $this->Util->ajaxReturn(false,'支付尾款失败');
+            return $this->Util->ajaxReturn(false,'支付失败');
         }
         
     }
@@ -989,9 +997,9 @@ class DateOrderController extends AppController
         if($this->user->gender==1){
              if((strtotime($order->start_time)-time())>= 2*60*60){
                  //2小时开外
-                $refuse_msg = '平台将只退回约单金额的70%,剩余的30%将打至美女账户作为补偿，是否继续？';
+                $refuse_msg = '将只退回约单金额的70%,剩余的30%将打至对方账户作为补偿';
              }else{
-                $refuse_msg = '平台将只退回约单金额的30%,剩余的70%将打至美女账户作为补偿，是否继续？';
+                $refuse_msg = '将只退回约单金额的30%,剩余的70%将打至对方账户作为补偿';
              }
         }else{
             $refuse_msg = '将会扣除约单金额的20%作为惩罚';
