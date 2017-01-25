@@ -199,29 +199,34 @@
         <table border="1px" align="center" width="90%">
             <caption><h1>审核</h1></caption>  
             <tr>
+                <th>基本照片视频审核</th>
+                <th>真人视频认证</th>
                 <th>审核状态</th>
                 <th>身份认证</th>
-                <th>真人视频认证</th>
                 <th>账号状态</th>
                 <th>操作</th>
             </tr>
             <tr>
-                <td class="horizone-title">
-
+                <td class="horizone-title" id="vpstatus">
+                    <input type="radio" <?= ($user->vp_status == UserStatus::CHECKING)?'checked="checked"':''?> name="vp_status" value="<?= UserStatus::CHECKING;?>" />待审核<br>
+                    <input type="radio" <?= ($user->vp_status == UserStatus::PASS)?'checked="checked"':''?> name="vp_status" value="<?= UserStatus::PASS;?>" />审核通过<br>
+                    <input type="radio" <?= ($user->vp_status == UserStatus::NOPASS)?'checked="checked"':''?> name="vp_status" value="<?= UserStatus::NOPASS;?>" />审核不通过
+                </td>
+                <td class="horizone-title" id="authstatus">
+                    <input type="radio" <?= ($user->auth_status == UserStatus::CHECKING)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::CHECKING;?>" />待审核<br>
+                    <input type="radio" <?= ($user->auth_status == UserStatus::PASS)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::PASS;?>" />审核通过<br>
+                    <input type="radio" <?= ($user->auth_status == UserStatus::NOPASS)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::NOPASS;?>" />审核不通过
+                </td>
+                <td class="horizone-title" id="status">
                     <input type="radio" <?= ($user->status == UserStatus::CHECKING)?'checked="checked"':''?> name="status" value="<?= UserStatus::CHECKING;?>" />待审核<br>
                     <input type="radio" <?= ($user->status == UserStatus::PASS)?'checked="checked"':''?> name="status" value="<?= UserStatus::PASS;?>" />美女审核通过<br>
                     <input type="radio" <?= ($user->status == UserStatus::SHARE_PASS)?'checked="checked"':''?> name="status" value="<?= UserStatus::SHARE_PASS;?>" />非美女审核通过(不展示)<br>
                     <input type="radio" <?= ($user->status == UserStatus::NOPASS)?'checked="checked"':''?> name="status" value="<?= UserStatus::NOPASS;?>" />审核不通过
                 </td>
-                <td class="horizone-title">
+                <td class="horizone-title" id="idstatus">
                     <input type="radio" <?= ($user->id_status == UserStatus::CHECKING)?'checked="checked"':''?> name="id_status" value="<?= UserStatus::CHECKING;?>" />待审核<br>
                     <input type="radio" <?= ($user->id_status == UserStatus::PASS)?'checked="checked"':''?> name="id_status" value="<?= UserStatus::PASS;?>" />审核通过<br>
                     <input type="radio" <?= ($user->id_status == UserStatus::NOPASS)?'checked="checked"':''?> name="id_status" value="<?= UserStatus::NOPASS;?>" />审核不通过
-                </td>
-                <td class="horizone-title">
-                    <input type="radio" <?= ($user->auth_status == UserStatus::CHECKING)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::CHECKING;?>" />待审核<br>
-                    <input type="radio" <?= ($user->auth_status == UserStatus::PASS)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::PASS;?>" />审核通过<br>
-                    <input type="radio" <?= ($user->auth_status == UserStatus::NOPASS)?'checked="checked"':''?> name="auth_status" value="<?= UserStatus::NOPASS;?>" />审核不通过
                 </td>
                 <td class="horizone-title">
                     <input type="radio" <?= ($user->enabled == 1)?'checked="checked"':''?> name="enabled" value="1" />正常<br>
@@ -239,6 +244,26 @@
 
 <script>
     function submitdata() {
+        var vpstatus = $('#vpstatus input[name="vp_status"]:checked').val();
+        var authstatus = $('#authstatus input[name="auth_status"]:checked').val();
+        var status = $('#status input[name="status"]:checked').val();
+        var idstatus = $('#idstatus input[name="id_status"]:checked').val();
+        if(!vpstatus || vpstatus == 1) {
+            layer.alert('基本视频图片未审核！');
+            return;
+        }
+        if(!authstatus || authstatus == 1) {
+            layer.alert('真人视频认证未审核！');
+            return;
+        }
+        if(!status || status == 1) {
+            layer.alert('审核状态未选择！');
+            return;
+        }
+        if(!idstatus || idstatus == 1) {
+            layer.alert('身份认证未审核！');
+            return;
+        }
         $.ajax({
             type: 'POST',
             dataType: 'json',
