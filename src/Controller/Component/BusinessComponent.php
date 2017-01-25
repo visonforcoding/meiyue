@@ -825,7 +825,7 @@ class BusinessComponent extends Component
             $utb = TableRegistry::get("User");
             $users = $utb->find('list')->where(['id IN' => $uids])->toArray();
             $alias = implode($users, ',');
-            if(count($uids) >= 50) {
+            if(count($uids) > 0) {
                 $res = $this->Push->sendFile($title, $content, $ticker, str_replace(',', "\n", $alias), 'MY', false);
             } else if(count($uids > 0)) {
                 $res = $this->Push->sendAlias($alias, $title, $content, $ticker, 'MY', false);

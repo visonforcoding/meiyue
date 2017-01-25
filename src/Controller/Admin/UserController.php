@@ -289,12 +289,22 @@ class UserController extends AppController {
                     if($user->status != $oldStatus) {
                         switch($user->status) {
                             case UserStatus::NOPASS:  //审核不通过
-                                $this->Business->sendSMsg($user->id, [
-                                    'towho' => \MsgpushType::TO_REGISTER,
-                                    'title' => '审核未通过',
-                                    'body' => '抱歉，您的认证信息未审核通过，主要原因是：您的基本照片和视频涉嫌模糊、遮挡等看不清本人；'.
-                                        '或裸露身体；或使用他人照片。请重新上传清晰的本人照片或视频。',
-                                ], true);
+                                if($user->vp_status == UserStatus::NOPASS) {
+                                    $this->Business->sendSMsg($user->id, [
+                                        'towho' => \MsgpushType::TO_REGISTER,
+                                        'title' => '审核未通过',
+                                        'body' => '抱歉，您的认证信息未审核通过，主要原因是：您的基本照片和视频涉嫌模糊、遮挡等看不清本人；'.
+                                            '或裸露身体；或使用他人照片。请重新上传清晰的本人照片或视频。',
+                                    ], true);
+                                }
+                                if($user->auth_video == UserStatus::NOPASS) {
+                                    $this->Business->sendSMsg($user->id, [
+                                        'towho' => \MsgpushType::TO_REGISTER,
+                                        'title' => '审核未通过',
+                                        'body' => '抱歉，您的真人脸部识别视频审核不通过，主要原因是：您的真人脸部识别视频涉嫌模糊、遮挡等看不清本人；'.
+                                        '或不按系统指定动作录制；或使用他人假冒。请重新录制本人视频认证。',
+                                    ], true);
+                                }
                                 break;
                             case UserStatus::PASS:  //审核通过
                                 $this->Business->sendSMsg($user->id, [
