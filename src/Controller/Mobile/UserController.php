@@ -990,7 +990,7 @@ class UserController extends AppController {
             'user' => $this->user,
             'total' => $total,
             'count' => $invitcount,
-            'pageTitle'=>'已成功邀请的人'
+            'pageTitle'=>'查看我的佣金'
         ]);
     }
 
