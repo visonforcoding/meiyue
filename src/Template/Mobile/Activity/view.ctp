@@ -113,7 +113,7 @@
         window.shareConfig.link = '<?= getHost().'/activity/view/'.$activity['id']; ?><?= isset($user)?'?ivc='.$user->invit_code:'';?>';
         window.shareConfig.title = '<?= $activity['title'] ?>';
         window.shareConfig.imgUrl = '<?= getHost().$activity['big_img']; ?>';
-        var share_desc = '<?= isset($activity['share_desc'])?$activity['share_desc']:''; ?>';
+        var share_desc = '<?= isset($activity['share_desc'])?preg_replace('//s*/', ',', $activity['share_desc']):''; ?>';
         share_desc && (window.shareConfig.desc = share_desc);
         LEMON.show.shareBanner();
     }
