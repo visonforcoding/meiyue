@@ -88,7 +88,9 @@
                         '操作'
                     ],
                 colModel: [
-                    {name:'name',editable:true,align:'center'},
+                    {name:'name',editable:true,align:'center', formatter: function(cellvalue, options, rowObject) {
+                        return '<a href="/user/fmview/'+ rowObject.id +'">' + cellvalue + '</a>';
+                    }},
                     {name:'phone',editable:true,align:'center'},
                     {name:'area',editable:true,align:'center'},
                     {name:'yuepai.act_time',editable:true,align:'center'},
@@ -140,25 +142,18 @@
                 + 'data-id="' + rowObject.id
                 + '" class="grid-btn ">'
                 + '<i class="icon icon-trash"></i> </a>';
-            switch (rowObject.checked) {
-                case <?= CheckStatus::CHECKED; ?>:
-                    response += '<a title="审核不通过" '
-                        + 'onClick="doCheck('
-                        + rowObject.id + ', <?= CheckStatus::CHECKNO; ?>);" '
-                        + 'data-id="' + rowObject.id
-                        + '" class="grid-btn ">'
-                        + '<i class="icon icon-remove"></i> </a>';
-                    break;
-                case <?= CheckStatus::CHECKING; ?>:
-                case <?= CheckStatus::CHECKNO; ?>:
-                    response += '<a title="审核通过" '
-                        + 'onClick="doCheck('
-                        + rowObject.id + ',<?= CheckStatus::CHECKED; ?>);" '
-                        + 'data-id="' + rowObject.id
-                        + '" class="grid-btn ">'
-                        + '<i class="icon icon-check"></i> </a>';
-                    break;
-            }
+            response += '<a title="审核不通过" '
+                + 'onClick="doCheck('
+                + rowObject.id + ', <?= CheckStatus::CHECKNO; ?>);" '
+                + 'data-id="' + rowObject.id
+                + '" class="grid-btn ">'
+                + '<i class="icon icon-remove"></i> </a>';
+            response += '<a title="审核通过" '
+                + 'onClick="doCheck('
+                + rowObject.id + ',<?= CheckStatus::CHECKED; ?>);" '
+                + 'data-id="' + rowObject.id
+                + '" class="grid-btn ">'
+                + '<i class="icon icon-check"></i> </a>';
             return response;
         }
 
@@ -214,7 +209,6 @@
             }, function () {
             });
         }
-
     </script>
 <?php
 $this->end();
