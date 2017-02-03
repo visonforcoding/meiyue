@@ -150,9 +150,11 @@ class TracleController extends AppController {
                     return $items->map(function($item) use($followed){
                         $item['user']['avatar'] = generateImgUrl($item['user']['avatar']);
                         $item['images'] = unserialize($item['images']);
-                        /*foreach ($item['images'] as &$img) {
-                            $img = generateImgUrl($img);
-                        }*/
+                        $images = [];
+                        foreach ($item['images'] as $img) {
+                            $images[] = generateImgUrl($img);
+                        }
+                        $item['images'] = $images;
                         //时间语义化转换
                         $item['create_time'] = (new Time($item['create_time']))->timeAgoInWords(
                             [ 'accuracy' => [
