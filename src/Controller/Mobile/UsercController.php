@@ -854,7 +854,7 @@ class UsercController extends AppController
         $this->set([
             'user' => $this->user,
             'packs' => $packs,
-            'pageTitle' => '购买套餐',
+            'pageTitle' => '充值预存',
             'reurl' => $reurl
         ]);
     }

@@ -6,7 +6,7 @@
 </header> -->
 <div class="wraper">
     <div class="package_list mt20">
-        <h3 class="commontitle inner">充值预送会员</h3>
+        <h3 class="commontitle inner">充值预存会员</h3>
         <div class="charge_container_con">
             <ul id="changed">
                 <?php foreach($packs as $item): ?>
