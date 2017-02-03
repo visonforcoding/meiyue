@@ -827,7 +827,7 @@ class BusinessComponent extends Component
             $alias = implode($users, ',');
             if(count($uids) >= 50) {
                 $res = $this->Push->sendFile($title, $content, $ticker, str_replace(',', "\n", $alias), 'MY', false);
-            } else if(count($uids > 0)) {
+            } else if(count($uids) > 0) {
                 $res = $this->Push->sendAlias($alias, $title, $content, $ticker, 'MY', false);
             }
         }
