@@ -58,7 +58,9 @@
         </div>
     </div>
     <div style="height:62px;" class="not-vip-show"></div>
-    <a class="identify_footer_potion not-vip-show" id="beVIP">成为会员，立即查看访客信息</a>
+    <a class="identify_footer_potion not-vip-show" id="beVIP">
+        <?= $isChecking?'需要消耗'.$iosCheckConf['view_visitors'].'积分才能查看访客哦~':'成为会员，立即查看访客信息'; ?>
+    </a>
 <?php $this->start('script'); ?>
     <script type="text/javascript">
         <?php if($isvip || ($user->gender == 2)): ?>
@@ -111,6 +113,28 @@
             $('.not-vip-show').hide();
             window.holdLoad = false;
         }
+        <?php elseif($isChecking): ?>
+        $.util.tap($('#beVIP'), function() {
+            $.util.confirm(
+                ' ',
+                '将消耗<?= $iosCheckConf['view_visitors']; ?>积分',
+                function() {
+                    $.util.ajax({
+                        url:'/userc/consume-visit/<?=$user->id?>',
+                        method: 'POST',
+                        func:function(res){
+                            $.util.hidePreloader();
+                            if(res.status) {
+                                location.reload();
+                            } else {
+                                $.util.alert(res.msg);
+                            }
+                        }
+                    })
+                },
+                null
+            );
+        });
         <?php else: ?>
         $.util.tap($('#beVIP'), function() {
             location.href = '/userc/vip-buy?reurl=/userc/visitors';

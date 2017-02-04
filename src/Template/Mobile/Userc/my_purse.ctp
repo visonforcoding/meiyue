@@ -31,11 +31,19 @@
                         </div>
                     </div>
                     <p><a href="/activity/index/3#3" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
+                    <!-- 审核模式 -->
+                    <?php if($iosCheckConf['check_mode']): ?>
+                        <div><p class="smallarea aligncenter moneycharge mt20">我的积分：<?= $user->bonus_point; ?></p></div>
+                    <?php endif;?>
                 <?php else: ?>
                     <div class="flex flex_justify inner" onclick="window.location.href='/purse/recharge'">
                         <span class="btn btn_bg_active">充值</span>
                     </div>
                     <p><a href="/activity/index/3#3" class="undertext color_tencent smallarea">查看在土豪榜中的位置</a></p>
+                    <!-- 审核模式 -->
+                    <?php if($iosCheckConf['check_mode']): ?>
+                        <div><p class="smallarea aligncenter moneycharge mt20">我的积分：<?= $user->bonus_point; ?></p></div>
+                    <?php endif;?>
                 <?php endif; ?>
             <?php else: ?>
                 <div class="flex flex_justify inner" onclick="duihuan();"><span class="btn btn_bg_t">提现</span></div>

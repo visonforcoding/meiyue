@@ -70,6 +70,8 @@ class TracleController extends AppController {
             $this->loadComponent('Business');
             //检查权限和名额剩余
             $res = $this->Business->checkRight($this->user->id, $uid, ServiceType::BROWSE);
+            $iosCheckConf = \Cake\Core\Configure::read('ios_check_conf');
+
             return $this->Util->ajaxReturn(['right' => $res]);
         }
     }

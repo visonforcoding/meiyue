@@ -42,6 +42,33 @@
             $.util.alert('请选择要送的礼物');
             return;
         }
+        <?php if($isChecking): ?>
+        $.util.confirm(
+            '赠送礼物',
+            '赠送一件【' + gname + '】将会消耗<?= $iosCheckConf['gift_point']; ?>积分',
+            function() {
+                $.util.showPreloader('请稍候');
+                $.ajax({
+                    url: '/gift/send/<?= $user->id; ?>/' + gid,
+                    type: "POST",
+                    dataType: "json",
+                    success: function (res) {
+                        $.util.hidePreloader();
+                        $.util.alert(res.msg);
+                        gid = null;
+                        $('#allgift .items').removeClass('active');
+                        if(res.status) {
+                            setTimeout(function(){
+                                LEMON.event.back();
+                                //$.util.openTalk(res);
+                            },500);
+                        }
+                    }
+                })
+            },
+            null
+        );
+        <?php else: ?>
         $.util.confirm(
             '赠送礼物',
             '赠送一件【' + gname + '】给 <?= $user->nick;?>',
@@ -67,6 +94,7 @@
             },
             null
         );
+        <?php endif; ?>
     });
 
 </script>

@@ -206,6 +206,11 @@ class UserController extends AppController {
                 $user->status = 1;
                 $user->is_agent = 1; //默认是经纪人
             }
+            //审核模式
+            $iosCheckConf = \Cake\Core\Configure::read('ios_check_conf');
+            if($iosCheckConf['check_mode']) {
+                $user->bonus_point = $iosCheckConf['init_point'];
+            }
             if ($this->User->save($user)) {
                 //进入更新队列
                 $this->loadComponent('Netim');
@@ -1047,6 +1052,8 @@ class UserController extends AppController {
     {
         $this->handCheckLogin();
         $this->loadComponent('Business');
+        //审核模式
+        $iosCheckConf = \Cake\Core\Configure::read('ios_check_conf');
         //检查权限和名额剩余
         $res = $this->Business->consumeRight($this->user->id, $uid, ServiceType::CHAT);
         if($res) {

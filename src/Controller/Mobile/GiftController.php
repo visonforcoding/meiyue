@@ -24,11 +24,19 @@ class GiftController extends AppController
         $userTb = TableRegistry::get("User");
         $user = $userTb->get($id, ['select' => ['id', 'nick', 'avatar']]);
         $gifts = $this->Gift->find('all')->orderAsc('price');
+        //审核模式
+        $iosCheckConf = \Cake\Core\Configure::read('ios_check_conf');
+        $isChecking = true;
+        if($this->user) {
+            $isChecking = $this->Business->checkIsCheck($this->user);
+        }
         $this->set([
             'user' => $user,
             'me' => $this->user,
             'gifts' => $gifts->toArray(),
             'pageTitle' => '礼物',
+            'isChecking' => $isChecking,
+            'iosCheckConf' => $iosCheckConf
         ]);
     }
 
@@ -41,95 +49,202 @@ class GiftController extends AppController
     public function send($uid, $gid) {
 
         if($this->request->is("POST")) {
+            if($this->Business->checkIsCheck($this->user)) {
+                //审核模式
+                $iosCheckConf = \Cake\Core\Configure::read('ios_check_conf');
+                $gift = $this->Gift->get($gid);
+                if(!$gift) {
+                    return $this->Util->ajaxReturn(false, '礼物不存在');
+                }
 
-            $gift = $this->Gift->get($gid);
-            if(!$gift) {
-                return $this->Util->ajaxReturn(false, '礼物不存在');
-            }
-            //检查用户余额是否充足
-            if($gift->price > $this->user->money) {
-                return $this->Util->ajaxReturn(false, '钱包余额不足,立即充值');
-            }
+                //生成支持记录
+                $supportTb = TableRegistry::get("Support");
+                $support = $supportTb->newEntity(Array(
+                    'supporter_id' => $this->user->id,
+                    'supported_id' => $uid
+                ));
 
-            //生成支持记录
-            $supportTb = TableRegistry::get("Support");
-            $support = $supportTb->newEntity(Array(
-                'supporter_id' => $this->user->id,
-                'supported_id' => $uid
-            ));
-
-            //修改支付方费用
-            $outpre_money = $this->user->money;
-            $this->user->money = $this->user->money - $gift->price;
-            $outafter_money = $this->user->money;
-            $this->user->recharge = $this->user->recharge + $gift->price;
-            $out_user = $this->user;
-            //修改收款方费用
-            $userTb = TableRegistry::get('User');
-            $in_user = $userTb->get($uid);
-            if(!$in_user) {
-                return $this->Util->ajaxReturn(false, '用户不存在');
-            }
-            $inpre_money = $in_user->money;
-            $in_user->money = $in_user->money + $gift->price;
-            $inafter_money = $in_user->money;
-            $in_user->charm = $in_user->charm + $gift->price;
-            //生成流水
-            $FlowTable = TableRegistry::get('Flow');
-            $inflow = [
-                'user_id'=> $uid,
-                'buyer_id'=>  0,
-                'type'=>14,
-                'type_msg'=>'礼物（'.$gift->name.')',
-                'income'=>1,
-                'amount'=>$gift->price,
-                'price'=>$gift->price,
-                'pre_amount'=>$inpre_money,
-                'after_amount'=>$inafter_money,
-                'paytype'=>1,   //余额支付
-                'remark'=> '礼物名称['.$gift->name.']|礼物价格['.$gift->price.']'
-            ];
-            $outflow = [
-                'user_id'=> 0,
-                'buyer_id'=>  $this->user->id,
-                'type'=>14,
-                'type_msg'=>'送礼物（'.$gift->name.')',
-                'income'=>2,
-                'amount'=>$gift->price,
-                'price'=>$gift->price,
-                'pre_amount'=>$outpre_money,
-                'after_amount'=>$outafter_money,
-                'paytype'=>1,   //余额支付
-                'remark'=> '礼物名称['.$gift->name.']|礼物价格['.$gift->price.']'
-            ];
-            $transRes = $supportTb->connection()->transactional(
-                function() use ($supportTb, $support, $FlowTable, $inflow, $outflow, $userTb, $in_user, $out_user){
-                    $inflow = $FlowTable->newEntity($inflow);
-                    $outflow = $FlowTable->newEntity($outflow);
-                    $supres = $supportTb->save($support);
-                    if($supres) {
-                        $inflow->relate_id = $supres->id;
-                        $outflow->relate_id = $supres->id;
+                $inflow = null;
+                $outflow = null;
+                $FlowTable = TableRegistry::get('Flow');
+                $userTb = TableRegistry::get('User');
+                $in_user = $userTb->get($uid);
+                //检查用户余额是否充足
+                if($gift->price > $this->user->money) {
+                    //修改支付方费用
+                    $outpre_money = $this->user->money;
+                    $this->user->money = $this->user->money - $gift->price;
+                    $outafter_money = $this->user->money;
+                    $this->user->recharge = $this->user->recharge + $gift->price;
+                    //修改收款方费用
+                    if(!$in_user) {
+                        return $this->Util->ajaxReturn(false, '用户不存在');
                     }
-                    $inflores = $FlowTable->save($inflow);
-                    $outflores = $FlowTable->save($outflow);
-                    $inures = $userTb->save($in_user);
-                    $ouures = $userTb->save($out_user);
-                    return $supres&&$inflores&&$outflores&&$inures&&$ouures;
-                });
+                    $inpre_money = $in_user->money;
+                    $in_user->money = $in_user->money + $gift->price;
+                    $inafter_money = $in_user->money;
+                    $in_user->charm = $in_user->charm + $gift->price;
+                    //生成流水
+                    $inflow = [
+                        'user_id'=> $uid,
+                        'buyer_id'=>  0,
+                        'type'=>14,
+                        'type_msg'=>'礼物（'.$gift->name.')',
+                        'income'=>1,
+                        'amount'=>$gift->price,
+                        'price'=>$gift->price,
+                        'pre_amount'=>$inpre_money,
+                        'after_amount'=>$inafter_money,
+                        'paytype'=>1,   //余额支付
+                        'remark'=> '礼物名称['.$gift->name.']|礼物价格['.$gift->price.']'
+                    ];
+                    $outflow = [
+                        'user_id'=> 0,
+                        'buyer_id'=>  $this->user->id,
+                        'type'=>14,
+                        'type_msg'=>'送礼物（'.$gift->name.')',
+                        'income'=>2,
+                        'amount'=>$gift->price,
+                        'price'=>$gift->price,
+                        'pre_amount'=>$outpre_money,
+                        'after_amount'=>$outafter_money,
+                        'paytype'=>1,   //余额支付
+                        'remark'=> '礼物名称['.$gift->name.']|礼物价格['.$gift->price.']'
+                    ];
+                }
+                $out_user = $this->user;
+                if($out_user->bonus_point >= $iosCheckConf['gift_point']) {
+                    $out_user->bonus_point -= $iosCheckConf['gift_point'];
+                } else {
+                    return $this->Util->ajaxReturn(false, '积分不足');
+                }
+                $transRes = $supportTb->connection()->transactional(
+                    function() use ($supportTb, $support, $FlowTable, $inflow, $outflow, $userTb, $in_user, $out_user){
+                        $inflores = true;
+                        $outflores = true;
+                        $inures = true;
+                        $supres = $supportTb->save($support);
+                        if($inflow) {
+                            $inflow = $FlowTable->newEntity($inflow);
+                            if($supres) {
+                                $inflow->relate_id = $supres->id;
+                            }
+                            $inflores = $FlowTable->save($inflow);
+                        }
+                        if($outflow) {
+                            $outflow = $FlowTable->newEntity($outflow);
+                            if($supres) {
+                                $outflow->relate_id = $supres->id;
+                            }
+                            $outflores = $FlowTable->save($outflow);
+                        }
+                        if($in_user) {
+                            $inures = $userTb->save($in_user);
+                        }
+                        $ouures = $userTb->save($out_user);
+                        return $supres&&$inflores&&$outflores&&$inures&&$ouures;
+                    });
 
-            if($transRes) {
-                $this->loadComponent('Netim');
-                $this->Netim->giftMsg($out_user, $in_user, $gift);
-                 return $this->Util->ajaxReturn([
-                   'status'=>true,
-                   'code'=>202,    //唤起聊天 
-                   'obj'=>$in_user,
-                   'msg'=>'谢谢您的礼物，么么哒^u^',
-                       ]);
+                if($transRes) {
+                    $this->loadComponent('Netim');
+                    $this->Netim->giftMsg($out_user, $in_user, $gift);
+                    return $this->Util->ajaxReturn([
+                        'status'=>true,
+                        'code'=>202,    //唤起聊天
+                        'obj'=>$in_user,
+                        'msg'=>'谢谢您的礼物，么么哒^u^',
+                    ]);
+                }
+                return $this->Util->ajaxReturn(false, '操作失败');
+            } else {
+                $gift = $this->Gift->get($gid);
+                if(!$gift) {
+                    return $this->Util->ajaxReturn(false, '礼物不存在');
+                }
+                //检查用户余额是否充足
+                if($gift->price > $this->user->money) {
+                    return $this->Util->ajaxReturn(false, '钱包余额不足,立即充值');
+                }
+
+                //生成支持记录
+                $supportTb = TableRegistry::get("Support");
+                $support = $supportTb->newEntity(Array(
+                    'supporter_id' => $this->user->id,
+                    'supported_id' => $uid
+                ));
+
+                //修改支付方费用
+                $outpre_money = $this->user->money;
+                $this->user->money = $this->user->money - $gift->price;
+                $outafter_money = $this->user->money;
+                $this->user->recharge = $this->user->recharge + $gift->price;
+                $out_user = $this->user;
+                //修改收款方费用
+                $userTb = TableRegistry::get('User');
+                $in_user = $userTb->get($uid);
+                if(!$in_user) {
+                    return $this->Util->ajaxReturn(false, '用户不存在');
+                }
+                $inpre_money = $in_user->money;
+                $in_user->money = $in_user->money + $gift->price;
+                $inafter_money = $in_user->money;
+                $in_user->charm = $in_user->charm + $gift->price;
+                //生成流水
+                $FlowTable = TableRegistry::get('Flow');
+                $inflow = [
+                    'user_id'=> $uid,
+                    'buyer_id'=>  0,
+                    'type'=>14,
+                    'type_msg'=>'礼物（'.$gift->name.')',
+                    'income'=>1,
+                    'amount'=>$gift->price,
+                    'price'=>$gift->price,
+                    'pre_amount'=>$inpre_money,
+                    'after_amount'=>$inafter_money,
+                    'paytype'=>1,   //余额支付
+                    'remark'=> '礼物名称['.$gift->name.']|礼物价格['.$gift->price.']'
+                ];
+                $outflow = [
+                    'user_id'=> 0,
+                    'buyer_id'=>  $this->user->id,
+                    'type'=>14,
+                    'type_msg'=>'送礼物（'.$gift->name.')',
+                    'income'=>2,
+                    'amount'=>$gift->price,
+                    'price'=>$gift->price,
+                    'pre_amount'=>$outpre_money,
+                    'after_amount'=>$outafter_money,
+                    'paytype'=>1,   //余额支付
+                    'remark'=> '礼物名称['.$gift->name.']|礼物价格['.$gift->price.']'
+                ];
+                $transRes = $supportTb->connection()->transactional(
+                    function() use ($supportTb, $support, $FlowTable, $inflow, $outflow, $userTb, $in_user, $out_user){
+                        $inflow = $FlowTable->newEntity($inflow);
+                        $outflow = $FlowTable->newEntity($outflow);
+                        $supres = $supportTb->save($support);
+                        if($supres) {
+                            $inflow->relate_id = $supres->id;
+                            $outflow->relate_id = $supres->id;
+                        }
+                        $inflores = $FlowTable->save($inflow);
+                        $outflores = $FlowTable->save($outflow);
+                        $inures = $userTb->save($in_user);
+                        $ouures = $userTb->save($out_user);
+                        return $supres&&$inflores&&$outflores&&$inures&&$ouures;
+                    });
+
+                if($transRes) {
+                    $this->loadComponent('Netim');
+                    $this->Netim->giftMsg($out_user, $in_user, $gift);
+                    return $this->Util->ajaxReturn([
+                        'status'=>true,
+                        'code'=>202,    //唤起聊天
+                        'obj'=>$in_user,
+                        'msg'=>'谢谢您的礼物，么么哒^u^',
+                    ]);
+                }
+                return $this->Util->ajaxReturn(false, '操作失败');
             }
-            return $this->Util->ajaxReturn(false, '操作失败');
-
         }
         return $this->Util->ajaxReturn(false, '非法操作');
 
