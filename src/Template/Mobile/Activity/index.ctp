@@ -416,11 +416,11 @@
                 }
             });
             this.addTabEvent();
-            if (cur_tab == 1) {
+            if (this.cur_tab == 1) {
                 obj.loadDataWithoutPage(obj.tab_action[this.cur_tab], 'top_week');
-            } else if (cur_tab == 2) {
+            } else if (this.cur_tab == 2) {
                 obj.loadDataWithoutPage(obj.tab_action[this.cur_tab], 'top_month');
-            } else if (cur_tab == 3) {
+            } else if (this.cur_tab == 3) {
                 obj.loadDataWithoutPage(obj.tab_action[this.cur_tab], 'rich_list');
             }
         },
