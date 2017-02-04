@@ -68,7 +68,6 @@
         init();
         loadUser(curpage);
         function loadUser(page, more, query) {
-            $.util.showPreloader();
             var template = '';
             if(<?= $user->gender; ?> == 1) {
                 template = $('#male-list-tpl').html();
@@ -86,10 +85,8 @@
                     } else {
                         $('#visitors-list').html(rendered);
                     }
-                    $.util.hidePreloader();
                     window.holdLoad = false;
                 } else {
-                    $.util.hidePreloader();
                     if(curpage == 1) {
                         $('#blank-area').html('<div class="empty-content  empty-text mt350"><p class="empty-tips">您暂时没有访客哦</p></div>');
                     } else {

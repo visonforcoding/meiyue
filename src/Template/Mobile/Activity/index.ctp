@@ -449,6 +449,7 @@
                 success: function (res) {
                     if (res.status) {
                         if ('rich_list' == tab) {
+                            console.log(res);
                             if (res.mydata) {
                                 $('#my-top').show();
                                 if (res.mydata.paiming) {

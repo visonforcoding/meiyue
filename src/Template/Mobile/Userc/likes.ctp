@@ -46,13 +46,11 @@
         }, 2000)
 
         function loadUser(page, more, query) {
-            $.util.showPreloader();
             var template = $('#like-list-tpl').html();
             Mustache.parse(template);   // optional, speeds up future uses
             url = '/userc/get-likes-list/' + page + '.json';
             $.getJSON(url, function (data) {
                 window.holdLoad = false;
-                $.util.hidePreloader();
                 if ((data.likes).length) {
                     var rendered = Mustache.render(template, data);
                     if (more) {

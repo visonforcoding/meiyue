@@ -39,13 +39,11 @@
         loadUser(curpage);
 
         function loadUser(page, more, query) {
-            $.util.showPreloader();
             var template = $('#fans-list-tpl').html();
             Mustache.parse(template);   // optional, speeds up future uses
             url = '/userc/fans/' + page + '.json';
             $.getJSON(url, function (data) {
                 window.holdLoad = false;
-                $.util.hidePreloader();
                 if ((data.fans).length) {
                     var rendered = Mustache.render(template, data);
                     if (more) {
