@@ -490,6 +490,8 @@ class IndexController extends AppController {
                 $out_user = $this->user;
                 $in_user = $userTb->get($wxerid);
                 $moneyEnough = true;
+                $inflow = null;
+                $outflow = null;
                 if($this->user->money < $wxfee) {
                     $moneyEnough = false;
                 } else {
