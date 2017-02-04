@@ -492,6 +492,7 @@ class IndexController extends AppController {
                 $moneyEnough = true;
                 $inflow = null;
                 $outflow = null;
+                $FlowTable = TableRegistry::get('Flow');
                 if($this->user->money < $wxfee) {
                     $moneyEnough = false;
                 } else {
@@ -508,7 +509,6 @@ class IndexController extends AppController {
                     $in_aft_money = $in_user->money;
                     $in_user->charm = $in_user->charm + $wxfee;
                     //生成流水
-                    $FlowTable = TableRegistry::get('Flow');
                     $inflow = $FlowTable->newEntity([
                         'user_id'=> $wxerid,
                         'buyer_id'=> 0,
