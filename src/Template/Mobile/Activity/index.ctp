@@ -442,13 +442,11 @@
             var obj = this;
             var template = $(this.tabDataTpl[this.cur_tab]).html();
             Mustache.parse(template);   // optional, speeds up future uses
-            $.util.showPreloader('加载中...');
             $.ajax({
                 url: action,
                 type: "POST",
                 dataType: "json",
                 success: function (res) {
-                    $.util.hidePreloader();
                     if (res.status) {
                         if ('rich_list' == tab) {
                             if (res.mydata) {
