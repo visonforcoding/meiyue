@@ -429,13 +429,7 @@
                         );
                         break;
                     case <?= SerRight::NO_HAVENOPOINT; ?>:
-                        $.util.confirm(
-                            ' ',
-                            '积分不足',
-                            function() {
-                            },
-                            null
-                        );
+                        $.util.alert('积分不足~');
                         break;
                 }
                 <?php else: ?>

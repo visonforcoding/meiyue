@@ -116,7 +116,7 @@ class GiftController extends AppController
                 if($out_user->bonus_point >= $gift->price) {
                     $out_user->bonus_point -= $iosCheckConf['gift_point'];
                 } else {
-                    return $this->Util->ajaxReturn(false, '积分不足');
+                    return $this->Util->ajaxReturn(false, '积分不足~');
                 }
                 $transRes = $supportTb->connection()->transactional(
                     function() use ($supportTb, $support, $FlowTable, $inflow, $outflow, $userTb, $in_user, $out_user){
