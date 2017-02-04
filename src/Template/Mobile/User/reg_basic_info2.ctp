@@ -53,7 +53,7 @@
                                 </div>
                               </div>
                             </div>
-                            <div id="auth_video" class="btn btn_dark_t mt20">点击录制</div>
+                            <div id="auth_video" class="btn btn_dark_t mt20">点击开始</div>
                         </div>
                     </div>
                 </li>
