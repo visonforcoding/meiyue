@@ -86,7 +86,7 @@
             $(this).removeClass('cur');
         });
         $(this).addClass('cur');
-        curquery = $(this).data('query');
+        curquery = parseInt($(this).data('query'));
         var query = "?query=" + $(this).data('query');
         var curpage = 1;
         $.util.asyLoadData({
@@ -133,7 +133,6 @@
                 datas[key] = tmp;
             }
             data.datas = datas;
-
         } else {
             if(curpage == 1 && curquery == 1) {
                 $('.empty_container').hide();
