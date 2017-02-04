@@ -447,9 +447,10 @@
                 type: "POST",
                 dataType: "json",
                 success: function (res) {
+                    console.log(res);
                     if (res.status) {
                         if ('rich_list' == tab) {
-                            console.log(res);
+                            console.log('hel');
                             if (res.mydata) {
                                 $('#my-top').show();
                                 if (res.mydata.paiming) {
