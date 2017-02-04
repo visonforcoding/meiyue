@@ -447,6 +447,7 @@
                 type: "POST",
                 dataType: "json",
                 success: function (res) {
+                    console.log(tab);
                     console.log(res);
                     if (res.status) {
                         if ('rich_list' == tab) {
