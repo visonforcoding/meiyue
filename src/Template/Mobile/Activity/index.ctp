@@ -329,7 +329,6 @@
 
         asyLoadData: function (curtab) {
             this.tabLoadHold[curtab] = 1;  //防止连刷
-            $.util.showPreloader();
             var template = $(this.tabDataTpl[curtab]).html();
             var nodataTmpl = $('#nodata-tpl').html();
             var url = this.tabDataUrl[curtab] + this.tabPage[curtab];
@@ -337,7 +336,6 @@
             Mustache.parse(nodataTmpl);   // optional, speeds up future uses
             var obj = this;
             $.getJSON(url, function (data) {
-                $.util.hidePreloader();
                 if (data.code === 200) {
                     var rendered = Mustache.render(template, data);
                     var nodataRend = '';
