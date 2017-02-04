@@ -32,9 +32,9 @@
 <div class="wraper">
     <div class="home_paty_container">
         <div class="date_list_header">
-            <div class="date-tab alldate cur" data-query="1#1"><span class="headertab">进行中</span></div>
+            <div class="date-tab alldate cur" data-query="1" href="#1"><span class="headertab">进行中</span></div>
             |
-            <div class="date-tab todate" data-query="2#2"><span class="headertab">已结束</span>
+            <div class="date-tab todate" data-query="2" href="#2"><span class="headertab">已结束</span>
             </div>
         </div>
         <div class="home_paty_con">
