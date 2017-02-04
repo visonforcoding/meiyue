@@ -17,7 +17,7 @@ p{background-color: transparent;word-break: break-all;}
 /*弹出层提示*/
 .alert{position:fixed;	z-index: 999;color:#fff;font-size:0.28rem;left:0;top:40%;right:0;margin:auto;width:50%;height:30%;font-size:0.3rem;
        /*display: -webkit-flex;display: flex;-webkit-justify-content: center;justify-content: center;-webkit-align-items:center;align-items: center;*/}
-.alert span{line-height: 0.38rem;text-align: center;background: rgba(0,0,0,0.8);border-radius: 0.15rem;padding:0.3rem;display:block;}
+.alert span{line-height: 0.38rem;text-align: center;background: rgba(0,0,0,0.6);border-radius: 0.15rem;padding:0.3rem;display:block;}
 /*loading层*/
 .loader{
     position: fixed;
