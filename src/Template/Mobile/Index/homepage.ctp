@@ -9,8 +9,10 @@
     <div class="home_page">
         <div class="header" style="overflow:hidden">
             <img src="<?= generateImgUrl($user->avatar); ?>" class="responseimg"/>
-            <?php if($user->status == 3): ?><span class="identify-info  id-btn">视频已认证</span><?php endif; ?>
-            <?php if($user->id_status == 3): ?><span class="identify-info video-btn">身份已认证</span><?php endif; ?>
+            <div class="certifay-box">
+                <?php if($user->status == 3): ?><span class="identify-info  id-btn">视频已认证</span><?php endif; ?>
+                <?php if($user->id_status == 3): ?><span class="identify-info video-btn">身份已认证</span><?php endif; ?>
+            </div>
         </div>
      </div>
     <!--基本信息-->
