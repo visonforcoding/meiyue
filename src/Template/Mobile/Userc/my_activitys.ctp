@@ -134,6 +134,8 @@
             }
             data.datas = datas;
         } else {
+            console.log(curpage);
+            console.log(curquery);
             if(curpage == 1 && curquery == 1) {
                 $('.empty_container').hide();
                 $('.empty_container1').show();
