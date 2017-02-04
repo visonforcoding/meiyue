@@ -1,15 +1,15 @@
-<!--<header>
+<!-- <header>
     <div class="header">
         <span class="l_btn">取消</span>
         <h1>意见反馈</h1>
         <span class="r_btn" onclick="release();">提交</span>
     </div>
-</header>-->
-<div class="wraper">
+</header> -->
+<div class="wraper fullwraper">
     <div class="submit_box_textarea suggest_area">
         <form>
         <div class="inner">
-            <textarea name="body" rows="" cols="" placeholder="请简要描述您的问题。。。。"></textarea>
+            <textarea name="body" rows="" cols="" placeholder="请简要描述您的建议或问题（100字以内）" onInput = 'limLength(this)';></textarea>
         </div>
         </form>
     </div>
@@ -20,7 +20,10 @@
     window.onTopRight = function () {
         release();
     }
-
+    function limLength(that){
+        var data =that.value;
+        that.value = data.substring(0, 100);
+    }
     function release() {
         $.util.confirm(
             '意见反馈',
