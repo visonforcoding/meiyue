@@ -212,6 +212,8 @@
             if(target.nodeName == 'IMG') target = target.parentNode;
             var index = $(em).data('index');
             var curimg = ($(target).find('img').attr('src')).replace(/imgs/, 'upload');
+            console.log(curimg);
+            console.log(allMovements);
             LEMON.event.viewImg(curimg.replace(/\?.*/, ''), allMovements[index]);
         }
     });
