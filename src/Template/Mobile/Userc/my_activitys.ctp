@@ -88,7 +88,7 @@
         $(this).addClass('cur');
         curquery = parseInt($(this).data('query'));
         var query = "?query=" + $(this).data('query');
-        var curpage = 1;
+        curpage = 1;
         $.util.asyLoadData({
             gurl: url,
             page: curpage,
