@@ -211,7 +211,7 @@
         if(em.id.indexOf('imgcontainer_') != -1){
             if(target.nodeName == 'IMG') target = target.parentNode;
             var index = $(em).data('index');
-            var curimg = ($(target).find('img').attr('src'));
+            var curimg = ($(target).find('img').attr('src')).replace(/\?.*/, '');
             console.log(curimg);
             console.log(allMovements);
             LEMON.event.viewImg(curimg.replace(/\?.*/, ''), allMovements[index]);

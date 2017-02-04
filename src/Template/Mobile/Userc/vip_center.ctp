@@ -129,7 +129,7 @@
             <?php else: ?>
             <div class="empty_container">
                  <div class="empty-content mt80">
-                     <p class="empty-tips">你当前没有购买记录</p>
+                     <p class="empty-tips">你当前没有充值记录</p>
                  </div>
             </div>
             <?php endif; ?>

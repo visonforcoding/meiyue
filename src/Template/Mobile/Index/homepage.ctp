@@ -531,6 +531,7 @@
                         $('.raper').addClass('hide');
                         $('.raper .showxpay').hide();
                         $('.raper .cancel').off('click');
+                        return false;
                     });
                     $.util.tap($('.raper .gopay'), function() {
                         $('.raper').addClass('hide');
@@ -548,6 +549,7 @@
                             <?php endif; ?>
                         }
                         $('.raper .gopay').off('click');
+                        return false;
                     });
                 }
             }
