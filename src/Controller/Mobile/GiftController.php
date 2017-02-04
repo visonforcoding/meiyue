@@ -113,7 +113,7 @@ class GiftController extends AppController
                     ];
                 }
                 $out_user = $this->user;
-                if($out_user->bonus_point >= $iosCheckConf['gift_point']) {
+                if($out_user->bonus_point >= $gift->price) {
                     $out_user->bonus_point -= $iosCheckConf['gift_point'];
                 } else {
                     return $this->Util->ajaxReturn(false, '积分不足');

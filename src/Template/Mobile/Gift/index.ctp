@@ -16,7 +16,7 @@
     <ul class="" id="allgift">
         <li>
             <?php foreach($gifts as $gift): ?>
-                <div class="items" data-id="<?= $gift->id; ?>" data-name="<?= $gift->name; ?>">
+                <div class="items" data-id="<?= $gift->id; ?>" data-name="<?= $gift->name; ?>" data-cost="<?= $gift->price; ?>">
                     <div class="gift_pic">
                         <img src="<?= generateImgUrl($gift->pic); ?>"/>
                     </div>
@@ -31,10 +31,12 @@
 <script type="text/javascript">
     var gid = null;
     var gname = '';
+    var gprice = 0;
     $('#allgift .items').on('tap', function () {
         $(this).addClass('active').siblings().removeClass('active');
         gid = $(this).data('id');
         gname = $(this).data('name');
+        gprice = $(this).data('cost');
     })
 
     $('#sendto').on('tap', function() {
@@ -45,7 +47,7 @@
         <?php if($isChecking): ?>
         $.util.confirm(
             '赠送礼物',
-            '赠送一件【' + gname + '】将会消耗<?= $iosCheckConf['gift_point']; ?>积分',
+            '赠送【' + gname + '】将会消耗'+gprice+'积分',
             function() {
                 $.util.showPreloader('请稍候');
                 $.ajax({

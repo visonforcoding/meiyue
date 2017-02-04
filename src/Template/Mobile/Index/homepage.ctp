@@ -546,8 +546,7 @@
                         } else {
                             <!--审核模式-->
                             <?php if($isChecking): ?>
-                            $.util.confirm(' ','积分不足', function() {
-                            }, null);
+                            $.util.alert('积分不足~');
                             <?php else: ?>
                             $.util.confirm('余额不足','立即前往充值？', function() {
                                 showxpay();
@@ -699,13 +698,7 @@
                         );
                         break;
                     case <?= SerRight::NO_HAVENOPOINT; ?>:
-                        $.util.confirm(
-                            '私聊美女',
-                            '积分不足~',
-                            function() {
-                            },
-                            null
-                        );
+                        $.util.alert('积分不足~');
                         break;
                 }
                 <?php else: ?>
