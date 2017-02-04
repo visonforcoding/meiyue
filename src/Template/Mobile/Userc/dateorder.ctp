@@ -88,7 +88,7 @@
                 <h3 class="pay_desc color_y">待付尾款</h3>
                 <div class="groupbtn">
                     <?php if ($user->gender == 1): ?>
-                        <span data-orderid="{{id}}" class="orders pay_status_7 clickable" >付尾款</span>
+                        <span data-orderid="{{id}}" class="orders pay_status_7 clickable" date-amount="{{amount}}" date-prepay="{{pre_pay}}">付尾款</span>
                     <?php else: ?>
                         <span data-orderid="{{id}}"  class="refuse cancel_order refuse_status_7 clickable">取消订单</span>
                     <?php endif; ?>
@@ -339,7 +339,10 @@ $(document).on('click', '.remove_order', function () {
 $(document).on('click', '.pay_status_7', function () {
     //支付尾款
     var orderid = $(this).data('orderid');
-    $.util.confirm('确定支付？', '将会扣除<?= $order->amount - $order->pre_pay ?>元的尾款', function () {
+    var amount = $(this).data('amount');
+    var prepay = $(this).data('prepay');
+    var afterpay = amount - prepay;
+    $.util.confirm('确定支付？', '将会扣除' +afterpay+ '元的尾款', function () {
         $.util.showPreloader('支付中');
         $.util.ajax({
             url: '/date-order/orderPayall',
