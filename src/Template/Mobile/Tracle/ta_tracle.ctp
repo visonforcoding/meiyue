@@ -198,7 +198,7 @@
                     handImgs = [];
                     unHandImgs = e.images
                     unHandImgs.forEach(function(img) {
-                        handImgs.push(('<?= getHost(); ?>' + img).replace(/\?.*/, ''));
+                        handImgs.push((img).replace(/\?.*/, ''));
                     });
                     allMovements[e.id] = handImgs;
                 }
@@ -211,7 +211,7 @@
         if(em.id.indexOf('imgcontainer_') != -1){
             if(target.nodeName == 'IMG') target = target.parentNode;
             var index = $(em).data('index');
-            var curimg = '<?= getHost(); ?>' + ($(target).find('img').attr('src')).replace(/imgs/, 'upload');
+            var curimg = ($(target).find('img').attr('src')).replace(/imgs/, 'upload');
             LEMON.event.viewImg(curimg.replace(/\?.*/, ''), allMovements[index]);
         }
     });
