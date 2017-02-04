@@ -89,7 +89,6 @@
     var heightR = 0;
     loadUser(curpage);
     function loadUser(page, more, query) {
-        $.util.showPreloader();
         var template = $('#user-list-tpl').html();
         Mustache.parse(template);   // optional, speeds up future uses
         if (!query) {
@@ -112,7 +111,6 @@
                 } else {
                     $('#user-list').html(rendered);
                 }
-                $.util.hidePreloader();
             }
         });
     }

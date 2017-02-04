@@ -548,7 +548,6 @@ $.util = {
      * @returns {undefined}
      */
     asyLoadData: function (opt) {
-        $.util.showPreloader();
         var url;
         var gurl = opt.gurl;
         var more = opt['more'];
@@ -565,7 +564,6 @@ $.util = {
             }
             window.holdLoad = false
             if (data.code === 200) {
-                $.util.hidePreloader();
                 var rendered = Mustache.render(template, data);
                 if (!data[opt.key].length) {
                     window.holdLoad = true;
