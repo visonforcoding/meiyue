@@ -22,6 +22,8 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property string $city
  * @property string $avatar
  * @property float $money
+ * @property float $bonus_point
+ * @property int $is_normal
  * @property int $status
  * @property int $vp_status
  * @property float $recharge

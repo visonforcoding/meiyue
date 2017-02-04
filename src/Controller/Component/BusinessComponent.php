@@ -140,12 +140,12 @@ class BusinessComponent extends Component
             return \VIPlevel::HUANGJIN_VIP;
         }
 
+        $type = [PackType::VIP, PackType::LINSHI];
         $upackTb = TableRegistry::get('UserPackage');
         $validpack = $upackTb->find()->where([
             'user_id' => $user->id,
-            'type' => PackType::VIP,
-            'deadline >' => new Time(),
-            'OR' => ['rest_chat >' => 0, 'rest_browse >' => 0]
+            'type IN' => $type,
+            'deadline >' => new Time()
         ])->first();
         if($validpack) {
             return \VIPlevel::COMMON_VIP;
@@ -274,24 +274,37 @@ class BusinessComponent extends Component
         if($usedPack) {
             return SerRight::OK_CONSUMED;
         } else {
-            $userPackTb = TableRegistry::get('UserPackage');
-            $key = "sum(" . ServiceType::getDBRestr($type) . ")";
-            $userPack = $userPackTb
-                ->find()
-                ->select(['rest' => $key])
-                ->where(
-                    [
-                        'user_id' => $userid,
-                        'deadline >' => new Time(),
-                    ])
-                ->first();
-            if($userPack) {
-                $rest = $userPack->rest;
-                if($rest > 0) {
-                    return SerRight::NO_HAVENUM;
+            //审核模式
+            $iosCheckConf = \Cake\Core\Configure::read('ios_check_conf');
+            $user = TableRegistry::get("User")->get($userid);
+            if($this->checkIsCheck($user)) {
+                if(($type == ServiceType::BROWSE) && ($user->bonus_point >= $iosCheckConf['view_dt_point'])) {
+                    return SerRight::NO_HAVEPOINT;
+                } else if(($type == ServiceType::CHAT) && ($user->bonus_point >= $iosCheckConf['chat_point'])) {
+                    return SerRight::NO_HAVEPOINT;
+                } else {
+                    return SerRight::NO_HAVENOPOINT;
                 }
+            } else {
+                $userPackTb = TableRegistry::get('UserPackage');
+                $key = "sum(" . ServiceType::getDBRestr($type) . ")";
+                $userPack = $userPackTb
+                    ->find()
+                    ->select(['rest' => $key])
+                    ->where(
+                        [
+                            'user_id' => $userid,
+                            'deadline >' => new Time(),
+                        ])
+                    ->first();
+                if($userPack) {
+                    $rest = $userPack->rest;
+                    if($rest > 0) {
+                        return SerRight::NO_HAVENUM;
+                    }
+                }
+                return SerRight::NO_HAVENONUM;
             }
-            return SerRight::NO_HAVENONUM;
         }
     }
 
@@ -307,43 +320,84 @@ class BusinessComponent extends Component
      */
     function consumeRightD($userid, $usedid, $type)
     {
-        $userPackTb = TableRegistry::get("UserPackage");
-        $key = ServiceType::getDBRestr($type);
-        $userPack = $userPackTb
-            ->find()
-            ->where(
-                [
-                    'user_id' => $userid,
-                    $key.' >' => 0,
-                    'deadline >' => new Time(),
-                ])
-            ->orderAsc('create_time')
-            ->first();
-        if($userPack) {
-            $userPack->$key --;
+        //审核模式
+        $iosCheckConf = \Cake\Core\Configure::read('ios_check_conf');
+        $userTb = TableRegistry::get("User");
+        $user = $userTb->get($userid);
+        if($this->checkIsCheck($user)) {
             //生成消费记录
             $usedPackTb = TableRegistry::get("UsedPackage");
             $usedPack = $usedPackTb
                 ->newEntity([
-                    'user_id' => $userPack->user_id,
+                    'user_id' => $userid,
                     'used_id' => $usedid,
-                    'package_id' => $userPack->id,
+                    'package_id' => 0,  //表示零售
                     'type' => $type,
-                    'deadline' => $userPack->deadline,
+                    'deadline' => new Time('+1 year'),
                 ]);
+            if($type == ServiceType::BROWSE) {
+                if($user->bonus_point < $iosCheckConf['view_dt_point']) {
+                    return false;
+                }
+                $user->bonus_point -= $iosCheckConf['view_dt_point'];
+            } else{
+                if($user->bonus_point < $iosCheckConf['chat_point']) {
+                    return false;
+                }
+                $user->bonus_point -= $iosCheckConf['chat_point'];
+            }
             $transRes = $usedPackTb
                 ->connection()
                 ->transactional(
-                    function() use ($userPack, $userPackTb, $usedPack, $usedPackTb){
-                        $upackres = $userPackTb->save($userPack);
+                    function() use ($user, $userTb, $usedPack, $usedPackTb){
+                        $useres = $userTb->save($user);
                         $dpackres = $usedPackTb->save($usedPack);
-                        return $upackres&&$dpackres;
+                        return $useres&&$dpackres;
                     });
             if($transRes) {
                 return true;
+            } else {
+                return false;
             }
+        } else {
+            $userPackTb = TableRegistry::get("UserPackage");
+            $key = ServiceType::getDBRestr($type);
+            $userPack = $userPackTb
+                ->find()
+                ->where(
+                    [
+                        'user_id' => $userid,
+                        $key.' >' => 0,
+                        'deadline >' => new Time(),
+                    ])
+                ->orderAsc('create_time')
+                ->first();
+            if($userPack) {
+                $userPack->$key --;
+                //生成消费记录
+                $usedPackTb = TableRegistry::get("UsedPackage");
+                $usedPack = $usedPackTb
+                    ->newEntity([
+                        'user_id' => $userPack->user_id,
+                        'used_id' => $usedid,
+                        'package_id' => $userPack->id,
+                        'type' => $type,
+                        'deadline' => $userPack->deadline,
+                    ]);
+                $transRes = $usedPackTb
+                    ->connection()
+                    ->transactional(
+                        function() use ($userPack, $userPackTb, $usedPack, $usedPackTb){
+                            $upackres = $userPackTb->save($userPack);
+                            $dpackres = $usedPackTb->save($usedPack);
+                            return $upackres&&$dpackres;
+                        });
+                if($transRes) {
+                    return true;
+                }
+            }
+            return false;
         }
-        return false;
     }
 
 
@@ -362,7 +416,7 @@ class BusinessComponent extends Component
         $chres = $this->checkRight($userid, $usedid, $type);
         if($chres == SerRight::OK_CONSUMED) {
             return true;
-        } else if($chres == SerRight::NO_HAVENUM) {
+        } else if(($chres == SerRight::NO_HAVENUM) || ($chres == SerRight::NO_HAVEPOINT)) {
             return $this->consumeRightD($userid, $usedid, $type);
         }
         return false;
@@ -400,6 +454,7 @@ class BusinessComponent extends Component
         $pre_amount = $order->user->money;
         $order->user->money += $order->price;    //专家余额+
         $order->user->recharge +=$realFee;
+        $order->user->is_normal = 1;
         $order->dirty('user', true);  //这里的seller 一定得是关联属性 不是关联模型名称 可以理解为实体
         $OrderTable = \Cake\ORM\TableRegistry::get('Payorder');
         $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
@@ -906,5 +961,16 @@ class BusinessComponent extends Component
         } else {
             return MsgpushType::FAILD;
         }
+    }
+
+    /**
+     * 检查是否审核模式
+     */
+    public function checkIsCheck(User $user) {
+        $iosCheckConf = \Cake\Core\Configure::read('ios_check_conf');
+        $res = $iosCheckConf['check_mode'] &&
+                !$user->is_normal &&
+                (in_array($user->id, $iosCheckConf['special_user']) || ($user->id >= $iosCheckConf['new_user_id']));
+        return $res;
     }
 }

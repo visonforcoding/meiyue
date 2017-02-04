@@ -349,7 +349,11 @@ class IndexController extends AppController {
         if(isset($this->user)) {
             $browseRight = $this->Business->checkRight($this->user->id, $id, ServiceType::BROWSE);
         }
-
+        $iosCheckConf = \Cake\Core\Configure::read('ios_check_conf');
+        $isChecking = true;
+        if($this->user) {
+            $isChecking = $this->Business->checkIsCheck($this->user);
+        }
         //若登录
         $this->set([
             'pageTitle' => '发现-主页',
@@ -360,7 +364,9 @@ class IndexController extends AppController {
             'distance' => $distance,
             'birthday' => $birthday,
             'isFollow' => $isFollow,
-            'shown' => $this->Business->getShown($user)
+            'shown' => $this->Business->getShown($user),
+            'isChecking' => $isChecking,
+            'iosCheckConf' => $iosCheckConf
         ]);
         if($user->gender == 1) {
             $this->render('/Mobile/User/male_homepage');
@@ -428,9 +434,15 @@ class IndexController extends AppController {
                 'wxorder' => $wxorder
             ];
         }else {
+            //审核模式
+            $iosCheckConf = \Cake\Core\Configure::read('ios_check_conf');
+            $moneycheck = ($this->user->money >= IndexController::WX_VIEW_COST);
+            if($this->Business->checkIsCheck($this->user)) {
+                $moneycheck = ($this->user->bonus_point >= $iosCheckConf['view_wx_point']);
+            }
             return [
                 'status' => false,
-                'moneycheck' => ($this->user->money > IndexController::WX_VIEW_COST)
+                'moneycheck' => $moneycheck
             ];
         }
     }
@@ -463,82 +475,173 @@ class IndexController extends AppController {
      * 查看微信支付
      */
     public function pay4wx($wxerid = null) {
-        $wxfee = IndexController::WX_VIEW_COST;
         $this->handCheckLogin();
+        $wxfee = IndexController::WX_VIEW_COST;
         if(!$wxerid) {
             return $this->Util->ajaxReturn(false, '非法操作');
         }
-        if($this->user->money < $wxfee) {
-            return $this->Util->ajaxReturn(false, '钱包余额不足,立即充值');
-        }
-        //修改支付方费用
-        $userTb = TableRegistry::get('User');
-        $out_user = $this->user;
-        $out_pre_money = $out_user->money;
-        $out_user->money = $out_user->money - $wxfee;
-        $out_aft_money = $out_user->money;
-        $out_user->charm = $out_user->recharge + $wxfee;
-        //修改收款方费用
-        $in_user = $userTb->get($wxerid);
-        if(!$in_user) {
-            return $this->Util->ajaxReturn(false, '用户不存在');
-        }
-        $in_pre_money = $in_user->money;
-        $in_user->money = $in_user->money + $wxfee;
-        $in_aft_money = $in_user->money;
-        $in_user->charm = $in_user->charm + $wxfee;
-        //生成流水
-        $FlowTable = TableRegistry::get('Flow');
-        $inflow = $FlowTable->newEntity([
-            'user_id'=> $wxerid,
-            'buyer_id'=> 0,
-            'type'=>18,
-            'type_msg'=>getFlowType('18'),
-            'income'=>1,
-            'amount'=>$wxfee,
-            'price'=>$wxfee,
-            'pre_amount'=>$in_pre_money,
-            'after_amount'=>$in_aft_money,
-            'paytype'=>1,   //余额支付
-            'remark'=> getFlowType('18')
-        ]);
-        $outflow = $FlowTable->newEntity([
-            'user_id'=> 0,
-            'buyer_id'=> $this->user->id,
-            'type'=>18,
-            'type_msg'=>getFlowType('18'),
-            'income'=>2,
-            'amount'=>$wxfee,
-            'price'=>$wxfee,
-            'pre_amount'=>$out_pre_money,
-            'after_amount'=>$out_aft_money,
-            'paytype'=>1,   //余额支付
-            'remark'=> getFlowType('18')
-        ]);
-        //生成查看记录
-        $anhao = '美约'.mt_rand(10000, 99999);
-        $wxorderTb = TableRegistry::get('Wxorder');
-        $wxorder = $wxorderTb->newEntity([
-            'user_id' => $this->user->id,
-            'wxer_id' => $wxerid,
-            'anhao' => $anhao
-        ]);
-        $transRes = $FlowTable->connection()->transactional(function() use ($inflow, $outflow, $FlowTable, $userTb, $in_user, $out_user, $wxorderTb, $wxorder){
-            $wxores = $wxorderTb->save($wxorder);
-            if($wxores) {
-                $inflow->relate_id = $wxores->id;
-                $outflow->relate_id = $wxores->id;
+        //审核模式
+        $iosCheckConf = \Cake\Core\Configure::read('ios_check_conf');
+        $isChecking = $this->Business->checkIsCheck($this->user);
+        if($isChecking) {
+            if($this->user->bonus_point >= $iosCheckConf['view_wx_point']) {
+                //修改支付方费用
+                $userTb = TableRegistry::get('User');
+                $out_user = $this->user;
+                $in_user = $userTb->get($wxerid);
+                $moneyEnough = true;
+                if($this->user->money < $wxfee) {
+                    $moneyEnough = false;
+                } else {
+                    $out_pre_money = $out_user->money;
+                    $out_user->money = $out_user->money - $wxfee;
+                    $out_aft_money = $out_user->money;
+                    $out_user->charm = $out_user->recharge + $wxfee;
+                    //修改收款方费用
+                    if(!$in_user) {
+                        return $this->Util->ajaxReturn(false, '用户不存在');
+                    }
+                    $in_pre_money = $in_user->money;
+                    $in_user->money = $in_user->money + $wxfee;
+                    $in_aft_money = $in_user->money;
+                    $in_user->charm = $in_user->charm + $wxfee;
+                    //生成流水
+                    $FlowTable = TableRegistry::get('Flow');
+                    $inflow = $FlowTable->newEntity([
+                        'user_id'=> $wxerid,
+                        'buyer_id'=> 0,
+                        'type'=>18,
+                        'type_msg'=>getFlowType('18'),
+                        'income'=>1,
+                        'amount'=>$wxfee,
+                        'price'=>$wxfee,
+                        'pre_amount'=>$in_pre_money,
+                        'after_amount'=>$in_aft_money,
+                        'paytype'=>1,   //余额支付
+                        'remark'=> getFlowType('18')
+                    ]);
+                    $outflow = $FlowTable->newEntity([
+                        'user_id'=> 0,
+                        'buyer_id'=> $this->user->id,
+                        'type'=>18,
+                        'type_msg'=>getFlowType('18'),
+                        'income'=>2,
+                        'amount'=>$wxfee,
+                        'price'=>$wxfee,
+                        'pre_amount'=>$out_pre_money,
+                        'after_amount'=>$out_aft_money,
+                        'paytype'=>1,   //余额支付
+                        'remark'=> getFlowType('18')
+                    ]);
+                }
+                //生成查看记录
+                $anhao = '美约'.mt_rand(10000, 99999);
+                $wxorderTb = TableRegistry::get('Wxorder');
+                $wxorder = $wxorderTb->newEntity([
+                    'user_id' => $this->user->id,
+                    'wxer_id' => $wxerid,
+                    'anhao' => $anhao
+                ]);
+                $out_user->bonus_point -= $iosCheckConf['view_wx_point'];
+                $transRes = $FlowTable->connection()->transactional(function() use ($inflow, $outflow, $FlowTable, $userTb, $in_user, $out_user, $wxorderTb, $wxorder, $moneyEnough){
+                    $wxores = $wxorderTb->save($wxorder);
+                    $inflores = true;
+                    $outflores = true;
+                    $use1res = true;
+                    if($moneyEnough) {
+                        if($wxores) {
+                            $inflow->relate_id = $wxores->id;
+                            $outflow->relate_id = $wxores->id;
+                        }
+                        $inflores = $FlowTable->save($inflow);
+                        $outflores = $FlowTable->save($outflow);
+                        $use1res = $userTb->save($in_user);
+                    }
+                    $use2res = $userTb->save($out_user);
+                    return $inflores&&$outflores&&$wxores&&$use1res&&$use2res;
+                });
+                if($transRes) {
+                    return $this->Util->ajaxReturn(true, '消耗成功');
+                } else {
+                    return $this->Util->ajaxReturn(false, '消耗失败');
+                }
+            } else {
+                return $this->Util->ajaxReturn(false, '积分不足');
             }
-            $inflores = $FlowTable->save($inflow);
-            $outflores = $FlowTable->save($outflow);
-            $use1res = $userTb->save($in_user);
-            $use2res = $userTb->save($out_user);
-            return $inflores&&$outflores&&$wxores&&$use1res&&$use2res;
-        });
-        if($transRes) {
-            return $this->Util->ajaxReturn(true, '支付成功');
         } else {
-            return $this->Util->ajaxReturn(false, '支付失败');
+            if($this->user->money < $wxfee) {
+                return $this->Util->ajaxReturn(false, '钱包余额不足,立即充值');
+            } else {
+                //修改支付方费用
+                $userTb = TableRegistry::get('User');
+                $out_user = $this->user;
+                $out_pre_money = $out_user->money;
+                $out_user->money = $out_user->money - $wxfee;
+                $out_aft_money = $out_user->money;
+                $out_user->charm = $out_user->recharge + $wxfee;
+                //修改收款方费用
+                $in_user = $userTb->get($wxerid);
+                if(!$in_user) {
+                    return $this->Util->ajaxReturn(false, '用户不存在');
+                }
+                $in_pre_money = $in_user->money;
+                $in_user->money = $in_user->money + $wxfee;
+                $in_aft_money = $in_user->money;
+                $in_user->charm = $in_user->charm + $wxfee;
+                //生成流水
+                $FlowTable = TableRegistry::get('Flow');
+                $inflow = $FlowTable->newEntity([
+                    'user_id'=> $wxerid,
+                    'buyer_id'=> 0,
+                    'type'=>18,
+                    'type_msg'=>getFlowType('18'),
+                    'income'=>1,
+                    'amount'=>$wxfee,
+                    'price'=>$wxfee,
+                    'pre_amount'=>$in_pre_money,
+                    'after_amount'=>$in_aft_money,
+                    'paytype'=>1,   //余额支付
+                    'remark'=> getFlowType('18')
+                ]);
+                $outflow = $FlowTable->newEntity([
+                    'user_id'=> 0,
+                    'buyer_id'=> $this->user->id,
+                    'type'=>18,
+                    'type_msg'=>getFlowType('18'),
+                    'income'=>2,
+                    'amount'=>$wxfee,
+                    'price'=>$wxfee,
+                    'pre_amount'=>$out_pre_money,
+                    'after_amount'=>$out_aft_money,
+                    'paytype'=>1,   //余额支付
+                    'remark'=> getFlowType('18')
+                ]);
+                //生成查看记录
+                $anhao = '美约'.mt_rand(10000, 99999);
+                $wxorderTb = TableRegistry::get('Wxorder');
+                $wxorder = $wxorderTb->newEntity([
+                    'user_id' => $this->user->id,
+                    'wxer_id' => $wxerid,
+                    'anhao' => $anhao
+                ]);
+                $transRes = $FlowTable->connection()->transactional(function() use ($inflow, $outflow, $FlowTable, $userTb, $in_user, $out_user, $wxorderTb, $wxorder){
+                    $wxores = $wxorderTb->save($wxorder);
+                    if($wxores) {
+                        $inflow->relate_id = $wxores->id;
+                        $outflow->relate_id = $wxores->id;
+                    }
+                    $inflores = $FlowTable->save($inflow);
+                    $outflores = $FlowTable->save($outflow);
+                    $use1res = $userTb->save($in_user);
+                    $use2res = $userTb->save($out_user);
+                    return $inflores&&$outflores&&$wxores&&$use1res&&$use2res;
+                });
+                if($transRes) {
+                    return $this->Util->ajaxReturn(true, '支付成功');
+                } else {
+                    return $this->Util->ajaxReturn(false, '支付失败');
+                }
+            }
         }
     }
 

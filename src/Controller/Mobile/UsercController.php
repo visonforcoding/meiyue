@@ -566,13 +566,15 @@ class UsercController extends AppController
                 $canTixian = $this->user->money;
             }
         }
+        $iosCheckConf = \Cake\Core\Configure::read('ios_check_conf');
         $this->set([
             'pageTitle' => '我的钱包',
             'user' => $this->user,
             'top5flows' => $top5flows,
             'status' => $status,
             'canTixian' => $canTixian,
-            'withdraw' => $withdraw
+            'withdraw' => $withdraw,
+            'iosCheckConf' => $iosCheckConf
         ]);
     }
 
@@ -1331,7 +1333,7 @@ class UsercController extends AppController
         $isvip = false;
         $visitnum = 0;
         $visitorTb = TableRegistry::get('Visitor');
-        if($this->Business->getVIP($this->user) != \VIPlevel::NOT_VIP) {
+        if(($this->Business->getVIP($this->user) != \VIPlevel::NOT_VIP)) {
             $isvip = true;
         } else {
             $visitnum = $visitorTb->find()->where(['visited_id' => $this->user->id])->count();
@@ -1376,14 +1378,66 @@ class UsercController extends AppController
             }
             return $this->Util->ajaxReturn(['visitors' => $visitors]);
         }
+        //审核模式
+        $iosCheckConf = \Cake\Core\Configure::read('ios_check_conf');
+        $isChecking = $this->Business->checkIsCheck($this->user);
         $this->set([
             'user' => $this->user,
             'isvip' => $isvip,
             'visitnum' => $visitnum,
-            'pageTitle' => '我的访客'
+            'pageTitle' => '我的访客',
+            'isChecking' => $isChecking,
+            'iosCheckConf' => $iosCheckConf
         ]);
     }
 
+
+    /**
+     * 查看访客消耗积分
+     */
+    public function consumeVisit()
+    {
+        $this->handCheckLogin();
+        //审核模式
+        $iosCheckConf = \Cake\Core\Configure::read('ios_check_conf');
+        if($this->user->bonus_point >= $iosCheckConf['view_visitors']) {
+            //生成套餐购买记录
+            $deadline = new Time("+1 year");
+            $userPackTb = TableRegistry::get('UserPackage');
+            $userPack = $userPackTb->newEntity([
+                'title' => '临时VIP',
+                'user_id' => $this->user->id,
+                'package_id' => 0,
+                'chat_num' => 0,
+                'rest_chat' => 0,
+                'browse_num' => 0,
+                'rest_browse' => 0,
+                'type' => PackType::LINSHI,
+                'cost' => 0,
+                'vir_money' => 0,
+                'deadline' => $deadline,
+                'honour_name' => ' ',
+            ]);
+            $user = $this->user;
+            $user->bonus_point -= $iosCheckConf['view_visitors'];
+            $transRes = $userPackTb
+                ->connection()
+                ->transactional(
+                    function() use ($user, $userPack, $userPackTb){
+                        $useres = TableRegistry::get('User')->save($user);
+                        $upres = $userPackTb->save($userPack);
+                        return $useres&&$upres;
+                    });
+
+            if ($transRes) {
+                return $this->Util->ajaxReturn(true, '消耗成功');
+            }else{
+                return $this->Util->ajaxReturn(false, '消耗失败');
+            }
+        } else {
+            return $this->Util->ajaxReturn(false, '积分不足');
+        }
+    }
 
     /**
      * 成为经纪人

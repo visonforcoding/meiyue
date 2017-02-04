@@ -260,15 +260,28 @@
 <div class="raper hide">
     <div class='fullwraper flex flex_center'>
     <!--约Ta弹出层-->
-    <div class="popup showxpay" hidden>
-        <div class="popup_con">
-            <h3 class="aligncenter">需支付100元才能看到她的微信</h3>
+    <!--审核模式-->
+    <?php if($isChecking): ?>
+        <div class="popup showxpay" hidden>
+            <div class="popup_con">
+                <h3 class="aligncenter">需消耗<?= $iosCheckConf['view_wx_point'] ?>积分才能看到她的微信</h3>
+            </div>
+            <div class="popup_footer flex flex_justify">
+                <span class="footerbtn cancel">取消</span>
+                <span class="footerbtn gopay">立即查看</span>
+            </div>
         </div>
-        <div class="popup_footer flex flex_justify">
-            <span class="footerbtn cancel">取消</span>
-            <span class="footerbtn gopay">立即支付</span>
+    <?php else: ?>
+        <div class="popup showxpay" hidden>
+            <div class="popup_con">
+                <h3 class="aligncenter">需支付100元才能看到她的微信</h3>
+            </div>
+            <div class="popup_footer flex flex_justify">
+                <span class="footerbtn cancel">取消</span>
+                <span class="footerbtn gopay">立即支付</span>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
 
     <!--查看微信弹出层-->
     <div id="showx-container" class="popup wx_popup showx" hidden>
@@ -385,6 +398,47 @@
             url:'/tracle/browse/<?=$user->id?>',
             method: 'POST',
             func:function(res){
+                //审核模式
+                <?php if($isChecking):?>
+                switch(res.right) {
+                    case <?= SerRight::OK_CONSUMED; ?>:
+                        switch(action) {
+                            case 1:
+                                location.href = '/tracle/ta-tracle/<?=$user->id?>';
+                                break;
+                            case 2:
+                                initVideo();
+                                break;
+                        }
+                        break;
+                    case <?= SerRight::NO_HAVEPOINT; ?>:
+                        $.util.confirm(
+                            '查看美女动态',
+                            '需消耗<?= $iosCheckConf['view_dt_point']; ?>积分才能查看人家的动态哦~~',
+                            function() {
+                                switch(action) {
+                                    case 1:
+                                        location.href = '/tracle/ta-tracle/<?=$user->id?>';
+                                        break;
+                                    case 2:
+                                        initVideo();
+                                        break;
+                                }
+                            },
+                            null
+                        );
+                        break;
+                    case <?= SerRight::NO_HAVENOPOINT; ?>:
+                        $.util.confirm(
+                            ' ',
+                            '积分不足',
+                            function() {
+                            },
+                            null
+                        );
+                        break;
+                }
+                <?php else: ?>
                 switch(res.right) {
                     case <?= SerRight::OK_CONSUMED; ?>:
                         switch(action) {
@@ -426,6 +480,7 @@
                         );
                         break;
                 }
+                <?php endif; ?>
             }
         })
     }
@@ -489,9 +544,15 @@
                         if(res.moneycheck) {
                             showmbpay();
                         } else {
+                            <!--审核模式-->
+                            <?php if($isChecking): ?>
+                            $.util.confirm(' ','积分不足', function() {
+                            }, null);
+                            <?php else: ?>
                             $.util.confirm('余额不足','立即前往充值？', function() {
                                 showxpay();
                             }, null);
+                            <?php endif; ?>
                         }
                         $('.raper .gopay').off('click');
                     });
@@ -621,6 +682,33 @@
             url:'/user/check-chat/<?=$user->id?>',
             method: 'POST',
             func:function(res){
+                //审核模式
+                <?php if($isChecking):?>
+                switch(res.right) {
+                    case <?= SerRight::OK_CONSUMED; ?>:
+                        chat(res.accid);
+                        break;
+                    case <?= SerRight::NO_HAVEPOINT; ?>:
+                        $.util.confirm(
+                            '私聊',
+                            '需消耗<?= $iosCheckConf['view_dt_point']; ?>积分才能私聊人家哦~~',
+                            function() {
+                                consumeChat();
+                            },
+                            null
+                        );
+                        break;
+                    case <?= SerRight::NO_HAVENOPOINT; ?>:
+                        $.util.confirm(
+                            '私聊美女',
+                            '积分不足~',
+                            function() {
+                            },
+                            null
+                        );
+                        break;
+                }
+                <?php else: ?>
                 switch(res.right) {
                     case <?= SerRight::OK_CONSUMED; ?>:
                         chat(res.accid);
@@ -648,6 +736,7 @@
                         );
                         break;
                 }
+                <?php endif; ?>
             }
         })
     }

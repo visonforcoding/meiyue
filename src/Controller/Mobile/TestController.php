@@ -38,16 +38,16 @@ class TestController extends AppController {
         /*$payOrderTb = TableRegistry::get("Payorder");
         $payOrder = $payOrderTb->find()->contain('User')->where(['Payorder.id' => 43])->first();
         echo $this->Business->handPackPay($payOrder, 100, 1, '1827382738772837HSKJ');*/
-        /*$this->Business->sendSMsg(3, [
+        $this->loadComponent('Business');
+        debug($this->Business->sendSMsg(3, [
             'towho' => \MsgpushType::TO_REGISTER,
-            'title' => '注册-认证信息提交成功',
-            'body' => '您填写的认证信息已成功上传，后台人员正在审核中',
-        ], true);*/
-
-        $this->loadComponent('Push');
+            'title' => '文件播测试',
+            'body' => '文件播测试',
+        ], true));
+        /*$this->loadComponent('Push');
         $this->loadComponent('Business');
         $this->Business->sendPtMsg([], [], true);
-        //debug($this->Push->sendAll('美约平台广播推送', ' ', '美约平台广播推送'));
+        //debug($this->Push->sendAll('美约平台广播推送', ' ', '美约平台广播推送'));*/
         exit();
         //debug(\Cake\Core\Configure::read('Redis.default'));
     }

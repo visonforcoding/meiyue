@@ -65,5 +65,16 @@ return [
     ],
     'img'=>[
         'domain'=>'imgs.meiyue.dev'
+    ],
+    'ios_check_conf' => [
+        'check_mode' => true,  //是否开启审核模式
+        'init_point' => 10,    //注册用户赠送积分数
+        'special_user' => [],  //指定特殊用户
+        'new_user_id' => 10,  //设置该用户id开始后面皆为“新用户”
+        'view_wx_point' => 100, //设置查看微信需要消耗的积分
+        'view_dt_point' => 100, //设置查看美女动态需要消耗的积分
+        'chat_point' => 100, //设置私聊美女需要消耗的积分
+        'gift_point' => 100, //设置送礼物需要消耗的积分
+        'view_visitors' => 100, //设置查看访客需要消耗的积分
     ]
 ];

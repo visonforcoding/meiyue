@@ -214,6 +214,7 @@ function getBaiduPOICF() {
 class PackType {
     const VIP = 1;
     const RECHARGE = 2;
+    const LINSHI = 10;  //临时套餐
     //const OTHER = 3;
 
     public static function getPackageType($num = null) {
@@ -302,6 +303,8 @@ class SerRight {
     const OK_CONSUMED = 1; //已经消费，具有权限
     const NO_HAVENUM = 2;  //剩余名额，还没有权限
     const NO_HAVENONUM = 3; //没有名额，还没有权限
+    const NO_HAVEPOINT = 4; //尚未消费，积分充足
+    const NO_HAVENOPOINT = 5; //尚未消费，积分不足
 }
 
 
