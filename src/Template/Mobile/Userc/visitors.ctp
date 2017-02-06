@@ -84,10 +84,10 @@
                         curpage++;
                     } else {
                         $('#visitors-list').html(rendered);
-                        curpage++;
                     }
                     window.holdLoad = false;
                 } else {
+                    alert(curpage);
                     if(curpage == 1) {
                         $('#blank-area').html('<div class="empty-content  empty-text mt350"><p class="empty-tips">您暂时没有访客哦</p></div>');
                     } else {
