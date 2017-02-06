@@ -84,6 +84,7 @@
                         curpage++;
                     } else {
                         $('#visitors-list').html(rendered);
+                        curpage++;
                     }
                     window.holdLoad = false;
                 } else {
