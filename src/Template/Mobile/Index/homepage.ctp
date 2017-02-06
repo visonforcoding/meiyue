@@ -55,7 +55,7 @@
                     <li class="img-item clickable"><img src="<?= generateImgUrl($img) ?>?w=160" onload="$.util.setWH(this);"/></li>
                 <?php endforeach; ?>
                 <li onclick="checkBrownR(1);">
-                    <a class='ablock' >
+                    <a class='ablock'>
                         <img src="<?= generateImgUrl(unserialize($user->images)[3]); ?>?w=160" onload="$.util.setWH(this);"/>
                         <span>更多私房</span>
                     </a>
