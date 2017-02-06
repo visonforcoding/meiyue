@@ -81,10 +81,10 @@
                     var rendered = Mustache.render(template, data);
                     if (more) {
                         $('#visitors-list').append(rendered);
-                        curpage++;
                     } else {
                         $('#visitors-list').html(rendered);
                     }
+                    curpage++;
                     window.holdLoad = false;
                 } else {
                     alert(curpage);
