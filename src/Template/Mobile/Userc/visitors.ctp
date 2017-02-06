@@ -95,10 +95,10 @@
                         window.holdLoad = true;
                     }
                 }
-                if(curpage == 1) {
+                if(curpage == 2) {
                     $(window).on("scroll", function () {
                         $.util.listScroll('visitors-list', function () {
-                            loadUser(curpage + 1, true);
+                            loadUser(curpage, true);
                         })
                     });
                 }
