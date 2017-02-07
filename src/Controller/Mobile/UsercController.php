@@ -1503,4 +1503,16 @@ class UsercController extends AppController
             'pageTitle' => '意见反馈'
         ]);
     }
+
+
+    /**
+     * 关于我们
+     */
+    public function aboutus()
+    {
+        $this->set([
+            'gender' => $this->user->gender,
+            'pageTitle' => '关于我们'
+        ]);
+    }
 }

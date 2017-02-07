@@ -43,7 +43,7 @@
             </a>
         </li>-->
         <li>
-            <a class="commonlayer ablock" href="/mobile/html/home_aboutus.html">
+            <a class="commonlayer ablock" href="/userc/aboutus">
                 <div>关于我们</div>
                 <span class="iconfont rcon">&#xe605;</span>
             </a>
