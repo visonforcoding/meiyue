@@ -1515,4 +1515,15 @@ class UsercController extends AppController
             'pageTitle' => '关于我们'
         ]);
     }
+
+
+    /**
+     * 免责申明
+     */
+    public function norespon()
+    {
+        $this->set([
+            'pageTitle' => '免责申明'
+        ]);
+    }
 }

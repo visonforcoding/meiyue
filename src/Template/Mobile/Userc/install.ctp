@@ -30,12 +30,6 @@
         </li>
     </ul>-->
     <ul class="mt20 outerblock bgff">
-        <li>
-            <a class="commonlayer ablock">
-                <div>常见问题</div>
-                <span class="iconfont rcon">&#xe605;</span>
-            </a>
-        </li>
         <!--<li>
             <a class="commonlayer ablock">
                 <div>意见反馈</div>
@@ -45,6 +39,12 @@
         <li>
             <a class="commonlayer ablock" href="/userc/aboutus">
                 <div>关于我们</div>
+                <span class="iconfont rcon">&#xe605;</span>
+            </a>
+        </li>
+        <li>
+            <a class="commonlayer ablock" href="/userc/norespon">
+                <div>免责申明</div>
                 <span class="iconfont rcon">&#xe605;</span>
             </a>
         </li>
