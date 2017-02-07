@@ -18,7 +18,10 @@
             <span class="empty-ico-box bg-light">
                 <i class="iconfont empty-ico">&#xe698;</i>
             </span>
-            <p class="empty-tips">你还没有发布过技能，赶快发布提升魅力值吧~</p>
+            <p class="empty-tips">
+                1.添加你的技能，轻松赚零花钱<br>
+                2.严禁出现令人不适的内容，一旦发现，立即封号
+            </p>
         </div>
     </div>
     <?php endif; ?>
