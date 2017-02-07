@@ -356,7 +356,7 @@ class IndexController extends AppController {
         }
         //若登录
         $this->set([
-            'pageTitle' => '发现-主页',
+            'pageTitle' => '个人主页',
             'user' => $user,
             'loginer' => $this->user,
             'age' => $age,
