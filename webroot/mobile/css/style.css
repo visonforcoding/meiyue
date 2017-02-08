@@ -492,7 +492,7 @@ color:#fff; line-height: 20px;padding-right: .1rem;}
 .home_page .header{height:6.2rem;position: relative;}
 .home_page .header span{color:#fff;font-size: 20px;}
 .home_page .header .identify-info{margin:.1rem  0;display:block;font-size: 10px;height:18px;line-height: 16px;border:1px #fff solid;border-radius: 3px;padding:0 .1rem;}
-.home_page .header .certifay-box{position: absolute;right:.3rem;top:30px;}
+.home_page .header .certifay-box{position: absolute;right:.3rem;top:20px;}
 .home_page .header .video-btn{/*top:20px;*/opacity: .8;}
 .home_page .header .id-btn{/*top:50px;*/opacity:.8}
 .home_page_basic{background: #fff;padding-top:.4rem;position:relative;}
@@ -501,9 +501,9 @@ color:#fff; line-height: 20px;padding-right: .1rem;}
 /*.home_page_basic .home_name em i{margin-right:.05rem;}*/
 .home_page_basic .home_name_info .address .ico{font-size: 12px;margin-left:.1rem;}
 .home_page_basic .home_name_info{color:#959da7;font-size: 12px;margin-top:.36rem;}
-.home_page_basic .add-weixin{position:absolute;top:.6rem;right:.8rem;width:.8rem;height:.78rem;}
+.home_page_basic .add-weixin{position:absolute;top:.6rem;right:.6rem;width:.8rem;height:.78rem;}
 .home_page_basic .home_name_info .iconfont{font-size: 14px;vertical-align: top;}
-.home_page_basic .home_name_info .job,.home_page_basic .home_name_info .address{}
+.home_page_basic .home_name_info .job,.home_page_basic .home_name_info .address{margin-left:.16rem;}
 .home_page_basic .home_name_info .address {}
 .home_page_basic .home_name_info .distance{}
 .home_page_basic .home_name_info .address .iconfont{font-size: 12px;}
@@ -1050,7 +1050,7 @@ color:#999;padding:.1rem;}
 	to{-webkit-transform: translateX(0);transform: translateX(0);}
 }
 /*发布动态*/
-.submit_box_textarea{background: #fff;padding-top:.2rem;}
+.submit_box_textarea{background: #fff;padding-top:.2rem;width:100%;height:100%;}
 .submit_box_textarea textarea{width:100%;height:1.2rem;padding:.05rem 0;border:none;}
 /*约拍*/
 .booking_box_list .con ul{overflow: hidden;padding:.4rem 0 .2rem;}
